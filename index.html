@@ -309,7 +309,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -909,6 +909,85 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-xsp .h{top:0;bottom:0;left:calc(100% + 6px);width:9px;border-width:1.5px 0}.mk-xsp .h::before{content:'';position:absolute;top:0;bottom:0;left:3px;border-left:1.5px solid var(--mark)}
 .mk-xsp .h b{left:100%;top:50%;translate:4px -50%}
 .mk-xsl{display:flex;flex-direction:column;gap:3px;margin:0;padding:0;list-style:none;font-size:12px}
+.mk-nfr{position:relative;width:240px;height:140px;border-radius:10px;overflow:hidden;border:1px solid var(--rule);background:var(--plate)}
+.mk-nfr>div{position:absolute;inset:0}
+.mk-nfr .tg{position:absolute;left:8px;bottom:8px;padding:2px 8px;border-radius:999px;background:var(--plate);font-size:11.5px;font-weight:700;color:var(--ink)}
+.mk-ncf>div{animation:mk-ncf 6s ease-in-out infinite}.mk-ncf>div+div{animation-delay:-3s}
+@keyframes mk-ncf{0%,35%{opacity:1}50%,85%{opacity:0}100%{opacity:1}}
+.mk-nse{position:relative;width:250px;height:150px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);text-align:left}
+.mk-nse .ls{position:absolute;inset:10px;display:flex;flex-direction:column;gap:10px;animation:mk-nsl 6s var(--ease) infinite}
+.mk-nse .ls>span{display:flex;align-items:center;gap:8px;height:32px;font-size:12px;font-weight:700;color:var(--ink)}
+.mk-nse .ls i{flex:none;width:32px;height:32px;border-radius:3px;overflow:hidden}.mk-nse .ls .me i{visibility:hidden}
+.mk-nse .im{position:absolute;left:10px;top:10px;width:96px;height:96px;border-radius:9px;overflow:hidden;transform-origin:0 0;animation:mk-nse 6s var(--ease) infinite}
+.mk-nse .dt{position:absolute;left:116px;top:12px;right:10px;display:flex;flex-direction:column;gap:4px;animation:mk-nsd 6s var(--ease) infinite}
+.mk-nse .dt b{font-size:14px;color:var(--ink)}.mk-nse .dt span{font-size:12px;color:var(--muted)}
+@keyframes mk-nse{0%,25%{transform:translateY(42px) scale(.3333)}45%,80%{transform:none}95%,100%{transform:translateY(42px) scale(.3333)}}
+@keyframes mk-nsl{0%,22%{opacity:1}32%,85%{opacity:0}97%,100%{opacity:1}}
+@keyframes mk-nsd{0%,32%{opacity:0;transform:translateY(6px)}48%,78%{opacity:1;transform:none}88%,100%{opacity:0;transform:translateY(6px)}}
+.mk-nsm{position:relative;display:flex;flex-direction:column;gap:10px;width:250px;padding:12px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);overflow:hidden}
+.mk-nsm i{display:block;height:10px;border-radius:5px;background:var(--rule-2)}
+.mk-nsm .hd{display:flex;align-items:center;gap:10px}.mk-nsm .hd>i{flex:none;width:36px;height:36px;border-radius:50%}
+.mk-nsm .hd span{flex:1;display:flex;flex-direction:column;gap:7px}.mk-nsm .pic{height:70px;border-radius:8px}
+.mk-nsm::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,var(--plate) 50%,transparent 65%);
+  opacity:.85;transform:translateX(-100%);animation:mk-nsh 1.8s linear -.7s infinite;animation-play-state:var(--ps)}
+@keyframes mk-nsh{0%{transform:translateX(-100%)}65%,100%{transform:translateX(100%)}}
+.mk-ncu{display:flex;flex-direction:column;align-items:center;gap:10px}.mk-ncu .ks{display:flex;gap:10px}
+.mk-ncu .k{display:flex;flex-direction:column;gap:2px;width:122px;padding:10px 12px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);text-align:left}
+.mk-ncu .k>span{font-size:11.5px;color:var(--muted)}
+.mk-ncu .k b{font-size:22px;line-height:1.25;color:var(--ink);font-variant-numeric:tabular-nums}.mk-ncu .n{display:inline-block;text-align:right}.mk-ncu small{margin-left:2px;font-size:12px}
+.mk-ntw{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:250px;padding:14px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);text-align:left}
+.mk-ntw .ey{padding:2px 8px;border-radius:999px;background:var(--mark-bg);color:var(--mark-text);font-size:11.5px;font-weight:700}
+.mk-ntw .t{display:grid;font-size:20px;font-weight:700;line-height:1.3;color:var(--ink)}.mk-ntw .t>span{grid-area:1/1}.mk-ntw .gh{visibility:hidden}
+.mk-ntw .c{display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:var(--mark)}
+.mk-ntw .c.done{animation:blink 1s steps(1) 4}
+@media (prefers-reduced-motion:reduce){.mk-ntw .c.done{animation:none}}
+.mk-nmq{width:270px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);overflow:hidden;text-align:left}
+.mk-nmq .bn{padding:7px 0;background:var(--ink);color:#fff;font-size:12px;font-weight:700}
+.mk-nmq .bn>div{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mk-nmq .tr{display:flex;width:max-content;animation:marq 16s linear infinite}.mk-nmq .tr>span{display:flex;gap:14px;padding-right:14px;white-space:nowrap}
+.mk-nmq .hd{display:flex;align-items:center;justify-content:space-between;padding:12px}.mk-nmq .hd b{font-size:13px;color:var(--ink)}
+.mk-nmq i{display:block;height:8px;border-radius:4px;background:var(--rule-2)}.mk-nmq .hd i{width:30px}
+.mk-nmq .bd{display:flex;flex-direction:column;gap:8px;padding:0 12px 14px}
+.mk-nsl{width:250px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);overflow:hidden;text-align:left}
+.mk-nsl .pg{height:4px;background:var(--rule-2)}.mk-nsl .pg i{display:block;height:100%;background:var(--mark);transform:scaleX(0);transform-origin:0 50%}
+.mk-nsl .sc{display:flex;flex-direction:column;gap:8px;height:128px;padding:10px 12px;overflow-y:auto;overscroll-behavior:contain}
+.mk-nsl .sc b{font-size:13px;color:var(--ink)}.mk-nsl .sc i{flex:none;display:block;height:8px;border-radius:4px;background:var(--rule-2)}
+.mk-nce{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:260px;padding:12px 14px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);
+  text-align:left;font-size:12.5px;line-height:1.5;color:var(--ink)}
+.mk-nce>b{font-size:13px}
+.mk-nce .bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows 250ms var(--ease)}.mk-nce .bd.open{grid-template-rows:1fr}.mk-nce .bd>div{min-height:0;overflow:hidden}
+.mk-nce svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:rotate 250ms var(--ease)}
+.mk-nce [aria-expanded="true"] svg{rotate:180deg}
+@media (prefers-reduced-motion:reduce){.mk-nce .bd,.mk-nce svg{transition:none}}
+.mk-nrv{display:flex;flex-direction:column;gap:10px;width:250px;text-align:left}
+.mk-nrv .fr{position:relative;height:110px;border-radius:8px;outline:1.5px dashed var(--steel);outline-offset:2px}
+.mk-nrv .im{position:absolute;inset:0;border-radius:8px;overflow:hidden;animation:mk-nrv 6s var(--ease) -2.8s infinite}
+.mk-nrv .ln{overflow:hidden;font-size:18px;font-weight:700;line-height:1.3;color:var(--ink)}.mk-nrv .ln span{display:block;animation:mk-nrt 6s var(--ease) -2.8s infinite}
+@keyframes mk-nrv{0%,8%{clip-path:inset(0 100% 0 0);opacity:1}40%,85%{clip-path:inset(0 0 0 0);opacity:1}95%{clip-path:inset(0 0 0 0);opacity:0}100%{clip-path:inset(0 100% 0 0);opacity:0}}
+@keyframes mk-nrt{0%,25%{transform:translateY(105%);opacity:1}45%,85%{transform:none;opacity:1}95%{transform:none;opacity:0}100%{transform:translateY(105%);opacity:0}}
+.mk-npd{display:flex;flex-direction:column;gap:6px;width:260px;padding:12px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);text-align:left}
+.mk-npd>b{font-size:12.5px;color:var(--ink)}.mk-npd svg{display:block;width:100%;height:auto;overflow:visible}.mk-npd .gl{stroke:var(--rule-2)}
+.mk-npd .ax{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted)}
+.mk-npd .ln{fill:none;stroke:var(--ch1);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:var(--L);animation:mk-npd 6s var(--ease) -3.3s infinite}
+.mk-npd .dt{fill:var(--ch1);stroke:var(--plate);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:mk-npt 6s var(--ease) -3.3s infinite}
+@keyframes mk-npd{0%,8%{stroke-dashoffset:var(--L);opacity:1}45%,85%{stroke-dashoffset:0;opacity:1}95%{stroke-dashoffset:0;opacity:0}100%{stroke-dashoffset:var(--L);opacity:0}}
+@keyframes mk-npt{0%,42%{opacity:0;scale:.4}52%,85%{opacity:1;scale:1}95%,100%{opacity:0;scale:1}}
+.mk-nmg{display:flex;flex-direction:column;align-items:center;gap:10px}
+.mk-nmg .zn{position:relative;display:grid;place-items:center;width:220px;height:120px;border:1.5px dashed var(--steel);border-radius:999px}
+.mk-nmg .zn>span{position:absolute;top:10px;font-size:11.5px;color:var(--muted);pointer-events:none}
+.mk-nmg .mk-btn{min-height:40px;padding:0 20px;font-size:13px;transition:translate 200ms var(--ease)}
+.mk-ntl{display:flex;flex-direction:column;align-items:center;gap:10px;perspective:600px}
+.mk-ntl .cd{width:190px;border-radius:12px;border:1px solid var(--rule);background:var(--plate);overflow:hidden;text-align:left;touch-action:none;transition:transform 200ms var(--ease)}
+.mk-ntl .pic{display:block;height:84px}.mk-ntl .cd>span{display:flex;flex-direction:column;padding:8px 12px 10px}
+.mk-ntl .cd b{font-size:13px;color:var(--ink)}.mk-ntl .cd small{font-size:12px;color:var(--muted)}
+.mk-nct{display:flex;flex-direction:column;align-items:center;gap:6px;width:240px;padding:14px;border-radius:10px;border:1px solid var(--rule);background:var(--plate)}
+.mk-nct>span{font-size:12px;color:var(--muted)}.mk-nct>b{font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
+.mk-nct .bw{position:relative;width:100%;margin-top:4px}.mk-nct .pay{width:100%;min-height:40px;font-size:13px}
+.mk-nct .pay:disabled{background:var(--moss);border-color:var(--moss)}.mk-nct .rs[hidden]{display:none}
+.mk-nct .pc{position:absolute;left:50%;top:50%;pointer-events:none}
+.mk-nct .pc i{position:absolute;left:-3px;top:-5px;width:6px;height:10px;border-radius:1.5px;background:var(--c);opacity:0}
+.mk-nct .pc.on i{animation:mk-nct 1200ms var(--ease) both}
+@keyframes mk-nct{0%{translate:0 0;rotate:0deg;opacity:1}35%{translate:calc(var(--dx) * .6) var(--dy);opacity:1}100%{translate:var(--dx) calc(var(--dy) + 90px);rotate:var(--r);opacity:0}}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -2117,6 +2196,19 @@ T('design','motion',[
  {en:'Shake',ko:'셰이크 · 좌우 흔들림',d:'좌우로 짧게 흔들리는 움직임. 비밀번호 틀림 같은 경고에 써요.',x:'의도한 흔들림은 Shake, 의도치 않게 밀리면 Layout Shift.',j:'"부르르 떨게 해 주세요"',p:'비밀번호가 틀리면 입력칸이 0.4초 좌우로 shake 되게 해줘',r:['Layout Shift','Jank'],l:1,o:0,v:'shake'},
  {en:'Hover Lift',ko:'호버 리프트 · 떠오르기',d:'마우스를 올리면 카드가 살짝 위로 뜨고 그림자가 커지는 효과.',p:'카드에 마우스 올리면 4px 떠오르고 그림자가 진해지게 해줘',r:['Hover Effect','Transform','Box Shadow'],l:1,o:0,v:'hoverlift'},
  {en:'Pulse',ko:'펄스 · 두근두근',d:'심장 뛰듯 커졌다 작아지기를 반복해 눈길을 끄는 움직임.',p:'새 알림 점이 은은하게 pulse 하게 해줘. 너무 빠르지 않게',r:['CTA Button','Scale'],l:1,o:0,v:'pulse'},
+ {en:'Crossfade',ko:'크로스페이드 · 겹쳐 바뀌기',d:'앞 장면이 서서히 사라지는 동안 같은 자리에서 다음 장면이 서서히 나타나는 전환이에요.',x:'두 장면을 동시에 바꿔야 해요. 앞 장면이 다 사라진 뒤에 다음 장면이 나오면 사이에 빈 화면이 번쩍여요.',p:'배너 사진이 바뀔 때 툭 바뀌지 말고 Crossfade(겹쳐 바뀌기)로 0.4초 동안 겹치며 바뀌게 해줘',r:['Fade In / Out','Carousel','Duration'],l:2,o:0,v:'u-crossfade'},
+ {en:'Shared Element Transition',ko:'공유 요소 전환',d:'목록의 작은 사진이 그대로 커지고 움직여 다음 화면의 큰 사진이 되는 전환이에요. 어디서 왔는지 눈으로 따라갈 수 있어요.',x:'웹에서는 View Transition(뷰 전환) 기능으로 만들어요. 두 화면에서 같은 요소에 같은 이름(view-transition-name)을 붙여 짝을 지어요.',p:'상품 목록에서 사진을 누르면 Shared Element Transition(공유 요소 전환)으로 그 사진이 커지면서 상세 화면으로 이어지게 해줘',r:['Thumbnail','Page Transition','Scale'],l:3,o:0,v:'u-shared-element-transition'},
+ {en:'Shimmer',ko:'시머 · 반짝이며 로딩',d:'회색 자리표시 위로 밝은 빛이 지나가며 "불러오는 중"임을 알리는 효과예요.',x:'빛은 한쪽 방향으로 천천히 지나가게 해요. 너무 빠르면 깜빡이는 것처럼 보여요.',p:'게시글을 불러오는 동안 Skeleton UI(뼈대 화면)에 Shimmer(반짝이며 로딩) 효과를 넣어줘',r:['Skeleton UI','Loading State','Perceived Performance'],l:1,o:0,v:'u-shimmer'},
+ {en:'Count-up',ko:'카운트업 · 숫자 올라가기',d:'숫자가 0부터 목표 값까지 빠르게 올라가며 보이는 효과예요. 실적이나 통계를 강조할 때 써요.',x:'숫자 폭이 모두 같은 설정(tabular-nums)을 써야 올라가는 동안 글자가 좌우로 흔들리지 않아요.',p:'회사 소개의 방문자 수가 화면에 보이면 Count-up(숫자 올라가기)으로 1초 동안 올라가게 해줘',r:['Dashboard','Easing','Duration'],l:1,o:0,v:'u-count-up'},
+ {en:'Typewriter Effect',ko:'타자 효과 · 한 글자씩 써지기',d:'글자가 타자를 치듯 한 글자씩 차례로 나타나는 효과예요. 끝에 커서가 깜빡이면 더 실감 나요.',x:'긴 문장에 쓰면 다 읽기까지 오래 기다려야 해요. 첫 화면의 짧은 문구에만 써요.',p:'첫 화면 제목이 Typewriter Effect(타자 효과)로 한 글자씩 써지게 해줘. 다 써지면 커서만 몇 번 깜빡이게',r:['Hero Section','Streaming','Delay'],l:1,o:0,v:'u-typewriter-effect'},
+ {en:'Marquee',ko:'마키 · 흐르는 글자',d:'글자나 로고가 띠 안에서 끝없이 옆으로 흘러가는 움직임이에요. 공지 띠나 고객사 로고 줄에 써요.',x:'저절로 5초 넘게 움직이는 것에는 멈출 방법을 둬야 해요(WCAG 2.2.2). 중요한 안내를 흐르는 글자에만 두지 마세요.',p:'맨 위 공지 띠를 Marquee(흐르는 글자)로 천천히 흐르게 하고, 멈춤 버튼도 같이 둬줘',r:['Banner','Loop','Reduced Motion'],l:1,o:0,v:'u-marquee'},
+ {en:'Scroll-linked Animation',ko:'스크롤 연동 애니메이션',d:'스크롤한 만큼 움직임이 진행되는 애니메이션이에요. 다시 올리면 움직임도 같이 되돌아가요.',x:'한 번 나타나고 끝나는 Scroll Reveal(스크롤 등장)과 달라요. 스크롤 위치가 곧 진행도예요.',p:'글 맨 위에 Scroll-linked Animation(스크롤 연동)으로 읽은 만큼 차오르는 진행 막대를 넣어줘',r:['Scroll Reveal','Parallax','Progress Bar'],l:2,o:0,v:'u-scroll-linked-animation'},
+ {en:'Collapse / Expand',ko:'접기·펼치기',d:'눌러서 숨은 내용을 펼쳐 보이거나 다시 접어 숨기는 동작이에요. 높이가 부드럽게 늘었다 줄어요.',x:'여러 칸이 쌓인 Accordion(아코디언)도 이 동작으로 만들어요. 버튼 글자를 "더 보기"·"접기"로 바꿔 지금 상태를 알려 줘요.',p:'후기가 길면 앞부분만 보이고, "더 보기"를 누르면 Collapse / Expand(접기·펼치기)로 부드럽게 펼쳐지게 해줘',r:['Accordion','Duration','Easing'],l:1,o:0,v:'u-collapse-expand'},
+ {en:'Reveal Mask',ko:'리빌 마스크 · 가려진 것이 드러나기',d:'가림막을 걷어 내듯 그림이나 글자가 한쪽부터 드러나는 효과예요.',x:'요소는 처음부터 제자리에 있고, 보이는 영역만 넓어져요. CSS의 clip-path(잘라 보이기)나 mask(가리개)로 만들어요.',p:'첫 화면 사진이 왼쪽부터 Reveal Mask(가려진 것이 드러나기)로 0.8초 동안 드러나게 해줘',r:['Slide-in','Fade In / Out','Hero Section'],l:2,o:0,v:'u-reveal-mask'},
+ {en:'Path Drawing',ko:'패스 드로잉 · 선 그려지기',d:'보이지 않는 펜이 따라 그리듯 선이 처음부터 끝까지 그려지는 효과예요. 그래프, 서명, 체크 표시에 써요.',x:'SVG 선의 점선 길이(stroke-dasharray)를 선 전체 길이로 두고, 시작 위치(stroke-dashoffset)를 0까지 줄여서 만들어요.',p:'대시보드의 꺾은선 그래프가 처음 보일 때 Path Drawing(선 그려지기)으로 왼쪽부터 그려지게 해줘',r:['Line Chart','Vector vs Raster','Duration'],l:2,o:0,v:'u-path-drawing'},
+ {en:'Magnetic Button',ko:'자석 버튼',d:'마우스가 가까이 오면 버튼이 자석처럼 살짝 끌려오고, 멀어지면 제자리로 돌아가는 효과예요.',x:'마우스가 있는 기기에서만 써요. 끌려오는 거리는 몇 px로 작게 둬야 누르기 어렵지 않아요. 터치와 키보드에서는 움직이지 않아도 돼요.',p:'첫 화면 "시작하기" 버튼에 Magnetic Button(자석 버튼) 효과를 넣어줘. 마우스에서만, 최대 10px까지만 끌려오게',r:['CTA Button','Hover Effect','Microinteraction'],l:3,o:0,v:'u-magnetic-button'},
+ {en:'Tilt Effect',ko:'틸트 · 기울기 효과',d:'마우스 위치에 따라 카드가 입체적으로 살짝 기울어지는 효과예요. 손에 든 카드처럼 보여요.',x:'기울기는 몇 도만 줘요. 크게 기울면 글자를 읽기 어렵고 어지러울 수 있어요. 동작 줄이기 설정이면 꺼요.',p:'상품 카드에 마우스를 올리면 Tilt Effect(기울기 효과)로 최대 8도까지 기울어지게 해줘. 동작 줄이기 설정이면 끄고',r:['Card Flip','Hover Effect','Reduced Motion'],l:3,o:0,v:'u-tilt-effect'},
+ {en:'Confetti',ko:'컨페티 · 색종이 효과',d:'목표를 이뤘을 때 색종이 조각이 터지듯 흩날리는 축하 효과예요.',x:'첫 결제나 목표 달성처럼 정말 기쁜 순간에만 아껴 써요. 동작 줄이기 설정이면 색종이 없이 축하 문구만 보여 줘요.',p:'첫 주문을 마치면 Confetti(색종이 효과)를 한 번 터뜨려줘. 동작 줄이기 설정이면 빼고 완료 문구만 보여줘',r:['Success State','Microinteraction','Reduced Motion'],l:2,o:0,v:'u-confetti'},
 ]);
 T('front','motion',[
  {en:'Rotate',ko:'회전 · 로테이트',d:'요소를 각도만큼 돌리는 변형. 화살표 뒤집기 등에 써요.',p:'아코디언이 열리면 화살표가 180도 rotate 되게 해줘',r:['Transform','Accordion'],l:1,o:1,u:MDN('Web/CSS/transform-function/rotate'),v:'rotate'},
@@ -3286,6 +3378,93 @@ Object.assign(D, {
     <i>↓ 예</i><span class="st">결제</span><i>↓</i><span class="st ok">주문 완료</span></div>`, cap:'네모는 화면, 마름모는 갈림길이에요. 로그인 안 한 사람은 옆길로 돌아와요'},
   'u-design-spec':{h:`<div class="mk-xsp"><div class="bx"><span class="w"><b>160</b></span><span class="mk-btn mk-xsb">구매하기</span><span class="h"><b>44</b></span></div>
     <ul class="mk-xsl"><li>글자 14 · 굵기 700</li><li>모서리 8</li><li>바탕 #1D2B4F</li></ul></div>`, cap:'크기, 모서리, 색을 숫자로 적어 두면 개발자가 그대로 만들 수 있어요'},
+});
+/* design: motion — 자동 재생은 .A + m:1(멈춘 첫 장면도 뜻이 보이게 음수 지연), 조작형은 stage 안 요소에만 리스너 */
+const NP = [[4, 74], [42, 58], [80, 64], [118, 34], [156, 42], [194, 16], [232, 22]], NL = Math.ceil(NP.slice(1).reduce((a, p, i) => a + Math.hypot(p[0] - NP[i][0], p[1] - NP[i][1]), 0));
+const NCF = Array.from({length: 16}, (_, i) => { const a = (-170 + i * 160 / 15) * Math.PI / 180, R = 60 + i * 37 % 50;
+  return `<i style="--dx:${Math.round(Math.cos(a) * R)}px;--dy:${Math.round(Math.sin(a) * R)}px;--r:${180 + i * 97 % 360}deg;--c:var(${['--ch1', '--mark', '--ch3', '--moss', '--sky'][i % 5]})"></i>`; }).join('');
+const NCE = uid();
+Object.assign(D, {
+  'u-crossfade':{h:`<div class="mk-vcol"><div class="mk-nfr mk-ncf">${[0, 1].map(i => `<div class="A">${jph(i)}<span class="tg">사진 ${i + 1}</span></div>`).join('')}</div>
+    <span class="mk-help">앞 사진이 흐려지는 동안 다음 사진이 선명해져요</span></div>`, m:1, cap:'같은 자리에서 두 장면이 겹치며 바뀌어요. 사이에 빈 화면이 없어요'},
+  'u-shared-element-transition':{h:`<div class="mk-vcol"><div class="mk-nse"><div class="ls A">${['바다 여행', '봄 산책 코스', '도시 야경'].map((t, i) => `<span${i === 1 ? ' class="me"' : ''}><i>${jph(i)}</i>${t}</span>`).join('')}</div>
+    <div class="im A">${jph(1)}</div><div class="dt A"><b>봄 산책 코스</b><span>2시간 · 4.2km</span><span>★ 4.8</span></div></div>
+    <span class="mk-help">목록 화면 → 상세 화면</span></div>`, m:1, cap:'목록의 작은 사진이 커지며 올라가 상세 화면의 큰 사진이 돼요'},
+  'u-shimmer':{h:`<div class="mk-vcol"><div class="mk-nsm" aria-hidden="true"><div class="hd"><i></i><span><i style="width:60%"></i><i style="width:35%"></i></span></div>
+    <i class="pic"></i><i></i><i style="width:75%"></i></div><span class="mk-help">불러오는 중…</span></div>`, m:1, cap:'자리표시 위로 빛이 지나가며 아직 불러오는 중이라고 알려요'},
+  'u-count-up':{h:`<div class="mk-ncu"><span class="sr">이번 달 방문자 12,480명, 만족도 98%</span><div class="ks" aria-hidden="true">${[['이번 달 방문자', 12480, '명'], ['만족도', 98, '%']].map(([t, v, u]) =>
+    `<div class="k"><span>${t}</span><b><span class="n" data-v="${v}" style="min-width:${v.toLocaleString('ko-KR').length}ch">${v.toLocaleString('ko-KR')}</span><small>${u}</small></b></div>`).join('')}</div>
+    <button type="button" class="mk-btn ghost">다시 세기</button><output class="mk-help">화면에 보이면 숫자가 올라가요</output></div>`, cap:'숫자가 0부터 목표 값까지 빠르게 올라가고, 끝에 가까울수록 천천히 멈춰요',
+    init: s => { const ns = [...s.querySelectorAll('.n')], out = s.querySelector('output'), f = v => Math.round(v).toLocaleString('ko-KR'), MS = 1200; let t0 = 0, raf = 0;
+      const tick = now => { if (!s.isConnected) return; const p = Math.min(1, (now - t0) / MS), e = 1 - (1 - p) ** 3;
+        ns.forEach(n => { n.textContent = f(n.dataset.v * e); }); if (p < 1) raf = requestAnimationFrame(tick); };
+      const run = () => { cancelAnimationFrame(raf);
+        if (reduced) { ns.forEach(n => { n.textContent = f(+n.dataset.v); }); out.textContent = '동작 줄이기 설정이라 바로 최종 값을 보여 줘요'; return; }
+        t0 = performance.now(); raf = requestAnimationFrame(tick); };
+      s.querySelector('button').addEventListener('click', run); run(); }},
+  'u-typewriter-effect':{h:`<div class="mk-ntw"><span class="ey">새 기능</span><span class="t"><span class="sr">말로 설명하는 디자인</span><span class="gh" aria-hidden="true">말로 설명하는 디자인<i class="c"></i></span>
+    <span class="ty" aria-hidden="true"><span class="tx">말로 설명하는 디자인</span><i class="c"></i></span></span><span class="mk-help">짧은 문구 · 한 글자에 0.09초</span>
+    <button type="button" class="mk-btn ghost mk-sm">다시 입력</button></div>`, cap:'제목이 한 글자씩 써지고, 다 써지면 커서가 몇 번 깜빡여요',
+    init: s => { const tx = s.querySelector('.tx'), c = s.querySelector('.ty .c'), W = [...tx.textContent]; let i = 0, tm = 0;
+      const step = () => { if (!s.isConnected) return; tx.textContent = W.slice(0, ++i).join(''); if (i < W.length) tm = setTimeout(step, 90); else c.classList.add('done'); };
+      const run = () => { clearTimeout(tm); c.classList.remove('done'); if (reduced) { tx.textContent = W.join(''); return; } i = 0; tx.textContent = ''; tm = setTimeout(step, 300); };
+      s.querySelector('button').addEventListener('click', run); run(); }},
+  'u-marquee':{h:(() => { const c = ['오늘만 무료 배송', '신규 가입 10% 할인', '주말 이벤트 진행 중'].map(t => `<span>${t}</span><span aria-hidden="true">·</span>`).join('');
+    return `<div class="mk-nmq"><div class="bn"><div><div class="tr A"><span>${c}</span><span aria-hidden="true">${c}</span></div></div></div>
+    <div class="hd"><b>봄빛 상점</b><span class="mk-row"><i></i><i></i><i></i></span></div><div class="bd"><i style="width:80%"></i><i style="width:55%"></i></div></div>`; })(),
+    m:1, cap:'공지 띠 안에서 글자가 끝없이 옆으로 흘러요. 오른쪽 아래 멈춤 버튼처럼 멈출 방법을 함께 둬요'},
+  'u-scroll-linked-animation':{h:hint('안쪽 글을 스크롤해 보세요 (방향키도 돼요)') + `<div class="mk-vcol"><div class="mk-nsl"><div class="pg"><i></i></div>
+    <div class="sc" tabindex="0" role="region" aria-label="글 내용"><b>용어를 알면 요청이 쉬워져요</b>${[92, 80, 88, 60, 95, 84, 70, 90, 76, 86, 64, 92, 50].map(w => `<i style="width:${w}%"></i>`).join('')}</div></div>
+    <output class="mk-help">읽은 양 0%</output></div>`, cap:'스크롤한 만큼 위 막대가 차오르고, 다시 올리면 같이 줄어요',
+    init: s => { const sc = s.querySelector('.sc'), bar = s.querySelector('.pg i'), out = s.querySelector('output');
+      sc.addEventListener('scroll', () => { const p = sc.scrollTop / (sc.scrollHeight - sc.clientHeight || 1);
+        bar.style.transform = `scaleX(${p})`; out.textContent = `읽은 양 ${Math.round(p * 100)}%`; }, {passive: true}); }},
+  'u-collapse-expand':{h:`<div class="mk-nce"><b>★ 4.8 · 배송이 빨라요</b><p>포장이 꼼꼼하고 주문한 다음 날 바로 받았어요.</p>
+    <div class="bd" id="${NCE}" inert><div><p>색은 사진과 거의 같고, 크기는 생각보다 조금 커요. 다음에도 여기서 살 것 같아요.</p></div></div>
+    <button type="button" class="mk-btn ghost mk-sm" aria-expanded="false" aria-controls="${NCE}"><span>더 보기</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button></div>`,
+    cap:'"더 보기"를 누르면 숨은 내용이 부드럽게 펼쳐지고, "접기"로 다시 숨어요',
+    init: s => { const b = s.querySelector('button'), bd = s.querySelector('.bd'), l = b.querySelector('span');
+      b.addEventListener('click', () => { const o = b.getAttribute('aria-expanded') !== 'true';
+        b.setAttribute('aria-expanded', o); bd.classList.toggle('open', o); bd.inert = !o; l.textContent = o ? '접기' : '더 보기'; }); }},
+  'u-reveal-mask':{h:`<div class="mk-nrv"><div class="fr"><div class="im A">${jph(0)}</div></div><div class="ln"><span class="A">새 계절, 새 옷</span></div>
+    <span class="mk-help">점선은 원래 그림 자리예요. 그림은 처음부터 제자리에 있어요</span></div>`, m:1, cap:'가림막이 걷히듯 사진이 왼쪽부터 드러나고, 제목이 아래에서 올라와요'},
+  'u-path-drawing':{h:`<div class="mk-npd"><b>주간 방문자</b><svg viewBox="0 0 236 84" aria-hidden="true">${[10, 42, 74].map(y => `<line class="gl" x1="0" x2="236" y1="${y}" y2="${y}"/>`).join('')}
+    <path class="ln A" style="--L:${NL}" d="M${NP.map(p => p.join(' ')).join(' L')}"/><circle class="dt A" cx="232" cy="22" r="5"/></svg>
+    <span class="ax">${['월', '화', '수', '목', '금', '토', '일'].map(d => `<span>${d}</span>`).join('')}</span></div>`, m:1, cap:'보이지 않는 펜이 따라 그리듯 선이 왼쪽부터 그려져요'},
+  'u-magnetic-button':{h:hint('버튼 근처로 마우스를 가져가 보세요') + `<div class="mk-nmg"><div class="zn"><span>자석 영역</span><button type="button" class="mk-btn">시작하기</button></div>
+    <output class="mk-help">점선 안으로 들어오면 버튼이 끌려와요</output></div>`, cap:'마우스 쪽으로 버튼이 최대 10px 끌려오고, 영역을 벗어나면 제자리로 돌아가요',
+    init: s => { const z = s.querySelector('.zn'), b = z.querySelector('button'), out = s.querySelector('output'), M = 10, K = .3;
+      const back = t => { b.style.translate = ''; out.textContent = t; };
+      z.addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; if (reduced) { out.textContent = '동작 줄이기 설정이라 움직이지 않아요'; return; }
+        const r = z.getBoundingClientRect(), cl = v => Math.max(-M, Math.min(M, v)), x = cl((e.clientX - r.left - r.width / 2) * K), y = cl((e.clientY - r.top - r.height / 2) * K);
+        b.style.translate = `${x.toFixed(1)}px ${y.toFixed(1)}px`; out.textContent = `끌려오는 중 · 가로 ${Math.round(x)}px, 세로 ${Math.round(y)}px`; });
+      z.addEventListener('pointerleave', e => { if (e.pointerType !== 'touch') back('영역을 벗어나 제자리로 돌아왔어요'); });
+      z.addEventListener('pointercancel', () => back('취소돼서 제자리로 돌아왔어요'));
+      z.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') out.textContent = '터치에서는 끌려오지 않아요'; });
+      b.addEventListener('click', () => { out.textContent = '눌렀어요 · 끌려온 자리에서도 잘 눌려요'; }); }},
+  'u-tilt-effect':{h:hint('카드를 기울여 보세요 (방향키도 돼요)') + `<div class="mk-ntl"><div class="cd" tabindex="0" role="group" aria-label="기울기 카드">
+    <span class="pic">${jph(2)}</span><span><b>여름 한정판 운동화</b><small>₩39,000</small></span></div><output class="mk-help">평평해요</output></div>`,
+    cap:'마우스가 있는 쪽이 살짝 눌린 듯 최대 8도 기울고, 벗어나면 평평하게 돌아와요',
+    init: s => { const c = s.querySelector('.cd'), out = s.querySelector('output'), A = 8; let rx = 0, ry = 0, held = false;
+      const set = (x, y) => { rx = Math.max(-A, Math.min(A, x)); ry = Math.max(-A, Math.min(A, y)); const on = Math.round(rx) || Math.round(ry);
+        c.style.transform = on ? `rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg)` : ''; out.textContent = on ? `기울기 · 가로 ${Math.round(ry)}°, 세로 ${Math.round(rx)}°` : '평평해요'; };
+      const no = () => { out.textContent = '동작 줄이기 설정이라 기울이지 않아요'; };
+      const at = e => { if (reduced) return no(); const r = c.getBoundingClientRect(); set(((e.clientY - r.top) / r.height - .5) * -2 * A, ((e.clientX - r.left) / r.width - .5) * 2 * A); };
+      const end = () => { held = false; set(0, 0); };
+      c.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') return; held = true; c.setPointerCapture(e.pointerId); at(e); });
+      c.addEventListener('pointermove', e => { if (e.pointerType === 'mouse' || held) at(e); });
+      c.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') end(); }); c.addEventListener('pointercancel', end);
+      c.addEventListener('pointerleave', () => { if (!held) end(); });
+      keys(c, {ArrowUp: [A / 2, 0], ArrowDown: [-A / 2, 0], ArrowLeft: [0, -A / 2], ArrowRight: [0, A / 2], Escape: 0, Home: 0},
+        v => reduced ? no() : v ? set(rx + v[0], ry + v[1]) : set(0, 0)); }},
+  'u-confetti':{h:`<div class="mk-nct"><span>주문 금액</span><b>₩39,000</b><span class="bw"><button type="button" class="mk-btn pay">결제하기</button><span class="pc" aria-hidden="true">${NCF}</span></span>
+    <output class="mk-help">결제하면 축하 색종이가 터져요</output><button type="button" class="mk-btn ghost mk-sm rs" hidden>다시 해 보기</button></div>`,
+    cap:'결제를 마친 순간 한 번만 색종이가 터져요. 버튼 색과 글자도 함께 바뀌어 완료를 알려요',
+    init: s => { const b = s.querySelector('.pay'), pc = s.querySelector('.pc'), out = s.querySelector('output'), rs = s.querySelector('.rs');
+      b.addEventListener('click', () => { b.disabled = true; b.textContent = '결제 완료'; rs.hidden = false; rs.focus();
+        if (reduced) { out.textContent = '첫 주문을 축하해요! (동작 줄이기 설정이라 색종이는 빼요)'; return; }
+        out.textContent = '첫 주문을 축하해요!'; pc.classList.remove('on'); void pc.offsetWidth; pc.classList.add('on'); });
+      rs.addEventListener('click', () => { pc.classList.remove('on'); b.disabled = false; b.textContent = '결제하기'; rs.hidden = true; out.textContent = '결제하면 축하 색종이가 터져요'; b.focus(); }); }},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
