@@ -300,8 +300,8 @@ a.tag:hover{background:var(--ink);color:#fff}
    자동 재생은 10s 주기, k번째 칸은 k×10%에 나타나 92%까지 남는다. 멈춘 장면은 전부 보이는 88%(-8.8s) */
 .mk-term{flex:none;width:300px;max-width:100%;background:#1d2b4f;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;text-align:left}
 .mk-tbar{display:flex;align-items:center;gap:5px;padding:6px 10px;background:#16213d}.mk-tbar>i{width:8px;height:8px;border-radius:50%;background:#4a5b80}
-.mk-tbar>span{margin-left:6px;font-size:11px;color:#a9b8d0}
-.mk-tbody{font-family:var(--mono);font-size:12px;line-height:1.6;color:#e6ecf7;white-space:pre;overflow-x:auto;padding:10px 12px}
+.mk-tbar>span{margin-left:6px;font-size:11px;color:#a9b8d0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-tbody{font-family:var(--mono);font-size:12px;line-height:1.6;color:#e6ecf7;white-space:pre;overflow-x:auto;padding:10px 12px}.mk-tbody>div{min-height:1.6em}
 .mk-tp{color:#a8d49a}.mk-te{color:#ff9e94}.mk-tc{display:inline-block}.mk-tbody .mk-hl{outline-offset:1px;border-radius:3px}
 .cmp>div:has(>.mk-term){min-width:0;grid-template-columns:minmax(0,1fr)}
 .mk-tcur{display:inline-block;width:.6em;height:1.1em;vertical-align:text-bottom;background:#e6ecf7}.mk-tcur.A{animation:blink 1s step-end infinite}
@@ -4610,7 +4610,7 @@ Object.assign(D, {
   'u-pwd':{h:term([{c:'pwd'},{o:'/home/me/project', h:'/home/me/project'}]), m:1, cap:'프롬프트에는 ~/project로 줄여 보이지만, pwd는 맨 앞 /부터 전체 경로를 보여 줘요'},
   'u-mkdir':{h:term([{c:'mkdir -p src/components', h:'-p'},{c:'ls src'},{o:'components'}]), m:1, cap:'src 폴더가 없었는데도 -p 덕분에 src와 그 안의 components가 한 번에 생겼어요'},
   'u-touch':{h:term([{c:'touch notes.md', h:'touch'},{c:'ls'},{o:'index.html  notes.md'}]), m:1, cap:'아무것도 출력되지 않지만 ls를 쳐 보면 빈 notes.md가 생겨 있어요'},
-  'u-cp':{h:term([{c:'cp index.html backup.html', h:'backup.html'},{c:'ls'},{o:'backup.html  index.html'}]), m:1, cap:'원본 index.html은 그대로 있고 사본 backup.html이 하나 더 생겼어요'},
+  'u-cp':{h:term([{c:'cp index.html copy.html', h:'copy.html'},{c:'ls'},{o:'copy.html  index.html'}]), m:1, cap:'원본 index.html은 그대로 있고 사본 copy.html이 하나 더 생겼어요'},
   'u-mv':{h:term([{c:'ls'},{o:'draft.md'},{c:'mv draft.md post.md', h:'post.md'},{c:'ls'},{o:'post.md'}]), m:1, cap:'복사가 아니라 이름이 바뀐 거라 draft.md는 남지 않아요'},
   'u-rm':{h:term([{c:'ls'},{o:'memo.txt  old'},{c:'rm memo.txt'},{c:'rm -r old', h:'-r'},{c:'ls'}]), m:1, cap:'파일은 rm으로, 폴더는 rm -r로 지웠어요. 묻지도 않고 바로 사라져서 마지막 ls에는 아무것도 안 나와요'},
   'u-cat':{h:term([{c:'cat package.json'},{o:'{'},{o:'  "name": "app",'},{o:'  "version": "1.0.0"'},{o:'}'}]), m:1, cap:'파일을 열지 않고도 내용이 터미널에 그대로 찍혀요'},
