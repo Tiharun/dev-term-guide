@@ -309,7 +309,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -988,6 +988,70 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-nct .pc i{position:absolute;left:-3px;top:-5px;width:6px;height:10px;border-radius:1.5px;background:var(--c);opacity:0}
 .mk-nct .pc.on i{animation:mk-nct 1200ms var(--ease) both}
 @keyframes mk-nct{0%{translate:0 0;rotate:0deg;opacity:1}35%{translate:calc(var(--dx) * .6) var(--dy);opacity:1}100%{translate:var(--dx) calc(var(--dy) + 90px);rotate:var(--r);opacity:0}}
+.mk-osg{display:inline-flex;gap:2px;padding:2px;border-radius:8px;background:var(--rule-2)}
+.mk-osg button{min-height:28px;padding:0 10px;border-radius:6px;font-size:12px;font-weight:700;color:var(--muted)}
+.mk-osg button[aria-pressed="true"]{background:var(--plate);color:var(--ink);box-shadow:0 0 0 1px var(--rule)}
+.mk-ods{display:grid;gap:3px;width:min(100%,330px)}
+.mk-ods .rw,.mk-oad .rw{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:10px}
+.mk-ods .rw>b,.mk-oad .rw>b{font-size:12px;color:var(--ink);text-align:right}
+.mk-ods .rw{grid-template-columns:76px 1fr}.mk-ods .ar{margin-left:86px;font-size:12px;color:var(--muted);line-height:1}
+.mk-ods .tk{display:flex;align-items:center;gap:6px}.mk-ods .tk i{width:20px;height:20px;border-radius:5px}
+.mk-ods .tk .aa{font-size:16px;font-weight:700;color:var(--ink);margin-left:4px}.mk-ods .tk .gp{font-size:11.5px;color:var(--muted)}
+.mk-ods .cp{display:flex;align-items:center;gap:8px}.mk-ods .mk-in{width:110px}
+.mk-ods .sc{display:grid;gap:6px;width:170px;text-align:left}.mk-ods .sc>b{font-size:12px;color:var(--ink)}.mk-ods .sc .mk-btn{justify-self:start}
+.mk-oad{display:grid;gap:8px;width:min(100%,330px)}
+.mk-oad .at,.mk-oad .sf,.mk-oad .hd{display:flex;align-items:center;gap:6px}.mk-oad .at{gap:10px}.mk-oad .mk-in{width:84px;min-height:28px}
+.mk-oad .sf{gap:0}.mk-oad .sf .mk-in{border-radius:7px 0 0 7px;border-right:0}.mk-oad .sf .mk-btn{border-radius:0 7px 7px 0;padding:0 7px}
+.mk-oad .hd{justify-content:space-between;padding:5px 8px;border:1px solid var(--rule);border-radius:8px;background:var(--plate)}.mk-oad .hd>b{font-size:12.5px;color:var(--ink)}
+.mk-oad .pg{display:grid;grid-template-columns:42px 1fr;grid-template-rows:9px 32px;gap:4px;width:160px;padding:4px;border:1px solid var(--rule);border-radius:7px;background:var(--plate)}
+.mk-oad .pg .h{grid-column:1/-1;border-radius:2px;background:var(--sky)}.mk-oad .pg .im{border-radius:4px;background:var(--rule-2);overflow:hidden}
+.mk-oad .pg .tx{align-self:center;height:9px;border-radius:2px;background:var(--rule-2)}.mk-oad .pg span{align-self:center;font-size:11.5px;font-weight:700;color:var(--ink)}
+.mk-oft{display:grid;gap:10px;width:min(100%,360px);padding-top:8px}
+.mk-oft .ct{display:flex;flex-wrap:wrap;gap:8px}
+.mk-oft .tr{--x:calc(100% - 30px);position:relative;height:64px}.mk-oft.n .tr{--x:110px}
+.mk-oft .go{position:absolute;left:0;top:50%;translate:0 -50%}
+.mk-oft .ln{position:absolute;top:50%;left:50px;width:calc(var(--x) - 50px);border-top:1.5px dashed var(--steel)}
+.mk-oft .tg{position:absolute;left:var(--x);top:50%;translate:-50% -50%;width:56px;height:56px;border-radius:50%;border:2px solid var(--mark);background:var(--mark-bg)}
+.mk-oft.s .tg{width:22px;height:22px}
+.mk-oft .rs,.mk-ohk .rs{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;font-size:11.5px;color:var(--muted)}
+.mk-oft .rs b,.mk-ohk .rs b{color:var(--ink);font-variant-numeric:tabular-nums}
+.mk-ohk{display:grid;gap:10px;width:min(100%,330px);margin-top:4px;padding-top:8px}.mk-ohk>.mk-osg{justify-self:start}
+.mk-ohk .ls{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start;min-height:130px}
+.mk-ohk .rs{grid-template-columns:repeat(3,auto);justify-content:start}
+.mk-opg,.mk-ocl,.mk-omm{display:grid;gap:5px;width:100%;max-width:200px;text-align:left}
+.mk-opg>span,.mk-ocl>span:not(.mk-help){display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--ink)}
+.mk-opg>span b,.mk-ocl>span b{font-weight:400;color:var(--muted)}.mk-opg .mo{justify-content:center;font-weight:700;margin-top:4px}
+.mk-ocl p{margin:0;font-size:11.5px;line-height:1.5;color:var(--muted)}
+.mk-ocl .tt{padding-top:5px;border-top:1px solid var(--rule);font-weight:700}.mk-ocl .tt b{color:var(--ink);font-weight:700}
+.mk-ojk{display:grid;gap:8px;width:100%;max-width:220px}
+.mk-ojk .hd{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--rule);border-radius:7px;background:var(--plate);color:var(--ink)}
+.mk-ojk .hd>b{font-size:12.5px}.mk-ojk .hd .sp{flex:1}
+.mk-ojk .q{flex:1;display:flex;align-items:center;gap:4px;min-height:24px;padding:0 7px;border-radius:12px;background:var(--rule-2);font-size:11.5px;color:var(--muted)}.mk-ojk .q svg{width:14px;height:14px}
+.mk-ofz{width:100%;max-width:160px}.mk-ofz .t{fill:var(--rule)}.mk-ofz .k{fill:var(--ink)}.mk-ofz .y{fill:var(--rule-2)}.mk-ofz .b{fill:var(--mark)}
+.mk-ofz .p{fill:none;stroke:var(--mark);stroke-width:7;stroke-linecap:round;opacity:.4}.mk-ofz .z{fill:none;stroke:var(--mark);stroke-width:2.5;stroke-linejoin:round}.mk-ofz .zh{fill:var(--mark)}
+.mk-oia{display:flex;flex-direction:column;align-items:center;width:min(100%,340px)}
+.mk-oia .rt{position:relative;padding:5px 18px;border-radius:7px;background:var(--ink);color:#fff;font-size:12.5px}
+.mk-oia .rt::after{content:'';position:absolute;left:50%;top:100%;height:9px;border-left:1.5px solid var(--steel)}
+.mk-oia .cs{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-top:18px}
+.mk-oia .cs::before{content:'';position:absolute;top:-9px;left:16.6%;right:16.6%;border-top:1.5px solid var(--steel)}
+.mk-oia .c{position:relative;display:grid;gap:4px;text-align:center}.mk-oia .c::before{content:'';position:absolute;top:-9px;left:50%;height:9px;border-left:1.5px solid var(--steel)}
+.mk-oia .c b{padding:4px 2px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font-size:12px;color:var(--ink)}
+.mk-oia .c span{padding:3px 2px;border-radius:5px;background:var(--rule-2);font-size:11.5px;color:var(--ink)}
+.mk-omm .mk-bar{font-size:11.5px}.mk-omm .mk-bar b{margin-left:auto;color:var(--sky)}
+.mk-ous{display:grid;justify-items:center;gap:10px;width:min(100%,330px)}
+.mk-ous .tk{display:grid;gap:2px;text-align:center}.mk-ous .tk b{font-size:13px;color:var(--ink)}
+.mk-ous .ps{display:flex;gap:12px}.mk-ous .ps span{display:grid;justify-items:center;gap:2px}.mk-ous .ps small{font-size:11.5px;font-weight:700}
+.mk-ous .ok{color:var(--moss)}.mk-ous .no{color:var(--mark-text)}
+.mk-ous .fd{margin:0;padding:5px 8px;font-size:12px;font-weight:700;color:var(--ink);text-align:center}
+.mk-ohe{width:min(100%,330px);text-align:left}.mk-ohe>b{display:block;font-size:12.5px;color:var(--ink);margin-bottom:4px}
+.mk-ohe .it{display:grid;grid-template-columns:16px 1fr auto;gap:6px;align-items:start;padding:6px 0;border-top:1px solid var(--rule-2);font-size:11.5px;color:var(--muted)}
+.mk-ohe .it>i{font-style:normal;font-weight:800}.mk-ohe .no>i{color:var(--mark-text)}.mk-ohe .ok>i{color:var(--moss)}
+.mk-ohe .it span b{display:block;font-size:12px;color:var(--ink)}
+.mk-ohe .it em{font-style:normal;font-size:11px;font-weight:700;color:var(--mark-text);background:var(--mark-bg);padding:1px 7px;border-radius:9px;white-space:nowrap}
+.mk-oms{display:grid;gap:4px;width:min(100%,320px)}
+.mk-oms .rw{display:grid;grid-template-columns:46px 1fr auto;align-items:baseline;gap:8px;line-height:1.2}
+.mk-oms .rw>span:first-child{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}.mk-oms .rw b{color:var(--ink);white-space:nowrap}
+.mk-oms .bs{background:var(--mark-bg);border-radius:6px}.mk-oms>.mk-help{margin-top:4px}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -1136,15 +1200,25 @@ T('design','motion',[
  {en:'Card Flip',ko:'카드 뒤집기',d:'카드가 뒤집히며 뒷면 내용을 보여 주는 3D 회전.',p:'카드를 누르면 뒤집혀서 뒷면 설명이 보이게 해줘',r:['Transform'],l:2,o:0,v:'cardflip'},
 ]);
 T('design','adv',[
- {en:'Design System',ko:'디자인 시스템',d:'색·글꼴·간격·부품 규칙을 한곳에 정리해, 누가 만들어도 같은 모습이 나오게 하는 기준집.',p:'지금 쓰는 버튼·색·글꼴을 디자인 시스템 문서로 정리해줘',r:['Design Token','Component'],l:2,o:0,v:{stack:['페이지','컴포넌트','디자인 토큰 (색·글꼴·간격)'],hl:[2]}},
+ {en:'Design System',ko:'디자인 시스템',d:'색·글꼴·간격·부품 규칙을 한곳에 정리해, 누가 만들어도 같은 모습이 나오게 하는 기준집.',p:'지금 쓰는 버튼·색·글꼴을 디자인 시스템 문서로 정리해줘',r:['Design Token','Component'],l:2,o:0,v:'u-design-system'},
  {en:'Design Token',ko:'디자인 토큰 · 디자인 값 이름',d:'"메인 파랑=#2563eb"처럼 디자인 값에 이름을 붙여 한곳에서 관리하는 것.',p:'색을 직접 쓰지 말고 디자인 토큰 변수로 바꿔줘',r:['Design System','CSS Variable'],l:3,o:0,v:{code:'--color-primary: #1d2b4f;\n--space-md: 16px;\n--radius-card: 12px;'}},
  {en:'Grid System',ko:'그리드 시스템 · 칸 나누기 규칙',d:'화면을 보통 12칸으로 나누고 그 칸에 맞춰 요소를 놓는 배치 규칙.',p:'12칼럼 그리드 시스템에 맞춰 배치를 다시 잡아줘',r:['CSS Grid','8pt Grid'],l:2,o:0,v:'grid'},
- {en:'Atomic Design',ko:'아토믹 디자인',d:'화면을 원자(버튼) → 분자(검색창) → 유기체(헤더) → 페이지 순으로 쌓아 만드는 방법.',p:'컴포넌트를 아토믹 디자인 단계로 나눠 폴더를 정리해줘',r:['Component'],l:3,o:0,v:{flow:['원자','분자','유기체','템플릿','페이지']}},
+ {en:'Atomic Design',ko:'아토믹 디자인',d:'화면을 원자(버튼) → 분자(검색창) → 유기체(헤더) → 페이지 순으로 쌓아 만드는 방법.',p:'컴포넌트를 아토믹 디자인 단계로 나눠 폴더를 정리해줘',r:['Component'],l:3,o:0,v:'u-atomic-design'},
  {en:'Affordance',ko:'어포던스 · 쓰는 법이 보이는 모양',d:'보기만 해도 "누를 수 있겠다"를 알게 하는 생김새.',p:'이 글자가 버튼인 줄 모르겠어. 버튼처럼 보이게 어포던스를 살려줘',r:['Button States'],l:2,o:0,v:'button'},
  {en:'Gestalt Principles',ko:'게슈탈트 원리 · 묶어 보이는 법칙',d:'가까이 있거나 비슷하면 한 묶음으로 보이는 등, 사람이 모양을 묶어 보는 법칙.',p:'관련된 입력칸끼리 가깝게 붙여서 한 묶음으로 보이게 해줘',r:['Whitespace'],l:3,o:0,v:'gap'},
- {en:"Fitts's Law",ko:'피츠의 법칙',d:'누를 대상이 크고 가까울수록 빨리 누를 수 있다는 법칙.',p:'모바일에서 중요한 버튼은 크게 하고 손 닿는 아래쪽에 둬줘',r:['Touch Target'],l:3,o:0,v:'button'},
+ {en:"Fitts's Law",ko:'피츠의 법칙',d:'누를 대상이 크고 가까울수록 빨리, 정확하게 누를 수 있다는 법칙이에요.',x:'자주 누르는 버튼은 크게, 손이나 마우스가 있는 곳 가까이 둬요. 반대로 삭제처럼 실수하면 안 되는 버튼은 조금 떨어뜨려요.',p:"Fitts's Law(피츠의 법칙)에 맞게 모바일 결제 버튼을 화면 아래쪽에 크게 놓아줘. 높이는 48px 이상으로 해줘",r:['Touch Target',"Hick's Law",'CTA Button'],l:3,o:0,v:'u-fitts-s-law'},
  {en:'Touch Target',ko:'터치 영역',d:'손가락으로 누를 수 있는 범위. 보통 가로세로 44~48px 이상을 권장해요.',p:'모바일 아이콘 버튼의 터치 영역을 48px로 키워줘',r:[],l:2,o:0,v:'icon'},
  {en:'Dark Pattern',ko:'다크 패턴 · 속이는 디자인',d:'해지 버튼을 숨기는 것처럼 사용자를 헷갈리게 해서 원치 않는 행동을 하게 만드는 디자인.',p:'구독 해지 버튼을 숨기지 말고 잘 보이게 해줘',r:['UX'],l:2,o:0,v:'contrast'},
+ {en:'Progressive Disclosure',ko:'점진적 공개 · 필요할 때 더 보여 주기',d:'처음에는 꼭 필요한 것만 보여 주고, 덜 쓰는 기능은 "더 보기"나 다음 단계에 숨겨 두는 방법이에요.',x:'숨긴 기능이 있다는 표시(더 보기, 고급 설정)를 꼭 남겨요. 표시가 없으면 사람들은 그런 기능이 없다고 생각해요.',p:'인쇄 설정 화면이 복잡해. 자주 쓰는 매수·양면만 보이고 나머지는 Progressive Disclosure(점진적 공개)로 "고급 설정" 안에 접어 둬줘',r:['Accordion','Collapse / Expand','Cognitive Load'],l:2,o:0,v:'u-progressive-disclosure'},
+ {en:'Cognitive Load',ko:'인지 부하 · 머리 쓰는 양',d:'화면을 쓰면서 기억하고, 계산하고, 판단해야 하는 머리의 부담이에요. 클수록 쉽게 지치고 실수해요.',x:'사람이 할 계산과 기억을 화면이 대신하면 줄어요. 합계는 미리 계산해 보여 주고, 앞 화면 정보는 다시 보여 줘요.',p:'결제 화면에서 Cognitive Load(인지 부하)를 줄여줘. 배송비 규칙을 글로 늘어놓지 말고 최종 결제 금액을 계산해서 보여줘',r:['Progressive Disclosure','Grouping','Density'],l:2,o:0,v:'u-cognitive-load'},
+ {en:"Hick's Law",ko:'힉의 법칙',d:'고를 수 있는 것이 많고 복잡할수록 결정하는 데 시간이 더 걸린다는 법칙이에요.',x:'무조건 줄이라는 뜻은 아니에요. 비슷한 것끼리 묶고 이름을 분명히 붙이면 많아도 빨리 찾아요. 추천 하나를 먼저 보여 주는 것도 방법이에요.',p:"고객센터 메뉴가 12개라 고르기 힘들어. Hick's Law(힉의 법칙)를 생각해서 자주 찾는 4개만 먼저 보이고 나머지는 묶어줘",r:["Fitts's Law",'Mega Menu','Progressive Disclosure'],l:3,o:0,v:'u-hick-s-law'},
+ {en:"Jakob's Law",ko:'제이콥의 법칙 · 익숙한 대로',d:'사람들은 대부분의 시간을 다른 사이트에서 보내서, 내 사이트도 익숙한 곳들처럼 움직이길 기대한다는 법칙이에요.',x:'로고는 왼쪽 위, 장바구니는 오른쪽 위처럼 흔한 자리를 따르면 설명 없이도 써요. 새 방식은 확실히 더 나을 때만 써요.',p:"Jakob's Law(제이콥의 법칙)에 맞게 쇼핑몰 헤더를 바꿔줘. 로고는 왼쪽, 검색창은 가운데, 장바구니는 오른쪽 위에 둬줘",r:['Consistency','Header','Mental Model'],l:2,o:0,v:'u-jakob-s-law'},
+ {en:'F-pattern / Z-pattern',ko:'F자·Z자 패턴 · 시선 흐름',d:'사람의 눈이 화면을 훑는 길이에요. 글이 많으면 F자로, 글이 적고 큰 요소가 있으면 Z자로 움직여요.',x:'F자로 읽는 화면은 줄 앞부분만 읽혀요. 제목과 문단 첫머리에 중요한 말을 둬요. Z자 화면은 끝점인 오른쪽 아래에 버튼을 둬요.',p:'랜딩 페이지를 F-pattern / Z-pattern(시선 흐름)에 맞게 다시 배치해줘. 왼쪽 위에 로고, 오른쪽 위에 메뉴, 오른쪽 아래에 가입 버튼을 둬줘',r:['Focal Point','Visual Hierarchy','Hero Section'],l:2,o:0,v:'u-f-pattern-z-pattern'},
+ {en:'Information Architecture',ko:'정보 구조 · IA',d:'내용을 어떻게 묶고, 어떤 순서로 놓고, 무슨 이름을 붙일지 정하는 설계예요. 메뉴와 사이트맵의 바탕이 돼요.',x:'회사 부서가 아니라 쓰는 사람이 찾는 방식대로 묶어요. 같은 것은 어디서나 같은 이름으로 불러요.',p:'쇼핑몰 메뉴의 Information Architecture(정보 구조)를 다시 짜줘. 상품, 주문·배송, 고객센터 3개로 묶고 각 아래 메뉴 이름도 정해줘',r:['Sitemap','GNB','Mental Model'],l:3,o:0,v:'u-information-architecture'},
+ {en:'Mental Model',ko:'멘탈 모델 · 머릿속 작동 그림',d:'사람이 "이건 이렇게 움직이겠지" 하고 머릿속에 그리는 작동 방식이에요. 사실과 달라도 그 생각대로 행동해요.',x:'휴지통처럼 사람들이 이미 아는 방식에 맞추면 쉬워요. 생각과 다르게 움직이면 실수하고 서비스를 탓해요.',p:'사진 삭제가 Mental Model(멘탈 모델)과 달라. 바로 지우지 말고 휴지통으로 옮긴 뒤 30일 동안 되살릴 수 있게 해줘',r:["Jakob's Law",'Information Architecture','Snackbar'],l:3,o:0,v:'u-mental-model'},
+ {en:'Usability Test',ko:'사용성 테스트',d:'실제 사용자에게 "환불 신청해 보세요" 같은 과제를 주고, 쓰는 모습을 지켜보며 어디서 막히는지 찾는 방법이에요.',x:'옆에서 도와주거나 설명하지 않고 지켜보기만 해요. 5명이면 큰 문제는 대부분 보이니, 고친 뒤 다시 5명에게 해 보는 게 좋아요.',p:'결제 화면 Usability Test(사용성 테스트) 계획을 짜줘. 5명에게 줄 과제 3개와 성공 기준을 적어줘',r:['Heuristic Evaluation','A/B Test','Prototype'],l:2,o:0,v:'u-usability-test'},
+ {en:'Heuristic Evaluation',ko:'휴리스틱 평가 · 원칙 체크리스트 점검',d:'전문가가 정해진 사용성 원칙 목록(닐슨의 10원칙 등)에 맞춰 화면을 하나씩 점검하는 방법이에요.',x:'사용자 없이 빨리 할 수 있지만, 전문가 생각이라 실제 사용자 반응과 다를 수 있어요. 사용성 테스트와 같이 써요.',p:'이 회원가입 화면을 Heuristic Evaluation(휴리스틱 평가)해줘. 닐슨의 10원칙 기준으로 문제와 심각도를 표로 정리해줘',r:['Usability Test','Error Message','Consistency'],l:3,o:0,v:'u-heuristic-evaluation'},
+ {en:'Modular Scale',ko:'모듈러 스케일 · 크기 비율 단계',d:'본문 크기에 같은 비율(예: 1.25배)을 계속 곱해 제목 크기들을 정하는 방법이에요. 크기 차이가 고르게 커져요.',x:'앱 화면은 1.2~1.25배처럼 작은 비율이, 큰 제목이 많은 홍보 페이지는 더 큰 비율이 어울려요.',p:'글자 크기를 Modular Scale(크기 비율 단계)로 정리해줘. 본문 16px에서 1.25배씩 키워서 20·25·31px로 맞춰줘',r:['Font Size','Visual Hierarchy','Design Token'],l:3,o:0,v:'u-modular-scale'},
 ]);
 T('design','app',[
  {en:'Title Bar',ko:'타이틀 바 · 제목 표시줄',d:'프로그램 창 맨 위, 이름과 최소화·닫기 버튼이 있는 줄.',p:'창 타이틀 바에 현재 파일 이름을 보여줘',r:['Menu Bar'],l:1,o:0,v:{win:'tt'}},
@@ -3465,6 +3539,73 @@ Object.assign(D, {
         if (reduced) { out.textContent = '첫 주문을 축하해요! (동작 줄이기 설정이라 색종이는 빼요)'; return; }
         out.textContent = '첫 주문을 축하해요!'; pc.classList.remove('on'); void pc.offsetWidth; pc.classList.add('on'); });
       rs.addEventListener('click', () => { pc.classList.remove('on'); b.disabled = false; b.textContent = '결제하기'; rs.hidden = true; out.textContent = '결제하면 축하 색종이가 터져요'; b.focus(); }); }},
+});
+/* design: adv — 법칙 두 개(피츠·힉)는 눌러서 걸린 시간을 재고, 나머지는 비교·구조 그림. 리스너는 stage 안 요소에만 */
+const OCART = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.5h10.6L20 7H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>';
+const osg = (lab, list) => `<span class="mk-osg" role="group" aria-label="${lab}">${list.map(([t, a, on]) => `<button type="button" ${a} aria-pressed="${!!on}">${t}</button>`).join('')}</span>`;
+const otm = t0 => ((performance.now() - t0) / 1000).toFixed(2) + '초';
+const OHK = ['배송 조회', '주문 취소', '교환 신청', '영수증', '쿠폰', '포인트', '1:1 문의'];
+Object.assign(D, {
+  'u-design-system':{h:`<div class="mk-ods"><div class="rw"><b>디자인 토큰</b><div class="tk"><i style="background:var(--ink)"></i><i style="background:var(--mark)"></i><i style="background:var(--moss)"></i><span class="aa">Aa</span><span class="gp">간격 8·16</span></div></div>
+    <span class="ar" aria-hidden="true">↓</span><div class="rw"><b>컴포넌트</b><div class="cp"><span class="mk-btn mk-sm">저장</span><span class="mk-in">이름</span></div></div>
+    <span class="ar" aria-hidden="true">↓</span><div class="rw"><b>화면</b><div class="mk-card sc"><b>회원 정보</b><span class="mk-in">이름</span><span class="mk-btn mk-sm">저장</span></div></div></div>`,
+    cap:'토큰(색·글꼴·간격)으로 부품을 만들고, 부품으로 화면을 짜요. 토큰 하나를 바꾸면 모든 화면이 따라 바뀌어요'},
+  'u-atomic-design':{h:`<div class="mk-oad"><div class="rw"><b>원자</b><div class="at"><span class="mk-in">검색어</span><span class="mk-btn mk-sm">검색</span>${ic('search')}</div></div>
+    <div class="rw"><b>분자</b><div class="sf"><span class="mk-in">검색어</span><span class="mk-btn mk-sm">${ic('search')}</span></div></div>
+    <div class="rw"><b>유기체</b><div class="hd"><b>봄빛</b><div class="sf"><span class="mk-in">검색어</span><span class="mk-btn mk-sm">${ic('search')}</span></div>${ic('menu')}</div></div>
+    <div class="rw"><b>템플릿</b><div class="pg"><i class="h"></i><i class="im"></i><i class="tx"></i></div></div>
+    <div class="rw"><b>페이지</b><div class="pg"><i class="h"></i><i class="im">${jph(0)}</i><span>봄 신상품</span></div></div></div>`,
+    cap:'작은 부품을 묶어 더 큰 부품을 만들고, 그걸 쌓아 화면 틀(템플릿)과 실제 화면(페이지)을 만들어요'},
+  'u-fitts-s-law':{h:`${hint('출발을 누른 다음 목표를 눌러 보세요')}<div class="mk-oft"><div class="ct">${osg('목표 크기', [['작게', 'data-k="s" data-v="1"'], ['크게', 'data-k="s" data-v="0"', 1]])}${osg('거리', [['멀게', 'data-k="n" data-v="0"', 1], ['가깝게', 'data-k="n" data-v="1"']])}</div>
+    <div class="tr"><button type="button" class="mk-btn mk-sm go">출발</button><i class="ln" aria-hidden="true"></i><button type="button" class="tg" aria-label="목표"></button></div>
+    <div class="rs">${['크게·가깝게', '크게·멀게', '작게·가깝게', '작게·멀게'].map(t => `<span>${t} <b>—</b></span>`).join('')}</div>
+    <output class="mk-help">크기와 거리를 바꿔 가며 재 보세요</output></div>`, cap:'목표가 크고 가까울수록 빨리 눌러요. 크기와 거리를 바꿔 걸린 시간을 비교해 보세요',
+    init: s => { const r = s.querySelector('.mk-oft'), out = s.querySelector('output'), cs = s.querySelectorAll('.rs b'), N = ['크게·가깝게', '크게·멀게', '작게·가깝게', '작게·멀게']; let t0 = 0;
+      s.querySelectorAll('.mk-osg button').forEach(b => b.addEventListener('click', () => {
+        b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); r.classList.toggle(b.dataset.k, b.dataset.v === '1');
+        t0 = 0; out.textContent = '바꿨어요. 출발부터 다시 눌러요'; }));
+      s.querySelector('.go').addEventListener('click', () => { t0 = performance.now(); out.textContent = '목표를 눌러요!'; });
+      s.querySelector('.tg').addEventListener('click', () => { if (!t0) { out.textContent = '먼저 출발을 눌러요'; return; }
+        const k = (r.classList.contains('s') ? 2 : 0) + (r.classList.contains('n') ? 0 : 1), v = otm(t0); t0 = 0; cs[k].textContent = v; out.textContent = `${N[k]}: ${v} 걸렸어요`; }); }},
+  'u-hick-s-law':{h:`${hint("'환불 신청'을 찾아 눌러 보세요")}<div class="mk-ohk">${osg('선택지 개수', [['2개', 'data-n="2"'], ['4개', 'data-n="4"', 1], ['8개', 'data-n="8"']])}
+    <div class="ls"></div><div class="rs">${[2, 4, 8].map(n => `<span>${n}개 <b>—</b></span>`).join('')}</div>
+    <output class="mk-help">개수 버튼을 누르면 시간을 재기 시작해요</output></div>`, cap:'선택지가 많을수록 고르는 데 오래 걸려요. 개수를 바꿔 걸린 시간을 비교해 보세요',
+    init: s => { const ls = s.querySelector('.ls'), out = s.querySelector('output'), cs = s.querySelectorAll('.rs b'); let t0 = 0, n = 4, round = 0;
+      const draw = () => { const l = OHK.slice(0, n - 1); l.splice(round % n, 0, '환불 신청'); ls.innerHTML = l.map(t => `<button type="button" class="mk-btn ghost mk-sm">${t}</button>`).join(''); };
+      s.querySelectorAll('.mk-osg button').forEach(b => b.addEventListener('click', () => {
+        b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); n = +b.dataset.n; round++; draw();
+        t0 = performance.now(); out.textContent = `${n}개 중에서 '환불 신청'을 찾아요`; }));
+      ls.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+        if (b.textContent !== '환불 신청') { out.textContent = `'${b.textContent}' 버튼을 눌렀어요. '환불 신청'을 찾아요`; return; }
+        if (!t0) { out.textContent = '개수 버튼을 먼저 누르면 시간을 재요'; return; }
+        const v = otm(t0); t0 = 0; cs[[2, 4, 8].indexOf(n)].textContent = v; out.textContent = `${n}개 중에서 찾는 데 ${v} 걸렸어요`; });
+      draw(); }},
+  'u-progressive-disclosure':{h:vs('한꺼번에', `<div class="mk-opg">${[['매수', '1'], ['양면', '켬'], ['용지', 'A4'], ['여백', '기본'], ['배율', '100%'], ['색', '컬러'], ['해상도', '600dpi']].map(([a, b]) => `<span><b>${a}</b>${b}</span>`).join('')}</div>`,
+    '단계적으로', `<div class="mk-opg"><span><b>매수</b>1</span><span><b>양면</b>켬</span><span class="mk-hl mo">고급 설정 5개 ▾</span></div>`),
+    cap:'자주 쓰는 설정만 먼저 보여 주고, 나머지는 "고급 설정" 안에 접어 둬요'},
+  'u-cognitive-load':{h:vs('사람이 계산', `<div class="mk-ocl"><span><b>상품</b>47,000원</span><p>배송비 3,000원, 5만 원 이상 무료, 제주·도서 지역은 3,000원 추가</p><span class="mk-help">그래서 얼마를 내요?</span></div>`,
+    '화면이 계산', `<div class="mk-ocl"><span><b>상품</b>47,000원</span><span><b>배송비</b>3,000원</span><span class="tt"><b>결제 금액</b>50,000원</span><span class="mk-help">3,000원 더 담으면 무료 배송</span></div>`),
+    cap:'계산과 기억은 화면이 대신해요. 사람은 보고 고르기만 하면 돼요'},
+  'u-jakob-s-law':{h:vs('낯선 자리', `<div class="mk-ojk"><div class="hd">${OCART}${ic('menu')}<i class="sp"></i><b>봄빛</b></div><span class="mk-help">장바구니가 어디 있지?</span></div>`,
+    '익숙한 자리', `<div class="mk-ojk"><div class="hd"><b>봄빛</b><span class="q">${ic('search')}검색</span>${OCART}</div><span class="mk-help">보던 대로 바로 찾아요</span></div>`),
+    cap:'로고는 왼쪽 위, 장바구니는 오른쪽 위처럼 다른 사이트에서 익힌 자리에 두면 바로 찾아요'},
+  'u-f-pattern-z-pattern':{h:vs('F자 · 글이 많은 화면', `<svg class="mk-ofz" viewBox="0 0 120 90" role="img" aria-label="글줄이 많은 화면에서 시선이 맨 위 가로, 그 아래 짧은 가로, 왼쪽 세로로 F자를 그려요">${[[8, 104], [20, 96], [32, 78], [44, 90], [56, 60], [68, 84], [80, 50]].map(([y, w]) => `<rect class="t" x="8" y="${y - 2}" width="${w}" height="5" rx="2"/>`).join('')}<path class="p" d="M8 10H110M8 32H80M8 10V80"/></svg>`,
+    'Z자 · 글이 적은 화면', `<svg class="mk-ofz" viewBox="0 0 120 90" role="img" aria-label="왼쪽 위 로고에서 오른쪽 위 메뉴로, 대각선으로 왼쪽 아래, 다시 오른쪽 아래 버튼으로 Z자를 그려요"><rect class="k" x="8" y="8" width="22" height="10" rx="2"/>${[76, 88, 100].map(x => `<rect class="t" x="${x}" y="11" width="10" height="4" rx="2"/>`).join('')}<rect class="y" x="8" y="26" width="104" height="34" rx="4"/><rect class="b" x="76" y="68" width="36" height="14" rx="4"/><path class="z" d="M14 13H104L20 75H86"/><path class="zh" d="M84 70L94 75L84 80Z"/></svg>`),
+    cap:'글이 많으면 눈이 F자로, 글이 적으면 Z자로 움직여요. 중요한 것은 그 길 위에 둬요'},
+  'u-information-architecture':{h:`<div class="mk-oia"><b class="rt">홈</b><div class="cs">${[['상품', ['옷', '신발']], ['주문·배송', ['주문 내역', '배송 조회']], ['고객센터', ['환불 신청', '1:1 문의']]].map(([h, l]) =>
+    `<div class="c"><b>${h}</b>${l.map(x => `<span>${x}</span>`).join('')}</div>`).join('')}</div></div>`, cap:'내용을 묶고(분류), 이름을 붙이고, 위아래 순서를 정한 지도예요. 메뉴는 이 지도대로 만들어요'},
+  'u-mental-model':{h:vs('생각과 다름', `<div class="mk-omm"><span class="mk-help">사진을 지운 뒤</span><span class="mk-bar">영구 삭제했어요</span><span class="mk-help">휴지통에 있을 줄 알았는데 없어요</span></div>`,
+    '생각대로', `<div class="mk-omm"><span class="mk-help">사진을 지운 뒤</span><span class="mk-bar">휴지통으로 옮겼어요<b>되돌리기</b></span><span class="mk-help">30일 안에 되살릴 수 있어요</span></div>`),
+    cap:'사람들은 지운 파일이 휴지통에 있을 거라 생각해요. 그 생각대로 움직이면 실수해도 되돌릴 수 있어요'},
+  'u-usability-test':{h:`<div class="mk-ous"><div class="mk-card tk"><span class="mk-help">과제</span><b>환불을 신청해 보세요</b></div>
+    <div class="ps">${[1, 1, 0, 1, 0].map(ok => `<span class="${ok ? 'ok' : 'no'}">${ico('user')}<small>${ok ? '성공' : '헤맴'}</small></span>`).join('')}</div>
+    <p class="mk-hl fd">5명 중 2명이 '환불' 메뉴를 못 찾았어요</p></div>`, cap:'실제 사용자에게 과제를 주고 지켜보기만 해요. 5명만 봐도 큰 문제는 대부분 드러나요'},
+  'u-heuristic-evaluation':{h:`<div class="mk-card mk-ohe"><b>점검표 · 회원가입 화면</b>${[[0, '지금 상태 보여 주기', '가입 버튼을 눌러도 아무 표시가 없어요', 3], [0, '실수 막기', '비밀번호 규칙을 다 쓴 뒤에야 알려 줘요', 2], [1, '되돌리기·나가기'], [1, '일관성·표준']].map(([ok, t, d, v]) =>
+    `<div class="it ${ok ? 'ok' : 'no'}"><i aria-hidden="true">${ok ? '✓' : '✕'}</i><span><span class="sr">${ok ? '통과' : '문제'}: </span><b>${t}</b>${d || ''}</span>${v ? `<em>심각도 ${v}/4</em>` : ''}</div>`).join('')}</div>`,
+    cap:'전문가가 정해진 원칙 목록대로 화면을 하나씩 점검하고, 문제마다 심각도를 매겨요'},
+  'u-modular-scale':{h:`<div class="mk-oms">${[[31, '큰 제목'], [25, '제목'], [20, '작은 제목'], [16, '본문 · 기준'], [12.8, '설명']].map(([z, t]) =>
+    `<div class="rw${z === 16 ? ' bs' : ''}"><span>${z}px</span><b style="font-size:${z}px;font-weight:${z > 16 ? 700 : 400}">봄 신상품</b><span class="mk-help">${t}</span></div>`).join('')}
+    <span class="mk-help">16에 1.25를 곱할 때마다 한 단계씩 커져요</span></div>`, cap:'기준 크기에 같은 비율을 곱해 단계를 만들어요. 단계 사이 차이가 고르게 커져요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
