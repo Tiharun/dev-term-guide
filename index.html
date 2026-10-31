@@ -309,7 +309,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -769,6 +769,80 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-vbz.thin>div::before{content:"";position:absolute;top:5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--ink)}
 .mk-vbz>.hb{position:absolute;bottom:6px;left:50%;width:14px;height:14px;margin-left:-7px;border:1.5px solid var(--steel);border-radius:50%}
 @media (prefers-reduced-motion:reduce){.mk-vdi,.mk-vdi>span,.mk-vbl,.mk-vin,.mk-vkb{animation:none}}
+/* 이미지·미디어 — 사진은 jph() 풍경 SVG, 동영상은 jsea() 배 그림을 틀만 바꿔 쓴다 */
+.mk-jph{display:block;width:100%;height:100%}.mk-jph .u{fill:var(--mark)}.mk-jph .m{fill:var(--ink-2)}.mk-jph .g{fill:var(--moss)}.mk-jph .y{fill:var(--sky)}
+.mk-jph .w{fill:var(--ch1)}.mk-jph .k{fill:var(--ink)}.mk-jph .sl{fill:var(--plate)}.mk-jph .ms{stroke:var(--ink);stroke-width:2}.mk-jph .wv{fill:none;stroke:var(--sky);stroke-width:1.5;opacity:.7}
+.mk-jar{flex:none;color:var(--mark);font-weight:800;font-size:20px;line-height:1}
+.mk-jch{display:inline-flex;align-items:center;padding:2px 8px;border:1.5px solid var(--rule);border-radius:999px;background:var(--plate);font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.mk-jch.p{border-color:var(--moss)}.mk-jch.m{border-color:var(--mark)}
+:is(.mk-jbl,.mk-jmu,.mk-jps,.mk-jvb,.mk-jsr) svg{flex:none;width:12px;height:12px;fill:currentColor}
+:is(.mk-jbl,.mk-jmu,.mk-jps,.mk-jvb,.mk-jsr) .l{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.mk-jtr{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;line-height:1.35}
+.mk-jth{position:relative;flex:none;width:64px;height:36px;border-radius:4px;overflow:hidden}
+.mk-jth>i{position:absolute;right:2px;bottom:2px;padding:0 3px;border-radius:3px;background:var(--ink);color:#fff;font-size:11px;font-style:normal;line-height:14px;font-variant-numeric:tabular-nums}
+.mk-jcr{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px}
+.mk-jcw{position:relative;width:200px;height:150px;border-radius:6px;overflow:hidden}
+.mk-jbx{position:absolute;left:0;top:0;width:90px;height:90px;border:2px dashed #fff;box-shadow:0 0 0 400px color-mix(in srgb,var(--ink) 55%,transparent);cursor:grab;touch-action:none}
+.mk-jbx:active{cursor:grabbing}.mk-jbx:focus-visible{outline:2px solid var(--mark);outline-offset:-7px}
+.mk-jpv{width:60px;height:60px;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden}.mk-jpi{width:133.33px;height:100px}
+.mk-jbu{display:flex;align-items:center;gap:8px}.mk-jbu>.mk-vcol{width:100px;gap:4px}.mk-jbu b{font-size:12px}
+.mk-jbf{width:100px;height:75px;border-radius:6px;overflow:hidden}.mk-jbf.b .mk-jph{filter:blur(5px);transform:scale(1.12)}
+.mk-jlg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mk-jlt{display:block;aspect-ratio:1;padding:0;border:0;border-radius:4px;overflow:hidden;background:none;cursor:pointer}
+.mk-jlb{position:absolute;inset:-32px -10px -20px;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:40px 10px 24px;background:color-mix(in srgb,var(--ink) 94%,transparent)}
+.mk-jlb[hidden]{display:none}.mk-jlb :focus-visible{outline-color:#fff}
+.mk-jlp{aspect-ratio:4/3;border-radius:6px;overflow:hidden}
+.mk-jln{display:flex;align-items:center;justify-content:center;gap:14px}
+.mk-jlx,.mk-jlv{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:50%;background:color-mix(in srgb,#fff 20%,transparent);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+.mk-jlx{position:absolute;top:14px;right:14px}
+.mk-jlc{min-width:44px;text-align:center;color:#fff;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.mk-jga{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.mk-jga>i{aspect-ratio:1;border-radius:3px;overflow:hidden}
+.mk-jfm{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:300px}
+.mk-jfm>div{display:flex;flex-direction:column;gap:4px;padding:8px;border:1px solid var(--rule);border-radius:8px;background:var(--plate);text-align:left}.mk-jfm b{font-size:12px}
+.mk-jtc{display:block;height:44px;border-radius:4px;overflow:hidden;background:repeating-conic-gradient(var(--rule) 0 25%,var(--plate) 0 50%) 0 0/10px 10px}
+.mk-jtc>svg{display:block;width:100%;height:100%}
+.mk-jfr{display:flex;align-items:center;justify-content:center;gap:3px;height:100%}.mk-jfr>i{width:30px;height:24px;border-radius:2px;overflow:hidden}
+.mk-jbk{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:96px;height:64px;padding:4px;border:1.5px dashed var(--steel);border-radius:6px;font-size:11.5px;line-height:1.3;color:var(--muted)}
+.mk-jsr{display:flex;align-items:flex-start;gap:4px;max-width:100%;padding:4px 6px;border-radius:8px;background:var(--fig);font-size:11.5px;line-height:1.35;text-align:left;overflow-wrap:anywhere}.mk-jsr svg{margin-top:2px}
+.mk-jss{display:flex;flex-direction:column;align-items:center;gap:4px}.mk-jss>div{display:flex;gap:6px}
+.mk-jdv{display:flex;align-items:flex-end;gap:18px}
+.mk-jdp,.mk-jdm{display:block;height:76px;overflow:hidden;border:3px solid var(--moss);border-radius:8px}.mk-jdp{width:44px}.mk-jdm{width:120px;border-color:var(--mark);border-radius:4px}
+.mk-jcp{display:flex;gap:8px}.mk-jcp>div{gap:3px;width:76px}.mk-jcp b{font-size:12px}
+.mk-jcq{display:block;width:72px;height:54px;border-radius:4px;overflow:hidden}
+.mk-jvp{width:240px;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--ink)}.mk-jvs{height:135px}
+.mk-jvc{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--plate)}
+.mk-jvb{flex:none;display:grid;place-items:center;width:28px;height:28px;padding:0;border:1.5px solid var(--ink);border-radius:50%;background:var(--plate);color:var(--ink);cursor:pointer}
+.mk-jvt{position:relative;flex:1;height:24px;cursor:pointer;touch-action:none}
+.mk-jvt::before{content:"";position:absolute;left:0;right:0;top:10px;height:4px;border-radius:2px;background:var(--rule)}
+.mk-jvf{position:absolute;left:0;top:10px;height:4px;border-radius:2px;background:var(--mark)}
+.mk-jvk{position:absolute;top:6px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--mark);border:2px solid var(--plate)}
+.mk-jvn{flex:none;font-size:11px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.mk-jav{position:relative;width:96px;height:64px;border-radius:6px;overflow:hidden;background:var(--ink)}
+.mk-jbl{position:absolute;left:50%;top:50%;display:grid;place-items:center;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:color-mix(in srgb,var(--ink) 72%,transparent);color:#fff}
+.mk-jmu{position:absolute;left:4px;top:4px;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:color-mix(in srgb,var(--ink) 72%,transparent);color:#fff}
+.mk-jbt.mv{animation:mk-jbt 6s linear infinite}@keyframes mk-jbt{to{transform:translateX(110px)}}
+.mk-jbg{position:relative;flex:1;margin:-12px;overflow:hidden}.mk-jbg>svg{position:absolute;inset:0}
+.mk-jbg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--ink) 78%,transparent),color-mix(in srgb,var(--ink) 50%,transparent))}
+.mk-jhe{position:absolute;left:14px;top:50%;z-index:1;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-start;gap:4px;color:#fff}.mk-jhe>b{font-size:15px}
+.mk-jhe .mk-btn{margin-top:4px;background:#fff;color:var(--ink);border-color:#fff}
+.mk-jps{position:absolute;right:12px;bottom:12px;z-index:1;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#fff;color:var(--ink)}
+.mk-jbr{height:auto}.mk-jem{display:flex;flex-direction:column;gap:4px;padding:6px;border-radius:6px;background:var(--fig)}.mk-jev{position:relative;height:84px;border-radius:4px;overflow:hidden}
+.mk-jgs{display:flex;gap:6px}.mk-jgs>span{display:flex;flex-direction:column;align-items:center;gap:2px}
+.mk-jgs i{display:block;width:48px;height:36px;border:1px solid var(--rule);border-radius:3px;overflow:hidden}.mk-jgs svg{display:block;width:100%;height:100%}
+.mk-jgw{width:96px;height:72px;outline:1.5px solid var(--ink);border-radius:6px;overflow:hidden}
+.mk-jgv{display:flex;flex-direction:column;animation:mk-jgv 1.2s steps(4) infinite}.mk-jgv svg{display:block;flex:none;width:96px;height:72px}
+@keyframes mk-jgv{to{transform:translateY(-100%)}}
+.mk-jms{flex:1;min-height:0;overflow:hidden;column-count:3;column-gap:4px}.mk-jms>i{display:block;margin-bottom:4px;border-radius:4px;overflow:hidden;break-inside:avoid}
+.mk-jwm{position:relative;flex:none;width:200px;height:150px;border-radius:8px;overflow:hidden}
+.mk-jwm>span{position:absolute;inset:0;display:grid;place-items:center;transform:rotate(-18deg);color:#fff;opacity:.6;font-size:20px;font-weight:800;letter-spacing:.04em}
+.mk-jtl{display:flex;flex-direction:column;gap:4px;width:220px;padding:8px;border:1px solid var(--rule);border-radius:8px;background:var(--plate);text-align:left}
+.mk-jtw{display:flex;align-items:center;gap:6px;font-size:11px}.mk-jtw>span{flex:none;width:36px}.mk-jtw>i{position:relative;flex:1;height:12px;border-bottom:1px solid var(--rule)}
+.mk-jtw b{position:absolute;top:2px;width:8px;height:8px;margin-left:-4px;background:var(--mark);transform:rotate(45deg)}
+.mk-jlr{display:flex;align-items:center;gap:10px}
+.mk-jok{display:block;width:52px;height:52px}.mk-jok circle{fill:var(--moss-bg);stroke:var(--moss);stroke-width:2}
+.mk-jok path{fill:none;stroke:var(--moss);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;animation:mk-jok 2.4s var(--ease) infinite}
+@keyframes mk-jok{0%,15%{stroke-dashoffset:1}55%,100%{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.mk-jbt.mv,.mk-jgv,.mk-jok path{animation:none}}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -852,7 +926,7 @@ function SYM(g, list){ list.forEach(([q, t]) => SYMPTOMS.push({g, q, t})); }
 /* ===== 카테고리 목록 ===== */
 CAT('basics','개발 기본','개발을 처음 시작할 때 듣는 가장 기본적인 말', [['code','코드 읽기 기초','코드를 볼 때 알아야 하는 문법 이름']]);
 CAT('web','웹사이트','웹사이트가 어떻게 생기고 움직이는지에 관한 말', [['parts','페이지 구성요소','웹페이지 각 부분의 이름']]);
-CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['gesture','제스처·조작','손가락·마우스·키보드로 화면을 다루는 방법'],['device','기기 화면','휴대폰·모니터 화면 자체의 특징'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
+CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['gesture','제스처·조작','손가락·마우스·키보드로 화면을 다루는 방법'],['device','기기 화면','휴대폰·모니터 화면 자체의 특징'],['media','이미지·미디어','사진·동영상·움직이는 그림을 다루는 말'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법']]);
 CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
@@ -884,7 +958,6 @@ T('design','core',[
  {en:'Component',ko:'컴포넌트 · 재사용 부품',d:'버튼·카드처럼 여러 곳에서 똑같이 다시 쓰는 화면 부품.',p:'이 버튼을 컴포넌트로 만들어서 모든 페이지에 같이 써줘',r:['Design System','Main Component'],l:1,o:1,v:{stack:['페이지','카드 컴포넌트','버튼 컴포넌트'],hl:[2]}},
  {en:'Button States',ko:'버튼 상태 · 기본·호버·포커스·비활성',d:'버튼이 상황마다 바뀌는 모습. 기본, 마우스 올림(hover), 선택됨(focus), 누를 수 없음(disabled).',p:'버튼에 hover, focus, disabled 상태 스타일을 각각 만들어줘',r:['Hover Effect','Focus'],l:2,o:1,u:MDN('Web/CSS/:hover'),v:'button'},
  {en:'Accordion',ko:'아코디언 · 접었다 펴기',d:'제목을 누르면 아래 내용이 펼쳐지고 다시 누르면 접히는 목록.',p:'자주 묻는 질문을 아코디언으로 접었다 펼 수 있게 해줘',r:['Tab'],l:1,o:0,v:'accordion'},
- {en:'Carousel',ko:'캐러셀 · 슬라이더',d:'여러 장의 배너가 옆으로 넘어가며 보이는 영역.',j:'"슬라이드 배너", "롤링 배너"',p:'메인 배너를 5초마다 넘어가는 캐러셀로 만들어줘',r:['Slide-in'],l:1,o:0,v:'carousel'},
 ]);
 T('design','motion',[
  {en:'Slide-in',ko:'슬라이드 인 · 밀려 들어오기',d:'요소가 화면 밖에서 미끄러지듯 들어오는 움직임.',p:'메뉴가 왼쪽에서 slide-in 되게 해줘',r:['Drawer','Easing'],l:1,o:0,v:'slidein',sy:['왼쪽에서 나와요']},
@@ -1084,6 +1157,29 @@ T('design','device',[
  {en:'Text Scaling',ko:'글자 크기 설정 · 텍스트 확대',d:'사용자가 휴대폰이나 브라우저 설정에서 글자를 크게 키운 상태예요.',x:'글자 크기를 rem으로 쓰면 루트 글자 크기를 따라 함께 커져요. 상자 높이를 고정하면 커진 글자가 넘치니 높이는 내용에 맞게 늘어나게 둬요.',p:'Text Scaling(글자 크기 설정)으로 글자를 키워도 잘리지 않게 글자는 rem으로, 상자 높이는 내용에 맞게 늘어나게 해줘',r:['rem','Font Size','Web Accessibility'],l:2,o:0,v:'u-text-scaling'},
  {en:'Bezel',ko:'베젤 · 화면 테두리',d:'화면 바깥을 둘러싼 테두리예요. 얇을수록 같은 크기 기기에 화면이 더 커져요.',x:'예전 아이폰은 아래쪽 넓은 베젤에 홈 버튼이 있었어요. 요즘은 베젤이 얇아져서 화면이 모서리 가까이까지 닿아요.',p:'Bezel(베젤)이 얇은 휴대폰 목업 안에 앱 화면을 넣어서 보여줘',r:['Safe Area','Screen Size','Notch'],l:1,o:0,v:'u-bezel'},
 ]);
+T('design','media',[
+ {en:'Carousel',ko:'캐러셀 · 슬라이더',d:'여러 장의 배너가 옆으로 넘어가며 보이는 영역.',j:'"슬라이드 배너", "롤링 배너"',p:'메인 배너를 5초마다 넘어가는 캐러셀로 만들어줘',r:['Slide-in'],l:1,o:0,v:'u-carousel'},
+ {en:'Avatar',ko:'아바타 · 프로필 사진',d:'사용자를 나타내는 작은 동그란 사진이나 이니셜.',p:'댓글 옆에 작성자 아바타를 동그랗게 보여줘',r:['Badge'],l:1,o:0,v:'avatar'},
+ {en:'Thumbnail',ko:'썸네일 · 미리보기 그림',d:'큰 사진·동영상을 작게 줄여 목록에 먼저 보여 주는 그림이에요.',x:'원본과 따로 작은 파일을 만들어 두면 목록이 빨리 뜨고, 누를 때만 원본을 불러와요.',p:'동영상 목록에 16:9 Thumbnail(썸네일)을 넣고 오른쪽 아래에 재생 시간을 붙여줘',r:['Aspect Ratio','Lazy Loading','Image Optimization'],l:1,o:0,v:'u-thumbnail'},
+ {en:'Crop',ko:'크롭 · 사진 자르기',d:'사진에서 필요한 부분만 남기고 나머지를 잘라 내는 일이에요.',x:'CSS `object-fit: cover`는 원본은 그대로 두고 틀 밖으로 나간 부분만 잘라 보여 줘요. 사용자가 직접 고르게 하려면 끌어서 옮기는 자르기 틀을 줘요.',p:'프로필 사진을 올릴 때 정사각형 Crop(크롭) 틀을 끌어서 남길 부분을 고르게 해줘',r:['Object Fit','Aspect Ratio','Avatar'],l:2,o:0,v:'u-crop'},
+ {en:'Blur-up Placeholder',ko:'블러업 · 흐린 미리보기',d:'진짜 사진이 오기 전에 아주 작고 흐린 그림을 먼저 깔아 두는 방법이에요.',x:'아주 작은 그림을 크게 늘려 흐리게 보여 주다가 원본이 다 오면 바꿔 끼워요. 빈칸이 갑자기 사진으로 바뀌는 깜빡임이 줄어요.',p:'사진을 불러오는 동안 Blur-up Placeholder(블러업)로 흐린 미리보기를 먼저 보여줘',r:['Lazy Loading','Skeleton UI','Placeholder'],l:2,o:0,v:'u-blur-up-placeholder'},
+ {en:'Lightbox',ko:'라이트박스 · 사진 크게 보기',d:'작은 사진을 누르면 화면을 어둡게 덮고 사진을 크게 띄워 보여 줘요.',x:'원래 Lokesh Dhakar가 만든 자바스크립트 라이브러리 이름이었는데, 지금은 비슷한 창을 모두 이렇게 불러요. 열리면 포커스를 창 안으로 옮기고 Esc로 닫혀야 해요.',p:'갤러리 사진을 누르면 Lightbox(라이트박스)로 크게 띄우고 좌우 화살표로 넘기게 해줘',r:['Modal','Overlay','Gallery'],l:2,o:0,v:'u-lightbox'},
+ {en:'Gallery',ko:'갤러리 · 사진 모아 보기',d:'여러 장의 사진을 바둑판처럼 나란히 모아 보여 주는 화면이에요.',x:'칸 크기와 비율을 똑같이 맞추면 정돈돼 보여요. CSS Grid로 화면 너비에 따라 한 줄에 놓이는 개수를 바꿔요.',p:'사진 Gallery(갤러리)를 정사각형 3열로 만들고 화면이 넓으면 5열로 늘려줘',r:['CSS Grid','Aspect Ratio','Lightbox'],l:1,o:0,v:'u-gallery'},
+ {en:'Image Format',ko:'이미지 형식 · JPG·PNG·WebP',d:'사진 파일을 저장하는 방식이에요. 형식마다 용량과 잘하는 일이 달라요.',x:'MDN은 사진에는 JPEG, 정확히 그대로 보여야 하는 그림에는 PNG를 권해요. WebP·AVIF는 더 작게 줄어서, 오래된 브라우저용으로 picture 태그에 대신할 형식을 함께 적어 줘요.',p:'사진은 WebP로, 투명한 로고는 PNG로 Image Format(이미지 형식)을 나눠서 저장해줘',r:['WebP','Image Optimization','Compression'],l:2,o:0,v:'u-image-format'},
+ {en:'Vector vs Raster',ko:'벡터 · 래스터',d:'점(픽셀)으로 그린 그림과 선·면 계산식으로 그린 그림의 차이예요.',x:'래스터(JPG·PNG)는 키우면 점이 보여 흐려지고, 벡터(SVG)는 계산식이라 아무리 키워도 매끈해요. 그래서 아이콘·로고는 벡터, 사진은 래스터로 써요.',p:'로고를 Vector vs Raster(벡터·래스터) 중 벡터 SVG로 바꿔서 레티나 화면에서도 선명하게 해줘',r:['Icon','Retina Display','Image Format'],l:2,o:0,v:'u-vector-vs-raster'},
+ {en:'Alt Text',ko:'대체 텍스트 · alt',d:'그림을 볼 수 없을 때 대신 읽어 주는 글이에요.',x:'MDN: 화면 낭독기가 `alt`를 소리 내어 읽고, 그림이 안 뜨면 그 자리에 `alt`가 보여요. 꾸밈용 그림은 `alt=""`로 비워 두면 건너뛰어요.',p:'상품 사진마다 무엇이 찍혔는지 Alt Text(대체 텍스트)를 달아줘',r:['Web Accessibility','Broken Image','SEO'],l:1,o:0,v:'u-alt-text'},
+ {en:'Responsive Image',ko:'반응형 이미지',d:'화면 크기에 맞는 크기의 사진 파일을 골라 보내는 방법이에요.',x:'`srcset`에 크기별 파일을 적고 `sizes`에 화면에서 차지할 너비를 적으면, 브라우저가 알맞은 파일 하나만 내려받아요.',p:'배너 사진을 Responsive Image(반응형 이미지)로 만들어 휴대폰에는 작은 파일을 보내줘',r:['Responsive Web Design','Pixel Density','Image Optimization'],l:3,o:0,v:'u-responsive-image'},
+ {en:'Image Compression',ko:'이미지 압축',d:'눈에 잘 안 띄는 정보를 덜어 사진 파일 크기를 줄이는 일이에요.',x:'손실 압축(JPEG 등)은 많이 줄일수록 네모난 얼룩이 생기고, 무손실 압축(PNG)은 화질은 그대로지만 덜 줄어요.',p:'올린 사진을 Image Compression(이미지 압축)으로 화질 80%쯤에 맞춰 용량을 줄여줘',r:['Compression','Image Optimization','Image Format'],l:2,o:0,v:'u-image-compression'},
+ {en:'Video Player',ko:'동영상 플레이어',d:'동영상을 재생·멈춤·건너뛰기 할 수 있는 화면과 버튼 묶음이에요.',x:'HTML `video` 태그에 `controls`를 붙이면 브라우저 기본 재생 막대가 나와요. 직접 만들면 재생 버튼·진행 막대·소리 버튼을 키보드로도 움직일 수 있어야 해요.',p:'Video Player(동영상 플레이어)에 재생, 진행 막대, 음소거 버튼을 넣고 키보드로도 조작되게 해줘',r:['Progress Bar','Autoplay','Poster Image'],l:2,o:0,v:'u-video-player'},
+ {en:'Autoplay',ko:'자동 재생 · 오토플레이',d:'누르지 않아도 페이지가 열리면 동영상이 저절로 재생되는 거예요.',x:'MDN: 사용자가 페이지와 상호작용하기 전에는 대부분의 브라우저가 소리 나는 자동 재생을 막아요. 소리를 끈(`muted`) 동영상은 보통 자동 재생돼요.',p:'메인 영상을 소리 없이 Autoplay(자동 재생)하고 소리 켜기 버튼을 따로 줘',r:['Video Player','Background Video','Reduced Motion'],l:2,o:0,v:'u-autoplay'},
+ {en:'Poster Image',ko:'포스터 이미지 · 대표 그림',d:'동영상이 재생되기 전에 그 자리에 먼저 보여 주는 그림이에요.',x:'`video` 태그의 `poster` 속성에 그림 주소를 넣어요. 없으면 첫 장면을 받을 때까지 아무것도 보이지 않아요.',p:'동영상에 Poster Image(포스터 이미지)를 넣어 재생 전에도 대표 장면이 보이게 해줘',r:['Video Player','Thumbnail','Lazy Loading'],l:1,o:0,v:'u-poster-image'},
+ {en:'Background Video',ko:'배경 동영상',d:'글 뒤에 소리 없이 계속 돌아가는 동영상을 까는 방법이에요.',x:'보통 `autoplay muted loop`를 함께 써요. WCAG는 5초 넘게 저절로 움직이는 것에 멈춤 버튼을 두라고 하고, 움직임 줄이기 설정이면 정지 그림을 보여 줘요.',p:'히어로 섹션에 Background Video(배경 동영상)를 깔고 멈춤 버튼을 달아줘',r:['Hero Section','Autoplay','Reduced Motion'],l:2,o:0,v:'u-background-video'},
+ {en:'Embed',ko:'임베드 · 퍼 오기',d:'다른 사이트의 동영상·지도를 내 페이지 안에 그대로 넣어 보여 주는 거예요.',x:'보통 `iframe`으로 넣어요. 화면 낭독기를 위해 `title`을 달고, `loading="lazy"`로 화면에 가까워질 때 불러오면 첫 로딩이 빨라져요.',p:'유튜브 영상을 Embed(임베드)로 넣고 스크롤해서 가까워질 때만 불러오게 해줘',r:['Lazy Loading','Loading Speed','Web Accessibility'],l:2,o:0,v:'u-embed'},
+ {en:'GIF',ko:'GIF · 움짤',d:'여러 장면을 이어 붙여 짧게 반복되는 움직이는 그림 파일이에요.',x:'1987년 CompuServe가 만든 형식이라 한 장면에 색을 256가지까지만 써요. 같은 움짤을 동영상(MP4·WebM)으로 바꾸면 훨씬 가벼워져요.',p:'페이지의 GIF(움짤)를 소리 없이 반복되는 MP4로 바꿔서 용량을 줄여줘',r:['Image Format','Autoplay','Compression'],l:1,o:0,v:'u-gif'},
+ {en:'Masonry Layout',ko:'메이슨리 · 벽돌 쌓기 배치',d:'높이가 다른 사진들을 빈틈없이 위로 차곡차곡 쌓아 배치하는 방법이에요.',x:'CSS Grid의 masonry는 아직 실험 단계라, 흔히 `column-count`로 비슷하게 만들어요. 이때는 왼쪽 단을 위에서 아래로 먼저 채워요.',p:'사진 목록을 Masonry Layout(메이슨리)으로 높이가 달라도 빈틈없이 3단으로 쌓아줘',r:['CSS Grid','Gallery','Column'],l:2,o:0,v:'u-masonry-layout'},
+ {en:'Watermark',ko:'워터마크',d:'사진 위에 흐리게 주인 이름이나 로고를 새겨 넣는 표시예요.',x:'원래는 종이 두께를 다르게 만들어 빛에 비춰야 보이는 무늬로, 지폐·우표 위조를 막는 데 써요. 사진에서는 반투명 글자나 로고로 출처를 밝혀요.',p:'올린 사진 오른쪽 아래에 반투명 Watermark(워터마크)로 사이트 이름을 넣어줘',r:['Opacity','Image Format'],l:1,o:0,v:'u-watermark'},
+ {en:'Lottie',ko:'로티 · JSON 애니메이션',d:'애프터 이펙트로 만든 움직임을 JSON 파일로 바꿔 앱·웹에서 그대로 재생하는 방법이에요.',x:'Airbnb가 만든 라이브러리로, Bodymovin 플러그인이 내보낸 JSON을 읽어 그려요. 이름은 독일의 실루엣 애니메이션 선구자인 감독에게서 따왔어요.',p:'완료 체크 표시를 Lottie(로티) 애니메이션으로 넣고 한 번만 재생되게 해줘',r:['JSON','Keyframes','GIF'],l:2,o:0,v:'u-lottie'},
+]);
 T('design','tool',[
  {en:'Frame',ko:'프레임 · 대지',d:'Figma에서 화면 한 장이나 부품을 담는 틀.',x:'Photoshop의 "대지(아트보드)"와 비슷해요.',j:'"대지 하나 더 만들어 주세요"',p:'Figma에서 1440px 데스크톱 프레임을 기준으로 만들었어',r:['Layer','Auto Layout'],l:1,o:1,u:'https://help.figma.com/hc/en-us/articles/360041539473-Frames-in-Figma-Design',v:{page:''}},
  {en:'Layer',ko:'레이어 · 층',d:'디자인을 이루는 하나하나의 층. 위에 있는 층이 앞에 보여요.',p:'Figma 레이어 순서대로 겹치는 순서를 맞춰줘',r:['Frame','Z-index'],l:1,o:0,v:'layer'},
@@ -1257,7 +1353,6 @@ T('web','parts',[
  {en:'Sidebar',ko:'사이드바 · 옆 영역',d:'본문 옆에 붙은 좁은 영역. 목차·광고·필터 등을 둬요.',p:'블로그 오른쪽 사이드바에 인기 글 목록을 넣어줘',r:['Side Panel'],l:1,o:0,v:{page:'sd'}},
  {en:'CTA Button',ko:'씨티에이 버튼 · 행동 유도 버튼',d:'"지금 신청", "구매하기"처럼 사용자가 해 주기를 바라는 행동 버튼. Call To Action.',p:'CTA 버튼을 하나만 크게, 눈에 띄는 색으로 해줘',r:['Hero Section','Primary Color'],l:1,o:0,v:'pulse'},
  {en:'Above the Fold',ko:'첫 화면 · 스크롤 전 영역',d:'스크롤하지 않고 처음 보이는 화면 범위.',p:'가입 버튼이 스크롤 없이 첫 화면(above the fold)에 보이게 해줘',r:['Hero Section','Viewport'],l:2,o:0,v:'viewport'},
- {en:'Avatar',ko:'아바타 · 프로필 사진',d:'사용자를 나타내는 작은 동그란 사진이나 이니셜.',p:'댓글 옆에 작성자 아바타를 동그랗게 보여줘',r:['Badge'],l:1,o:0,v:'avatar'},
  {en:'Chip',ko:'칩 · 필터 태그',d:'선택한 조건이나 분류를 보여 주는 작고 둥근 버튼.',p:'카테고리 필터를 칩 형태로 가로로 늘어놔줘',r:['Badge','Tab'],l:1,o:0,v:'chip'},
  {en:'Divider',ko:'디바이더 · 구분선',d:'영역을 나누는 가는 선.',p:'목록 항목 사이에 1px 구분선을 넣어줘',r:['Whitespace'],l:1,o:1,u:MDN('Web/HTML/Element/hr'),v:'divider'},
 ]);
@@ -1954,7 +2049,7 @@ const MOVED = {
   'web-form':'design-form', 'web-input-field':'design-input-field', 'web-placeholder':'design-placeholder',
   'web-empty-state':'design-empty-state', 'web-badge':'design-badge', 'web-loading-spinner':'design-loading-spinner',
   'web-progress-bar':'design-progress-bar', 'back-loading-state':'design-loading-state',
-  'web-breadcrumb':'design-breadcrumb', 'web-pagination':'design-pagination', 'web-gnb':'design-gnb',
+  'web-breadcrumb':'design-breadcrumb', 'web-pagination':'design-pagination', 'web-gnb':'design-gnb', 'web-avatar':'design-avatar',
 };
 T('front','layout',[
  {en:'Breakpoint',ko:'브레이크포인트 · 화면 너비 기준점',d:'"이 너비부터 배치를 바꾼다"고 정한 화면 폭. 예: 768px.',x:'디버거의 breakpoint(중단점)와 다른 뜻이에요.',p:'768px 브레이크포인트에서 메뉴를 햄버거로 바꿔줘',r:['Media Query','Responsive Web Design'],l:1,o:0,v:'breakpoint'},
@@ -2952,6 +3047,89 @@ Object.assign(D, {
       lo.addEventListener('click', () => set(k - 1)); hi.addEventListener('click', () => set(k + 1)); set(0); }},
   'u-bezel':{h:vs('두꺼운 베젤', `<div class="mk-vcol"><div class="mk-vbz"><div>${vrow(3, -1)}</div><i class="hb"></i></div><span class="mk-help">테두리가 넓고 아래에 홈 버튼</span></div>`,
     '얇은 베젤', `<div class="mk-vcol"><div class="mk-vbz thin"><div>${vrow(4, -1)}</div></div><span class="mk-help">같은 크기에 화면이 더 커요</span></div>`), cap:'테두리(베젤)가 얇을수록 같은 기기에 화면이 넓어져요'}
+});
+/* design: media — 사진은 jph(v) 풍경(하늘·해·산·땅) 6가지를 돌려 쓰고, 동영상은 jsea()의 배를 움직인다 */
+const JSKY = ['var(--sky)', 'var(--mark-bg)', 'var(--moss-bg)'];
+const jph = v => `<svg class="mk-jph" viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="120" height="90" style="fill:${JSKY[v % 3]}"/><circle class="u" cx="${[86, 30, 64][v % 3]}" cy="${[24, 20, 30][v % 3]}" r="11"/><path class="m" d="${v % 2 ? 'M0 70 32 34 54 56 78 26 120 66V90H0z' : 'M0 66 26 44 48 60 82 30 120 62V90H0z'}"/><path class="g" d="M0 76Q60 66 120 78V90H0z"/></svg>`;
+/* jph(0)을 10칸 단위로 뭉갠 그림: 많이 압축한 사진 */
+const jblk = () => { const P = [[0, 66], [26, 44], [48, 60], [82, 30], [120, 62]], my = x => { const i = P.findIndex(p => p[0] >= x), a = P[i - 1], b = P[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); },
+    gy = x => { const t = x / 120; return (1 - t) ** 2 * 76 + 2 * t * (1 - t) * 66 + t * t * 78; }; let r = '';
+  for (let y = 5; y < 90; y += 10) for (let x = 5; x < 120; x += 10) r += `<rect x="${x - 5}" y="${y - 5}" width="10" height="10" class="${y >= gy(x) ? 'g' : y >= my(x) ? 'm' : Math.hypot(x - 86, y - 24) <= 12 ? 'u' : 'y'}"/>`;
+  return `<svg class="mk-jph" viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`; };
+const jsea = (c = '') => `<svg class="mk-jph" viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="160" height="90" style="fill:var(--sky)"/><circle class="u" cx="128" cy="22" r="10"/><rect class="w" y="58" width="160" height="32"/><g class="mk-jbt${c}"><path class="k" d="M10 52h34l-6 8H16z"/><path class="sl" d="M27 22 40 48H27z"/><path class="ms" d="M26 18v34"/></g><path class="wv" d="M0 66q10-4 20 0t20 0 20 0 20 0 20 0 20 0 20 0 20 0"/></svg>`;
+const JI = {play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z"/></svg>', pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>',
+  snd: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3.5v11L5 10H2z"/><path class="l" d="M11.5 5.5q2 2.5 0 5"/></svg>', mute: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3.5v11L5 10H2z"/><path class="l" d="m11 6 4 4m0-4-4 4"/></svg>'};
+const JLOGO = '<svg viewBox="0 0 120 44" aria-hidden="true"><circle cx="60" cy="22" r="15" style="fill:var(--mark)"/><path d="m53 22 5 5 9-10" style="fill:none;stroke:#fff;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round"/></svg>';
+const JBRK = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4" style="fill:none;stroke:var(--steel);stroke-width:1.6"/><path d="m15 3-6 18" style="stroke:var(--mark);stroke-width:1.6"/></svg>';
+const jgfr = i => `<svg viewBox="0 0 48 36" aria-hidden="true"><rect width="48" height="36" style="fill:var(--sky)"/><rect y="30" width="48" height="6" style="fill:var(--moss)"/><circle cx="${8 + i * 11}" cy="${[24, 11, 8, 18][i]}" r="5" style="fill:var(--mark)"/></svg>`;
+Object.assign(ART, {
+  carousel:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s" d="M55 4v8"/><path class="s t" d="M16 34 55 12l39 22z"/><path class="s" d="M28 34v44M55 34v44M82 34v44"/><rect class="s y" x="20" y="46" width="16" height="11" rx="5"/><rect class="s y" x="47" y="58" width="16" height="11" rx="5"/><rect class="s y" x="74" y="50" width="16" height="11" rx="5"/><rect class="s t" x="12" y="78" width="86" height="8" rx="2"/><path class="s r" d="M28 94q27 6 52 0"/><path class="o" d="m86 92-9-4 2 8z"/></svg>',
+  masonry:'<svg viewBox="0 0 110 100" aria-hidden="true"><rect class="s t" x="10" y="14" width="90" height="72" rx="2"/><rect class="s y" x="25" y="32" width="30" height="18"/><path class="s" d="M10 32h90M10 50h90M10 68h90M40 14v18M70 14v18M25 32v18M55 32v18M85 32v18M40 50v18M70 50v18M25 68v18M55 68v18M85 68v18"/></svg>',
+  watermark:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s r" d="M70 10V4M86 16l4-4M92 32h6M86 48l4 4"/><circle class="o" cx="70" cy="32" r="16"/><rect class="s" x="12" y="20" width="58" height="72" rx="2" style="fill:var(--plate)"/><circle class="s" cx="41" cy="56" r="15" style="stroke:var(--steel);stroke-dasharray:3 4"/><path class="s" d="M35 56h12M41 50v12" style="stroke:var(--steel)"/></svg>'
+});
+Object.assign(D, {
+  'u-carousel':{h:pair(ART.carousel, D.carousel.h), m:1, cap:'회전목마처럼, 여러 장이 차례로 돌아오며 보여요'},
+  'u-thumbnail':{h:phone(`<b>동영상</b>${[[0, '바닷가 산책 브이로그', '12:04'], [1, '캠핑 요리 3가지', '8:31'], [5, '아침 운동 10분', '5:47']].map(([v, t, d], i) =>
+    `<div class="mk-jtr"><span class="mk-jth${i ? '' : ' mk-hl'}">${jph(v)}<i>${d}</i></span><span>${t}</span></div>`).join('')}<span class="mk-help">점선이 썸네일이에요. 원본을 작게 줄여 먼저 보여 줘요</span>`), cap:'목록에는 작게 줄인 그림을 먼저 보여 주고, 누르면 원본을 열어요'},
+  'u-crop':{h:hint('점선 틀을 끌어 보세요 (방향키)') + `<div class="mk-jcr"><div class="mk-jcw">${jph(3)}<div class="mk-jbx" tabindex="0" aria-label="자르기 틀. 화살표 키로 옮겨요"></div></div>
+    <div class="mk-vcol"><div class="mk-jpv"><div class="mk-jpi">${jph(3)}</div></div><span class="mk-help">남는 부분</span></div></div>`, cap:'틀 안만 남기고 바깥은 잘라 내요',
+    init: s => { const b = s.querySelector('.mk-jbx'), im = s.querySelector('.mk-jpi'), W = 200, H = 150, B = 90; let x = 60, y = 30, x0 = x, y0 = y;
+      const set = (nx, ny) => { x = Math.max(0, Math.min(W - B, nx)); y = Math.max(0, Math.min(H - B, ny)); b.style.transform = `translate(${x}px,${y}px)`; im.style.transform = `translate(${-x * 2 / 3}px,${-y * 2 / 3}px)`; };
+      grab(b, {down: () => { x0 = x; y0 = y; }, move: (e, dx, dy) => set(x0 + dx, y0 + dy), up: (e, dx, dy, c) => { if (c) set(x0, y0); }});
+      keys(b, {ArrowLeft: [-10, 0], ArrowRight: [10, 0], ArrowUp: [0, -10], ArrowDown: [0, 10]}, ([dx, dy]) => set(x + dx, y + dy)); set(x, y); }},
+  'u-blur-up-placeholder':{h:`<div class="mk-jbu"><div class="mk-vcol"><div class="mk-jbf b">${jph(4)}</div><b>① 먼저</b><span class="mk-help">작은 그림을 늘려 흐리게</span></div><span class="mk-jar" aria-hidden="true">→</span>
+    <div class="mk-vcol"><div class="mk-jbf">${jph(4)}</div><b>② 다 오면</b><span class="mk-help">진짜 사진으로 바꿔요</span></div></div>`, cap:'빈칸 대신 흐린 그림을 먼저 깔아, 사진이 갑자기 튀어나오지 않게 해요'},
+  'u-lightbox':{h:hint('사진을 눌러 크게 보세요 (Esc로 닫기)') + phone(`<b>여행 사진</b><div class="mk-jlg">${[0, 1, 2, 3, 4, 5].map(i => `<button class="mk-jlt" aria-label="사진 ${i + 1} 크게 보기">${jph(i)}</button>`).join('')}</div>
+    <span class="mk-help">누르면 화면을 어둡게 덮고 크게 띄워요</span><div class="mk-jlb" role="dialog" aria-modal="true" aria-label="사진 크게 보기" hidden><button class="mk-jlx" aria-label="닫기">✕</button>
+    <div class="mk-jlp" role="img"></div><div class="mk-jln"><button class="mk-jlv" aria-label="이전 사진">‹</button><span class="mk-jlc" aria-live="polite"></span><button class="mk-jlv" aria-label="다음 사진">›</button></div></div>`), cap:'사진 위에 어두운 막을 덮고 크게 보여 줘요',
+    init: s => { const lb = s.querySelector('.mk-jlb'), pv = s.querySelector('.mk-jlp'), ct = s.querySelector('.mk-jlc'), x = s.querySelector('.mk-jlx'), th = [...s.querySelectorAll('.mk-jlt')], [pr, nx] = s.querySelectorAll('.mk-jlv'); let k = -1;
+      const show = n => { k = (n + th.length) % th.length; pv.innerHTML = jph(k); pv.setAttribute('aria-label', `사진 ${k + 1}`); ct.textContent = `${k + 1} / ${th.length}`; };
+      const close = () => { if (k < 0) return; const t = th[k]; k = -1; lb.hidden = true; t.focus(); };
+      th.forEach((t, i) => t.addEventListener('click', () => { show(i); lb.hidden = false; x.focus(); }));
+      x.addEventListener('click', close); pr.addEventListener('click', () => show(k - 1)); nx.addEventListener('click', () => show(k + 1));
+      lb.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); close(); } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); show(k + (e.key === 'ArrowLeft' ? -1 : 1)); }
+        else if (e.key === 'Tab') { const f = [x, pr, nx], i = f.indexOf(e.target); if (e.shiftKey ? i <= 0 : i === f.length - 1) { e.preventDefault(); f[e.shiftKey ? f.length - 1 : 0].focus(); } } }); }},
+  'u-gallery':{h:phone(`<b>사진 · 9장</b><div class="mk-jga">${Array.from({length: 9}, (_, i) => `<i>${jph(i)}</i>`).join('')}</div>`), cap:'같은 크기 칸에 사진을 바둑판처럼 나란히 모아요'},
+  'u-image-format':{h:`<div class="mk-jfm">${[['JPG', jph(0), '사진용 · 투명 배경 ✗'], ['PNG', JLOGO, '로고·글자용 · 투명 배경 ✓'], ['WebP', jph(1), '둘 다 되고 더 작아요'],
+    ['GIF', `<span class="mk-jfr">${[0, 1, 2].map(v => `<i>${jph(v)}</i>`).join('')}</span>`, '움직이지만 256색까지']].map(([a, h, t]) =>
+    `<div><span class="mk-jtc">${h}</span><b>${a}</b><span class="mk-help">${t}</span></div>`).join('')}</div>`, cap:'형식마다 잘하는 일이 달라요. 체크무늬는 투명한 부분이에요'},
+  'u-vector-vs-raster':{h:vs('래스터 (PNG)', `<div class="mk-vcol"><div class="mk-vlo">${vdisc(10)}</div><span class="mk-help">점으로 그려 키우면 계단이 보여요</span></div>`,
+    '벡터 (SVG)', `<div class="mk-vcol"><div class="mk-vlo"><svg viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="3.8"/></svg></div><span class="mk-help">계산식이라 키워도 매끈해요</span></div>`), cap:'둘 다 크게 확대한 모습이에요. 점으로 그린 그림만 계단이 보여요'},
+  'u-alt-text':{h:vs('alt 없음', `<div class="mk-vcol"><div class="mk-jbk">${JBRK}</div><span class="mk-jsr">${JI.snd}<span>"IMG_2034.jpg, 이미지"</span></span></div>`,
+    'alt 있음', `<div class="mk-vcol"><div class="mk-jbk">${JBRK}<span>노란 우산을 쓴 아이</span></div><span class="mk-jsr">${JI.snd}<span>"노란 우산을 쓴 아이, 이미지"</span></span></div>`), cap:'그림이 안 떠도 alt 글은 보이고, 화면 낭독기가 읽어 줘요 (낭독 문구는 예시)'},
+  'u-responsive-image':{h:`<div class="mk-vres"><div class="mk-jss"><span class="mk-help">srcset에 적은 크기별 파일</span><div>${['480w', '960w', '1600w'].map((t, i) => `<span class="mk-jch${['', ' p', '', ' m'][i + (i > 0)]}">${t}</span>`).join('')}</div></div>
+    <div class="mk-jdv"><div class="mk-vcol"><span class="mk-jdp">${jph(2)}</span><span class="mk-help"><b>휴대폰</b> → 480w</span></div><div class="mk-vcol"><span class="mk-jdm">${jph(2)}</span><span class="mk-help"><b>큰 모니터</b> → 1600w</span></div></div></div>`, cap:'화면에 맞는 크기의 파일 하나만 골라 내려받아요'},
+  'u-image-compression':{h:`<div class="mk-vres"><div class="mk-jcp">${[['원본', '2.4MB', jph(0)], ['화질 80%', '0.5MB', jph(0)], ['화질 20%', '0.1MB', jblk()]].map(([a, b, h]) =>
+    `<div class="mk-vcol"><span class="mk-jcq">${h}</span><b>${a}</b><span class="mk-help">${b}</span></div>`).join('')}</div><span class="mk-help">용량은 예시예요</span></div>`, cap:'조금 줄이면 거의 같아 보이고, 너무 줄이면 네모난 얼룩이 생겨요'},
+  'u-video-player':{h:hint('재생하고 막대를 끌어 보세요 (Space·방향키)') + `<div class="mk-jvp"><div class="mk-jvs">${jsea()}</div><div class="mk-jvc"><button class="mk-jvb" aria-label="재생">${JI.play}</button>
+    <div class="mk-jvt" role="slider" tabindex="0" aria-label="재생 위치" aria-valuemin="0" aria-valuemax="30"><i class="mk-jvf"></i><i class="mk-jvk"></i></div><span class="mk-jvn"></span>
+    <button class="mk-jvb" aria-label="음소거" aria-pressed="false">${JI.snd}</button></div></div>`, cap:'재생 버튼, 진행 막대, 소리 버튼이 한 줄에 모여 있어요',
+    init: s => { const [pb, mb] = s.querySelectorAll('.mk-jvb'), tr = s.querySelector('.mk-jvt'), f = s.querySelector('.mk-jvf'), kn = s.querySelector('.mk-jvk'), n = s.querySelector('.mk-jvn'), bt = s.querySelector('.mk-jbt'), L = 30;
+      let t = 0, on = false, last = 0, t0 = 0, raf = 0, mute = false; const mm = v => `${Math.floor(v / 60)}:${String(Math.floor(v % 60)).padStart(2, '0')}`;
+      const set = v => { t = Math.max(0, Math.min(L, v)); const p = t / L * 100; f.style.width = p + '%'; kn.style.left = p + '%'; bt.setAttribute('transform', `translate(${p * 1.1} 0)`);
+        n.textContent = `${mm(t)} / ${mm(L)}`; tr.setAttribute('aria-valuenow', Math.floor(t)); tr.setAttribute('aria-valuetext', `${Math.floor(t)}초`); };
+      const tick = now => { if (!on) return; if (!s.isConnected) { on = false; return; } set(t + (now - last) / 1000); last = now; if (t >= L) play(false); else raf = requestAnimationFrame(tick); };
+      const play = v => { on = v; pb.setAttribute('aria-label', on ? '일시 정지' : '재생'); pb.innerHTML = on ? JI.pause : JI.play; cancelAnimationFrame(raf);
+        if (on) { if (t >= L) set(0); last = performance.now(); raf = requestAnimationFrame(tick); } };
+      const seek = e => { const r = tr.getBoundingClientRect(); set((e.clientX - r.left) / r.width * L); };
+      grab(tr, {down: e => { t0 = t; seek(e); }, move: e => seek(e), up: (e, dx, dy, c) => { if (c) set(t0); }});
+      keys(tr, {ArrowLeft: -5, ArrowRight: 5, Home: 'home', End: 'end', ' ': 'play'}, v => v === 'home' ? set(0) : v === 'end' ? set(L) : v === 'play' ? play(!on) : set(t + v));
+      pb.addEventListener('click', () => play(!on)); mb.addEventListener('click', () => { mute = !mute; mb.setAttribute('aria-pressed', mute); mb.innerHTML = mute ? JI.mute : JI.snd; }); set(0); }},
+  'u-autoplay':{h:vs('소리 켠 채', `<div class="mk-vcol"><div class="mk-jav">${jsea()}<span class="mk-jmu">${JI.snd}</span><span class="mk-jbl">${JI.play}</span></div><span class="mk-help">브라우저가 막아 멈춰 있어요</span></div>`,
+    '소리 끈 채', `<div class="mk-vcol"><div class="mk-jav">${jsea(' A mv')}<span class="mk-jmu">${JI.mute}</span></div><span class="mk-help">저절로 재생돼요</span></div>`), m:1, cap:'소리가 나는 영상은 누르기 전까지 자동 재생이 막혀요'},
+  'u-poster-image':{h:vs('poster 없음', `<div class="mk-vcol"><div class="mk-jav"><span class="mk-jbl">${JI.play}</span></div><span class="mk-help">첫 장면이 올 때까지 빈 화면</span></div>`,
+    'poster 있음', `<div class="mk-vcol"><div class="mk-jav">${jph(1)}<span class="mk-jbl">${JI.play}</span></div><span class="mk-help">재생 전에도 대표 그림이 보여요</span></div>`), cap:'재생 버튼을 누르기 전 영상 자리에 보여 주는 그림이에요'},
+  'u-background-video':{h:browser(`<div class="mk-jbg">${jsea(' A mv')}<div class="mk-jhe"><b>여름 바다 여행</b><span>지금 예약하면 20% 할인</span><span class="mk-btn mk-sm">예약하기</span></div>
+    <span class="mk-jps mk-hl">${JI.pause}</span></div>`, {url: 'travel.example'}), m:1, cap:'글 뒤에 소리 없는 영상을 돌리고, 멈춤 버튼(점선)을 꼭 달아요'},
+  'u-embed':{h:browser(`<b>오늘의 레시피</b><span class="mk-help">달걀말이를 부드럽게 만드는 법이에요.</span><div class="mk-jem mk-hl"><span class="mk-help">video.example에서 불러옴</span><div class="mk-jev">${jph(2)}<span class="mk-jbl">${JI.play}</span></div></div>`,
+    {url: 'myblog.example'}).replace('mk-browser', 'mk-browser mk-jbr'), cap:'점선 안은 다른 사이트의 영상을 내 글 안에 그대로 넣은 거예요'},
+  'u-gif':{h:`<div class="mk-vres"><div class="mk-jgs">${[0, 1, 2, 3].map(i => `<span><i>${jgfr(i)}</i><span class="mk-help">${i + 1}</span></span>`).join('')}</div><span class="mk-jar" aria-hidden="true">↓</span>
+    <div class="mk-jgw"><span class="A mk-jgv">${[0, 1, 2, 3].map(jgfr).join('')}</span></div><span class="mk-jch">한 장면에 색 256가지까지</span></div>`, m:1, cap:'여러 장면을 차례로 바꿔 보여 줘서 움직이는 것처럼 보여요'},
+  'u-masonry-layout':{h:pair(ART.masonry, phone(`<b>둘러보기</b><div class="mk-jms">${[[0, 70], [3, 44], [1, 56], [4, 40], [2, 64], [5, 52], [1, 38], [0, 50], [3, 60]].map(([v, h]) => `<i style="height:${h}px">${jph(v)}</i>`).join('')}</div>`)), cap:'벽돌을 쌓듯, 사진을 틈 없이 차곡차곡 위로 쌓아요'},
+  'u-watermark':{h:pair(ART.watermark, `<div class="mk-jwm">${jph(0)}<span>© 달빛사진관</span></div>`), cap:'종이를 빛에 비추면 보이는 무늬처럼, 사진 위에 흐리게 주인 이름을 새겨요'},
+  'u-lottie':{h:`<div class="mk-vres"><div class="mk-jtl"><span class="mk-help">애프터 이펙트 타임라인</span>${[['위치', [8, 55]], ['크기', [20, 45, 80]], ['투명도', [5, 30]]].map(([nm, k]) =>
+    `<div class="mk-jtw"><span>${nm}</span><i>${k.map(x => `<b style="left:${x}%"></b>`).join('')}</i></div>`).join('')}</div><span class="mk-jar" aria-hidden="true">↓</span>
+    <div class="mk-jlr"><span class="mk-jch">check.json</span><span class="mk-jar" aria-hidden="true">→</span><svg class="mk-jok" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17"/><path class="A" d="M12 21l6 6 11-13" pathLength="1"/></svg></div></div>`, m:1, cap:'움직임을 JSON 파일로 내보내 앱·웹에서 그대로 다시 그려요'}
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
