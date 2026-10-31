@@ -122,8 +122,9 @@ const SYM_NEW = ['아이폰에서 위·아래 내용이 가려져요', '휴대�
   '목록 끝에서 튕기는 느낌이 없어요', '뒤가 유리처럼 흐리게 비치게 하고 싶어요', '모서리가 아이폰 아이콘처럼 부드럽지 않아요', '색약인 사람이 구분을 못 해요', '색이 너무 쨍해요',
   '마지막 줄에 한 글자만 남아요', '제목 글꼴 중 일부 글자만 모양이 달라요', '긴 페이지에서 맨 위로 돌아가기 힘들어요', '이미지가 늦게 뜨고 덜컥 나타나요', '사진 때문에 페이지가 무거워요',
   '이미지가 안 보일 때 무슨 사진인지 몰라요', '동영상 자동 재생이 안 돼요'];    // 스펙 6장 26개(칩 말투에 맞춰 해요체)
-check('symcount', () => g.SYMPTOMS.length !== 82 ? 'length ' + g.SYMPTOMS.length
-  : SYM_NEW.filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_TERM = ['명령어를 찾을 수 없다고 나와요', 'Permission denied(권한 없음)가 떠요', 'PowerShell에서 스크립트를 실행할 수 없대요', '파일이 분명히 있는데 없다고 나와요', '폴더 이름에 띄어쓰기가 있으면 명령이 깨져요', '명령이 실패했는지 성공했는지 모르겠어요', '비밀번호를 쳐도 아무것도 안 보여요', '터미널이 멈춰서 아무것도 안 쳐져요', 'git log 화면에서 빠져나올 수가 없어요', 'y/N이라고 묻는데 뭘 눌러야 할지 모르겠어요', '명령이 끝나지 않고 계속 켜져 있어요', '터미널에서 한글이 깨져 보여요', '출력이 길어서 앞부분이 안 보여요', '같은 줄 숫자만 계속 바뀌어요', '글자가 한 줄씩 계속 올라와요'];    // 터미널 스펙 7장 표
+check('symcount', () => g.SYMPTOMS.length !== 97 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
 check('total', () => g.TERMS.length === 1055 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
