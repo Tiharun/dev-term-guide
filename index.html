@@ -578,6 +578,125 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-ygw>span{position:relative;display:inline-flex;align-items:center;min-height:32px;padding:0 16px;border-radius:8px;background:#2563eb;color:#fff;font-size:12px;font-weight:700}
 .mk-yhalo{position:absolute;inset:-4px;border-radius:12px;box-shadow:0 0 16px 4px rgba(59,130,246,.8);animation:mk-yhalo 2.4s var(--ease) infinite alternate}
 @keyframes mk-yhalo{from{opacity:.25}to{opacity:1}}
+/* 제스처·조작 — 끄는 영역은 touch-action으로 브라우저 스크롤과 겹치지 않게 한다 */
+.mk-qls{display:flex;flex-direction:column}
+.mk-qr{width:100%;text-align:left;transition:background-color .15s var(--ease)}
+.mk-qr.on{background:var(--fig)}
+.mk-qr:active{background:var(--mark-bg)}
+.mk-qt{flex:1;min-width:0;display:flex;flex-direction:column}
+.mk-qt>span{color:var(--muted);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-qr small{color:var(--muted);font-size:11px}
+.mk-qph{position:relative;height:120px;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.mk-qpop{display:grid;opacity:0;filter:drop-shadow(0 2px 6px rgba(29,43,79,.35))}
+.mk-qpop svg{width:56px;height:56px;fill:var(--plate)}
+.mk-qpop.go{animation:mk-qpop .8s var(--ease)}
+@keyframes mk-qpop{0%{opacity:0;transform:scale(.6)}15%{opacity:1;transform:scale(1.1)}30%{transform:scale(1)}70%{opacity:1}100%{opacity:0;transform:scale(1)}}
+@keyframes mk-qfade{0%,100%{opacity:0}20%,70%{opacity:1}}
+.mk-qbar{display:flex;align-items:center;gap:8px}
+.mk-qb{align-self:flex-start;max-width:85%;padding:6px 10px;border-radius:12px;background:var(--fig)}
+.mk-qmr{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.mk-qb.me{position:relative;overflow:hidden;align-self:auto;background:var(--ink);color:#fff;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.mk-qb.me::after{content:'';position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--mark);transform:scaleX(0);transform-origin:left}
+.mk-qb.me.hold::after{transform:scaleX(1);transition:transform .5s linear}
+.mk-qmo{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--rule);color:var(--muted)}
+.mk-qmu{position:absolute;right:0;top:calc(100% + 4px);z-index:3;display:flex;flex-direction:column;min-width:96px;padding:4px;background:var(--plate);border:1px solid var(--rule);border-radius:10px;box-shadow:0 6px 16px rgba(29,43,79,.18)}
+.mk-qmu[hidden]{display:none}
+.mk-qmu button{min-height:28px;padding:4px 8px;border-radius:6px;text-align:left}
+.mk-qmu button:hover,.mk-qmu button:focus-visible{background:var(--fig)}
+.mk-qvw{position:relative;overflow:hidden;border-radius:10px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.mk-qvw:active{cursor:grabbing}
+.mk-qvw.v{flex:1;min-height:0;touch-action:none;border:1px solid var(--rule);background:var(--plate)}
+.mk-qtk{display:flex;transition:transform .35s var(--ease)}
+.mk-qcd{flex:0 0 100%;display:flex;flex-direction:column;gap:4px}
+.mk-qcd .mk-img{height:70px}
+.mk-qdots{display:flex;justify-content:center;gap:6px}
+.mk-qdots i,.mk-qdot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--steel)}
+.mk-qdots i.on{background:var(--ink)}
+.mk-qst{text-align:center}
+.mk-qvp{position:relative;flex:1;min-height:0;overflow:hidden;border:1px solid var(--rule);border-radius:10px;background:var(--rule-2);touch-action:none}
+.mk-qvp>svg{display:block;width:100%;height:100%;transform-origin:center;transition:transform .2s var(--ease)}
+.mk-qpan{cursor:grab}.mk-qpan:active{cursor:grabbing}
+.mk-qpan>svg{width:320px;height:260px;max-width:none;transform-origin:0 0}
+.mk-qvp .g{fill:var(--rule-2)}.mk-qvp .pk{fill:var(--moss-bg)}.mk-qvp .rv{fill:var(--sky)}.mk-qvp .bk{fill:var(--fig);stroke:var(--rule)}
+.mk-qvp .rc{fill:none;stroke:var(--rule);stroke-width:15}.mk-qvp .rd{fill:none;stroke:var(--plate);stroke-width:12}.mk-qvp .pn{fill:var(--mark)}.mk-qvp .pc{fill:var(--plate)}
+.mk-qz{min-width:36px;text-align:center;font-variant-numeric:tabular-nums}
+.mk-qkb{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mk-qcol{display:flex;flex-direction:column;gap:6px;padding:8px;border:1.5px dashed transparent;border-radius:10px;background:var(--fig);transition:border-color .15s var(--ease),background-color .15s var(--ease)}
+.mk-qcol.on{border-color:var(--mark);background:var(--mark-bg)}
+.mk-qcl{display:flex;flex-direction:column;gap:6px;min-height:56px}
+.mk-qkc{transition:transform .25s var(--ease),box-shadow .15s var(--ease);user-select:none;-webkit-user-select:none}
+.mk-qkc.lift{z-index:3;cursor:grabbing;box-shadow:0 8px 18px rgba(29,43,79,.22)}
+.mk-qod .mk-li{padding:2px 2px 2px 8px;background:var(--plate);transition:transform .2s var(--ease)}
+.mk-qod .mk-li>span{flex:1}
+.mk-qod .mk-li.lift{position:relative;z-index:3;border-radius:6px;box-shadow:0 6px 14px rgba(29,43,79,.2)}
+.mk-qh{flex:none;width:32px;height:32px;border-radius:6px;color:var(--muted);font-size:16px;touch-action:none;cursor:grab}
+.mk-qh[aria-pressed=true]{background:var(--mark-bg);color:var(--mark-text);outline:1.5px solid var(--mark)}
+.mk-qpv{position:relative;flex:1;min-height:0;overflow:hidden;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.mk-qpw{position:relative;transition:transform .45s var(--ease)}
+.mk-qpi{position:absolute;left:0;right:0;top:-44px;height:44px;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:11.5px}
+.mk-qspin{width:16px;height:16px;border-radius:50%;border:2px solid var(--rule);border-top-color:var(--mark)}
+.mk-qpi.ld .mk-qspin{animation:spin .8s linear infinite}
+.mk-qfd .mk-li,.mk-qfr{font-size:11.5px;color:var(--muted)}
+.mk-qfd b,.mk-qfr b{color:var(--ink);font-size:12px}
+.mk-qfd .mk-li.on{background:var(--mark-bg)}
+.mk-qsw{position:relative;overflow:hidden}
+.mk-qdel{position:absolute;top:0;right:0;bottom:1px;width:72px;background:var(--mark-text);color:#fff;font-weight:700}
+.mk-qfr{position:relative;background:var(--plate);touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;transition:transform .25s var(--ease)}
+.mk-qes{position:relative;flex:1;min-height:0;overflow:hidden}
+.mk-qlist,.mk-qdet{display:flex;flex-direction:column;gap:6px}
+.mk-qlist .mk-qr,.mk-qdet .mk-li{justify-content:space-between}
+.mk-qdet{position:absolute;inset:0;padding:0 2px 0 26px;background:var(--plate);box-shadow:-6px 0 14px rgba(29,43,79,.16);transition:transform .3s var(--ease)}
+.mk-qbk{align-self:flex-start;min-height:28px;color:var(--mark-text);font-weight:700}
+.mk-qedge{position:absolute;left:0;top:0;bottom:0;width:20px;background:var(--mark-bg);border-right:1.5px dashed var(--mark);touch-action:none;cursor:grab}
+.mk-qhap{display:flex;align-items:center;gap:6px}
+.mk-qwv{flex:none;width:20px;height:60px;fill:none;stroke:var(--mark);stroke-width:2.5;stroke-linecap:round;animation:mk-qwv 2.4s var(--ease) infinite}
+.mk-qshk{animation:mk-qshk 2.4s linear infinite}
+.mk-qok{display:flex;flex-direction:column;align-items:center;gap:4px;margin:14px 0 4px;text-align:center}
+.mk-qck{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--moss-bg);animation:mk-qck 2.4s var(--ease) infinite}
+.mk-qck svg{width:26px;height:26px;fill:none;stroke:var(--moss);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+@keyframes mk-qshk{0%,12%,100%{transform:none}2%,6%,10%{transform:translateX(-2px)}4%,8%{transform:translateX(2px)}}
+@keyframes mk-qwv{0%,16%{opacity:1;transform:none}26%,94%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:none}}
+@keyframes mk-qck{0%,82%{opacity:1;transform:none}90%,95%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:none}}
+.mk-qpr{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.mk-qpb{transition:transform .16s var(--ease),filter .16s var(--ease)}
+.mk-qpb.dn{transform:scale(.95);filter:brightness(.72);transition-duration:.08s}
+.mk-qto{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}.mk-qto>.mk-browser{max-width:100%}
+.mk-qfm{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}
+.mk-qfl{display:flex;flex-direction:column;gap:3px}
+.mk-qfm .w{grid-column:1/-1}
+.mk-qin{position:relative;display:block;height:26px;border:1px solid var(--rule);border-radius:6px;background:var(--plate)}
+.mk-qin.mk-btn{display:flex;height:auto;border:0;background:var(--ink)}
+.mk-qin.on{outline:2px solid var(--mark);outline-offset:2px}
+.mk-qno{position:absolute;top:-7px;right:-7px;display:grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;font-style:normal;line-height:1}
+.mk-qin.mk-btn .mk-qno{background:var(--plate);color:var(--ink);border:1px solid var(--ink)}
+.mk-qin.on .mk-qno{background:var(--mark-text);color:#fff;border-color:var(--mark-text)}
+.mk-qctl{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
+.mk-qtg{display:inline-flex;padding:2px;border:1px solid var(--rule);border-radius:8px;background:var(--plate)}
+.mk-qtg button{min-height:28px;padding:4px 8px;border-radius:6px;font-size:11.5px}
+.mk-qtg [aria-pressed=true]{background:var(--ink);color:#fff}
+.mk-qcs{display:flex;gap:10px}
+.mk-qcz{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.mk-qcz>*{width:100%}
+.mk-qgr{cursor:grab;user-select:none;-webkit-user-select:none}
+.mk-qgr.dn{cursor:grabbing}
+.mk-qdis{background:var(--rule);color:var(--muted);cursor:not-allowed}
+.mk-qcv{flex:0 0 96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:10px;background:var(--fig);text-align:center}
+.mk-qcg{width:40px;height:40px}
+.mk-qcg path,.mk-qcg circle{fill:var(--plate);stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.mk-qcn{font-family:var(--mono);font-size:11.5px}
+.mk-qsk{display:flex;gap:8px;width:max-content;transition:transform .35s var(--ease)}
+.mk-qsc{flex:0 0 100px;display:flex;flex-direction:column;gap:4px;padding:6px}
+.mk-qsc .mk-img{height:64px}
+.mk-qsl{position:absolute;left:0;top:0;bottom:0;border-left:2px dashed var(--mark);transition:opacity .2s var(--ease)}
+.mk-qvw.off .mk-qsl{opacity:0}
+.mk-qsw3{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px;padding:4px 10px;border:1px solid var(--rule);border-radius:16px;background:var(--plate);font-weight:700}
+.mk-qsw3 span{padding:2px 8px;border-radius:10px;background:var(--ink);color:#fff;font-size:11.5px}
+.mk-qsw3[aria-checked=false] span{background:var(--rule);color:var(--ink)}
+.mk-qrl{transition:transform .5s var(--ease)}
+.mk-qms .mk-qrl{transition:none}
+.mk-qms+.mk-help{font-variant-numeric:tabular-nums}
+.mk-art .s.r{stroke:var(--mark)}
+@media (prefers-reduced-motion:reduce){.mk-qpop.go{animation-name:mk-qfade}.mk-qpi.ld .mk-qspin,.mk-qshk,.mk-qwv,.mk-qck{animation:none}}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -661,7 +780,7 @@ function SYM(g, list){ list.forEach(([q, t]) => SYMPTOMS.push({g, q, t})); }
 /* ===== 카테고리 목록 ===== */
 CAT('basics','개발 기본','개발을 처음 시작할 때 듣는 가장 기본적인 말', [['code','코드 읽기 기초','코드를 볼 때 알아야 하는 문법 이름']]);
 CAT('web','웹사이트','웹사이트가 어떻게 생기고 움직이는지에 관한 말', [['parts','페이지 구성요소','웹페이지 각 부분의 이름']]);
-CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
+CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['gesture','제스처·조작','손가락·마우스·키보드로 화면을 다루는 방법'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법']]);
 CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
@@ -854,6 +973,26 @@ T('design','style',[
  {en:'Mesh Gradient',ko:'메시 그라데이션',d:'여러 색 점이 이리저리 섞여 번지는, 구름처럼 자유로운 그라데이션이에요.',x:'한 방향으로 흐르는 보통 그라데이션과 달리 여러 곳의 색 점이 섞여요. CSS에는 아직 전용 기능이 없어 radial-gradient를 여러 겹 겹쳐 비슷하게 만들어요.',p:'메인 배경을 보라·분홍·하늘색이 구름처럼 섞이는 메시 그라데이션으로 만들어줘',r:['Gradient','Grain Texture','Hero Section'],l:2,o:0,v:'u-mesh-gradient'},
  {en:'Illustration',ko:'일러스트',d:'사진 대신 그린 그림으로 설명이나 분위기를 전하는 것이에요.',x:'첫 사용 안내·빈 화면·오류 화면처럼 글만으로는 딱딱한 곳에 많이 써요. 한 서비스 안에서는 선 굵기와 색을 맞춰야 한 벌처럼 보여요.',p:'첫 사용 안내 화면마다 같은 선 굵기와 색을 쓴 일러스트를 넣어줘',r:['Empty State','Isometric','Color Palette'],l:1,o:0,v:'u-illustration'},
  {en:'Isometric',ko:'아이소메트릭',d:'물체를 비스듬히 위에서 본 모습으로, 멀리 있어도 크기가 줄지 않게 그리는 입체 그림 방식이에요.',x:'세 축이 서로 120°를 이루고, 옆선은 가로선에서 30° 기울여 그려요. 원근이 없어 서비스 구조도·지도 같은 설명 그림에 잘 맞아요.',p:'서비스 구조 설명 그림을 상자들이 쌓인 아이소메트릭 일러스트로 그려줘',r:['Illustration','Grid System'],l:2,o:0,v:'u-isometric'},
+]);
+T('design','gesture',[
+ {en:'Tap',ko:'탭 · 한 번 누르기',d:'손가락으로 화면을 한 번 가볍게 눌렀다 떼는 동작이에요. 마우스의 클릭과 같아요.',x:'누르는 순간 바로 색이 바뀌어야 눌렸다는 걸 알아요. 손을 뗄 때 실행하면, 누른 채 손가락을 밖으로 빼서 취소할 수도 있어요.',p:'목록 줄을 탭하면 누르는 순간 배경이 바뀌고 손을 떼면 상세 화면이 열리게 만들어줘',r:['Touch Target','Pressed State'],l:1,o:0,v:'u-tap'},
+ {en:'Double Tap',ko:'두 번 탭',d:'같은 곳을 빠르게 두 번 누르는 동작이에요. 사진에 하트를 누르거나 확대할 때 써요.',x:'예전 모바일 브라우저는 두 번 탭을 기다리느라 한 번 탭도 0.3초쯤 늦게 반응했어요. 요즘은 width=device-width를 넣은 페이지에서 대부분 이 지연을 없앴어요.',p:'사진을 두 번 탭하면 가운데에 하트가 커졌다 사라지고 좋아요가 눌리게 해줘. 하트 버튼도 따로 둬줘',r:['Tap','Microinteraction'],l:1,o:0,v:'u-double-tap'},
+ {en:'Long Press',ko:'길게 누르기',d:'손가락을 떼지 않고 잠깐 누르고 있는 동작이에요. 숨은 메뉴를 열 때 많이 써요.',x:'겉으로 안 보이는 동작이라 모르는 사람이 많아요. 같은 메뉴를 여는 버튼(예: 점 세 개)을 꼭 함께 둬야 해요.',p:'메시지를 길게 누르면 원이 차오르다가 복사·답장·삭제 메뉴가 열리게 해줘. 같은 메뉴를 여는 버튼도 둬줘',r:['Context Menu','Kebab Menu'],l:1,o:0,v:'u-long-press'},
+ {en:'Swipe',ko:'스와이프 · 밀어 넘기기',d:'손가락을 화면에 댄 채 옆이나 위아래로 빠르게 미는 동작이에요.',x:'미는 동안 화면이 손가락을 그대로 따라와야 자연스러워요. 조금만 밀고 놓으면 제자리로 돌아가고, 충분히 밀거나 빠르게 밀면 다음 장으로 넘어가요.',p:'카드를 옆으로 스와이프하면 손가락을 따라 움직이다가 많이 밀면 다음 카드로 넘어가고 아니면 제자리로 돌아오게 해줘',r:['Carousel','Edge Swipe'],l:1,o:0,v:'u-swipe'},
+ {en:'Pinch Zoom',ko:'핀치 줌 · 두 손가락 확대',d:'두 손가락을 벌리면 커지고 모으면 작아지는 동작이에요.',x:'페이지에서 확대를 막으면(user-scalable=no) 글자가 작아 잘 안 보이는 사람이 크게 볼 방법이 없어져요. 지도나 사진에는 +·− 버튼도 함께 두면 좋아요.',p:'지도를 두 손가락으로 벌리면 확대되고 모으면 축소되게 해줘. +·− 버튼도 같이 둬줘',r:['Pan','Double Tap'],l:1,o:0,v:'u-pinch-zoom'},
+ {en:'Pan',ko:'팬 · 화면 끌기',d:'화면보다 큰 지도나 사진을 손가락으로 끌어서 다른 부분을 보는 동작이에요.',x:'스와이프는 한 장씩 넘기고, 팬은 놓은 자리에 그대로 멈춰요. 끝에 닿으면 더 끌리지 않게 막아 줘요.',p:'화면보다 큰 지도를 손가락으로 끌어서 볼 수 있게 하고, 지도 끝에서는 더 끌리지 않게 막아줘',r:['Pinch Zoom','Swipe'],l:2,o:0,v:'u-pan'},
+ {en:'Drag and Drop',ko:'드래그 앤 드롭 · 끌어다 놓기',d:'항목을 눌러 잡은 채 끌어서 다른 자리에 놓는 동작이에요.',x:'끌기가 어려운 사람도 있어서, 접근성 기준(WCAG 2.5.7)은 끌지 않고 한 번 누르기로도 할 수 있는 방법을 함께 두라고 해요.',p:'할 일 카드를 완료 칸으로 끌어다 놓으면 옮겨지게 하고, 키보드나 버튼으로도 옮길 수 있게 해줘',r:['Dropzone','Drag to Reorder'],l:1,o:0,v:'u-drag-and-drop'},
+ {en:'Drag to Reorder',ko:'끌어서 순서 바꾸기',d:'목록의 손잡이(≡)를 잡고 위아래로 끌어 순서를 바꾸는 동작이에요.',x:'끄는 동안 다른 줄이 비켜 주면 어디에 놓일지 보여요. 이 그림처럼 Space로 잡고 화살표로 옮기는 키보드 방법도 있어야 해요.',p:'목록 줄 오른쪽에 손잡이를 달고, 끌면 다른 줄이 비켜 주면서 순서가 바뀌게 해줘. 키보드로도 옮길 수 있게 해줘',r:['Drag and Drop'],l:2,o:0,v:'u-drag-to-reorder'},
+ {en:'Pull to Refresh',ko:'당겨서 새로고침',d:'목록 맨 위에서 아래로 끌어당겼다 놓으면 새 내용을 불러오는 동작이에요.',x:'로런 브리처가 만든 트위터용 앱 Tweetie 2에서 처음 쓰였고, 지금은 거의 모든 피드 앱이 써요.',p:'피드 맨 위를 아래로 당기면 저항감 있게 끌려오다가 충분히 당겼을 때 놓으면 새로고침되게 해줘',r:['Loading Spinner','Infinite Scroll'],l:1,o:0,v:'u-pull-to-refresh'},
+ {en:'Swipe to Delete',ko:'밀어서 삭제',d:'목록 줄을 옆으로 밀면 뒤에 숨은 삭제 버튼이 나오는 동작이에요.',x:'조금 밀면 버튼만 보이고, 끝까지 밀면 바로 지워요. 실수로 지울 수 있으니 되돌리기를 함께 보여 주면 좋아요.',p:'메일 목록 줄을 왼쪽으로 밀면 빨간 삭제 버튼이 나오고 끝까지 밀면 지운 뒤 되돌리기 알림이 뜨게 해줘',r:['Destructive Action','Snackbar'],l:2,o:0,v:'u-swipe-to-delete'},
+ {en:'Edge Swipe',ko:'가장자리 밀기',d:'화면 맨 가장자리에서 안쪽으로 밀어 뒤로 가거나 메뉴를 여는 동작이에요.',x:'아이폰은 iOS 7부터 화면 왼쪽 끝에서 밀면 이전 화면으로 돌아가요. 운영체제가 쓰는 가장자리 동작과 겹치지 않게 조심해야 해요.',p:'상세 화면에서 왼쪽 가장자리를 밀면 손가락을 따라 화면이 밀리다가 충분히 밀면 이전 화면으로 돌아가게 해줘',r:['Swipe','Drawer'],l:2,o:0,v:'u-edge-swipe'},
+ {en:'Haptic Feedback',ko:'햅틱 피드백 · 진동 피드백',d:'동작이 끝났을 때 기기가 짧게 떨려서 손으로 알려 주는 피드백이에요.',x:'웹에서는 navigator.vibrate로 진동을 낼 수 있지만 아이폰 사파리는 지원하지 않아요. 진동만으로 알리지 말고 화면 표시도 함께 해요.',p:'결제가 끝나면 짧은 진동과 함께 체크 표시가 나오게 해줘. 진동이 안 되는 기기에서도 화면으로 알 수 있게 해줘',r:['Microinteraction','Feedback'],l:2,o:0,v:'u-haptic-feedback'},
+ {en:'Pressed State',ko:'눌림 상태',d:'버튼을 누르고 있는 동안 살짝 작아지거나 어두워져서 눌렸다는 걸 보여 주는 모습이에요.',x:'CSS에서는 :active로 누르는 동안의 모습을 정해요. 손을 뗄 때가 아니라 누르는 순간 바로 바뀌어야 반응이 빠르게 느껴져요.',p:'버튼을 누르는 동안 살짝 작아지고 어두워지는 눌림 상태(:active)를 넣어줘',r:['Hover','Feedback','Affordance'],l:1,o:0,v:'u-pressed-state'},
+ {en:'Tab Order',ko:'탭 순서 · Tab 키 이동 순서',d:'키보드의 Tab 키를 누를 때 입력칸과 버튼 사이를 옮겨 가는 순서예요.',x:'순서는 보이는 순서와 같아야 해요. tabindex에 1 이상의 숫자를 넣어 억지로 바꾸면 꼬이기 쉬우니, 코드 순서 자체를 화면 순서와 맞춰요.',p:'가입 화면에서 Tab 키를 누르면 위에서 아래, 왼쪽에서 오른쪽 순서로 이동하게 코드 순서를 맞춰줘',r:['Focus','Skip Link'],l:2,o:0,v:'u-tab-order'},
+ {en:'Cursor Style',ko:'커서 모양',d:'마우스를 올린 곳에 따라 화살표·손가락·글자 막대처럼 바뀌는 커서 모양이에요.',x:'CSS cursor로 정해요. 누를 수 있으면 pointer, 글자를 쓰는 곳은 text, 끌 수 있으면 grab, 못 쓰면 not-allowed를 써요.',p:'버튼에는 손가락 커서, 끌 수 있는 카드에는 grab 커서, 비활성 버튼에는 not-allowed 커서를 넣어줘',r:['Hover','Affordance'],l:1,o:0,v:'u-cursor-style'},
+ {en:'Scroll Snap',ko:'스크롤 스냅 · 스크롤 맞춤',d:'스크롤을 멈추면 카드가 어중간한 곳에 서지 않고 한 장씩 딱 맞춰 멈추는 기능이에요.',x:'CSS scroll-snap으로 만들어요. mandatory는 항상 맞춤 자리에 서고, proximity는 맞춤 자리 가까이 왔을 때만 붙어요.',p:'가로로 넘기는 카드 목록에 scroll-snap을 넣어서 스크롤을 멈추면 카드가 한 장씩 딱 맞게 서게 해줘',r:['Horizontal Scroll','Carousel'],l:2,o:0,v:'u-scroll-snap'},
+ {en:'Rubber Banding',ko:'러버 밴딩 · 끝에서 튕김',d:'목록 끝에서 더 끌면 고무줄처럼 조금만 늘어나다가 놓으면 제자리로 튕겨 돌아오는 효과예요.',x:'아이폰 초기부터 쓰인 효과예요. 애플은 이 효과의 특허(\'381)를 삼성과의 소송에서 쓰기도 했어요. 딱 멈추는 것보다 끝에 닿았다는 걸 부드럽게 알려 줘요.',p:'목록 끝에서 더 끌면 점점 덜 끌려오다가 놓으면 스프링처럼 제자리로 돌아오는 러버 밴딩 효과를 넣어줘',r:['Bounce','Momentum Scroll','Spring Animation'],l:2,o:0,v:'u-rubber-banding'},
+ {en:'Momentum Scroll',ko:'모멘텀 스크롤 · 관성 스크롤',d:'손가락을 빠르게 튕기고 떼도 그 속도대로 계속 굴러가다가 서서히 멈추는 스크롤이에요.',x:'떼는 순간의 속도가 이어져야 자연스러워요. 천천히 끌고 떼면 바로 서고, 세게 튕기면 멀리 가요.',p:'긴 목록을 손가락으로 튕기면 그 속도대로 굴러가다가 점점 느려지며 멈추는 관성 스크롤을 넣어줘',r:['Rubber Banding','Smooth Scroll','Scroll Snap'],l:2,o:0,v:'u-momentum-scroll'},
 ]);
 T('design','tool',[
  {en:'Frame',ko:'프레임 · 대지',d:'Figma에서 화면 한 장이나 부품을 담는 틀.',x:'Photoshop의 "대지(아트보드)"와 비슷해요.',j:'"대지 하나 더 만들어 주세요"',p:'Figma에서 1440px 데스크톱 프레임을 기준으로 만들었어',r:['Layer','Auto Layout'],l:1,o:1,u:'https://help.figma.com/hc/en-us/articles/360041539473-Frames-in-Figma-Design',v:{page:''}},
@@ -2457,6 +2596,217 @@ Object.assign(D, {
     ${cube(50, 30, 24)}${cube(50, 6, 24)}${cube(70.8, 42, 24)}
     <path class="a" d="M70.8 90H118M91.6 78 114 65"/><path class="m" d="M86.8 90A16 16 0 0 0 84.7 82"/><text x="94" y="88">30°</text></svg>`),
     cap:'가로선을 30°씩 기울여 깊이를 보이되 크기는 줄이지 않는다'},
+});
+/* design: gesture — 끌기는 stage 안 요소에 grab(포인터 캡처)으로 붙이고, 취소되면 원위치로 돌린다 */
+Object.assign(ART, {
+  rubber:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s" d="M22 30h66" stroke-dasharray="3 6"/><path class="s r" d="M22 30 55 74 88 30"/><circle class="s y" cx="22" cy="30" r="6"/><circle class="s y" cx="88" cy="30" r="6"/><circle class="o" cx="55" cy="76" r="5"/><path class="s" d="M74 66V46m-6 6 6-6 6 6"/></svg>'
+});
+const MAP = '<svg viewBox="0 0 320 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect class="g" width="320" height="260"/><rect class="pk" x="196" y="18" width="104" height="78" rx="14"/><path class="rv" d="M0 196c70-30 130 26 210-4s110-12 110-12v52c-60 14-120 22-190 12S40 236 0 244z"/>'
+  + '<path class="bk" d="M20 20h70v76H20zM20 140h70v40H20zM130 140h52v36h-52zM212 120h80v44h-80z"/><path class="rc" d="M0 120h320M110 0v260M150 260 290 0"/><path class="rd" d="M0 120h320M110 0v260M150 260 290 0"/>'
+  + '<path class="pn" d="M178 112c-9-12-14-19-14-26a14 14 0 0 1 28 0c0 7-5 14-14 26z"/><circle class="pc" cx="178" cy="86" r="5"/></svg>';
+const CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+const CUR = {
+  default:['<path d="M6 3v16l4.2-4 2.9 6.2 2.6-1.2-2.9-6.1H18z"/>', '화살표'],
+  pointer:['<path d="M9 12V4.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V12m0-1a1.5 1.5 0 0 1 3 0v4c0 3.6-2.5 6-6 6h-1c-2.2 0-3.6-1-4.8-2.6l-2.4-3.3a1.5 1.5 0 0 1 2.4-1.8L9 16z"/>', '손가락'],
+  text:['<path d="M8.5 4h7M12 4v16m-3.5 0h7" fill="none"/>', '글자 막대'],
+  grab:['<path d="M7.5 12.5V8a1.5 1.5 0 0 1 3 0v3.5m0-5a1.5 1.5 0 0 1 3 0v5m0-4a1.5 1.5 0 0 1 3 0v5m0-2.5a1.5 1.5 0 0 1 3 0V15c0 3.3-2.7 6-6 6h-1.5c-2 0-3.4-.9-4.5-2.4l-2.3-3.2a1.5 1.5 0 0 1 2.4-1.8l.9 1.2z"/>', '편 손'],
+  grabbing:['<path d="M7.5 11.5a1.5 1.5 0 0 1 3 0m0-.5a1.5 1.5 0 0 1 3 0m0 0a1.5 1.5 0 0 1 3 0v1m0-.5a1.5 1.5 0 0 1 3 0V15c0 3.3-2.7 6-6 6H12c-2.5 0-4.5-2-4.5-4.5z"/>', '쥔 손'],
+  'not-allowed':['<circle cx="12" cy="12" r="8" fill="none"/><path d="m6.5 6.5 11 11"/>', '금지']
+};
+Object.assign(D, {
+  'u-tap':{h:hint('줄을 눌러 보세요 (키보드 Enter)') + phone(`<b>받은 메일</b><div class="mk-qls">${[['김하늘','회의 시간을 바꿔요','9:41'],['택배','오늘 도착할 예정이에요','8:15'],['은행','이번 달 내역이에요','어제']].map(([n, t, w]) =>
+    `<button class="mk-li mk-qr"><i class="mk-thumb"></i><span class="mk-qt"><b>${n}</b><span>${t}</span></span><small>${w}</small></button>`).join('')}</div><span class="mk-help" aria-live="polite">줄을 누르면 메일이 열려요</span>`), cap:'누르는 순간 바로 반응하고, 손을 떼면 실행해요',
+    init: s => { const st = s.querySelector('.mk-help'), bs = s.querySelectorAll('.mk-qr');
+      bs.forEach(b => b.addEventListener('click', () => { bs.forEach(x => x.classList.toggle('on', x === b)); st.textContent = `‘${b.querySelector('b').textContent}’ 메일을 열었어요`; })); }},
+  'u-double-tap':{h:hint('사진을 빠르게 두 번 눌러 보세요 (키보드 Enter)') + phone(`<b>하늘이 사진</b><div class="mk-img mk-qph" tabindex="0" role="img" aria-label="사진. Enter를 누르면 좋아요"><span class="mk-qpop">${SVG.heart}</span></div>
+    <div class="mk-qbar"><button class="mk-like" aria-pressed="false" aria-label="좋아요">${SVG.heart}</button><span aria-live="polite">좋아요 0개</span></div>`), cap:'두 번 누르면 좋아요, 같은 일을 하는 하트 버튼도 함께 둬요',
+    init: s => { const ph = s.querySelector('.mk-qph'), pop = ph.firstElementChild, lk = s.querySelector('.mk-like'), n = lk.nextElementSibling; let last = -1e4;
+      const set = v => { lk.setAttribute('aria-pressed', v); n.textContent = v ? '좋아요 1개' : '좋아요 0개'; };
+      const burst = () => { set(true); pop.classList.remove('go'); void pop.offsetWidth; pop.classList.add('go'); };
+      ph.addEventListener('pointerup', e => { if (e.timeStamp - last < 300) { burst(); last = -1e4; } else last = e.timeStamp; });
+      ph.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); burst(); } });
+      lk.addEventListener('click', () => set(lk.getAttribute('aria-pressed') !== 'true')); }},
+  'u-long-press':{h:hint('내 말풍선을 길게 눌러 보세요 (키보드 Enter)') + phone(`<b>하늘이</b><span class="mk-qb">내일 몇 시에 만나?</span>
+    <div class="mk-qmr"><button class="mk-qmo" aria-label="메시지 메뉴" aria-haspopup="menu" aria-expanded="false">⋯</button><span class="mk-qb me" tabindex="0" aria-haspopup="menu">3시에 역 앞 어때?</span>
+    <div class="mk-qmu" role="menu" aria-label="메시지 메뉴" hidden><button role="menuitem">복사</button><button role="menuitem">답장</button><button role="menuitem" class="mk-red">삭제</button></div></div>
+    <span class="mk-help" aria-live="polite">길게 누르거나 ⋯ 버튼을 눌러도 같은 메뉴가 열려요</span>`), cap:'누르고 있으면 숨은 메뉴가 열려요. 보이는 버튼도 함께 둬요',
+    init: s => { const m = s.querySelector('.mk-qb.me'), mo = s.querySelector('.mk-qmo'), mu = s.querySelector('.mk-qmu'), its = [...mu.children], st = s.querySelector('.mk-help'); let t = 0, p = null;
+      const clear = () => { clearTimeout(t); m.classList.remove('hold'); p = null; };
+      const open = f => { clear(); mu.hidden = false; mo.setAttribute('aria-expanded', true); if (f) its[0].focus({preventScroll: true}); };
+      const close = () => { mu.hidden = true; mo.setAttribute('aria-expanded', false); m.focus({preventScroll: true}); };
+      m.addEventListener('pointerdown', e => { if (e.button > 0) return; p = {x: e.clientX, y: e.clientY}; m.classList.add('hold'); t = setTimeout(() => open(1), 500); });
+      m.addEventListener('pointermove', e => { if (p && Math.hypot(e.clientX - p.x, e.clientY - p.y) > 10) clear(); });
+      ['pointerup', 'pointerleave', 'pointercancel'].forEach(k => m.addEventListener(k, clear));
+      m.addEventListener('contextmenu', e => e.preventDefault());
+      m.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(1); } });
+      mo.addEventListener('click', () => mu.hidden ? open(1) : close());
+      keys(mu, {ArrowDown: 1, ArrowUp: -1, Escape: 0}, (d, e) => d ? its[(its.indexOf(e.target) + d + 3) % 3].focus() : close());
+      its.forEach(b => b.addEventListener('click', () => { st.textContent = `‘${b.textContent}’ 메뉴를 눌렀어요`; close(); })); }},
+  'u-swipe':{h:hint('카드를 옆으로 밀어 보세요 (키보드 ← →)') + phone(`<b>오늘의 추천</b><div class="mk-qvw" tabindex="0" aria-label="추천 카드. 왼쪽 오른쪽 화살표로 넘겨요"><div class="mk-qtk">${[['단풍길 산책','가을에 걷기 좋은 길'],['한강 자전거','강바람 맞으며 달리기'],['북촌 골목','한옥 사이 골목 여행']].map(([n, t]) =>
+    `<div class="mk-card mk-qcd"><i class="mk-img"></i><b>${n}</b><span class="mk-help">${t}</span></div>`).join('')}</div></div><div class="mk-qdots" aria-hidden="true"><i></i><i></i><i></i></div><span class="mk-help mk-qst" aria-live="polite"></span>`), cap:'손가락을 따라오다가, 많이 밀면 넘어가고 조금 밀면 돌아와요',
+    init: s => { const vw = s.querySelector('.mk-qvw'), tk = vw.firstElementChild, ds = s.querySelectorAll('.mk-qdots i'), st = s.querySelector('.mk-qst'); let k = 0, t0 = 0;
+      const put = dx => { tk.style.transform = `translateX(calc(${-k * 100}% + ${dx}px))`; };
+      const go = n => { k = Math.max(0, Math.min(2, n)); tk.style.transition = ''; put(0); ds.forEach((d, j) => d.classList.toggle('on', j === k)); const w = `${k + 1} / 3`; if (st.textContent !== w) st.textContent = w; };
+      grab(vw, {down: e => { t0 = e.timeStamp; tk.style.transition = 'none'; },
+        move: (e, dx) => put((k === 0 && dx > 0) || (k === 2 && dx < 0) ? dx * .35 : dx),
+        up: (e, dx, dy, c) => { const v = dx / Math.max(1, e.timeStamp - t0); go(c ? k : dx < -40 || v < -.5 ? k + 1 : dx > 40 || v > .5 ? k - 1 : k); }});
+      keys(vw, {ArrowRight: 1, ArrowLeft: -1}, d => go(k + d));
+      go(0); }},
+  'u-pinch-zoom':{h:hint('두 손가락으로 벌려 보세요 (버튼, 키보드 + −)') + phone(`<b>지도</b><div class="mk-qvp" tabindex="0" aria-label="지도. + − 키로 확대 축소">${MAP}</div>
+    <div class="mk-qbar"><button class="mk-btn ghost mk-sm" aria-label="축소">−</button><span class="mk-qz">1.0×</span><button class="mk-btn ghost mk-sm" aria-label="확대">+</button></div>`), cap:'두 손가락 사이가 벌어진 만큼 커져요. 버튼으로도 할 수 있어요',
+    init: s => { const vp = s.querySelector('.mk-qvp'), m = vp.firstElementChild, z = s.querySelector('.mk-qz'), [lo, hi] = s.querySelectorAll('.mk-qbar button'), P = new Map(); let sc = 1, s0 = 1, d0 = 0;
+      const set = v => { sc = Math.min(3, Math.max(1, v)); m.style.transform = `scale(${sc})`; z.textContent = sc.toFixed(1) + '×'; };
+      const dist = () => { const [a, b] = P.values(); return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
+      vp.addEventListener('pointerdown', e => { vp.setPointerCapture(e.pointerId); P.set(e.pointerId, {x: e.clientX, y: e.clientY}); if (P.size === 2) { d0 = dist(); s0 = sc; m.style.transition = 'none'; } });
+      vp.addEventListener('pointermove', e => { if (!P.has(e.pointerId)) return; P.set(e.pointerId, {x: e.clientX, y: e.clientY}); if (P.size === 2 && d0) set(s0 * dist() / d0); });
+      const end = c => e => { if (!P.delete(e.pointerId)) return; m.style.transition = ''; if (c && d0) set(s0); d0 = 0; };
+      vp.addEventListener('pointerup', end(false)); vp.addEventListener('pointercancel', end(true)); vp.addEventListener('lostpointercapture', end(true));
+      lo.addEventListener('click', () => set(sc - .5)); hi.addEventListener('click', () => set(sc + .5));
+      keys(vp, {'+': .5, '=': .5, '-': -.5}, d => set(sc + d)); }},
+  'u-pan':{h:hint('지도를 끌어 다른 곳을 보세요 (키보드 화살표)') + phone(`<b>동네 지도</b><div class="mk-qvp mk-qpan" tabindex="0" aria-label="지도. 화살표 키로 움직여요">${MAP}</div><span class="mk-help">지도 끝에 닿으면 더 끌리지 않아요</span>`), cap:'놓은 자리에 그대로 멈추고, 끝을 넘어가지 않아요',
+    init: s => { const vp = s.querySelector('.mk-qpan'), m = vp.firstElementChild; let x = -76, y = -50, x0 = 0, y0 = 0;
+      const put = (a, b) => { x = Math.min(0, Math.max(vp.clientWidth - 320, a)); y = Math.min(0, Math.max(vp.clientHeight - 260, b)); m.style.transform = `translate(${x}px,${y}px)`; };
+      grab(vp, {down: () => { x0 = x; y0 = y; m.style.transition = 'none'; }, move: (e, dx, dy) => put(x0 + dx, y0 + dy),
+        up: (e, dx, dy, c) => { m.style.transition = ''; if (c) put(x0, y0); }});
+      keys(vp, {ArrowLeft: [20, 0], ArrowRight: [-20, 0], ArrowUp: [0, 20], ArrowDown: [0, -20]}, ([a, b]) => put(x + a, y + b));
+      put(x, y); }},
+  'u-drag-and-drop':{h:hint('카드를 완료 칸으로 끌어 보세요 (키보드 Enter)') + browser(`<div class="mk-qkb">${['할 일', '완료'].map((n, i) => `<div class="mk-qcol" data-n="${n}"><b>${n}</b><div class="mk-qcl">${i ? '' : ['보고서 쓰기', '회의 자료 보내기'].map(t =>
+    `<span class="mk-kc mk-drag mk-qkc" tabindex="0" role="button" aria-label="${t}. Enter를 누르면 다른 칸으로 옮겨요">${t}</span>`).join('')}</div></div>`).join('')}</div><span class="mk-help" aria-live="polite">Enter 키로도 옮길 수 있어요</span>`, {url:'todo.example.com'}), cap:'잡고 끌어서 다른 칸에 놓으면 옮겨져요',
+    init: s => { const cols = [...s.querySelectorAll('.mk-qcol')], st = s.querySelector('.mk-help');
+      const at = e => cols.find(c => { const r = c.getBoundingClientRect(); return e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom; });
+      const put = (c, to) => { to.lastElementChild.append(c); st.textContent = `‘${c.textContent}’ 카드를 ${to.dataset.n} 칸으로 옮겼어요`; c.focus({preventScroll: true}); };
+      s.querySelectorAll('.mk-qkc').forEach(c => {
+        grab(c, {down: () => { c.style.transition = 'none'; c.classList.add('lift'); },
+          move: (e, dx, dy) => { c.style.transform = `translate(${dx}px,${dy}px) rotate(-2deg)`; const o = at(e); cols.forEach(x => x.classList.toggle('on', x === o && !x.contains(c))); },
+          up: (e, dx, dy, cancel) => { const o = cancel ? null : at(e), ok = o && !o.contains(c); c.classList.remove('lift'); cols.forEach(x => x.classList.remove('on'));
+            c.style.transition = ok ? 'none' : ''; c.style.transform = ''; if (ok) { put(c, o); void c.offsetWidth; c.style.transition = ''; } }});
+        c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); put(c, cols.find(x => !x.contains(c))); } });
+      }); }},
+  'u-drag-to-reorder':{h:hint('≡를 잡고 끌어 보세요 (키보드 Space, ↑ ↓)') + phone(`<b>장보기 목록</b><div class="mk-qls mk-qod">${['우유', '달걀', '사과', '식빵'].map(n =>
+    `<div class="mk-li" data-n="${n}"><span>${n}</span><button class="mk-qh" aria-label="${n} 순서 바꾸기" aria-pressed="false">≡</button></div>`).join('')}</div><span class="mk-help" aria-live="polite">≡에서 Space로 잡고 화살표로 옮긴 뒤 Space로 놓아요</span>`), cap:'끄는 동안 다른 줄이 비켜 주며 놓일 자리를 보여 줘요',
+    init: s => { const ls = s.querySelector('.mk-qod'), st = s.querySelector('.mk-help'); let held = null, keep = [];
+      const rows = () => [...ls.children];
+      const say = (r, w) => { st.textContent = `${r.dataset.n}: ${w} · ${rows().indexOf(r) + 1}번째 / 4개`; };
+      const press = (r, v) => r.querySelector('.mk-qh').setAttribute('aria-pressed', v);
+      rows().forEach(r => { const h = r.querySelector('.mk-qh'); let i0 = 0, H = 0, to = 0;
+        grab(h, {down: () => { i0 = to = rows().indexOf(r); H = r.offsetHeight; r.classList.add('lift'); r.style.transition = 'none'; },
+          move: (e, dx, dy) => { const n = rows().length, y = Math.max(-i0 * H, Math.min((n - 1 - i0) * H, dy)); to = i0 + Math.round(y / H); r.style.transform = `translateY(${y}px)`;
+            rows().forEach((x, j) => { if (x !== r) x.style.transform = j > i0 && j <= to ? `translateY(${-H}px)` : j < i0 && j >= to ? `translateY(${H}px)` : ''; }); },
+          up: (e, dx, dy, c) => { const l = rows(); l.forEach(x => { x.style.transition = 'none'; x.style.transform = ''; }); r.classList.remove('lift');
+            if (!c && to !== i0) { l.splice(i0, 1); l.splice(to, 0, r); ls.append(...l); h.focus({preventScroll: true}); say(r, '옮겼어요'); }
+            void ls.offsetWidth; l.forEach(x => { x.style.transition = ''; }); }});
+        keys(h, {' ': 0, Enter: 0, ArrowUp: -1, ArrowDown: 1, Escape: 'x'}, d => {
+          if (d === 0) { if (held === r) { held = null; press(r, false); say(r, '놓았어요'); } else { if (held) press(held, false); held = r; keep = rows(); press(r, true); say(r, '잡았어요'); } return; }
+          if (held !== r) return;
+          if (d === 'x') { ls.append(...keep); held = null; press(r, false); h.focus(); say(r, '되돌렸어요'); return; }
+          const l = rows(), i = l.indexOf(r), j = i + d; if (j < 0 || j >= l.length) return;
+          l.splice(i, 1); l.splice(j, 0, r); ls.append(...l); h.focus(); say(r, '옮겼어요'); });
+      }); }},
+  'u-pull-to-refresh':{h:hint('목록을 당겼다 놓아 보세요 (키보드 Enter)') + phone(`<b>새 소식</b><div class="mk-qpv" tabindex="0" aria-label="소식 목록. Enter를 누르면 새로고침해요"><div class="mk-qpw">
+    <div class="mk-qpi" aria-hidden="true"><i class="mk-qspin"></i><span>당겨서 새로고침</span></div><div class="mk-qfd">${[['하늘', '오늘 날씨가 맑아요'], ['바다', '사진 3장을 올렸어요'], ['산들', '새 글을 썼어요']].map(([n, t]) =>
+    `<div class="mk-li"><i class="mk-thumb"></i><span><b>${n}</b><br>${t}</span></div>`).join('')}</div></div></div><span class="mk-help" aria-live="polite"></span>`), cap:'당길수록 덜 끌려오고, 충분히 당긴 뒤 놓으면 새로 불러와요',
+    init: s => { const pv = s.querySelector('.mk-qpv'), w = pv.firstElementChild, ic = w.firstElementChild, tx = ic.lastElementChild, sp = ic.firstElementChild, fd = w.lastElementChild, st = s.querySelector('.mk-help'); let busy = false, n = 0;
+      const put = y => { w.style.transform = y ? `translateY(${y}px)` : ''; sp.style.transform = `rotate(${y * 4}deg)`; };
+      const pull = dy => dy > 0 ? dy * 300 * .55 / (300 + .55 * dy) : 0;
+      const go = () => { busy = true; w.style.transition = ''; put(44); ic.classList.add('ld'); tx.textContent = '불러오는 중…'; st.textContent = '';
+        setTimeout(() => { const [a, b] = [['새벽', '방금 새 글을 올렸어요'], ['노을', '방금 사진을 올렸어요']][n++ % 2];
+          fd.querySelectorAll('.on').forEach(x => x.classList.remove('on')); fd.lastElementChild.remove();
+          fd.insertAdjacentHTML('afterbegin', `<div class="mk-li on"><i class="mk-thumb"></i><span><b>${a}</b><br>${b}</span></div>`);
+          busy = false; ic.classList.remove('ld'); tx.textContent = '당겨서 새로고침'; put(0); st.textContent = '새 소식 1개를 불러왔어요'; }, 900); };
+      grab(pv, {down: () => { if (!busy) w.style.transition = 'none'; },
+        move: (e, dx, dy) => { if (busy) return; const y = pull(dy); put(y); tx.textContent = y >= 56 ? '놓으면 새로고침' : '당겨서 새로고침'; },
+        up: (e, dx, dy, c) => { if (busy) return; if (!c && pull(dy) >= 56) go(); else { w.style.transition = ''; put(0); tx.textContent = '당겨서 새로고침'; } }});
+      pv.addEventListener('keydown', e => { if (e.key === 'Enter' && !busy) { e.preventDefault(); go(); } }); }},
+  'u-swipe-to-delete':{h:hint('메일 줄을 왼쪽으로 밀어 보세요 (키보드 Delete)') + phone(`<b>받은 메일</b><div class="mk-qls">${[['쇼핑몰', '주문하신 상품이 출발했어요'], ['동네 소식', '이번 주 장터 안내'], ['김하늘', '자료 보내 드려요']].map(([n, t]) =>
+    `<div class="mk-qsw"><button class="mk-qdel" tabindex="-1">삭제</button><div class="mk-li mk-qfr" tabindex="0" aria-label="${n}, ${t}. Delete 키로 삭제"><i class="mk-thumb"></i><span><b>${n}</b><br>${t}</span></div></div>`).join('')}</div>
+    <div class="mk-snack" role="status"><span></span><button class="mk-undo">되돌리기</button></div>`), cap:'조금 밀면 삭제 버튼이 나오고, 끝까지 밀면 바로 지워요',
+    init: s => { const sn = s.querySelector('.mk-snack'), sx = sn.firstElementChild, un = sn.lastElementChild; let gone = null;
+      const del = (w, kb) => { w.hidden = true; gone = w; sx.textContent = `‘${w.querySelector('b').textContent}’ 메일을 지웠어요`; sn.classList.add('on'); if (kb) un.focus({preventScroll: true}); };
+      s.querySelectorAll('.mk-qsw').forEach(w => { const f = w.lastElementChild, b = w.firstElementChild; let x = 0, x0 = 0;
+        const put = (v, a) => { x = v; f.style.transition = a ? '' : 'none'; f.style.transform = v ? `translateX(${v}px)` : ''; b.tabIndex = v ? 0 : -1; };
+        grab(f, {down: () => { x0 = x; put(x, 0); }, move: (e, dx) => put(Math.min(0, x0 + dx), 0),
+          up: (e, dx, dy, c) => { const v = x0 + dx; if (c) put(x0, 1); else if (v < -150) { put(0, 0); del(w); } else put(v < -40 ? -72 : 0, 1); }});
+        b.addEventListener('click', () => { put(0, 0); del(w, 1); });
+        f.addEventListener('keydown', e => { if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); put(0, 0); del(w, 1); } });
+      });
+      un.addEventListener('click', () => { sn.classList.remove('on'); if (!gone) return; gone.hidden = false; gone.lastElementChild.focus({preventScroll: true}); gone = null; }); }},
+  'u-edge-swipe':{h:hint('주황 띠를 밀어 보세요 (키보드 ← →)') + phone(`<div class="mk-qes"><div class="mk-qlist"><b>설정</b>${['알림', '화면', '소리'].map(n =>
+    `<button class="mk-li mk-qr">${n}<span aria-hidden="true">›</span></button>`).join('')}<span class="mk-help">→ 키를 누르면 다시 들어가요</span></div>
+    <div class="mk-qdet" tabindex="0" aria-label="상세 화면. ← 키로 뒤로 가요"><button class="mk-qbk">‹ 설정</button><b>알림</b><div class="mk-li">새 메시지<span>켬</span></div><div class="mk-li">미리 보기<span>항상</span></div>
+    <span class="mk-help">가장자리를 밀어도, ‹ 버튼을 눌러도 뒤로 가요</span><i class="mk-qedge" aria-hidden="true"></i></div></div>`), cap:'화면 끝에서 안쪽으로 밀면 이전 화면으로 돌아가요',
+    init: s => { const ls = s.querySelector('.mk-qlist'), dt = s.querySelector('.mk-qdet'), ttl = dt.querySelector('b'), bs = [...ls.querySelectorAll('button')]; let last = bs[0], t0 = 0;
+      const show = (on, f) => { dt.style.transition = ''; dt.style.transform = on ? '' : 'translateX(105%)'; dt.inert = !on; ls.inert = on; if (f) (on ? dt : last).focus({preventScroll: true}); };
+      bs.forEach(b => b.addEventListener('click', () => { last = b; ttl.textContent = b.firstChild.textContent; show(true, 1); }));
+      dt.querySelector('.mk-qbk').addEventListener('click', () => show(false, 1));
+      grab(dt.querySelector('.mk-qedge'), {down: e => { t0 = e.timeStamp; dt.style.transition = 'none'; },
+        move: (e, dx) => { dt.style.transform = `translateX(${Math.max(0, dx)}px)`; },
+        up: (e, dx, dy, c) => { const v = dx / Math.max(1, e.timeStamp - t0); show(c || !(dx > dt.offsetWidth * .4 || (v > .5 && dx > 10))); }});
+      keys(dt, {ArrowLeft: 0}, () => show(false, 1)); keys(ls, {ArrowRight: 0}, () => show(true, 1));
+      show(true); }},
+  'u-haptic-feedback':{h:`<div class="mk-qhap"><svg class="A mk-qwv" viewBox="0 0 20 60" aria-hidden="true"><path d="M14 18q-6 12 0 24M6 10q-10 20 0 40"/></svg><div class="A mk-qshk">${phone(`<b>결제</b>
+    <div class="mk-qok"><i class="A mk-qck">${CHECK}</i><b>결제 완료</b><span class="mk-help">12,900원</span></div><span class="mk-help">화면 표시와 함께 짧은 진동이 손에 한 번 더 알려 줘요</span>`)}</div>
+    <svg class="A mk-qwv r" viewBox="0 0 20 60" aria-hidden="true"><path d="M6 18q6 12 0 24M14 10q10 20 0 40"/></svg></div>`, m:1, cap:'눈으로 보는 표시와 함께 손끝으로도 알려요'},
+  'u-pressed-state':{h:hint('두 버튼을 눌러 비교해 보세요 (키보드 Space)') + vs('반응 없음', `<div class="mk-qpr"><button class="mk-btn">결제하기</button><span class="mk-help">눌러도 그대로라 눌렸는지 몰라요</span></div>`,
+    '눌림 상태', `<div class="mk-qpr"><button class="mk-btn mk-qpb">결제하기</button><span class="mk-help">누르는 동안 작아지고 어두워져요</span></div>`), cap:'누르는 순간 모양이 바뀌어야 눌렸다는 걸 알아요',
+    init: s => { const b = s.querySelector('.mk-qpb'), on = v => () => b.classList.toggle('dn', v);
+      b.addEventListener('pointerdown', on(true)); ['pointerup', 'pointerleave', 'pointercancel', 'blur', 'keyup'].forEach(k => b.addEventListener(k, on(false)));
+      b.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) b.classList.add('dn'); }); }},
+  'u-tab-order':{h:hint('Tab ⇥ 버튼을 눌러 이동 순서를 따라가 보세요') + `<div class="mk-qto">${browser(`<div class="mk-qfm">${[['이름', ''], ['이메일', ''], ['비밀번호', ' w']].map(([n, c]) =>
+    `<span class="mk-qfl${c}"><span class="mk-l">${n}</span><span class="mk-qin" data-n="${n}"><i class="mk-qno"></i></span></span>`).join('')}<span class="mk-btn mk-sm mk-qin w" data-n="가입 버튼">가입<i class="mk-qno"></i></span></div>`, {url:'signup.example.com'})}
+    <div class="mk-qctl"><div class="mk-qtg" role="group" aria-label="이동 순서"><button aria-pressed="true">바른 순서</button><button aria-pressed="false">엉킨 순서</button></div><button class="mk-btn mk-sm">Tab ⇥</button></div><span class="mk-help" aria-live="polite"></span></div>`, cap:'보이는 순서대로 옮겨 가야 헤매지 않아요',
+    init: s => { const f = [...s.querySelectorAll('.mk-qin')], [ok, bad] = s.querySelectorAll('.mk-qtg button'), st = s.querySelector('.mk-qto>.mk-help'); let ord = [0, 1, 2, 3], i = -1;
+      const draw = () => { f.forEach((x, j) => { x.lastElementChild.textContent = ord.indexOf(j) + 1; x.classList.toggle('on', i >= 0 && ord[i] === j); });
+        st.textContent = i < 0 ? 'Tab을 누르면 1번부터 차례로 옮겨 가요' : `${i + 1}번째: ${f[ord[i]].dataset.n}`; };
+      const mode = b => { ord = b ? [0, 2, 1, 3] : [0, 1, 2, 3]; ok.setAttribute('aria-pressed', !b); bad.setAttribute('aria-pressed', b); i = -1; draw(); };
+      ok.addEventListener('click', () => mode(false)); bad.addEventListener('click', () => mode(true));
+      s.querySelector('.mk-qctl>.mk-btn').addEventListener('click', () => { i = (i + 1) % 4; draw(); });
+      draw(); }},
+  'u-cursor-style':{h:hint('마우스를 하나씩 올려 보세요 (키보드 Tab)') + browser(`<div class="mk-qcs"><div class="mk-qcz"><button class="mk-btn mk-sm" data-c="pointer">구매하기</button><input class="mk-in" data-c="text" placeholder="검색어 입력" aria-label="검색어">
+    <span class="mk-kc mk-qgr" tabindex="0" data-c="grab">≡ 사진.jpg 끌기</span><button class="mk-btn mk-sm mk-qdis" aria-disabled="true" data-c="not-allowed">품절</button></div>
+    <div class="mk-qcv"><svg class="mk-qcg" viewBox="0 0 24 24" aria-hidden="true"></svg><b class="mk-qcn"></b><span class="mk-help"></span></div></div>`, {url:'shop.example.com'}), cap:'커서 모양만 봐도 무엇을 할 수 있는지 알아요',
+    init: s => { const g = s.querySelector('.mk-qcg'), n = s.querySelector('.mk-qcn'), d = n.nextElementSibling, gr = s.querySelector('.mk-qgr');
+      const show = c => { g.innerHTML = CUR[c][0]; n.textContent = c; d.textContent = CUR[c][1]; };
+      s.querySelectorAll('[data-c]').forEach(el => { const c = () => show(el.dataset.c); el.addEventListener('pointerenter', c); el.addEventListener('focus', c); el.addEventListener('pointerleave', () => show('default')); });
+      gr.addEventListener('pointerdown', () => { gr.classList.add('dn'); show('grabbing'); });
+      ['pointerup', 'pointercancel'].forEach(k => gr.addEventListener(k, () => { gr.classList.remove('dn'); show('grab'); }));
+      show('default'); }},
+  'u-scroll-snap':{h:hint('사진을 끌었다 놓아 보세요 (키보드 ← →)') + phone(`<b>사진 모음</b><div class="mk-qvw" tabindex="0" aria-label="사진 목록. 왼쪽 오른쪽 화살표로 움직여요"><div class="mk-qsk">${[1, 2, 3, 4, 5].map(i =>
+    `<div class="mk-card mk-qsc"><i class="mk-img"></i><span>${i}번 사진</span></div>`).join('')}</div><i class="mk-qsl" aria-hidden="true"></i></div>
+    <button class="mk-qsw3" role="switch" aria-checked="true">스크롤 맞춤 <span aria-hidden="true">켬</span></button><span class="mk-help">놓으면 가장 가까운 카드에 딱 맞춰 서요</span>`), cap:'멈추면 카드가 어중간하게 잘리지 않고 한 장씩 맞춰 서요',
+    init: s => { const vw = s.querySelector('.mk-qvw'), tk = vw.firstElementChild, sw = s.querySelector('.mk-qsw3'), hl = s.querySelector('.mk-qsw3+.mk-help'), P = 108; let x = 0, x0 = 0, on = true;
+      const min = () => Math.min(0, vw.clientWidth - tk.scrollWidth);
+      const put = (v, a) => { x = Math.max(min(), Math.min(0, v)); tk.style.transition = a ? '' : 'none'; tk.style.transform = `translateX(${x}px)`; };
+      const snap = () => { const m = min(), c = [...tk.children].map((_, k) => Math.max(m, -k * P)); put(c.reduce((a, b) => Math.abs(b - x) < Math.abs(a - x) ? b : a), 1); };
+      grab(vw, {down: () => { x0 = x; put(x, 0); }, move: (e, dx) => put(x0 + dx, 0), up: (e, dx, dy, c) => c ? put(x0, 1) : on ? snap() : 0});
+      keys(vw, {ArrowRight: -1, ArrowLeft: 1}, d => { if (on) { x = Math.max(min(), Math.min(0, x + d * P)); snap(); } else put(x + d * 40, 1); });
+      sw.addEventListener('click', () => { on = !on; sw.setAttribute('aria-checked', on); sw.lastElementChild.textContent = on ? '켬' : '끔'; vw.classList.toggle('off', !on);
+        hl.textContent = on ? '놓으면 가장 가까운 카드에 딱 맞춰 서요' : '놓은 자리에 그대로 서서 카드가 잘려 보여요'; if (on) snap(); }); }},
+  'u-rubber-banding':{h:hint('목록을 끝 너머로 끌어 보세요 (키보드 ↑ ↓)') + pair(ART.rubber, phone(`<b>할 일</b><div class="mk-qvw v" tabindex="0" aria-label="할 일 목록. 위아래 화살표로 움직여요"><div class="mk-qrl">${['장보기', '빨래 개기', '화분 물 주기', '택배 찾기', '책 반납', '운동 30분', '편지 쓰기', '방 청소'].map(t =>
+    `<div class="mk-li"><i class="mk-qdot"></i>${t}</div>`).join('')}</div></div><span class="mk-help">끝을 넘으면 고무줄처럼 덜 끌려와요</span>`)), cap:'끝을 지나면 점점 덜 끌리고, 놓으면 제자리로 튕겨 돌아와요',
+    init: s => { const vw = s.querySelector('.mk-qvw'), ls = vw.firstElementChild; let y = 0, y0 = 0;
+      const lim = () => Math.min(0, vw.clientHeight - ls.offsetHeight);
+      const rb = o => { const d = vw.clientHeight; return o * d * .55 / (d + .55 * Math.abs(o)); };
+      const fit = r => { const m = lim(); return r > 0 ? rb(r) : r < m ? m + rb(r - m) : r; };
+      const show = (v, a) => { ls.style.transition = a ? '' : 'none'; ls.style.transform = `translateY(${v}px)`; };
+      grab(vw, {down: () => { y0 = y; show(y, 0); }, move: (e, dx, dy) => show(fit(y0 + dy), 0),
+        up: (e, dx, dy, c) => { y = c ? y0 : Math.max(lim(), Math.min(0, y0 + dy)); show(y, 1); }});
+      keys(vw, {ArrowDown: -30, ArrowUp: 30}, d => { const r = Math.max(lim(), Math.min(0, y + d));
+        if (r !== y) { y = r; show(y, 1); } else { show(y + (d > 0 ? 14 : -14), 0); requestAnimationFrame(() => requestAnimationFrame(() => show(y, 1))); } }); }},
+  'u-momentum-scroll':{h:hint('목록을 위로 세게 튕겨 보세요 (키보드 ↓ ↑)') + phone(`<b>소식 20개</b><div class="mk-qvw v mk-qms" tabindex="0" aria-label="소식 목록. 아래 위 화살표로 튕겨요"><div class="mk-qrl">${Array.from({length: 20}, (_, i) =>
+    `<div class="mk-li"><i class="mk-qdot"></i>${i + 1}번째 소식</div>`).join('')}</div></div><span class="mk-help">놓을 때 속도: 0.0px/ms</span>`), cap:'놓는 순간의 속도가 이어지다가 서서히 멈춰요',
+    init: s => { const vw = s.querySelector('.mk-qms'), ls = vw.firstElementChild, sp = s.querySelector('.mk-qms+.mk-help'); let y = 0, y0 = 0, raf = 0, hs = [];
+      const lim = () => Math.min(0, vw.clientHeight - ls.offsetHeight);
+      const put = r => { y = Math.max(lim(), Math.min(0, r)); ls.style.transform = `translateY(${y}px)`; return y === r; };
+      const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+      const fling = v => { stop(); sp.textContent = `놓을 때 속도: ${Math.abs(v).toFixed(1)}px/ms`;
+        if (reduced) { put(y + v * .998 / .002); return; }
+        let t = 0; const step = now => { if (!s.isConnected) return; const dt = t ? Math.min(32, now - t) : 16; t = now; v *= Math.pow(.998, dt);
+          raf = put(y + v * dt) && Math.abs(v) > .02 ? requestAnimationFrame(step) : 0; };
+        raf = requestAnimationFrame(step); };
+      grab(vw, {down: e => { stop(); ls.style.transition = ''; y0 = y; hs = [[e.timeStamp, 0]]; },
+        move: (e, dx, dy) => { put(y0 + dy); hs.push([e.timeStamp, dy]); while (hs.length > 2 && e.timeStamp - hs[0][0] > 100) hs.shift(); },
+        up: (e, dx, dy, c) => { if (c) { ls.style.transition = 'transform .3s var(--ease)'; put(y0); return; } const [t1, d1] = hs[0], dt = e.timeStamp - t1; fling(dt > 0 ? (dy - d1) / dt : 0); }});
+      keys(vw, {ArrowDown: -.3, PageDown: -.8, ArrowUp: .3, PageUp: .8}, v => fling(v)); }}
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
