@@ -27,9 +27,10 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   media: ['Carousel', 'Avatar', 'Thumbnail', 'Crop', 'Blur-up Placeholder', 'Lightbox', 'Gallery', 'Image Format', 'Vector vs Raster',
     'Alt Text', 'Responsive Image', 'Image Compression', 'Video Player', 'Autoplay', 'Poster Image', 'Background Video', 'Embed', 'GIF',
     'Masonry Layout', 'Watermark', 'Lottie'],
+  basic: ['Consistency', 'Focal Point', 'Readability', 'Visual Weight', 'Balance', 'Grouping', 'Density'],
 };
-const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21 };    // sec: 카드 수
-const REDRAWN = [];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15 };    // sec: 카드 수
+const REDRAWN = ['basic'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
