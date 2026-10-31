@@ -105,11 +105,17 @@ check('base', () => vm.runInContext(`(() => {
   const q = term([{c:'echo "<b>" > a && b | c'}]);
   if (q.includes('<b>') || !q.includes('&quot;&lt;b&gt;&quot; &gt; a &amp;&amp; b | c')) e.push('term esc');
   if (!term([{o:'a > b', h:'>'}]).includes('<span class="mk-hl">&gt;</span>')) e.push('term h');
+  if (!term([{o:'<t', h:'t'}]).includes('&lt;<span class="mk-hl">t</span>')) e.push('term h 원문');
   if (/ A\\b|mk-tl/.test(term([{c:'x'}], {still:true}))) e.push('term still');
   const k = tkeys(['Tab', '다시']); if (!k.includes('data-k="Tab"') || !k.includes('type="button"')) e.push('tkeys');
   if (!plate(Object.assign({}, TERMS[0], {ps:'\`Get-Item\`'})).includes('<b>Windows PowerShell</b><span><code>Get-Item</code></span>')) e.push('ps 행');
   return e.join(', ');
 })()`, ctx));
+check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
+  return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
+    t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });
+check('thl', () => { const m = [...html.matchAll(/\{([coe]):'((?:[^'\\]|\\.)*)', h:'((?:[^'\\]|\\.)*)'\}/g)];    // 터미널 줄의 h는 그 줄 글자에 있어야 한다
+  return !m.length ? 'h 없음' : m.filter(x => !x[2].includes(x[3])).map(x => x[3]).join(', '); });
 check('cat', () => { const c = g.CATS[1]; return c && c.id === 'terminal' && c.secs.map(s => s.id).join() === 'basic,core,motion,adv,cmd,tip' ? '' : 'CATS[1] ' + (c && c.id); });
 check('ps', () => g.TERMS.filter(t => 'ps' in t && (typeof t.ps !== 'string' || !t.ps.trim())).map(t => t.en).join(', '));
 const PS_CMD = ['ls', 'pwd', 'touch', 'grep', 'find', 'which', 'curl', 'tail', 'ps', 'kill', '--help'];    // Windows PowerShell 5.1에서 쳐 보니 그림의 bash 결과와 달랐던 명령(Task 6 측정)
