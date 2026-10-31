@@ -327,6 +327,15 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-tkeys{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .mk-tkey{min-height:32px;min-width:44px;padding:0 12px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font:600 13px var(--mono);cursor:pointer}
 .mk-tdim{color:#a9b8d0}.mk-tspin{display:inline-block;width:.75em;height:.75em;border:2px solid #a8d49a;border-right-color:transparent;border-radius:50%;vertical-align:-1px}.mk-tspin.A{animation:spin 1s linear infinite}
+.mk-tsw{display:inline-grid}.mk-tsw>i{grid-area:1/1;font-style:normal;opacity:0}.mk-tsw>i:last-child{opacity:1}.mk-tsw>i.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-tsw>i:nth-child(1){animation-name:mk-sw1}.mk-tsw>i:nth-child(2){animation-name:mk-sw2}.mk-tsw>i:nth-child(3){animation-name:mk-sw3}
+@keyframes mk-sw1{0%,44.9%{opacity:1}45%,100%{opacity:0}}
+@keyframes mk-sw2{0%,44.9%{opacity:0}45%,59.9%{opacity:1}60%,100%{opacity:0}}
+@keyframes mk-sw3{0%,59.9%{opacity:0}60%,100%{opacity:1}}
+.mk-tbody.mk-tsb{height:6.4em;overflow:hidden;position:relative}.mk-tsbin.A{animation:mk-tsb 10s var(--ease) -8.8s infinite}.mk-tthumb{position:absolute;top:10px;right:3px;width:4px;height:2.84em;border-radius:2px;background:#4a5b80}.mk-tthumb.A{animation:mk-tth 10s var(--ease) -8.8s infinite}
+@keyframes mk-tsb{0%,30%{transform:translateY(-8em)}60%,100%{transform:none}}
+@keyframes mk-tth{0%,30%{transform:translateY(3.56em)}60%,100%{transform:none}}
+.mk-art .mk-key{fill:none;stroke:var(--ink);stroke-width:1.5}.mk-kp.A{animation:mk-kp 1.2s steps(1) infinite}
+@keyframes mk-kp{0%,49%{opacity:1}50%,100%{opacity:0}}
 .mk-scr{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.45;color:var(--ink)}
 .mk-pair{width:100%;container-type:inline-size}
 .mk-pr{display:flex;align-items:center;justify-content:center;gap:14px}
@@ -1987,6 +1996,17 @@ T('terminal','core',[
  {en:'Wildcard',ko:'와일드카드 · 아무 글자나',d:'`*`는 아무 글자나, `?`는 아무 한 글자를 대신해요.',p:'와일드카드로 png 파일만 골라 images 폴더로 옮겨줘',r:['Path','Command'],l:2,o:1,u:BASH('Pattern-Matching'),v:'u-wildcard'},
  {en:'sudo',ko:'수도 · 관리자로 실행',d:'명령 앞에 붙이면 그 명령을 관리자(root) 권한으로 실행해요.',x:'비밀번호를 물을 때가 많아요. 아무 명령에나 붙이지 말고 꼭 필요할 때만 써요.',p:'이 설치 명령에 왜 sudo가 필요한지 알려줘',r:['Permission','SSH','Run as Administrator'],l:2,o:1,u:'https://www.sudo.ws/docs/man/sudo.man/',v:'u-sudo'},
  {en:'Run as Administrator',ko:'관리자 권한으로 실행 · Windows',d:'Windows에서 프로그램을 관리자 권한으로 여는 방법이에요. 시스템 설정을 바꾸는 명령에 필요해요.',x:'bash의 sudo와 비슷해요. 다만 명령 하나가 아니라 창 전체가 관리자로 열려요.',p:'이 명령을 관리자 권한 PowerShell에서 실행해야 하는지 알려줘',r:['sudo','PowerShell','Permission'],l:2,o:0,v:'u-run-as-administrator'}
+]);
+T('terminal','motion',[
+ {en:'Cursor Blink',ko:'커서 깜빡임 · 입력 자리 표시',d:'글자가 들어갈 자리를 깜빡이며 알려 주는 표시예요.',x:'프롬프트 없이 커서만 깜빡이면 앞 명령이 아직 실행 중일 수 있어요.',p:'터미널에 커서만 깜빡이고 반응이 없을 때 확인할 것을 알려줘',r:['Shell Prompt','Cursor Style'],l:1,o:0,v:'u-cursor-blink'},
+ {en:'Progress Output',ko:'진행 출력 · 같은 줄 덮어쓰기',d:'같은 줄을 덮어쓰며 숫자만 바꿔 진행 정도를 보여 줘요.',x:'줄을 바꾸지 않고 줄 맨 앞으로 돌아가는 글자(`\\r`)로 같은 줄에 다시 써요.',p:'다운로드 진행률을 같은 줄에서 숫자만 바뀌는 진행 출력으로 보여줘',r:['Loading Spinner','Progress Bar'],l:1,o:0,v:'u-progress-output'},
+ {en:'Streaming Output',ko:'스트리밍 출력 · 한 줄씩 올라옴',d:'결과를 다 모아서가 아니라 생기는 대로 한 줄씩 보여 줘요.',x:'출력이 잠깐 멈춰도 프롬프트가 안 돌아왔으면 아직 일하는 중이에요.',p:'빌드 로그를 끝날 때까지 모으지 말고 스트리밍 출력으로 한 줄씩 보여줘',r:['Standard Output','Scrollback'],l:1,o:0,v:'u-streaming-output'},
+ {en:'Scrollback',ko:'스크롤백 · 지나간 출력 다시 보기',d:'화면 위로 밀려 올라간 지난 출력을 터미널이 기억해 둔 부분이에요. 위로 스크롤하면 다시 보여요.',x:'기억하는 줄 수에 한도가 있는 경우가 많아서 아주 오래된 줄은 사라질 수 있어요.',p:'터미널 스크롤백에 남는 줄 수를 늘리는 방법을 알려줘',r:['Streaming Output','Pager'],l:1,o:0,v:'u-scrollback'},
+ {en:'Watch Mode',ko:'워치 모드 · 바뀌면 다시 실행',d:'파일이 바뀔 때마다 알아서 다시 실행하며 계속 켜져 있는 실행 방식이에요.',x:'끝나지 않는 게 정상이에요. 멈추려면 Ctrl+C를 눌러요. 다시 실행할 때 화면을 지우는 도구도 있어요.',p:'파일을 저장할 때마다 테스트가 다시 돌게 워치 모드로 실행해줘',r:['Interrupt','Hot Reload'],l:2,o:0,v:'u-watch-mode'},
+ {en:'Confirmation Prompt',ko:'확인 물음 · y/N',d:'되돌리기 어려운 일을 하기 전에 y(예)·n(아니오)로 묻는 물음이에요.',x:'`(y/N)`처럼 대문자로 쓴 쪽이 보통 기본값이에요. 그냥 Enter를 누르면 그쪽으로 답한 것이 돼요.',p:'이 삭제 스크립트가 지우기 전에 (y/N) 확인 물음을 하게 해줘',r:['Destructive Action','Confirm Dialog'],l:1,o:0,v:'u-confirmation-prompt'},
+ {en:'Hidden Input',ko:'숨긴 입력 · 비밀번호 칠 때',d:'비밀번호를 칠 때는 화면에 글자가 안 보이는 경우가 많아요.',x:'`*`도 안 나와 고장 난 줄 알기 쉽지만 입력은 되고 있어요. 다 치고 Enter를 눌러요.',p:'비밀번호를 물을 때 입력한 글자가 화면에 안 보이는 숨긴 입력으로 만들어줘',r:['sudo','Cursor Blink'],l:1,o:0,v:'u-hidden-input'},
+ {en:'Pager',ko:'페이저 · 한 화면씩 보기',d:'긴 출력을 한 화면씩 끊어 보여 주는 프로그램이에요. 출력이 길면 `git log`도 이 화면으로 열려요.',x:'맨 아래 `:`가 보이면 페이저 안이에요. q를 누르면 빠져나와요.',p:'git log가 페이저 없이 바로 끝까지 출력되게 해줘',r:['Scrollback','TUI'],l:2,o:0,v:'u-pager'},
+ {en:'TUI',ko:'티유아이 · 글자로 그린 화면',d:'글자와 기호만으로 막대·표·메뉴를 그려 터미널 화면 전체를 쓰는 프로그램이에요.',x:'`htop`·`vim`처럼 키보드로 다뤄요. 빠져나오는 키가 프로그램마다 달라서 화면 아래 안내를 먼저 봐요.',p:'서버 상태를 터미널에서 볼 수 있는 TUI 프로그램을 추천해줘',r:['GUI','CLI','Pager'],l:2,o:0,v:'u-tui'}
 ]);
 </script>
 <script>
@@ -4456,7 +4476,7 @@ Object.assign(D, {
       const stop = () => { if (!on) return; on = false; run.hidden = true; b.insertAdjacentHTML('beforeend', `<div class="mk-tr">^C</div><div class="mk-tr">${p} <i class="mk-tcur"></i></div>`); };
       const again = () => { if (on) return; on = true; b.lastElementChild.remove(); b.lastElementChild.remove(); run.hidden = false; };
       cc.addEventListener('click', stop); re.addEventListener('click', again);
-      g.addEventListener('keydown', e => { if (on && e.ctrlKey && e.key.toLowerCase() === 'c') { e.preventDefault(); stop(); } }); }},
+      g.addEventListener('keydown', e => { if (on && e.ctrlKey && (e.key.toLowerCase() === 'c' || e.code === 'KeyC')) { e.preventDefault(); stop(); } }); }},
   'u-path-variable':{h:term([{c:'echo $PATH'},{o:'/usr/local/bin:/usr/bin:/bin', h:'/usr/local/bin'}], {prompt:'$'}), m:1, cap:':로 나눈 폴더를 앞에서부터 차례로 뒤져 명령을 찾아요'},
   'u-exit-code':{h:term([{c:'ls nope.txt'},{e:"ls: cannot access 'nope.txt': No such file or directory"},{c:'echo $?'},{o:'2', h:'2'}]), m:1, cap:'없는 파일을 찾은 ls가 2를 남겼어요. 0이 아니니 실패예요'},
   'u-standard-output':{h:term([{c:'ls'},{o:'images  index.html', h:'images  index.html'}]), m:1, cap:'오류 없이 나온 결과(파일 목록)가 표준 출력이에요'},
@@ -4467,6 +4487,36 @@ Object.assign(D, {
   'u-sudo':{h:term([{c:'whoami'},{o:'me'},{c:'sudo whoami', h:'sudo'},{o:'root'}], {prompt:'$'}), m:1, cap:'sudo를 붙이면 같은 whoami가 root(관리자)로 실행돼요'},
   'u-run-as-administrator':{h:`<div class="mk-card" style="display:grid;gap:10px;justify-items:start;font-size:13px"><b>Windows PowerShell</b><div class="mk-menu"><span>관리자 권한으로 실행</span><span>열기</span></div></div>`,
     cap:'앱을 마우스 오른쪽 버튼으로 누르면 나오는 메뉴에 있어요'},
+});
+
+/* terminal: motion — git clone 진행 줄·node --watch 출력·git의 pager(less)는 Git Bash에서 잰 모양. clean.sh·로그·npm test·htop 화면은 예시, sudo 물음은 Debian·Ubuntu 기본 모양 */
+const TKEYB = '<svg viewBox="0 0 110 70" aria-hidden="true"><rect class="s y" x="4" y="12" width="102" height="46" rx="6"/>'
+  + [...Array(18)].map((_, i) => `<rect class="${i === 3 || i === 8 ? 'o A mk-kp' : 'mk-key'}" x="${11 + i % 6 * 15.5}" y="${19 + (i / 6 | 0) * 12}" width="11" height="8" rx="2"${i === 8 ? ' style="animation-delay:-.6s"' : ''}/>`).join('') + '</svg>';
+const TSW = '<span class="mk-tsw"><i class="A"> 25% (3/12)</i><i class="A"> 58% (7/12)</i><i class="A">100% (12/12), done.</i></span>';
+Object.assign(D, {
+  'u-cursor-blink':{h:term([{c:'echo 안녕'},{o:'안녕'}]).replace('class="mk-tcur A"', 'class="mk-tcur A mk-hl"'), m:1, cap:'맨 아래 깜빡이는 네모가 커서예요. 다음에 치는 글자가 여기에 들어가요'},
+  'u-progress-output':{h:term([{c:'git clone https://github.com/me/app'},{o:"Cloning into 'app'..."},{o:'Receiving objects: @@'}], {prompt:'$', end:false}).replace('@@', TSW), m:1, cap:'새 줄이 생기지 않고 같은 줄의 숫자만 바뀌다가 100%에서 멈춰요'},
+  'u-streaming-output':{h:term([{c:'tail -f app.log'},{o:'GET / 200'},{o:'GET /about 200'},{o:'POST /login 302'},{o:'GET /mypage 200'},{o:'GET / 200'}], {end:false}), m:1, cap:'tail -f는 끝나지 않고, 로그가 생길 때마다 한 줄씩 올라와요'},
+  'u-scrollback':{h:term([{c:'npm test'},{e:'FAIL  login.test.js', h:'FAIL'},{o:'PASS  home.test.js'},{o:'PASS  menu.test.js'},{o:'PASS  cart.test.js'},{o:'PASS  pay.test.js'},{o:'PASS  user.test.js'},{o:'Tests: 1 failed, 6 passed'}], {still:true})
+    .replace('<div class="mk-tbody">', '<div class="mk-tbody mk-tsb"><div class="mk-tsbin A">').replace(/<\/div><\/div>$/, '</div><i class="mk-tthumb A"></i></div></div>'),
+    m:1, cap:'위로 올려 보니 화면 밖으로 밀려났던 FAIL 줄이 다시 보여요'},
+  'u-watch-mode':{h:term([{c:'node --watch app.js'},{o:'서버 시작'},{o:"Restarting 'app.js'", h:'Restarting'},{o:'서버 시작'}], {end:false}), m:1, cap:'app.js를 저장하자 알아서 다시 실행됐어요. 명령은 끝나지 않고 다음 변경을 기다려요'},
+  'u-confirmation-prompt':{h:hint('y나 n을 눌러 보세요 (키보드 y·n·Enter)') + term([{c:'./clean.sh'},{o:'메모.txt를 지울까요? (y/N) ', h:'N'}], {still:true, end:false, label:'확인 물음 연습'}) + tkeys(['y', 'n', '다시']),
+    cap:'(y/N)에서 대문자 N이 기본값이에요. 그냥 Enter를 누르면 지우지 않아요',
+    init: s => { const g = s.querySelector('.mk-term'), b = s.querySelector('.mk-tbody'), q = b.lastElementChild, [yb, nb, re] = s.querySelectorAll('.mk-tkey'), p = s.querySelector('.mk-tp').outerHTML, cur = '<i class="mk-tcur"></i>'; let on = true;
+      q.insertAdjacentHTML('beforeend', cur);
+      const say = a => { if (!on) return; on = false; q.lastElementChild.remove(); q.insertAdjacentHTML('beforeend', `<span>${a}</span>`);
+        b.insertAdjacentHTML('beforeend', `<div class="mk-tr">${a === 'y' ? '지웠어요' : '그대로 뒀어요'}</div><div class="mk-tr">${p} ${cur}</div>`); };
+      const again = () => { if (on) return; on = true; b.lastElementChild.remove(); b.lastElementChild.remove(); q.lastElementChild.remove(); q.insertAdjacentHTML('beforeend', cur); };
+      yb.addEventListener('click', () => say('y')); nb.addEventListener('click', () => say('n')); re.addEventListener('click', again);
+      g.addEventListener('keydown', e => { if (!on || e.ctrlKey || e.metaKey || e.altKey) return; const a = e.code === 'KeyY' ? 'y' : e.code === 'KeyN' ? 'n' : e.key === 'Enter' ? '' : null;
+        if (a !== null) { e.preventDefault(); say(a); } }); }},
+  'u-hidden-input':{h:pair(TKEYB, term([{c:'sudo apt update'},{o:'[sudo] password for me: '}], {end:false}).replace(/<\/div><\/div><\/div>$/, '<i class="mk-tcur A"></i></div></div></div>')),
+    m:1, cap:'키보드로 비밀번호를 치는데도 화면에는 아무것도 안 찍혀요. 입력은 되고 있어요'},
+  'u-pager':{h:term([{o:'3f9c2e1 로그인 버튼 고침'},{o:'8a41d07 메뉴 글씨 키움'},{o:'c2e9b54 결제 오류 수정'},{o:'71d0fa3 첫 화면 추가'},{o:'e5b8c62 사진 크기 줄임'},{o:':', h:':'}], {title:'git log', end:false}),
+    m:1, cap:'맨 아래 :가 페이저 표시예요. 스페이스는 다음 화면, q는 빠져나오기예요'},
+  'u-tui':{h:term([{o:'  CPU[|||||||     35.0%]'},{o:'  Mem[|||    1.20G/7.60G]'},{o:'  PID USER   CPU% Command'},{o:'  412 me     12.0 node'},{o:'  388 me      3.1 bash'},{o:'F1Help F3Search F10Quit', h:'F10Quit'}], {title:'htop', end:false}),
+    m:1, cap:'글자와 기호만으로 막대와 표를 그렸어요. 맨 아래에 F10Quit처럼 나가는 키를 알려 줘요'},
 });
 
 const visual = t => {
