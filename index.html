@@ -282,6 +282,31 @@ a.tag:hover{background:var(--ink);color:#fff}
 .gitg text{font-size:11px;fill:var(--muted);font-weight:700}
 .swatch{display:flex;gap:6px}.swatch i{width:44px;height:64px;border-radius:7px;display:block}
 .typ{display:flex;flex-direction:column;gap:6px;align-items:flex-start;width:min(380px,94%)}
+/* ---------- 화면 모형 (mk-) : 그림 속 글자는 11px 이상 ---------- */
+.mk-phone{position:relative;flex:none;width:190px;height:280px;background:var(--plate);border:1.5px solid var(--ink);border-radius:30px;
+  padding:32px 10px 20px;display:flex;flex-direction:column;overflow:hidden}
+.mk-phone.flat{padding-top:16px}
+.mk-notch{position:absolute;top:9px;left:50%;width:58px;height:16px;margin-left:-29px;border-radius:9px;background:var(--ink)}
+.mk-home{position:absolute;bottom:7px;left:50%;width:64px;height:4px;margin-left:-32px;border-radius:2px;background:var(--ink)}
+.mk-browser{flex:none;width:300px;height:190px;background:var(--plate);border:1.5px solid var(--ink);border-radius:10px;display:flex;flex-direction:column;overflow:hidden}
+.mk-top{display:flex;align-items:center;gap:5px;padding:6px 10px;background:var(--fig);border-bottom:1px solid var(--rule)}
+.mk-top>i{width:8px;height:8px;border-radius:50%;background:var(--steel)}
+.mk-url{flex:1;min-width:0;margin-left:6px;background:var(--plate);border:1px solid var(--rule);border-radius:999px;padding:0 10px;font-size:11px;
+  color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mk-browser .mk-scr{padding:12px}
+.mk-scr{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;font-size:12px;line-height:1.45;color:var(--ink)}
+.mk-pair{width:100%;container-type:inline-size}
+.mk-pr{display:flex;align-items:center;justify-content:center;gap:14px}
+.mk-art{flex:none;width:110px}.mk-art svg{display:block;width:100%;height:auto}
+.mk-arrow{flex:none;color:var(--mark);font-weight:800;font-size:20px;line-height:1}
+@container (max-width:480px){.mk-pr{flex-direction:column;gap:8px}.mk-arrow{transform:rotate(90deg)}}
+.mk-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:0 14px;border-radius:8px;border:1.5px solid var(--ink);
+  background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;touch-action:manipulation}
+.mk-btn.ghost{background:transparent;color:var(--ink)}
+.mk-in{display:flex;align-items:center;min-height:32px;width:100%;padding:0 10px;border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);font-size:12.5px;color:var(--ink)}
+.mk-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;background:var(--ink);color:#fff;font-size:12px}
+.mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
+.mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
@@ -1309,6 +1334,8 @@ T('front','core',[
  {en:'Border Radius',ko:'모서리 둥글기 · 라운드',d:'상자 모서리를 둥글게 깎는 정도.',j:'"라운드 좀 주세요"',p:'카드 모서리를 12px로 둥글게 해줘',r:['Border','Box Shadow'],l:1,o:1,u:MDN('Web/CSS/border-radius'),v:'radius'},
  {en:'Box Shadow',ko:'그림자 · 박스 섀도',d:'상자 아래에 드리우는 그림자. 떠 있는 느낌을 줘요.',p:'카드에 아주 옅은 그림자를 넣어서 살짝 떠 보이게 해줘',r:['Border Radius','Hover Lift'],l:1,o:1,u:MDN('Web/CSS/box-shadow'),v:'shadow'},
 ]);
+/* 다른 카테고리로 옮긴 카드: 옛 id → 새 id (즐겨찾기·외움·옛 주소를 이어 준다) */
+const MOVED = {};
 T('front','layout',[
  {en:'Breakpoint',ko:'브레이크포인트 · 화면 너비 기준점',d:'"이 너비부터 배치를 바꾼다"고 정한 화면 폭. 예: 768px.',x:'디버거의 breakpoint(중단점)와 다른 뜻이에요.',p:'768px 브레이크포인트에서 메뉴를 햄버거로 바꿔줘',r:['Media Query','Responsive Web Design'],l:1,o:0,v:'breakpoint'},
  {en:'Viewport',ko:'뷰포트 · 보이는 화면 영역',d:'브라우저에서 지금 실제로 보이는 화면 영역.',p:'첫 화면 뷰포트 안에 가입 버튼이 보이게 해줘',r:['vw / vh','Above the Fold'],l:1,o:1,u:MDN('Glossary/Viewport'),v:'viewport'},
@@ -1427,9 +1454,15 @@ const store = {
   set(k, v){ try { localStorage.setItem(SITE.storeKey + '.' + k, JSON.stringify([...v])); } catch(e){} }
 };
 const pins = store.get('pins'), learned = store.get('learned');
+const migrateIds = (set, map) => { let ch = false; [...set].forEach(id => { if (map[id]) { set.delete(id); set.add(map[id]); ch = true; } }); return ch; };
+[['pins', pins], ['learned', learned]].forEach(([k, set]) => { if (migrateIds(set, MOVED)) store.set(k, set); });
 
 /* ---------- visuals ---------- */
 const L = (x, y, lx, ly, t) => ({x, y, lx, ly, t});
+/* 화면 모형 틀: 휴대폰 190×280, 브라우저 300×190, 비유 그림 + 모형 */
+const phone = (body, {notch = true} = {}) => `<div class="mk-phone${notch ? '' : ' flat'}">${notch ? '<i class="mk-notch"></i>' : ''}<div class="mk-scr">${body}</div><i class="mk-home"></i></div>`;
+const browser = (body, {url = 'example.com'} = {}) => `<div class="mk-browser"><div class="mk-top"><i></i><i></i><i></i><span class="mk-url">${esc(url)}</span></div><div class="mk-scr">${body}</div></div>`;
+const pair = (art, mock) => `<div class="mk-pair"><div class="mk-pr"><div class="mk-art">${art}</div><span class="mk-arrow" aria-hidden="true">→</span>${mock}</div></div>`;
 const D = {
   boxmodel:{h:`<div class="cv"><div style="left:8%;top:10%;width:56%;height:74%;border:2px dashed var(--mark);border-radius:6px"></div>
     <div style="left:14%;top:19%;width:44%;height:56%;background:var(--sky);border:3px solid var(--ink);border-radius:4px"></div>
@@ -1525,8 +1558,8 @@ const D = {
 };
 
 const visual = t => {
-  const v = t.v; let h = '', lab = [], m = 0, cap = '';
-  if (typeof v === 'string' && D[v]) ({h, lab = [], m = 0, cap = ''} = D[v]);
+  const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
+  if (typeof v === 'string' && D[v]) ({h, lab = [], m = 0, cap = '', init} = D[v]);
   else if (v && v.flow) {
     h = `<div class="flow">${v.flow.map((n, i) => (i ? `<div class="edge"><span>${esc((v.e||[])[i-1]||'')}</span><div class="ln"></div><span>→</span></div>` : '') +
       `<div class="node${(v.hl||[]).includes(i) ? ' hl' : ''}">${esc(n)}</div>`).join('')}</div>`; m = 1;
@@ -1542,7 +1575,7 @@ const visual = t => {
   else if (v && v.big) h = `<div class="term-big">${esc(v.big)}<small>${esc(v.sub||'')}</small></div>`;
   else h = `<div class="term-big">${esc(t.en)}<small>${esc(t.ko)}</small></div>`;
   if (v && v.cap) cap = v.cap;
-  return {h, lab, m, cap};
+  return {h, lab, m, cap, init};
 };
 function gitSvg(kind){
   const c = (x,y,f='#fff') => `<circle cx="${x}" cy="${y}" r="8" fill="${f}"/>`;
@@ -1590,8 +1623,9 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), {rootMargin: '120px 0px'});
 function mount(f){
   if (f.dataset.ok) return; f.dataset.ok = 1;
-  const t = byId.get(f.dataset.id), {h, lab, m, cap} = visual(t), st = f.querySelector('.stage');
+  const t = byId.get(f.dataset.id), {h, lab, m, cap, init} = visual(t), st = f.querySelector('.stage');
   st.innerHTML = h;
+  if (init) init(st);
   if (lab.length) {
     const len = 400;
     f.insertAdjacentHTML('beforeend', `<svg class="leaders" aria-hidden="true">${lab.map(l => `<line x1="${l.x}%" y1="${l.y}%" x2="${l.lx}%" y2="${l.ly}%" style="--len:${len}"/><circle cx="${l.x}%" cy="${l.y}%" r="3.5"/>`).join('')}</svg>` +
@@ -1670,6 +1704,7 @@ function observe(){ document.querySelectorAll('#view .fig').forEach(f => io.obse
 
 function route(){
   const h = decodeURIComponent(location.hash.slice(2)).split('/');
+  if (h[0] === 't' && MOVED[h[1]]) { location.replace('#/t/' + MOVED[h[1]]); return; }
   let cur = {}, html = '';
   if (h[0] === 'c' && catById.has(h[1])) {
     const c = catById.get(h[1]), s = c.secs.find(x => x.id === h[2]) || c.secs[0]; cur = {c: c.id, s: s.id}; html = viewSection(c, s);

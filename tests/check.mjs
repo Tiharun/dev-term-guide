@@ -42,6 +42,16 @@ for (const [s, c] of Object.entries(COUNT))
   check('count:' + s, () => { const k = sec(s) ? sec(s).terms.length : 'no sec'; return k === c ? '' : `${k} ≠ ${c}`; });
 for (const s of REDRAWN)
   check('redrawn:' + s, () => (sec(s) ? sec(s).terms : []).filter(t => t.v && typeof t.v === 'object' && (t.v.flow || t.v.big || t.v.stack)).map(t => t.en).join(', '));
+check('base', () => vm.runInContext(`(() => {
+  const eq = (s, a) => s.size === a.length && a.every(x => s.has(x)), m = {'web-form': 'design-form'}, e = [];
+  const s1 = new Set(['web-form', 'x']); if (migrateIds(s1, m) !== true || !eq(s1, ['design-form', 'x'])) e.push('바꾸기');
+  const s2 = new Set(['web-form', 'design-form']); migrateIds(s2, m); if (!eq(s2, ['design-form'])) e.push('둘 다 있음');
+  if (migrateIds(s1, m) !== false) e.push('두 번째 호출');
+  if (migrateIds(new Set(), m) !== false) e.push('빈 Set');
+  if (!phone('a').includes('mk-phone') || !browser('a').includes('mk-browser') || !pair('a', 'b').includes('mk-pair')) e.push('틀');
+  if (typeof MOVED !== 'object') e.push('MOVED');
+  return e.join(', ');
+})()`, ctx));
 check('sym', () => g.SYMPTOM_GROUPS.length !== 8 ? 'groups ' + g.SYMPTOM_GROUPS.length
   : g.SYMPTOMS.filter(s => !g.SYMPTOM_GROUPS.includes(s.g)).map(s => s.q).join(', '));
 
