@@ -415,6 +415,51 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-stat{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:var(--muted)}.mk-stat i{width:9px;height:9px;border-radius:50%}
 .mk-stat.on i{background:var(--moss)}.mk-stat.away i{background:var(--mark)}.mk-stat.off i{border:1.5px solid var(--steel)}
 .mk-cookie{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:6px;padding:8px 12px;background:var(--plate);border-top:1.5px solid var(--ink);font-size:11.5px}
+/* 내비게이션 */
+.mk-art .s.k{fill:var(--ink)}
+.mk-pull{animation:mk-pull 4s var(--ease) infinite}
+@keyframes mk-pull{0%,15%{transform:none}35%,80%{transform:translateX(-18px)}100%{transform:none}}
+.mk-gnb{display:flex;align-items:center;gap:12px;margin:-12px -12px 0;padding:7px 12px;border-bottom:1px solid var(--rule);font-size:12px;font-weight:700;white-space:nowrap}.mk-gnb>b{margin-right:auto}
+.mk-gnb .on{color:var(--mark-text);font-weight:800;text-decoration:underline 2px;text-underline-offset:5px}
+.mk-gnb button{min-height:24px;padding:0 2px;font-weight:700}
+.mk-cols{display:flex;gap:10px;flex:1;min-height:0}
+.mk-lnb{display:flex;flex-direction:column;gap:2px;width:100px;font-size:11.5px}.mk-lnb span{padding:3px 6px;border-radius:5px}
+.mk-lnb .on{background:var(--mark-bg);color:var(--mark-text);font-weight:700}
+.mk-tabbar{display:flex;justify-content:space-around;margin-top:auto;padding-top:6px;border-top:1px solid var(--rule)}
+.mk-rail{display:flex;flex-direction:column;align-items:center;gap:8px;width:50px;padding:4px 0;border-right:1px solid var(--rule)}
+.mk-tabbar span,.mk-rail span{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted)}
+.mk-tabbar i,.mk-rail i{width:16px;height:16px;border-radius:5px;border:1.5px solid currentColor}
+.mk-tabbar .on,.mk-rail .on{color:var(--mark-text);font-weight:700}.mk-tabbar .on i,.mk-rail .on i{background:var(--mark-bg)}
+.mk-tablet{flex:none;width:300px;height:190px;padding:10px;background:var(--plate);border:1.5px solid var(--ink);border-radius:16px;display:flex}.mk-tablet>.mk-scr{flex-direction:row;gap:12px}
+.mk-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-content:start}.mk-grid i{aspect-ratio:4/3;border-radius:6px;background:var(--sky)}
+.mk-back{align-self:flex-start;padding:0 4px;font-size:13px;font-weight:800;color:var(--mark-text)}
+.mk-img{flex:none;height:84px;border-radius:8px;background:var(--sky)}
+.mk-fab,.mk-ttop{position:absolute;right:4px;bottom:4px;display:grid;place-items:center;border-radius:50%;font-weight:800;line-height:1}
+.mk-fab{width:40px;height:40px;background:var(--ink);color:#fff;font-size:24px}
+.mk-ttop{width:34px;height:34px;background:var(--plate);border:1.5px solid var(--ink);font-size:16px}
+.mk-sb{position:absolute;right:-7px;top:52%;width:3px;height:40px;border-radius:2px;background:var(--steel)}
+.mk-tgt{align-self:flex-start;padding:1px 6px;border-radius:4px;background:var(--mark-bg);color:var(--mark-text)}
+.mk-toc{display:flex;flex-direction:column;gap:3px;width:86px;padding-left:8px;border-left:2px solid var(--rule);font-size:11.5px;color:var(--muted)}.mk-toc .on{color:var(--ink);font-weight:800}
+.mk-sq{border-radius:6px}.mk-ctr{align-self:center}
+.mk-kb{width:190px;gap:6px}
+.mk-dots{display:grid;place-items:center;width:26px;height:26px}.mk-dots svg{width:18px;height:18px;fill:currentColor}
+.mk-menu{display:flex;flex-direction:column;align-self:flex-end;min-width:96px;padding:4px;border:1.5px solid var(--ink);border-radius:10px;background:var(--plate)}
+.mk-menu>span{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700}.mk-menu>span:first-child{background:var(--mark-bg)}
+.mk-mm{font-weight:700}.mk-mm[aria-expanded=true]{color:var(--mark-text)}
+.mk-mega{position:absolute;left:-12px;right:-12px;top:21px;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px 12px 10px;background:var(--plate);border-bottom:1.5px solid var(--ink)}
+.mk-mega button{min-height:26px;padding:0 4px;border-radius:5px;text-align:left;font-size:12px}.mk-mega button:hover,.mk-mega button:focus-visible{background:var(--mark-bg)}
+.mk-steps{position:relative;display:flex;justify-content:space-between;margin:0;padding:0 4px;list-style:none}
+.mk-steps::before{content:'';position:absolute;left:26px;right:26px;top:11px;height:2px;background:var(--rule)}
+.mk-steps li{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;width:44px;font-size:11px;color:var(--muted)}
+.mk-steps i{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--rule);background:var(--plate);font-style:normal;font-weight:800;font-size:11px}
+.mk-steps .on{color:var(--ink);font-weight:800}.mk-steps .on i{border-color:var(--mark-text);color:var(--mark-text)}
+.mk-steps .done i{background:var(--ink);border-color:var(--ink);color:#fff}
+.mk-stb{justify-content:space-between;margin-top:auto}
+.mk-peek{display:inline-flex;align-items:center;min-height:24px;color:var(--mark-text);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.mk-skip{position:absolute;top:2px;left:2px;z-index:4;padding:4px 10px;border-radius:6px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;
+  opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease)}
+.mk-skip:focus{opacity:1;pointer-events:auto;transform:none}
+.mk-main:focus{outline:2px solid var(--mark);outline-offset:3px;border-radius:4px}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
@@ -484,7 +529,7 @@ function SYM(g, list){ list.forEach(([q, t]) => SYMPTOMS.push({g, q, t})); }
 /* ===== 카테고리 목록 ===== */
 CAT('basics','개발 기본','개발을 처음 시작할 때 듣는 가장 기본적인 말', [['code','코드 읽기 기초','코드를 볼 때 알아야 하는 문법 이름']]);
 CAT('web','웹사이트','웹사이트가 어떻게 생기고 움직이는지에 관한 말', [['parts','페이지 구성요소','웹페이지 각 부분의 이름']]);
-CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
+CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법']]);
 CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
@@ -515,7 +560,6 @@ T('design','core',[
  {en:'Prototype',ko:'프로토타입 · 눌러 보는 시안',d:'클릭하면 화면이 넘어가도록 만든 시험용 모형.',p:'버튼을 누르면 다음 화면으로 넘어가는 프로토타입을 만들어줘',r:['Mockup'],l:1,o:0,v:'pagetrans'},
  {en:'Component',ko:'컴포넌트 · 재사용 부품',d:'버튼·카드처럼 여러 곳에서 똑같이 다시 쓰는 화면 부품.',p:'이 버튼을 컴포넌트로 만들어서 모든 페이지에 같이 써줘',r:['Design System','Main Component'],l:1,o:1,v:{stack:['페이지','카드 컴포넌트','버튼 컴포넌트'],hl:[2]}},
  {en:'Button States',ko:'버튼 상태 · 기본·호버·포커스·비활성',d:'버튼이 상황마다 바뀌는 모습. 기본, 마우스 올림(hover), 선택됨(focus), 누를 수 없음(disabled).',p:'버튼에 hover, focus, disabled 상태 스타일을 각각 만들어줘',r:['Hover Effect','Focus'],l:2,o:1,u:MDN('Web/CSS/:hover'),v:'button'},
- {en:'Tab',ko:'탭',d:'같은 자리에서 내용을 바꿔 보여 주는 이름표 버튼 묶음.',p:'상품 상세를 소개·후기·문의 탭으로 나눠줘',r:['Accordion'],l:1,o:0,v:'tabs'},
  {en:'Accordion',ko:'아코디언 · 접었다 펴기',d:'제목을 누르면 아래 내용이 펼쳐지고 다시 누르면 접히는 목록.',p:'자주 묻는 질문을 아코디언으로 접었다 펼 수 있게 해줘',r:['Tab'],l:1,o:0,v:'accordion'},
  {en:'Carousel',ko:'캐러셀 · 슬라이더',d:'여러 장의 배너가 옆으로 넘어가며 보이는 영역.',j:'"슬라이드 배너", "롤링 배너"',p:'메인 배너를 5초마다 넘어가는 캐러셀로 만들어줘',r:['Slide-in'],l:1,o:0,v:'carousel'},
 ]);
@@ -554,8 +598,6 @@ T('design','app',[
  {en:'Status Bar',ko:'상태 표시줄',d:'창 맨 아래, 지금 상태(저장됨, 줄 번호 등)를 작게 보여 주는 줄.',p:'아래 상태 표시줄에 "저장됨" 표시를 넣어줘',r:['Title Bar'],l:1,o:0,v:{win:'st'}},
  {en:'Context Menu',ko:'컨텍스트 메뉴 · 우클릭 메뉴',d:'마우스 오른쪽 버튼을 누르면 그 자리에 뜨는 메뉴.',p:'파일을 우클릭하면 이름 바꾸기·삭제가 있는 컨텍스트 메뉴를 띄워줘',r:['Dropdown'],l:2,o:0,v:'dropdown'},
  {en:'Dialog',ko:'다이얼로그 · 대화 상자',d:'확인·취소처럼 사용자의 대답을 받는 작은 창.',x:'웹에서는 보통 모달로 만들어요.',p:'창을 닫기 전에 "저장할까요?" 다이얼로그를 띄워줘',r:['Modal'],l:1,o:1,u:MDN('Web/HTML/Element/dialog'),v:'modal'},
- {en:'Drawer',ko:'드로어 · 서랍 메뉴',d:'옆에서 서랍처럼 밀려 나오는 메뉴 판.',j:'"햄버거 누르면 옆에서 나오는 메뉴"',p:'모바일에서 햄버거 버튼을 누르면 왼쪽에서 drawer가 나오게 해줘',r:['Hamburger Menu','Slide-in'],l:1,o:0,v:'drawer',sy:['왼쪽에서 나와요']},
- {en:'Hamburger Menu',ko:'햄버거 메뉴 · 세 줄 버튼',d:'가로줄 세 개로 된 버튼. 누르면 숨겨 둔 메뉴가 열려요.',p:'모바일에서는 메뉴를 햄버거 버튼 안에 숨겨줘',r:['Drawer'],l:1,o:0,v:'hamburger'},
  {en:'Bottom Sheet',ko:'바텀 시트 · 아래에서 올라오는 판',d:'모바일 화면 아래에서 위로 올라오는 판.',p:'공유 버튼을 누르면 아래에서 bottom sheet가 올라오게 해줘',r:['Drawer','Modal'],l:2,o:0,v:'toast'},
 ]);
 T('design','form',[
@@ -612,6 +654,28 @@ T('design','feedback',[
  {en:'Status Indicator',ko:'상태 표시 · 상태 점',d:'온라인·자리 비움처럼 지금 상태를 색 점과 짧은 글자로 보여 주는 표시예요.',x:'색만으로 구분하면 색약인 사람은 헷갈려요. 글자를 함께 붙여요.',p:'팀원 이름 옆에 온라인·자리 비움·오프라인 상태 점과 글자를 붙여줘',r:['Notification Dot','Badge'],l:1,o:0,v:'u-status-indicator'},
  {en:'Cookie Consent Banner',ko:'쿠키 동의 배너',d:'처음 들어온 사이트 아래에 떠서 쿠키를 써도 되는지 묻는 띠예요.',x:'유럽 개인정보 감독기관들은 "거절"도 "허용"만큼 쉽게 누를 수 있어야 한다고 봐요.',p:'첫 방문 때 아래에 쿠키 동의 배너를 띄우고 "모두 허용"과 "모두 거절"을 같은 크기로 나란히 둬줘',r:['Banner','Modal'],l:1,o:0,v:'u-cookie-consent-banner'},
  {en:'Destructive Action',ko:'되돌릴 수 없는 동작 · 파괴적 동작',d:'지우기·탈퇴처럼 한 번 하면 되돌릴 수 없는 동작이라, 경고색과 확인 단계로 구분해요.',x:'되돌릴 수 있게 만들 수 있다면 확인창보다 실행 취소가 더 편해요.',p:'프로젝트 삭제 버튼은 경고색으로 하고, 프로젝트 이름을 똑같이 써야 누를 수 있게 해줘',r:['Confirm Dialog','Snackbar'],l:2,o:0,v:'u-destructive-action'},
+]);
+T('design','nav',[
+ {en:'Tab',ko:'탭',d:'같은 자리에서 내용을 바꿔 보여 주는 이름표 버튼 묶음.',p:'상품 상세를 소개·후기·문의 탭으로 나눠줘',r:['Accordion'],l:1,o:0,v:'tabs'},
+ {en:'Hamburger Menu',ko:'햄버거 메뉴 · 세 줄 버튼',d:'가로줄 세 개로 된 버튼. 누르면 숨겨 둔 메뉴가 열려요.',p:'모바일에서는 메뉴를 햄버거 버튼 안에 숨겨줘',r:['Drawer'],l:1,o:0,v:'u-hamburger-menu'},
+ {en:'Drawer',ko:'드로어 · 서랍 메뉴',d:'옆에서 서랍처럼 밀려 나오는 메뉴 판.',j:'"햄버거 누르면 옆에서 나오는 메뉴"',p:'모바일에서 햄버거 버튼을 누르면 왼쪽에서 drawer가 나오게 해줘',r:['Hamburger Menu','Slide-in'],l:1,o:0,v:'u-drawer',sy:['왼쪽에서 나와요']},
+ {en:'Breadcrumb',ko:'브레드크럼 · 현재 위치 경로',d:'"홈 › 의류 › 티셔츠"처럼 지금 어디 있는지 보여 주는 경로.',p:'상품 페이지 위에 breadcrumb을 넣어줘',r:['GNB'],l:1,o:0,v:'u-breadcrumb'},
+ {en:'Pagination',ko:'페이지네이션 · 쪽 번호',d:'목록을 여러 쪽으로 나누고 번호로 넘기는 장치.',p:'게시판 아래에 페이지네이션을 넣어줘. 한 쪽에 10개씩',r:['Infinite Scroll'],l:1,o:0,v:'pagination'},
+ {en:'GNB',ko:'지엔비 · 대표 메뉴',d:'모든 페이지 위쪽에 공통으로 있는 큰 메뉴 줄. Global Navigation Bar.',j:'"GNB", "상단 메뉴", "LNB(왼쪽 하위 메뉴)"',p:'GNB 메뉴를 소개·제품·문의 세 개로 줄여줘',r:['Header','Breadcrumb'],l:1,o:0,jg:1,v:'u-gnb'},
+ {en:'LNB',ko:'엘엔비 · 지역 메뉴',d:'한 메뉴 안의 세부 페이지로 가게 해 주는, 보통 옆에 붙은 작은 메뉴예요.',x:'GNB가 사이트 전체의 큰 메뉴라면, LNB는 그 안에서 쓰는 작은 메뉴예요.',p:'고객센터 페이지 왼쪽에 공지·자주 묻는 질문·1:1 문의 LNB를 넣어줘',r:['GNB','Sidebar'],l:1,o:0,v:'u-lnb'},
+ {en:'Tab Bar',ko:'탭 바 · 하단 탭',d:'앱 맨 아래에 홈·검색·내 정보 같은 주요 화면 버튼을 늘어놓은 줄이에요.',x:'화면 안 내용만 바꾸는 Tab과 달리, 탭 바는 앱의 큰 화면 자체를 바꿔요.',p:'앱 아래에 홈·검색·찜·내 정보 탭 바를 넣고 지금 화면을 색으로 표시해줘',r:['Tab','Navigation Rail'],l:1,o:0,v:'u-tab-bar'},
+ {en:'Mega Menu',ko:'메가 메뉴 · 큰 펼침 메뉴',d:'메뉴를 누르거나 올리면 여러 묶음의 하위 메뉴가 넓은 판에 한꺼번에 펼쳐지는 메뉴예요.',x:'하위 메뉴가 많은 쇼핑몰·학교 사이트에서 자주 써요.',p:'상단 메뉴 "여성"을 누르면 의류·신발·가방 하위 메뉴가 한 판에 펼쳐지는 메가 메뉴로 만들어줘',r:['GNB','Dropdown'],l:2,o:0,v:'u-mega-menu'},
+ {en:'Stepper',ko:'스테퍼 · 단계 표시',d:'여러 단계로 나뉜 일에서 지금 몇 번째 단계인지 보여 주는 표시예요.',x:'숫자를 올리고 내리는 Quantity Stepper와는 다른 말이에요.',p:'주문을 배송지·결제·확인 3단계로 나누고 위에 단계 표시를 넣어줘',r:['Progress Bar','Quantity Stepper'],l:2,o:0,v:'u-stepper'},
+ {en:'Back Button',ko:'뒤로 가기 버튼',d:'바로 전 화면으로 돌아가게 해 주는, 보통 왼쪽 위에 있는 버튼이에요.',x:'브라우저의 뒤로 가기와 같은 곳으로 가야 헷갈리지 않아요.',p:'상품 상세 화면 왼쪽 위에 목록으로 돌아가는 뒤로 가기 버튼을 넣어줘',r:['Breadcrumb','Header'],l:1,o:0,v:'u-back-button'},
+ {en:'FAB',ko:'팹 · 떠 있는 버튼',d:'화면 오른쪽 아래에 동그랗게 떠서, 가장 자주 하는 일 하나를 바로 하게 해 주는 버튼이에요. Floating Action Button.',x:'가장 중요한 일 하나에만 써요. 여러 개 띄우면 무엇이 중요한지 흐려져요.',p:'메모 목록 오른쪽 아래에 새 메모를 쓰는 + 버튼을 떠 있게 넣어줘',r:['Back to Top','Tab Bar'],l:1,o:0,v:'u-fab'},
+ {en:'Back to Top',ko:'맨 위로 버튼',d:'긴 페이지를 내려가면 나타나서, 누르면 맨 위로 바로 올려 주는 버튼이에요.',p:'스크롤을 한 화면 넘게 내리면 오른쪽 아래에 맨 위로 버튼을 보여줘',r:['Smooth Scroll','FAB'],l:1,o:0,v:'u-back-to-top'},
+ {en:'Anchor Link',ko:'앵커 링크 · 페이지 안 이동',d:'같은 페이지 안의 특정 제목으로 바로 내려가게 하는 링크예요.',x:'주소 끝에 #이름이 붙어요. 그 주소를 보내면 받은 사람도 그 자리부터 봐요.',p:'FAQ 맨 위 질문 목록을 누르면 그 답이 있는 곳으로 바로 내려가게 앵커 링크를 걸어줘',r:['Table of Contents','Hyperlink','Smooth Scroll'],l:2,o:0,v:'u-anchor-link'},
+ {en:'Table of Contents',ko:'목차',d:'긴 글의 제목들을 모아 보여 주고, 누르면 그 부분으로 가게 하는 목록이에요.',x:'지금 읽는 부분을 목차에 표시해 주면 어디쯤인지 알기 쉬워요.',p:'긴 안내 글 오른쪽에 목차를 붙이고, 지금 읽는 제목을 굵게 표시해줘',r:['Anchor Link','Active Menu'],l:1,o:0,v:'u-table-of-contents'},
+ {en:'Load More Button',ko:'더 보기 버튼',d:'목록 끝에서 누르면 다음 묶음을 이어 붙여 보여 주는 버튼이에요.',x:'저절로 이어지는 Infinite Scroll과 달리 누를 때만 더 불러와요.',p:'상품 목록을 20개씩 보여 주고 아래에 더 보기 버튼을 넣어줘',r:['Pagination','Infinite Scroll'],l:1,o:0,v:'u-load-more-button'},
+ {en:'Navigation Rail',ko:'내비게이션 레일',d:'태블릿처럼 넓은 화면에서 왼쪽 가장자리에 아이콘 메뉴를 세로로 세운 좁은 띠예요.',x:'휴대폰에서 아래 탭 바였던 메뉴가 넓은 화면에서는 레일로 옮겨 가요.',p:'태블릿 가로 화면에서는 아래 탭 바 대신 왼쪽에 내비게이션 레일을 보여줘',r:['Tab Bar','Sidebar'],l:2,o:0,v:'u-navigation-rail'},
+ {en:'Skip Link',ko:'본문 바로가기',d:'키보드로 Tab을 처음 누르면 나타나서, 반복되는 메뉴를 건너뛰고 본문으로 가게 해 주는 링크예요.',x:'평소엔 숨어 있다가 키보드로 들어온 사람에게만 보여요.',p:'페이지 맨 앞에 Tab을 누르면 나타나는 "본문 바로가기" 링크를 넣어줘',r:['Focus','Anchor Link'],l:2,o:0,v:'u-skip-link'},
+ {en:'Active Menu',ko:'현재 메뉴 표시',d:'메뉴 중 지금 보고 있는 페이지를 굵기나 밑줄로 구분해 보여 주는 표시예요.',x:'색만 바꾸면 색약인 사람은 헷갈려요. 굵기나 밑줄을 함께 바꿔요.',p:'상단 메뉴에서 지금 페이지 메뉴는 굵게 하고 밑줄을 그어줘',r:['GNB','Tab'],l:1,o:0,v:'u-active-menu'},
+ {en:'Kebab Menu',ko:'케밥 메뉴 · 점 세 개',d:'세로 점 세 개 버튼으로, 누르면 수정·삭제 같은 추가 동작이 펼쳐져요.',x:'점이 가로로 놓이면 미트볼 메뉴라고도 불러요. 이름은 곳마다 조금씩 달라요.',p:'댓글마다 오른쪽에 점 세 개 버튼을 두고 누르면 수정·삭제 메뉴를 보여줘',r:['Hamburger Menu','Context Menu'],l:1,o:0,v:'u-kebab-menu'},
 ]);
 T('design','tool',[
  {en:'Frame',ko:'프레임 · 대지',d:'Figma에서 화면 한 장이나 부품을 담는 틀.',x:'Photoshop의 "대지(아트보드)"와 비슷해요.',j:'"대지 하나 더 만들어 주세요"',p:'Figma에서 1440px 데스크톱 프레임을 기준으로 만들었어',r:['Layer','Auto Layout'],l:1,o:1,u:'https://help.figma.com/hc/en-us/articles/360041539473-Frames-in-Figma-Design',v:{page:''}},
@@ -781,12 +845,9 @@ T('web','adv',[
 ]);
 T('web','parts',[
  {en:'Header',ko:'헤더 · 머리글',d:'페이지 맨 위, 로고와 메뉴가 있는 영역.',p:'헤더 왼쪽에 로고, 오른쪽에 메뉴를 놔줘',r:['GNB','Footer'],l:1,o:1,u:MDN('Web/HTML/Element/header'),v:{page:'hd'}},
- {en:'GNB',ko:'지엔비 · 대표 메뉴',d:'모든 페이지 위쪽에 공통으로 있는 큰 메뉴 줄. Global Navigation Bar.',j:'"GNB", "상단 메뉴", "LNB(왼쪽 하위 메뉴)"',p:'GNB 메뉴를 소개·제품·문의 세 개로 줄여줘',r:['Header','Breadcrumb'],l:1,o:0,jg:1,v:{page:'nv'}},
  {en:'Hero Section',ko:'히어로 섹션 · 첫 화면 큰 영역',d:'페이지에 들어오자마자 보이는 큰 제목·이미지 영역.',j:'"메인 비주얼", "키 비주얼"',p:'히어로 섹션 제목을 더 크게 하고 버튼을 하나만 남겨줘',r:['Above the Fold','CTA Button'],l:1,o:0,v:{page:'hr'}},
  {en:'Footer',ko:'푸터 · 바닥글',d:'페이지 맨 아래, 회사 정보·저작권·약관 링크가 있는 영역.',p:'푸터에 회사 주소와 개인정보처리방침 링크를 넣어줘',r:['Header'],l:1,o:1,u:MDN('Web/HTML/Element/footer'),v:{page:'ft'}},
  {en:'Sidebar',ko:'사이드바 · 옆 영역',d:'본문 옆에 붙은 좁은 영역. 목차·광고·필터 등을 둬요.',p:'블로그 오른쪽 사이드바에 인기 글 목록을 넣어줘',r:['Side Panel'],l:1,o:0,v:{page:'sd'}},
- {en:'Breadcrumb',ko:'브레드크럼 · 현재 위치 경로',d:'"홈 › 의류 › 티셔츠"처럼 지금 어디 있는지 보여 주는 경로.',p:'상품 페이지 위에 breadcrumb을 넣어줘',r:['GNB'],l:1,o:0,v:'breadcrumb'},
- {en:'Pagination',ko:'페이지네이션 · 쪽 번호',d:'목록을 여러 쪽으로 나누고 번호로 넘기는 장치.',p:'게시판 아래에 페이지네이션을 넣어줘. 한 쪽에 10개씩',r:['Infinite Scroll'],l:1,o:0,v:'pagination'},
  {en:'CTA Button',ko:'씨티에이 버튼 · 행동 유도 버튼',d:'"지금 신청", "구매하기"처럼 사용자가 해 주기를 바라는 행동 버튼. Call To Action.',p:'CTA 버튼을 하나만 크게, 눈에 띄는 색으로 해줘',r:['Hero Section','Primary Color'],l:1,o:0,v:'pulse'},
  {en:'Above the Fold',ko:'첫 화면 · 스크롤 전 영역',d:'스크롤하지 않고 처음 보이는 화면 범위.',p:'가입 버튼이 스크롤 없이 첫 화면(above the fold)에 보이게 해줘',r:['Hero Section','Viewport'],l:2,o:0,v:'viewport'},
  {en:'Avatar',ko:'아바타 · 프로필 사진',d:'사용자를 나타내는 작은 동그란 사진이나 이니셜.',p:'댓글 옆에 작성자 아바타를 동그랗게 보여줘',r:['Badge'],l:1,o:0,v:'avatar'},
@@ -1486,6 +1547,7 @@ const MOVED = {
   'web-form':'design-form', 'web-input-field':'design-input-field', 'web-placeholder':'design-placeholder',
   'web-empty-state':'design-empty-state', 'web-badge':'design-badge', 'web-loading-spinner':'design-loading-spinner',
   'web-progress-bar':'design-progress-bar', 'back-loading-state':'design-loading-state',
+  'web-breadcrumb':'design-breadcrumb', 'web-pagination':'design-pagination', 'web-gnb':'design-gnb',
 };
 T('front','layout',[
  {en:'Breakpoint',ko:'브레이크포인트 · 화면 너비 기준점',d:'"이 너비부터 배치를 바꾼다"고 정한 화면 폭. 예: 768px.',x:'디버거의 breakpoint(중단점)와 다른 뜻이에요.',p:'768px 브레이크포인트에서 메뉴를 햄버거로 바꿔줘',r:['Media Query','Responsive Web Design'],l:1,o:0,v:'breakpoint'},
@@ -1934,6 +1996,79 @@ Object.assign(D, {
       i.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); b.click(); } });
       b.addEventListener('click', () => { if (!ok()) return; card.hidden = true; done.hidden = false; done.querySelector('button').focus(); });
       done.querySelector('button').addEventListener('click', () => { i.value = ''; b.setAttribute('aria-disabled', 'true'); done.hidden = true; card.hidden = false; i.focus(); }); }},
+});
+/* design: nav */
+Object.assign(ART, {
+  burger:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s t" d="M20 44a35 26 0 0 1 70 0z"/><circle class="o" cx="42" cy="31" r="2.5"/><circle class="o" cx="57" cy="26" r="2.5"/><circle class="o" cx="70" cy="34" r="2.5"/><rect class="s k" x="17" y="50" width="76" height="12" rx="6"/><path class="s t" d="M20 68h70v3a10 10 0 0 1-10 10H30a10 10 0 0 1-10-10z"/></svg>',
+  cabinet:'<svg viewBox="0 0 110 100" aria-hidden="true"><rect class="s" x="26" y="14" width="66" height="74" rx="4"/><path class="s" d="M26 39h66M26 63h66M54 26h10M54 76h10"/><g class="A mk-pull"><rect class="s t" x="26" y="40" width="66" height="22" rx="2"/><path class="s" d="M54 51h10"/></g></svg>',
+  crumbs:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s t" d="M12 40a11 11 0 0 1 6-20h20a11 11 0 0 1 6 20v22H12z"/><circle class="o" cx="54" cy="66" r="3"/><circle class="o" cx="64" cy="72" r="3"/><circle class="o" cx="74" cy="78" r="3"/><path class="s" d="M82 88V74l9-8 9 8v14z"/></svg>',
+  kebab:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s" d="M55 6v90"/><rect class="s t" x="43" y="14" width="24" height="18" rx="7"/><rect class="s y" x="43" y="40" width="24" height="18" rx="7"/><rect class="s t" x="43" y="66" width="24" height="18" rx="7"/></svg>',
+});
+const lines = (...w) => w.map(x => `<span class="mk-ln" style="width:${x}%"></span>`).join('');
+const gnb = (a, on = -1, c = '', h = '') => `<nav class="mk-gnb${c}"><b>로고</b>${a.map((x, i) => i === on ? `<span class="on${h}" aria-current="page">${x}</span>` : `<span>${x}</span>`).join('')}</nav>`;
+const tabs = ['홈', '검색', '찜', '내 정보'].map((x, i) => `<span${i ? '' : ' class="on" aria-current="page"'}><i></i>${x}</span>`).join('');
+const KEB = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>';
+const MEGA = [['의류', ['티셔츠', '바지']], ['신발', ['운동화', '구두']], ['가방', ['백팩', '토트백']]];
+const STEPS = [['배송지', '받는 분 주소를 적어요'], ['결제', '결제 수단을 골라요'], ['확인', '주문 내용을 한 번 더 봐요']];
+Object.assign(D, {
+  'u-hamburger-menu':{h:pair(ART.burger, D.hamburger.h), m:1, cap:'빵·고기·빵이 쌓인 햄버거처럼 가로줄 세 개가 겹친 버튼이에요'},
+  'u-drawer':{h:pair(ART.cabinet, D.drawer.h), m:1, cap:'서랍을 당겨 열듯, 메뉴 판이 옆에서 밀려 나와요'},
+  'u-breadcrumb':{h:pair(ART.crumbs, D.breadcrumb.h), m:1, cap:'동화 속 빵 부스러기처럼, 지나온 길을 남겨 되돌아갈 수 있게 해요'},
+  'u-kebab-menu':{h:pair(ART.kebab, `<div class="mk-card mk-f mk-kb"><div class="mk-row"><i class="mk-av"></i><b style="flex:1">민지</b><span class="mk-dots mk-hl">${KEB}</span></div>
+    <span class="mk-help">사진 정말 예뻐요!</span><div class="mk-menu"><span>수정</span><span class="mk-red">삭제</span></div></div>`), m:1, cap:'꼬치에 꿴 세 조각처럼 점 세 개가 세로로 놓인 버튼이에요'},
+  'u-gnb':{h:browser(gnb(['소개', '제품', '문의'], -1, ' mk-hl in') + `<b>새로 나온 제품</b><div class="mk-card mk-f">${lines(80, 55)}</div>`, {url:'shop.example'}),
+    cap:'어느 페이지에 가도 맨 위에 똑같이 붙어 있는 사이트 전체의 큰 메뉴예요'},
+  'u-lnb':{h:browser(gnb(['제품', '이벤트', '고객센터'], 2) + `<div class="mk-cols"><nav class="mk-lnb mk-hl"><b>고객센터</b><span class="on" aria-current="page">공지</span><span>자주 묻는 질문</span><span>1:1 문의</span></nav>
+    <div class="mk-f" style="flex:1"><b>공지</b>${lines(90, 70, 80)}</div></div>`, {url:'shop.example/help'}), cap:'큰 메뉴 하나 안에서 세부 페이지로 가는, 옆에 붙은 작은 메뉴예요'},
+  'u-tab-bar':{h:phone(`<b>홈</b><div class="mk-card mk-f">${lines(85, 60)}</div><div class="mk-card mk-f">${lines(70, 50)}</div><nav class="mk-tabbar mk-hl">${tabs}</nav>`),
+    cap:'앱 맨 아래에 주요 화면 버튼을 늘어놓고, 지금 화면을 표시해요'},
+  'u-back-button':{h:phone(`<span class="mk-back mk-hl">‹ 목록</span><div class="mk-img"></div><b>줄무늬 티셔츠</b>${lines(80, 55)}`), cap:'바로 전 화면으로 돌아가는 버튼은 보통 왼쪽 위에 둬요'},
+  'u-fab':{h:phone(`<b>메모</b>${['장보기 목록', '회의 준비', '여행 짐 싸기'].map(x => `<div class="mk-li">${x}</div>`).join('')}<span class="mk-fab mk-hl">+</span>`),
+    cap:'가장 자주 하는 일 하나를 오른쪽 아래에 떠 있는 버튼으로 바로 하게 해요'},
+  'u-back-to-top':{h:phone(`<b>긴 안내 글</b>${lines(90, 75, 85, 60, 90, 70, 80, 65, 88)}<i class="mk-sb"></i><span class="mk-ttop mk-hl">↑</span>`), cap:'긴 페이지를 내려가면 나타나서, 누르면 맨 위로 올려 줘요'},
+  'u-anchor-link':{h:browser(`<b>자주 묻는 질문</b><div class="mk-chips"><span>배송</span><span class="mk-hl">환불</span><span>교환</span></div>${lines(85, 60)}<b class="mk-tgt">환불은 어떻게 하나요?</b>${lines(80)}`,
+    {url:'shop.example/faq#환불'}), cap:'누르면 같은 페이지 안의 그 제목으로 바로 내려가요'},
+  'u-table-of-contents':{h:browser(`<div class="mk-cols"><div class="mk-f" style="flex:1"><b>사용법</b>${lines(95, 80, 90)}<b>문제 해결</b>${lines(85, 70)}</div>
+    <nav class="mk-toc mk-hl"><b>목차</b><span>시작하기</span><span>설치</span><span class="on">사용법</span><span>문제 해결</span></nav></div>`, {url:'docs.example/guide'}), cap:'긴 글의 제목을 모아 두고, 지금 읽는 부분을 표시해요'},
+  'u-load-more-button':{h:phone(`<b>상품 20개</b>${['티셔츠', '바지', '모자'].map(x => `<div class="mk-li"><i class="mk-av mk-sq"></i>${x}</div>`).join('')}<span class="mk-btn ghost mk-sm mk-hl mk-ctr">더 보기 (3/20)</span>`),
+    cap:'목록 끝에서 누를 때만 다음 묶음을 이어 붙여요'},
+  'u-navigation-rail':{h:`<div class="mk-tablet"><div class="mk-scr"><nav class="mk-rail mk-hl">${tabs}</nav><div class="mk-grid">${'<i></i>'.repeat(6)}</div></div></div>`,
+    cap:'넓은 화면에서는 아래 탭 바 대신 왼쪽 가장자리에 메뉴를 세워요'},
+  'u-active-menu':{h:browser(gnb(['소개', '제품', '문의'], 1, '', ' mk-hl') + `<b>제품</b><div class="mk-card mk-f">${lines(80, 55)}</div>`, {url:'shop.example/products'}),
+    cap:'지금 보고 있는 페이지의 메뉴를 굵기와 밑줄로 구분해요'},
+  'u-mega-menu':{h:hint('여성을 눌러 보세요 (방향키로 이동, Esc로 닫기)') + browser(`<nav class="mk-gnb"><b>로고</b><button class="mk-mm" aria-expanded="false">여성 ▾</button><span>남성</span><span>아이</span></nav>
+    <div class="mk-mega" hidden>${MEGA.map(([h, a]) => `<div class="mk-f"><b>${h}</b>${a.map(x => `<button data-p="여성 › ${h} › ${x}">${x}</button>`).join('')}</div>`).join('')}</div>
+    <b class="mk-res" aria-live="polite">여성</b><div class="mk-card mk-f">${lines(80, 55)}</div>`, {url:'shop.example'}), cap:'메뉴 하나에 딸린 하위 메뉴를 넓은 판에 한꺼번에 펼쳐요',
+    init: s => { const b = s.querySelector('.mk-mm'), p = s.querySelector('.mk-mega'), it = [...p.querySelectorAll('button')], res = s.querySelector('.mk-res');
+      p.id = uid(); b.setAttribute('aria-controls', p.id);
+      const set = o => { p.hidden = !o; b.setAttribute('aria-expanded', o); };
+      b.addEventListener('click', () => { const o = p.hidden; set(o); if (o) it[0].focus(); });
+      keys(b, {ArrowDown: 1, Escape: 0}, o => { set(!!o); if (o) it[0].focus(); });
+      keys(p, {ArrowDown: 1, ArrowUp: -1, ArrowRight: 2, ArrowLeft: -2, Escape: 0}, d => {
+        if (!d) { set(false); b.focus(); return; }
+        const i = it.indexOf(s.getRootNode().activeElement); it[(i + d + it.length) % it.length].focus(); });
+      it.forEach(x => x.addEventListener('click', () => { res.textContent = x.dataset.p; set(false); b.focus(); }));
+      s.addEventListener('focusout', e => { if (!p.hidden && !(b.contains(e.relatedTarget) || p.contains(e.relatedTarget))) set(false); }); }},
+  'u-stepper':{h:hint('다음을 눌러 단계를 넘겨 보세요') + phone(`<b>주문하기</b><ol class="mk-steps">${STEPS.map(([n]) => `<li><i></i>${n}</li>`).join('')}</ol>
+    <div class="mk-card mk-f mk-stp"><b aria-live="polite"></b><span class="mk-help"></span></div>
+    <div class="mk-row mk-stb"><button class="mk-btn ghost mk-sm">이전</button><button class="mk-btn mk-sm">다음</button></div>`), cap:'여러 단계로 나뉜 일에서 지금 몇 번째인지 보여 줘요',
+    init: s => { const li = [...s.querySelectorAll('.mk-steps li')], t = s.querySelector('.mk-stp b'), h = s.querySelector('.mk-stp .mk-help'), [pv, nx] = s.querySelectorAll('.mk-stb button');
+      let k = 0;
+      const draw = () => { const d = k < 3;
+        li.forEach((x, i) => { x.className = i < k ? 'done' : i === k ? 'on' : ''; x.firstChild.textContent = i < k ? '✓' : i + 1;
+          if (i === k) x.setAttribute('aria-current', 'step'); else x.removeAttribute('aria-current'); });
+        t.textContent = d ? `${k + 1}단계 · ${STEPS[k][0]}` : '주문을 마쳤어요'; h.textContent = d ? STEPS[k][1] : '주문 번호 1024';
+        pv.setAttribute('aria-disabled', k === 0 || !d); nx.textContent = k < 2 ? '다음' : d ? '주문하기' : '처음부터'; };
+      pv.addEventListener('click', () => { if (k > 0 && k < 3) { k--; draw(); } });
+      nx.addEventListener('click', () => { k = k < 3 ? k + 1 : 0; draw(); });
+      draw(); }},
+  'u-skip-link':{h:hint('키보드는 Tab · 마우스는 <button class="mk-peek">숨은 링크 보기</button>') + browser(`<button class="mk-skip">본문 바로가기</button>
+    <nav class="mk-gnb"><b>로고</b>${['소개', '제품', '소식', '문의'].map(x => `<button>${x}</button>`).join('')}</nav>
+    <div class="mk-main mk-f" tabindex="-1"><b>본문</b>${lines(85, 60)}<span class="mk-res mk-ok" aria-live="polite"></span></div>`), cap:'키보드 사용자가 반복되는 메뉴를 건너뛰고 본문으로 바로 가게 해요',
+    init: s => { const k = s.querySelector('.mk-skip'), m = s.querySelector('.mk-main'), r = m.querySelector('.mk-res');
+      s.querySelector('.mk-peek').addEventListener('click', () => k.focus());
+      k.addEventListener('click', () => { m.focus(); r.textContent = '메뉴 4개를 건너뛰고 본문에 왔어요'; });
+      m.addEventListener('blur', () => { r.textContent = ''; }); }},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;

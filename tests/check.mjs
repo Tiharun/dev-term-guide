@@ -11,8 +11,11 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   feedback: ['Modal', 'Overlay', 'Toast', 'Tooltip', 'Skeleton UI', 'Empty State', 'Badge', 'Loading Spinner', 'Progress Bar', 'Loading State',
     'Snackbar', 'Banner', 'Confirm Dialog', 'Popover', 'Notification Dot', 'Error State', 'Success State', 'Inline Message',
     'Determinate vs Indeterminate', 'Optimistic UI', 'Status Indicator', 'Cookie Consent Banner', 'Destructive Action'],
+  nav: ['Tab', 'Hamburger Menu', 'Drawer', 'Breadcrumb', 'Pagination', 'GNB', 'LNB', 'Tab Bar', 'Mega Menu', 'Stepper',
+    'Back Button', 'FAB', 'Back to Top', 'Anchor Link', 'Table of Contents', 'Load More Button', 'Navigation Rail',
+    'Skip Link', 'Active Menu', 'Kebab Menu'],
 };
-const COUNT = { form: 28, feedback: 23 };    // sec: 카드 수
+const COUNT = { form: 28, feedback: 23, nav: 20 };    // sec: 카드 수
 const REDRAWN = [];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
