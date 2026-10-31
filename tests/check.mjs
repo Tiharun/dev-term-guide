@@ -42,8 +42,11 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   color: ['Saturation', 'Brightness', 'Tint / Shade', 'Semantic Color', 'Brand Color', 'Complementary Color', 'Analogous Color', 'Monochrome',
     'Neutral Color', 'Color Blindness', 'RGB vs CMYK', 'Tone Down', 'Color Temperature', 'OKLCH'],
   tip: ['Develop', 'Asset', 'Design Review', 'Layout Frame', 'Dummy Data', 'Lorem Ipsum', 'Benchmarking', 'Moodboard'],
+  'terminal/basic': ['Terminal', 'CLI', 'Path', 'Directory', 'Shell', 'Shell Prompt', 'Command', 'Working Directory', 'Home Directory',
+    'Absolute vs Relative Path', 'Argument', 'Option', 'GUI'],
 };
-const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16 };    // sec: 카드 수
+const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
+  'basics/core': 8, 'terminal/basic': 13 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
@@ -114,7 +117,7 @@ const SYM_NEW = ['아이폰에서 위·아래 내용이 가려져요', '휴대�
 check('symcount', () => g.SYMPTOMS.length !== 82 ? 'length ' + g.SYMPTOMS.length
   : SYM_NEW.filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 978 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강)
+check('total', () => g.TERMS.length === 987 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
 const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
   const b = Buffer.from(html.match(/FONT:START[\s\S]*?base64,([A-Za-z0-9+/=]+)/)[1], 'base64'), set = new Set();
