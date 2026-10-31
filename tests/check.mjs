@@ -54,7 +54,7 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
   'basics/core': 8, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -146,8 +146,9 @@ const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
         for (let c = a; c <= z && c !== 0xFFFF; c++) { const gi = r ? t.readUInt16BE(R + j * 2 + r + (c - a) * 2) : c; if (gi && (gi + d) & 0xFFFF) set.add(c); } } } }
   return set;
 };
+const NO_GLYPH = ['덈', '뀞'];    // 원본 Hahmlet에도 없는 확장 완성형. Character Encoding의 깨짐 예시라 본문·고정폭 글꼴로만 보인다
 check('font', () => { const set = fontCmap(), out = html.replace(/\/\* FONT:START \*\/[\s\S]*?\/\* FONT:END \*\//, '');
-  const miss = [...new Set(out.match(/[ㄱ-ㆎ가-힣]/g))].filter(ch => !set.has(ch.codePointAt(0)));
+  const miss = [...new Set(out.match(/[ㄱ-ㆎ가-힣]/g))].filter(ch => !set.has(ch.codePointAt(0)) && !NO_GLYPH.includes(ch));
   return miss.length ? miss.length + '자 없음: ' + miss.slice(0, 20).join('') : ''; });
 
 if (later.length) console.log(later.join('\n'));
