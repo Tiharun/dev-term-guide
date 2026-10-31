@@ -3004,7 +3004,7 @@ Object.assign(D, {
       const set = n => { v = Math.max(0, Math.min(100, Math.round(n))); f.style.width = th.style.left = v + '%';
         th.setAttribute('aria-valuenow', v); th.setAttribute('aria-valuetext', v + '%'); out.textContent = v + '%'; pv.style.opacity = .2 + v / 125; };
       const at = e => { const r = t.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); };
-      grab(t, {down: e => { at(e); th.focus({preventScroll: true}); }, move: at});
+      grab(t, {down: e => { e.preventDefault(); at(e); th.focus({preventScroll: true}); }, move: at});
       keys(th, {ArrowLeft:-5, ArrowDown:-5, ArrowRight:5, ArrowUp:5, PageDown:-10, PageUp:10, Home:-100, End:100}, d => set(v + d)); set(v); }},
   'u-quantity-stepper':{h:hint('− + 를 눌러 보세요 (키보드 ↑↓)') + phone(`<b>장바구니</b><div class="mk-card mk-row"><span class="mk-thumb"></span><div style="flex:1"><b>양말 3켤레</b><div class="mk-help">9,900원</div></div></div>
     <div class="mk-step"><button class="mk-btn ghost" aria-label="하나 빼기">−</button><span role="spinbutton" tabindex="0" aria-label="수량" aria-valuemin="1" aria-valuemax="9" aria-valuenow="1">1</span><button class="mk-btn ghost" aria-label="하나 더하기">+</button></div>
@@ -4045,13 +4045,11 @@ Object.assign(D, {
     <div class="dv" role="separator" tabindex="0" aria-orientation="vertical" aria-label="파일 목록 너비" aria-valuemin="25" aria-valuemax="75" aria-valuenow="40"><i></i></div>
     <div class="b"><b>index.html</b><code>&lt;h1&gt;봄빛&lt;/h1&gt;</code><code>&lt;p&gt;봄 신상품&lt;/p&gt;</code></div></div>
     <output class="mk-help">왼쪽 40% · 오른쪽 60% · 화살표 키로도 움직여요</output></div>`, cap:'경계선을 끌어 양쪽 너비를 나눠요. 너무 좁아지지 않게 25~75% 사이에서만 움직여요',
-    init: s => { const pn = s.querySelector('.pn'), dv = s.querySelector('.dv'), out = s.querySelector('output'); let v = 40, v0 = 0, drag = false;
+    init: s => { const pn = s.querySelector('.pn'), dv = s.querySelector('.dv'), out = s.querySelector('output'); let v = 40, v0 = 0;
       const set = n => { v = Math.max(25, Math.min(75, Math.round(n))); pn.style.setProperty('--w', v + '%'); dv.setAttribute('aria-valuenow', v); };
       const say = t => { out.textContent = `왼쪽 ${v}% · 오른쪽 ${100 - v}%${t || ''}`; };
-      dv.addEventListener('pointerdown', e => { drag = true; v0 = v; dv.setPointerCapture(e.pointerId); dv.classList.add('on'); });
-      dv.addEventListener('pointermove', e => { if (!drag) return; const r = pn.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); });
-      dv.addEventListener('pointerup', () => { if (!drag) return; drag = false; dv.classList.remove('on'); say(); });
-      dv.addEventListener('pointercancel', () => { if (!drag) return; drag = false; dv.classList.remove('on'); set(v0); say(' · 끌기가 끊겨 원래 너비로 돌아왔어요'); });
+      grab(dv, {down: () => { v0 = v; dv.classList.add('on'); }, move: e => { const r = pn.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); },
+        up: (e, dx, dy, c) => { dv.classList.remove('on'); if (c) { set(v0); say(' · 끌기가 끊겨 원래 너비로 돌아왔어요'); } else say(); }});
       keys(dv, {ArrowLeft: -5, ArrowRight: 5, Home: -100, End: 100}, d => { set(v + d); say(); }); }},
   'u-shortcut-key':{h:`<div class="mk-apsk"><div class="mk-card"><b>편집</b>${[['되돌리기', 'Ctrl+Z'], ['잘라내기', 'Ctrl+X'], ['복사', 'Ctrl+C', 1], ['붙여넣기', 'Ctrl+V'], ['모두 선택', 'Ctrl+A']].map(([t, k, on]) =>
     `<span class="rw${on ? ' on' : ''}">${t}<kbd>${k}</kbd></span>`).join('')}</div><span class="mk-help">맥은 Ctrl 대신 ⌘ · 예) 복사 ⌘C</span></div>`,
@@ -4194,7 +4192,7 @@ Object.assign(D, {
       const set = n => { v = Math.max(400, Math.min(800, Math.round(n / 10) * 10)); f.style.width = th.style.left = (v - 400) / 4 + '%';
         th.setAttribute('aria-valuenow', v); th.setAttribute('aria-valuetext', '굵기 ' + v); out.textContent = v; sm.style.fontWeight = v; };
       const at = e => { const r = t.getBoundingClientRect(); set(400 + (e.clientX - r.left) / r.width * 400); };
-      grab(t, {down: e => { at(e); th.focus({preventScroll: true}); }, move: at});
+      grab(t, {down: e => { e.preventDefault(); at(e); th.focus({preventScroll: true}); }, move: at});
       keys(th, {ArrowLeft: -10, ArrowDown: -10, ArrowRight: 10, ArrowUp: 10, PageDown: -100, PageUp: 100, Home: -400, End: 400}, d => set(v + d)); set(v); }},
   'u-baseline':{h:`<div class="mk-tfbl">${[['c', '가운데 맞춤'], ['g on', '기준선 맞춤']].map(([k, t]) => `<div class="rw ${k}"><small>${t}</small><span class="ln"><i class="bl" aria-hidden="true"></i><span class="pr"><b>12,900</b><span>원</span></span></span></div>`).join('')}</div>`,
     cap:'"원"을 가운데에 맞추면 떠 보이고, 기준선(주황 선)에 맞추면 숫자와 한 줄로 앉아요'},
@@ -4243,7 +4241,7 @@ const tcRun = (s, k, min, max, step, v) => { const t = s.querySelector('.mk-sl')
     th.style.left = p + '%'; f.style.left = Math.min(p, q) + '%'; f.style.width = Math.abs(p - q) + '%';
     th.setAttribute('aria-valuenow', v); th.setAttribute('aria-valuetext', txt); out.textContent = txt; a.style.background = col; };
   const at = e => { const r = t.getBoundingClientRect(); set(min + (e.clientX - r.left) / r.width * (max - min)); };
-  grab(t, {down: e => { at(e); th.focus({preventScroll: true}); }, move: at});
+  grab(t, {down: e => { e.preventDefault(); at(e); th.focus({preventScroll: true}); }, move: at});
   keys(th, {ArrowLeft: -step, ArrowDown: -step, ArrowRight: step, ArrowUp: step, PageDown: -step * 4, PageUp: step * 4, Home: min - max, End: max - min}, d => set(v + d)); set(v); };
 const tcWheel = (on, line) => { const P = (a, r) => { const t = (a - 90) * Math.PI / 180; return (50 + r * Math.cos(t)).toFixed(2) + ' ' + (50 + r * Math.sin(t)).toFixed(2); };
   return `<svg class="wh" viewBox="0 0 100 100" aria-hidden="true">${Array.from({length: 12}, (_, i) => { const a = i * 30 - 15, b = a + 30;
