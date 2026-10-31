@@ -17,6 +17,7 @@
   --mark:#e0662b;--mark-text:#a8410f;--mark-bg:#fdf0e8;
   --sky:#b9c7d8;--steel:#8fa3bd;
   --ch1:#3566b8;--ch2:var(--mark);--ch3:#13a08a;
+  --tl-r:#ff5f57;--tl-y:#febc2e;--tl-g:#28c840;
   --serif:'Hahmlet','HANBatang','Batang','바탕','AppleMyungjo',serif;
   --sans:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
   --mono:Consolas,'D2Coding','Courier New',monospace;
@@ -270,7 +271,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .page>div{background:var(--fig);border-radius:4px;display:grid;place-items:center}
 .page>div.hl{background:var(--mark);color:#fff}
 .win{width:min(360px,94%);aspect-ratio:4/3;background:var(--plate);border:1.5px solid var(--ink);border-radius:9px;overflow:hidden;display:grid;
-  grid-template:"tt tt" 12% "mb mb" 8% "tb tb" 11% "sb ct" 1fr "st st" 8%/28% 1fr;font-size:10.5px;font-weight:700;color:var(--muted);gap:3px}
+  grid-template:"tt tt" 12% "mb mb" 8% "tb tb" 11% "sb ct" 1fr "st st" 8%/28% 1fr;font-size:11px;font-weight:700;color:var(--muted);gap:3px}
 .win>div{background:var(--fig);display:grid;place-items:center;position:relative}
 .win>div.hl{background:var(--mark);color:#fff}
 .http{text-align:center}
@@ -309,7 +310,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -1052,6 +1053,68 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-oms .rw{display:grid;grid-template-columns:46px 1fr auto;align-items:baseline;gap:8px;line-height:1.2}
 .mk-oms .rw>span:first-child{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}.mk-oms .rw b{color:var(--ink);white-space:nowrap}
 .mk-oms .bs{background:var(--mark-bg);border-radius:6px}.mk-oms>.mk-help{margin-top:4px}
+.mk-apsp{display:flex;align-items:center;gap:10px}.mk-apsp .st{display:grid;justify-items:center;gap:6px}.mk-apsp .ar{font-size:14px;color:var(--muted)}
+.mk-apsp .ph{width:112px;height:190px;border:1.5px solid var(--ink);border-radius:18px;background:var(--plate);padding:14px 8px;display:flex;flex-direction:column;gap:6px}
+.mk-apsp .ph.sp{align-items:center;justify-content:center;background:var(--mark-bg)}.mk-apsp .sp b{font-size:13px;color:var(--ink)}
+.mk-apsp .ic{width:42px;height:42px;border-radius:11px;background:var(--mark);display:grid;place-items:center;color:#fff}.mk-apsp .ic svg.i{width:24px;height:24px}
+.mk-apsp .hd{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink)}.mk-apsp .im{height:58px;border-radius:7px;overflow:hidden}
+.mk-apsp .ln{height:9px;border-radius:4px;background:var(--rule-2)}.mk-apsp .ln.s{width:62%}
+.mk-apon .sk{align-self:flex-end;font-size:11.5px;font-weight:700;color:var(--muted)}.mk-apon .im{height:92px;border-radius:10px;overflow:hidden}
+.mk-apon b{font-size:13.5px}.mk-apon p{margin:0;font-size:11.5px;color:var(--muted)}
+.mk-apon .dt{display:flex;justify-content:center;gap:5px;margin-top:auto}.mk-apon .dt i{width:6px;height:6px;border-radius:50%;background:var(--rule)}.mk-apon .dt i.on{width:16px;border-radius:3px;background:var(--ink)}
+.mk-apon .mk-btn{justify-content:center}
+.mk-apab .ab{display:flex;align-items:center;gap:6px;margin:-4px -4px 0;padding:6px 4px}.mk-apab .ab b{flex:1;font-size:13px;text-align:center}
+.mk-apab .ab svg.i{width:18px;height:18px}.mk-apab .it{display:grid;gap:2px;padding:7px 2px;border-bottom:1px solid var(--rule-2)}
+.mk-apab .it b{font-size:12px}.mk-apab .it span{font-size:11px;color:var(--muted)}
+.mk-apsb{display:grid;gap:8px;justify-items:center}.mk-apsb .bx{display:grid;grid-template-columns:1fr 12px;width:220px;border:1.5px solid var(--ink);border-radius:9px;background:var(--plate);overflow:hidden}
+.mk-apsb .ls{display:grid}.mk-apsb .ls span{padding:7px 10px;font-size:12px;color:var(--ink);border-bottom:1px solid var(--rule-2)}.mk-apsb .ls span:last-child{border-bottom:0}
+.mk-apsb .tr{position:relative;background:var(--fig);border-left:1px solid var(--rule)}.mk-apsb .th{position:absolute;left:2px;right:2px;top:30%;height:40%;border-radius:4px;background:var(--steel)}
+.mk-apsb .lg{display:grid;gap:2px;text-align:center}.mk-apsb .lg b{font-size:12px;color:var(--ink)}
+.mk-apsl{display:grid;gap:8px;width:min(100%,320px);margin-top:6px}
+.mk-apsl .pn{--w:40%;display:grid;grid-template-columns:var(--w) 24px 1fr;height:150px;border:1.5px solid var(--ink);border-radius:9px;background:var(--plate);overflow:hidden}
+.mk-apsl .a,.mk-apsl .b{display:grid;align-content:start;gap:5px;min-width:0;padding:9px 8px;font-size:11.5px;color:var(--muted)}.mk-apsl .a{background:var(--fig)}
+.mk-apsl .a b,.mk-apsl .b b{font-size:12px;color:var(--ink)}.mk-apsl .a span{white-space:nowrap}.mk-apsl .b code{font-size:11.5px;white-space:nowrap}
+.mk-apsl .dv{position:relative;display:grid;place-items:center;cursor:col-resize;touch-action:none;background:var(--plate)}
+.mk-apsl .dv::before{content:"";position:absolute;top:0;bottom:0;left:11px;width:2px;background:var(--rule)}
+.mk-apsl .dv i{position:relative;width:8px;height:28px;border-radius:4px;background:var(--plate);border:1.5px solid var(--steel)}
+.mk-apsl .dv.on::before,.mk-apsl .dv:hover::before{background:var(--mark)}.mk-apsl .dv.on i{border-color:var(--mark)}
+.mk-apsl .dv:focus-visible{outline:2px solid var(--mark);outline-offset:-2px}
+.mk-apsk{display:grid;gap:8px;width:230px}.mk-apsk .mk-card{display:grid;padding:6px;text-align:left}.mk-apsk .mk-card>b{padding:2px 8px 6px;font-size:12px;color:var(--muted)}
+.mk-apsk .rw{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 8px;border-radius:6px;font-size:12.5px;color:var(--ink)}.mk-apsk .rw.on{background:var(--mark-bg)}
+.mk-apsk kbd,.mk-apcp kbd{font-family:var(--sans);font-size:11px;color:var(--muted);border:1px solid var(--rule);border-radius:5px;padding:0 5px;white-space:nowrap}
+.mk-apwc{display:grid;gap:12px;width:min(100%,300px)}.mk-apwc .rw{display:grid;gap:4px}.mk-apwc .rw>b{font-size:12px;color:var(--ink)}
+.mk-apwc .bar{display:flex;align-items:center;height:30px;border:1.5px solid var(--ink);border-radius:8px;background:var(--fig);overflow:hidden;font-size:12px;color:var(--ink)}
+.mk-apwc .bar>span{flex:1;padding:0 10px}.mk-apwc .mac>span{text-align:center;padding-right:58px}
+.mk-apwc .w{display:grid;place-items:center;width:38px;height:100%;font-size:13px;color:var(--ink)}.mk-apwc .w.x{background:var(--mark);color:#fff}
+.mk-apwc .tl{display:flex;gap:7px;padding-left:10px}.mk-apwc .tl i{width:12px;height:12px;border-radius:50%}
+.mk-aptr{display:grid;gap:6px;width:min(100%,300px)}.mk-aptr .mn{justify-self:end;margin-right:76px;display:grid;padding:4px;min-width:110px;text-align:left}
+.mk-aptr .mn span{padding:4px 8px;border-radius:5px;font-size:12px;color:var(--ink)}.mk-aptr .mn span:first-child{background:var(--mark-bg)}
+.mk-aptr .tb{display:flex;align-items:center;gap:6px;height:38px;padding:0 8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--fig)}
+.mk-aptr .ap{width:20px;height:20px;border-radius:5px;background:var(--steel)}.mk-aptr .ap.a{background:var(--ink-3)}.mk-aptr .sp{flex:1}
+.mk-aptr .na{display:flex;align-items:center;gap:6px;padding:2px 4px;font-size:11.5px;color:var(--ink)}.mk-aptr .na svg.i{width:16px;height:16px}.mk-aptr .na .me{display:grid;margin:0 4px;color:var(--mark-text)}
+.mk-apst .t{font-size:15px}.mk-apst .gp{display:grid;gap:0}.mk-apst .gp>span{font-size:11px;font-weight:700;color:var(--muted);padding:0 2px 2px}
+.mk-apst .rw{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;background:var(--fig);font-size:12px}.mk-apst .rw+.rw{border-top:1px solid var(--rule)}
+.mk-apst .gp .rw:first-of-type{border-radius:7px 7px 0 0}.mk-apst .gp .rw:last-child{border-radius:0 0 7px 7px}.mk-apst .gp .rw:only-of-type{border-radius:7px}
+.mk-apst .rw em{font-style:normal;font-size:11px;color:var(--muted)}.mk-apst .rw.out{justify-content:center;color:var(--mark-text);font-weight:700}
+.mk-apst .tg{position:relative;width:30px;height:18px;border-radius:9px;background:var(--steel)}.mk-apst .tg::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.mk-apst .tg.on{background:var(--moss)}.mk-apst .tg.on::after{left:14px}
+.mk-apin{display:grid;grid-template-columns:1fr 128px;width:min(100%,320px);min-height:170px;border:1.5px solid var(--ink);border-radius:9px;background:var(--plate);overflow:hidden}
+.mk-apin .cv{position:relative;background:var(--fig)}.mk-apin .rc{position:absolute;left:18%;top:26%;width:52%;height:34%;border-radius:8px;background:var(--ch1);outline:1.5px solid var(--mark);outline-offset:3px}
+.mk-apin .rc i{position:absolute;width:7px;height:7px;background:var(--plate);border:1.5px solid var(--mark)}
+.mk-apin .rc i:nth-child(1){left:-8px;top:-8px}.mk-apin .rc i:nth-child(2){right:-8px;top:-8px}.mk-apin .rc i:nth-child(3){left:-8px;bottom:-8px}.mk-apin .rc i:nth-child(4){right:-8px;bottom:-8px}
+.mk-apin .ci{position:absolute;right:10%;bottom:10%;width:30px;height:30px;border-radius:50%;background:var(--sky)}
+.mk-apin .pp{display:grid;align-content:start;gap:6px;padding:9px;border-left:1px solid var(--rule);text-align:left}.mk-apin .pp>b{font-size:12px;color:var(--ink)}
+.mk-apin .pp>span{font-size:11px;font-weight:700;color:var(--muted)}.mk-apin .g{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.mk-apin .f{display:flex;align-items:center;gap:4px;padding:3px 5px;border:1px solid var(--rule);border-radius:5px;font-size:11.5px;color:var(--ink)}.mk-apin .f small{font-size:11px;color:var(--muted)}
+.mk-apin .f i{width:12px;height:12px;border-radius:3px;background:var(--ch1)}
+.mk-apcp{display:grid;gap:8px;width:min(100%,320px);margin-top:6px}
+.mk-apcp .bx{border:1.5px solid var(--ink);border-radius:10px;background:var(--plate);overflow:hidden}
+.mk-apcp .q{display:flex;align-items:center;gap:6px;padding:0 10px;border-bottom:1px solid var(--rule)}.mk-apcp .q svg.i{color:var(--muted)}
+.mk-apcp input{flex:1;min-width:0;height:36px;border:0;background:none;font:inherit;font-size:13px;color:var(--ink)}.mk-apcp input:focus{outline:none}
+.mk-apcp .bx:focus-within{box-shadow:0 0 0 2px var(--mark)}
+.mk-apcp ul{list-style:none;margin:0;padding:4px;height:178px}
+.mk-apcp li{display:flex;align-items:center;justify-content:space-between;gap:10px;height:28px;padding:0 8px;border-radius:6px;font-size:12.5px;color:var(--ink);cursor:pointer}
+.mk-apcp li b{color:var(--mark-text)}.mk-apcp li[aria-selected="true"]{background:var(--mark-bg)}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -1229,6 +1292,17 @@ T('design','app',[
  {en:'Context Menu',ko:'컨텍스트 메뉴 · 우클릭 메뉴',d:'마우스 오른쪽 버튼을 누르면 그 자리에 뜨는 메뉴.',p:'파일을 우클릭하면 이름 바꾸기·삭제가 있는 컨텍스트 메뉴를 띄워줘',r:['Dropdown'],l:2,o:0,v:'dropdown'},
  {en:'Dialog',ko:'다이얼로그 · 대화 상자',d:'확인·취소처럼 사용자의 대답을 받는 작은 창.',x:'웹에서는 보통 모달로 만들어요.',p:'창을 닫기 전에 "저장할까요?" 다이얼로그를 띄워줘',r:['Modal'],l:1,o:1,u:MDN('Web/HTML/Element/dialog'),v:'modal'},
  {en:'Bottom Sheet',ko:'바텀 시트 · 아래에서 올라오는 판',d:'모바일 화면 아래에서 위로 올라오는 판.',p:'공유 버튼을 누르면 아래에서 bottom sheet가 올라오게 해줘',r:['Drawer','Modal'],l:2,o:0,v:'toast'},
+ {en:'Splash Screen',ko:'스플래시 화면 · 시작 화면',d:'앱을 켜면 첫 화면이 준비될 때까지 잠깐 보이는 화면이에요. 보통 앱 아이콘과 바탕색만 있어요.',x:'준비가 끝나면 바로 사라져야 해요. 일부러 오래 띄우면 기다림만 길어져요. 안드로이드는 12 버전부터 모든 앱에 기본 시작 화면이 붙어요.',p:'앱을 켤 때 Splash Screen(시작 화면)에는 로고만 가운데 두고, 준비가 끝나면 바로 첫 화면으로 넘어가게 해줘',r:['Loading State','Skeleton UI'],l:2,o:0,j:'"스플래시"',v:'u-splash-screen'},
+ {en:'Onboarding',ko:'온보딩 · 첫 사용 안내',d:'앱을 처음 쓰는 사람에게 핵심 기능과 쓰는 법을 몇 장으로 알려 주는 과정이에요.',x:'짧게 만들고 언제든 건너뛸 수 있게 해요. 설명을 길게 늘어놓기보다 바로 써 보게 하는 편이 좋아요.',p:'첫 실행 때 Onboarding(첫 사용 안내)을 3장으로 보여주고, 오른쪽 위에 "건너뛰기"를 넣어줘',r:['Empty State','Progressive Disclosure','Tooltip'],l:2,o:0,j:'"온보딩", "튜토리얼"',v:'u-onboarding'},
+ {en:'App Bar',ko:'앱 바 · 상단 바',d:'모바일 앱 화면 맨 위에 붙은 줄이에요. 지금 화면 이름, 뒤로 가기, 자주 쓰는 버튼이 들어가요.',x:'웹의 헤더, 프로그램 창의 타이틀 바와 하는 일이 비슷해요. 머티리얼 디자인에서는 Top App Bar라고 불러요.',p:'주문 내역 화면 위에 App Bar(앱 바)를 넣어서 왼쪽은 뒤로 가기, 가운데는 제목, 오른쪽은 검색 아이콘을 둬줘',r:['Title Bar','Back Button','Tab Bar'],l:1,o:0,j:'"헤더", "상단 바"',v:'u-app-bar'},
+ {en:'Scrollbar',ko:'스크롤바 · 스크롤 막대',d:'내용이 영역보다 길 때 옆에 생기는 막대예요. 손잡이 위치는 지금 보는 곳을, 손잡이 길이는 한 번에 보이는 양을 알려 줘요.',x:'맥에서 트랙패드를 쓰면 스크롤할 때만 잠깐 보였다 사라지는 게 기본이에요. 마우스로 쓰는 곳에서는 손잡이를 잡아 끌 수 있어야 해요.',p:'목록 영역에만 Scrollbar(스크롤바)가 생기게 하고, 막대를 얇고 연한 색으로 바꿔줘',r:['Overflow','Momentum Scroll'],l:1,o:0,v:'u-scrollbar'},
+ {en:'Split Pane',ko:'스플릿 페인 · 나눈 창',d:'한 창을 둘 이상으로 나누고, 가운데 경계선을 끌어 크기를 조절하게 만든 구조예요.',x:'파일 목록과 편집기, 메일 목록과 본문처럼 두 가지를 함께 볼 때 써요. 경계선은 키보드 화살표로도 움직일 수 있어야 해요.',p:'왼쪽 파일 목록과 오른쪽 편집기를 Split Pane(나눈 창)으로 만들고, 가운데 경계선을 끌거나 화살표 키로 너비를 바꾸게 해줘',r:['Side Panel','Master-Detail','Split Screen'],l:2,o:0,v:'u-split-pane'},
+ {en:'Shortcut Key',ko:'단축키 · 키보드 단축키',d:'메뉴를 찾아 누르는 대신 키 몇 개를 함께 눌러 바로 실행하는 방법이에요. Ctrl+C(복사)처럼요.',x:'메뉴 옆에 단축키를 적어 두면 쓰다가 저절로 외워요. 맥에서는 Ctrl 대신 ⌘(Command) 키를 써요. ⌘C가 복사예요.',p:'저장 기능에 Shortcut Key(단축키) Ctrl+S를 달고, 메뉴의 "저장" 옆에 단축키를 적어줘',r:['Menu Bar','Context Menu','Tooltip'],l:1,o:0,j:'"단축키", "핫키"',v:'u-shortcut-key'},
+ {en:'Window Controls',ko:'창 조절 버튼 · 최소화·최대화·닫기',d:'프로그램 창 맨 위 구석에 있는 최소화·최대화·닫기 버튼 세 개예요.',x:'윈도우는 오른쪽 위에 —·☐·✕, 맥은 왼쪽 위에 빨강(닫기)·노랑(최소화)·초록(확대) 동그라미로 있어요. 제목 줄을 직접 그리는 앱도 이 자리와 순서는 지켜요.',p:'제목 줄을 직접 만든 데스크톱 앱이야. 윈도우에서는 오른쪽 위에 Window Controls(최소화·최대화·닫기)를 기본 순서대로 넣어줘',r:['Title Bar','Menu Bar'],l:1,o:0,j:'맥 버튼은 "트래픽 라이트"',v:'u-window-controls'},
+ {en:'Tray Icon',ko:'트레이 아이콘 · 알림 영역 아이콘',d:'윈도우 작업 표시줄 오른쪽 구석(알림 영역)에 뜨는 작은 프로그램 아이콘이에요. 창을 닫아도 뒤에서 도는 프로그램이 여기 남아요.',x:'누르면 열기·종료 같은 짧은 메뉴가 떠요. 맥에서는 화면 맨 위 메뉴 막대 오른쪽에 비슷한 아이콘이 놓여요.',p:'창을 닫아도 앱이 꺼지지 않게 Tray Icon(트레이 아이콘)으로 남기고, 아이콘을 우클릭하면 "열기 / 종료" 메뉴를 띄워줘',r:['Context Menu','Status Bar','Notification Dot'],l:2,o:0,j:'"트레이", "시스템 트레이"',v:'u-tray-icon'},
+ {en:'Settings Screen',ko:'설정 화면 · 환경설정',d:'알림·화면·계정처럼 앱을 내 입맛대로 바꾸는 항목을 모아 둔 화면이에요.',x:'비슷한 것끼리 묶어 제목을 달고, 켜고 끄는 건 바로 적용되는 토글로 만들어요. 로그아웃처럼 되돌리기 어려운 건 맨 아래에 따로 둬요.',p:'Settings Screen(설정 화면)을 알림·화면·계정 묶음으로 나누고, 알림 켜기는 Toggle Switch(토글 스위치)로 바로 적용되게 해줘',r:['Toggle Switch','Grouping','Destructive Action'],l:1,o:0,j:'"설정", "환경설정"',v:'u-settings-screen'},
+ {en:'Inspector Panel',ko:'인스펙터 · 속성 패널',d:'고른 물체의 크기·색·글꼴 같은 속성을 보여 주고 바로 고치게 하는 옆 패널이에요. 피그마 오른쪽 패널이 대표적이에요.',x:'무엇을 골랐느냐에 따라 내용이 바뀌어요. 글자를 고르면 글꼴, 도형을 고르면 크기와 채우기 색이 나와요.',p:'캔버스에서 도형을 고르면 오른쪽 Inspector Panel(속성 패널)에 너비·높이·색이 나오고, 숫자를 고치면 바로 반영되게 해줘',r:['Side Panel','Inline Edit','Master-Detail'],l:2,o:0,j:'"속성창", "인스펙터"',v:'u-inspector-panel'},
+ {en:'Command Palette',ko:'커맨드 팔레트 · 명령 팔레트',d:'단축키로 띄운 검색창에 하고 싶은 일을 적으면, 맞는 명령을 찾아 바로 실행해 주는 창이에요.',x:'메뉴가 어디 있는지 몰라도 이름만 알면 돼요. VS Code에서는 Ctrl+Shift+P(맥은 ⌘+Shift+P)로 열어요.',p:'Ctrl+K를 누르면 Command Palette(명령 팔레트)가 뜨고, 글자를 치면 명령이 걸러지고, 화살표와 Enter로 실행되게 해줘',r:['Search Bar','Shortcut Key','Autocomplete'],l:2,o:0,v:'u-command-palette'},
 ]);
 T('design','form',[
  {en:'Checkbox',ko:'체크박스',d:'여러 개를 동시에 고를 수 있는 네모 선택칸.',p:'관심 분야를 여러 개 고를 수 있게 체크박스로 만들어줘',r:['Radio Button','Toggle Switch'],l:1,o:1,u:MDN('Web/HTML/Element/input/checkbox'),v:'checkbox'},
@@ -3606,6 +3680,73 @@ Object.assign(D, {
   'u-modular-scale':{h:`<div class="mk-oms">${[[31, '큰 제목'], [25, '제목'], [20, '작은 제목'], [16, '본문 · 기준'], [12.8, '설명']].map(([z, t]) =>
     `<div class="rw${z === 16 ? ' bs' : ''}"><span>${z}px</span><b style="font-size:${z}px;font-weight:${z > 16 ? 700 : 400}">봄 신상품</b><span class="mk-help">${t}</span></div>`).join('')}
     <span class="mk-help">16에 1.25를 곱할 때마다 한 단계씩 커져요</span></div>`, cap:'기준 크기에 같은 비율을 곱해 단계를 만들어요. 단계 사이 차이가 고르게 커져요'},
+});
+/* design: app — 나눈 창은 경계선을 끌고(끊기면 원래 너비로), 명령 팔레트는 쳐서 거르고 화살표·Enter로 실행. 나머지는 화면 그림. 리스너는 stage 안 요소에만 */
+const PSV = d => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
+const PBACK = PSV('<path d="M15 5l-7 7 7 7"/>'), PSUN = PSV('<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>'),
+  PWIFI = PSV('<path d="M3 9a13 13 0 0 1 18 0M6 12.5a8 8 0 0 1 12 0M9 16a3.5 3.5 0 0 1 6 0"/><circle cx="12" cy="19" r="1"/>'),
+  PSPK = PSV('<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/>'), PSYNC = PSV('<path d="M20 12a8 8 0 0 1-14 5.3M4 12A8 8 0 0 1 18 6.7"/><path d="M18 3v4h-4M6 21v-4h4"/>');
+const PCMD = [['새 파일', 'Ctrl+N'], ['파일 열기', 'Ctrl+O'], ['저장', 'Ctrl+S'], ['다른 이름으로 저장', 'Ctrl+Shift+S'], ['다크 모드 켜기', ''], ['줄 번호 숨기기', '']];
+Object.assign(D, {
+  'u-splash-screen':{h:`<div class="mk-apsp"><div class="st"><div class="ph sp"><span class="ic">${PSUN}</span><b>봄빛</b></div><span class="mk-help">켜는 동안</span></div>
+    <span class="ar" aria-hidden="true">→</span><div class="st"><div class="ph"><div class="hd"><b>봄빛</b>${ic('search')}</div><div class="im">${jph(0)}</div><i class="ln"></i><i class="ln s"></i><i class="ln"></i></div><span class="mk-help">준비 끝 · 첫 화면</span></div></div>`,
+    cap:'앱을 켜는 동안 아이콘과 바탕색만 잠깐 보이고, 준비가 끝나면 바로 첫 화면으로 넘어가요'},
+  'u-onboarding':{h:`<div class="mk-apon">${phone(`<span class="sk">건너뛰기</span><div class="im">${jph(1)}</div><b>사진을 한곳에 모아요</b><p>여러 앱에 흩어진 사진을 찾아 정리해 줘요</p>
+    <span class="dt" role="img" aria-label="3장 중 1장째"><i class="on"></i><i></i><i></i></span><span class="mk-btn">다음</span>`)}</div>`,
+    cap:'처음 켰을 때 핵심만 몇 장으로 알려 줘요. 몇 장째인지 점으로 보여 주고, 언제든 건너뛸 수 있어요'},
+  'u-app-bar':{h:`<div class="mk-apab">${phone(`<div class="ab mk-hl">${PBACK}<span class="sr">뒤로 가기</span><b>주문 내역</b>${ic('search')}<span class="sr">검색</span></div>
+    ${[['봄 원피스', '배송 중'], ['린넨 셔츠', '배송 완료'], ['캔버스 가방', '배송 완료']].map(([a, b]) => `<div class="it"><b>${a}</b><span>${b}</span></div>`).join('')}`)}</div>`,
+    cap:'화면 맨 위 줄(점선)에 뒤로 가기, 지금 화면 이름, 자주 쓰는 버튼을 둬요'},
+  'u-scrollbar':{h:`<div class="mk-apsb"><div class="bx"><div class="ls">${[4, 5, 6, 7].map(n => `<span>${n}번째 주문</span>`).join('')}</div><div class="tr" aria-hidden="true"><i class="th"></i></div></div>
+    <div class="lg"><b>전체 10줄 중 4~7번째를 보는 중</b><span class="mk-help">손잡이 위치 = 지금 보는 곳</span><span class="mk-help">손잡이 길이 = 보이는 양(4/10)</span></div></div>`,
+    cap:'오른쪽 막대의 손잡이가 지금 어디를, 얼마만큼 보고 있는지 알려 줘요'},
+  'u-split-pane':{h:`${hint('가운데 경계선을 끌어 보세요')}<div class="mk-apsl"><div class="pn"><div class="a"><b>파일</b><span>index.html</span><span>style.css</span><span>app.js</span></div>
+    <div class="dv" role="separator" tabindex="0" aria-orientation="vertical" aria-label="파일 목록 너비" aria-valuemin="25" aria-valuemax="75" aria-valuenow="40"><i></i></div>
+    <div class="b"><b>index.html</b><code>&lt;h1&gt;봄빛&lt;/h1&gt;</code><code>&lt;p&gt;봄 신상품&lt;/p&gt;</code></div></div>
+    <output class="mk-help">왼쪽 40% · 오른쪽 60% · 화살표 키로도 움직여요</output></div>`, cap:'경계선을 끌어 양쪽 너비를 나눠요. 너무 좁아지지 않게 25~75% 사이에서만 움직여요',
+    init: s => { const pn = s.querySelector('.pn'), dv = s.querySelector('.dv'), out = s.querySelector('output'); let v = 40, v0 = 0, drag = false;
+      const set = n => { v = Math.max(25, Math.min(75, Math.round(n))); pn.style.setProperty('--w', v + '%'); dv.setAttribute('aria-valuenow', v); };
+      const say = t => { out.textContent = `왼쪽 ${v}% · 오른쪽 ${100 - v}%${t || ''}`; };
+      dv.addEventListener('pointerdown', e => { drag = true; v0 = v; dv.setPointerCapture(e.pointerId); dv.classList.add('on'); });
+      dv.addEventListener('pointermove', e => { if (!drag) return; const r = pn.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); });
+      dv.addEventListener('pointerup', () => { if (!drag) return; drag = false; dv.classList.remove('on'); say(); });
+      dv.addEventListener('pointercancel', () => { if (!drag) return; drag = false; dv.classList.remove('on'); set(v0); say(' · 끌기가 끊겨 원래 너비로 돌아왔어요'); });
+      keys(dv, {ArrowLeft: -5, ArrowRight: 5, Home: -100, End: 100}, d => { set(v + d); say(); }); }},
+  'u-shortcut-key':{h:`<div class="mk-apsk"><div class="mk-card"><b>편집</b>${[['되돌리기', 'Ctrl+Z'], ['잘라내기', 'Ctrl+X'], ['복사', 'Ctrl+C', 1], ['붙여넣기', 'Ctrl+V'], ['모두 선택', 'Ctrl+A']].map(([t, k, on]) =>
+    `<span class="rw${on ? ' on' : ''}">${t}<kbd>${k}</kbd></span>`).join('')}</div><span class="mk-help">맥은 Ctrl 대신 ⌘ · 예) 복사 ⌘C</span></div>`,
+    cap:'메뉴 이름 옆에 단축키를 적어 두면, 쓰다 보면 메뉴를 열지 않고 키로 바로 실행하게 돼요'},
+  'u-window-controls':{h:`<div class="mk-apwc"><div class="rw"><b>윈도우 · 오른쪽 위</b><div class="bar"><span>보고서.txt</span><i class="w" aria-hidden="true">—</i><i class="w" aria-hidden="true">☐</i><i class="w x" aria-hidden="true">✕</i></div>
+    <span class="mk-help">왼쪽부터 최소화 · 최대화 · 닫기</span></div>
+    <div class="rw"><b>맥 · 왼쪽 위</b><div class="bar mac"><span class="tl" aria-hidden="true"><i style="background:var(--tl-r)"></i><i style="background:var(--tl-y)"></i><i style="background:var(--tl-g)"></i></span><span>보고서.txt</span></div>
+    <span class="mk-help">왼쪽부터 닫기(빨강) · 최소화(노랑) · 확대(초록)</span></div></div>`,
+    cap:'같은 세 버튼이지만 윈도우는 오른쪽 위, 맥은 왼쪽 위에 있어요. 순서도 서로 달라요'},
+  'u-tray-icon':{h:`<div class="mk-aptr"><div class="mk-card mn"><span>열기</span><span>일시 정지</span><span>종료</span></div>
+    <div class="tb"><i class="ap a"></i><i class="ap"></i><i class="ap"></i><i class="sp"></i><span class="na"><span aria-hidden="true">^</span><span class="me mk-hl">${PSYNC}</span>${PWIFI}${PSPK}<span>15:20</span></span></div>
+    <span class="mk-help">작업 표시줄 오른쪽 끝 · 알림 영역</span></div>`,
+    cap:'창을 닫아도 뒤에서 도는 프로그램이 작업 표시줄 구석에 아이콘(점선)으로 남아요. 누르면 짧은 메뉴가 떠요'},
+  'u-settings-screen':{h:`<div class="mk-apst">${phone(`<b class="t">설정</b><div class="gp"><span>알림</span><div class="rw">푸시 알림<i class="tg on" aria-hidden="true"></i><span class="sr">켜짐</span></div><div class="rw">소리<i class="tg" aria-hidden="true"></i><span class="sr">꺼짐</span></div></div>
+    <div class="gp"><span>화면</span><div class="rw">다크 모드<em>시스템 따라 ›</em></div></div><div class="gp"><span>계정</span><div class="rw out">로그아웃</div></div>`)}</div>`,
+    cap:'비슷한 설정끼리 묶어 제목을 달고, 켜고 끄는 건 토글로 바로 바꿔요. 로그아웃은 맨 아래에 따로 둬요'},
+  'u-inspector-panel':{h:`<div class="mk-apin"><div class="cv" role="img" aria-label="캔버스에서 파란 사각형이 골라져 있어요"><span class="rc"><i></i><i></i><i></i><i></i></span><i class="ci"></i></div>
+    <div class="pp"><b>사각형</b><span>크기</span><div class="g"><span class="f"><small>W</small>120</span><span class="f"><small>H</small>80</span></div>
+    <span>채우기</span><span class="f"><i></i>파랑</span><span>모서리</span><span class="f">8</span></div></div>`,
+    cap:'캔버스에서 고른 사각형의 크기·색·모서리가 오른쪽 패널에 나와요. 여기서 숫자를 고치면 바로 바뀌어요'},
+  'u-command-palette':{h:`${hint('명령 이름을 쳐 보세요 · 예) 저장')}<div class="mk-apcp"><div class="bx"><label class="q">${ic('search')}<span class="sr">명령 찾기</span>
+    <input type="text" role="combobox" aria-expanded="true" aria-autocomplete="list" placeholder="할 일을 입력…" autocomplete="off"></label><ul role="listbox" aria-label="명령"></ul></div>
+    <output class="mk-help">위·아래 화살표로 고르고 Enter로 실행해요</output></div>`, cap:'메뉴를 뒤지지 않고 이름을 쳐서 명령을 찾아 바로 실행해요',
+    init: s => { const inp = s.querySelector('input'), ul = s.querySelector('ul'), out = s.querySelector('output'), id = uid(); let hit = PCMD, a = 0;
+      ul.id = id; inp.setAttribute('aria-controls', id);
+      const mk = (t, q) => { const i = q ? t.indexOf(q) : -1; return i < 0 ? esc(t) : esc(t.slice(0, i)) + `<b>${esc(q)}</b>` + esc(t.slice(i + q.length)); };
+      const draw = () => { const q = inp.value.trim(); hit = PCMD.filter(([t]) => t.includes(q)); a = Math.min(a, Math.max(hit.length - 1, 0));
+        ul.innerHTML = hit.map(([t, k], i) => `<li role="option" id="${id}-${i}" aria-selected="${i === a}">${mk(t, q)}${k ? `<kbd>${k}</kbd>` : ''}</li>`).join('');
+        if (hit.length) inp.setAttribute('aria-activedescendant', `${id}-${a}`); else inp.removeAttribute('aria-activedescendant');
+        if (!hit.length) out.textContent = `'${q}'에 맞는 명령이 없어요`; };
+      const run = i => { const c = hit[i]; if (!c) return; a = i; draw(); out.textContent = `'${c[0]}' 실행했어요${c[1] ? ` · 단축키 ${c[1]}로도 돼요` : ''}`; };
+      inp.addEventListener('input', () => { a = 0; draw(); if (hit.length) out.textContent = `${hit.length}개 찾았어요`; });
+      keys(inp, {ArrowDown: 1, ArrowUp: -1, Enter: 0, Escape: 'x'}, d => { if (d === 'x') { inp.value = ''; a = 0; draw(); out.textContent = '지웠어요'; return; }
+        if (!hit.length) return; if (d === 0) { run(a); return; } a = (a + d + hit.length) % hit.length; draw(); });
+      ul.addEventListener('click', e => { const li = e.target.closest('li'); if (li) { run([...ul.children].indexOf(li)); inp.focus(); } });
+      draw(); }},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
