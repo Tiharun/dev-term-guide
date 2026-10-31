@@ -34,9 +34,11 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
     'Mental Model', 'Usability Test', 'Heuristic Evaluation', 'Modular Scale'],
   app: ['Splash Screen', 'Onboarding', 'App Bar', 'Scrollbar', 'Split Pane', 'Shortcut Key', 'Window Controls', 'Tray Icon',
     'Settings Screen', 'Inspector Panel', 'Command Palette'],
+  tool: ['Variables', 'Styles', 'Plugin', 'Smart Animate', 'Mask', 'Boolean Operation', 'Export', 'Team Library', 'Slice', 'Pen Tool',
+    'Component Properties', 'Hug / Fill / Fixed', 'Layout Grid', 'Version History'],
 };
-const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19 };    // sec: 카드 수
-const REDRAWN = ['basic', 'core', 'adv'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23 };    // sec: 카드 수
+const REDRAWN = ['basic', 'core', 'adv', 'tool'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';

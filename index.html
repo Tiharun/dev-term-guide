@@ -310,7 +310,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -1115,6 +1115,86 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-apcp ul{list-style:none;margin:0;padding:4px;height:178px}
 .mk-apcp li{display:flex;align-items:center;justify-content:space-between;gap:10px;height:28px;padding:0 8px;border-radius:6px;font-size:12.5px;color:var(--ink);cursor:pointer}
 .mk-apcp li b{color:var(--mark-text)}.mk-apcp li[aria-selected="true"]{background:var(--mark-bg)}
+.mk-fgmc,.mk-fgin,.mk-fgtl{display:grid;justify-items:center}.mk-fgmc .tg,.mk-fgin .tg{font-size:11.5px;font-weight:700;color:var(--mark-text)}
+.mk-fgmc .mn,.mk-fgin .mn{display:grid;justify-items:center;gap:6px;padding:8px 16px;border:1.5px dashed var(--mark);border-radius:10px;background:var(--plate)}
+.mk-fgmc svg.ln,.mk-fgin svg.ln,.mk-fgtl svg.ln{width:220px;height:26px;fill:none;stroke:var(--steel);stroke-width:1.5}
+.mk-fgmc .is,.mk-fgin .is,.mk-fgtl .is{display:grid;grid-template-columns:repeat(3,64px);gap:14px}
+.mk-fgmc .sc,.mk-fgin .i,.mk-fgtl .fl{display:grid;justify-items:center;gap:4px;padding:7px 2px;border:1px solid var(--rule);border-radius:8px;background:var(--plate)}
+.mk-fgmc small,.mk-fgtl small{font-size:11px;color:var(--muted)}.mk-fgmc .sc .mk-btn,.mk-fgin .i .mk-btn{padding:0 8px}
+.mk-fgmc .mk-btn{animation:mk-fgc 5s var(--ease) infinite}.mk-fgmc .sc .mk-btn{animation-delay:.25s}
+@keyframes mk-fgc{0%,35%,100%{background:var(--ink);border-color:var(--ink);border-radius:8px}45%,85%{background:var(--mark);border-color:var(--mark);border-radius:16px}}
+.mk-fgin .mk-help{margin-top:8px}.mk-fgin .i.mk-hl{outline-offset:2px}
+.mk-fgho{display:flex;align-items:center;gap:6px}.mk-fgho .sd{display:grid;justify-items:center;gap:6px}.mk-fgho .sd>b{font-size:12px;color:var(--ink)}
+.mk-fgho .sd>small{font-size:11px;color:var(--muted)}.mk-fgho .ar{font-size:15px;color:var(--muted)}
+.mk-fgho .dz{position:relative;padding:18px 8px 10px 20px;border-radius:9px;background:var(--fig)}
+.mk-fgho .pd{display:block;padding:10px 14px;border-radius:8px;background:var(--mark-bg);outline:1px dashed var(--mark)}
+.mk-fgho .pd span{display:block;padding:2px 6px;border-radius:3px;background:var(--ink);color:#fff;font-size:12px;font-weight:700}
+.mk-fgho .ms{position:absolute;font-size:11px;font-style:normal;font-weight:700;color:var(--mark-text)}.mk-fgho .ms.t{top:2px;left:50%;translate:-30% 0}.mk-fgho .ms.l{left:4px;top:50%;translate:0 -30%}
+.mk-fgho pre{margin:0;padding:8px 10px;border-radius:8px;background:var(--ink);color:#fff;font:11px/1.6 var(--mono);text-align:left}
+.mk-fgva{display:grid;gap:8px;justify-items:center}.mk-fgva table{border-collapse:collapse;font-size:11.5px;color:var(--ink);background:var(--plate);border:1px solid var(--rule)}
+.mk-fgva th,.mk-fgva td{padding:5px 8px;border-bottom:1px solid var(--rule-2);text-align:left;white-space:nowrap}.mk-fgva th{background:var(--fig);font-weight:700}
+.mk-fgva td i{display:inline-block;width:11px;height:11px;margin-right:5px;border-radius:3px;border:1px solid var(--rule);vertical-align:-1px}
+.mk-fgva .pv{display:flex;gap:8px}.mk-fgva .pv span{display:grid;gap:2px;padding:8px 14px;border-radius:8px;border:1px solid var(--rule);background:var(--plate);color:var(--ink);font-size:12px;font-weight:700}
+.mk-fgva .pv span.dk{background:var(--ink);border-color:var(--ink);color:#fff}.mk-fgva .pv small{font-size:11px;font-weight:400;opacity:.8}
+.mk-fgst,.mk-fgpl,.mk-fgex,.mk-fgcp{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:10px}
+.mk-fgst .mk-card,.mk-fgpl .mk-card,.mk-fgex .mk-card,.mk-fgcp .mk-card{display:grid;gap:5px;width:140px;text-align:left;font-size:11.5px;color:var(--ink)}
+.mk-fgst .mk-card>b,.mk-fgpl .mk-card>b,.mk-fgex .mk-card>b,.mk-fgcp .mk-card>b{font-size:12px}
+.mk-fgst small{font-size:11px;color:var(--muted)}.mk-fgst .r{display:flex;align-items:center;gap:6px}.mk-fgst .r i{width:12px;height:12px;border-radius:3px}
+.mk-fgst .us{display:grid;gap:6px;width:130px;padding:12px;border-radius:10px;border:1px solid var(--rule);background:var(--plate);text-align:left;box-shadow:0 2px 6px rgba(15,20,30,.12)}
+.mk-fgst .us b{font-size:16px;color:var(--ink)}.mk-fgst .us p{margin:0;font-size:11.5px;color:var(--muted)}.mk-fgst .us .mk-btn{justify-self:start;background:var(--mark);border-color:var(--mark)}
+.mk-fgpl .r{display:flex;align-items:center;gap:6px;padding:4px 6px;border-radius:6px}.mk-fgpl .r.on{background:var(--mark-bg)}.mk-fgpl .r svg.i{width:14px;height:14px}
+.mk-fgpl .gd{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.mk-fgpl .gd span{display:grid;place-items:center;height:30px;border-radius:6px;border:1px solid var(--rule)}
+.mk-fgpl .gd span.on{border-color:var(--mark);background:var(--mark-bg)}.mk-fgpl .gd svg.i{width:16px;height:16px}.mk-fgpl .mk-btn{justify-self:stretch}
+.mk-fgsa{display:flex;align-items:center;gap:5px}.mk-fgsa .ar{font-size:14px;color:var(--muted)}.mk-fgsa .st{display:grid;justify-items:center;gap:5px}.mk-fgsa .st>small{font-size:11px;color:var(--muted)}
+.mk-fgsa .fr{position:relative;width:72px;height:108px;border:1.5px solid var(--ink);border-radius:10px;background:var(--plate);overflow:hidden}
+.mk-fgsa .fr.pv{border-color:var(--mark)}.mk-fgsa .cd{position:absolute;left:8px;top:8px;width:58px;height:44px;border-radius:6px;background:var(--ch1);transform-origin:0 0}
+.mk-fgsa .s .cd{scale:.42}.mk-fgsa .pv .cd{animation:mk-fgsa 4.5s var(--ease) infinite}
+.mk-fgsa .ln{position:absolute;left:8px;right:8px;height:7px;border-radius:4px;background:var(--rule-2)}
+.mk-fgsa .nm{position:absolute;left:30px;top:9px;font-size:11px;font-weight:700;color:var(--mark-text)}.mk-fgsa .b .nm{left:8px;top:56px}
+@keyframes mk-fgsa{0%,20%,100%{scale:.42}45%,75%{scale:1}}
+.mk-fgmk{display:flex;align-items:flex-start;gap:8px}.mk-fgmk .st{display:grid;justify-items:center;gap:5px}.mk-fgmk .st>small{font-size:11px;color:var(--muted);text-align:center;line-height:1.35}
+.mk-fgmk .op{margin-top:24px;font-size:15px;font-weight:700;color:var(--muted)}.mk-fgmk .bx{position:relative;width:68px;height:68px;border-radius:6px;overflow:hidden}
+.mk-fgmk .ci{width:68px;height:68px;border-radius:50%;background:var(--sky);border:1.5px dashed var(--ink-3)}
+.mk-fgmk .gh{opacity:.18}.mk-fgmk .ct{position:absolute;inset:0;clip-path:circle(34px at 50% 50%)}
+.mk-fgbo{display:grid;justify-items:center;gap:8px;margin-top:22px}.mk-fgbo .mk-osg{flex-wrap:wrap;justify-content:center}
+.mk-fgbo svg{width:132px;height:132px}.mk-fgbo .rs{fill:var(--ch1);fill-rule:evenodd}.mk-fgbo .ol{fill:none;stroke:var(--steel);stroke-width:1;stroke-dasharray:3 3}
+.mk-fgex .cn{display:grid;place-items:center;width:84px;height:84px;border-radius:9px;background:var(--fig)}.mk-fgex .cn span{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:var(--mark);color:#fff}
+.mk-fgex .cn svg.i{width:24px;height:24px}.mk-fgex .r{display:flex;gap:6px}.mk-fgex .r span{flex:1;padding:3px 6px;border:1px solid var(--rule);border-radius:5px}
+.mk-fgex .mk-btn{justify-self:stretch}.mk-fgex .fs{display:flex;gap:6px;width:100%;justify-content:center}.mk-fgex .fs span{padding:3px 8px;border-radius:6px;background:var(--moss-bg);color:var(--moss);font-size:11.5px;font-weight:700}
+.mk-fgtl .lb{display:grid;justify-items:center;gap:6px;padding:8px 14px;border:1.5px solid var(--ink);border-radius:10px;background:var(--plate)}.mk-fgtl .lb>b{font-size:12px;color:var(--ink)}
+.mk-fgtl .lb .it{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink)}.mk-fgtl .lb i{width:12px;height:12px;border-radius:3px}
+.mk-fgtl .fl b{font-size:11px;color:var(--ink)}.mk-fgtl .fl .bg{padding:1px 5px;border-radius:5px;background:var(--mark-bg);color:var(--mark-text);font-size:11px;font-weight:700}
+.mk-fgsl{display:flex;align-items:center;gap:10px}.mk-fgsl .ar{font-size:15px;color:var(--muted)}
+.mk-fgsl .fr{position:relative;display:grid;gap:6px;width:150px;padding:8px;border:1.5px solid var(--ink);border-radius:9px;background:var(--plate)}
+.mk-fgsl .hd{height:10px;border-radius:3px;background:var(--rule-2)}.mk-fgsl .hr{display:flex;align-items:center;gap:8px;padding:8px;border-radius:6px;background:var(--mark-bg)}
+.mk-fgsl .lg{flex:none;width:26px;height:26px;border-radius:50%;background:var(--mark)}.mk-fgsl .hr b{font-size:12px;color:var(--ink)}.mk-fgsl .tx{height:8px;border-radius:4px;background:var(--rule-2)}.mk-fgsl .tx.s{width:60%}
+.mk-fgsl .sl{position:absolute;left:4px;right:12px;top:20px;height:50px;border:1.5px dashed var(--mark)}.mk-fgsl .sl b{position:absolute;left:-1px;top:-18px;padding:0 4px;border-radius:3px;background:var(--mark);color:#fff;font-size:11px}
+.mk-fgsl .rs{display:grid;justify-items:center;gap:5px}.mk-fgsl .rs small{font-size:11px;color:var(--muted)}
+.mk-fgsl .th{display:flex;align-items:center;gap:6px;height:30px;padding:0 8px;border-radius:5px;background:var(--mark-bg);outline:1px solid var(--rule)}
+.mk-fgsl .th i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--mark)}.mk-fgsl .th b{font-size:11px;color:var(--ink);white-space:nowrap}
+.mk-fgpt svg{width:min(100%,290px);height:auto}.mk-fgpt .cv{fill:none;stroke:var(--ink);stroke-width:2.5}.mk-fgpt .hd{stroke:var(--ch1);stroke-width:1.2}
+.mk-fgpt .hc{fill:var(--plate);stroke:var(--ch1);stroke-width:1.2}.mk-fgpt .an{fill:var(--plate);stroke:var(--ch1);stroke-width:1.5}.mk-fgpt .an.on{fill:var(--ch1)}
+.mk-fgpt text{font-size:11.5px;font-weight:700;fill:var(--mark-text)}.mk-fgpt .lk{stroke:var(--mark);stroke-width:1}
+.mk-fgcp .pr{display:grid;place-items:center;width:110px;height:84px;border-radius:9px;background:var(--fig)}.mk-fgcp .pr .mk-btn{outline:1.5px dashed var(--mark);outline-offset:4px}
+.mk-fgcp .r{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:24px}.mk-fgcp .r>span:first-child{color:var(--muted)}
+.mk-fgcp .f{display:inline-flex;align-items:center;gap:4px;padding:2px 6px;border:1px solid var(--rule);border-radius:5px}.mk-fgcp .f svg.i{width:12px;height:12px}
+.mk-fgcp .sw{width:26px;height:15px;border-radius:8px;background:var(--moss);position:relative}.mk-fgcp .sw::after{content:"";position:absolute;right:2px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff}
+.mk-fghf{display:grid;justify-items:center;gap:8px;margin-top:22px;width:100%}.mk-fghf .ct{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.mk-fghf .fr{position:relative;display:flex;align-items:center;gap:8px;width:var(--fw,260px);max-width:100%;padding:18px 10px 10px;border:1.5px dashed var(--steel);border-radius:9px;background:var(--plate)}
+.mk-fghf .fr>small{position:absolute;left:8px;top:2px;font-size:11px;color:var(--muted)}.mk-fghf .ic{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--fig)}
+.mk-fghf .bt{flex:none;min-width:0;overflow:hidden;text-overflow:ellipsis}.mk-fghf .fill .bt{flex:1 1 0}.mk-fghf .fixed .bt{width:120px}
+.mk-fghf output{min-height:17px;font-variant-numeric:tabular-nums}
+.mk-fglg{display:grid;gap:6px;justify-items:center}.mk-fglg .fr{position:relative;width:min(100%,250px);padding:10px 16px;border:1.5px solid var(--ink);border-radius:9px;background:var(--plate)}
+.mk-fglg .gd,.mk-fglg .ct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.mk-fglg .gd{position:absolute;inset:0 16px}.mk-fglg .gd i{background:var(--mark-bg)}
+.mk-fglg .ct{position:relative;grid-auto-rows:min-content}.mk-fglg .ct span{border-radius:4px;background:var(--steel)}
+.mk-fglg .ct .h{grid-column:1/-1;height:14px;background:var(--ink-3)}.mk-fglg .ct .p{grid-column:span 2;height:46px;overflow:hidden}.mk-fglg .ct .t{grid-column:span 2;height:46px;background:var(--sky)}
+.mk-fglg .ct .c{height:24px;background:var(--sky)}
+.mk-fgvh{position:relative;display:grid;gap:2px;width:min(100%,240px);padding:10px;border:1px solid var(--rule);border-radius:10px;background:var(--plate);text-align:left;font-size:11.5px;color:var(--ink)}
+.mk-fgvh>b{font-size:12px;margin-bottom:4px}.mk-fgvh .v{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:6px;padding:4px 6px 4px 22px;border-radius:6px}
+.mk-fgvh .v::before{content:"";position:absolute;left:7px;top:9px;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--steel);background:var(--plate)}
+.mk-fgvh .v.n::before{width:9px;height:9px;left:6px;top:8px;border-color:var(--ink);background:var(--ink)}.mk-fgvh .v.n{font-weight:700}
+.mk-fgvh .v small{grid-column:1;font-size:11px;font-weight:400;color:var(--muted)}.mk-fgvh .v.on{background:var(--mark-bg)}.mk-fgvh .v .mk-btn{grid-row:1/3;grid-column:2}
+.mk-fgvh .tl{position:absolute;left:21px;top:40px;bottom:22px;width:1.5px;background:var(--rule)}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -1492,12 +1572,26 @@ T('design','tool',[
  {en:'Frame',ko:'프레임 · 대지',d:'Figma에서 화면 한 장이나 부품을 담는 틀.',x:'Photoshop의 "대지(아트보드)"와 비슷해요.',j:'"대지 하나 더 만들어 주세요"',p:'Figma에서 1440px 데스크톱 프레임을 기준으로 만들었어',r:['Layer','Auto Layout'],l:1,o:1,u:'https://help.figma.com/hc/en-us/articles/360041539473-Frames-in-Figma-Design',v:{page:''}},
  {en:'Layer',ko:'레이어 · 층',d:'디자인을 이루는 하나하나의 층. 위에 있는 층이 앞에 보여요.',p:'Figma 레이어 순서대로 겹치는 순서를 맞춰줘',r:['Frame','Z-index'],l:1,o:0,v:'layer'},
  {en:'Auto Layout',ko:'오토 레이아웃',d:'Figma에서 안의 요소가 늘거나 줄면 간격을 유지하며 자동으로 다시 배치되는 기능. 웹의 Flexbox와 비슷해요.',p:'Figma 오토 레이아웃처럼 버튼 사이 간격 12px을 flex gap으로 맞춰줘',r:['Flexbox','Gap'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout',v:'autolayout'},
- {en:'Main Component',ko:'메인 컴포넌트 · 원본 부품',d:'Figma에서 재사용 부품의 원본. 원본을 고치면 복사본이 모두 바뀌어요.',p:'메인 컴포넌트를 고친 것처럼 모든 버튼 스타일을 한 번에 바꿔줘',r:['Instance','Variant'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360038662654-Guide-to-components-in-Figma',v:{flow:['메인 컴포넌트','인스턴스 A','인스턴스 B'],hl:[0]}},
- {en:'Instance',ko:'인스턴스 · 복사본 부품',d:'메인 컴포넌트에서 찍어 낸 복사본. 원본을 따라 바뀌어요.',p:'이 화면의 버튼들은 모두 같은 컴포넌트의 인스턴스야',r:['Main Component'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360038662654-Guide-to-components-in-Figma',v:{flow:['메인 컴포넌트','인스턴스'],hl:[1]}},
+ {en:'Main Component',ko:'메인 컴포넌트 · 원본 부품',d:'Figma에서 재사용 부품의 원본. 원본을 고치면 복사본이 모두 바뀌어요.',p:'메인 컴포넌트를 고친 것처럼 모든 버튼 스타일을 한 번에 바꿔줘',r:['Instance','Variant'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360038662654-Guide-to-components-in-Figma',v:'u-main-component'},
+ {en:'Instance',ko:'인스턴스 · 복사본 부품',d:'메인 컴포넌트에서 찍어 낸 복사본. 원본을 따라 바뀌어요.',p:'이 화면의 버튼들은 모두 같은 컴포넌트의 인스턴스야',r:['Main Component'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360038662654-Guide-to-components-in-Figma',v:'u-instance'},
  {en:'Variant',ko:'배리언트 · 변형',d:'같은 부품의 여러 버전(크기·색·상태)을 한 묶음으로 관리하는 것.',p:'버튼 variant를 primary·secondary·disabled 세 가지로 만들어줘',r:['Main Component','Button States'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360056440594-Create-and-use-variants',v:'button'},
  {en:'Constraints',ko:'컨스트레인트 · 고정 규칙',d:'틀 크기가 바뀔 때 요소를 어느 쪽에 붙여 둘지 정하는 규칙.',p:'화면이 넓어져도 닫기 버튼은 오른쪽 위에 붙어 있게 해줘',r:['Responsive Web Design'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/360039957734-Apply-constraints-to-define-how-layers-resize',v:'responsive'},
  {en:'Dev Mode',ko:'데브 모드 · 개발자 보기',d:'Figma에서 개발자가 크기·색·간격 값을 바로 읽을 수 있는 보기 방식.',p:'Figma Dev Mode에 나온 간격 값 그대로 CSS로 옮겨줘',r:['Handoff'],l:2,o:1,u:'https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode',v:{code:'width: 320px;\npadding: 16px 24px;\nborder-radius: 12px;\ncolor: #1d2b4f;'}},
- {en:'Handoff',ko:'핸드오프 · 개발 전달',d:'완성된 디자인을 개발자가 만들 수 있게 넘겨주는 과정.',j:'"디자인 넘겨 드릴게요"',p:'디자인 핸드오프 받은 대로 간격과 색을 정확히 맞춰줘',r:['Dev Mode','Design QA'],l:1,o:0,v:{flow:['디자이너','핸드오프','개발자'],hl:[1]}},
+ {en:'Handoff',ko:'핸드오프 · 개발 전달',d:'완성된 디자인을 개발자가 만들 수 있게 넘겨주는 과정.',j:'"디자인 넘겨 드릴게요"',p:'디자인 핸드오프 받은 대로 간격과 색을 정확히 맞춰줘',r:['Dev Mode','Design QA'],l:1,o:0,v:'u-handoff'},
+ {en:'Variables',ko:'변수 · 이름 붙인 값',d:'색·숫자·글자 같은 값 하나에 이름을 붙여 저장해 두는 기능이에요. 라이트·다크처럼 모드마다 다른 값을 넣어 두면, 모드를 바꿀 때 화면이 따라 바뀌어요.',x:'값은 색, 숫자, 글자, 참·거짓 네 종류예요. 코드의 CSS 변수나 디자인 토큰과 같은 생각이에요.',p:'Figma Variables(변수)의 라이트·다크 모드 값을 CSS 변수로 옮겨서 다크 모드를 만들어줘',r:['Design Token','CSS Variable','Dark Mode'],l:2,o:0,v:'u-variables'},
+ {en:'Styles',ko:'스타일 · 저장한 꾸밈 묶음',d:'글자 모양·색·그림자처럼 자주 쓰는 꾸밈을 이름 붙여 저장해 두고, 클릭 한 번으로 똑같이 입히는 기능이에요.',x:'변수는 값 하나를 담고, 스타일은 글꼴·크기·줄 간격처럼 여러 값을 한 묶음으로 담아요. 스타일을 고치면 그 스타일을 쓴 곳이 모두 바뀌어요.',p:'Figma Styles(스타일)의 제목·본문 글자 스타일 이름대로 CSS 클래스를 만들어줘',r:['Variables','Style Guide','Design Token'],l:1,o:0,v:'u-styles'},
+ {en:'Plugin',ko:'플러그인 · 덧붙이는 기능',d:'Figma에 없는 기능을 다른 사람이 만들어 덧붙여 쓰는 작은 프로그램이에요. 아이콘 넣기, 명암 검사처럼 손이 많이 가는 일을 대신해 줘요.',x:'브라우저 확장 프로그램처럼 원래 프로그램에 기능을 더하는 방식이에요. 회사에 따라 쓸 수 있는 플러그인을 정해 두기도 해요.',p:'Figma Plugin(플러그인)으로 뽑은 아이콘 SVG를 메뉴 버튼에 넣어줘',r:['Icon','Library'],l:1,o:0,v:'u-plugin'},
+ {en:'Smart Animate',ko:'스마트 애니메이트 · 자연스럽게 잇기',d:'시안 두 장에서 이름이 같은 레이어를 찾아, 위치·크기·색이 바뀐 만큼 부드럽게 움직이며 넘어가게 하는 프로토타입 효과예요.',x:'두 화면에서 레이어 이름이 같아야 이어져요. 짝이 없는 레이어는 움직이지 않고 서서히 나타나거나 사라져요.',p:'Figma Smart Animate(스마트 애니메이트)처럼 작은 카드가 커지면서 상세 화면으로 넘어가게 해줘',r:['Prototype','Shared Element Transition','Layer'],l:2,o:0,v:'u-smart-animate'},
+ {en:'Mask',ko:'마스크 · 모양대로 가리기',d:'아래에 둔 도형 모양대로 위의 사진이나 그림을 잘라 보여 주는 기능이에요. 잘린 부분은 숨겨질 뿐 지워지지 않아요.',x:'프로필 사진을 동그랗게 보여 줄 때 자주 써요. 실제로 잘라 내는 자르기와 달리 마스크를 풀면 원래대로 돌아와요.',p:'Figma Mask(마스크)처럼 프로필 사진을 원 모양으로 잘라 보이게 해줘',r:['Crop','Reveal Mask','Layer'],l:2,o:0,v:'u-mask'},
+ {en:'Boolean Operation',ko:'불리언 연산 · 도형 합치기·빼기',d:'겹친 도형 두 개를 합치거나, 빼거나, 겹친 곳만 남기거나, 겹친 곳만 빼서 새 모양 하나를 만드는 기능이에요.',x:'빼기는 위 도형이 아래 도형을 파내요. Figma 단축키는 합치기 Alt+Shift+U, 빼기 Alt+Shift+S, 겹친 곳만 Alt+Shift+I, 겹친 곳 빼기 Alt+Shift+E예요(맥은 Alt 대신 Option).',p:'Figma Boolean Operation(불리언 연산)의 빼기처럼 원 모양 구멍이 뚫린 아이콘을 SVG로 만들어줘',r:['Icon','Vector vs Raster','Pen Tool'],l:2,o:0,v:'u-boolean-operation'},
+ {en:'Export',ko:'내보내기',d:'디자인에서 고른 부분을 PNG·JPG·SVG·PDF 같은 파일로 꺼내는 기능이에요.',x:'2x처럼 배율을 정하면 고해상도 화면에서도 선명한 그림이 나와요. 아이콘은 SVG, 사진은 JPG가 잘 맞아요.',p:'Figma에서 Export(내보내기)한 2x PNG를 img의 srcset에 넣어줘',r:['Image Format','Responsive Image','Slice'],l:1,o:0,v:'u-export'},
+ {en:'Team Library',ko:'팀 라이브러리 · 공유 부품 창고',d:'한 파일에 만든 부품·스타일·변수를 팀에 게시해서, 다른 파일에서도 꺼내 쓰게 하는 기능이에요. 원본을 고쳐 다시 게시하면 쓰는 파일에서 업데이트를 받아요.',x:'코드에서 말하는 라이브러리(남이 만든 기능 묶음)와 이름은 비슷해도 뜻이 달라요. 게시는 유료 요금제에서만 돼요.',p:'Figma Team Library(팀 라이브러리)의 버튼 컴포넌트와 같은 모양으로 공용 Button 부품을 만들어줘',r:['Library','Main Component','UI Kit'],l:2,o:0,v:'u-team-library'},
+ {en:'Slice',ko:'슬라이스 · 구역 잘라 내보내기',d:'레이어와 상관없이 화면에서 원하는 네모 구역을 정해, 그 부분만 그대로 파일로 내보내는 도구예요.',x:'레이어 하나를 꺼낼 때는 그냥 내보내기를 쓰고, 여러 레이어에 걸친 구역을 한 장으로 뽑을 때 슬라이스를 써요.',p:'Figma Slice(슬라이스)로 뽑은 배너 이미지를 첫 화면 맨 위에 넣어줘',r:['Export','Frame'],l:2,o:0,v:'u-slice'},
+ {en:'Pen Tool',ko:'펜 툴 · 점 찍어 그리기',d:'점을 찍어 직선을 긋고, 누른 채 끌어 곡선을 그리는 도구예요. 점에서 나온 손잡이(핸들)를 움직여 굽은 정도를 고쳐요.',x:'로고나 아이콘처럼 정해진 도형으로 안 되는 모양을 그릴 때 써요. 이렇게 그린 선은 SVG로 내보낼 수 있어요.',p:'Figma Pen Tool(펜 툴)로 그린 물결 모양을 SVG path로 바꿔서 섹션 구분선으로 넣어줘',r:['Vector vs Raster','Path Drawing','Boolean Operation'],l:2,o:0,v:'u-pen-tool'},
+ {en:'Component Properties',ko:'컴포넌트 속성 · 바꿀 수 있는 칸',d:'부품에서 바꿔도 되는 부분(글자, 아이콘 보이기, 아이콘 바꾸기, 크기)을 미리 정해 두는 기능이에요. 쓰는 사람은 오른쪽 패널에서 그 칸만 고쳐요.',x:'코드 부품의 props와 같은 생각이에요. 종류는 참·거짓(보이기), 글자, 다른 부품으로 바꾸기, 배리언트 네 가지예요.',p:'Figma Component Properties(컴포넌트 속성)처럼 Button에 label·icon·size props를 만들어줘',r:['Props','Variant','Instance'],l:2,o:0,v:'u-component-properties'},
+ {en:'Hug / Fill / Fixed',ko:'크기 맞춤 방식 · 내용 맞춤·채우기·고정',d:'오토 레이아웃 안에서 상자의 너비·높이를 정하는 세 가지 방식이에요. 내용에 맞춰 줄고 늘거나(Hug), 남는 칸을 꽉 채우거나(Fill), 숫자로 못 박아요(Fixed).',x:'CSS로 옮기면 Hug는 width: fit-content, Fill은 flex: 1, Fixed는 width: 120px 같은 고정값에 가까워요. 안에 Fill인 상자가 있으면 바깥 상자는 Hug가 될 수 없어요.',p:'Figma에서 이 버튼은 Hug / Fill / Fixed(내용 맞춤·채우기·고정) 중 Fill이니까 부모 너비를 꽉 채우게 해줘',r:['Auto Layout','Flexbox','Frame'],l:2,o:0,v:'u-hug-fill-fixed'},
+ {en:'Layout Grid',ko:'레이아웃 그리드 · 칸 안내선',d:'프레임 위에 세로 칸(열)이나 가로 줄, 바둑판 눈금을 깔아 두고 상자를 거기에 맞춰 놓게 돕는 안내선이에요. 작업할 때만 보이는 선이에요.',x:'2025년 5월부터 Figma에서는 이름이 레이아웃 가이드(Layout guide)로 바뀌었어요. 칸 사이 틈은 거터, 양옆 빈칸은 여백(마진)이라고 해요. Shift+G로 켜고 꺼요.',p:'Figma Layout Grid(레이아웃 그리드)처럼 12열, 거터 24px 기준으로 CSS Grid를 짜줘',r:['Grid System','CSS Grid','8pt Grid'],l:2,o:0,v:'u-layout-grid'},
+ {en:'Version History',ko:'버전 기록 · 예전으로 돌아가기',d:'파일이 바뀌어 온 기록이에요. Figma는 30분마다 저절로 기록을 남기고, 중요한 때에는 이름을 붙여 둘 수 있어요. 예전 버전을 열어 보거나 그때로 되돌려요.',x:'코드의 Git 커밋 기록과 비슷해요. 자동 기록은 지울 수 없고, 이름 붙인 버전 사이의 자동 기록은 접혀서 보여요.',p:'Figma Version History(버전 기록)의 "시안 1" 버전 화면대로 메인 페이지를 되돌려줘',r:['Commit History','Git'],l:1,o:0,v:'u-version-history'},
 ]);
 T('design','font',[
  {en:'Typeface vs Font',ko:'서체와 폰트',d:'서체는 글자 디자인 가족(예: 맑은 고딕), 폰트는 그중 한 굵기·크기 파일.',x:'일상에서는 둘 다 "폰트"라고 불러도 대부분 통해요.',p:'제목 폰트를 본문과 다른 서체로 바꿔줘',r:['Font Weight','Web Font'],l:1,o:0,v:'fontweight'},
@@ -3747,6 +3841,93 @@ Object.assign(D, {
         if (!hit.length) return; if (d === 0) { run(a); return; } a = (a + d + hit.length) % hit.length; draw(); });
       ul.addEventListener('click', e => { const li = e.target.closest('li'); if (li) { run([...ul.children].indexOf(li)); inp.focus(); } });
       draw(); }},
+});
+/* design: tool — 도형 합치기는 방식을 골라 결과 모양을 바꾸고, 크기 맞춤은 방식·글자·틀 너비를 바꿔 버튼 너비를 비교. 메인 컴포넌트·스마트 애니메이트는 저절로 움직임. 리스너는 stage 안 요소에만 */
+const FLN = '<svg class="ln" viewBox="0 0 220 26" aria-hidden="true"><path d="M110 0V10M32 26V10H188V26M110 10V26"/></svg>';
+const FBO = {u: ['M20 20H80V48A32 32 0 1 1 48 80H20Z', '합치기(Union) · 두 도형이 한 덩어리가 됐어요'],
+  s: ['M20 20H80V48A32 32 0 0 0 48 80H20Z', '빼기(Subtract) · 위의 원이 아래 네모를 파냈어요'],
+  i: ['M80 80H48A32 32 0 0 1 80 48Z', '겹친 곳만(Intersect) · 겹친 부분만 남았어요'],
+  e: ['M20 20H80V48A32 32 0 0 0 48 80H20ZM80 80V48A32 32 0 1 1 48 80Z', '겹친 곳 빼기(Exclude) · 겹친 부분만 뚫렸어요']};
+const FHF = {hug: '글자 길이에 맞춰 줄고 늘어요', fill: '아이콘을 뺀 남는 칸을 꽉 채워요', fixed: '글자·틀이 바뀌어도 그대로예요'};
+Object.assign(D, {
+  'u-main-component':{h:`<div class="mk-fgmc"><div class="mn"><span class="tg">◆ 메인 컴포넌트</span><span class="mk-btn mk-sm A">저장</span></div>${FLN}
+    <div class="is">${['결제', '회원', '설정'].map(t => `<span class="sc"><small>${t} 화면</small><span class="mk-btn mk-sm A">저장</span></span>`).join('')}</div></div>`, m:1,
+    cap:'원본(◆) 하나의 색·모서리를 고치면, 이 부품을 쓴 모든 화면의 버튼이 같이 바뀌어요'},
+  'u-instance':{h:`<div class="mk-fgin"><div class="mn"><span class="tg">◆ 원본</span><span class="mk-btn mk-sm">저장</span></div>${FLN}
+    <div class="is">${['저장', '보내기', '저장'].map((t, i) => `<span class="i${i === 1 ? ' mk-hl' : ''}"><span class="tg">◇</span><span class="mk-btn mk-sm">${t}</span></span>`).join('')}</div>
+    <span class="mk-help">가운데 복사본은 글자만 바꿨어요 · 원본과 연결은 그대로</span></div>`,
+    cap:'원본에서 찍어 낸 복사본(◇)이에요. 글자만 바꿔 써도 원본을 고치면 나머지는 따라 바뀌어요'},
+  'u-handoff':{h:`<div class="mk-fgho"><div class="sd"><b>디자이너</b><div class="dz"><i class="ms t">16</i><i class="ms l">24</i><span class="pd"><span>저장</span></span></div><small>간격·크기·색 표시</small></div>
+    <span class="ar" aria-hidden="true">→</span><div class="sd"><b>개발자</b><pre>padding: 16px 24px;
+border-radius: 8px;
+background: #1D2B4F;</pre><small>그 값 그대로 코드로</small></div></div>`,
+    cap:'디자이너가 간격·크기·색을 표시해 넘기면, 개발자가 그 값 그대로 코드로 옮겨요'},
+  'u-variables':{h:`<div class="mk-fgva"><table><thead><tr><th>이름</th><th>라이트 모드</th><th>다크 모드</th></tr></thead><tbody>
+    <tr><td>배경</td><td><i style="background:var(--plate)"></i>#FFFFFF</td><td><i style="background:var(--ink)"></i>#1D2B4F</td></tr>
+    <tr><td>글자</td><td><i style="background:var(--ink)"></i>#1D2B4F</td><td><i style="background:var(--plate)"></i>#FFFFFF</td></tr>
+    <tr><td>간격</td><td>16</td><td>16</td></tr></tbody></table>
+    <div class="pv"><span>안녕하세요<small>라이트</small></span><span class="dk">안녕하세요<small>다크</small></span></div></div>`,
+    cap:'값에 이름(배경·글자)을 붙여 두고 모드마다 다른 값을 넣어 두면, 모드만 바꿔도 화면이 바뀌어요'},
+  'u-styles':{h:`<div class="mk-fgst"><div class="mk-card"><b>스타일</b><small>글자</small><span class="r"><b>제목</b>· 16 굵게</span><span class="r">본문 · 11.5 보통</span>
+    <small>색</small><span class="r"><i style="background:var(--mark)"></i>주색</span><span class="r"><i style="background:var(--ink)"></i>글자색</span><small>효과</small><span class="r">그림자 · 작게</span></div>
+    <div class="us"><b>봄 신상품</b><p>새로 나온 옷을 만나 보세요</p><span class="mk-btn mk-sm">보러 가기</span></div></div>`,
+    cap:'왼쪽에 저장한 글자·색·효과를 오른쪽 카드에 그대로 입혔어요. 스타일을 고치면 쓴 곳이 모두 바뀌어요'},
+  'u-plugin':{h:`<div class="mk-fgpl"><div class="mk-card"><b>플러그인</b><span class="r on">${ic('stamp')}아이콘 넣기</span><span class="r">${ic('copy')}가짜 글 채우기</span><span class="r">${ic('search')}명암 검사</span></div>
+    <div class="mk-card"><b>아이콘 넣기</b><div class="gd"><span class="on">${ic('home')}</span><span>${ic('search')}</span><span>${ic('pin')}</span><span>${ic('key')}</span><span>${ic('menu')}</span><span>${ic('copy')}</span></div><span class="mk-btn mk-sm">넣기</span></div></div>`,
+    cap:'Figma에 없는 기능을 남이 만든 작은 프로그램으로 덧붙여요. 고르고 누르면 반복 일을 대신해 줘요'},
+  'u-smart-animate':{h:`<div class="mk-fgsa"><div class="st"><div class="fr s"><span class="cd"></span><b class="nm">카드</b><i class="ln" style="top:36px"></i><i class="ln" style="top:50px"></i><i class="ln" style="top:64px"></i></div><small>화면 1</small></div>
+    <span class="ar" aria-hidden="true">+</span><div class="st"><div class="fr b"><span class="cd"></span><b class="nm">카드</b><i class="ln" style="top:76px"></i><i class="ln" style="top:90px"></i></div><small>화면 2</small></div>
+    <span class="ar" aria-hidden="true">→</span><div class="st"><div class="fr pv"><span class="cd A"></span></div><small>미리 보기</small></div></div>`, m:1,
+    cap:'두 화면에 같은 이름(카드)의 레이어가 있으면, 바뀐 크기만큼 부드럽게 커지며 넘어가요'},
+  'u-mask':{h:`<div class="mk-fgmk"><div class="st"><div class="bx">${jph(1)}</div><small>사진<br>(위)</small></div><span class="op" aria-hidden="true">+</span>
+    <div class="st"><div class="ci"></div><small>원 · 마스크<br>(아래)</small></div><span class="op" aria-hidden="true">=</span>
+    <div class="st"><div class="bx"><div class="gh">${jph(1)}</div><div class="ct">${jph(1)}</div></div><small>결과<br>(흐린 곳은 숨김)</small></div></div>`,
+    cap:'아래에 둔 원 모양대로 위의 사진이 잘려 보여요. 바깥은 숨겨질 뿐이라 마스크를 풀면 돌아와요'},
+  'u-boolean-operation':{h:`${hint('방식을 골라 겹친 두 도형을 바꿔 보세요')}<div class="mk-fgbo">${osg('도형 합치기 방식', [['합치기', 'data-o="u"', 1], ['빼기', 'data-o="s"'], ['겹친 곳만', 'data-o="i"'], ['겹친 곳 빼기', 'data-o="e"']])}
+    <svg viewBox="0 0 132 132" role="img"><path class="rs"/><rect class="ol" x="20" y="20" width="60" height="60"/><circle class="ol" cx="80" cy="80" r="32"/></svg>
+    <output class="mk-help"></output></div>`, cap:'네모(아래)와 원(위)을 합치고, 빼고, 겹친 곳만 남기고, 겹친 곳만 빼서 새 모양을 만들어요. 점선은 원래 도형이에요',
+    init: s => { const p = s.querySelector('.rs'), sv = s.querySelector('svg'), out = s.querySelector('output');
+      const set = o => { p.setAttribute('d', FBO[o][0]); sv.setAttribute('aria-label', FBO[o][1]); out.textContent = FBO[o][1]; };
+      s.querySelectorAll('.mk-osg button').forEach(b => b.addEventListener('click', () => {
+        b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); set(b.dataset.o); }));
+      set('u'); }},
+  'u-export':{h:`<div class="mk-fgex"><div class="cn"><span class="mk-hl">${ic('home')}</span></div>
+    <div class="mk-card"><b>내보내기</b><div class="r"><span>2x</span><span>PNG ▾</span></div><div class="r"><span>1x</span><span>SVG ▾</span></div><span class="mk-btn mk-sm">내보내기</span></div>
+    <div class="fs"><span>집@2x.png</span><span>집.svg</span></div></div>`,
+    cap:'고른 아이콘을 배율과 파일 형식을 정해 파일로 꺼내요. 한 번에 여러 형식으로도 뽑아요'},
+  'u-team-library':{h:`<div class="mk-fgtl"><div class="lb"><b>디자인 시스템 파일</b><span class="it">◆ 버튼 · ◆ 입력칸</span><span class="it"><i style="background:var(--mark)"></i><i style="background:var(--ink)"></i><i style="background:var(--moss)"></i>색 스타일</span><span class="mk-btn mk-sm">게시</span></div>${FLN}
+    <div class="is">${['결제', '회원', '앱'].map(t => `<span class="fl"><b>${t} 파일</b><span class="bg">업데이트</span></span>`).join('')}</div></div>`,
+    cap:'한 파일에 모은 부품·스타일을 게시하면 팀의 다른 파일에서 꺼내 쓰고, 고친 내용을 업데이트로 받아요'},
+  'u-slice':{h:`<div class="mk-fgsl"><div class="fr"><i class="hd"></i><div class="hr"><i class="lg"></i><b>봄 세일</b></div><i class="tx"></i><i class="tx s"></i><span class="sl"><b>슬라이스</b></span></div>
+    <span class="ar" aria-hidden="true">→</span><div class="rs"><div class="th"><i></i><b>봄 세일</b></div><small>배너.png</small></div></div>`,
+    cap:'레이어와 상관없이 점선 네모 구역만 정해서, 그 부분을 그대로 한 장의 그림으로 내보내요'},
+  'u-pen-tool':{h:`<div class="mk-fgpt"><svg viewBox="0 0 240 130" role="img" aria-label="점 세 개로 그린 곡선과, 가운데 점에서 양쪽으로 뻗은 손잡이">
+    <path class="cv" d="M20 100C50 40 100 40 130 80C160 120 190 110 210 50"/><path class="hd" d="M100 40L160 120"/><circle class="hc" cx="100" cy="40" r="4"/><circle class="hc" cx="160" cy="120" r="4"/>
+    <rect class="an" x="16" y="96" width="8" height="8"/><rect class="an on" x="126" y="76" width="8" height="8"/><rect class="an" x="206" y="46" width="8" height="8"/>
+    <path class="lk" d="M136 74L156 38"/><text x="140" y="31">점(앵커)</text><path class="lk" d="M156 122L120 122"/><text x="30" y="126">손잡이(핸들)</text></svg></div>`,
+    cap:'점을 찍으면 직선, 누른 채 끌면 곡선이 돼요. 점에서 뻗은 손잡이로 굽은 정도를 고쳐요'},
+  'u-component-properties':{h:`<div class="mk-fgcp"><div class="pr"><span class="mk-btn mk-sm">${ic('pin')}저장</span></div>
+    <div class="mk-card"><b>◇ 버튼</b><div class="r"><span>크기</span><span class="f">중간 ▾</span></div><div class="r"><span>아이콘 보이기</span><i class="sw" aria-hidden="true"></i><span class="sr">켜짐</span></div>
+    <div class="r"><span>아이콘</span><span class="f">${ic('pin')}핀 ▾</span></div><div class="r"><span>글자</span><span class="f">저장</span></div></div></div>`,
+    cap:'부품에서 바꿔도 되는 칸(크기·아이콘 보이기·아이콘·글자)을 미리 정해 두면, 쓸 때 패널에서 그 칸만 고쳐요'},
+  'u-hug-fill-fixed':{h:`${hint('방식을 고른 뒤 글자 길이와 틀 너비를 바꿔 보세요')}<div class="mk-fghf">${osg('크기 맞춤 방식', [['Hug 맞춤', 'data-m="hug"', 1], ['Fill 채움', 'data-m="fill"'], ['Fixed 고정', 'data-m="fixed"']])}
+    <div class="ct">${osg('글자', [['글자 짧게', 'data-t="저장"', 1], ['글자 길게', 'data-t="임시 저장하기"']])}${osg('틀 너비', [['틀 좁게', 'data-w="190"'], ['틀 넓게', 'data-w="260"', 1]])}</div>
+    <div class="fr hug"><small>오토 레이아웃 틀</small><span class="ic">${ic('home')}</span><span class="mk-btn mk-sm bt">저장</span></div>
+    <output class="mk-help"></output></div>`, cap:'같은 버튼도 Hug는 글자에, Fill은 틀에 맞춰 너비가 바뀌고, Fixed는 그대로예요',
+    init: s => { const fr = s.querySelector('.fr'), bt = s.querySelector('.bt'), out = s.querySelector('output'); let m = 'hug';
+      const say = () => { out.textContent = `버튼 너비 ${Math.round(bt.getBoundingClientRect().width)}px · ${FHF[m]}`; };
+      s.querySelectorAll('.mk-osg button').forEach(b => b.addEventListener('click', () => {
+        b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); const d = b.dataset;
+        if (d.m) { fr.classList.remove(m); m = d.m; fr.classList.add(m); } if (d.t) bt.textContent = d.t; if (d.w) fr.style.setProperty('--fw', d.w + 'px'); say(); }));
+      say(); }},
+  'u-layout-grid':{h:`<div class="mk-fglg"><div class="fr"><div class="gd" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ct"><span class="h"></span><span class="p">${jph(2)}</span><span class="t"></span><span class="c"></span><span class="c"></span><span class="c"></span><span class="c"></span></div></div>
+    <span class="mk-help">주황 띠 = 열 · 띠 사이 틈 = 거터 · 양옆 빈칸 = 여백</span></div>`,
+    cap:'화면 위에 세로 칸(열)을 깔고 상자를 칸에 맞춰 놓으면 줄이 반듯하게 맞아요'},
+  'u-version-history':{h:`<div class="mk-fgvh"><b>버전 기록</b><i class="tl" aria-hidden="true"></i><div class="v n">현재 버전<small>지금</small></div>
+    <div class="v n">시안 2 확정<small>오늘 14:10 · 이름 붙임</small></div><div class="v">자동 저장<small>오늘 13:40</small></div><div class="v">자동 저장<small>오늘 13:10</small></div>
+    <div class="v n on">시안 1<small>어제 17:30 · 이름 붙임</small><span class="mk-btn mk-sm">되돌리기</span></div></div>`,
+    cap:'30분마다 저절로 기록이 남고, 중요한 때엔 이름을 붙여 둬요. 고른 버전으로 언제든 되돌려요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
