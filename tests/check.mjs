@@ -17,8 +17,11 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   data: ['Data Table', 'Table Header', 'Sortable Column', 'Filter Panel', 'List', 'Grid View', 'Tree View', 'Kanban Board',
     'Timeline', 'Zebra Stripes', 'Frozen Column', 'Bulk Action', 'Inline Edit', 'Expandable Row', 'Responsive Table',
     'Dashboard', 'Bar Chart', 'Line Chart', 'Pie Chart', 'Legend', 'Master-Detail'],
+  style: ['Flat Design', 'Skeuomorphism', 'Glassmorphism', 'Neumorphism', 'Material Design', 'Human Interface Guidelines', 'Elevation',
+    'Backdrop Blur', 'Stroke', 'Line Icon vs Solid Icon', 'Squircle', 'Grain Texture', 'Duotone', 'Minimalism', 'Brutalism',
+    'Bento Grid', 'Inner Shadow', 'Glow', 'Mesh Gradient', 'Illustration', 'Isometric'],
 };
-const COUNT = { form: 28, feedback: 23, nav: 20, data: 21 };    // sec: 카드 수
+const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21 };    // sec: 카드 수
 const REDRAWN = [];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
