@@ -16,6 +16,7 @@
   --moss:#4d6d40;--moss-bg:#e8efe3;
   --mark:#e0662b;--mark-text:#a8410f;--mark-bg:#fdf0e8;
   --sky:#b9c7d8;--steel:#8fa3bd;
+  --ch1:#3566b8;--ch2:var(--mark);--ch3:#13a08a;
   --serif:'Hahmlet','HANBatang','Batang','바탕','AppleMyungjo',serif;
   --sans:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
   --mono:Consolas,'D2Coding','Courier New',monospace;
@@ -460,6 +461,44 @@ a.tag:hover{background:var(--ink);color:#fff}
   opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .2s,transform .2s var(--ease)}
 .mk-skip:focus{opacity:1;pointer-events:auto;transform:none}
 .mk-main:focus{outline:2px solid var(--mark);outline-offset:3px;border-radius:4px}
+/* 표·목록 */
+.mk-tb{width:100%;border-collapse:collapse;font-size:11.5px;line-height:1.35;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mk-tb th,.mk-tb td{padding:2px 6px;text-align:left;border-bottom:1px solid var(--rule)}
+.mk-tb th{font-weight:800;color:var(--muted);border-bottom-color:var(--ink)}.mk-tb .n{text-align:right}
+.mk-tb.zb tbody tr:nth-child(even){background:var(--fig)}
+.mk-sort th{padding:0 6px}.mk-sort th button{display:inline-flex;align-items:center;gap:3px;min-height:24px;font-weight:800;color:var(--ink)}
+.mk-sort th i{min-width:10px;font-style:normal;font-size:11px;color:var(--mark-text)}
+.mk-cb{display:flex;align-items:center;gap:6px;min-height:24px;cursor:pointer}.mk-cb input{flex:none;margin:0;width:14px;height:14px;accent-color:var(--ink)}
+.mk-fp{flex:none;width:92px;gap:0}.mk-ls{gap:0}.mk-ls>.mk-li{padding:2px}.mk-ls>.mk-li>.mk-help:last-child{margin-left:auto}
+.mk-ell{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mk-g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mk-g2>div{gap:1px}.mk-g2 .mk-img{height:40px}.mk-g2 span{font-size:11.5px}
+.mk-tree,.mk-tree ul{margin:0;padding:0;list-style:none;line-height:17px}.mk-tree ul{margin:1px 0 1px 6px;padding-left:12px;border-left:1px solid var(--rule)}.mk-tree ul.mk-hl{margin:6px 0 6px 6px}
+.mk-kan{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mk-kan>div{padding:6px;border-radius:8px;background:var(--fig)}.mk-kan b{font-size:11.5px}
+.mk-kc{padding:4px 6px;border:1px solid var(--rule);border-radius:6px;background:var(--plate);font-size:11.5px}.mk-kc.mk-hl{transform:rotate(-4deg)}
+.mk-tl{margin:0 0 0 6px;padding:0 0 0 16px;list-style:none;border-left:2px solid var(--rule)}
+.mk-tl li{position:relative;display:flex;flex-direction:column;padding-bottom:10px}.mk-tl li:last-child{padding-bottom:0}
+.mk-tl li::before{content:'';position:absolute;left:-24px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--plate);border:2px solid var(--steel)}
+.mk-tl .on{font-weight:800}.mk-tl .on::before{border-color:var(--mark);background:var(--mark)}
+.mk-fz{display:flex}.mk-fz>.mk-tb{width:auto;flex:none;border-right:2px solid var(--ink)}.mk-fzr{flex:1;min-width:0;padding-left:4px;overflow:hidden}.mk-fzr .mk-tb{width:max-content}
+.mk-slide{animation:mk-slide 5s var(--ease) infinite}
+@keyframes mk-slide{0%,15%{transform:none}40%,80%{transform:translateX(-126px)}100%{transform:none}}
+.mk-bulk{min-height:30px;padding:0 4px 0 0;border-radius:8px;background:var(--fig)}.mk-bulk .mk-cb{padding:0 6px}
+.mk-ie{min-height:24px;padding:0 4px;border-bottom:1.5px dashed var(--steel);border-radius:3px}.mk-ie:hover,.mk-ie:focus-visible{background:var(--mark-bg)}
+.mk-in.mk-iei{min-height:24px;width:72px;padding:0 6px;text-align:right;font-size:12px;border-color:var(--mark)}
+.mk-ex tr:not(.mk-exd) td{padding-top:0;padding-bottom:0}
+.mk-ex button{width:24px;height:24px;margin-left:-6px;border-radius:5px;color:var(--mark-text);font-size:12px}.mk-ex button:hover{background:var(--mark-bg)}
+.mk-exd td{background:var(--mark-bg)}
+.mk-two.mk-rt{display:flex;flex-wrap:wrap;justify-content:center;width:100%;font-size:12px;color:var(--ink)}.mk-rt>.mk-card{flex:none;gap:6px}
+.mk-rt>.mk-card:first-child{width:200px}.mk-rt>.mk-card:last-child{width:124px}
+.mk-rc{display:grid;grid-template-columns:auto 1fr;gap:0 8px;margin:0;padding:5px 8px;border:1px solid var(--rule);border-radius:8px;font-size:11.5px}.mk-rc dt{color:var(--muted)}.mk-rc dd{margin:0;font-weight:700}
+.mk-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.mk-kpi .mk-card{padding:5px 7px;gap:0}.mk-kpi b{font-size:14px;line-height:1.25}
+.mk-ch{flex:none;display:block;overflow:visible}.mk-ch text{font-size:11px;fill:var(--muted)}.mk-ch .v{fill:var(--text);font-weight:800}.mk-ch .ax{stroke:var(--rule);fill:none}
+.mk-ch .b1{fill:var(--ch1)}.mk-ch .l1,.mk-ch .l2{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.mk-ch .l1{stroke:var(--ch1)}.mk-ch .l2{stroke:var(--ch2)}
+.mk-ch .d1,.mk-ch .d2,.mk-ch .p1,.mk-ch .p2,.mk-ch .p3{stroke:var(--plate);stroke-width:2}.mk-ch .d1,.mk-ch .p1{fill:var(--ch1)}.mk-ch .d2,.mk-ch .p2{fill:var(--ch2)}.mk-ch .p3{fill:var(--ch3)}
+.mk-lg{display:flex;gap:10px;margin:0;padding:0;list-style:none;font-size:11.5px;color:var(--text)}.mk-lg i{display:inline-block;width:12px;height:3px;margin-right:4px;border-radius:2px;vertical-align:middle}
+.mk-lg.sq{flex-direction:column;gap:4px}.mk-lg.sq i{width:10px;height:10px;border-radius:3px}.mk-pie{justify-content:center;gap:18px}
+.mk-md{display:flex;flex-direction:column;flex:none;width:100px;gap:2px;padding-right:8px;border-right:1px solid var(--rule)}
+.mk-md>span{display:flex;flex-direction:column;min-width:0;padding:3px 6px;border-radius:5px;font-size:11px;color:var(--muted)}.mk-md b{color:var(--ink);font-size:11.5px}.mk-md .on{background:var(--mark-bg)}
 
 /* ---------- responsive ---------- */
 @media (max-width:1080px){
@@ -529,7 +568,7 @@ function SYM(g, list){ list.forEach(([q, t]) => SYMPTOMS.push({g, q, t})); }
 /* ===== 카테고리 목록 ===== */
 CAT('basics','개발 기본','개발을 처음 시작할 때 듣는 가장 기본적인 말', [['code','코드 읽기 기초','코드를 볼 때 알아야 하는 문법 이름']]);
 CAT('web','웹사이트','웹사이트가 어떻게 생기고 움직이는지에 관한 말', [['parts','페이지 구성요소','웹페이지 각 부분의 이름']]);
-CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
+CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법']]);
 CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
@@ -676,6 +715,29 @@ T('design','nav',[
  {en:'Skip Link',ko:'본문 바로가기',d:'키보드로 Tab을 처음 누르면 나타나서, 반복되는 메뉴를 건너뛰고 본문으로 가게 해 주는 링크예요.',x:'평소엔 숨어 있다가 키보드로 들어온 사람에게만 보여요.',p:'페이지 맨 앞에 Tab을 누르면 나타나는 "본문 바로가기" 링크를 넣어줘',r:['Focus','Anchor Link'],l:2,o:0,v:'u-skip-link'},
  {en:'Active Menu',ko:'현재 메뉴 표시',d:'메뉴 중 지금 보고 있는 페이지를 굵기나 밑줄로 구분해 보여 주는 표시예요.',x:'색만 바꾸면 색약인 사람은 헷갈려요. 굵기나 밑줄을 함께 바꿔요.',p:'상단 메뉴에서 지금 페이지 메뉴는 굵게 하고 밑줄을 그어줘',r:['GNB','Tab'],l:1,o:0,v:'u-active-menu'},
  {en:'Kebab Menu',ko:'케밥 메뉴 · 점 세 개',d:'세로 점 세 개 버튼으로, 누르면 수정·삭제 같은 추가 동작이 펼쳐져요.',x:'점이 가로로 놓이면 미트볼 메뉴라고도 불러요. 이름은 곳마다 조금씩 달라요.',p:'댓글마다 오른쪽에 점 세 개 버튼을 두고 누르면 수정·삭제 메뉴를 보여줘',r:['Hamburger Menu','Context Menu'],l:1,o:0,v:'u-kebab-menu'},
+]);
+T('design','data',[
+ {en:'Data Table',ko:'데이터 표',d:'많은 정보를 행과 열로 정리해, 화면에서 보고 비교하게 해 주는 표 부품이에요.',x:'데이터 묶음을 뜻하는 Table과 달리 화면에 보여 주는 표를 말해요. 줄이 수천 개면 Virtual Scrolling을 함께 써요.',p:'주문 목록을 상품·가격·상태 열이 있는 데이터 표로 보여줘',r:['Table','Table Header','Virtual Scrolling'],l:1,o:0,v:'u-data-table'},
+ {en:'Table Header',ko:'표 머리글',d:'표 맨 윗줄에서 각 열이 무엇인지 이름을 알려 주는 칸이에요.',x:'줄이 많은 표는 아래로 내려도 머리글이 위에 붙어 있게 하면 덜 헷갈려요.',p:'표 머리글을 굵게 하고, 아래로 내려도 맨 위에 붙어 있게 해줘',r:['Data Table','Sticky Header'],l:1,o:0,v:'u-table-header'},
+ {en:'Sortable Column',ko:'정렬 가능한 열',d:'머리글을 누르면 그 열을 기준으로 줄을 다시 늘어놓는 열이에요.',x:'데이터를 순서대로 늘어놓는 일 자체는 Sorting이라고 해요. 지금 어느 쪽으로 정렬됐는지 ▲▼로 보여 줘요.',p:'상품 표의 가격 머리글을 누르면 낮은 순·높은 순으로 바뀌게 해줘',r:['Sorting','Table Header'],l:2,o:0,v:'u-sortable-column'},
+ {en:'Filter Panel',ko:'필터 패널',d:'조건을 골라 목록에서 원하는 것만 남기게 해 주는 판이에요.',x:'조건에 맞는 것만 골라내는 일 자체는 Filtering이라고 해요. 남은 개수를 바로 보여 주면 좋아요.',p:'상품 목록 옆에 색상·가격 조건을 고르는 필터 패널을 넣고 남은 개수를 보여줘',r:['Filtering','Checkbox','Chip'],l:2,o:0,v:'u-filter-panel'},
+ {en:'List',ko:'목록 · 리스트',d:'같은 종류의 항목을 위에서 아래로 한 줄씩 늘어놓은 모양이에요.',x:'훑어 읽기 쉬워서 메시지·설정·검색 결과에 많이 써요.',p:'메시지 목록을 프로필 사진·이름·마지막 메시지가 한 줄씩 보이는 리스트로 만들어줘',r:['Grid View','Card'],l:1,o:0,v:'u-list'},
+ {en:'Grid View',ko:'격자 보기 · 그리드 뷰',d:'항목을 바둑판처럼 가로세로 칸에 나눠 늘어놓은 모양이에요.',x:'사진·상품처럼 그림이 중요한 항목에 잘 맞아요. 글이 중요하면 List가 읽기 쉬워요.',p:'상품 목록을 한 줄에 2개씩 사진이 보이는 격자 보기로 바꿔줘',r:['List','Card'],l:1,o:0,v:'u-grid-view'},
+ {en:'Tree View',ko:'트리 보기',d:'폴더 안에 폴더가 들어가듯, 항목을 단계별로 들여 써서 보여 주는 목록이에요.',x:'▸를 누르면 안쪽 항목이 펼쳐져요. 파일 탐색기 왼쪽 목록이 대표적이에요.',p:'문서 메뉴를 폴더처럼 들여 쓴 트리 보기로 만들고 ▸를 누르면 펼쳐지게 해줘',r:['Accordion','Expandable Row'],l:2,o:0,v:'u-tree-view'},
+ {en:'Kanban Board',ko:'칸반 보드',d:'할 일·진행 중·완료처럼 단계별 칸에 일을 카드로 놓고, 옮겨 가며 관리하는 화면이에요.',x:'칸반은 일본어로 "간판"이라는 뜻이에요. 토요타 공장에서 카드로 일을 관리하던 방식에서 이름을 따왔어요.',p:'할 일·진행 중·완료 세 칸이 있는 칸반 보드를 만들고 카드를 끌어 옮기게 해줘',r:['Card','List'],l:2,o:0,v:'u-kanban-board'},
+ {en:'Timeline',ko:'타임라인',d:'일어난 일을 시간 순서대로 선 위에 점을 찍어 늘어놓은 모양이에요.',x:'배송 조회·활동 기록에서 많이 봐요. 지금 몇 단계인지 보여 주는 Stepper와 달리 지나간 기록을 보여 줘요.',p:'배송 조회 화면에 주문·출발·도착 기록을 시간 순서대로 타임라인으로 보여줘',r:['Stepper','List'],l:1,o:0,v:'u-timeline'},
+ {en:'Zebra Stripes',ko:'줄무늬 표 · 지브라 스트라이프',d:'표의 줄을 한 줄씩 번갈아 다른 바탕색으로 칠한 모양이에요.',x:'읽기에 도움이 되는지는 연구마다 결과가 달라요. 쓴다면 색 차이를 은은하게 둬요.',p:'주문 표의 줄을 한 줄씩 번갈아 연한 회색으로 칠해줘',r:['Data Table','Table Header'],l:1,o:0,v:'u-zebra-stripes'},
+ {en:'Frozen Column',ko:'고정 열',d:'표를 가로로 넘겨도 첫 열은 제자리에 붙어 있게 고정한 열이에요.',x:'열이 많은 표에서 지금 보는 줄이 무엇인지 계속 알 수 있어요.',p:'열이 많은 매출 표에서 가로로 넘겨도 지점 이름 열은 고정해줘',r:['Table Header','Responsive Table','Sticky Header'],l:2,o:0,v:'u-frozen-column'},
+ {en:'Bulk Action',ko:'일괄 작업',d:'여러 항목을 한꺼번에 골라 삭제·이동 같은 일을 한 번에 하게 해 주는 기능이에요.',x:'하나라도 고르면 "2개 선택됨 · 삭제" 같은 막대가 나타나요.',p:'메일 목록에서 여러 개를 체크해 한 번에 지우는 일괄 작업 막대를 넣어줘',r:['Checkbox','Data Table','Destructive Action'],l:2,o:0,v:'u-bulk-action'},
+ {en:'Inline Edit',ko:'표 안에서 바로 수정 · 인라인 편집',d:'표나 목록의 값을 따로 화면을 열지 않고 그 자리에서 바로 고치는 방식이에요.',x:'고칠 수 있는 칸은 밑줄이나 연필 표시로 알려 주고, Enter로 저장·Esc로 취소해요.',p:'상품 표에서 가격 칸을 누르면 그 자리에서 바로 고치고 Enter로 저장되게 해줘',r:['Data Table','Input Field'],l:2,o:0,v:'u-inline-edit'},
+ {en:'Expandable Row',ko:'펼치는 행',d:'표의 한 줄을 누르면 그 아래로 자세한 내용이 펼쳐지는 행이에요.',x:'표를 길게 늘이지 않고 필요한 줄만 자세히 볼 수 있어요.',p:'주문 표에서 줄 앞 ▸를 누르면 그 주문의 배송 정보가 아래로 펼쳐지게 해줘',r:['Data Table','Accordion','Tree View'],l:2,o:0,v:'u-expandable-row'},
+ {en:'Responsive Table',ko:'반응형 표',d:'화면이 좁아지면 표 모양을 바꿔, 휴대폰에서도 옆으로 넘기지 않고 읽게 만든 표예요.',x:'좁은 화면에서는 줄 하나를 카드 한 장으로 바꾸거나, 덜 중요한 열을 숨겨요.',p:'주문 표를 휴대폰에서는 줄마다 카드 한 장으로 바꿔 보여줘',r:['Data Table','Frozen Column','Responsive Web Design'],l:2,o:0,v:'u-responsive-table'},
+ {en:'Dashboard',ko:'대시보드',d:'중요한 숫자와 차트를 한 화면에 모아, 상황을 한눈에 보게 해 주는 화면이에요.',x:'숫자를 다 넣기보다 지금 꼭 봐야 할 것 몇 개만 크게 보여 줘요.',p:'쇼핑몰 관리자 첫 화면에 오늘 주문 수·매출·방문자 수와 요일별 주문 차트가 있는 대시보드를 만들어줘',r:['Bar Chart','Line Chart','Status Indicator'],l:1,o:0,v:'u-dashboard'},
+ {en:'Bar Chart',ko:'막대 차트',d:'값의 크기를 막대 길이로 바꿔, 무엇이 크고 작은지 비교하게 해 주는 차트예요.',x:'막대는 0에서 시작해야 길이 비교가 정확해요.',p:'요일별 주문 수를 막대 차트로 보여 주고 가장 많은 날은 값을 적어줘',r:['Line Chart','Pie Chart','Legend'],l:1,o:0,v:'u-bar-chart'},
+ {en:'Line Chart',ko:'꺾은선 차트',d:'시간에 따라 값이 어떻게 바뀌는지 점을 선으로 이어 보여 주는 차트예요.',x:'흐름을 보기 좋아요. 선이 너무 많으면 겹쳐서 읽기 어려워요.',p:'월별 방문자 수를 꺾은선 차트로 보여 주고 올해와 작년을 색으로 나눠줘',r:['Bar Chart','Legend'],l:1,o:0,v:'u-line-chart'},
+ {en:'Pie Chart',ko:'원 차트 · 파이 차트',d:'전체를 100으로 보고, 각 부분이 차지하는 몫을 원의 조각으로 보여 주는 차트예요.',x:'조각이 많거나 크기가 비슷하면 비교가 어려워요. 그럴 땐 막대 차트가 나아요.',p:'결제 수단 비율을 원 차트로 보여 주고 조각마다 퍼센트를 적어줘',r:['Bar Chart','Legend'],l:1,o:0,v:'u-pie-chart'},
+ {en:'Legend',ko:'범례',d:'차트의 색이나 모양이 각각 무엇을 뜻하는지 알려 주는 작은 설명표예요.',x:'색만으로 구분하지 않게, 선 끝에 이름을 바로 적어 주기도 해요.',p:'차트 위에 올해·작년 범례를 넣고, 선 끝에도 이름을 적어줘',r:['Line Chart','Pie Chart'],l:1,o:0,v:'u-legend'},
+ {en:'Master-Detail',ko:'목록-상세',d:'목록에서 하나를 고르면 옆에 그 자세한 내용이 보이는 화면 구성이에요.',x:'메일·메신저·설정 화면에서 흔해요. 좁은 화면에서는 목록과 상세를 한 화면씩 나눠 보여 줘요.',p:'메일 화면을 왼쪽은 메일 목록, 오른쪽은 고른 메일 내용이 보이는 목록-상세 구성으로 만들어줘',r:['List','Sidebar'],l:2,o:0,v:'u-master-detail'},
 ]);
 T('design','tool',[
  {en:'Frame',ko:'프레임 · 대지',d:'Figma에서 화면 한 장이나 부품을 담는 틀.',x:'Photoshop의 "대지(아트보드)"와 비슷해요.',j:'"대지 하나 더 만들어 주세요"',p:'Figma에서 1440px 데스크톱 프레임을 기준으로 만들었어',r:['Layer','Auto Layout'],l:1,o:1,u:'https://help.figma.com/hc/en-us/articles/360041539473-Frames-in-Figma-Design',v:{page:''}},
@@ -2069,6 +2131,121 @@ Object.assign(D, {
       s.querySelector('.mk-peek').addEventListener('click', () => k.focus());
       k.addEventListener('click', () => { m.focus(); r.textContent = '메뉴 4개를 건너뛰고 본문에 왔어요'; });
       m.addEventListener('blur', () => { r.textContent = ''; }); }},
+});
+/* design: data */
+Object.assign(ART, {
+  zebra:'<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s" d="M39 20 32 4 47 14M71 20 78 4 63 14"/><rect class="s" x="34" y="12" width="42" height="80" rx="20"/><rect class="s k" x="36" y="36" width="38" height="5"/><rect class="s k" x="36" y="48" width="38" height="5"/><rect class="s k" x="36" y="60" width="38" height="5"/><circle class="s k" cx="46" cy="26" r="1.5"/><circle class="s k" cx="64" cy="26" r="1.5"/><ellipse class="s t" cx="55" cy="80" rx="15" ry="9"/><circle class="o" cx="50" cy="80" r="2"/><circle class="o" cx="60" cy="80" r="2"/></svg>',
+});
+const won = n => n.toLocaleString('ko-KR');
+const ORD = [['티셔츠', 12000, '배송 중'], ['바지', 25000, '준비 중'], ['모자', 9000, '완료'], ['양말', 3000, '완료']];
+const tb = (head, rows, c = '') => `<table class="mk-tb${c}"><thead><tr>${head.map((x, i) => `<th${typeof rows[0][i] === 'number' ? ' class="n"' : ''}>${x}</th>`).join('')}</tr></thead>
+  <tbody>${rows.map(r => `<tr>${r.map(x => typeof x === 'number' ? `<td class="n">${won(x)}</td>` : `<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const DAYS = ['월', '화', '수', '목', '금', '토', '일'], ORDN = [42, 55, 48, 61, 78, 96, 70];
+const chBar = H => { const W = 220, base = H - 18, top = 16, sw = W / 7, bw = 22, mx = Math.max(...ORDN);
+  return `<svg class="mk-ch" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="요일별 주문 수 막대 차트, 가장 많은 날은 토요일 ${mx}건">${ORDN.map((v, i) => {
+    const h = Math.round(v / mx * (base - top)), x = Math.round(i * sw + (sw - bw) / 2), y = base - h;
+    return `<path class="b1" d="M${x} ${base}V${y + 4}a4 4 0 0 1 4-4h${bw - 8}a4 4 0 0 1 4 4V${base}z"/><text x="${x + bw / 2}" y="${H - 4}" text-anchor="middle">${DAYS[i]}</text>${
+      v === mx ? `<text class="v" x="${x + bw / 2}" y="${y - 4}" text-anchor="middle">${v}</text>` : ''}`; }).join('')}<path class="ax" d="M0 ${base + .5}H${W}"/></svg>`; };
+const MON = ['1월', '2월', '3월', '4월', '5월', '6월'], LN = [['올해', [12, 15, 14, 19, 23, 26]], ['작년', [10, 11, 13, 12, 15, 17]]];
+const chLine = hl => { const W = 220, H = 100, base = H - 18, X = i => 10 + i * 34, Y = v => (base - v / 30 * (base - 8)).toFixed(1);
+  return `<div class="mk-row"><b style="flex:1">월별 방문자 (천 명)</b><span class="mk-lg${hl ? ' mk-hl' : ''}">${LN.map(([n], k) => `<span><i style="background:var(--ch${k + 1})"></i>${n}</span>`).join('')}</span></div>
+  <svg class="mk-ch" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="월별 방문자 꺾은선 차트, 6월에 올해 26천 명, 작년 17천 명">${MON.map((m, i) => `<text x="${X(i)}" y="${H - 4}" text-anchor="middle">${m}</text>`).join('')}
+  <path class="ax" d="M0 ${base + .5}H${W}"/>${LN.map(([n, a], k) => `<path class="l${k + 1}" d="M${a.map((v, i) => `${X(i)} ${Y(v)}`).join('L')}"/><circle class="d${k + 1}" cx="${X(5)}" cy="${Y(a[5])}" r="4"/><text class="v" x="${X(5) + 9}" y="${+Y(a[5]) + 4}">${n}</text>`).join('')}</svg>`; };
+const PIE = [['카드', 55], ['계좌이체', 30], ['휴대폰', 15]];
+const chPie = () => { let a = -Math.PI / 2; const p = t => `${(48 + 44 * Math.cos(t)).toFixed(1)} ${(48 + 44 * Math.sin(t)).toFixed(1)}`;
+  return `<svg class="mk-ch" width="96" height="96" viewBox="0 0 96 96" role="img" aria-label="결제 수단 비율 원 차트: ${PIE.map(([n, v]) => `${n} ${v}%`).join(', ')}">${PIE.map(([, v], k) => {
+    const b = a + v / 50 * Math.PI, d = `M48 48L${p(a)}A44 44 0 ${v > 50 ? 1 : 0} 1 ${p(b)}z`; a = b; return `<path class="p${k + 1}" d="${d}"/>`; }).join('')}</svg>`; };
+const FP = [['티셔츠', '검정', 12000], ['셔츠', '흰색', 28000], ['바지', '검정', 25000], ['모자', '흰색', 9000]];
+const MSG = [['민지', '내일 몇 시에 볼까?', '9:41'], ['준호', '사진 보냈어요', '어제'], ['엄마', '저녁 먹었니?', '어제'], ['수아', '고마워요!', '월']];
+const KAN = [['할 일', ['장보기', '청소']], ['진행 중', ['보고서']], ['완료', ['예약', '송금']]];
+const TL = [['10:02', '주문 접수'], ['13:40', '상품 출발'], ['18:15', '동네 도착'], ['지금', '배송 중']];
+const FZ = [['강남', [1240, 1310, 1180, 1420, 1500, 1380, 1610, 1720]], ['홍대', [980, 1020, 1100, 1050, 1210, 1190, 1300, 1280]], ['부산', [860, 910, 940, 1020, 990, 1080, 1150, 1230]]];
+const MAIL = [['쇼핑몰', '주문하신 상품이 출발했어요'], ['은행', '이번 달 거래 내역'], ['동호회', '토요일 모임 안내'], ['뉴스레터', '이번 주 소식']];
+const IE = [['티셔츠', 12000], ['바지', 25000], ['모자', 9000]];
+const EX = [['1024', '티셔츠', '배송 중', '서울 마포구 · 오늘 도착 예정'], ['1025', '바지', '준비 중', '부산 해운대구 · 내일 출발'], ['1026', '모자', '완료', '대전 서구 · 어제 받음']];
+Object.assign(D, {
+  'u-data-table':{h:browser(`<b>주문 4건</b>${tb(['상품', '가격', '상태'], ORD, ' mk-hl')}`, {url:'shop.example/admin'}), cap:'많은 정보를 행과 열로 정리해 한눈에 비교하게 해요'},
+  'u-table-header':{h:browser(`<b>주문 4건</b>${tb(['상품', '가격', '상태'], ORD).replace('<thead>', '<thead class="mk-hl">')}`, {url:'shop.example/admin'}), cap:'표 맨 윗줄에서 각 열이 무엇인지 이름을 알려 줘요'},
+  'u-sortable-column':{h:hint('머리글을 눌러 보세요 (Enter·Space)') + browser(`<b aria-live="polite"></b><table class="mk-tb mk-sort"><thead><tr><th><button>상품<i></i></button></th><th class="n"><button>가격<i></i></button></th></tr></thead><tbody></tbody></table>`,
+    {url:'shop.example/products'}), cap:'머리글을 누르면 그 열을 기준으로 줄을 다시 늘어놓아요',
+    init: s => { const th = [...s.querySelectorAll('.mk-sort th')], bd = s.querySelector('.mk-sort tbody'), t = s.querySelector('.mk-scr>b'), L = [['이름 가나다순', '이름 가나다 역순'], ['가격 낮은 순', '가격 높은 순']];
+      let k = -1, dir = 1;
+      const draw = () => { const r = ORD.slice(0, 3); if (k >= 0) r.sort((a, b) => (k ? a[1] - b[1] : a[0].localeCompare(b[0], 'ko')) * dir);
+        bd.innerHTML = r.map(([a, b]) => `<tr><td>${a}</td><td class="n">${won(b)}</td></tr>`).join('');
+        th.forEach((x, i) => { x.setAttribute('aria-sort', i !== k ? 'none' : dir > 0 ? 'ascending' : 'descending'); x.querySelector('i').textContent = i !== k ? '↕' : dir > 0 ? '▲' : '▼'; });
+        t.textContent = `상품 3개 · ${k < 0 ? '들어온 순' : L[k][dir > 0 ? 0 : 1]}`; };
+      th.forEach((x, i) => x.querySelector('button').addEventListener('click', () => { dir = k === i ? -dir : 1; k = i; draw(); }));
+      draw(); }},
+  'u-filter-panel':{h:hint('조건을 골라 보세요 (Space로 체크)') + browser(`<div class="mk-cols"><div class="mk-fp mk-f mk-hl" role="group" aria-label="필터"><b>색상</b>
+    <label class="mk-cb"><input type="checkbox" value="검정">검정</label><label class="mk-cb"><input type="checkbox" value="흰색">흰색</label>
+    <b>가격</b><label class="mk-cb"><input type="checkbox" value="p">2만 원 이하</label></div>
+    <div class="mk-f mk-ls" style="flex:1"><b aria-live="polite">상품 4개</b>${FP.map(([n, c, p]) => `<div class="mk-li">${n}<span class="mk-help">${c} · ${won(p)}원</span></div>`).join('')}</div></div>`,
+    {url:'shop.example/products'}), cap:'조건을 골라 목록에서 원하는 것만 남겨요',
+    init: s => { const cb = [...s.querySelectorAll('.mk-fp input')], li = [...s.querySelectorAll('.mk-ls .mk-li')], t = s.querySelector('.mk-ls b');
+      const draw = () => { const on = cb.filter(x => x.checked).map(x => x.value), col = on.filter(x => x !== 'p'); let n = 0;
+        FP.forEach(([, c, p], i) => { const ok = (!col.length || col.includes(c)) && (!on.includes('p') || p <= 20000); li[i].hidden = !ok; n += ok; });
+        t.textContent = n ? `상품 ${n}개` : '맞는 상품이 없어요'; };
+      cb.forEach(x => x.addEventListener('change', draw)); }},
+  'u-list':{h:phone(`<b>메시지</b><div class="mk-f mk-ls mk-hl">${MSG.map(([n, m, t]) => `<div class="mk-li"><i class="mk-av"></i><span class="mk-f mk-ls" style="flex:1;min-width:0"><b>${n}</b><span class="mk-help mk-ell">${m}</span></span><span class="mk-help">${t}</span></div>`).join('')}</div>`),
+    cap:'같은 종류의 항목을 한 줄씩 위에서 아래로 늘어놓아요'},
+  'u-grid-view':{h:phone(`<b>상품</b><div class="mk-g2 mk-hl">${IE.concat([['양말', 3000]]).map(([n, p]) => `<div class="mk-f"><i class="mk-img"></i><span>${n}</span><b>${won(p)}원</b></div>`).join('')}</div>`),
+    cap:'항목을 바둑판처럼 가로세로 칸에 나눠 늘어놓아요'},
+  'u-tree-view':{h:browser(`<b>내 파일</b><ul class="mk-tree"><li>▾ 문서<ul class="mk-hl"><li>▾ 2026<ul><li>계획.txt</li><li>회의록.txt</li></ul></li></ul></li><li>▸ 사진</li></ul>`, {url:'drive.example'}),
+    cap:'폴더 안에 폴더가 들어가듯 단계별로 들여 써서 보여 줘요'},
+  'u-kanban-board':{h:browser(`<b>이번 주 할 일</b><div class="mk-kan">${KAN.map(([h, a], j) => `<div class="mk-f"><b>${h} ${a.length}</b>${a.map(x => `<span class="mk-kc${j === 1 ? ' mk-hl' : ''}">${x}</span>`).join('')}</div>`).join('')}</div>`, {url:'board.example'}),
+    cap:'단계별 칸에 일을 카드로 놓고, 다음 칸으로 옮겨 가며 관리해요'},
+  'u-timeline':{h:phone(`<b>배송 조회</b><ol class="mk-tl">${TL.map(([t, x], i) => `<li${i === 3 ? ' class="on mk-hl"' : ''}><span class="mk-help">${t}</span>${x}</li>`).join('')}</ol>`),
+    cap:'일어난 일을 시간 순서대로 선 위에 늘어놓아요'},
+  'u-zebra-stripes':{h:pair(ART.zebra, browser(`<b>주문 4건</b>${tb(['상품', '가격', '상태'], ORD, ' zb mk-hl')}`, {url:'shop.example/admin'})), cap:'얼룩말 줄무늬처럼, 표의 줄을 한 줄씩 번갈아 다른 색으로 칠해요'},
+  'u-frozen-column':{h:browser(`<b>지점별 매출 (만 원)</b><div class="mk-fz">${tb(['지점'], FZ.map(([n]) => [n]), ' mk-hl')}<div class="mk-fzr">${
+    tb([...'12345678'].map(x => x + '월'), FZ.map(([, a]) => a), ' A mk-slide')}</div></div>`, {url:'shop.example/sales'}), m:1, cap:'표를 가로로 넘겨도 첫 열은 제자리에 붙어 있어요'},
+  'u-bulk-action':{h:hint('메일을 체크해 보세요 (Space로 체크)') + phone(`<div class="mk-row mk-bulk mk-hl"><label class="mk-cb"><input type="checkbox" aria-label="전체 선택"></label><b aria-live="polite" style="flex:1"></b>
+    <button class="mk-btn mk-sm" hidden>삭제</button><button class="mk-btn ghost mk-sm" hidden>되돌리기</button></div>
+    <div class="mk-f mk-ls">${MAIL.map(([n, t]) => `<label class="mk-li mk-cb"><input type="checkbox"><span class="mk-f mk-ls" style="min-width:0"><b>${n}</b><span class="mk-help mk-ell">${t}</span></span></label>`).join('')}</div>`),
+    cap:'여러 항목을 한꺼번에 골라 한 번에 지우거나 옮겨요',
+    init: s => { const all = s.querySelector('.mk-bulk input'), t = s.querySelector('.mk-bulk b'), [del, undo] = s.querySelectorAll('.mk-bulk button'), it = [...s.querySelectorAll('label.mk-li')], cb = it.map(x => x.querySelector('input'));
+      let gone = 0;
+      const draw = () => { const v = cb.filter((x, i) => !it[i].hidden), n = v.filter(x => x.checked).length;
+        all.checked = n > 0 && n === v.length; all.indeterminate = n > 0 && n < v.length; all.disabled = !v.length;
+        t.textContent = n ? `${n}개 선택됨` : gone ? `${gone}개 지움` : `메일 ${v.length}개`; del.hidden = !n; undo.hidden = n > 0 || !gone; };
+      cb.forEach(x => x.addEventListener('change', draw));
+      all.addEventListener('change', () => { cb.forEach((x, i) => { if (!it[i].hidden) x.checked = all.checked; }); draw(); });
+      del.addEventListener('click', () => { gone = 0; cb.forEach((x, i) => { if (x.checked) { it[i].hidden = true; x.checked = false; } gone += it[i].hidden; }); draw(); undo.focus(); });
+      undo.addEventListener('click', () => { it.forEach(x => { x.hidden = false; }); gone = 0; draw(); all.focus(); });
+      draw(); }},
+  'u-inline-edit':{h:hint('가격을 눌러 고쳐 보세요 (Enter 저장 · Esc 취소)') + browser(`<b aria-live="polite">상품 3개</b><table class="mk-tb"><thead><tr><th>상품</th><th class="n">가격</th></tr></thead>
+    <tbody>${IE.map(([n, p]) => `<tr><td>${n}</td><td class="n"><button class="mk-ie" aria-label="${n} 가격 고치기">${won(p)}</button></td></tr>`).join('')}</tbody></table>`, {url:'shop.example/admin'}),
+    cap:'값을 따로 화면을 열지 않고 그 자리에서 바로 고쳐요',
+    init: s => { const t = s.querySelector('.mk-scr>b'), v = IE.map(x => x[1]);
+      s.querySelectorAll('.mk-ie').forEach((b, i) => b.addEventListener('click', () => { const td = b.parentNode; let done = false;
+        td.innerHTML = `<input class="mk-in mk-iei" inputmode="numeric" aria-label="${IE[i][0]} 가격" value="${v[i]}">`;
+        const inp = td.firstChild;
+        const end = ok => { if (done) return b; done = true; const d = inp.value.replace(/[^0-9]/g, '');
+          if (ok && d && +d !== v[i]) { v[i] = +d; t.textContent = `${IE[i][0]} 가격을 ${won(v[i])}원으로 바꿨어요`; } else if (!ok) t.textContent = '고치지 않고 그대로 뒀어요';
+          b.textContent = won(v[i]); td.replaceChildren(b); return b; };
+        keys(inp, {Enter: 1, Escape: 0}, k => end(!!k).focus());
+        inp.addEventListener('blur', () => end(true));
+        inp.focus(); inp.select(); })); }},
+  'u-expandable-row':{h:hint('▸를 눌러 펼쳐 보세요') + browser(`<table class="mk-tb mk-ex"><thead><tr><th>주문</th><th>상품</th><th>상태</th></tr></thead><tbody>${EX.map(([n, a, b, d]) =>
+    `<tr><td><button aria-expanded="false" aria-label="${n}번 주문 자세히">▸</button>${n}</td><td>${a}</td><td>${b}</td></tr><tr class="mk-exd" hidden><td colspan="3">${d}</td></tr>`).join('')}</tbody></table>`, {url:'shop.example/orders'}),
+    cap:'한 줄을 누르면 그 아래로 자세한 내용이 펼쳐져요',
+    init: s => { const bs = [...s.querySelectorAll('.mk-ex button')], row = b => b.closest('tr').nextElementSibling;
+      bs.forEach(b => { row(b).id = uid(); b.setAttribute('aria-controls', row(b).id);
+        b.addEventListener('click', () => { const o = b.getAttribute('aria-expanded') !== 'true';
+          bs.forEach(x => { const on = x === b && o; x.setAttribute('aria-expanded', on); x.textContent = on ? '▾' : '▸'; row(x).hidden = !on; }); }); }); }},
+  'u-responsive-table':{h:`<div class="mk-two mk-rt"><div class="mk-card mk-f"><span class="mk-help">넓은 화면</span>${tb(['상품', '가격', '상태'], ORD.slice(0, 2))}</div>
+    <div class="mk-card mk-f mk-hl"><span class="mk-help">좁은 화면</span>${ORD.slice(0, 2).map(([n, p, st]) => `<dl class="mk-rc"><dt>상품</dt><dd>${n}</dd><dt>가격</dt><dd>${won(p)}</dd><dt>상태</dt><dd>${st}</dd></dl>`).join('')}</div></div>`,
+    cap:'넓은 화면에서는 표로, 좁은 화면에서는 줄마다 카드 한 장으로 바꿔 보여 줘요'},
+  'u-dashboard':{h:browser(`<div class="mk-kpi mk-hl">${[['오늘 주문', '128', '▲ 12%'], ['매출', '352만', '▲ 8%'], ['방문자', '2,410', '▼ 3%']].map(([a, b, c]) => `<div class="mk-card mk-f"><span class="mk-help">${a}</span><b>${b}</b><span class="mk-help">${c}</span></div>`).join('')}</div>${chBar(54)}`,
+    {url:'shop.example/admin'}), cap:'중요한 숫자와 차트를 한 화면에 모아 한눈에 보게 해요'},
+  'u-bar-chart':{h:browser(`<b>요일별 주문 수</b>${chBar(100)}`, {url:'shop.example/admin'}), cap:'값의 크기를 막대 길이로 바꿔 무엇이 큰지 비교하게 해요'},
+  'u-line-chart':{h:browser(chLine(false), {url:'shop.example/admin'}), cap:'시간에 따라 값이 어떻게 바뀌는지 점을 선으로 이어 보여 줘요'},
+  'u-pie-chart':{h:browser(`<b>결제 수단 비율</b><div class="mk-row mk-pie">${chPie()}<ul class="mk-lg sq">${PIE.map(([n, v], k) => `<li><i style="background:var(--ch${k + 1})"></i>${n} <b>${v}%</b></li>`).join('')}</ul></div>`, {url:'shop.example/admin'}),
+    cap:'전체를 원으로 보고, 각 부분의 몫을 조각으로 보여 줘요'},
+  'u-legend':{h:browser(chLine(true), {url:'shop.example/admin'}), cap:'차트의 색이 각각 무엇을 뜻하는지 알려 줘요'},
+  'u-master-detail':{h:browser(`<div class="mk-cols"><nav class="mk-md">${MAIL.slice(0, 3).map(([n, t], i) => `<span${i ? '' : ' class="on mk-hl" aria-current="true"'}><b>${n}</b><span class="mk-ell">${t}</span></span>`).join('')}</nav>
+    <div class="mk-f" style="flex:1;min-width:0"><b>${MAIL[0][1]}</b><span class="mk-help">쇼핑몰 · 오전 9:41</span>${lines(95, 80, 90, 60)}</div></div>`, {url:'mail.example'}),
+    cap:'목록에서 하나를 고르면 옆에 그 내용을 자세히 보여 줘요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
