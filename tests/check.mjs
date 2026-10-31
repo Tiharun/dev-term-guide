@@ -2,6 +2,7 @@
 // 다음 작업들은 아래 EXPECT·COUNT·REDRAWN만 고친다.
 import fs from 'fs';
 import vm from 'vm';
+import zlib from 'zlib';
 
 const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할 카드
   form: ['Checkbox', 'Radio Button', 'Toggle Switch', 'Dropdown', 'Form', 'Input Field', 'Placeholder',
@@ -100,6 +101,24 @@ const SYM_NEW = ['아이폰에서 위·아래 내용이 가려져요', '휴대�
   '이미지가 안 보일 때 무슨 사진인지 몰라요', '동영상 자동 재생이 안 돼요'];    // 스펙 6장 26개(칩 말투에 맞춰 해요체)
 check('symcount', () => g.SYMPTOMS.length !== 82 ? 'length ' + g.SYMPTOMS.length
   : SYM_NEW.filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+
+check('total', () => g.TERMS.length === 978 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강)
+check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
+const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
+  const b = Buffer.from(html.match(/FONT:START[\s\S]*?base64,([A-Za-z0-9+/=]+)/)[1], 'base64'), set = new Set();
+  let t;
+  for (let i = 0; i < b.readUInt16BE(12); i++) { const o = 44 + i * 20; if (b.toString('latin1', o, o + 4) !== 'cmap') continue;
+    const off = b.readUInt32BE(o + 4), len = b.readUInt32BE(o + 8); t = len < b.readUInt32BE(o + 12) ? zlib.inflateSync(b.subarray(off, off + len)) : b.subarray(off, off + len); }
+  for (let i = 0; i < t.readUInt16BE(2); i++) { const s = t.readUInt32BE(8 + i * 8), f = t.readUInt16BE(s);
+    if (f === 12) for (let j = 0; j < t.readUInt32BE(s + 12); j++) for (let c = t.readUInt32BE(s + 16 + j * 12); c <= t.readUInt32BE(s + 20 + j * 12); c++) set.add(c);
+    if (f === 4) { const seg = t.readUInt16BE(s + 6) / 2, E = s + 14, S = E + seg * 2 + 2, D = S + seg * 2, R = D + seg * 2;
+      for (let j = 0; j < seg; j++) { const a = t.readUInt16BE(S + j * 2), z = t.readUInt16BE(E + j * 2), d = t.readUInt16BE(D + j * 2), r = t.readUInt16BE(R + j * 2);
+        for (let c = a; c <= z && c !== 0xFFFF; c++) { const gi = r ? t.readUInt16BE(R + j * 2 + r + (c - a) * 2) : c; if (gi && (gi + d) & 0xFFFF) set.add(c); } } } }
+  return set;
+};
+check('font', () => { const set = fontCmap(), out = html.replace(/\/\* FONT:START \*\/[\s\S]*?\/\* FONT:END \*\//, '');
+  const miss = [...new Set(out.match(/[ㄱ-ㆎ가-힣]/g))].filter(ch => !set.has(ch.codePointAt(0)));
+  return miss.length ? miss.length + '자 없음: ' + miss.slice(0, 20).join('') : ''; });
 
 if (fails.length) { console.log(fails.join('\n')); process.exit(1); }
 console.log('OK ' + n);
