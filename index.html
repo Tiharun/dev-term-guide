@@ -326,6 +326,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 @keyframes mk-tt8{0%,80%{clip-path:inset(-4px 100% -4px -4px)}86%,100%{clip-path:inset(-4px)}}
 .mk-tkeys{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .mk-tkey{min-height:32px;min-width:44px;padding:0 12px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font:600 13px var(--mono);cursor:pointer}
+.mk-tkey[aria-pressed=true]{background:var(--ink);color:var(--plate)}
 .mk-tdim{color:#a9b8d0}.mk-tspin{display:inline-block;width:.75em;height:.75em;border:2px solid #a8d49a;border-right-color:transparent;border-radius:50%;vertical-align:-1px}.mk-tspin.A{animation:spin 1s linear infinite}
 .mk-tsw{display:inline-grid}.mk-tsw>i{grid-area:1/1;font-style:normal;opacity:0}.mk-tsw>i:last-child{opacity:1}.mk-tsw>i.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-tsw>i:nth-child(1){animation-name:mk-sw1}.mk-tsw>i:nth-child(2){animation-name:mk-sw2}.mk-tsw>i:nth-child(3){animation-name:mk-sw3}
 @keyframes mk-sw1{0%,44.9%{opacity:1}45%,100%{opacity:0}}
@@ -344,7 +345,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 @container (max-width:480px){.mk-pr{flex-direction:column;gap:8px}.mk-arrow{transform:rotate(90deg)}}
 /* 네트워크 모형(net): 아이콘 줄 + 이웃 아이콘 사이 메시지 줄. k번째 줄은 mk-tl{k}로 나타나고 점은 mk-nwx{k}로 k×10+6%에 도착한다.
    멈춘 장면(-8.8s=88%)은 점이 모두 도착한 뒤. 그림판이 좁으면(아이콘 4~5개 640px, 2~3개(.s) 360px 이하) 세로로 쌓고 점은 mk-nwy{k}로 내려간다 */
-.mk-nw{width:100%;container:nw / inline-size}.mk-nw.s{container-name:nws}.mk-nwr{display:flex;align-items:flex-start;justify-content:center}
+.mk-nw,.mk-nwbox{width:100%}.stage:has(>.mk-nwbox){padding-top:50px}.mk-nw{container:nw / inline-size}.mk-nw.s{container-name:nws}.mk-nwr{display:flex;align-items:flex-start;justify-content:center}
 .mk-nwn{flex:0 1 auto;min-width:76px;max-width:104px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:11.5px;line-height:1.3;font-weight:700;color:var(--ink)}
 .mk-nwi{display:grid;place-items:center;width:44px;height:44px;border:1.5px solid var(--ink);border-radius:10px;background:var(--plate)}
 .mk-nwi svg{width:28px;height:28px;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
@@ -2361,10 +2362,7 @@ T('db','tip',[
 /* ===== 07 서버 ===== */
 T('server','basic',[
  {en:'Localhost',ko:'로컬호스트 · 내 컴퓨터',d:'내 컴퓨터 자신을 가리키는 주소. 개발 중 확인용.',p:'localhost:3000에서 확인할 수 있게 띄워줘',r:['Port','Dev Server'],l:1,o:0,v:{big:'localhost:3000',sub:'내 컴퓨터 · 3000번 문'}},
- {en:'Port',ko:'포트 · 문 번호',d:'한 컴퓨터 안에서 프로그램마다 나눠 쓰는 문 번호. 3000, 8080 등.',p:'3000번 포트가 이미 쓰이고 있대. 다른 포트로 바꿔줘',r:['Localhost'],l:1,o:0,v:{tbl:[['포트','프로그램'],['3000','웹 앱'],['5432','DB']]}},
  {en:'Dev Server',ko:'개발 서버',d:'만드는 중인 사이트를 내 컴퓨터에서 미리 돌려 보는 서버.',p:'npm run dev로 개발 서버를 켜고 주소를 알려줘',r:['Localhost','Hot Reload'],l:1,o:0,v:{code:'$ npm run dev\n→ http://localhost:5173'}},
- {en:'IP Address',ko:'IP 주소',d:'인터넷에서 컴퓨터를 찾는 숫자 주소. 192.168.0.1 같은 것.',p:'도메인 연결에 필요한 서버 IP 주소를 어디서 확인하는지 알려줘',r:['DNS','Domain'],l:1,o:1,u:MDN('Glossary/IP_Address'),v:{big:'192.168.0.10',sub:'컴퓨터의 숫자 주소'}},
- {en:'DNS',ko:'디엔에스 · 주소 안내소',d:'도메인 이름을 IP 주소로 바꿔 주는 전화번호부.',p:'도메인 DNS 설정에 어떤 값을 넣어야 하는지 알려줘',r:['Domain','IP Address'],l:2,o:1,u:MDN('Glossary/DNS'),v:{flow:['example.com','DNS','93.184.216.34']}},
  {en:'Production',ko:'운영 서버 · 프로덕션',d:'실제 사용자가 쓰는 진짜 서비스 환경.',j:'"프로드", "라이브"',p:'운영 서버에 바로 올리지 말고 테스트 서버에서 먼저 확인해줘',r:['Staging','Development Environment'],l:1,o:0,v:{flow:['개발','스테이징','프로덕션'],hl:[2]}},
  {en:'Cloud',ko:'클라우드',d:'내 컴퓨터 대신 인터넷 너머 회사(AWS 등)의 컴퓨터를 빌려 쓰는 것.',p:'이 서비스를 클라우드에 올리는 가장 쉬운 방법을 알려줘',r:['AWS'],l:1,o:0,v:{flow:['내 앱','인터넷','클라우드 서버']}},
  {en:'Uptime',ko:'가동 시간 · 업타임',d:'서버가 멈추지 않고 정상으로 돌아간 시간 비율.',p:'한 달 가동률이 얼마인지 볼 수 있게 해줘',r:['Downtime','Monitoring'],l:2,o:0,v:{big:'99.9%',sub:'한 달에 약 43분 멈춤'}},
@@ -2421,6 +2419,24 @@ T('server','tip',[
  {en:'Maintenance Page',ko:'점검 페이지',d:'서버 점검 중에 보여 주는 안내 화면.',p:'점검 중일 때 보여 줄 안내 페이지를 만들어줘',r:['Downtime'],l:1,o:0,v:'emptystate'},
  {en:'Works on My Machine',ko:'"내 컴퓨터에선 되는데"',d:'내 컴퓨터에선 되는데 서버에선 안 되는 흔한 상황. 환경 차이가 원인이에요.',j:'"제 로컬에선 되는데요"',p:'로컬에선 되는데 배포하면 안 돼. 환경 차이를 찾아줘',r:['Docker','Environment Variable'],l:1,o:0,jg:1,v:{cmp:['내 컴퓨터','<span class="btnx">✓ 됨</span>','서버','<span class="btnx o">✗ 안 됨</span>']}},
  {en:'Self-hosting',ko:'직접 호스팅',d:'남의 서비스 대신 내 서버에 직접 설치해 운영하는 것.',p:'이 도구를 직접 호스팅할 때 드는 관리 부담을 알려줘',r:['Hosting'],l:3,o:0,v:{flow:['내 서버','직접 설치','직접 관리']}},
+]);
+</script>
+<script>
+/* ===== 08 네트워크 ===== */
+const RFC = n => 'https://www.rfc-editor.org/rfc/rfc' + n;
+T('net','basic',[
+ {en:'Network',ko:'네트워크 · 연결망',d:'컴퓨터와 기기가 서로 이어져 데이터를 주고받는 묶음이에요.',p:'우리 집 네트워크에 어떤 기기가 연결돼 있는지 확인하는 방법을 알려줘',r:['Internet','Router'],l:1,o:0,v:'u-network'},
+ {en:'Internet',ko:'인터넷 · 네트워크의 네트워크',d:'전 세계의 네트워크가 서로 이어진 아주 큰 네트워크예요.',x:'웹(브라우저로 보는 사이트)은 인터넷 위에서 돌아가는 서비스 중 하나예요.',p:'이 기능이 인터넷 없이도 동작하게 만들 수 있는지 알려줘',r:['Network','Server'],l:1,o:0,v:'u-internet'},
+ {en:'IP Address',ko:'IP 주소',d:'인터넷에서 컴퓨터를 찾는 숫자 주소. 192.168.0.1 같은 것.',p:'도메인 연결에 필요한 서버 IP 주소를 어디서 확인하는지 알려줘',r:['DNS','Domain'],l:1,o:1,u:MDN('Glossary/IP_Address'),v:'u-ip-address'},
+ {en:'Port',ko:'포트 · 문 번호',d:'한 컴퓨터 안에서 프로그램마다 나눠 쓰는 문 번호. 3000, 8080 등.',p:'3000번 포트가 이미 쓰이고 있대. 다른 포트로 바꿔줘',r:['Localhost'],l:1,o:0,v:'u-port'},
+ {en:'DNS',ko:'디엔에스 · 주소 안내소',d:'도메인 이름을 IP 주소로 바꿔 주는 전화번호부.',p:'도메인 DNS 설정에 어떤 값을 넣어야 하는지 알려줘',r:['Domain','IP Address'],l:2,o:1,u:MDN('Glossary/DNS'),v:'u-dns'},
+ {en:'Packet',ko:'패킷 · 데이터 조각',d:'보낼 데이터를 잘게 나눈 조각이에요. 조각마다 받는 곳 주소가 붙어서 따로 가요.',p:'요청 하나가 패킷 여러 개로 나뉘어 가는 과정을 쉽게 설명해줘',r:['IP Address','Protocol'],l:2,o:0,v:'u-packet'},
+ {en:'Protocol',ko:'프로토콜 · 통신 약속',d:'컴퓨터끼리 데이터를 주고받을 때 지키는 약속이에요. HTTP도 프로토콜이에요.',p:'이 두 프로그램이 어떤 프로토콜로 데이터를 주고받는지 알려줘',r:['HTTP','HTTPS'],l:1,o:0,v:'u-protocol'},
+ {en:'Router',ko:'라우터 · 길 안내 기기',d:'네트워크 사이에서 데이터가 갈 길을 정해 넘겨주는 기기예요.',x:'집에서 쓰는 공유기도 라우터 일을 해요. 모뎀과 한 기계로 합쳐진 제품도 있어요.',p:'집 공유기가 하는 일을 그림으로 쉽게 설명해줘',r:['Modem','Network'],l:1,o:0,v:'u-router'},
+ {en:'Modem',ko:'모뎀 · 회선 연결 기기',d:'통신사 회선과 집 네트워크를 이어 주는 기기예요.',x:'공유기와 모뎀이 한 기계로 합쳐진 제품도 있어요.',p:'인터넷이 끊겼을 때 모뎀과 공유기 중 어느 쪽 문제인지 구분하는 방법을 알려줘',r:['Router','Internet'],l:1,o:0,v:'u-modem'},
+ {en:'Wi-Fi',ko:'와이파이 · 무선 연결',d:'선 없이 전파로 기기를 공유기에 연결하는 방식이에요.',p:'와이파이가 자꾸 끊길 때 확인할 것을 순서대로 알려줘',r:['Ethernet','Router'],l:1,o:0,v:'u-wi-fi'},
+ {en:'Ethernet',ko:'이더넷 · 유선 연결',d:'랜선(케이블)을 꽂아 기기를 네트워크에 연결하는 방식이에요.',x:'보통 와이파이보다 끊김이 적어요.',p:'노트북을 유선으로 연결하면 뭐가 나아지는지 알려줘',r:['Wi-Fi'],l:1,o:0,v:'u-ethernet'},
+ {en:'Bandwidth',ko:'대역폭 · 한 번에 보내는 양',d:'1초에 보낼 수 있는 데이터의 최대 양이에요. 보통 Mbps나 Gbps로 적어요.',x:'지연 시간과는 다른 말이에요. 길이 넓어도 멀면 늦게 도착해요.',p:'이 페이지가 느린 게 대역폭 때문인지 확인하는 방법을 알려줘',r:['Latency','File Size'],l:2,o:0,v:'u-bandwidth'},
 ]);
 </script>
 <script>
@@ -2844,6 +2860,7 @@ const MOVED = {
   'web-progress-bar':'design-progress-bar', 'back-loading-state':'design-loading-state',
   'web-breadcrumb':'design-breadcrumb', 'web-pagination':'design-pagination', 'web-gnb':'design-gnb', 'web-avatar':'design-avatar',
   'basics-terminal':'terminal-terminal', 'basics-cli':'terminal-cli', 'basics-path':'terminal-path', 'basics-directory':'terminal-directory',
+  'server-ip-address':'net-ip-address', 'server-port':'net-port', 'server-dns':'net-dns',
 };
 T('front','layout',[
  {en:'Breakpoint',ko:'브레이크포인트 · 화면 너비 기준점',d:'"이 너비부터 배치를 바꾼다"고 정한 화면 폭. 예: 768px.',x:'디버거의 breakpoint(중단점)와 다른 뜻이에요.',p:'768px 브레이크포인트에서 메뉴를 햄버거로 바꿔줘',r:['Media Query','Responsive Web Design'],l:1,o:0,v:'breakpoint'},
@@ -4687,6 +4704,31 @@ Object.assign(D, {
   'u-character-encoding':{h:term([{c:'cat hi.txt'},{o:'?덈뀞', h:'?덈뀞'},{c:'cat hi.txt -Encoding UTF8', h:'-Encoding UTF8'},{o:'안녕', h:'안녕'}], {title:'Windows PowerShell', prompt:'PS C:\\>'}), m:1, cap:'같은 hi.txt인데 그냥 읽으면 CP949로 읽어 깨지고, -Encoding UTF8을 붙이면 안녕이 제대로 나와요'},
   'u-line-ending':{h:vs('CRLF로 저장', term([{c:'cat -A go.sh', h:'-A'},{o:'#!/bin/bash^M$', h:'^M'},{o:'echo hi^M$', h:'^M'},{c:'./go.sh'},{e:'./go.sh: /bin/bash^M: bad interpreter: No such file or directory', h:'/bin/bash^M'}], {prompt:'$'}), 'LF로 저장', term([{c:'cat -A go.sh'},{o:'#!/bin/bash$'},{o:'echo hi$'},{c:'./go.sh'},{o:'hi'}], {prompt:'$'})), m:1, cap:'cat -A로 보면 줄 끝 $ 앞에 ^M(CR)이 붙어 있어요. 이 글자 때문에 셸이 /bin/bash^M이라는 없는 프로그램을 찾아요'},
   'u-sharing-terminal-output':{h:term([{c:'npm run dev'},{e:'npm error code ENOENT'},{e:'npm error syscall open'},{e:'npm error path C:\\project\\package.json'},{e:'npm error errno -4058'},{e:"npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open 'C:\\project\\package.json'", h:'Could not read'},{e:'npm error enoent This is related to npm not being able to find a file.'},{e:'npm error enoent'},{e:'npm error A complete log of this run can be found in: C:\\Users\\me\\AppData\\Local\\npm-cache\\_logs\\…-debug-0.log'}]), m:1, cap:'마지막 줄만 보내면 로그 파일 위치뿐이에요. 원인 Could not read package.json은 가운데 있어서 전체를 복사해야 전해져요'},
+});
+
+/* net: basic — 주소는 문서용 예시(IPv4 198.51.100.x·203.0.113.x, 사설 192.168.x.x). 3000번은 개발 서버 예시. 1GB 시간은 1GB=8,000Mb로 나눈 이론 계산값 */
+const NBOX = '<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s y" d="M30 8h50v30H30z"/><path class="s" d="M55 8v30"/><path class="s t" d="M8 56h26v26H8z"/><path class="s" d="M21 56v26"/><path class="s t" d="M42 56h26v26H42z"/><path class="s" d="M55 56v26"/><path class="s t" d="M76 56h26v26H76z"/><path class="s" d="M89 56v26"/></svg>';
+const NPORT = k => net([{k:'pc', t:'브라우저', s:'localhost:' + k}, {k:'server', t:'개발 서버', s:'3000번에서 기다림'}],
+  [k === '3000' ? {m:[{t:'요청'}, {t:'응답', r:1}]} : {cut:'연결 거부'}], {still:true, label:'포트 ' + k + '번으로 연결'});
+const NPORT_SAY = {3000:'3000번에서 기다리던 개발 서버가 응답해요', 3001:'3001번에는 기다리는 프로그램이 없어 연결이 거부돼요'};
+Object.assign(D, {
+  'u-network':{h:net([{k:'pc'}, {k:'router'}, {k:'phone'}], [{m:[{t:'사진'}]}, {w:1, m:[{t:'사진'}]}]), m:1, cap:'내 PC가 보낸 사진이 공유기를 거쳐 휴대폰에 닿아요. 이렇게 이어진 기기 묶음이 네트워크예요'},
+  'u-internet':{h:net([{k:'pc', t:'우리 집'}, {k:'cloud'}, {k:'server', t:'먼 곳의 서버'}], [{m:[{t:'요청'}]}, {m:[{t:'요청'}]}]), m:1, cap:'우리 집 네트워크를 나간 요청이 인터넷을 지나 다른 네트워크의 서버에 닿아요'},
+  'u-ip-address':{h:net([{k:'pc', s:'198.51.100.7'}, {k:'server', s:'203.0.113.10'}], [{m:[{t:'요청'}, {t:'응답', r:1}]}]), m:1, cap:'기기마다 숫자 주소가 있어서 요청과 응답이 맞는 곳을 찾아가요'},
+  'u-port':{h:`<div class="mk-nwbox">${NPORT('3000')}</div>${tkeys(['3000', '3001'])}<span class="mk-hint" aria-live="polite">${NPORT_SAY[3000]}</span>`,
+    cap:'개발 서버는 3000번 문 앞에서 기다려요. 다른 번호로 두드리면 받는 프로그램이 없어요',
+    init: s => { const box = s.querySelector('.mk-nwbox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      const set = k => { box.innerHTML = NPORT(k); say.textContent = NPORT_SAY[k]; ks.forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k)); };
+      ks.forEach(b => b.addEventListener('click', () => set(b.dataset.k))); set('3000'); }},
+  'u-dns':{h:net([{k:'pc'}, {k:'dns'}], [{m:[{t:'example.com은?'}, {t:'203.0.113.10', r:1}]}]), m:1, cap:'이름을 물으면 DNS 서버가 숫자 주소로 알려 줘요. 그다음 그 주소로 접속해요'},
+  'u-packet':{h:pair(NBOX, net([{k:'pc'}, {k:'server'}], [{m:[{t:'조각 1'}, {t:'조각 2'}, {t:'조각 3'}]}])), m:1, cap:'큰 짐을 작은 상자 여럿으로 나눠 부치듯, 데이터도 조각으로 나눠 보내고 받는 쪽에서 다시 합쳐요'},
+  'u-protocol':{h:net([{k:'pc', t:'브라우저'}, {k:'server'}], [{m:[{t:'GET /'}, {t:'200 OK', r:1}]}]), m:1, cap:'HTTP라는 약속대로 물으면(GET) 서버도 같은 약속대로 답해요(200 OK)'},
+  'u-router':{h:net([{k:'phone'}, {k:'router'}, {k:'cloud'}], [{w:1, m:[{t:'요청'}]}, {m:[{t:'요청'}]}]), m:1, cap:'휴대폰이 보낸 요청을 공유기(라우터)가 받아 인터넷 쪽으로 넘겨요'},
+  'u-modem':{h:net([{k:'router'}, {k:'modem'}, {k:'cloud'}], [{m:[{t:'요청'}]}, {m:[{t:'요청'}]}]), m:1, cap:'공유기에서 나온 데이터를 모뎀이 통신사 회선으로 내보내요'},
+  'u-wi-fi':{h:net([{k:'phone'}, {k:'router'}], [{w:1, m:[{t:'요청'}, {t:'응답', r:1}]}]), m:1, cap:'점선이 무선 연결이에요. 선 없이 전파로 공유기와 주고받아요'},
+  'u-ethernet':{h:net([{k:'pc'}, {k:'router'}], [{m:[{t:'요청'}, {t:'응답', r:1}]}]), m:1, cap:'실선이 랜선이에요. 케이블을 꽂아 공유기와 주고받아요'},
+  'u-bandwidth':{h:vs('100Mbps', net([{k:'server'}, {k:'pc', s:'약 80초'}], [{m:[{t:'1GB 파일'}]}], {still:true}), '1Gbps', net([{k:'server'}, {k:'pc', s:'약 8초'}], [{m:[{t:'1GB 파일'}]}], {still:true})),
+    cap:'같은 1GB 파일이 100Mbps면 약 80초, 1Gbps면 약 8초 걸려요(이론 계산값)'},
 });
 
 const visual = t => {
