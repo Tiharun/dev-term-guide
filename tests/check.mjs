@@ -3,8 +3,13 @@
 import fs from 'fs';
 import vm from 'vm';
 
-const EXPECT = {};   // sec: [영문명…]  → 그 하위항목에 있어야 할 카드
-const COUNT = {};    // sec: 카드 수
+const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할 카드
+  form: ['Checkbox', 'Radio Button', 'Toggle Switch', 'Dropdown', 'Form', 'Input Field', 'Placeholder',
+    'Label', 'Helper Text', 'Inline Validation', 'Required Field', 'Text Area', 'Select Box', 'Autocomplete', 'Search Bar', 'Date Picker',
+    'Slider', 'Quantity Stepper', 'File Upload', 'Dropzone', 'Segmented Control', 'Password Toggle', 'Floating Label', 'Disabled State',
+    'Submit Button', 'OTP Input', 'Input Mask', 'Rating'],
+};
+const COUNT = { form: 28 };    // sec: 카드 수
 const REDRAWN = [];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
