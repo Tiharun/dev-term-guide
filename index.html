@@ -309,7 +309,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -869,6 +869,46 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-wdn.c>span{display:flex;justify-content:space-between;padding:1px 0;border-bottom:1px solid var(--rule);font-size:11px;line-height:1.35}
 .mk-wdn.o{gap:8px}.mk-wdn.o>span{display:flex;align-items:center;gap:8px;font-size:12px;line-height:1.3}
 .mk-wdn.o i{flex:none;width:28px;height:28px;border-radius:6px;background:var(--sky)}
+/* 필수 — 누르는 버튼은 transition으로 0.96까지 줄이고(비활성 제외), 움직임 줄이기에서는 색만 바꾼다 */
+.mk-xb{touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:scale 150ms var(--ease),background-color 150ms var(--ease)}
+.mk-xb.on:not(:disabled){scale:.96}
+.mk-btn.mk-xb.on{background:var(--ink-2);border-color:var(--ink-2)}.mk-btn.ghost.mk-xb.on{background:var(--rule-2);border-color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.mk-xb.on:not(:disabled){scale:none}}
+.mk-xcol{display:flex;flex-direction:column;align-items:center;gap:8px}
+.mk-xbx{display:flex;flex-direction:column;gap:6px;width:min(230px,100%);text-align:left}
+.mk-xbx>b{font-size:18px;line-height:1.2}.mk-xbx .mk-btn{min-height:40px}.mk-xbx output,.mk-xcol output{min-height:17px}
+.mk-xrow{display:flex;gap:8px}.mk-xrow .mk-btn{flex:1}
+.mk-xgh{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:min(250px,100%);padding:16px;border-radius:10px;background:linear-gradient(135deg,var(--moss),var(--ink));color:#fff;text-align:left}
+.mk-xgh b{font-size:16px}.mk-xgh>span{font-size:11.5px}
+.mk-xgb{min-height:32px;margin-top:4px;padding:0 14px;border:1.5px solid #fff;border-radius:8px;font-size:12.5px;font-weight:700;color:#fff}.mk-xgb.on{background:rgb(255 255 255/.2)}
+.mk-xib{display:grid;place-items:center;width:44px;height:44px;border:1.5px dashed var(--soft);border-radius:10px;color:var(--ink)}.mk-xib.on{background:var(--mark-bg)}
+.mk-xcm{display:flex;flex-direction:column;align-items:center;gap:6px}
+.mk-xcm .mk-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 10px}
+.mk-xcm .cp{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.mk-xsg{display:flex;flex-direction:column;gap:8px;width:min(300px,100%);text-align:left}
+.mk-xsg>div{display:grid;grid-template-columns:32px 1fr;align-items:center;gap:8px;font-size:12px}
+.mk-xsg .sw,.mk-xsg .sp{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:11px}.mk-xsg .sw>span{display:flex;align-items:center;gap:4px}
+.mk-xsg .sw i{width:14px;height:14px;border-radius:4px}.mk-xsg .sp i{height:12px;margin-right:-4px;background:var(--mark)}
+.mk-xkt{display:flex;flex-direction:column;gap:8px;width:min(340px,100%);text-align:left}
+.mk-xkt>div{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px}
+.mk-xkt>div>div{display:flex;flex-direction:column;align-items:flex-start;gap:5px;padding:6px 8px;border:1px dashed var(--rule);border-radius:8px}
+.mk-xkt .mk-in{min-height:26px}.mk-xkt .tb{display:flex;gap:10px;font-size:12px}.mk-xkt .tb b{border-bottom:2px solid var(--ink)}
+.mk-xkt .tg{position:relative;width:32px;height:18px;border-radius:9px;background:var(--moss)}.mk-xkt .tg::after{content:'';position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.mk-xkt .ck{display:flex;align-items:center;gap:5px;font-size:12px}.mk-xkt .ck svg{width:14px;height:14px;padding:1px;border-radius:3px;background:var(--ink);fill:none;stroke:#fff;stroke-width:3}
+.mk-xkt .cd{width:56px;height:30px;border:1px solid var(--rule);border-radius:6px;background:linear-gradient(var(--sky) 55%,var(--plate) 55%)}
+.mk-xfl{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);justify-items:center;align-items:center;column-gap:8px;row-gap:2px}
+.mk-xfl>*{grid-column:2}.mk-xfl>.no{grid-column:3;justify-self:start;display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.mk-xfl .st{padding:4px 12px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font-size:12px;font-weight:700}.mk-xfl .st.ok{border-color:var(--moss);color:var(--moss)}
+.mk-xfl>i{font-style:normal;font-size:11.5px;color:var(--muted);line-height:1.3}.mk-xfl .no b{font-size:11.5px;color:var(--mark-text)}
+.mk-xfl .dc{display:grid;place-items:center;width:112px;height:56px;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);background:var(--mark-bg);color:var(--mark-text);font-size:11.5px;font-weight:700;line-height:1.25;text-align:center}
+.mk-xsp{display:flex;flex-direction:column;align-items:flex-start;gap:12px;text-align:left}.mk-xsp .bx{position:relative;margin:22px 30px 0 0}
+.mk-xsb{width:160px;height:44px;font-size:14px;border-radius:8px}
+.mk-xsp .w,.mk-xsp .h{position:absolute;border:solid var(--mark)}.mk-xsp b{position:absolute;font-size:11.5px;color:var(--mark-text)}
+.mk-xsp .w{left:0;right:0;bottom:calc(100% + 6px);height:9px;border-width:0 1.5px}.mk-xsp .w::before{content:'';position:absolute;left:0;right:0;top:3px;border-top:1.5px solid var(--mark)}
+.mk-xsp .w b{left:50%;bottom:100%;translate:-50% -1px}
+.mk-xsp .h{top:0;bottom:0;left:calc(100% + 6px);width:9px;border-width:1.5px 0}.mk-xsp .h::before{content:'';position:absolute;top:0;bottom:0;left:3px;border-left:1.5px solid var(--mark)}
+.mk-xsp .h b{left:100%;top:50%;translate:4px -50%}
+.mk-xsl{display:flex;flex-direction:column;gap:3px;margin:0;padding:0;list-style:none;font-size:12px}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -988,9 +1028,17 @@ T('design','core',[
  {en:'Wireframe',ko:'와이어프레임 · 뼈대 그림',d:'색과 그림 없이 상자와 선으로만 화면 배치를 그린 설계도.',j:'"와이어 먼저 잡아 볼게요"',p:'메인 페이지 와이어프레임부터 상자로만 잡아줘',r:['Mockup','Prototype'],l:1,o:0,v:{page:''}},
  {en:'Mockup',ko:'목업 · 완성 모습 그림',d:'실제와 똑같은 색·글꼴·이미지로 그린, 움직이지 않는 완성 화면.',x:'와이어프레임 → 목업 → 프로토타입 순으로 점점 진짜에 가까워져요.',p:'이 와이어프레임을 실제 색을 입힌 목업으로 만들어줘',r:['Wireframe','Prototype'],l:1,o:0,v:'card'},
  {en:'Prototype',ko:'프로토타입 · 눌러 보는 시안',d:'클릭하면 화면이 넘어가도록 만든 시험용 모형.',p:'버튼을 누르면 다음 화면으로 넘어가는 프로토타입을 만들어줘',r:['Mockup'],l:1,o:0,v:'pagetrans'},
- {en:'Component',ko:'컴포넌트 · 재사용 부품',d:'버튼·카드처럼 여러 곳에서 똑같이 다시 쓰는 화면 부품.',p:'이 버튼을 컴포넌트로 만들어서 모든 페이지에 같이 써줘',r:['Design System','Main Component'],l:1,o:1,v:{stack:['페이지','카드 컴포넌트','버튼 컴포넌트'],hl:[2]}},
+ {en:'Component',ko:'컴포넌트 · 재사용 부품',d:'버튼·카드처럼 여러 곳에서 똑같이 다시 쓰는 화면 부품.',p:'이 버튼을 컴포넌트로 만들어서 모든 페이지에 같이 써줘',r:['Design System','Main Component'],l:1,o:1,v:'u-component'},
  {en:'Button States',ko:'버튼 상태 · 기본·호버·포커스·비활성',d:'버튼이 상황마다 바뀌는 모습. 기본, 마우스 올림(hover), 선택됨(focus), 누를 수 없음(disabled).',p:'버튼에 hover, focus, disabled 상태 스타일을 각각 만들어줘',r:['Hover Effect','Focus'],l:2,o:1,u:MDN('Web/CSS/:hover'),v:'button'},
  {en:'Accordion',ko:'아코디언 · 접었다 펴기',d:'제목을 누르면 아래 내용이 펼쳐지고 다시 누르면 접히는 목록.',p:'자주 묻는 질문을 아코디언으로 접었다 펼 수 있게 해줘',r:['Tab'],l:1,o:0,v:'accordion'},
+ {en:'Primary Button',ko:'주 버튼 · 프라이머리 버튼',d:'화면에서 가장 중요한 행동 하나를 맡은 버튼이에요. 색을 꽉 채워 가장 눈에 띄게 만들어요.',x:'한 화면에 보통 하나만 둬요. 여러 개면 무엇을 먼저 눌러야 할지 헷갈려요.',p:'결제하기 버튼을 Primary Button(주 버튼)으로 만들어서 색을 꽉 채우고 화면에 하나만 둬줘',r:['Secondary Button','Visual Weight','Button States'],l:1,o:0,v:'u-primary-button'},
+ {en:'Secondary Button',ko:'보조 버튼 · 세컨더리 버튼',d:'주 버튼 옆에서 덜 중요한 다른 선택지를 맡은 버튼이에요. 테두리만 두르거나 연한 색을 써서 주 버튼보다 약하게 보여요.',x:'모양이 아니라 역할 이름이에요. 디자인 시스템마다 테두리형, 연한 색 채움형 등으로 달라요.',p:'장바구니 담기를 Secondary Button(보조 버튼)으로 바꿔서 테두리만 두르고 바로 구매보다 약하게 보여줘',r:['Primary Button','Ghost Button'],l:1,o:0,v:'u-secondary-button'},
+ {en:'Ghost Button',ko:'고스트 버튼 · 투명 버튼',d:'바탕을 비워 두고 글자와 얇은 테두리만 남긴 투명한 버튼이에요. 뒤 사진이나 색이 비쳐 보여서 큰 배너 위에 자주 써요.',x:'눈에 덜 띄어서 가장 중요한 행동에는 쓰지 않아요. 테두리 없이 글자만 두기도 해요.',p:'배너 위 구경하기 버튼을 Ghost Button(고스트 버튼)으로 바꿔서 바탕은 투명하게, 흰 테두리와 글자만 남겨줘',r:['Secondary Button','Primary Button'],l:2,o:0,v:'u-ghost-button'},
+ {en:'Icon Button',ko:'아이콘 버튼',d:'글자 없이 아이콘 하나로만 된 버튼이에요. 하트, 종, 더보기처럼 뜻이 널리 알려진 그림에 써요.',x:'그림이 작아도 누르는 범위는 44px 이상으로 잡고, 화면 읽기 프로그램이 읽을 이름(aria-label)을 꼭 붙여요.',p:'하트 아이콘을 Icon Button(아이콘 버튼)으로 만들고 누르는 범위는 44px, aria-label은 좋아요로 붙여줘',r:['Icon','Touch Target','Tooltip'],l:2,o:0,v:'u-icon-button'},
+ {en:'Style Guide',ko:'스타일 가이드',d:'색, 글꼴, 간격, 말투처럼 화면을 꾸미는 규칙을 한곳에 적어 둔 문서예요. 누가 만들어도 같은 느낌이 나게 해요.',x:'디자인 시스템의 한 부분으로 보는 경우가 많아요. 부품 사용법까지 담으면 디자인 시스템이에요.',p:'우리 서비스 Style Guide(스타일 가이드)를 만들어서 색, 글꼴 크기, 간격, 말투 규칙을 한 페이지에 정리해줘',r:['Design System','Color Palette','Consistency'],l:2,o:0,v:'u-style-guide'},
+ {en:'UI Kit',ko:'UI 키트 · 화면 부품 모음',d:'버튼, 입력칸, 카드처럼 미리 만들어 둔 화면 부품을 한 파일에 모아 둔 것이에요. 가져다 놓기만 하면 화면을 빨리 그릴 수 있어요.',x:'주로 디자인 툴 파일이라 그림만 있고, 코드나 사용 규칙은 없는 경우가 많아요.',p:'버튼, 입력칸, 토글, 카드를 모은 UI Kit(UI 키트)를 만들고 새 화면은 여기서 가져다 그려줘',r:['Component','Design System','Style Guide'],l:2,o:0,v:'u-ui-kit'},
+ {en:'User Flow',ko:'사용자 흐름 · 유저 플로우',d:'사용자가 목표 하나를 이룰 때까지 거치는 화면과 갈림길을 순서대로 그린 그림이에요. 막히거나 빙 돌아가는 곳을 미리 찾아요.',x:'네모는 화면, 마름모는 갈림길로 그리는 경우가 많아요.',p:'결제까지의 User Flow(사용자 흐름)를 그려서 로그인 안 한 사람이 어디로 가는지도 표시해줘',r:['Wireframe','Prototype'],l:2,o:0,v:'u-user-flow'},
+ {en:'Design Spec',ko:'디자인 스펙 · 치수 표기',d:'개발자가 그대로 만들 수 있게 크기, 간격, 색, 글자 크기를 숫자로 적어 둔 설명이에요.',x:'예전에는 빨간 선으로 직접 그려 레드라인(redline)이라고도 했어요. 요즘은 디자인 툴의 개발 모드가 자동으로 보여 주기도 해요.',p:'이 화면의 Design Spec(디자인 스펙)을 정리해서 버튼 크기, 간격, 색 코드를 숫자로 적어줘',r:['Handoff','Dev Mode','Design Token'],l:2,o:0,v:'u-design-spec'},
 ]);
 T('design','motion',[
  {en:'Slide-in',ko:'슬라이드 인 · 밀려 들어오기',d:'요소가 화면 밖에서 미끄러지듯 들어오는 움직임.',p:'메뉴가 왼쪽에서 slide-in 되게 해줘',r:['Drawer','Easing'],l:1,o:0,v:'slidein',sy:['왼쪽에서 나와요']},
@@ -3192,6 +3240,52 @@ Object.assign(D, {
   'u-density':{h:vs('촘촘하게', `<div class="mk-wdn c">${[['1021', '대기'], ['1022', '발송'], ['1023', '완료'], ['1024', '대기'], ['1025', '취소'], ['1026', '완료']].map(([n, s]) => `<span><b>#${n}</b>${s}</span>`).join('')}</div>`,
     '넉넉하게', `<div class="mk-wdn o">${[['원피스', '39,000원'], ['샌들', '25,000원'], ['모자', '18,000원']].map(([n, w]) => `<span><i></i><span><b>${n}</b><br><span class="mk-help">${w}</span></span></span>`).join('')}</div>`),
     cap:'업무 도구는 한 화면에 많이 보이게 촘촘하게, 쇼핑 앱은 보기 편하게 넉넉하게 채워요'},
+});
+/* design: core — 버튼 누름은 stage 안 버튼에만 붙이고, 취소(밖으로 벗어남·스크롤)되면 바로 원래 모양으로 돌린다 */
+const PRESS = s => { const out = s.querySelector('output'); let n = 0;
+  s.querySelectorAll('.mk-xb').forEach(b => { const on = v => b.classList.toggle('on', v);
+    const cancel = () => { if (!b.classList.contains('on')) return; on(false); out.textContent = '취소됐어요 · 버튼 밖에서 떼면 안 눌려요'; };
+    const press = () => { on(true); out.textContent = '누르는 중…'; };
+    b.addEventListener('pointerdown', e => { if (e.button === 0) press(); });
+    b.addEventListener('pointerup', () => on(false));
+    b.addEventListener('pointercancel', cancel); b.addEventListener('pointerleave', cancel);
+    b.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') press(); });
+    b.addEventListener('keyup', () => on(false)); b.addEventListener('blur', () => on(false));
+    b.addEventListener('click', () => { out.textContent = `${b.dataset.t || b.textContent.trim()} 눌렀어요 · ${++n}번`; });
+  }); };
+const IDLE = '<output class="mk-help">기본 상태 · 아직 안 눌렀어요</output>';
+Object.assign(D, {
+  'u-component':{h:`<div class="mk-xcm"><div class="mk-card"><span class="mk-help">컴포넌트(원본)</span><span class="mk-btn mk-sm mk-hl">저장</span></div>
+    <span class="mk-arrow" aria-hidden="true">↓</span><div class="cp">${['글쓰기', '설정', '프로필'].map(t => `<div class="mk-card"><span class="mk-help">${t}</span><span class="mk-btn mk-sm">저장</span></div>`).join('')}</div></div>`,
+    cap:'원본 하나(점선)를 여러 화면에 똑같이 꽂아 써요. 원본을 고치면 모두 함께 바뀌어요'},
+  'u-primary-button':{h:`${hint('버튼을 꾹 눌러 보세요')}<div class="mk-card mk-xbx"><span class="mk-help">주문 금액</span><b>32,000원</b>
+    <button type="button" class="mk-btn mk-xb">결제하기</button>${IDLE}</div>`, init:PRESS, cap:'가장 중요한 행동 하나만 색을 꽉 채워 가장 눈에 띄게 해요'},
+  'u-secondary-button':{h:`${hint('두 버튼을 눌러 보세요')}<div class="mk-card mk-xbx"><span class="mk-help">샌들</span><b>25,000원</b>
+    <div class="mk-xrow"><button type="button" class="mk-btn ghost mk-xb mk-hl">장바구니</button><button type="button" class="mk-btn mk-xb">바로 구매</button></div>${IDLE}</div>`,
+    init:PRESS, cap:'덜 중요한 선택지(점선)는 테두리만 둘러 주 버튼보다 약하게 보여요'},
+  'u-ghost-button':{h:`${hint('투명한 버튼을 눌러 보세요')}<div class="mk-xcol"><div class="mk-xgh"><b>봄 신상품</b><span>새로 들어온 옷을 만나 보세요</span>
+    <button type="button" class="mk-xb mk-xgb">구경하기</button></div>${IDLE}</div>`, init:PRESS, cap:'바탕이 투명해서 뒤 배경이 비치고, 흰 테두리와 글자만 보여요'},
+  'u-icon-button':{h:`${hint('아이콘 버튼을 눌러 보세요')}<div class="mk-xcol"><div class="mk-card mk-xrow">${[['heart', '좋아요'], ['bell', '알림 받기'], ['user', '내 정보']].map(([k, t]) =>
+    `<button type="button" class="mk-xb mk-xib" aria-label="${t}" data-t="${t}">${ico(k)}</button>`).join('')}</div><span class="mk-help">점선 = 누를 수 있는 범위 44 × 44</span>${IDLE}</div>`,
+    init:PRESS, cap:'그림은 작아도 누르는 범위는 넓게 잡고, 읽어 줄 이름표를 붙여요'},
+  'u-style-guide':{h:`<div class="mk-card mk-xsg"><b>스타일 가이드</b>
+    <div><span class="mk-help">색</span><span class="sw">${[['--ink', '#1D2B4F'], ['--mark', '#E0662B'], ['--moss', '#4D6D40']].map(([v, t]) => `<span><i style="background:var(${v})"></i>${t}</span>`).join('')}</span></div>
+    <div><span class="mk-help">글꼴</span><span><b style="font-size:18px">제목 18</b> · 본문 12</span></div>
+    <div><span class="mk-help">간격</span><span class="sp">${[4, 8, 16].map(w => `<i style="width:${w}px"></i> ${w}`).join('')}</span></div>
+    <div><span class="mk-help">말투</span><span>"저장했어요"처럼 해요체</span></div></div>`,
+    cap:'색, 글꼴, 간격, 말투 규칙을 한 문서에 적어 두고 모두가 따라요'},
+  'u-ui-kit':{h:`<div class="mk-card mk-xkt"><b>UI 키트</b><div>
+    <div><span class="mk-help">버튼</span><span class="mk-row"><span class="mk-btn mk-sm">확인</span><span class="mk-btn mk-sm ghost">취소</span></span></div>
+    <div><span class="mk-help">입력칸</span><span class="mk-in">이메일</span></div>
+    <div><span class="mk-help">체크박스</span><span class="ck">${CHECK}기억하기</span></div>
+    <div><span class="mk-help">토글</span><i class="tg"></i></div>
+    <div><span class="mk-help">탭</span><span class="tb"><b>홈</b><span>검색</span></span></div>
+    <div><span class="mk-help">카드</span><i class="cd"></i></div></div></div>`, cap:'미리 만든 부품을 모아 둔 파일이에요. 가져다 놓기만 하면 화면이 돼요'},
+  'u-user-flow':{h:`<div class="mk-xfl"><span class="st">장바구니</span><i>↓</i><span class="dc">로그인<br>했나요?</span>
+    <span class="no"><b>아니요 →</b><span class="st">로그인</span><span class="mk-help">다시 결제로</span></span>
+    <i>↓ 예</i><span class="st">결제</span><i>↓</i><span class="st ok">주문 완료</span></div>`, cap:'네모는 화면, 마름모는 갈림길이에요. 로그인 안 한 사람은 옆길로 돌아와요'},
+  'u-design-spec':{h:`<div class="mk-xsp"><div class="bx"><span class="w"><b>160</b></span><span class="mk-btn mk-xsb">구매하기</span><span class="h"><b>44</b></span></div>
+    <ul class="mk-xsl"><li>글자 14 · 굵기 700</li><li>모서리 8</li><li>바탕 #1D2B4F</li></ul></div>`, cap:'크기, 모서리, 색을 숫자로 적어 두면 개발자가 그대로 만들 수 있어요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
