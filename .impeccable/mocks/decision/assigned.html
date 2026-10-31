@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{font-family:'Gothic A1',sans-serif;background:#e9ecea;color:#1f2a27;display:flex}
+.drawer{width:280px;height:900px;background:#2f4a43;padding:28px 0 0 24px;position:relative}
+.brand{color:#fbfbf8;font-weight:800;font-size:20px;margin-bottom:6px}
+.sub{color:#a9c1b8;font-size:12px;margin-bottom:26px}
+.tab{height:40px;margin-bottom:6px;border-radius:8px 0 0 8px;display:flex;align-items:center;padding-left:14px;font-weight:600;font-size:14px;color:#1f2a27}
+.tab small{margin-left:auto;margin-right:16px;font-size:11px;opacity:.6}
+.t1{background:#f2b632;margin-left:0}.t2{background:#7fb6e0;margin-left:10px}.t3{background:#fbfbf8;margin-left:0;box-shadow:inset 6px 0 0 #d6443a;font-weight:800}
+.t4{background:#8fcfa6;margin-left:10px}.t5{background:#ef8a6a;margin-left:20px}.t6{background:#b7a3e0;margin-left:10px}.t7{background:#f2b632;margin-left:20px}
+.t8{background:#7fb6e0;margin-left:0}.t9{background:#8fcfa6;margin-left:10px}.t10{background:#ef8a6a;margin-left:20px}.t11{background:#b7a3e0;margin-left:10px}
+main{flex:1;padding:28px 40px}
+.holder{background:#c9b27a;border:3px solid #9c8650;border-radius:10px;padding:14px 18px;display:flex;gap:14px;align-items:center}
+.search{flex:1;background:#fbfbf8;border-radius:6px;padding:14px 16px;font-size:16px;color:#6b7a75}
+.chips{display:flex;gap:8px;margin-top:12px}
+.chip{background:#fbfbf8;border:1px solid #c5ccc9;border-radius:999px;padding:7px 14px;font-size:13px}
+.chip b{color:#d6443a}
+h1{font-size:34px;font-weight:800;margin:28px 0 4px}
+.lead{color:#55635e;font-size:15px}
+.secs{display:flex;gap:4px;margin-top:20px;align-items:flex-end}
+.sec{background:#d7dcda;padding:10px 18px;border-radius:8px 8px 0 0;font-size:14px;color:#55635e}
+.sec.on{background:#fbfbf8;color:#1f2a27;font-weight:800;padding:14px 22px;box-shadow:0 -3px 0 #d6443a inset}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;background:#fbfbf8;padding:22px;border-radius:0 10px 10px 10px}
+.card{background:#fff;border:1px solid #dfe3e1;border-radius:6px;padding:0 0 16px;position:relative;
+background-image:repeating-linear-gradient(#fff 0 27px,#d9e6f2 27px 28px);background-position:0 72px}
+.card .head{background:#fff;border-bottom:2px solid #d6443a;padding:14px 16px 10px}
+.en{font-size:19px;font-weight:800}.ko{font-size:13px;color:#55635e}
+.demo{margin:14px 16px;height:96px;background:#eef3f6;border-radius:6px;position:relative}
+.box{position:absolute;left:26px;top:22px;width:70px;height:52px;background:#7fb6e0;border-radius:6px}
+.box2{position:absolute;left:112px;top:30px;width:70px;height:52px;background:#ef8a6a;border-radius:6px;opacity:.85}
+.def{padding:0 16px;font-size:14px;line-height:28px}
+.say{margin:10px 16px 0;background:#fff7e0;border-left:4px solid #f2b632;padding:8px 10px;font-size:13px;line-height:1.5}
+.clip{position:absolute;top:-10px;right:18px;width:14px;height:34px;border:3px solid #8a9692;border-radius:8px}
+.stamp{position:absolute;bottom:14px;right:14px;border:2px solid #d6443a;color:#d6443a;font-weight:800;font-size:13px;padding:3px 8px;border-radius:4px;transform:rotate(-8deg)}
+.lvl{display:inline-flex;gap:2px;margin-left:8px;vertical-align:middle}.lvl i{width:8px;height:8px;background:#1f2a27;display:block}.lvl i.o{background:#d7dcda}
+</style></head><body>
+<nav class="drawer">
+  <div class="brand">개발 용어 설정집</div><div class="sub">13개 서랍 · 용어 520장</div>
+  <div class="tab t1">개발 기본<small>40</small></div>
+  <div class="tab t2">웹사이트<small>42</small></div>
+  <div class="tab t3">디자인 · UI/UX<small>64</small></div>
+  <div class="tab t4">프론트엔드<small>48</small></div>
+  <div class="tab t5">백엔드<small>40</small></div>
+  <div class="tab t6">데이터베이스<small>38</small></div>
+  <div class="tab t7">서버<small>38</small></div>
+  <div class="tab t8">Git · 협업<small>36</small></div>
+  <div class="tab t9">배포 · DevOps<small>34</small></div>
+  <div class="tab t10">보안<small>34</small></div>
+  <div class="tab t11">성능 · 최적화<small>32</small></div>
+</nav>
+<main>
+  <div class="holder"><div class="search">증상이나 용어로 찾기 — 예: 카드가 흔들려요</div></div>
+  <div class="chips">
+    <span class="chip"><b>●</b> 지진 나듯 흔들려요</span><span class="chip"><b>●</b> 왼쪽에서 스르륵 나와요</span>
+    <span class="chip"><b>●</b> 글자가 잘려요</span><span class="chip"><b>●</b> 화면 줄이면 깨져요</span><span class="chip"><b>●</b> 클릭해도 반응이 없어요</span>
+  </div>
+  <h1>디자인 · UI/UX</h1>
+  <p class="lead">화면에 보이는 모든 것의 이름. 웹디자인 · 앱·프로그램 UI · 디자인 툴 · 폰트</p>
+  <div class="secs"><span class="sec">기본</span><span class="sec">필수</span><span class="sec on">모션용어 및 연출</span><span class="sec">심화</span><span class="sec">추천 개념</span></div>
+  <div class="grid">
+    <div class="card"><span class="clip"></span><div class="head"><div class="en">Slide-in <span class="lvl"><i></i><i class="o"></i><i class="o"></i></span></div><div class="ko">슬라이드 인 · 밀려 들어오기</div></div>
+      <div class="demo"><span class="box"></span></div>
+      <p class="def">요소가 화면 밖에서 미끄러지듯 들어오는 움직임.</p>
+      <p class="say">"메뉴를 왼쪽에서 slide-in 되게 해줘"</p></div>
+    <div class="card"><div class="head"><div class="en">Layout Shift <span class="lvl"><i></i><i></i><i class="o"></i></span></div><div class="ko">레이아웃 시프트 · 화면 밀림</div></div>
+      <div class="demo"><span class="box"></span><span class="box2"></span></div>
+      <p class="def">불러오는 중에 요소가 갑자기 밀려 움직이는 현상.</p>
+      <p class="say">"hover 때 카드에 layout shift가 생겨"</p><span class="stamp">외움</span></div>
+    <div class="card"><div class="head"><div class="en">Easing <span class="lvl"><i></i><i></i><i class="o"></i></span></div><div class="ko">이징 · 속도 곡선</div></div>
+      <div class="demo"><span class="box"></span></div>
+      <p class="def">움직임이 빨라지고 느려지는 방식.</p>
+      <p class="say">"ease-out으로 끝을 부드럽게 해줘"</p></div>
+  </div>
+</main>
+</body></html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden}
+body{font-family:'Gothic A1',sans-serif;background:#fafafa;color:#18181b;display:flex}
+nav{width:250px;padding:28px 22px;border-right:1px solid #e4e4e7}
+.brand{font-weight:800;font-size:18px;margin-bottom:24px}
+.cat{font-size:14px;color:#71717a;padding:7px 10px;border-radius:6px}
+.cat.on{background:#18181b;color:#fafafa;font-weight:600}
+main{flex:1;padding:36px 64px}
+.search{border:1px solid #e4e4e7;background:#fff;border-radius:10px;padding:14px 18px;color:#a1a1aa;font-size:15px;width:560px}
+.chips{display:flex;gap:8px;margin-top:10px}.chips span{font-size:13px;border:1px solid #e4e4e7;border-radius:999px;padding:6px 12px;color:#52525b}
+h1{font-size:40px;font-weight:800;margin-top:40px;letter-spacing:-.02em}
+.lead{color:#71717a;font-size:16px;margin-top:6px}
+.pair{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;margin-top:36px;padding-top:32px;border-top:1px solid #e4e4e7;align-items:center}
+.term{font-size:26px;font-weight:800}.ko{color:#71717a;font-size:14px;margin:4px 0 14px}
+.def{font-size:16px;line-height:1.7;color:#3f3f46}
+.say{margin-top:16px;border:1px solid #e4e4e7;background:#fff;border-radius:8px;padding:12px 14px;font-size:14px}
+.say b{color:#4f46e5}
+.proof{height:220px;border-radius:14px;background:radial-gradient(circle at 50% 40%,#fff,#ececf0);border:1px solid #e4e4e7;position:relative}
+.b{position:absolute;top:70px;width:110px;height:80px;border-radius:10px;background:#18181b}
+.b1{left:80px;opacity:.25}.b2{left:150px;opacity:.5}.b3{left:220px;background:#4f46e5}
+</style></head><body>
+<nav><div class="brand">개발 용어 설정집</div>
+  <div class="cat">개발 기본</div><div class="cat">웹사이트</div><div class="cat on">디자인 · UI/UX</div><div class="cat">프론트엔드</div><div class="cat">백엔드</div><div class="cat">데이터베이스</div><div class="cat">서버</div><div class="cat">Git · 협업</div><div class="cat">배포 · DevOps</div><div class="cat">보안</div><div class="cat">성능 · 최적화</div><div class="cat">버그 · 디버깅 현상</div><div class="cat">AI · Claude와 일하기</div></nav>
+<main>
+  <div class="search">증상이나 용어로 찾기</div>
+  <div class="chips"><span>흔들려요</span><span>왼쪽에서 나와요</span><span>글자가 잘려요</span><span>화면 줄이면 깨져요</span></div>
+  <h1>모션용어 및 연출</h1><p class="lead">디자인 · UI/UX — 움직임을 정확히 부르는 말</p>
+  <div class="pair"><div><div class="term">Slide-in</div><div class="ko">슬라이드 인 · 밀려 들어오기</div>
+    <p class="def">요소가 화면 밖에서 미끄러지듯 들어오는 움직임. 메뉴나 알림창에 자주 써요.</p>
+    <div class="say"><b>말하기</b> "메뉴를 왼쪽에서 slide-in 되게 해줘"</div></div>
+    <div class="proof"><span class="b b1"></span><span class="b b2"></span><span class="b b3"></span></div></div>
+</main>
+</body></html>
