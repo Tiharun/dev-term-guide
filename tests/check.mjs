@@ -22,8 +22,10 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
     'Bento Grid', 'Inner Shadow', 'Glow', 'Mesh Gradient', 'Illustration', 'Isometric'],
   gesture: ['Tap', 'Double Tap', 'Long Press', 'Swipe', 'Pinch Zoom', 'Pan', 'Drag and Drop', 'Drag to Reorder', 'Pull to Refresh',
     'Swipe to Delete', 'Edge Swipe', 'Haptic Feedback', 'Pressed State', 'Tab Order', 'Cursor Style', 'Scroll Snap', 'Rubber Banding', 'Momentum Scroll'],
+  device: ['Safe Area', 'Notch', 'Dynamic Island', 'Home Indicator', 'Screen Resolution', 'Pixel Density', 'Retina Display',
+    'Physical vs CSS Pixel', 'Screen Size', 'Orientation', 'Foldable', 'Split Screen', 'Refresh Rate', 'Virtual Keyboard', 'Text Scaling', 'Bezel'],
 };
-const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18 };    // sec: 카드 수
+const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16 };    // sec: 카드 수
 const REDRAWN = [];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 

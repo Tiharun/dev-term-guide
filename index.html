@@ -697,6 +697,78 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-qms+.mk-help{font-variant-numeric:tabular-nums}
 .mk-art .s.r{stroke:var(--mark)}
 @media (prefers-reduced-motion:reduce){.mk-qpop.go{animation-name:mk-qfade}.mk-qpi.ld .mk-qspin,.mk-qshk,.mk-qwv,.mk-qck{animation:none}}
+/* 기기 화면 — 그림마다 phone() 틀을 쓰고, 노치·홈 바·키보드처럼 틀에 붙은 부분만 따로 그린다 */
+.mk-vun{position:absolute;left:0;right:0;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--mark) 26%,transparent) 0 3px,transparent 3px 7px);border:0 dashed var(--mark)}
+.mk-vun.t{top:0;height:30px;border-bottom-width:1px}.mk-vun.b{bottom:0;height:18px;border-top-width:1px}
+.mk-vsafe{flex:1;display:flex;flex-direction:column;gap:6px;padding:6px}.mk-vwarn{margin-top:auto;color:var(--mark-text)}
+.mk-vnt{position:absolute;top:-2px;left:50%;width:84px;height:22px;margin-left:-42px;border-radius:0 0 13px 13px;background:var(--ink)}
+.mk-vsb{position:absolute;top:6px;left:22px;font-size:11px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+.mk-vbat{position:absolute;top:8px;right:20px;width:18px;height:9px;border:1.5px solid var(--ink);border-radius:3px;background:linear-gradient(90deg,var(--ink) 70%,transparent 70%) 1px 1px/13px 4px no-repeat}
+.mk-vdi{position:absolute;top:4px;left:50%;width:150px;height:28px;margin-left:-75px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;
+  border-radius:14px;background:var(--ink);color:#fff;font-size:11px;font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;animation:mk-vdi 4s var(--ease) infinite}
+.mk-vdi>span{display:flex;align-items:center;gap:5px;animation:mk-vdt 4s var(--ease) infinite}.mk-vdi>span>i{width:8px;height:8px;border-radius:50%;background:var(--mark)}
+@keyframes mk-vdi{0%,45%,100%{clip-path:inset(0 round 14px)}58%,88%{clip-path:inset(5px 46px 7px round 8px)}}
+@keyframes mk-vdt{0%,40%,100%{opacity:1}50%,92%{opacity:0}}
+.mk-vnow{display:flex;flex-direction:column;gap:4px}.mk-vnow .mk-img{height:56px}
+.mk-vnote{margin-top:auto;text-align:center}.mk-vnote+.mk-tabbar{margin-top:0}
+.mk-vres{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.mk-vmo{display:flex;flex-direction:column;align-items:center}
+.mk-vmon{width:224px;padding:6px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}
+.mk-vms{position:relative;height:118px;padding:8px 8px 8px 38px;border-radius:3px;background:var(--fig);display:flex;flex-direction:column;gap:6px;text-align:left}
+.mk-vax{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;white-space:nowrap;line-height:1.2}.mk-vax>i{flex:1;height:1.5px;background:var(--ink)}
+.mk-vax.y{position:absolute;left:6px;top:8px;bottom:8px;width:28px;flex-direction:column;gap:3px;text-align:center}.mk-vax.y>i{width:1.5px;height:auto}
+.mk-vlpt{margin-top:auto;padding-right:64px}
+.mk-vlp{position:absolute;right:10px;bottom:8px;width:54px;height:54px;border:2px solid var(--ink);border-radius:50%;
+  background:linear-gradient(90deg,var(--steel) 1px,transparent 1px) 0 0/7px 7px,linear-gradient(var(--steel) 1px,transparent 1px) 0 0/7px 7px,var(--plate)}
+.mk-vnk{width:14px;height:12px;background:var(--ink)}.mk-vft{width:64px;height:4px;border-radius:2px;background:var(--ink)}
+.mk-vden{display:flex;gap:14px;justify-content:center}.mk-vden>div{display:flex;flex-direction:column;align-items:center;gap:4px}
+.mk-vden svg{display:block;width:64px;height:64px;border:1px solid var(--rule);border-radius:6px;background:var(--plate);fill:var(--ink)}.mk-vden b{font-size:12px}
+.mk-vcol{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.mk-vlo{display:grid;place-items:center;width:84px;height:84px;border:2px solid var(--ink);border-radius:50%;background:var(--plate);overflow:hidden}
+.mk-vlo svg{width:60px;height:60px;fill:var(--ink)}.mk-vlo span{font-family:var(--serif);font-size:54px;font-weight:700;line-height:1;color:var(--ink)}
+.mk-vgr{display:block;width:96px;height:96px}.mk-vgr rect{fill:var(--plate);stroke:var(--rule)}.mk-vgr .on{fill:var(--mark)}
+.mk-vgr .bx{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:4 3}
+.mk-vsz{display:flex;align-items:flex-end;justify-content:center;gap:12px}.mk-vsz>div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.mk-vsz svg{display:block}.mk-vsz .f{fill:var(--plate);stroke:var(--ink);stroke-width:1.5}.mk-vsz .d{fill:none;stroke:var(--mark);stroke-width:1.5;stroke-dasharray:4 3}.mk-vsz b{font-size:12px}
+.mk-vori{display:flex;flex-direction:column;align-items:center;gap:8px}
+.mk-vbox{display:grid;place-items:center;width:240px;height:240px}
+.mk-vori .mk-phone{width:168px;height:236px}
+.mk-vori .mk-phone.land{width:236px;height:168px;padding:10px 30px 18px 14px}
+.mk-phone.land .mk-notch{top:50%;left:auto;right:7px;width:16px;height:58px;margin:-29px 0 0}
+.mk-vgal{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.mk-vgal i{aspect-ratio:4/3;border-radius:5px;background:var(--sky)}
+.land .mk-vgal{grid-template-columns:repeat(4,1fr)}
+.mk-vfd{display:flex;gap:6px;height:132px;padding:10px 6px;border:1.5px solid var(--ink);border-radius:12px;background:var(--plate);text-align:left}
+.mk-vfd.n{width:78px}.mk-vfd.w{width:152px}
+.mk-vfd>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}.mk-vfd b{font-size:11.5px}
+.mk-vfd .hg{flex:none;margin:-10px 0;border-left:1.5px dashed var(--mark)}
+.mk-vln{flex:none;height:14px;border-radius:4px;background:var(--fig)}.mk-vln.on{background:var(--mark-bg);outline:1.5px solid var(--mark)}.mk-vln.s{height:6px}.mk-vln.s:last-child{width:60%}
+.mk-vtab{display:flex;width:240px;height:150px;padding:8px;border:1.5px solid var(--ink);border-radius:14px;background:var(--plate);text-align:left}
+.mk-vap{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:6px;background:var(--fig)}
+.mk-vmp{flex:1;width:100%;min-height:0;border-radius:4px;background:var(--moss-bg)}.mk-vmp .rv{fill:none;stroke:var(--sky);stroke-width:6}.mk-vmp .rd{fill:none;stroke:var(--plate);stroke-width:3}
+.mk-vdv{flex:none;display:grid;place-items:center;width:12px;margin:0 2px}.mk-vdv>i{width:4px;height:28px;border-radius:2px;background:var(--ink)}
+.mk-vrr{display:flex;flex-direction:column;gap:12px;width:220px;text-align:left}.mk-vrr>div{display:flex;flex-direction:column;gap:5px}
+.mk-vtr{position:relative;height:18px;border:1px solid var(--rule);border-radius:9px;background:var(--plate);overflow:hidden}
+.mk-vbl{position:absolute;left:1px;top:1px;width:calc(100% - 16px);height:14px;animation:mk-vbl 2s linear -.75s infinite alternate}.mk-vbl.st{animation-timing-function:steps(24)}
+.mk-vbl>i{display:block;width:14px;height:14px;border-radius:50%;background:var(--ch1)}
+@keyframes mk-vbl{to{transform:translateX(100%)}}
+.mk-vmsg{align-self:flex-start;max-width:85%;padding:4px 9px;border-radius:12px 12px 12px 4px;background:var(--fig)}
+.mk-vmsg.me{align-self:flex-end;border-radius:12px 12px 4px 12px;background:var(--ink);color:#fff}
+.mk-vin{position:absolute;left:0;right:0;bottom:85px;display:flex;gap:6px;animation:mk-vin 4.5s var(--ease) infinite}.mk-vin .mk-in{min-width:0;color:var(--muted)}
+.mk-vkb{position:absolute;left:-10px;right:-10px;bottom:-20px;height:101px;display:grid;grid-template-columns:repeat(10,1fr);grid-auto-rows:16px;gap:3px;
+  padding:6px 5px 22px;background:var(--fig);border-top:1px solid var(--rule);animation:mk-vkb 4.5s var(--ease) infinite}
+.mk-vkb>i{border-radius:3px;background:var(--plate);border-bottom:1px solid var(--rule)}.mk-vkb>.sp{grid-column:3/9}
+@keyframes mk-vkb{0%,50%,100%{transform:none}65%,88%{transform:translateY(100%)}}
+@keyframes mk-vin{0%,50%,100%{transform:none}65%,88%{transform:translateY(85px)}}
+.mk-vts{display:flex;align-items:center;justify-content:center;gap:8px}.mk-vpc{min-width:40px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.mk-vtc{--vt:1;flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:4px;font-size:calc(12px * var(--vt));line-height:1.4}
+.mk-vtc .mk-card{padding:6px 8px}.mk-vtc .mk-card>*{display:block;font-size:inherit}
+.mk-vfix{flex:none;height:48px;overflow:hidden}.mk-vfs.bad{color:var(--mark-text);font-weight:700}
+.mk-vbz{position:relative;flex:none;width:88px;height:156px;border-radius:14px;background:var(--ink)}
+.mk-vbz>div{position:absolute;inset:20px 6px 26px;display:flex;flex-direction:column;gap:5px;padding:8px 6px;border-radius:2px;background:var(--plate)}
+.mk-vbz.thin>div{inset:3px;padding-top:16px;border-radius:11px}
+.mk-vbz.thin>div::before{content:"";position:absolute;top:5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--ink)}
+.mk-vbz>.hb{position:absolute;bottom:6px;left:50%;width:14px;height:14px;margin-left:-7px;border:1.5px solid var(--steel);border-radius:50%}
+@media (prefers-reduced-motion:reduce){.mk-vdi,.mk-vdi>span,.mk-vbl,.mk-vin,.mk-vkb{animation:none}}
 .mk-ymesh{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-radius:8px;
   background:radial-gradient(at 15% 20%,#a78bfa 0,transparent 55%),radial-gradient(at 85% 15%,#f9a8d4 0,transparent 50%),radial-gradient(at 20% 85%,#67e8f9 0,transparent 55%),radial-gradient(at 85% 85%,#fde68a 0,transparent 55%),#f5f3ff}
 .mk-ymesh>i{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ink)}
@@ -780,7 +852,7 @@ function SYM(g, list){ list.forEach(([q, t]) => SYMPTOMS.push({g, q, t})); }
 /* ===== 카테고리 목록 ===== */
 CAT('basics','개발 기본','개발을 처음 시작할 때 듣는 가장 기본적인 말', [['code','코드 읽기 기초','코드를 볼 때 알아야 하는 문법 이름']]);
 CAT('web','웹사이트','웹사이트가 어떻게 생기고 움직이는지에 관한 말', [['parts','페이지 구성요소','웹페이지 각 부분의 이름']]);
-CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['gesture','제스처·조작','손가락·마우스·키보드로 화면을 다루는 방법'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
+CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['gesture','제스처·조작','손가락·마우스·키보드로 화면을 다루는 방법'],['device','기기 화면','휴대폰·모니터 화면 자체의 특징'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법']]);
 CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
@@ -993,6 +1065,24 @@ T('design','gesture',[
  {en:'Scroll Snap',ko:'스크롤 스냅 · 스크롤 맞춤',d:'스크롤을 멈추면 카드가 어중간한 곳에 서지 않고 한 장씩 딱 맞춰 멈추는 기능이에요.',x:'CSS scroll-snap으로 만들어요. mandatory는 항상 맞춤 자리에 서고, proximity는 맞춤 자리 가까이 왔을 때만 붙어요.',p:'가로로 넘기는 카드 목록에 scroll-snap을 넣어서 스크롤을 멈추면 카드가 한 장씩 딱 맞게 서게 해줘',r:['Horizontal Scroll','Carousel'],l:2,o:0,v:'u-scroll-snap'},
  {en:'Rubber Banding',ko:'러버 밴딩 · 끝에서 튕김',d:'목록 끝에서 더 끌면 고무줄처럼 조금만 늘어나다가 놓으면 제자리로 튕겨 돌아오는 효과예요.',x:'아이폰 초기부터 쓰인 효과예요. 애플은 이 효과의 특허(\'381)를 삼성과의 소송에서 쓰기도 했어요. 딱 멈추는 것보다 끝에 닿았다는 걸 부드럽게 알려 줘요.',p:'목록 끝에서 더 끌면 점점 덜 끌려오다가 놓으면 스프링처럼 제자리로 돌아오는 러버 밴딩 효과를 넣어줘',r:['Bounce','Momentum Scroll','Spring Animation'],l:2,o:0,v:'u-rubber-banding'},
  {en:'Momentum Scroll',ko:'모멘텀 스크롤 · 관성 스크롤',d:'손가락을 빠르게 튕기고 떼도 그 속도대로 계속 굴러가다가 서서히 멈추는 스크롤이에요.',x:'떼는 순간의 속도가 이어져야 자연스러워요. 천천히 끌고 떼면 바로 서고, 세게 튕기면 멀리 가요.',p:'긴 목록을 손가락으로 튕기면 그 속도대로 굴러가다가 점점 느려지며 멈추는 관성 스크롤을 넣어줘',r:['Rubber Banding','Smooth Scroll','Scroll Snap'],l:2,o:0,v:'u-momentum-scroll'},
+]);
+T('design','device',[
+ {en:'Safe Area',ko:'세이프 에어리어 · 안전 영역',d:'노치나 홈 바에 가리지 않고 글과 버튼을 둘 수 있는 화면 안쪽 영역이에요.',x:'웹에서는 viewport 메타 태그에 viewport-fit=cover를 넣어 화면 끝까지 쓰고, 글과 버튼은 CSS env(safe-area-inset-top) 같은 값만큼 안쪽으로 밀어요.',p:'화면 위아래 내용이 노치와 홈 바에 가리지 않게 Safe Area(안전 영역)만큼 여백을 줘. viewport-fit=cover와 env(safe-area-inset-*)를 써줘',r:['Viewport','Notch','Home Indicator'],l:2,o:0,v:'u-safe-area'},
+ {en:'Notch',ko:'노치 · 화면 위 파인 곳',d:'휴대폰 화면 위쪽 가운데가 움푹 파여서 카메라와 센서가 들어간 부분이에요.',x:'노치 양옆은 시계·배터리 같은 상태 표시가 쓰는 자리예요. 제목이나 버튼은 그 아래 안전 영역 안에 둬요.',p:'노치가 있는 휴대폰에서 상단 제목이 Notch(노치)에 가리지 않게 안전 영역 아래로 내려줘',r:['Safe Area','Status Bar','Dynamic Island'],l:1,o:0,v:'u-notch'},
+ {en:'Dynamic Island',ko:'다이내믹 아일랜드',d:'아이폰 화면 위 검은 알약 모양 자리가 타이머·음악 같은 알림에 따라 늘었다 줄었다 하는 기능이에요.',x:'애플이 2022년 아이폰 14 Pro에서 처음 선보였어요. 카메라가 있는 자리를 알림과 진행 상황을 보여 주는 공간으로 바꾼 거예요.',p:'Dynamic Island(다이내믹 아일랜드)처럼 화면 위 작은 알약이 알림 내용에 따라 부드럽게 늘어났다 줄어드는 알림 표시를 만들어줘',r:['Notch','Safe Area'],l:1,o:0,v:'u-dynamic-island'},
+ {en:'Home Indicator',ko:'홈 인디케이터 · 홈 바',d:'화면 맨 아래 가로 막대예요. 위로 밀어 올리면 홈 화면으로 나가요.',x:'아이폰 X(2017)가 홈 버튼을 밀어 올리는 동작으로 바꾸면서 생겼어요. 막대 근처는 운영체제가 쓰니 하단 버튼은 그 위로 올려 둬요.',p:'하단 탭 바가 Home Indicator(홈 바)와 겹치지 않게 env(safe-area-inset-bottom)만큼 아래 여백을 줘',r:['Safe Area','Tab Bar','Edge Swipe'],l:1,o:0,v:'u-home-indicator'},
+ {en:'Screen Resolution',ko:'해상도 · 화면 해상도',d:'화면이 가로·세로로 점(픽셀)을 몇 개씩 갖고 있는지 나타낸 숫자예요. 1920×1080처럼 써요.',x:'해상도가 같아도 화면이 크면 점 하나가 커져서 덜 선명해요. 선명함은 해상도와 화면 크기를 함께 봐야 알 수 있어요.',p:'1920×1080 Screen Resolution(해상도) 모니터에서 글줄이 너무 길어지지 않게 본문 최대 너비를 정해줘',r:['Pixel Density','Screen Size','Breakpoint'],l:1,o:0,v:'u-screen-resolution'},
+ {en:'Pixel Density',ko:'픽셀 밀도 · DPR',d:'같은 넓이 안에 점(픽셀)이 얼마나 촘촘히 들어 있는지예요. 촘촘할수록 선명해요.',x:'1인치에 점이 몇 개인지는 PPI로 말해요. 웹에서는 CSS 픽셀 하나를 실제 점 몇 개로 그리는지를 devicePixelRatio(DPR)로 알 수 있어요.',p:'Pixel Density(픽셀 밀도)가 높은 화면에서도 흐리지 않게 이미지를 2배·3배 크기로 만들어 srcset에 넣어줘',r:['Retina Display','Physical vs CSS Pixel','Screen Resolution'],l:2,o:0,v:'u-pixel-density'},
+ {en:'Retina Display',ko:'레티나 디스플레이',d:'점이 아주 촘촘해서 보통 거리에서는 점 하나하나가 안 보이는 애플 화면의 이름이에요.',x:'애플이 2010년 아이폰 4에서 처음 썼어요. 3.5인치에 960×640 점으로, 이전 아이폰 3GS보다 점이 4배 많았어요.',p:'Retina Display(레티나 디스플레이)에서 로고가 흐리지 않게 SVG로 바꾸거나 2배 크기 이미지를 써줘',r:['Pixel Density','Screen Resolution'],l:1,o:0,v:'u-retina-display'},
+ {en:'Physical vs CSS Pixel',ko:'물리 픽셀 · CSS 픽셀',d:'화면의 실제 점(물리 픽셀)과 코드에서 크기를 정하는 단위(CSS 픽셀)는 서로 달라요.',x:'DPR이 3인 화면에서는 CSS 100px을 가로로 실제 점 300개로 그려요. 그래서 CSS 크기로 정하면 기기가 달라도 눈에 보이는 크기가 비슷해요.',p:'Physical vs CSS Pixel(물리 픽셀과 CSS 픽셀) 차이를 생각해서, 캔버스를 devicePixelRatio만큼 크게 그려 선명하게 해줘',r:['Pixel Density','Viewport'],l:3,o:0,v:'u-physical-vs-css-pixel'},
+ {en:'Screen Size',ko:'화면 크기 · 인치',d:'화면 대각선 길이를 인치로 잰 크기예요. 휴대폰은 6인치 안팎, 노트북은 14인치쯤이에요.',x:'인치는 대각선 길이라서, 인치가 같아도 화면 비율에 따라 가로·세로 길이가 달라요.',p:'Screen Size(화면 크기)가 작은 휴대폰부터 큰 모니터까지 레이아웃이 자연스럽게 바뀌게 해줘',r:['Screen Resolution','Breakpoint','Responsive Web Design'],l:1,o:0,v:'u-screen-size'},
+ {en:'Orientation',ko:'화면 방향 · 가로·세로 모드',d:'휴대폰을 세워 든 세로 모드와 눕혀 든 가로 모드예요.',x:'CSS @media (orientation: landscape)로 가로 모드 모양을 따로 정해요. 세로로 들고 있어도 화면 키보드가 올라오면 화면이 가로로 길어져 가로 모드로 잡힐 수 있어요.',p:'Orientation(화면 방향)이 가로 모드일 때는 사진을 한 줄에 4장씩 보여 주게 @media (orientation: landscape)로 바꿔줘',r:['Media Query','Foldable','Virtual Keyboard'],l:2,o:0,v:'u-orientation'},
+ {en:'Foldable',ko:'폴더블 · 접는 화면',d:'화면을 반으로 접었다 펼 수 있는 휴대폰이에요. 펼치면 태블릿처럼 넓어져요.',x:'접을 때와 펼 때 화면 너비가 크게 바뀌어요. 펼쳤을 때 접히는 선(힌지)에 글이나 버튼이 걸리지 않게 해요.',p:'Foldable(폴더블) 폰을 펼치면 목록과 내용을 나란히 보여 주고, 접으면 한 화면씩 보여줘',r:['Orientation','Split Screen','Breakpoint'],l:2,o:0,v:'u-foldable'},
+ {en:'Split Screen',ko:'화면 분할 · 멀티 윈도우',d:'한 화면을 나눠 앱 두 개를 나란히 띄워 쓰는 기능이에요.',x:'화면을 나누면 앱 하나가 받는 너비가 반쯤으로 줄어요. 그래서 기기 종류가 아니라 지금 받은 너비에 맞춰 화면을 바꿔야 해요.',p:'Split Screen(화면 분할)으로 너비가 줄어도 깨지지 않게, 기기 종류가 아니라 창 너비로 레이아웃을 바꿔줘',r:['Foldable','Breakpoint','Responsive Web Design'],l:2,o:0,v:'u-split-screen'},
+ {en:'Refresh Rate',ko:'주사율 · 화면 새로 그리는 횟수',d:'화면이 1초에 몇 번 새로 그려지는지예요. 60Hz는 1초에 60번이에요.',x:'requestAnimationFrame은 보통 화면 주사율에 맞춰 불려요. 60Hz가 가장 흔하고 120Hz·144Hz 화면도 많아서, 움직임은 그린 횟수가 아니라 흐른 시간으로 계산해요.',p:'Refresh Rate(주사율)가 60Hz든 120Hz든 같은 속도로 움직이게 애니메이션을 흐른 시간 기준으로 계산해줘',r:['FPS','requestAnimationFrame'],l:2,o:0,v:'u-refresh-rate'},
+ {en:'Virtual Keyboard',ko:'화면 키보드 · 가상 키보드',d:'휴대폰에서 입력칸을 누르면 화면 아래에서 올라오는 키보드예요.',x:'입력칸에 inputmode="numeric"을 넣으면 숫자 키보드가 떠요. 키보드가 화면 아래를 가리니 입력칸과 보내기 버튼이 키보드 위에 보이게 해요.',p:'Virtual Keyboard(화면 키보드)가 올라와도 입력칸과 보내기 버튼이 가리지 않게 하고, 인증번호 칸은 inputmode="numeric"으로 숫자 키보드를 띄워줘',r:['Input Field','OTP Input','Viewport'],l:2,o:0,v:'u-virtual-keyboard'},
+ {en:'Text Scaling',ko:'글자 크기 설정 · 텍스트 확대',d:'사용자가 휴대폰이나 브라우저 설정에서 글자를 크게 키운 상태예요.',x:'글자 크기를 rem으로 쓰면 루트 글자 크기를 따라 함께 커져요. 상자 높이를 고정하면 커진 글자가 넘치니 높이는 내용에 맞게 늘어나게 둬요.',p:'Text Scaling(글자 크기 설정)으로 글자를 키워도 잘리지 않게 글자는 rem으로, 상자 높이는 내용에 맞게 늘어나게 해줘',r:['rem','Font Size','Web Accessibility'],l:2,o:0,v:'u-text-scaling'},
+ {en:'Bezel',ko:'베젤 · 화면 테두리',d:'화면 바깥을 둘러싼 테두리예요. 얇을수록 같은 크기 기기에 화면이 더 커져요.',x:'예전 아이폰은 아래쪽 넓은 베젤에 홈 버튼이 있었어요. 요즘은 베젤이 얇아져서 화면이 모서리 가까이까지 닿아요.',p:'Bezel(베젤)이 얇은 휴대폰 목업 안에 앱 화면을 넣어서 보여줘',r:['Safe Area','Screen Size','Notch'],l:1,o:0,v:'u-bezel'},
 ]);
 T('design','tool',[
  {en:'Frame',ko:'프레임 · 대지',d:'Figma에서 화면 한 장이나 부품을 담는 틀.',x:'Photoshop의 "대지(아트보드)"와 비슷해요.',j:'"대지 하나 더 만들어 주세요"',p:'Figma에서 1440px 데스크톱 프레임을 기준으로 만들었어',r:['Layer','Auto Layout'],l:1,o:1,u:'https://help.figma.com/hc/en-us/articles/360041539473-Frames-in-Figma-Design',v:{page:''}},
@@ -2807,6 +2897,61 @@ Object.assign(D, {
         move: (e, dx, dy) => { put(y0 + dy); hs.push([e.timeStamp, dy]); while (hs.length > 2 && e.timeStamp - hs[0][0] > 100) hs.shift(); },
         up: (e, dx, dy, c) => { if (c) { ls.style.transition = 'transform .3s var(--ease)'; put(y0); return; } const [t1, d1] = hs[0], dt = e.timeStamp - t1; fling(dt > 0 ? (dy - d1) / dt : 0); }});
       keys(vw, {ArrowDown: -.3, PageDown: -.8, ArrowUp: .3, PageUp: .8}, v => fling(v)); }}
+});
+/* design: device — 휴대폰 틀은 phone()을 쓰고, 노치·홈 바를 보여 줄 때만 그 부분을 바꿔 끼운다 */
+const vnotch = (h, x) => h.replace('<i class="mk-notch"></i>', x);
+const vpix = (rows, cls = '') => `<svg class="${cls}" viewBox="0 0 ${rows[0].length} ${rows.length}" shape-rendering="crispEdges" aria-hidden="true">${rows.flatMap((r, y) =>
+  [...r].map((c, x) => c === '#' ? `<rect x="${x}" y="${y}" width="1" height="1"/>` : '')).join('')}</svg>`;
+const vdisc = n => vpix(Array.from({length: n}, (_, y) => Array.from({length: n}, (_, x) => Math.hypot(x + .5 - n / 2, y + .5 - n / 2) <= n * .38 ? '#' : '.').join('')));
+const vgrid = (n, on) => { let r = ''; for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) r += `<rect x="${x}" y="${y}" width="1" height="1"${on(x, y) ? ' class="on"' : ''} vector-effect="non-scaling-stroke"/>`;
+  const k = n / 4; return `<svg class="mk-vgr" viewBox="0 0 ${n} ${n}" aria-hidden="true">${r}<rect class="bx" x="${k}" y="${k}" width="${k}" height="${k}" vector-effect="non-scaling-stroke"/></svg>`; };
+const vrow = (n, on) => Array.from({length: n}, (_, i) => `<i class="mk-vln${i === on ? ' on' : ''}"></i>`).join('');
+Object.assign(D, {
+  'u-safe-area':{h:vnotch(phone(`<div class="mk-vsafe mk-hl"><b>안전 영역</b><span class="mk-help">글과 버튼은 이 점선 안에 둬요</span><div class="mk-card"><b>오늘 할 일</b><div class="mk-help">장보기 · 운동 · 책 읽기</div></div>
+    <span class="mk-help mk-vwarn">빗금 친 위·아래는 노치와 홈 바에 가릴 수 있어요</span></div>`), '<i class="mk-vun t"></i><i class="mk-vun b"></i><i class="mk-notch"></i>'), cap:'화면 끝까지 그리되, 글과 버튼은 가리지 않는 안쪽에 둬요'},
+  'u-notch':{h:vnotch(phone(`<b>메시지</b><div class="mk-card"><b>민지</b><div class="mk-help">내일 몇 시에 볼까?</div></div><div class="mk-card"><b>준호</b><div class="mk-help">사진 보냈어</div></div>
+    <span class="mk-help">노치 양옆은 시계와 배터리 자리예요</span>`), '<i class="mk-vnt mk-hl"></i><span class="mk-vsb">9:41</span><i class="mk-vbat"></i>'), cap:'화면 위 가운데가 파인 곳에 카메라와 센서가 들어가요'},
+  'u-dynamic-island':{h:vnotch(phone(`<b>음악</b><div class="mk-card mk-vnow"><i class="mk-img"></i><b>밤산책</b><span class="mk-help">재생 중</span></div>
+    <span class="mk-help">알림이 오면 위 알약이 늘어나 내용을 보여 줘요</span>`), '<i class="A mk-vdi"><span class="A"><i></i>타이머</span><span class="A">02:15</span></i>'), m:1, cap:'카메라 자리의 검은 알약이 알림에 따라 늘었다 줄었다 해요'},
+  'u-home-indicator':{h:phone(`<b>홈</b><div class="mk-card"><b>오늘의 소식</b><div class="mk-help">새 글 3개</div></div>
+    <span class="mk-help mk-vnote">맨 아래 막대를 위로 밀면 홈 화면으로 나가요 ↓</span><nav class="mk-tabbar">${tabs}</nav>`).replace('<i class="mk-home">', '<i class="mk-home mk-hl">'), cap:'탭 바는 홈 바 위로 올려서 둘이 겹치지 않게 해요'},
+  'u-screen-resolution':{h:`<div class="mk-vres"><div class="mk-vmo"><div class="mk-vmon"><div class="mk-vms"><span class="mk-vax"><i></i>가로 1920<i></i></span>
+    <span class="mk-vax y"><i></i>세로<br>1080<i></i></span><span class="mk-help mk-vlpt">확대하면 작은 점(픽셀)이 보여요</span><i class="mk-vlp mk-hl"></i></div></div><i class="mk-vnk"></i><i class="mk-vft"></i></div>
+    <span class="mk-help">1920×1080 = 점 약 207만 개</span></div>`, cap:'가로 점 개수 × 세로 점 개수로 해상도를 말해요'},
+  'u-pixel-density':{h:`<div class="mk-vres"><div class="mk-vden">${[[8, '1배', 'DPR 1'], [16, '2배', 'DPR 2'], [24, '3배', 'DPR 3']].map(([n, a, b]) =>
+    `<div>${vdisc(n)}<b>${a}</b><span class="mk-help">${b}</span></div>`).join('')}</div><span class="mk-help">같은 크기에 점이 많을수록 동그라미가 매끈해요</span></div>`, cap:'같은 넓이에 점이 촘촘할수록 선명해요'},
+  'u-retina-display':{h:vs('보통 화면', `<div class="mk-vcol"><div class="mk-vlo">${vpix(['..........', '.####..#..', '....#..#..', '....#..#..', '....#..###', '...#...#..', '..#....#..', '.#.....#..', '..........', '..........'])}</div><span class="mk-help">점이 보여 계단처럼 보여요</span></div>`,
+    '레티나 화면', `<div class="mk-vcol"><div class="mk-vlo"><span>가</span></div><span class="mk-help">점이 안 보여 매끈해요</span></div>`), cap:'돋보기로 봐도 점이 안 보일 만큼 촘촘한 화면이에요'},
+  'u-physical-vs-css-pixel':{h:vs('DPR 1 화면', `<div class="mk-vcol">${vgrid(4, (x, y) => x === 1 && y === 1)}<b>CSS 1px = 점 1개</b></div>`,
+    'DPR 2 화면', `<div class="mk-vcol">${vgrid(8, (x, y) => x > 1 && x < 4 && y > 1 && y < 4)}<b>CSS 1px = 점 4개</b><span class="mk-help">가로 2 × 세로 2</span></div>`), cap:'같은 CSS 1px(점선 칸)을 실제 점 몇 개로 그리는지가 달라요'},
+  'u-screen-size':{h:`<div class="mk-vres"><div class="mk-vsz">
+    <div><svg width="32" height="58" viewBox="0 0 32 58" aria-hidden="true"><rect class="f" x="1" y="1" width="30" height="56" rx="6"/><path class="d" d="M5 5 27 53"/></svg><b>6.1인치</b><span class="mk-help">휴대폰</span></div>
+    <div><svg width="62" height="84" viewBox="0 0 62 84" aria-hidden="true"><rect class="f" x="1" y="1" width="60" height="82" rx="6"/><path class="d" d="M6 6 56 78"/></svg><b>11인치</b><span class="mk-help">태블릿</span></div>
+    <div><svg width="116" height="80" viewBox="0 0 116 80" aria-hidden="true"><rect class="f" x="7" y="1" width="102" height="68" rx="4"/><path class="d" d="M11 5 105 65"/><path class="f" d="M1 73h114l-5 6H6z"/></svg><b>14인치</b><span class="mk-help">노트북</span></div>
+    </div><span class="mk-help">주황 점선이 인치로 재는 대각선이에요</span></div>`, cap:'화면 크기는 대각선 길이를 인치로 잰 값이에요'},
+  'u-orientation':{h:hint('돌리기 버튼을 눌러 보세요 (키보드 Enter)') + `<div class="mk-vori"><div class="mk-vbox">${phone(`<b>사진 앨범</b><div class="mk-vgal">${'<i></i>'.repeat(4)}</div>`)}</div>
+    <button class="mk-btn ghost mk-sm mk-vrot" aria-pressed="false" aria-label="화면 돌리기">↻ 돌리기</button><span class="mk-help mk-vost" aria-live="polite">세로 모드 · portrait</span></div>`, cap:'가로로 돌리면 넓어진 화면에 맞춰 사진이 한 줄로 늘어서요',
+    init: s => { const ph = s.querySelector('.mk-phone'), b = s.querySelector('.mk-vrot'), st = s.querySelector('.mk-vost'), ez = getComputedStyle(s).getPropertyValue('--ease').trim() || 'ease-out'; let land = false;
+      b.addEventListener('click', () => { land = !land; ph.classList.toggle('land', land); b.setAttribute('aria-pressed', land); st.textContent = land ? '가로 모드 · landscape' : '세로 모드 · portrait';
+        if (!reduced) ph.animate([{transform: `rotate(${land ? -90 : 90}deg)`}, {transform: 'none'}], {duration: 450, easing: ez}); }); }},
+  'u-foldable':{h:vs('접었을 때', `<div class="mk-vcol"><div class="mk-vfd n"><div><b>메일</b>${vrow(4, 0)}</div></div><span class="mk-help">한 화면씩 봐요</span></div>`,
+    '펼쳤을 때', `<div class="mk-vcol"><div class="mk-vfd w"><div><b>메일</b>${vrow(4, 0)}</div><i class="hg"></i><div><b>회의 안내</b><i class="mk-vln s"></i><i class="mk-vln s"></i><i class="mk-vln s"></i></div></div><span class="mk-help">목록과 내용을 나란히 봐요 · 점선은 접히는 선</span></div>`), cap:'펼치면 넓어진 만큼 목록과 내용을 함께 보여 줘요'},
+  'u-split-screen':{h:`<div class="mk-vres"><div class="mk-vtab"><div class="mk-vap"><b>지도</b><svg class="mk-vmp" viewBox="0 0 100 80" preserveAspectRatio="none" aria-hidden="true"><path class="rv" d="M0 58C28 40 52 70 100 42"/><path class="rd" d="M30 0 42 80M0 24h100"/></svg></div>
+    <div class="mk-vdv mk-hl"><i></i></div><div class="mk-vap"><b>메모</b><i class="mk-vln s"></i><i class="mk-vln s"></i><i class="mk-vln s"></i></div></div>
+    <span class="mk-help">가운데 막대로 두 앱이 화면을 나눠 써요</span></div>`, cap:'앱 두 개가 화면을 나눠 쓰니 각 앱이 받는 너비가 줄어요'},
+  'u-refresh-rate':{h:`<div class="mk-vrr"><div><span class="mk-help"><b>1초에 12번</b> 그리면 뚝뚝 끊겨요 (예시)</span><div class="mk-vtr"><span class="A mk-vbl st"><i></i></span></div></div>
+    <div><span class="mk-help"><b>1초에 60번</b> 넘게 그리면 매끄러워요</span><div class="mk-vtr"><span class="A mk-vbl"><i></i></span></div></div><span class="mk-help">60Hz = 1초에 60번 새로 그려요</span></div>`, m:1, cap:'1초에 많이 새로 그릴수록 움직임이 매끄러워요'},
+  'u-virtual-keyboard':{h:phone(`<b>민지</b><span class="mk-vmsg">내일 몇 시에 볼까?</span><span class="mk-vmsg me">3시 어때?</span>
+    <div class="A mk-vin"><span class="mk-in">메시지 입력</span><span class="mk-btn mk-sm">보내기</span></div><div class="A mk-vkb">${'<i></i>'.repeat(29)}<i class="sp"></i></div>`), m:1, cap:'입력칸을 누르면 키보드가 올라와 화면 아래를 가려요'},
+  'u-text-scaling':{h:hint('가− 가+ 버튼으로 글자 크기를 바꿔 보세요') + phone(`<div class="mk-vts"><button class="mk-btn ghost mk-sm" aria-label="글자 작게">가−</button><span class="mk-vpc" aria-live="polite">100%</span><button class="mk-btn ghost mk-sm" aria-label="글자 크게">가+</button></div>
+    <div class="mk-vtc"><span class="mk-help">높이 고정 상자</span><div class="mk-card mk-vfix"><b>팀 회의</b><span>오후 3시 · 3층 회의실</span></div><span class="mk-help mk-vfs"></span>
+    <span class="mk-help">높이 자동 상자</span><div class="mk-card"><b>팀 회의</b><span>오후 3시 · 3층 회의실</span></div><span class="mk-help">✓ 상자가 글자에 맞춰 커져요</span></div>`), cap:'글자를 키우면 높이를 고정한 상자는 잘리고, 자동인 상자는 함께 커져요',
+    init: s => { const c = s.querySelector('.mk-vtc'), fx = s.querySelector('.mk-vfix'), pc = s.querySelector('.mk-vpc'), fs = s.querySelector('.mk-vfs'), [lo, hi] = s.querySelectorAll('.mk-vts button'), V = [1, 1.15, 1.3, 1.5]; let k = 0;
+      const set = n => { k = Math.max(0, Math.min(V.length - 1, n)); c.style.setProperty('--vt', V[k]); const t = Math.round(V[k] * 100) + '%'; if (pc.textContent !== t) pc.textContent = t;
+        const o = fx.scrollHeight > fx.clientHeight + 1; fs.textContent = o ? '✗ 글자가 넘쳐 잘렸어요' : '지금은 다 보여요'; fs.classList.toggle('bad', o); };
+      lo.addEventListener('click', () => set(k - 1)); hi.addEventListener('click', () => set(k + 1)); set(0); }},
+  'u-bezel':{h:vs('두꺼운 베젤', `<div class="mk-vcol"><div class="mk-vbz"><div>${vrow(3, -1)}</div><i class="hb"></i></div><span class="mk-help">테두리가 넓고 아래에 홈 버튼</span></div>`,
+    '얇은 베젤', `<div class="mk-vcol"><div class="mk-vbz thin"><div>${vrow(4, -1)}</div></div><span class="mk-help">같은 크기에 화면이 더 커요</span></div>`), cap:'테두리(베젤)가 얇을수록 같은 기기에 화면이 넓어져요'}
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
