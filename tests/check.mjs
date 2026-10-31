@@ -92,6 +92,14 @@ check('base', () => vm.runInContext(`(() => {
 })()`, ctx));
 check('sym', () => g.SYMPTOM_GROUPS.length !== 8 ? 'groups ' + g.SYMPTOM_GROUPS.length
   : g.SYMPTOMS.filter(s => !g.SYMPTOM_GROUPS.includes(s.g)).map(s => s.q).join(', '));
+const SYM_NEW = ['아이폰에서 위·아래 내용이 가려져요', '휴대폰을 가로로 돌리면 화면이 깨져요', '키보드가 올라오면 입력칸이 가려져요', '표가 휴대폰에서 옆으로 삐져나가요',
+  '글자 크기 설정을 키우면 화면이 깨져요', '고해상도 화면에서 이미지가 흐릿해요', '입력하자마자 빨간 오류 글씨가 떠요', '끌어서 놓기가 안 돼요', '버튼을 눌러도 눌린 느낌이 없어요',
+  'Tab 키를 누르면 엉뚱한 곳으로 이동해요', '아래로 당겨도 새로고침이 안 돼요', '눌렀는데 한참 뒤에야 화면이 바뀌어요', '알림이 너무 빨리 사라져요', '스크롤이 칸마다 딱 멈추지 않아요',
+  '목록 끝에서 튕기는 느낌이 없어요', '뒤가 유리처럼 흐리게 비치게 하고 싶어요', '모서리가 아이폰 아이콘처럼 부드럽지 않아요', '색약인 사람이 구분을 못 해요', '색이 너무 쨍해요',
+  '마지막 줄에 한 글자만 남아요', '제목 글꼴 중 일부 글자만 모양이 달라요', '긴 페이지에서 맨 위로 돌아가기 힘들어요', '이미지가 늦게 뜨고 덜컥 나타나요', '사진 때문에 페이지가 무거워요',
+  '이미지가 안 보일 때 무슨 사진인지 몰라요', '동영상 자동 재생이 안 돼요'];    // 스펙 6장 26개(칩 말투에 맞춰 해요체)
+check('symcount', () => g.SYMPTOMS.length !== 82 ? 'length ' + g.SYMPTOMS.length
+  : SYM_NEW.filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
 if (fails.length) { console.log(fails.join('\n')); process.exit(1); }
 console.log('OK ' + n);
