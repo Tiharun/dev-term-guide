@@ -439,6 +439,9 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dcb{display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px}.mk-dck{min-width:0;overflow-wrap:anywhere}.mk-dck.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-dch{display:block;font-size:13.5px;font-weight:800;line-height:1.3}.mk-dck ul{padding-left:16px}.mk-dck ul.mk-dcc{display:grid;gap:3px;padding:0;list-style:none}.mk-dcc li{display:flex;gap:6px}.mk-dcc b{flex:none;font-weight:400}
 .mk-dck table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11.5px;line-height:1.35}.mk-dck th,.mk-dck td{padding:3px 5px;border:1px solid var(--rule);text-align:left;vertical-align:top;overflow-wrap:anywhere}.mk-dck th{background:var(--fig);font-weight:800}
+.mk-kan.mk-dcbd{width:min(100%,300px);grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);text-align:left}
+.mk-dcdod{display:grid;gap:2px;width:min(100%,300px);min-width:0;margin:10px auto 0;padding:4px 10px 8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12.5px;text-align:left}.mk-dcdod legend{padding:0 4px;font-weight:800}
+.mk-dcmd{width:min(100%,340px);margin:0;padding:10px 12px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font:600 12.5px/1.6 var(--mono);text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
 .mk-fw{width:min(100%,320px);color:var(--ink);font-size:12px;line-height:1.35}.mk-fwl{display:flex;flex-direction:column;gap:22px;list-style:none}
 .mk-fwr{position:relative;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center}.mk-fwr.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px}
 .mk-fwr+.mk-fwr::before{content:'';position:absolute;top:-22px;left:calc(50% - .75px);width:1.5px;height:22px;background:var(--ink)}.mk-fwr:not(.two)+.mk-fwr.two::before{height:11px}
@@ -460,7 +463,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-fw,.mk-pl) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-fw,.mk-pl) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -3099,6 +3102,23 @@ T('plan','basic',[
  {en:'Owner',ko:'담당자 · 그 일을 맡은 사람',d:'어떤 일을 맡아서 끝까지 챙기는 한 사람이에요.',x:'"다 같이"라고 하면 아무도 안 하기 쉬워요. 할 일마다 담당자 한 명을 이름으로 적어 둬요.',p:'이 할 일 목록에 담당자 칸을 추가해줘. 한 줄에 한 사람만',r:['Meeting','Priority'],l:1,o:0,v:'u-owner'},
  {en:'Goal',ko:'목표 · 이루고 싶은 결과',d:'이 일을 해서 결국 무엇을 이루고 싶은지예요.',x:'"앱 만들기"보다 "자주 사는 상품을 1분 안에 다시 주문"처럼 무엇이 좋아지는지로 쓰면, 무엇을 만들지 고르기 쉬워요.',p:'이 프로젝트의 목표를 한 문장으로 써줘. 무엇을 만들지가 아니라 무엇이 좋아지는지로',r:['Planning','Requirement'],l:1,o:0,v:'u-goal'},
 ]);
+const SCRUM = 'https://scrumguides.org/scrum-guide.html';
+T('plan','core',[
+ {en:'Backlog',ko:'백로그 · 앞으로 할 일을 쌓아 둔 목록',d:'앞으로 할 일을 중요한 순서대로 쌓아 둔 목록이에요.',x:'Scrum Guide는 제품을 좋게 만드는 데 필요한 일을 순서대로 늘어놓은 목록이라고 해요. 그중 이번 스프린트에 할 일만 골라 모은 것은 Sprint Backlog라고 불러요(2026-11 확인).',p:'떠오른 기능 요청을 백로그로 정리해줘. 중요한 것이 위로 오게',r:['Kanban Board','Priority'],l:2,o:1,u:SCRUM,v:'u-backlog'},
+ {en:'Roadmap',ko:'로드맵 · 앞으로의 큰 일정표',d:'언제쯤 무엇을 만들지 큰 흐름을 시간 순서로 보여 주는 계획이에요.',x:'날짜를 하루 단위로 박기보다 달처럼 크게 잡아요. 계획이 바뀌면 로드맵도 함께 고쳐요.',p:'장보기 앱의 4개월 로드맵을 달 단위로 짜줘. 먼저 만들 기능부터',r:['Goal','Planning'],l:1,o:0,v:'u-roadmap'},
+ {en:'Milestone',ko:'마일스톤 · 중간 목표 지점',d:'큰 일 중간중간에 "여기까지 됐다"를 확인하는 지점이에요.',x:'길에 세운 이정표처럼 지금 어디쯤 왔는지 알려 줘요. 마일스톤마다 날짜와 무엇이 되면 통과인지를 같이 정해요.',p:'출시까지 마일스톤을 3개로 나누고, 각각 날짜와 통과 기준을 적어줘',r:['Roadmap','Deadline'],l:1,o:0,v:'u-milestone'},
+ {en:'Sprint',ko:'스프린트 · 짧게 끊은 작업 기간',d:'정해 둔 짧은 기간 안에 고른 일을 끝내는 작업 단위예요.',x:'Scrum Guide는 스프린트를 한 달 이하의 같은 길이로 정해요. 할 일을 정하는 계획으로 시작하고, 결과를 함께 보는 검토와 돌아보는 회고로 마무리해요(2026-11 확인).',p:'백로그에서 다음 2주 스프린트에 넣을 일을 골라줘. 2주 안에 끝낼 만큼만',r:['Kanban Board','Backlog'],l:2,o:1,u:SCRUM,v:'u-sprint'},
+ {en:'Agile',ko:'애자일 · 작게 만들고 자주 고치는 방식',d:'한 번에 다 만들지 않고, 작게 만들어 보여 주고 고치기를 되풀이하는 일하는 방식이에요.',x:'애자일 선언문은 네 가지를 더 중요하게 봐요. 프로세스·도구보다 사람과 소통, 빈틈없는 문서보다 작동하는 소프트웨어, 계약 협상보다 고객과 협력, 계획을 따르기보다 변화에 대응하기예요(2026-11 확인).',p:'이 앱을 애자일로 만들려면 첫 2주에 무엇부터 만들어 보여 줄지 정해줘',r:['Sprint','Feedback'],l:2,o:1,u:'https://agilemanifesto.org/',v:'u-agile'},
+ {en:'Ticket',ko:'티켓 · 번호 붙은 할 일 한 건',d:'해야 할 일 하나를 번호, 제목, 담당자와 함께 카드 한 장으로 적은 거예요.',x:'"#12 고쳐줘"처럼 번호로 짧게 가리킬 수 있어요. 티켓 하나에 일 하나만 담아야 끝났는지 알기 쉬워요.',p:'이 요청을 티켓 3개로 나눠줘. 티켓마다 제목, 할 일, 완료 조건을 적어서',r:['One Task per Request','Issue'],l:1,o:0,v:'u-ticket'},
+ {en:'Estimate',ko:'추정 · 얼마나 걸릴지 어림하기',d:'일을 끝내는 데 얼마나 걸릴지 미리 어림한 값이에요.',x:'추정은 약속이 아니라 예상이에요. 일을 잘게 나눠 하나씩 어림하고, 모르는 부분은 "조사 필요"로 따로 적으면 덜 틀려요.',p:'이 할 일들을 각각 며칠 걸릴지 추정해줘. 확실하지 않은 것은 이유도 적어서',r:['Deadline','Priority'],l:1,o:0,v:'u-estimate'},
+ {en:'Retrospective',ko:'회고 · 지난 기간을 돌아보기',d:'한 기간이 끝난 뒤 무엇이 잘됐고 무엇을 바꿀지 함께 돌아보는 자리예요.',x:'Scrum Guide는 회고의 목적을 품질과 효과를 높일 방법을 계획하는 것이라고 해요. 흔히 잘된 점, 아쉬운 점, 다음에 해 볼 것으로 나눠 적어요(2026-11 확인).',p:'이번 스프린트 회고를 정리해줘. 잘된 점, 아쉬운 점, 다음에 바꿀 것 하나씩',r:['Postmortem','Sprint'],l:2,o:1,u:SCRUM,v:'u-retrospective'},
+ {en:'Daily Stand-up',ko:'데일리 스탠드업 · 매일 하는 짧은 공유',d:'매일 잠깐 모여 진행 상황과 막힌 점을 나누는 짧은 회의예요.',x:'Scrum Guide의 이름은 Daily Scrum이에요. 개발자들이 15분 동안 스프린트 목표까지 얼마나 왔는지 보고 남은 계획을 고쳐요. 흔히 서서 짧게 해서 스탠드업이라고 불러요(2026-11 확인).',p:'오늘 스탠드업에서 말할 내용을 정리해줘. 어제 한 일, 오늘 할 일, 막힌 점',r:['Sprint','Meeting'],l:2,o:1,u:SCRUM,v:'u-daily-stand-up'},
+ {en:'Definition of Done',ko:'완료 정의 · 끝났다고 말할 기준',d:'일이 "끝났다"고 말하려면 무엇이 다 돼 있어야 하는지 팀이 함께 정한 기준이에요.',x:'Scrum Guide는 결과물이 품질 기준을 채운 상태를 적은 공식 설명이라고 해요. 이 기준을 못 채운 일은 출시하거나 발표할 수 없어요(2026-11 확인).',p:'우리 팀의 완료 정의를 체크리스트로 만들어줘. 테스트, 검토, 문서 고치기를 넣어서',r:['Acceptance Criteria','Ticket'],l:2,o:1,u:SCRUM,v:'u-definition-of-done'},
+ {en:'Markdown',ko:'마크다운 · 기호로 꾸미는 글쓰기',d:'#이나 - 같은 기호를 붙여 제목과 목록을 만드는 간단한 글쓰기 방법이에요.',x:'줄 앞에 #을 1~6개 붙이면 제목, -를 붙이면 목록이 돼요. README나 CLAUDE.md 같은 .md 파일이 이렇게 쓰여요(2026-11 확인).',p:'회의 내용을 마크다운으로 정리해줘. 제목은 #, 할 일은 - 목록으로',r:['README','CLAUDE.md'],l:1,o:1,u:'https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax',v:'u-markdown'},
+ {en:'Template',ko:'템플릿 · 미리 만들어 둔 양식',d:'자주 쓰는 문서를 매번 처음부터 쓰지 않도록 칸을 미리 만들어 둔 양식이에요.',x:'빈칸만 채우면 돼서 빠뜨리는 내용이 줄고, 누가 써도 모양이 같아져요.',p:'회의록 템플릿을 마크다운으로 만들어줘. 날짜, 참석자, 정한 것, 할 일 칸으로',r:['Style Guide','Markdown'],l:1,o:0,v:'u-template'},
+ {en:'Review Request',ko:'검토 요청 · 봐 달라고 부탁하기',d:'만든 것을 다른 사람에게 보여 주고 확인해 달라고 부탁하는 일이에요.',x:'무엇을 바꿨는지, 어디를 봐 주면 좋은지, 언제까지인지 함께 적으면 검토가 빨라져요.',p:'이 변경의 검토 요청 글을 써줘. 바꾼 것, 봐 줄 곳, 기한을 넣어서',r:['Feedback','Design Review','Code Review'],l:1,o:0,v:'u-review-request'},
+ {en:'Approval',ko:'승인 · 진행해도 된다는 허락',d:'정해진 사람이 "이대로 진행해도 좋아요"라고 허락하는 일이에요.',x:'누가 승인하는지 미리 정해 두지 않으면, 다 만든 뒤에 다시 하라는 말을 듣기 쉬워요.',p:'이 기획서를 누구에게 승인받아야 하는지 정리하고, 승인 요청 글을 써줘',r:['Review Request','Stakeholder'],l:1,o:0,v:'u-approval'},
+]);
 </script>
 <script>
 /* ===== 13 AI · Claude와 일하기 ===== */
@@ -3424,6 +3444,7 @@ const term = (lines, {title = '터미널', prompt = '~/project $', end = true, s
     + `<div class="mk-tbody"${label ? ' aria-live="polite"' : ''}>${body}</div></div>`;
 };
 const tkeys = names => `<div class="mk-tkeys">${names.map(n => `<button type="button" class="mk-tkey" data-k="${esc(n)}">${esc(n)}</button>`).join('')}</div>`;
+const tpick = (names, on) => tkeys(names).replace(/data-k="([^"]*)"/g, (m, k) => `${m} aria-pressed="${k === esc(on)}"`);
 /* 네트워크 모형: 아이콘 1~5개를 한 줄로 놓고, links[i]는 i번과 i+1번 사이 선 {m 메시지[], w 무선, cut 끊긴 이유}.
    메시지 {t 이름표, r 반대 방향, x 가는 길에 사라짐}. k번째 메시지 줄은 k×10%에 나타나 점이 k×10+6%에 도착한다(멈춘 장면 88%) */
 const NWI = Object.fromEntries(Object.entries({
@@ -6019,6 +6040,67 @@ Object.assign(D, {
   'u-goal':{h:doc([{h:'목표'}, {p:'자주 사는 상품을 1분 안에 다시 주문해요'}, {p:'그래서 만들 것: 다시 담기 버튼, 주문 내역'}],
       {title:'목표.md', hl:1, label:'무엇이 좋아지는지로 쓴 목표와 그걸 위해 만들 것'}), m:1,
     cap:'무엇이 좋아지는지를 먼저 쓰고, 만들 것은 그다음에 골라요'},
+});
+/* plan: core — 출처로 확인(2026-11): Scrum Guide 2020 — Sprint는 한 달 이하 같은 길이, Sprint Planning으로 시작, Daily Scrum 15분, 회고 목적, 완료 정의와
+   그걸 못 채우면 출시·발표 불가, Product·Sprint Backlog 뜻(scrumguides.org/scrum-guide.html) · 애자일 4가치(agilemanifesto.org) ·
+   Markdown 줄 앞 # 1~6개는 제목, -는 목록(docs.github.com basic-writing-and-formatting-syntax).
+   흔히: 스탠드업의 어제·오늘·막힌 점, 회고의 잘된 점·아쉬운 점·다음에 할 것. 예시: 달·날짜·일 수·추정 값, 이름(민지·준호), 티켓 번호 */
+const PKAN = (cols, hl) => `<div class="mk-kan">${cols.map(([h, a]) => `<div class="mk-f${h === hl ? ' mk-hl' : ''}"><b>${h} ${a.length}</b>${a.map(x => `<span class="mk-kc${x === hl ? ' mk-hl' : ''}">${x}</span>`).join('')}</div>`).join('')}</div>`;
+const PDOD = ['요구사항대로 동작해요', '테스트를 통과했어요', '검토를 받았어요', '문서를 고쳤어요'];
+const PDODB = done => { const t = '<span class="mk-kc">#12 장바구니 담기</span>';
+  return `<div class="mk-kan mk-dcbd" role="group" aria-label="할 일 판"><div class="mk-f"><b>진행 중 ${done ? 0 : 1}</b>${done ? '' : t}</div><div class="mk-f"><b>완료 ${done ? 1 : 0}</b>${done ? t : ''}</div></div>`; };
+const PMD = ['# 회의록', '## 할 일', '- 견적 보내기', '- 일정 정하기'];
+const PMDV = {'쓴 글': () => `<pre class="mk-dcmd">${PMD.map(esc).join('\n')}</pre>`,
+  '보이는 모습': () => doc([{h:PMD[0].slice(2)}, {h:PMD[1].slice(3)}, {ul:PMD.slice(2).map(x => x.slice(2))}], {still:true, title:'회의록.md'})};
+const PMD_SAY = {'쓴 글':'쓴 글: #·- 기호로 적은 원문이에요', '보이는 모습':'보이는 모습: 기호가 제목과 목록으로 바뀌었어요'};
+Object.assign(D, {
+  'u-backlog':{h:browser(`${PKAN([['백로그', ['쿠폰', '리뷰', '찜하기']], ['이번 스프린트', ['장바구니']], ['완료', ['로그인']]], '백로그')}`, {url:'board.example'}),
+    cap:'할 일을 중요한 순서로 쌓아 두고, 이번에 할 것만 골라 꺼내요'},
+  'u-roadmap':{h:track([{t:'로그인·장바구니', s:'done', n:'11월'}, {t:'결제', s:'now', n:'12월'}, {t:'쿠폰', s:'wait', n:'1월'}, {t:'리뷰', s:'wait', n:'2월'}],
+      {label:'11월부터 2월까지 달마다 만들 기능을 정해 둔 로드맵'}), m:1,
+    cap:'달 단위로 무엇을 먼저 만들지 큰 순서를 보여 줘요'},
+  'u-milestone':{h:track([{t:'화면 완성', s:'done', n:'11월 8일', w:'통과'}, {t:'결제 동작', s:'now', n:'11월 15일', w:'확인 중'}, {t:'출시 준비', s:'wait', n:'11월 20일'}],
+      {label:'날짜마다 통과 기준을 정해 둔 마일스톤 세 개'}), m:1,
+    cap:'중간 지점마다 날짜를 정하고 통과했는지 확인해요'},
+  'u-sprint':{h:track([{t:'계획', s:'done', n:'첫날'}, {t:'만들기', s:'now', n:'매일'}, {t:'검토', s:'wait', n:'마지막 날'}, {t:'회고', s:'wait', n:'마지막 날'}],
+      {label:'스프린트 한 번: 첫날 계획, 매일 만들기, 마지막 날 검토와 회고'}), m:1,
+    cap:'정한 기간 안에 계획 → 만들기 → 검토 → 회고를 한 바퀴 돌아요'},
+  'u-agile':{h:track([{t:'작게 만들기', s:'done', n:'1주'}, {t:'보여 주기', s:'done', n:'2주'}, {t:'의견 듣기', s:'now', n:'2주'}, {t:'고쳐 만들기', s:'wait', n:'3주'}],
+      {label:'작게 만들고 보여 주고 의견을 들어 고치기를 되풀이해요'}), m:1,
+    cap:'한 번에 다 만들지 않고, 보여 주고 고치기를 짧게 되풀이해요'},
+  'u-ticket':{h:browser(`${PKAN([['할 일', ['#14 쿠폰']], ['진행 중', ['#12 장바구니']], ['완료', ['#9 로그인']]], '#12 장바구니')}`, {url:'board.example'}),
+    cap:'일 하나를 번호 붙은 카드 한 장으로 만들어 칸을 옮겨 가요'},
+  'u-estimate':{h:doc([{h:'추정'}, {tb:[['할 일', '추정'], ['로그인', '2일'], ['장바구니', '3일'], ['결제', '모름 · 조사 필요']]}, {p:'합계: 5일 + 결제 조사'}],
+      {title:'추정.md', hl:1, label:'할 일마다 걸릴 날을 어림하고 모르는 것은 따로 적은 표'}), m:1,
+    cap:'일을 나눠 하나씩 어림하고, 모르는 건 모른다고 적어요'},
+  'u-retrospective':{h:doc([{h:'스프린트 3 회고'}, {p:'잘된 점: 매일 짧게 공유했어요'}, {p:'아쉬운 점: 테스트가 늦었어요'}, {ck:[['다음엔 테스트 먼저 쓰기', false]]}],
+      {title:'회고.md', hl:3, label:'잘된 점, 아쉬운 점, 다음에 할 일을 적은 회고'}), m:1,
+    cap:'돌아보고 끝내지 않고, 다음에 바꿀 일 하나를 남겨요'},
+  'u-daily-stand-up':{h:doc([{h:'11월 12일 스탠드업'}, {tb:[['누구', '오늘 할 일', '막힌 점'], ['민지', '결제 화면', '없음'], ['준호', '장바구니 테스트', '서버 주소 모름']]}, {p:'15분 안에 끝내요'}],
+      {title:'스탠드업.md', hl:1, label:'사람마다 오늘 할 일과 막힌 점을 적은 스탠드업 메모'}), m:1,
+    cap:'오늘 할 일과 막힌 점만 짧게 나눠요'},
+  'u-definition-of-done':{h:`<div class="mk-mobox">${PDODB(false)}</div><fieldset class="mk-dcdod"><legend>완료 조건</legend>${PDOD.map(x => `<label class="mk-cb"><input type="checkbox">${esc(x)}</label>`).join('')}</fieldset>${tkeys(['완료로 옮기기'])}<span class="mk-hint" aria-live="polite">조건을 모두 체크해야 완료로 옮길 수 있어요</span>`,
+    cap:'조건을 체크하고 완료로 옮겨 보세요. 하나라도 빠지면 옮겨지지 않아요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), cb = [...s.querySelectorAll('.mk-dcdod input')];
+      let done = false;
+      const set = (d, m) => { done = d; box.innerHTML = PDODB(d); say.textContent = m; };
+      s.querySelector('.mk-tkey').addEventListener('click', () => { const n = cb.filter(x => !x.checked).length;
+        n ? set(false, `아직 ${n}개 남았어요`) : set(true, '완료로 옮겼어요'); });
+      cb.forEach(x => x.addEventListener('change', () => { if (done && !x.checked) set(false, '조건이 빠져서 다시 진행 중이에요'); })); }},
+  'u-markdown':{h:`<div class="mk-mobox">${PMDV['쓴 글']()}</div>${tpick(['쓴 글', '보이는 모습'], '쓴 글')}<span class="mk-hint" aria-live="polite">${PMD_SAY['쓴 글']}</span>`,
+    cap:'쓴 글과 보이는 모습을 번갈아 눌러 기호가 어떻게 바뀌는지 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      ks.forEach(b => b.addEventListener('click', () => { const k = b.dataset.k;
+        box.innerHTML = PMDV[k](); say.textContent = PMD_SAY[k]; ks.forEach(x => x.setAttribute('aria-pressed', x === b)); })); }},
+  'u-template':{h:doc([{h:'회의록 템플릿'}, {tb:[['칸', '적을 것'], ['날짜', '언제 모였나요'], ['참석자', '누가 왔나요'], ['정한 것', '무엇을 정했나요'], ['할 일', '누가 무엇을 하나요']]}],
+      {title:'회의록_템플릿.md', hl:1, label:'칸 이름과 적을 내용을 미리 만들어 둔 회의록 템플릿'}), m:1,
+    cap:'칸을 미리 만들어 두면 빈칸만 채우면 돼요'},
+  'u-review-request':{h:doc([{h:'검토 요청: 장바구니 화면'}, {p:'바꾼 것: 수량 버튼을 키웠어요'}, {p:'봐 줄 곳: 375px 화면에서 누르기 쉬운지'}, {p:'기한: 11월 14일까지'}],
+      {title:'검토요청.md', hl:2, label:'바꾼 것, 봐 줄 곳, 기한을 적은 검토 요청'}), m:1,
+    cap:'무엇을, 어디를, 언제까지 봐 달라는지 적어요'},
+  'u-approval':{h:track([{t:'초안', s:'done'}, {t:'검토 요청', s:'done'}, {t:'팀장 확인', s:'now'}, {t:'승인', s:'wait'}],
+      {label:'초안, 검토 요청, 팀장 확인을 거쳐 승인으로 가는 단계'}), m:1,
+    cap:'승인할 사람을 정해 두고, 그 사람이 허락하면 다음으로 넘어가요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
