@@ -327,6 +327,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-tkeys{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .mk-tkey{min-height:32px;min-width:44px;padding:0 12px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font:600 13px var(--mono);cursor:pointer}
 .mk-tkey[aria-pressed=true]{background:var(--ink);color:var(--plate)}
+.mk-tkey[aria-disabled=true]{opacity:.45;cursor:not-allowed}
 .mk-rng{display:flex;align-items:center;gap:10px;margin-top:10px;font:700 13px var(--sans);color:var(--ink)}.mk-rng input{flex:0 1 160px;min-width:0;min-height:24px;margin:0;accent-color:var(--ink);cursor:pointer}.mk-rng b{min-width:3.2em;font:700 13px var(--mono)}
 .mk-tdim{color:#a9b8d0}.mk-tspin{display:inline-block;width:.75em;height:.75em;border:2px solid #a8d49a;border-right-color:transparent;border-radius:50%;vertical-align:-1px}.mk-tspin.A{animation:spin 1s linear infinite}
 .mk-tsw{display:inline-grid}.mk-tsw>i{grid-area:1/1;font-style:normal;opacity:0}.mk-tsw>i:last-child{opacity:1}.mk-tsw>i.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-tsw>i:nth-child(1){animation-name:mk-sw1}.mk-tsw>i:nth-child(2){animation-name:mk-sw2}.mk-tsw>i:nth-child(3){animation-name:mk-sw3}
@@ -442,6 +443,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-kan.mk-dcbd{width:min(100%,300px);grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);text-align:left}
 .mk-dcdod{display:grid;gap:2px;width:min(100%,300px);min-width:0;margin:10px auto 0;padding:4px 10px 8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12.5px;text-align:left}.mk-dcdod legend{padding:0 4px;font-weight:800}
 .mk-dcmd{width:min(100%,340px);margin:0;padding:10px 12px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font:600 12.5px/1.6 var(--mono);text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
+.mk-two.mk-fwcode{grid-template-columns:1fr}
 .mk-fw{width:min(100%,320px);color:var(--ink);font-size:12px;line-height:1.35}.mk-fwl{display:flex;flex-direction:column;gap:22px;list-style:none}
 .mk-fwr{position:relative;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center}.mk-fwr.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px}
 .mk-fwr+.mk-fwr::before{content:'';position:absolute;top:-22px;left:calc(50% - .75px);width:1.5px;height:22px;background:var(--ink)}.mk-fwr:not(.two)+.mk-fwr.two::before{height:11px}
@@ -3132,6 +3134,21 @@ T('plan','motion',[
  {en:'User Journey Map',ko:'사용자 여정 지도 · 겪는 과정과 기분',d:'사용자가 처음 알게 된 때부터 쓰고 난 뒤까지 단계마다 하는 일과 기분을 적은 표예요.',x:'흔히 단계, 하는 일, 기분을 줄로 나눠 적어요. 기분이 나빠지는 단계를 찾아 먼저 고쳐요.',p:'첫 주문까지의 사용자 여정 지도를 표로 만들어줘. 단계마다 하는 일, 기분, 불편한 점을',r:['User Flow','Stakeholder'],l:2,o:0,v:'u-user-journey-map'},
  {en:'State Diagram',ko:'상태 다이어그램 · 상태가 바뀌는 길',d:'무언가가 어떤 상태에 있고, 무슨 일이 생기면 어느 상태로 바뀌는지 그린 그림이에요.',x:'칸에는 상태를, 칸 사이에는 상태를 바꾸는 일을 적어요. 주문처럼 상태가 많은 것을 미리 그려 두면 빠진 경우를 찾기 쉬워요.',p:'주문의 상태 다이어그램을 그려줘. 접수, 결제, 배송, 취소 상태와 바뀌는 조건을',r:['State','Flowchart'],l:2,o:0,v:'u-state-diagram'},
  {en:'Swimlane Diagram',ko:'스윔레인 다이어그램 · 맡은 사람별로 줄을 나눈 흐름도',d:'흐름도를 맡은 사람별 줄로 나눠, 누가 어느 단계를 하는지 보이게 한 그림이에요.',x:'수영장 레인처럼 줄마다 한 사람이 맡아요. 줄을 넘어가는 곳이 일을 넘겨주는 곳이라, 일이 자주 멈추는 곳을 찾기 쉬워요.',p:'주문부터 배달까지 스윔레인 다이어그램을 그려줘. 손님, 가게, 기사 줄로 나눠서',r:['Owner','Flowchart'],l:2,o:0,v:'u-swimlane-diagram'},
+]);
+const ADR_U = 'https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions';
+T('plan','adv',[
+ {en:'ADR',ko:'ADR · 결정 이유를 남긴 기록',d:'중요한 기술 결정을 왜 그렇게 했는지 짧게 적어 두는 문서예요.',x:'Architecture Decision Record의 줄임말이에요. 마이클 나이가드가 2011년에 제목, 상태, 상황, 결정, 결과로 나눠 적자고 제안했어요. 결과에는 좋은 점만이 아니라 나쁜 점도 적어요(2026-11 확인).',p:'방금 정한 저장 방식을 ADR로 남겨줘. 상황, 결정, 결과를 나눠서',r:['Changelog','Approval'],l:3,o:1,u:ADR_U,v:'u-adr'},
+ {en:'RFC',ko:'RFC · 의견을 구하는 제안서',d:'큰 변경을 하기 전에 계획을 글로 적어 팀의 의견을 받는 문서예요.',x:'Request for Comments의 줄임말이에요. 정하기 전에 쓰고, 의견을 받아 고친 뒤 결정해요. 인터넷 기술 표준을 정하는 IETF의 RFC 문서와는 이름만 같은 다른 문서예요.',p:'결제 방식을 바꾸는 RFC를 써줘. 왜 바꾸는지, 어떻게 바꿀지, 의견을 받을 질문을 넣어서',r:['Review Request','Feedback'],l:3,o:0,v:'u-rfc'},
+ {en:'Functional vs Non-functional Requirement',ko:'기능·비기능 요구사항 · 무엇을 하나와 얼마나 잘하나',d:'기능 요구사항은 무엇을 하는지, 비기능 요구사항은 얼마나 빠르고 안전하게 하는지를 정한 거예요.',x:'"주문 내역을 볼 수 있어요"는 기능, "2초 안에 열려요"·"비밀번호는 암호화해요"는 비기능이에요. 비기능은 빠뜨리기 쉬워서 따로 적어요.',p:'장보기 앱 요구사항을 기능과 비기능으로 나눠 표로 정리해줘',r:['Requirement','Spec'],l:2,o:0,v:'u-functional-vs-non-functional-requirement'},
+ {en:'Traceability',ko:'추적성 · 요구사항부터 결과까지 이어 보기',d:'요구사항 하나가 어느 화면, 어느 코드, 어느 테스트로 이어졌는지 따라갈 수 있게 해 두는 거예요.',x:'요구사항 번호를 화면 목록, 티켓, 테스트에 같이 적어 두면, 바꿀 때 어디가 함께 바뀌는지 찾기 쉬워요. 연결이 없는 요구사항은 빠뜨린 거예요.',p:'요구사항 R1~R3이 어느 화면과 테스트로 이어지는지 추적 표를 만들어줘. 빈 칸은 표시해서',r:['Requirement','Test Case'],l:3,o:0,v:'u-traceability'},
+ {en:'Scope Creep',ko:'범위 확장 · 할 일이 슬금슬금 느는 것',d:'처음 정한 범위에 요청이 하나씩 더해져 할 일과 마감이 계속 늘어나는 거예요.',x:'요청 하나하나는 작아 보여도 쌓이면 마감을 넘겨요. 새 요청이 오면 바로 넣지 말고, 무엇을 빼거나 마감을 얼마나 미룰지 함께 정해요.',p:'새로 들어온 요청 4개를 이번 범위에 넣을지 다음으로 미룰지 정리해줘. 넣으면 마감이 얼마나 밀리는지도',r:['Scope','Deadline'],l:2,o:0,v:'u-scope-creep'},
+ {en:'Trade-off',ko:'트레이드오프 · 하나를 얻으면 하나를 내주기',d:'하나를 더 얻으려면 다른 하나를 덜 가져야 하는 맞바꿈이에요.',x:'빨리 내면 검토를 덜 하고, 꼼꼼히 하면 늦게 내요. 무엇을 얻고 무엇을 내주는지 적어 두면 나중에 왜 그렇게 골랐는지 설명하기 쉬워요.',p:'빨리 출시와 꼼꼼한 검토 사이의 트레이드오프를 표로 정리하고, 이번엔 무엇을 고를지 추천해줘',r:['Priority','Constraint'],l:2,o:0,v:'u-trade-off'},
+ {en:'Assumption',ko:'가정 · 확인 안 했지만 맞다고 두는 것',d:'아직 확인하지 않았지만 맞다고 치고 계획을 세운 내용이에요.',x:'가정을 적어 두지 않으면 사실처럼 굳어 버려요. 가정마다 언제, 어떻게 확인할지 함께 적고, 틀리면 계획을 고쳐요.',p:'이 기획서에 숨어 있는 가정을 모두 찾아 목록으로 만들어줘. 각각 어떻게 확인할지도',r:['Constraint','Requirement'],l:2,o:0,v:'u-assumption'},
+ {en:'Risk Register',ko:'위험 목록 · 일어날 수 있는 문제 목록',d:'일이 잘못될 수 있는 경우를 미리 적고 어떻게 대비할지 정해 둔 목록이에요.',x:'흔히 위험마다 생길 가능성, 생기면 얼마나 큰 문제인지, 대비책, 담당자를 적어요. 회의 때마다 다시 보고 고쳐요.',p:'출시까지의 위험 목록을 표로 만들어줘. 가능성, 영향, 대비책, 담당자 칸으로',r:['Estimate','Owner'],l:3,o:0,v:'u-risk-register'},
+ {en:'Change Request',ko:'변경 요청 · 정한 것을 바꿔 달라는 요청',d:'이미 정한 요구사항이나 범위를 바꾸고 싶을 때 내는 공식 요청이에요.',x:'무엇을 왜 바꾸는지, 그러면 일정과 비용이 어떻게 달라지는지 적어요. 승인된 것만 반영하고, 바꾼 내용은 버전 기록에 남겨요.',p:'로그인 방식을 바꾸는 변경 요청서를 써줘. 무엇을, 왜, 일정에 미치는 영향까지',r:['Version History','Release Notes'],l:2,o:0,v:'u-change-request'},
+ {en:'Single Source of Truth',ko:'단일 진실 공급원 · 원본은 한 곳에만',d:'같은 정보를 한 곳에만 두고, 다른 곳은 그 원본을 가리키게 하는 원칙이에요.',x:'같은 내용을 여러 문서에 복사해 두면 하나만 고쳤을 때 서로 달라져요. 원본 문서를 하나 정하고 나머지는 링크로 이어요. CLAUDE.md에 규칙을 모아 두는 것도 같은 생각이에요.',p:'흩어진 기획 문서에서 같은 내용이 겹치는 곳을 찾아줘. 원본 하나로 모으고 나머지는 링크로 바꿔서',r:['CLAUDE.md'],l:3,o:0,v:'u-single-source-of-truth'},
+ {en:'Docs as Code',ko:'코드처럼 다루는 문서 · 문서를 코드와 함께 관리',d:'문서를 코드처럼 글 파일로 쓰고, 코드와 같은 저장소에서 버전과 검토를 관리하는 방식이에요.',x:'흔히 마크다운으로 쓰고 Git으로 바꾼 기록을 남겨요. 코드를 고칠 때 문서도 같은 커밋에서 고치면 문서가 낡지 않아요. 회사마다 쓰는 도구는 달라요.',p:'이 프로젝트 문서를 docs 폴더의 마크다운으로 옮겨줘. 코드와 같은 커밋에서 고칠 수 있게',r:['CLAUDE.md','Markdown'],l:3,o:0,v:'u-docs-as-code'},
+ {en:'Mermaid',ko:'머메이드 · 글로 쓰는 그림',d:'정해진 글자 규칙으로 쓰면 순서도 같은 그림으로 바꿔 주는 도구예요.',x:'flowchart TD로 시작하고 A --> B처럼 화살표로 이어요. {}로 감싼 칸은 마름모가 되고, -->|예|처럼 화살표에 이름을 붙여요. 한글 글자는 A["상품 담기"]처럼 큰따옴표로 감싸요. GitHub은 mermaid 코드 블록을 그림으로 보여 줘요(2026-11 확인).',p:'로그인 흐름을 Mermaid 순서도 코드로 써줘. 갈림길은 {}로',r:['Flowchart','Markdown'],l:2,o:1,u:'https://mermaid.js.org/syntax/flowchart.html',v:'u-mermaid'},
 ]);
 </script>
 <script>
@@ -6160,6 +6177,53 @@ Object.assign(D, {
   'u-swimlane-diagram':{h:doc([{h:'주문부터 배달까지'}, {tb:[['누가', '1단계', '2단계', '3단계'], ['손님', '주문', '', ''], ['가게', '', '포장', ''], ['기사', '', '', '배달']]}],
       {title:'스윔레인.md', hl:1, label:'손님, 가게, 기사 줄마다 맡은 단계를 적은 스윔레인'}), m:1,
     cap:'줄은 맡은 사람, 칸은 단계예요. 줄이 바뀌는 곳에서 일을 넘겨요'},
+});
+/* plan: adv 그림 — 출처 확인(2026-11): Nygard 2011 ADR 항목·상태 값, Mermaid flowchart TD·{}·-->|글|, GitHub mermaid 코드 블록 그림, Mermaid 한글 글자는 큰따옴표로 감싼다. 흔히: 위험 목록 칸, Docs as Code 도구. 예시: 날짜·번호·파일 이름·커밋 해시 */
+const PSCOPE = {base:['로그인', '상품 목록', '장바구니'], add:['쿠폰', '리뷰', '찜하기', '알림'], day:20};
+const PSCV = n => doc([{h:'이번 범위'}, {ul:[...PSCOPE.base, ...PSCOPE.add.slice(0, n)]}, {p:`마감 11월 ${PSCOPE.day + n}일`}], {still:true, title:'범위.md', hl:n ? 2 : undefined});
+const PSC_SAY = n => `할 일 ${3 + n}개 · 마감 11월 ${PSCOPE.day + n}일${n === PSCOPE.add.length ? ' · 범위를 다시 정해야 해요' : ''}`;
+/* 저울: 왼쪽 "빨리" 접시가 올라가고 오른쪽 "꼼꼼히" 접시가 내려감 */
+const PSCALE = '<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s" d="M55 32v56M38 88h34M18 20l74 24M18 20v14M92 44v14"/><path class="s t" d="M6 34h24l-4 8H10z"/><path class="s y" d="M80 58h24l-4 8H84z"/><circle class="o" cx="55" cy="32" r="4"/><text x="18" y="56" font-size="11" text-anchor="middle" fill="currentColor">빨리</text><text x="92" y="82" font-size="11" text-anchor="middle" fill="currentColor">꼼꼼히</text></svg>';
+/* 원본 하나(위)를 복사본 셋(아래)이 화살표로 가리킴 */
+const PSSOT = '<svg viewBox="0 0 110 100" aria-hidden="true"><rect class="s t" x="40" y="8" width="30" height="38" rx="3"/><path class="s" d="M46 20h18M46 28h18M46 36h12"/><rect class="s" x="8" y="66" width="26" height="24" rx="3"/><rect class="s" x="42" y="66" width="26" height="24" rx="3"/><rect class="s" x="76" y="66" width="26" height="24" rx="3"/><path class="s" d="M21 64 44 50M55 64V50M89 64 66 50M44 50l-7 1M44 50l-3 6M55 50l-4 6M55 50l4 6M66 50l7 1M66 50l3 6"/></svg>';
+const PMMD = ['flowchart TD', '  A["상품 담기"]', '  B{"로그인했나요?"}', '  A --> B', '  B -->|예| C["장바구니"]', '  B -->|아니오| D["로그인 화면"]'];
+Object.assign(D, {
+  'u-adr':{h:doc([{h:'ADR 3: 주문 기록은 서버에 저장'}, {tb:[['항목', '내용'], ['상태', '승인됨'], ['상황', '휴대폰을 바꾸면 기록이 사라져요'], ['결정', '서버에 저장해요'], ['결과', '기록이 남아요 · 서버 비용이 들어요']]}],
+      {title:'ADR-003.md', hl:1, label:'상태, 상황, 결정, 결과를 적은 ADR'}), m:1,
+    cap:'왜 그렇게 정했는지 상황·결정·결과로 남겨요'},
+  'u-rfc':{h:doc([{h:'RFC: 간편결제 추가'}, {p:'왜: 카드 입력이 길어서 결제를 그만둬요'}, {p:'어떻게: 간편결제 버튼을 더해요'}, {p:'의견 받을 것: 어느 간편결제부터 붙일까요?'}, {p:'의견 마감: 11월 18일'}],
+      {title:'RFC-결제.md', hl:3, label:'왜, 어떻게, 의견 받을 질문과 마감을 적은 RFC'}), m:1,
+    cap:'정하기 전에 쓰고, 의견을 받아 고친 뒤 결정해요'},
+  'u-functional-vs-non-functional-requirement':{h:MDUO(['뜻', '예'], [['기능', '무엇을 하나요', '주문 내역 보기'], ['비기능', '얼마나 잘하나요', '2초 안에 열기']]),
+    cap:'하는 일과 그 일을 얼마나 잘해야 하는지를 나눠 적어요'},
+  'u-traceability':{h:doc([{h:'추적 표'}, {tb:[['요구사항', '화면', '테스트'], ['R1 로그인', 'S1', 'T1'], ['R2 장바구니', 'S4', 'T2'], ['R3 주문 내역', 'S5', '없음']]}, {p:'R3은 테스트가 빠졌어요'}],
+      {title:'추적표.md', hl:2, label:'요구사항마다 이어진 화면과 테스트를 적고 빠진 칸을 찾은 표'}), m:1,
+    cap:'번호로 이어 두면 빠진 칸이 바로 보여요'},
+  'u-scope-creep':{h:`<div class="mk-mobox">${PSCV(0)}</div>${tkeys(['요청 하나 더', '처음으로'])}<span class="mk-hint" aria-live="polite">${PSC_SAY(0)}</span>`,
+    cap:'요청 하나 더를 눌러 할 일과 마감이 어떻게 느는지 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), [more, reset] = s.querySelectorAll('.mk-tkey');
+      let n = 0;
+      more.addEventListener('click', () => { if (n < PSCOPE.add.length) n++; box.innerHTML = PSCV(n); say.textContent = PSC_SAY(n);
+        if (n === PSCOPE.add.length) more.setAttribute('aria-disabled', 'true'); });
+      reset.addEventListener('click', () => { n = 0; box.innerHTML = PSCV(0); more.removeAttribute('aria-disabled'); say.textContent = '처음 범위로 돌아왔어요'; }); }},
+  'u-trade-off':{h:pair(PSCALE, doc([{tb:[['고르면', '얻는 것', '내주는 것'], ['빨리', '일찍 출시', '검토 덜 함'], ['꼼꼼히', '오류 적음', '늦게 출시']]}], {title:'고르기.md', label:'빨리를 고르면 일찍 내지만 검토를 덜 하고, 꼼꼼히를 고르면 오류가 적지만 늦게 내요'})), m:1,
+    cap:'저울처럼 한쪽을 올리면 다른 쪽이 내려가요'},
+  'u-assumption':{h:doc([{h:'가정'}, {tb:[['가정', '확인 방법', '상태'], ['휴대폰으로 주문', '접속 기록', '확인함'], ['하루 100건 이하', '첫 주 주문 수', '확인 전']]}],
+      {title:'가정.md', hl:1, label:'가정마다 확인 방법과 확인했는지를 적은 표'}), m:1,
+    cap:'가정마다 확인할 방법을 적고, 확인 전인 것을 표시해요'},
+  'u-risk-register':{h:doc([{h:'위험 목록'}, {tb:[['위험', '가능성', '대비'], ['결제 연동 지연', '높음', '먼저 시작'], ['디자이너 휴가', '보통', '일정 앞당김']]}, {p:'매주 월요일에 다시 봐요'}],
+      {title:'위험목록.md', hl:1, label:'위험마다 가능성과 대비를 적은 위험 목록'}), m:1,
+    cap:'일어날 수 있는 문제와 대비를 미리 적어 둬요'},
+  'u-change-request':{h:doc([{h:'변경 요청 #4'}, {p:'바꿀 것: 이메일 로그인 → 휴대폰 번호 로그인'}, {p:'이유: 이메일을 잊는 사람이 많아요'}, {p:'영향: 마감 3일 늦어짐'}, {ck:[['승인', false]]}],
+      {title:'변경요청.md', hl:3, label:'바꿀 것, 이유, 일정 영향을 적고 승인을 기다리는 변경 요청'}), m:1,
+    cap:'무엇을 왜 바꾸는지와 영향까지 적어 승인을 받아요'},
+  'u-single-source-of-truth':{h:pair(PSSOT, doc([{h:'원본: 요구사항.md'}, {p:'기획서 → 요구사항.md 보기'}, {p:'화면 설계서 → 요구사항.md 보기'}], {title:'링크.md', label:'기획서와 화면 설계서가 원본 요구사항.md를 링크로 가리켜요'})), m:1,
+    cap:'원본은 한 곳에 두고 나머지는 원본을 가리켜요. 원본이 여러 개면 내용이 서로 달라져요'},
+  'u-docs-as-code':{h:term([{c:'git add cart.js docs/cart.md', h:'docs/cart.md'}, {c:'git commit -m "수량 버튼 키움"'}, {o:'[main 3f2a1c4] 수량 버튼 키움'}, {o:'2 files changed, 6 insertions(+)'}],
+      {prompt:'$', label:'코드 파일과 문서 파일을 한 커밋에 함께 담아요'}), m:1,
+    cap:'코드와 문서를 한 커밋에 함께 담아요'},
+  'u-mermaid':{h:`<div class="mk-two mk-fwcode"><pre class="mk-dcmd">${PMMD.map(esc).join('\n')}</pre>${flow(PDEC, {label:'Mermaid 코드가 상품 담기, 로그인 질문, 장바구니와 로그인 화면 갈래 그림이 돼요'})}</div>`, m:1,
+    cap:'위 글이 아래 그림이 돼요. {}는 마름모, |예|는 화살표 이름이에요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
