@@ -376,7 +376,10 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-rul{list-style:none}.mk-rur{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:8px;align-items:baseline;padding:6px 10px}.mk-rur+.mk-rur{border-top:1px solid var(--rule-2)}
 .mk-ruw,.mk-rus{grid-area:1/1}.mk-ruw{color:var(--muted)}.mk-rus{display:inline-flex;gap:4px;font-weight:800;white-space:nowrap}.mk-rur.pass .mk-rus{color:var(--moss)}.mk-rur.fail .mk-rus{color:var(--mark-text)}.mk-rur.skip :is(.mk-rus,.mk-run){color:var(--muted)}
 .mk-run{grid-area:1/2;overflow-wrap:anywhere}.mk-rums{grid-area:1/3;font:11px var(--mono);color:var(--muted);white-space:nowrap}.mk-rue{grid-area:2/2/3/-1;margin-top:2px;font-size:11.5px;color:var(--mark-text);overflow-wrap:anywhere}.mk-rue code{font:700 11.5px var(--mono)}
-.mk-rusum{padding:7px 10px;border-top:1.5px solid var(--ink);font-weight:800}@container (max-width:260px){.mk-rue{grid-column:1/-1}}.mk-rubox{width:100%}.stage:has(>.mk-rubox){padding-top:50px}
+.mk-rusum{padding:7px 10px;border-top:1.5px solid var(--ink);font-weight:800}@container (max-width:260px){.mk-rue{grid-column:1/-1}}.mk-rubox,.mk-rust{width:100%;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;gap:10px}.mk-rust>.mk-browser{max-width:100%}
+.mk-rucv{width:min(340px,100%);background:var(--plate);border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;text-align:left;color:var(--ink)}.mk-rucd{list-style:none;padding:6px 0;font:11.5px/1.6 var(--mono)}
+.mk-rucd li{display:grid;grid-template-columns:16px minmax(0,1fr);padding:0 10px;white-space:pre-wrap;overflow-wrap:anywhere}.mk-rucd li.on{background:var(--moss-bg)}.mk-rucd b{font:800 12px/1.55 var(--sans);color:var(--muted)}.mk-rucd li.on b{color:var(--moss)}
+.mk-ruck{list-style:none;display:grid;gap:8px;text-align:left}.mk-ruck li{display:flex;align-items:center;gap:8px}.mk-ruck i{flex:none;display:grid;place-items:center;width:16px;height:16px;border:1.5px solid var(--ink);border-radius:4px;font-size:11px;font-weight:800;line-height:1;font-style:normal}.mk-ruck li.on i{background:var(--ink);color:var(--plate)}.stage:has(>.mk-rubox){padding-top:50px}
 .mk-rur.A,.mk-rusum.A,.mk-ruw.A,.mk-rus.A,.mk-rue.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-rux1{animation-name:mk-rux1}.mk-rux2{animation-name:mk-rux2}.mk-rux3{animation-name:mk-rux3}.mk-rux4{animation-name:mk-rux4}.mk-rux5{animation-name:mk-rux5}.mk-rux6{animation-name:mk-rux6}
 .mk-ruy1{animation-name:mk-ruy1}.mk-ruy2{animation-name:mk-ruy2}.mk-ruy3{animation-name:mk-ruy3}.mk-ruy4{animation-name:mk-ruy4}.mk-ruy5{animation-name:mk-ruy5}.mk-ruy6{animation-name:mk-ruy6}
@@ -2798,7 +2801,6 @@ T('bug','core',[
  {en:'Race Condition',ko:'경쟁 상태',d:'두 일이 거의 동시에 일어나 순서에 따라 결과가 달라지는 버그.',p:'빨리 두 번 누르면 이상해져. race condition인지 확인해줘',r:['Asynchronous'],l:3,o:0,v:{flow:['요청 A','요청 B 먼저 도착','결과 꼬임']}},
  {en:'Infinite Loop',ko:'무한 루프',d:'반복이 끝나지 않아 프로그램이 멈추는 버그.',p:'페이지가 멈춰. 무한 루프가 있는지 찾아줘',r:['Loop','Freeze'],l:2,o:0,v:'rotate'},
  {en:'Hotfix vs Root Cause',ko:'임시방편과 근본 원인',d:'증상만 덮는 땜질과 진짜 원인을 고치는 수정은 달라요.',j:'"땜빵", "임시 처리"',p:'땜질 말고 근본 원인을 찾아서 고쳐줘',r:['Debugging'],l:2,o:0,jg:1,v:{cmp:['땜질','<span class="btnx o">증상 숨김</span>','근본 수정','<span class="btnx">원인 제거</span>']}},
- {en:'Testing',ko:'테스트',d:'코드가 의도대로 동작하는지 확인하는 것. 자동으로 돌리는 테스트 코드도 있어요.',p:'이 버그가 다시 안 생기게 테스트를 먼저 쓰고 고쳐줘',r:['Regression'],l:2,o:0,v:'checkbox'},
 ]);
 T('bug','motion',[
  {en:'Layout Shift',ko:'레이아웃 밀림 · 화면 덜컹거림',d:'이미지·광고가 늦게 뜨면서 이미 보이던 내용이 갑자기 밀리는 현상.',j:'"화면이 튀어요", "덜컹거려요"',p:'로딩 중에 카드가 아래로 밀려. 이미지 자리를 미리 잡아서 layout shift를 없애줘',r:['CLS','Jank','Aspect Ratio'],l:2,o:1,u:'https://web.dev/articles/cls',v:'layoutshift'},
@@ -2843,6 +2845,22 @@ T('bug','tip',[
  {en:'Check the Logs',ko:'로그부터 보기',d:'추측하기 전에 Console·서버 로그부터 확인하는 습관.',p:'',r:['Console','Server Log'],l:1,o:0,v:'typing'},
  {en:'Clear Error Text',ko:'오류 문구 전체 복사',d:'오류는 요약하지 말고 전체를 그대로 붙여야 원인을 빨리 찾아요.',p:'오류 전문을 그대로 붙일게. 요약하지 말고 원인을 찾아줘',r:['Error Message'],l:1,o:0,v:{code:'TypeError: Cannot read properties\nof undefined (reading "map")\n    at List (List.jsx:8)'}},
  {en:'Works After Refresh',ko:'새로고침하면 됨',d:'새로고침하면 되는 버그는 상태·캐시·타이밍 문제일 가능성이 높아요.',p:'처음엔 안 되고 새로고침하면 돼. 원인을 찾아줘',r:['Race Condition','Stale Data'],l:2,o:0,v:'rotate'},
+]);
+</script>
+<script>
+/* ===== 12 테스트 ===== */
+T('test','basic',[
+ {en:'Testing',ko:'테스트',d:'코드가 의도대로 동작하는지 확인하는 것. 자동으로 돌리는 테스트 코드도 있어요.',p:'이 버그가 다시 안 생기게 테스트를 먼저 쓰고 고쳐줘',r:['Regression'],l:2,o:0,v:'u-testing'},
+ {en:'Test Case',ko:'테스트 케이스 · 확인할 상황 하나',d:'어떤 상황에서 무엇을 하면 어떤 결과가 나와야 하는지 하나로 적은 거예요.',x:'문서로 적어 사람이 확인해도 되고, 코드로 옮기면 테스트 코드가 돼요.',p:'빈 장바구니로 결제하는 테스트 케이스를 추가해줘',r:['Edge Case','Expected vs Actual'],l:1,o:0,v:'u-test-case'},
+ {en:'Test Suite',ko:'테스트 스위트 · 테스트 묶음',d:'관련된 테스트 케이스를 한데 모아 함께 돌리는 묶음이에요.',x:'보통 기능 하나나 파일 하나 단위로 묶어요.',p:'장바구니 테스트 스위트만 따로 돌려줘',r:['Test Case','Test Runner'],l:2,o:0,v:'u-test-suite'},
+ {en:'Test Code',ko:'테스트 코드 · 확인하는 코드',d:'만든 코드를 불러 결과가 맞는지 자동으로 확인하는 코드예요.',x:'기능 코드와 따로 파일을 두고, 기능 코드를 바꿀 때마다 다시 돌려요.',p:'add 함수에 테스트 코드를 써줘',r:['Function','Test Case'],l:1,o:0,v:'u-test-code'},
+ {en:'Test Runner',ko:'테스트 러너 · 테스트 실행기',d:'테스트 파일을 찾아 돌리고 통과·실패를 모아 보여 주는 프로그램이에요.',p:'테스트 러너 결과에서 실패한 테스트가 뭔지 알려줘',r:['Terminal','Test Suite'],l:2,o:0,v:'u-test-runner'},
+ {en:'Assertion',ko:'어서션 · 결과 확인 줄',d:'"이 값은 이래야 한다"고 적어 두고 실제 값과 비교하는 줄이에요.',x:'기대값과 실제값이 다르면 그 자리에서 테스트가 실패해요.',p:'이 테스트에 합계가 맞는지 확인하는 assertion을 추가해줘',r:['Expected vs Actual'],l:2,o:0,v:'u-assertion'},
+ {en:'Pass / Fail',ko:'통과 / 실패 · 테스트 결과',d:'기대한 대로면 통과, 하나라도 다르면 실패로 표시돼요.',p:'실패한 테스트의 기대값과 실제값을 비교해서 원인을 알려줘',r:['Assertion','Expected vs Actual'],l:1,o:0,v:'u-pass-fail'},
+ {en:'Automated Test',ko:'자동 테스트 · 명령 하나로 도는 확인',d:'사람 대신 테스트 코드가 정해진 확인을 매번 똑같이 돌리는 방식이에요.',x:'코드를 바꿀 때마다 금방 다시 돌릴 수 있어서 CI에서 자주 돌려요.',p:'커밋 전에 자동 테스트를 전부 돌려줘',r:['Test Code','CI/CD','Manual Testing'],l:1,o:0,v:'u-automated-test'},
+ {en:'Manual Testing',ko:'수동 테스트 · 사람이 직접 눌러 보기',d:'사람이 화면을 직접 눌러 보며 의도대로 되는지 확인하는 방식이에요.',x:'보기 좋은지, 쓰기 편한지처럼 코드로 확인하기 어려운 것을 볼 때 좋아요.',p:'이 화면을 수동 테스트로 눌러 볼 점검 목록을 만들어줘',r:['Automated Test','Usability Test'],l:1,o:0,v:'u-manual-testing'},
+ {en:'QA',ko:'큐에이 · 품질 보증',d:'출시 전에 제품이 기준대로 동작하는지 테스트하고 확인하는 일이에요.',x:'Quality Assurance의 줄임말이에요. 이 일을 맡은 사람이나 팀을 QA라고 부르기도 해요.',p:'출시 전 QA 점검표를 기능별로 만들어줘',r:['Design QA','Penetration Test'],l:1,o:0,v:'u-qa'},
+ {en:'Test Coverage',ko:'테스트 커버리지 · 테스트가 지나간 코드 비율',d:'테스트를 돌리는 동안 실행된 코드가 전체의 몇 %인지 나타낸 값이에요.',x:'100%여도 버그가 없다는 뜻은 아니에요. 실행됐을 뿐 결과를 제대로 확인했는지는 따로 봐야 해요.',p:'테스트 커버리지를 재서 테스트가 안 지나간 코드를 알려줘',r:['Test Code'],l:2,o:0,v:'u-test-coverage'},
 ]);
 </script>
 <script>
@@ -2946,6 +2964,7 @@ const MOVED = {
   'basics-terminal':'terminal-terminal', 'basics-cli':'terminal-cli', 'basics-path':'terminal-path', 'basics-directory':'terminal-directory',
   'server-ip-address':'net-ip-address', 'server-port':'net-port', 'server-dns':'net-dns',
   'server-ping':'net-ping', 'server-latency':'net-latency',
+  'bug-testing':'test-testing',
 };
 T('front','layout',[
  {en:'Breakpoint',ko:'브레이크포인트 · 화면 너비 기준점',d:'"이 너비부터 배치를 바꾼다"고 정한 화면 폭. 예: 768px.',x:'디버거의 breakpoint(중단점)와 다른 뜻이에요.',p:'768px 브레이크포인트에서 메뉴를 햄버거로 바꿔줘',r:['Media Query','Responsive Web Design'],l:1,o:0,v:'breakpoint'},
@@ -5003,6 +5022,55 @@ Object.assign(D, {
     cap:'와이파이에 붙으면 이런 화면이 떠요. 동의하기 전까지는 다른 사이트가 열리지 않아요'},
   'u-it-s-always-dns':{h:net([{k:'pc'}, {k:'dns', s:'옛 주소 198.51.100.7'}], [{m:[{t:'주소 묻기'}, {t:'옛 주소', r:1}]}]), m:1,
     cap:'서버가 멀쩡해도 DNS가 엉뚱한 주소를 알려 주면 접속이 안 돼요. 그래서 먼저 DNS를 확인해요'},
+});
+
+/* test: basic — 함수·파일 이름(add, price, cart.test.js)과 값은 예시, ms는 예시. 코드는 Jest·Vitest 형식 예시. npm test는 package.json "scripts"의 "test" 명령을 실행(docs.npmjs.com npm test) */
+const TASRT = k => runner([k === '5' ? {n:'add(2, 3)은 ' + k, s:'pass'} : {n:'add(2, 3)은 ' + k, s:'fail', e:k, a:'5'}],
+  {file:'math.test.js', code:['expect(add(2, 3)).toBe(' + k + ')'], still:true, label:'기대값 ' + k + '로 확인한 결과'});
+const TASRT_SAY = {5:'기대값 5와 실제값 5가 같아 통과해요', 6:'기대값 6과 실제값 5가 달라 실패해요'};
+const TCOV_C = ['function price(n, vip) {', '  if (vip) {', '    return n * 0.9;', '  }', '  return n;', '}'];
+const TCOV_N = on => [on.normal || on.vip, on.vip, on.normal].filter(Boolean).length;
+const TCOV_SAY = on => `3줄 중 ${TCOV_N(on)}줄 실행 · ${Math.round(100 * TCOV_N(on) / 3)}%`;
+const TCOV = on => { const hit = {1:on.normal || on.vip, 2:on.vip, 4:on.normal};
+  return `<div class="mk-rucv" role="group" aria-label="price.js ${TCOV_SAY(on)}"><div class="mk-rubar">price.js · 커버리지 ${Math.round(100 * TCOV_N(on) / 3)}%</div><ol class="mk-rucd">`
+    + TCOV_C.map((l, i) => `<li${hit[i] ? ' class="on"' : ''}><b aria-hidden="true">${i in hit ? (hit[i] ? '✓' : '·') : ''}</b>${esc(l)}</li>`).join('') + '</ol></div>'
+    + runner([on.normal && {n:'일반 손님은 정가', s:'pass'}, on.vip && {n:'VIP는 10% 할인', s:'pass'}].filter(Boolean), {still:true, label:'켜진 테스트 결과'}); };
+Object.assign(D, {
+  'u-testing':{h:`<div class="mk-rust">${browser('<b>장바구니</b><span class="mk-help">담은 상품 1개</span><span class="mk-btn">담기</span>', {url:'localhost:3000'})}`
+    + `${runner([{n:'담기를 누르면 1개가 돼요', s:'pass'}, {n:'두 번 누르면 2개가 돼요', s:'pass'}])}</div>`, m:1,
+    cap:'담기 버튼이 의도대로 동작하는지 하나씩 확인해요. 맞으면 통과, 다르면 실패로 알려 줘요'},
+  'u-test-case':{h:runner([{n:'빈 장바구니로 결제하기', s:'pass'}], {file:'테스트 케이스', code:['상황: 장바구니가 비어 있음', '행동: 결제 누르기', '기대: "상품을 담아 주세요" 안내']}), m:1,
+    cap:'상황·행동·기대 결과를 하나로 묶은 것이 테스트 케이스예요. 이걸 코드로 옮기면 테스트 코드가 돼요'},
+  'u-test-suite':{h:runner([{n:'상품을 담으면 1개가 돼요', s:'pass'}, {n:'같은 상품을 또 담으면 2개가 돼요', s:'pass'}, {n:'빼면 0개가 돼요', s:'pass'}],
+    {file:'cart.test.js', code:["describe('장바구니', () => {", '  // 테스트 3개', '});']}), m:1,
+    cap:'장바구니에 관한 테스트 3개를 한 묶음으로 모아 함께 돌려요'},
+  'u-test-code':{h:runner([{n:'2 더하기 3은 5', s:'pass'}], {file:'math.test.js', code:["import { add } from './math.js';", '', "test('2 더하기 3은 5', () => {", '  expect(add(2, 3)).toBe(5);', '});']}), m:1,
+    cap:'add 함수를 불러 나온 값이 5인지 코드로 확인해요. 사람이 매번 계산해 볼 필요가 없어요'},
+  'u-test-runner':{h:runner([{n:'cart.test.js › 담기', s:'pass', ms:4}, {n:'cart.test.js › 빼기', s:'pass', ms:3}, {n:'math.test.js › 더하기', s:'pass', ms:1}],
+    {file:'테스트 파일 2개 · 테스트 3개'}), m:1,
+    cap:'테스트 러너가 테스트 파일을 찾아 하나씩 돌리고, 걸린 시간과 결과를 모아 보여 줘요'},
+  'u-assertion':{h:`<div class="mk-rubox">${TASRT('5')}</div>${tkeys(['5', '6'])}<span class="mk-hint" aria-live="polite">${TASRT_SAY[5]}</span>`,
+    cap:'버튼으로 toBe 안의 기대값을 바꿔 보세요. 실제값 5와 같을 때만 통과해요',
+    init: s => { const box = s.querySelector('.mk-rubox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      const set = k => { box.innerHTML = TASRT(k); say.textContent = TASRT_SAY[k]; ks.forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k)); };
+      ks.forEach(b => b.addEventListener('click', () => set(b.dataset.k))); set('5'); }},
+  'u-pass-fail':{h:runner([{n:'로그인하면 이름이 보여요', s:'pass'}, {n:'로그아웃하면 이름이 사라져요', s:'pass'}, {n:'장바구니 합계', s:'fail', e:'15,000원', a:'14,000원'}]), m:1,
+    cap:'기대와 같으면 통과, 다르면 실패예요. 실패 줄에는 무엇을 기대했고 실제로 무엇이 나왔는지 함께 보여요'},
+  'u-automated-test':{h:`<div class="mk-rust">${term([{c:'npm test'}], {end:false})}`
+    + `${runner([{n:'담기', s:'pass'}, {n:'빼기', s:'pass'}, {n:'합계', s:'pass'}])}</div>`, m:1,
+    cap:'명령 하나로 테스트 전체가 사람 손 없이 돌아요. 코드를 바꿀 때마다 똑같이 다시 돌릴 수 있어요'},
+  'u-manual-testing':{h:browser('<b>출시 전 직접 확인</b><ul class="mk-ruck"><li class="on"><i>✓</i>로그인 버튼이 눌려요</li><li class="on"><i>✓</i>틀린 비밀번호면 안내가 떠요</li>'
+    + '<li><i></i>휴대폰 화면에서도 안 깨져요</li></ul>', {url:'localhost:3000'}),
+    cap:'사람이 화면을 하나씩 눌러 보며 점검 목록에 체크해요. 자동 테스트가 못 보는 쓰기 편한지도 볼 수 있어요'},
+  'u-qa':{h:runner([{n:'자동 테스트 전체', s:'pass'}, {n:'디자인 시안과 화면 비교', s:'pass'}, {n:'휴대폰에서 결제하기', s:'fail', e:'결제 완료', a:'버튼이 안 눌림'}],
+    {file:'출시 전 QA 점검표'}), m:1,
+    cap:'자동 테스트와 사람 점검을 모아 출시해도 되는지 확인해요. 하나라도 실패하면 고친 뒤 다시 봐요'},
+  'u-test-coverage':{h:`<div class="mk-rubox">${TCOV({normal:true, vip:false})}</div>${tkeys(['일반 손님 테스트', 'VIP 테스트'])}<span class="mk-hint" aria-live="polite">${TCOV_SAY({normal:true, vip:false})}</span>`,
+    cap:'테스트를 켜고 꺼 보세요. 테스트가 지나간 줄에 ✓가 붙고, 세는 3줄 중 몇 줄을 지났는지가 커버리지예요',
+    init: s => { const box = s.querySelector('.mk-rubox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      const on = {normal:true, vip:false}, key = {'일반 손님 테스트':'normal', 'VIP 테스트':'vip'};
+      const set = () => { box.innerHTML = TCOV(on); say.textContent = TCOV_SAY(on); ks.forEach(b => b.setAttribute('aria-pressed', on[key[b.dataset.k]])); };
+      ks.forEach(b => b.addEventListener('click', () => { on[key[b.dataset.k]] = !on[key[b.dataset.k]]; set(); })); set(); }},
 });
 
 const visual = t => {
