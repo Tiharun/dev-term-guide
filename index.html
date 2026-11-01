@@ -438,7 +438,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dc{width:min(100%,340px);border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12px;line-height:1.45;text-align:left}
 .mk-dct{padding:5px 10px;border-bottom:1.5px solid var(--ink);border-radius:6.5px 6.5px 0 0;background:var(--fig);font:700 11.5px/1.35 var(--mono);overflow-wrap:anywhere}
 .mk-dcb{display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px}.mk-dck{min-width:0;overflow-wrap:anywhere}.mk-dck.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
-.mk-dch{display:block;font-size:13.5px;font-weight:800;line-height:1.3}.mk-dck ul{padding-left:16px}.mk-dck ul.mk-dcc{display:grid;gap:3px;padding:0;list-style:none}.mk-dcc li{display:flex;gap:6px}.mk-dcc b{flex:none;font-weight:400}
+.mk-dch{display:block;font-size:13.5px;font-weight:800;line-height:1.3}.mk-dch2{font-size:12.5px}.mk-dck ul{padding-left:16px}.mk-dck ul.mk-dcc{display:grid;gap:3px;padding:0;list-style:none}.mk-dcc li{display:flex;gap:6px}.mk-dcc b{flex:none;font-weight:400}
 .mk-dck table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11.5px;line-height:1.35}.mk-dck th,.mk-dck td{padding:3px 5px;border:1px solid var(--rule);text-align:left;vertical-align:top;overflow-wrap:anywhere}.mk-dck th{background:var(--fig);font-weight:800}
 .mk-kan.mk-dcbd{width:min(100%,300px);grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);text-align:left}
 .mk-dcdod{display:grid;gap:2px;width:min(100%,300px);min-width:0;margin:10px auto 0;padding:4px 10px 8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12.5px;text-align:left}.mk-dcdod legend{padding:0 4px;font-weight:800}
@@ -3138,7 +3138,7 @@ T('plan','motion',[
  {en:'Exception Flow',ko:'예외 흐름 · 문제가 생겼을 때의 길',d:'오류나 뜻밖의 상황이 생겼을 때 사용자가 가는 길이에요.',x:'결제 실패, 인터넷 끊김, 재고 없음처럼 해피 패스에서 벗어나는 곳마다 무엇을 보여 줄지 정해요.',p:'결제의 예외 흐름을 정리해줘. 카드 거절, 인터넷 끊김일 때 각각 보여 줄 화면을',r:['Edge Case','Error Message','Happy Path'],l:2,o:0,v:'u-exception-flow'},
  {en:'Task Flow',ko:'작업 흐름 · 일 하나를 끝내는 단계',d:'사용자가 한 가지 일을 끝내려고 거치는 단계를 한 줄로 늘어놓은 거예요.',x:'흔히 갈림길 없이 한 길만 그려요. 사용자 흐름보다 좁아서, 단계 수를 세어 줄일 곳을 찾기 쉬워요.',p:'주소 바꾸기의 작업 흐름을 단계로 적고, 줄일 수 있는 단계를 찾아줘',r:['User Flow','Screen Flow'],l:2,o:0,v:'u-task-flow'},
  {en:'User Journey Map',ko:'사용자 여정 지도 · 겪는 과정과 기분',d:'사용자가 처음 알게 된 때부터 쓰고 난 뒤까지 단계마다 하는 일과 기분을 적은 표예요.',x:'흔히 단계, 하는 일, 기분을 줄로 나눠 적어요. 기분이 나빠지는 단계를 찾아 먼저 고쳐요.',p:'첫 주문까지의 사용자 여정 지도를 표로 만들어줘. 단계마다 하는 일, 기분, 불편한 점을',r:['User Flow','Stakeholder'],l:2,o:0,v:'u-user-journey-map'},
- {en:'State Diagram',ko:'상태 다이어그램 · 상태가 바뀌는 길',d:'무언가가 어떤 상태에 있고, 무슨 일이 생기면 어느 상태로 바뀌는지 그린 그림이에요.',x:'칸에는 상태를, 칸 사이에는 상태를 바꾸는 일을 적어요. 주문처럼 상태가 많은 것을 미리 그려 두면 빠진 경우를 찾기 쉬워요.',p:'주문의 상태 다이어그램을 그려줘. 접수, 결제, 배송, 취소 상태와 바뀌는 조건을',r:['State','Flowchart'],l:2,o:0,v:'u-state-diagram'},
+ {en:'State Diagram',ko:'상태 다이어그램 · 상태가 바뀌는 길',d:'무언가가 어떤 상태에 있고, 무슨 일이 생기면 어느 상태로 바뀌는지 그린 그림이에요.',x:'칸에는 상태를, 칸 사이에는 상태를 바꾸는 일을 적어요. 주문처럼 상태가 많은 것을 미리 그려 두면 빠진 경우를 찾기 쉬워요.',p:'주문의 상태 다이어그램을 그려줘. 접수, 결제, 배송, 취소 상태와 바뀌는 조건을',r:['Flowchart'],l:2,o:0,v:'u-state-diagram'},
  {en:'Swimlane Diagram',ko:'스윔레인 다이어그램 · 맡은 사람별로 줄을 나눈 흐름도',d:'흐름도를 맡은 사람별 줄로 나눠, 누가 어느 단계를 하는지 보이게 한 그림이에요.',x:'수영장 레인처럼 줄마다 한 사람이 맡아요. 줄을 넘어가는 곳이 일을 넘겨주는 곳이라, 일이 자주 멈추는 곳을 찾기 쉬워요.',p:'주문부터 배달까지 스윔레인 다이어그램을 그려줘. 손님, 가게, 기사 줄로 나눠서',r:['Owner','Flowchart'],l:2,o:0,v:'u-swimlane-diagram'},
 ]);
 const ADR_U = 'https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions';
@@ -3151,10 +3151,10 @@ T('plan','adv',[
  {en:'Trade-off',ko:'트레이드오프 · 하나를 얻으면 하나를 내주기',d:'하나를 더 얻으려면 다른 하나를 덜 가져야 하는 맞바꿈이에요.',x:'빨리 내면 검토를 덜 하고, 꼼꼼히 하면 늦게 내요. 무엇을 얻고 무엇을 내주는지 적어 두면 나중에 왜 그렇게 골랐는지 설명하기 쉬워요.',p:'빨리 출시와 꼼꼼한 검토 사이의 트레이드오프를 표로 정리하고, 이번엔 무엇을 고를지 추천해줘',r:['Priority','Constraint'],l:2,o:0,v:'u-trade-off'},
  {en:'Assumption',ko:'가정 · 확인 안 했지만 맞다고 두는 것',d:'아직 확인하지 않았지만 맞다고 치고 계획을 세운 내용이에요.',x:'가정을 적어 두지 않으면 사실처럼 굳어 버려요. 가정마다 언제, 어떻게 확인할지 함께 적고, 틀리면 계획을 고쳐요.',p:'이 기획서에 숨어 있는 가정을 모두 찾아 목록으로 만들어줘. 각각 어떻게 확인할지도',r:['Constraint','Requirement'],l:2,o:0,v:'u-assumption'},
  {en:'Risk Register',ko:'위험 목록 · 일어날 수 있는 문제 목록',d:'일이 잘못될 수 있는 경우를 미리 적고 어떻게 대비할지 정해 둔 목록이에요.',x:'흔히 위험마다 생길 가능성, 생기면 얼마나 큰 문제인지, 대비책, 담당자를 적어요. 회의 때마다 다시 보고 고쳐요.',p:'출시까지의 위험 목록을 표로 만들어줘. 가능성, 영향, 대비책, 담당자 칸으로',r:['Estimate','Owner'],l:3,o:0,v:'u-risk-register'},
- {en:'Change Request',ko:'변경 요청 · 정한 것을 바꿔 달라는 요청',d:'이미 정한 요구사항이나 범위를 바꾸고 싶을 때 내는 공식 요청이에요.',x:'무엇을 왜 바꾸는지, 그러면 일정과 비용이 어떻게 달라지는지 적어요. 승인된 것만 반영하고, 바꾼 내용은 버전 기록에 남겨요.',p:'로그인 방식을 바꾸는 변경 요청서를 써줘. 무엇을, 왜, 일정에 미치는 영향까지',r:['Version History','Release Notes'],l:2,o:0,v:'u-change-request'},
+ {en:'Change Request',ko:'변경 요청 · 정한 것을 바꿔 달라는 요청',d:'이미 정한 요구사항이나 범위를 바꾸고 싶을 때 내는 공식 요청이에요.',x:'무엇을 왜 바꾸는지, 그러면 일정과 비용이 어떻게 달라지는지 적어요. 승인된 것만 반영하고, 바꾼 내용은 버전 기록에 남겨요.',p:'로그인 방식을 바꾸는 변경 요청서를 써줘. 무엇을, 왜, 일정에 미치는 영향까지',r:['Changelog','Release Notes'],l:2,o:0,v:'u-change-request'},
  {en:'Single Source of Truth',ko:'단일 진실 공급원 · 원본은 한 곳에만',d:'같은 정보를 한 곳에만 두고, 다른 곳은 그 원본을 가리키게 하는 원칙이에요.',x:'같은 내용을 여러 문서에 복사해 두면 하나만 고쳤을 때 서로 달라져요. 원본 문서를 하나 정하고 나머지는 링크로 이어요. CLAUDE.md에 규칙을 모아 두는 것도 같은 생각이에요.',p:'흩어진 기획 문서에서 같은 내용이 겹치는 곳을 찾아줘. 원본 하나로 모으고 나머지는 링크로 바꿔서',r:['CLAUDE.md'],l:3,o:0,v:'u-single-source-of-truth'},
  {en:'Docs as Code',ko:'코드처럼 다루는 문서 · 문서를 코드와 함께 관리',d:'문서를 코드처럼 글 파일로 쓰고, 코드와 같은 저장소에서 버전과 검토를 관리하는 방식이에요.',x:'흔히 마크다운으로 쓰고 Git으로 바꾼 기록을 남겨요. 코드를 고칠 때 문서도 같은 커밋에서 고치면 문서가 낡지 않아요. 회사마다 쓰는 도구는 달라요.',p:'이 프로젝트 문서를 docs 폴더의 마크다운으로 옮겨줘. 코드와 같은 커밋에서 고칠 수 있게',r:['CLAUDE.md','Markdown'],l:3,o:0,v:'u-docs-as-code'},
- {en:'Mermaid',ko:'머메이드 · 글로 쓰는 그림',d:'정해진 글자 규칙으로 쓰면 순서도 같은 그림으로 바꿔 주는 도구예요.',x:'flowchart TD로 시작하고 A --> B처럼 화살표로 이어요. {}로 감싼 칸은 마름모가 되고, -->|예|처럼 화살표에 이름을 붙여요. 한글 글자는 A["상품 담기"]처럼 큰따옴표로 감싸요. GitHub은 mermaid 코드 블록을 그림으로 보여 줘요(2026-11 확인).',p:'로그인 흐름을 Mermaid 순서도 코드로 써줘. 갈림길은 {}로',r:['Flowchart','Markdown'],l:2,o:1,u:'https://mermaid.js.org/syntax/flowchart.html',v:'u-mermaid'},
+ {en:'Mermaid',ko:'머메이드 · 글로 쓰는 그림',d:'정해진 글자 규칙으로 쓰면 순서도 같은 그림으로 바꿔 주는 도구예요.',x:'flowchart TD로 시작하고 A --> B처럼 화살표로 이어요. {}로 감싼 칸은 마름모가 되고, -->|예|처럼 화살표에 이름을 붙여요. 한글 글자는 A["상품 담기"]처럼 큰따옴표로 감싸요.',p:'로그인 흐름을 Mermaid 순서도 코드로 써줘. 갈림길은 {}로',r:['Flowchart','Markdown'],l:2,o:1,u:'https://mermaid.js.org/syntax/flowchart.html',v:'u-mermaid'},
 ]);
 T('plan','docs',[
  {en:'PRD',ko:'PRD · 제품 요구사항 문서',d:'만들 제품이 무엇이고 왜 필요한지, 무엇을 해야 하는지 적은 문서예요.',x:'Product Requirements Document의 줄임말이에요. 흔히 목표, 사용자, 요구사항, 범위 밖을 적어요. 회사마다 양식이 달라요.',p:'장보기 앱 PRD를 써줘. 목표, 사용자, 요구사항, 범위 밖 순서로',r:['Spec','MVP'],l:2,o:0,v:'u-prd'},
@@ -3168,7 +3168,7 @@ T('plan','docs',[
  {en:'User Manual',ko:'사용 설명서 · 쓰는 법을 알려 주는 문서',d:'사용자가 앱을 어떻게 쓰는지 단계별로 알려 주는 문서예요.',x:'흔히 목차, 시작하기, 기능별 사용법, 문제 해결 순서로 써요. 개발자의 말이 아니라 쓰는 사람의 말로 써요. 회사마다 양식이 달라요.',p:'장보기 앱 사용 설명서를 써줘. 목차, 시작하기, 주문하는 법, 문제 해결 순서로',r:['Table of Contents','README'],l:1,o:0,v:'u-user-manual'},
  {en:'Runbook',ko:'런북 · 문제가 생기면 따라 하는 절차서',d:'서버가 느려지는 것처럼 정해진 상황에서 할 일을 순서대로 적은 절차서예요.',x:'흔히 상황, 확인할 것, 할 일 순서, 안 되면 연락할 사람을 적어요. 급할 때 봐도 그대로 따라 할 수 있게 짧게 써요. 회사마다 양식이 달라요.',p:'결제 서버가 느려질 때 쓸 런북을 써줘. 확인할 것, 할 일 순서, 연락할 사람까지',r:['Incident','Rollback','Monitoring'],l:3,o:0,v:'u-runbook'},
  {en:'FAQ',ko:'FAQ · 자주 묻는 질문',d:'사용자가 자주 묻는 질문과 답을 모아 둔 문서예요.',x:'Frequently Asked Questions의 줄임말이에요. 실제로 많이 들어온 질문부터 짧은 답으로 적어요. 회사마다 양식이 달라요.',p:'고객 문의를 보고 FAQ를 만들어줘. 많이 물은 순서로 질문 5개와 짧은 답을',r:['Onboarding','README'],l:1,o:0,v:'u-faq'},
- {en:'Glossary',ko:'용어집 · 팀이 쓰는 말 사전',d:'팀에서 쓰는 말과 그 뜻을 한곳에 모아 둔 목록이에요.',x:'같은 것을 사람마다 다른 이름으로 부르면 오해가 생겨요. 흔히 용어, 뜻, 쓰지 않을 말을 적어요. 회사마다 양식이 달라요.',p:'기획서에 나오는 용어로 용어집을 만들어줘. 용어, 뜻, 쓰지 않을 말 칸으로',r:['Glossary Habit','Single Source of Truth'],l:1,o:0,v:'u-glossary'},
+ {en:'Glossary',ko:'용어집 · 팀이 쓰는 말 사전',d:'팀에서 쓰는 말과 그 뜻을 한곳에 모아 둔 목록이에요.',x:'같은 것을 사람마다 다른 이름으로 부르면 오해가 생겨요. 흔히 용어, 뜻, 쓰지 않을 말을 적어요. 회사마다 양식이 달라요.',p:'기획서에 나오는 용어로 용어집을 만들어줘. 용어, 뜻, 쓰지 않을 말 칸으로',r:['Write for the Reader','Single Source of Truth'],l:1,o:0,v:'u-glossary'},
  {en:'One-pager',ko:'원페이저 · 한 장으로 줄인 요약 문서',d:'계획이나 제안을 한 장 안에 요약해 빨리 읽게 만든 문서예요.',x:'흔히 문제, 해결, 목표, 일정, 필요한 것을 짧게 적어요. 바쁜 사람이 먼저 읽고 자세한 문서로 넘어가요. 회사마다 양식이 달라요.',p:'이 기획서를 원페이저로 줄여줘. 문제, 해결, 목표, 일정, 필요한 것만',r:['Goal','Approval'],l:2,o:0,v:'u-one-pager'},
  {en:'Gantt Chart',ko:'간트 차트 · 막대로 그린 일정표',d:'할 일마다 언제 시작해 언제 끝나는지 가로 막대로 그린 일정표예요.',x:'세로에 할 일, 가로에 주나 날짜를 두고 막대 길이로 기간을 보여요. 막대가 겹치면 함께 하는 일이고, 앞 일이 늦으면 뒤 일이 밀리는지 보여요. 회사마다 양식이 달라요.',p:'WBS의 할 일로 4주짜리 간트 차트를 만들어줘. 겹치는 일도 보이게',r:['Milestone','Roadmap'],l:2,o:0,v:'u-gantt-chart'},
 ]);
@@ -3595,9 +3595,10 @@ const track = (steps = [], { still = false, label } = {}) => {
   return `<div class="mk-mt"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><ol class="mk-mtl">${steps.map(({ t, s, n, w }, i) => { const k = i + 1, [g, d] = MT_S[s];
     return `<li class="mk-mtc ${s}">${still ? '' : `<i class="mk-mtr mk-mty${k} A" aria-hidden="true"></i>`}<b class="mk-mtn">${esc(t)}</b><span class="mk-mts${still ? '' : ` mk-rux${k} A`}"><b aria-hidden="true">${g}</b>${esc(w ?? d)}</span>${n ? `<span class="mk-mtd">${esc(n)}</span>` : ''}</li>`; }).join('')}</ol></div>`;
 };
-/* 문서 모형: 블록은 {h 제목 | p 문단 | ul 목록 | tb 표(첫 줄이 머리) | ck 체크 목록 [글, 참/거짓]} 1~6개. k번째 블록은 mk-rux{k}로 나타나고 기호는 읽지 않는다 */
+/* 문서 모형: 블록은 {h 제목 | h2 작은 제목 | p 문단 | ul 목록 | tb 표(첫 줄이 머리) | ck 체크 목록 [글, 참/거짓]} 1~6개. k번째 블록은 mk-rux{k}로 나타나고 기호는 읽지 않는다 */
 const DC_B = {
   h: v => `<b class="mk-dch">${esc(v)}</b>`,
+  h2: v => `<b class="mk-dch mk-dch2">${esc(v)}</b>`,
   p: v => `<p>${esc(v)}</p>`,
   ul: v => `<ul>${v.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`,
   tb: ([hd, ...rs]) => `<table><thead><tr>${hd.map(x => `<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${rs.map(r => `<tr>${r.map(x => `<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>`,
@@ -6119,12 +6120,14 @@ Object.assign(D, {
    Markdown 줄 앞 # 1~6개는 제목, -는 목록(docs.github.com basic-writing-and-formatting-syntax).
    흔히: 스탠드업의 어제·오늘·막힌 점, 회고의 잘된 점·아쉬운 점·다음에 할 것. 예시: 달·날짜·일 수·추정 값, 이름(민지·준호), 티켓 번호 */
 const PKAN = (cols, hl) => `<div class="mk-kan" style="grid-template-columns:repeat(${cols.length},1fr)">${cols.map(([h, a]) => `<div class="mk-f${h === hl ? ' mk-hl' : ''}"><b>${h} ${a.length}</b>${a.map(x => `<span class="mk-kc${x === hl ? ' mk-hl' : ''}">${x}</span>`).join('')}</div>`).join('')}</div>`;
+/* 같은 문장을 다시 넣으면 화면 낭독기가 안 읽어서, 비웠다가 150ms 뒤에 넣는다 */
+const psay = (el, m) => { el.textContent = ''; setTimeout(() => { el.textContent = m; }, 150); };
 const PDOD = ['요구사항대로 동작해요', '테스트를 통과했어요', '검토를 받았어요', '문서를 고쳤어요'];
 const PDODB = done => { const t = '<span class="mk-kc">#12 장바구니 담기</span>';
   return `<div class="mk-kan mk-dcbd" role="group" aria-label="할 일 판"><div class="mk-f"><b>진행 중 ${done ? 0 : 1}</b>${done ? '' : t}</div><div class="mk-f"><b>완료 ${done ? 1 : 0}</b>${done ? t : ''}</div></div>`; };
 const PMD = ['# 회의록', '## 할 일', '- 견적 보내기', '- 일정 정하기'];
 const PMDV = {'쓴 글': () => `<pre class="mk-dcmd">${PMD.map(esc).join('\n')}</pre>`,
-  '보이는 모습': () => doc([{h:PMD[0].slice(2)}, {h:PMD[1].slice(3)}, {ul:PMD.slice(2).map(x => x.slice(2))}], {still:true, title:'회의록.md'})};
+  '보이는 모습': () => doc([{h:PMD[0].slice(2)}, {h2:PMD[1].slice(3)}, {ul:PMD.slice(2).map(x => x.slice(2))}], {still:true, title:'회의록.md'})};
 const PMD_SAY = {'쓴 글':'쓴 글: #·- 기호로 적은 원문이에요', '보이는 모습':'보이는 모습: 기호가 제목과 목록으로 바뀌었어요'};
 Object.assign(D, {
   'u-backlog':{h:browser(`${PKAN([['백로그', ['쿠폰', '리뷰', '찜하기']], ['이번 스프린트', ['장바구니']]], '백로그')}`, {url:'board.example'}),
@@ -6156,7 +6159,7 @@ Object.assign(D, {
     cap:'조건을 체크하고 완료로 옮겨 보세요. 하나라도 빠지면 옮겨지지 않아요',
     init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), cb = [...s.querySelectorAll('.mk-dcdod input')];
       let done = false;
-      const set = (d, m) => { done = d; box.innerHTML = PDODB(d); say.textContent = m; };
+      const set = (d, m) => { done = d; box.innerHTML = PDODB(d); psay(say, m); };
       s.querySelector('.mk-tkey').addEventListener('click', () => { const n = cb.filter(x => !x.checked).length;
         n ? set(false, `아직 ${n}개 남았어요`) : set(true, '완료로 옮겼어요'); });
       cb.forEach(x => x.addEventListener('change', () => { if (done && !x.checked) set(false, '조건이 빠져서 다시 진행 중이에요'); })); }},
@@ -6223,7 +6226,7 @@ Object.assign(D, {
 /* plan: adv 그림 — 출처 확인(2026-11): Nygard 2011 ADR 항목·상태 값, Mermaid flowchart TD·{}·-->|글|, GitHub mermaid 코드 블록 그림, Mermaid 한글 글자는 큰따옴표로 감싼다. 흔히: 위험 목록 칸, Docs as Code 도구. 예시: 날짜·번호·파일 이름·커밋 해시 */
 const PSCOPE = {base:['로그인', '상품 목록', '장바구니'], add:['쿠폰', '리뷰', '찜하기', '알림'], day:20};
 const PSCV = n => doc([{h:'이번 범위'}, {ul:[...PSCOPE.base, ...PSCOPE.add.slice(0, n)]}, {p:`마감 11월 ${PSCOPE.day + n}일`}], {still:true, title:'범위.md', hl:n ? 2 : undefined});
-const PSC_SAY = n => `할 일 ${3 + n}개 · 마감 11월 ${PSCOPE.day + n}일${n === PSCOPE.add.length ? ' · 범위를 다시 정해야 해요' : ''}`;
+const PSC_SAY = n => `할 일 ${PSCOPE.base.length + n}개 · 마감 11월 ${PSCOPE.day + n}일${n === PSCOPE.add.length ? ' · 범위를 다시 정해야 해요' : ''}`;
 /* 저울: 왼쪽 "빨리" 접시가 올라가고 오른쪽 "꼼꼼히" 접시가 내려감 */
 const PSCALE = '<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s" d="M55 32v56M38 88h34M18 20l74 24M18 20v14M92 44v14"/><path class="s t" d="M6 34h24l-4 8H10z"/><path class="s y" d="M80 58h24l-4 8H84z"/><circle class="o" cx="55" cy="32" r="4"/><text x="18" y="56" font-size="11" text-anchor="middle" fill="currentColor">빨리</text><text x="92" y="82" font-size="11" text-anchor="middle" fill="currentColor">꼼꼼히</text></svg>';
 /* 원본 하나(위)를 복사본 셋(아래)이 화살표로 가리킴 */
@@ -6245,9 +6248,9 @@ Object.assign(D, {
     cap:'요청 하나 더를 눌러 할 일과 마감이 어떻게 느는지 보세요',
     init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), [more, reset] = s.querySelectorAll('.mk-tkey');
       let n = 0;
-      more.addEventListener('click', () => { if (n < PSCOPE.add.length) n++; box.innerHTML = PSCV(n); say.textContent = PSC_SAY(n);
+      more.addEventListener('click', () => { if (n < PSCOPE.add.length) n++; box.innerHTML = PSCV(n); psay(say, PSC_SAY(n));
         if (n === PSCOPE.add.length) more.setAttribute('aria-disabled', 'true'); });
-      reset.addEventListener('click', () => { n = 0; box.innerHTML = PSCV(0); more.removeAttribute('aria-disabled'); say.textContent = '처음 범위로 돌아왔어요'; }); }},
+      reset.addEventListener('click', () => { n = 0; box.innerHTML = PSCV(0); more.removeAttribute('aria-disabled'); psay(say, '처음 범위로 돌아왔어요'); }); }},
   'u-trade-off':{h:pair(PSCALE, doc([{tb:[['고르면', '얻는 것', '내주는 것'], ['빨리', '일찍 출시', '검토 덜 함'], ['꼼꼼히', '오류 적음', '늦게 출시']]}], {title:'고르기.md', label:'빨리를 고르면 일찍 내지만 검토를 덜 하고, 꼼꼼히를 고르면 오류가 적지만 늦게 내요'})), m:1,
     cap:'저울처럼 한쪽을 올리면 다른 쪽이 내려가요'},
   'u-assumption':{h:doc([{h:'가정'}, {tb:[['가정', '확인 방법', '상태'], ['휴대폰으로 주문', '접속 기록', '확인함'], ['하루 100건 이하', '첫 주 주문 수', '확인 전']]}],
@@ -6295,7 +6298,7 @@ Object.assign(D, {
   'u-test-plan':{h:doc([{h:'테스트 계획: 장바구니'}, {p:'범위: 담기, 수량, 삭제'}, {p:'방법: 자동 테스트 + 직접 눌러 보기'}, {p:'일정: 11월 10~12일'}, {p:'통과 기준: 오류 0건'}],
       {title:'테스트계획.md', hl:4, label:'범위, 방법, 일정, 통과 기준을 적은 테스트 계획서'}), m:1,
     cap:'무엇을 언제 어떻게 확인할지 먼저 정해요'},
-  'u-user-manual':{h:doc([{h:'장보기 앱 사용 설명서'}, {ul:['1. 시작하기', '2. 장바구니에 담기', '3. 주문하기', '4. 문제 해결']}, {p:'3. 주문하기: 장바구니에서 주문 버튼을 눌러요'}],
+  'u-user-manual':{h:doc([{h:'장보기 앱 사용 설명서'}, {ul:['시작하기', '장바구니에 담기', '주문하기', '문제 해결']}, {p:'주문하기: 장바구니에서 주문 버튼을 눌러요'}],
       {title:'설명서.md', hl:2, label:'목차와 주문하는 법을 적은 사용 설명서'}), m:1,
     cap:'쓰는 사람의 말로 순서대로 알려 줘요'},
   'u-runbook':{h:doc([{h:'런북: 결제가 느려요'}, {ck:[['상태 화면에서 오류 수 보기', true], ['최근 배포 확인', true], ['배포 되돌리기', false]]}, {p:'안 되면: 민지에게 전화'}],
@@ -6310,7 +6313,7 @@ Object.assign(D, {
   'u-one-pager':{h:doc([{h:'원페이저: 장보기 앱'}, {p:'문제: 장보기가 오래 걸려요'}, {p:'해결: 자주 산 상품 한 번에 담기'}, {p:'목표: 12월 출시'}, {p:'필요: 개발자 2명'}],
       {title:'원페이저.md', label:'문제, 해결, 목표, 필요한 것을 한 장에 적은 요약'}), m:1,
     cap:'한 장만 읽어도 무엇을 하려는지 알게 해요'},
-  'u-gantt-chart':{h:`<table class="mk-pl"><thead><tr><th>할 일</th>${[1, 2, 3, 4].map(w => `<th>${w}주</th>`).join('')}</tr></thead><tbody>${PGANTT.map(([n, a, b]) => `<tr><th scope="row">${esc(n)}</th>${'<td></td>'.repeat(a - 1)}<td colspan="${b - a + 1}"><span class="mk-plb"><span class="sr">${a === b ? a : a + '~' + b}주</span></span></td>${'<td></td>'.repeat(4 - b)}</tr>`).join('')}</tbody></table>`,
+  'u-gantt-chart':{h:`<table class="mk-pl" aria-label="4주 일정 간트 차트"><thead><tr><th scope="col">할 일</th>${[1, 2, 3, 4].map(w => `<th scope="col">${w}주</th>`).join('')}</tr></thead><tbody>${PGANTT.map(([n, a, b]) => `<tr><th scope="row">${esc(n)}</th>${'<td></td>'.repeat(a - 1)}<td colspan="${b - a + 1}"><span class="mk-plb"><span class="sr">${a === b ? a : a + '~' + b}주</span></span></td>${'<td></td>'.repeat(4 - b)}</tr>`).join('')}</tbody></table>`,
     cap:'막대가 겹치는 디자인과 개발은 2주에 함께 해요'},
 });
 /* plan: tip 그림 — 5 Whys 유래(도요타)는 공식 페이지에서 확인 못 해 넣지 않음, 흔히 쓰는 방법으로만 적음. 예시: 날짜·이름·숫자·원인 사슬 */
