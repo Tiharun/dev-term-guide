@@ -444,6 +444,12 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dcdod{display:grid;gap:2px;width:min(100%,300px);min-width:0;margin:10px auto 0;padding:4px 10px 8px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12.5px;text-align:left}.mk-dcdod legend{padding:0 4px;font-weight:800}
 .mk-dcmd{width:min(100%,340px);margin:0;padding:10px 12px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font:600 12.5px/1.6 var(--mono);text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
 .mk-two.mk-fwcode{grid-template-columns:1fr}
+.mk-two.mk-dcsd{grid-template-columns:1fr;justify-items:center}
+.mk-dcno{display:inline-grid;place-items:center;flex:none;min-width:18px;height:18px;margin-right:6px;border-radius:9px;background:var(--ink);color:var(--plate);font-size:11px;line-height:1}.mk-btn .mk-dcno{background:var(--plate);color:var(--ink)}
+.mk-pl{width:min(100%,320px);table-layout:fixed;border-collapse:collapse;font-size:12px}
+.mk-pl th,.mk-pl td{height:30px;padding:0 4px;border:1px solid var(--rule);text-align:center}
+.mk-pl th{white-space:nowrap}.mk-pl thead th:first-child{width:4.6em;text-align:start}.mk-pl th[scope=row]{text-align:start}
+.mk-plb{display:block;height:14px;border-radius:7px;background:var(--mark)}
 .mk-fw{width:min(100%,320px);color:var(--ink);font-size:12px;line-height:1.35}.mk-fwl{display:flex;flex-direction:column;gap:22px;list-style:none}
 .mk-fwr{position:relative;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center}.mk-fwr.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px}
 .mk-fwr+.mk-fwr::before{content:'';position:absolute;top:-22px;left:calc(50% - .75px);width:1.5px;height:22px;background:var(--ink)}.mk-fwr:not(.two)+.mk-fwr.two::before{height:11px}
@@ -3149,6 +3155,22 @@ T('plan','adv',[
  {en:'Single Source of Truth',ko:'단일 진실 공급원 · 원본은 한 곳에만',d:'같은 정보를 한 곳에만 두고, 다른 곳은 그 원본을 가리키게 하는 원칙이에요.',x:'같은 내용을 여러 문서에 복사해 두면 하나만 고쳤을 때 서로 달라져요. 원본 문서를 하나 정하고 나머지는 링크로 이어요. CLAUDE.md에 규칙을 모아 두는 것도 같은 생각이에요.',p:'흩어진 기획 문서에서 같은 내용이 겹치는 곳을 찾아줘. 원본 하나로 모으고 나머지는 링크로 바꿔서',r:['CLAUDE.md'],l:3,o:0,v:'u-single-source-of-truth'},
  {en:'Docs as Code',ko:'코드처럼 다루는 문서 · 문서를 코드와 함께 관리',d:'문서를 코드처럼 글 파일로 쓰고, 코드와 같은 저장소에서 버전과 검토를 관리하는 방식이에요.',x:'흔히 마크다운으로 쓰고 Git으로 바꾼 기록을 남겨요. 코드를 고칠 때 문서도 같은 커밋에서 고치면 문서가 낡지 않아요. 회사마다 쓰는 도구는 달라요.',p:'이 프로젝트 문서를 docs 폴더의 마크다운으로 옮겨줘. 코드와 같은 커밋에서 고칠 수 있게',r:['CLAUDE.md','Markdown'],l:3,o:0,v:'u-docs-as-code'},
  {en:'Mermaid',ko:'머메이드 · 글로 쓰는 그림',d:'정해진 글자 규칙으로 쓰면 순서도 같은 그림으로 바꿔 주는 도구예요.',x:'flowchart TD로 시작하고 A --> B처럼 화살표로 이어요. {}로 감싼 칸은 마름모가 되고, -->|예|처럼 화살표에 이름을 붙여요. 한글 글자는 A["상품 담기"]처럼 큰따옴표로 감싸요. GitHub은 mermaid 코드 블록을 그림으로 보여 줘요(2026-11 확인).',p:'로그인 흐름을 Mermaid 순서도 코드로 써줘. 갈림길은 {}로',r:['Flowchart','Markdown'],l:2,o:1,u:'https://mermaid.js.org/syntax/flowchart.html',v:'u-mermaid'},
+]);
+T('plan','docs',[
+ {en:'PRD',ko:'PRD · 제품 요구사항 문서',d:'만들 제품이 무엇이고 왜 필요한지, 무엇을 해야 하는지 적은 문서예요.',x:'Product Requirements Document의 줄임말이에요. 흔히 목표, 사용자, 요구사항, 범위 밖을 적어요. 회사마다 양식이 달라요.',p:'장보기 앱 PRD를 써줘. 목표, 사용자, 요구사항, 범위 밖 순서로',r:['Spec','MVP'],l:2,o:0,v:'u-prd'},
+ {en:'Functional Specification',ko:'기능 명세서 · 기능이 어떻게 동작하는지 적은 문서',d:'기능 하나하나가 어떤 입력에 어떻게 동작하는지 자세히 적은 문서예요.',x:'PRD가 무엇을 만들지 적는다면, 기능 명세서는 흔히 무엇을 누르면 어떻게 되고 틀린 값이면 어떻게 되는지까지 적어요. 회사마다 양식이 달라요.',p:'장바구니 기능 명세서를 써줘. 입력, 동작, 오류 처리를 기능마다 나눠서',r:['Spec','Edge Case'],l:3,o:0,v:'u-functional-specification'},
+ {en:'Screen Design Document',ko:'화면 설계서 · 화면마다 무엇이 어디 있는지 적은 문서',d:'화면 그림에 번호를 붙이고 번호마다 무엇을 하는지 설명한 문서예요.',x:'흔히 와이어프레임 옆에 번호별 설명표를 둬요. 기획자, 디자이너, 개발자가 같은 번호로 이야기할 수 있어요. 회사마다 양식이 달라요.',p:'장바구니 화면 설계서를 만들어줘. 화면 요소에 번호를 붙이고 번호별 설명표로',r:['Wireframe','Design Spec'],l:2,o:0,v:'u-screen-design-document'},
+ {en:'Technical Design Document',ko:'기술 설계서 · 어떻게 만들지 정한 문서',d:'기능을 어떤 구조와 기술로 만들지 개발자가 정리한 문서예요.',x:'흔히 구조, 데이터 모양, API, 검토한 다른 방법을 적어요. 기획 문서가 "무엇"이라면 기술 설계서는 "어떻게"예요. 회사마다 양식이 달라요.',p:'장바구니 저장 기능의 기술 설계서를 써줘. 구조, 데이터, API, 다른 방법 비교까지',r:['API Documentation','ADR'],l:3,o:0,v:'u-technical-design-document'},
+ {en:'Meeting Minutes',ko:'회의록 · 회의에서 정한 것을 적은 기록',d:'회의에서 무엇을 정했고 누가 무엇을 할지 적은 기록이에요.',x:'흔히 날짜, 참석자, 정한 것, 할 일과 담당자를 적어요. 회의가 끝나면 바로 나눠서 모두 같은 내용을 보게 해요. 회사마다 양식이 달라요.',p:'오늘 회의 메모를 회의록으로 정리해줘. 정한 것과 할 일, 담당자를 나눠서',r:['Meeting','Owner'],l:1,o:0,v:'u-meeting-minutes'},
+ {en:'Project Proposal',ko:'프로젝트 제안서 · 해 보자고 설득하는 문서',d:'새 프로젝트를 왜, 무엇을, 얼마나 들여 할지 적어 허락을 구하는 문서예요.',x:'흔히 문제, 해결 방법, 기대 효과, 필요한 기간과 비용을 적어요. 승인을 받으면 기획이 시작돼요. 회사마다 양식이 달라요.',p:'장보기 앱 프로젝트 제안서를 써줘. 문제, 해결, 기대 효과, 기간과 비용 순서로',r:['Goal','Stakeholder','Approval'],l:2,o:0,v:'u-project-proposal'},
+ {en:'WBS',ko:'WBS · 일을 잘게 나눈 목록',d:'큰 일을 작은 일로 계속 나누고 번호를 붙인 목록이에요.',x:'Work Breakdown Structure의 줄임말이에요. 1, 1.1, 1.2처럼 번호로 단계를 나눠요. 흔히 가장 작은 일은 추정하고 맡길 수 있을 만큼 나눠요. 회사마다 양식이 달라요.',p:'장보기 앱 만들기를 WBS로 나눠줘. 1, 1.1 번호를 붙여서',r:['Estimate','Dependency'],l:2,o:0,v:'u-wbs'},
+ {en:'Test Plan',ko:'테스트 계획서 · 무엇을 어떻게 확인할지 정한 문서',d:'무엇을, 언제, 어떤 방법으로 테스트할지 미리 정한 문서예요.',x:'흔히 범위, 방법, 일정, 통과 기준을 적어요. 테스트 케이스는 이 계획에 따라 만든 확인 항목 하나하나예요. 회사마다 양식이 달라요.',p:'장바구니 기능 테스트 계획서를 써줘. 범위, 방법, 일정, 통과 기준까지',r:['Test Case','Regression Test'],l:3,o:0,v:'u-test-plan'},
+ {en:'User Manual',ko:'사용 설명서 · 쓰는 법을 알려 주는 문서',d:'사용자가 앱을 어떻게 쓰는지 단계별로 알려 주는 문서예요.',x:'흔히 목차, 시작하기, 기능별 사용법, 문제 해결 순서로 써요. 개발자의 말이 아니라 쓰는 사람의 말로 써요. 회사마다 양식이 달라요.',p:'장보기 앱 사용 설명서를 써줘. 목차, 시작하기, 주문하는 법, 문제 해결 순서로',r:['Table of Contents','README'],l:1,o:0,v:'u-user-manual'},
+ {en:'Runbook',ko:'런북 · 문제가 생기면 따라 하는 절차서',d:'서버가 느려지는 것처럼 정해진 상황에서 할 일을 순서대로 적은 절차서예요.',x:'흔히 상황, 확인할 것, 할 일 순서, 안 되면 연락할 사람을 적어요. 급할 때 봐도 그대로 따라 할 수 있게 짧게 써요. 회사마다 양식이 달라요.',p:'결제 서버가 느려질 때 쓸 런북을 써줘. 확인할 것, 할 일 순서, 연락할 사람까지',r:['Incident','Rollback','Monitoring'],l:3,o:0,v:'u-runbook'},
+ {en:'FAQ',ko:'FAQ · 자주 묻는 질문',d:'사용자가 자주 묻는 질문과 답을 모아 둔 문서예요.',x:'Frequently Asked Questions의 줄임말이에요. 실제로 많이 들어온 질문부터 짧은 답으로 적어요. 회사마다 양식이 달라요.',p:'고객 문의를 보고 FAQ를 만들어줘. 많이 물은 순서로 질문 5개와 짧은 답을',r:['Onboarding','README'],l:1,o:0,v:'u-faq'},
+ {en:'Glossary',ko:'용어집 · 팀이 쓰는 말 사전',d:'팀에서 쓰는 말과 그 뜻을 한곳에 모아 둔 목록이에요.',x:'같은 것을 사람마다 다른 이름으로 부르면 오해가 생겨요. 흔히 용어, 뜻, 쓰지 않을 말을 적어요. 회사마다 양식이 달라요.',p:'기획서에 나오는 용어로 용어집을 만들어줘. 용어, 뜻, 쓰지 않을 말 칸으로',r:['Glossary Habit','Single Source of Truth'],l:1,o:0,v:'u-glossary'},
+ {en:'One-pager',ko:'원페이저 · 한 장으로 줄인 요약 문서',d:'계획이나 제안을 한 장 안에 요약해 빨리 읽게 만든 문서예요.',x:'흔히 문제, 해결, 목표, 일정, 필요한 것을 짧게 적어요. 바쁜 사람이 먼저 읽고 자세한 문서로 넘어가요. 회사마다 양식이 달라요.',p:'이 기획서를 원페이저로 줄여줘. 문제, 해결, 목표, 일정, 필요한 것만',r:['Goal','Approval'],l:2,o:0,v:'u-one-pager'},
+ {en:'Gantt Chart',ko:'간트 차트 · 막대로 그린 일정표',d:'할 일마다 언제 시작해 언제 끝나는지 가로 막대로 그린 일정표예요.',x:'세로에 할 일, 가로에 주나 날짜를 두고 막대 길이로 기간을 보여요. 막대가 겹치면 함께 하는 일이고, 앞 일이 늦으면 뒤 일이 밀리는지 보여요. 회사마다 양식이 달라요.',p:'WBS의 할 일로 4주짜리 간트 차트를 만들어줘. 겹치는 일도 보이게',r:['Milestone','Dependency','Roadmap'],l:2,o:0,v:'u-gantt-chart'},
 ]);
 </script>
 <script>
@@ -6224,6 +6246,52 @@ Object.assign(D, {
     cap:'코드와 문서를 한 커밋에 함께 담아요'},
   'u-mermaid':{h:`<div class="mk-two mk-fwcode"><pre class="mk-dcmd">${PMMD.map(esc).join('\n')}</pre>${flow(PDEC, {label:'Mermaid 코드가 상품 담기, 로그인 질문, 장바구니와 로그인 화면 갈래 그림이 돼요'})}</div>`, m:1,
     cap:'위 글이 아래 그림이 돼요. {}는 마름모, |예|는 화살표 이름이에요'},
+});
+/* plan: docs 그림 — 문서 종류는 회사마다 양식이 달라 흔히 쓰는 제목만 그림. 예시: 날짜·기간·금액·사람 이름·간트 주차(PGANTT) */
+const PGANTT = [['기획', 1, 1], ['디자인', 2, 2], ['개발', 2, 3], ['테스트', 4, 4]];
+const PSDD = '<span class="mk-li"><b class="mk-dcno">1</b>사과 2개</span><span class="mk-li"><b class="mk-dcno">2</b>합계 6,000원</span><span class="mk-btn"><b class="mk-dcno">3</b>주문하기</span>';
+Object.assign(D, {
+  'u-prd':{h:doc([{h:'PRD: 장보기 앱'}, {p:'목표: 10분 안에 장보기'}, {p:'사용자: 바쁜 직장인'}, {ul:['상품 검색', '장바구니', '주문']}, {p:'범위 밖: 쿠폰'}],
+      {title:'PRD.md', hl:3, label:'목표, 사용자, 요구사항, 범위 밖을 적은 PRD'}), m:1,
+    cap:'무엇을 왜 만드는지와 해야 할 일을 한 문서에 적어요'},
+  'u-functional-specification':{h:doc([{h:'기능: 수량 바꾸기'}, {tb:[['입력', '동작'], ['+ 누름', '수량 1 늘림'], ['1개일 때 - 누름', '삭제할지 물음'], ['99개에서 + 누름', '99개에서 멈춤']]}],
+      {title:'기능명세.md', hl:1, label:'입력마다 어떻게 동작하는지 적은 기능 명세서'}), m:1,
+    cap:'누르면 어떻게 되는지, 끝 경우까지 적어요'},
+  'u-screen-design-document':{h:`<div class="mk-two mk-dcsd">${app([{t:'장바구니', b:PSDD}], {still:true, notch:false, label:'번호 1, 2, 3을 붙인 장바구니 화면'})}${doc([{tb:[['번호', '설명'], ['1', '수량을 1개씩 바꿔요'], ['2', '가격 × 수량을 더해요'], ['3', '합계가 0원이면 꺼져요']]}],
+      {still:true, title:'화면 설계서', label:'장바구니 화면의 번호 1, 2, 3을 설명한 표'})}</div>`,
+    cap:'화면에 번호를 붙이고 번호마다 설명을 적어요'},
+  'u-technical-design-document':{h:doc([{h:'기술 설계: 장바구니 저장'}, {p:'구조: 앱 → 서버 → DB'}, {p:'데이터: 상품 id, 수량'}, {p:'API: POST /cart'}, {p:'다른 방법: 휴대폰에만 저장'}],
+      {title:'기술설계.md', hl:3, label:'구조, 데이터, API, 검토한 다른 방법을 적은 기술 설계서'}), m:1,
+    cap:'무엇을 만들지가 아니라 어떻게 만들지를 적어요'},
+  'u-meeting-minutes':{h:doc([{h:'회의록 11월 3일'}, {p:'참석: 민지, 준호'}, {ul:['결제는 카드부터', '쿠폰은 다음 달에']}, {ck:[['견적 보내기 · 민지', false], ['일정 정하기 · 준호', true]]}],
+      {title:'회의록.md', hl:3, label:'참석자, 정한 것, 할 일과 담당자를 적은 회의록'}), m:1,
+    cap:'정한 것과 누가 무엇을 할지 남겨요'},
+  'u-project-proposal':{h:doc([{h:'제안: 장보기 앱'}, {p:'문제: 장보기에 시간이 오래 걸려요'}, {p:'해결: 자주 산 상품을 한 번에 담아요'}, {p:'기대 효과: 장보는 시간 절반'}, {p:'기간·비용: 3개월 · 2명'}],
+      {title:'제안서.md', hl:2, label:'문제, 해결, 기대 효과, 기간과 비용을 적은 제안서'}), m:1,
+    cap:'왜 해야 하는지와 무엇이 드는지 적어 허락을 받아요'},
+  'u-wbs':{h:doc([{h:'WBS: 장보기 앱'}, {tb:[['번호', '할 일'], ['1', '기획'], ['1.1', '화면 목록'], ['1.2', '요구사항'], ['2', '개발'], ['2.1', '장바구니']]}],
+      {title:'WBS.md', hl:1, label:'1, 1.1처럼 번호로 일을 나눈 WBS'}), m:1,
+    cap:'큰 일을 번호로 잘게 나눠요'},
+  'u-test-plan':{h:doc([{h:'테스트 계획: 장바구니'}, {p:'범위: 담기, 수량, 삭제'}, {p:'방법: 자동 테스트 + 직접 눌러 보기'}, {p:'일정: 11월 10~12일'}, {p:'통과 기준: 오류 0건'}],
+      {title:'테스트계획.md', hl:4, label:'범위, 방법, 일정, 통과 기준을 적은 테스트 계획서'}), m:1,
+    cap:'무엇을 언제 어떻게 확인할지 먼저 정해요'},
+  'u-user-manual':{h:doc([{h:'장보기 앱 사용 설명서'}, {ul:['1. 시작하기', '2. 장바구니에 담기', '3. 주문하기', '4. 문제 해결']}, {p:'3. 주문하기: 장바구니에서 주문 버튼을 눌러요'}],
+      {title:'설명서.md', hl:2, label:'목차와 주문하는 법을 적은 사용 설명서'}), m:1,
+    cap:'쓰는 사람의 말로 순서대로 알려 줘요'},
+  'u-runbook':{h:doc([{h:'런북: 결제가 느려요'}, {ck:[['상태 화면에서 오류 수 보기', true], ['최근 배포 확인', true], ['배포 되돌리기', false]]}, {p:'안 되면: 민지에게 전화'}],
+      {title:'런북.md', hl:1, label:'결제가 느릴 때 할 일 순서와 연락할 사람을 적은 런북'}), m:1,
+    cap:'급할 때 그대로 따라 하도록 순서를 적어요'},
+  'u-faq':{h:doc([{h:'자주 묻는 질문'}, {p:'Q. 배송은 언제 와요?'}, {p:'A. 주문 다음 날 와요.'}, {p:'Q. 주문을 취소할 수 있나요?'}, {p:'A. 배송 전까지 취소할 수 있어요.'}],
+      {title:'FAQ.md', label:'질문과 짧은 답을 모은 FAQ'}), m:1,
+    cap:'많이 묻는 질문부터 짧게 답해요'},
+  'u-glossary':{h:doc([{h:'용어집'}, {tb:[['용어', '뜻', '쓰지 않을 말'], ['장바구니', '사기 전에 담아 둔 목록', '카트'], ['주문', '돈을 낸 구매', '결제']]}],
+      {title:'용어집.md', hl:1, label:'용어, 뜻, 쓰지 않을 말을 적은 용어집'}), m:1,
+    cap:'같은 것은 같은 이름으로 부르게 정해요'},
+  'u-one-pager':{h:doc([{h:'원페이저: 장보기 앱'}, {p:'문제: 장보기가 오래 걸려요'}, {p:'해결: 자주 산 상품 한 번에 담기'}, {p:'목표: 12월 출시'}, {p:'필요: 개발자 2명'}],
+      {title:'원페이저.md', label:'문제, 해결, 목표, 필요한 것을 한 장에 적은 요약'}), m:1,
+    cap:'한 장만 읽어도 무엇을 하려는지 알게 해요'},
+  'u-gantt-chart':{h:`<table class="mk-pl"><thead><tr><th>할 일</th>${[1, 2, 3, 4].map(w => `<th>${w}주</th>`).join('')}</tr></thead><tbody>${PGANTT.map(([n, a, b]) => `<tr><th scope="row">${esc(n)}</th>${'<td></td>'.repeat(a - 1)}<td colspan="${b - a + 1}"><span class="mk-plb"><span class="sr">${a === b ? a : a + '~' + b}주</span></span></td>${'<td></td>'.repeat(4 - b)}</tr>`).join('')}</tbody></table>`,
+    cap:'막대가 겹치는 디자인과 개발은 2주에 함께 해요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
