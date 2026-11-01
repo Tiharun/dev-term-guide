@@ -412,6 +412,17 @@ a.tag:hover{background:var(--ink);color:#fff}
 @keyframes mk-mopu2{0%,30%{transform:translateX(100%)}34%,96%{transform:none}96.1%,100%{transform:translateX(100%)}}@keyframes mk-momo2{0%,30%{transform:translateY(100%)}34%,96%{transform:none}96.1%,100%{transform:translateY(100%)}}@keyframes mk-mofa2{0%,30%{opacity:0}34%,96%{opacity:1}96.1%,100%{opacity:0}}@keyframes mk-mopu3{0%,50%{transform:translateX(100%)}54%,96%{transform:none}96.1%,100%{transform:translateX(100%)}}@keyframes mk-momo3{0%,50%{transform:translateY(100%)}54%,96%{transform:none}96.1%,100%{transform:translateY(100%)}}@keyframes mk-mofa3{0%,50%{opacity:0}54%,96%{opacity:1}96.1%,100%{opacity:0}}@keyframes mk-mopu4{0%,70%{transform:translateX(100%)}74%,96%{transform:none}96.1%,100%{transform:translateX(100%)}}@keyframes mk-momo4{0%,70%{transform:translateY(100%)}74%,96%{transform:none}96.1%,100%{transform:translateY(100%)}}@keyframes mk-mofa4{0%,70%{opacity:0}74%,96%{opacity:1}96.1%,100%{opacity:0}}@keyframes mk-motk1{0%,24.9%{opacity:0}25%,30%{opacity:1}30.1%,100%{opacity:0}}@keyframes mk-motk2{0%,44.9%{opacity:0}45%,50%{opacity:1}50.1%,100%{opacity:0}}@keyframes mk-motk3{0%,64.9%{opacity:0}65%,70%{opacity:1}70.1%,100%{opacity:0}}
 @keyframes mk-mty1{0%,14%{opacity:0}15%,24%{opacity:1}25%,100%{opacity:0}}@keyframes mk-mty2{0%,24%{opacity:0}25%,34%{opacity:1}35%,100%{opacity:0}}@keyframes mk-mty3{0%,34%{opacity:0}35%,44%{opacity:1}45%,100%{opacity:0}}@keyframes mk-mty4{0%,44%{opacity:0}45%,54%{opacity:1}55%,100%{opacity:0}}@keyframes mk-mty5{0%,54%{opacity:0}55%,64%{opacity:1}65%,100%{opacity:0}}
 .mk-mobox{width:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:12px}.stage:has(>.mk-mobox){padding-top:50px}
+/* 모바일 기본 부품: 홈 화면 아이콘, 스토어 줄, 잠금 화면 알림, 권한 창, 카메라, 웹뷰 영역, 코드 → 앱 */
+.mk-mohm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 4px;padding-top:4px}.mk-moic{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;font-size:11px;line-height:1.2;text-align:center}.mk-moic.mk-hl{outline-offset:2px}
+.mk-moi{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--sky);font:800 13px/1 var(--sans);color:var(--ink)}.mk-moi.me{background:var(--mark-bg);color:var(--mark-text);box-shadow:inset 0 0 0 1.5px var(--mark-text)}
+.mk-mosr{display:flex;align-items:center;gap:8px;padding:4px 0 8px;border-bottom:1px solid var(--rule)}.mk-mosr>span{flex:1;min-width:0;display:flex;flex-direction:column;font-size:11px;color:var(--muted)}.mk-mosr>span>b{font-size:12px;color:var(--ink)}
+.mk-mosr>em{flex:none;padding:3px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:11px;font-style:normal;font-weight:800}
+.mk-molk{padding:4px 0 6px;font:800 30px/1 var(--sans);text-align:center}.mk-mont{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--rule);border-radius:12px;background:var(--fig);font-size:11.5px;line-height:1.35}.mk-mont>b{font-size:11px;color:var(--muted)}
+.mk-modim{flex:1;display:flex;align-items:center;padding:6px;border-radius:8px;background:color-mix(in srgb,var(--ink) 18%,transparent)}.mk-mopm{width:100%;display:flex;flex-direction:column;gap:4px;padding:10px 10px 0;border-radius:12px;background:var(--plate);font-size:11.5px;line-height:1.4;text-align:center;overflow:hidden}.mk-mopm>b{font-size:12px}
+.mk-mopb{display:grid;grid-template-columns:1fr 1fr;margin:4px -10px 0;border-top:1px solid var(--rule)}.mk-mopb>span{padding:7px 0;font-weight:800;color:var(--mark-text)}.mk-mopb>span+span{border-left:1px solid var(--rule)}
+.mk-mocam{flex:1;min-height:40px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:#fff;font-size:11.5px}.mk-mosh{flex:none;align-self:center;width:34px;height:34px;border:3px solid var(--ink);border-radius:50%;background:var(--plate)}
+.mk-mono{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}.mk-moweb{flex:1;display:flex;flex-direction:column;gap:3px;padding:6px;font-size:11.5px;line-height:1.4}.mk-moweb .mk-url{margin:0 0 3px}.mk-moweb.mk-hl{outline-offset:-2px}
+.mk-mocf{display:flex;flex-direction:column;align-items:center;gap:4px;width:min(340px,100%)}.mk-mocf>.mk-card,.mk-mocf>.mk-two{width:100%}.mk-mocf .mk-card{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:12px}.mk-moar{line-height:1;color:var(--muted)}
 .mk-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:0 14px;border-radius:8px;border:1.5px solid var(--ink);
   background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;touch-action:manipulation}
 .mk-btn.ghost{background:transparent;color:var(--ink)}
@@ -2276,6 +2287,22 @@ T('front','tip',[
  {en:'Inspect Element',ko:'요소 검사',d:'화면 요소를 오른쪽 클릭 → "검사"로 그 요소의 HTML·CSS를 보는 기능.',p:'요소 검사로 보니 이 상자 margin이 40px이야. 줄여줘',r:['DevTools'],l:1,o:0,v:'boxmodel'},
  {en:'Cache Busting',ko:'캐시 무시 · 강제 새로고침',d:'고쳤는데도 예전 화면이 보일 때 브라우저 저장본을 무시하고 새로 받는 것. Ctrl+Shift+R.',p:'수정이 반영 안 돼. 캐시 문제인지 확인해줘',r:['Cache'],l:2,o:0,v:'fade'},
  {en:'Polyfill',ko:'폴리필',d:'옛 브라우저에 없는 기능을 비슷하게 채워 주는 코드.',p:'옛 Safari에서도 되게 폴리필이 필요한지 확인해줘',r:['Cross-browser'],l:3,o:1,u:MDN('Glossary/Polyfill'),v:{stack:['새 기능','폴리필 (빈자리 채움)','옛 브라우저'],hl:[1]}},
+]);
+</script>
+<script>
+/* ===== 04 모바일 앱 ===== */
+T('mobile','basic',[
+ {en:'Mobile App',ko:'모바일 앱 · 휴대폰에 깔아 쓰는 앱',d:'휴대폰이나 태블릿에 설치해서 홈 화면 아이콘으로 여는 프로그램이에요.',x:'스토어에서 받아 설치해요. 주소를 치고 들어가는 웹사이트와 달리 아이콘을 누르면 바로 열려요.',p:'이 웹 서비스를 모바일 앱으로도 내려면 무엇부터 정해야 하는지 알려줘',r:['Website','PWA'],l:1,o:0,v:'u-mobile-app'},
+ {en:'iOS',ko:'아이오에스 · Apple 휴대폰 운영체제',d:'Apple이 만든 아이폰용 운영체제예요.',x:'iOS 앱은 보통 Swift로, Mac에서 돌아가는 Xcode로 만들어요. 사용자는 App Store에서 받아요.',p:'이 화면이 iOS에서도 노치에 가리지 않는지 확인해줘',r:['Human Interface Guidelines','Safe Area'],l:1,o:0,v:'u-ios'},
+ {en:'Android',ko:'안드로이드 · Google 휴대폰 운영체제',d:'Google이 만든 휴대폰 운영체제로, 여러 회사의 휴대폰에 들어가요.',x:'Android 앱은 보통 Kotlin으로 Android Studio에서 만들어요. 사용자는 주로 Google Play에서 받아요.',p:'Android 휴대폰에서 뒤로 가기 버튼을 눌러도 입력한 글이 사라지지 않게 해줘',r:['Material Design','Back Button'],l:1,o:0,v:'u-android'},
+ {en:'Native App',ko:'네이티브 앱 · 운영체제 전용으로 만든 앱',d:'iOS용과 Android용을 그 운영체제의 언어와 도구로 따로 만든 앱이에요.',x:'카메라·알림 같은 기기 기능을 바로 쓰고 매끄럽지만, 두 플랫폼에 내려면 코드를 두 벌 만들고 고쳐야 해요.',p:'카메라를 많이 쓰는 앱인데 네이티브 앱과 크로스 플랫폼 중 무엇이 나은지 비교해줘',r:['Cross-platform','Hybrid App','SDK'],l:2,o:0,v:'u-native-app'},
+ {en:'Hybrid App',ko:'하이브리드 앱 · 웹 화면을 앱 틀에 담은 앱',d:'HTML·CSS·JS로 만든 웹 화면을 앱 틀 안에 넣어 스토어에 내보내는 앱이에요.',x:'웹을 만들던 사람이 빨리 만들 수 있지만, 화면이 웹이라 네이티브 앱보다 덜 매끄럽게 느껴질 수 있어요.',p:'지금 웹사이트를 하이브리드 앱으로 감싸면 무엇이 달라지는지 알려줘',r:['WebView','PWA','Native App'],l:2,o:0,v:'u-hybrid-app'},
+ {en:'Cross-platform',ko:'크로스 플랫폼 · 코드 한 벌로 두 플랫폼',d:'코드 한 벌로 iOS 앱과 Android 앱을 함께 만드는 방식이에요.',x:'React Native와 Flutter가 대표적이에요. 하이브리드 앱처럼 웹 화면을 띄우지 않고 앱 화면을 바로 그려요.',p:'iOS와 Android를 한 번에 내도록 크로스 플랫폼으로 시작해줘',r:['Native App','Hybrid App','Cross-browser'],l:2,o:0,v:'u-cross-platform'},
+ {en:'WebView',ko:'웹뷰 · 앱 안의 웹 페이지 창',d:'앱 화면 안에 웹 페이지를 띄워 보여 주는 부품이에요.',x:'iOS는 WKWebView, Android는 WebView라는 부품을 써요. 약관·공지처럼 자주 바뀌는 화면을 웹으로 만들어 넣을 때 흔히 써요.',p:'이용약관 화면은 WebView로 웹 페이지를 띄워줘',r:['PWA','Browser','Hybrid App'],l:2,o:1,u:'https://developer.apple.com/documentation/webkit/wkwebview',v:'u-webview'},
+ {en:'Screen',ko:'스크린 · 앱의 화면 한 장',d:'앱에서 한 번에 보이는 화면 하나예요. 웹의 페이지와 비슷해요.',x:'앱은 여러 화면을 오가며 써요. 화면마다 이름이 있으면 "상품 상세 화면의 버튼"처럼 고칠 곳을 정확히 말할 수 있어요.',p:'상품 상세 화면의 구매 버튼을 손가락으로 누르기 쉽게 키워줘',r:['Touch Target','Tap'],l:1,o:0,v:'u-screen'},
+ {en:'App Icon',ko:'앱 아이콘 · 앱을 여는 작은 그림',d:'홈 화면에서 눌러 앱을 여는 작은 그림이에요.',x:'스토어 목록에도 같이 보여서 앱의 첫인상이 돼요. 작게 보여도 알아볼 수 있게 단순하게 그려요.',p:'앱 아이콘을 장바구니 모양으로 단순하게 바꿔줘',r:['Icon','Badge'],l:1,o:0,v:'u-app-icon'},
+ {en:'Push Notification',ko:'푸시 알림 · 앱이 보내는 알림',d:'앱을 열고 있지 않아도 휴대폰 화면에 띄워 주는 알림이에요.',x:'Git의 Push(코드를 올리기)와는 다른 말이에요. iOS와 Android 13 이상에서는 사용자가 알림을 허용해야 받아요(2026-11 확인).',p:'주문한 상품이 배송을 시작하면 푸시 알림을 보내줘',r:['Push','Badge','Notification Dot'],l:1,o:1,u:'https://developer.android.com/develop/ui/views/notifications/notification-permission',v:'u-push-notification'},
+ {en:'Permission Request',ko:'권한 요청 · 기능을 써도 되는지 묻기',d:'앱이 카메라·위치·사진 같은 기능을 쓰기 전에 사용자에게 허락을 받는 창이에요.',x:'거부하면 다시 묻지 못할 수 있어요. iOS는 처음 고른 답을 기억하고, Android 11 이상은 두 번 거부하면 창을 더 띄우지 않아요. 그다음엔 사용자가 설정에서 켜야 해요(2026-11 확인).',p:'사진 버튼을 누를 때 카메라 권한을 요청하고, 거부했으면 설정을 여는 안내를 보여줘',r:['Permission','Principle of Least Privilege'],l:2,o:1,u:'https://developer.android.com/about/versions/11/privacy/permissions',v:'u-permission-request'},
 ]);
 </script>
 <script>
@@ -5450,6 +5477,62 @@ Object.assign(D, {
   'u-test-report':{h:`<div class="mk-rust">${rbar(80, {label:'통과율'})}${runner([{n:'로그인', s:'pass', ms:820}, {n:'장바구니', s:'pass', ms:640},
       {n:'쿠폰', s:'fail', e:'10% 할인', a:'할인 없음'}, {n:'결제', s:'pass', ms:910}, {n:'주문 내역', s:'pass', ms:530}], {file:'playwright-report'})}</div>`, m:1,
     cap:'5개 중 4개가 통과해 통과율 80%예요. 보고서에서 실패한 쿠폰 테스트부터 열어 봐요'},
+});
+/* mobile: basic — 공식 문서 확인: 권한을 거부한 뒤 다시 묻기 — Android 11 이상은 두 번 거부하면 창을 안 띄움(developer.android.com/about/versions/11/privacy/permissions),
+   iOS는 처음 답을 기억(developer.apple.com AVCaptureDevice requestAccess) · 알림 허용 — iOS requestAuthorization(developer.apple.com/documentation/usernotifications),
+   Android 13 POST_NOTIFICATIONS(developer.android.com/develop/ui/views/notifications/notification-permission) · WKWebView(developer.apple.com/documentation/webkit/wkwebview),
+   Android WebView(developer.android.com/develop/ui/views/layout/webapps). 예시: 앱·상품 이름, 주소, 가격, 시각 */
+const MHOME_A = [['사', '사진'], ['지', '지도'], ['메', '메모'], ['날', '날씨'], ['장', '장보기'], ['설', '설정']];
+const MHOME = (hl = false) => `<div class="mk-mohm">${MHOME_A.map(([g, n]) => `<span class="mk-moic${n === '장보기' ? ` me${hl ? ' mk-hl' : ''}` : ''}"><i class="mk-moi" aria-hidden="true">${g}</i>${n}</span>`).join('')}</div>`;
+const MSTORE = (store, btn, note) => app([{t:store, b:`<div class="mk-mosr"><i class="mk-moi me" aria-hidden="true">장</i><span><b>장보기 앱</b>쇼핑</span><em>${btn}</em></div><span class="mk-help">${note}</span>`}]);
+/* 코드 → 앱: 칸마다 [코드, 앱]. one이 있으면 코드 한 벌이 위에서 두 앱으로 나뉜다 */
+const MCODE = (cols, one) => `<div class="mk-mocf">${one ? `<div class="mk-card"><b>${one}</b></div><b class="mk-moar" aria-hidden="true">↓</b>` : ''}<div class="mk-two">${cols.map(([c, a]) => `<div class="mk-card">${c ? `<span class="mk-help">${c}</span><b class="mk-moar" aria-hidden="true">↓</b>` : ''}<b>${a}</b></div>`).join('')}</div></div>`;
+const MSHOP = '<span class="mk-in">상품 검색</span><span class="mk-li">우유 1L · 2,900원</span><span class="mk-li">달걀 10구 · 4,500원</span>';
+/* 권한 요청 직접 조작: ask에서 허용(yes)·거부(no)로 한 번만 바뀐다. 답한 뒤에는 설정에서만 바꿀 수 있다 */
+const MPERM_B = {
+  ask:{t:'사진 올리기', b:'<div class="mk-modim"><div class="mk-mopm"><b>‘장보기 앱’이 카메라를 사용하려고 해요</b>상품 사진을 찍어 올릴 때 써요<div class="mk-mopb"><span>거부</span><span>허용</span></div></div></div>'},
+  yes:{t:'사진 찍기', b:'<div class="mk-mocam">카메라 화면</div><i class="mk-mosh" aria-hidden="true"></i>'},
+  no:{t:'사진 올리기', b:'<div class="mk-mono"><b>카메라 권한이 꺼져 있어요</b><span class="mk-help">설정에서 카메라를 켜 주세요</span><span class="mk-btn ghost">설정 열기</span></div>'}};
+const MPERM = s => app([MPERM_B[s]], {still:true, label:'권한 요청 화면'});
+const MPERM_SAY = {start:'권한 창이 떴어요. 허용이나 거부를 눌러 보세요', yes:'허용했어요. 이제 카메라 화면이 열려요',
+  no:'거부했어요. 카메라를 쓸 수 없어서 앱이 설정에서 켜 달라고 안내해요', done:'이미 답했어요. 바꾸려면 휴대폰 설정에서 바꿔요',
+  askask:'아직 답하지 않아서 권한 창이 그대로 있어요', askyes:'이미 허용해서 다시 묻지 않고 카메라를 바로 써요',
+  askno:'창이 다시 안 떠요. iOS는 한 번 답하면, Android 11 이상은 두 번 거부하면 다시 묻지 않아요. 설정에서 직접 켜야 해요'};
+Object.assign(D, {
+  'u-mobile-app':{h:app([{t:'홈 화면', b:MHOME(), tap:[50, 54]}, {t:'장보기', b:MSHOP, go:'fade'}], {label:'홈 화면에서 장보기 아이콘을 누르면 앱이 열려요'}), m:1,
+    cap:'홈 화면의 아이콘을 누르면 설치해 둔 앱이 바로 열려요'},
+  'u-ios':{h:MSTORE('App Store', '받기', 'iPhone에서는 App Store에서 앱을 받아요'),
+    cap:'iOS 앱은 Apple의 App Store에서 받아요'},
+  'u-android':{h:MSTORE('Google Play', '설치', '여러 회사의 Android 휴대폰에서 Google Play로 받아요'),
+    cap:'Android 앱은 주로 Google Play에서 받아요. 같은 앱이 여러 회사의 휴대폰에서 돌아가요'},
+  'u-native-app':{h:MCODE([['Swift 코드', 'iOS 앱'], ['Kotlin 코드', 'Android 앱']]),
+    cap:'네이티브 앱은 플랫폼마다 코드를 따로 써요. 앱 둘에 코드도 두 벌이에요'},
+  'u-hybrid-app':{h:MCODE([[0, 'iOS 앱 틀 + 웹 화면'], [0, 'Android 앱 틀 + 웹 화면']], '웹 코드 한 벌 · HTML·CSS·JS'),
+    cap:'하이브리드 앱은 웹 코드 한 벌을 두 앱 틀에 담아 화면을 웹으로 보여 줘요'},
+  'u-cross-platform':{h:MCODE([[0, 'iOS 앱'], [0, 'Android 앱']], '코드 한 벌 · Dart 또는 JavaScript'),
+    cap:'크로스 플랫폼은 코드 한 벌로 두 플랫폼의 앱을 만들어요'},
+  'u-webview':{h:app([{t:'이용약관', b:'<div class="mk-moweb mk-hl"><div class="mk-row"><span class="mk-url">shop.example.com/terms</span></div><b>제1조 목적</b><span>이 약관은 장보기 앱을 쓰는 방법을 정해요.</span><b>제2조 주문</b><span>결제를 마치면 주문이 끝나요.</span></div>'}]),
+    cap:'점선 안은 앱이 아니라 웹 페이지예요. 웹뷰가 위의 주소에서 불러와 앱 화면 안에 띄워요'},
+  'u-screen':{h:app([{t:'홈', b:'<span class="mk-li">과일</span><span class="mk-li">채소</span><span class="mk-li">우유·달걀</span>', tap:[30, 55]},
+      {t:'상품 목록', b:'<span class="mk-li">우유 1L · 2,900원</span><span class="mk-li">두유 · 1,800원</span>', tap:[40, 22]},
+      {t:'상품 상세', b:'<div class="mk-mocam">상품 사진</div><b>우유 1L</b><span>2,900원</span><span class="mk-btn">장바구니 담기</span>'}], {label:'홈, 상품 목록, 상품 상세 화면으로 넘어가요'}), m:1,
+    cap:'홈, 상품 목록, 상품 상세처럼 앱은 화면 한 장씩 넘기며 써요'},
+  'u-app-icon':{h:app([{t:'홈 화면', b:MHOME(true)}]),
+    cap:'점선 안이 장보기 앱의 아이콘이에요. 작아도 알아보게 그림을 단순하게 그려요'},
+  'u-push-notification':{h:app([{t:'잠금 화면', b:'<b class="mk-molk">9:41</b><div class="mk-mont"><b>장보기 앱 · 지금</b>주문한 우유가 배송을 시작했어요</div>', tap:[50, 53]},
+      {t:'주문 상세', b:'<b>배송이 시작됐어요</b><span class="mk-li">우유 1L · 1개</span><span class="mk-help">오늘 도착할 예정이에요</span>', go:'fade'}], {label:'잠금 화면의 알림을 누르면 주문 상세 화면이 열려요'}), m:1,
+    cap:'앱을 닫아 둬도 잠금 화면에 알림이 떠요. 알림을 누르면 그 내용의 화면이 열려요'},
+  'u-permission-request':{h:`<div class="mk-mobox">${MPERM('ask')}</div>${tkeys(['허용', '거부', '다시 묻기'])}<span class="mk-hint" aria-live="polite">${MPERM_SAY.start}</span>`,
+    cap:'허용·거부를 눌러 보고, 거부한 뒤 다시 묻기를 눌러 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      let st = 'ask';
+      const set = m => { box.innerHTML = MPERM(st); say.textContent = MPERM_SAY[m];
+        ks.forEach(b => { if (b.dataset.k !== '다시 묻기') b.setAttribute('aria-pressed', b.dataset.k === {yes:'허용', no:'거부'}[st]); }); };
+      ks.forEach(b => b.addEventListener('click', () => {
+        if (b.dataset.k === '다시 묻기') return set('ask' + st);
+        if (st !== 'ask') return set('done');
+        st = b.dataset.k === '허용' ? 'yes' : 'no'; set(st); }));
+      set('start'); }},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
