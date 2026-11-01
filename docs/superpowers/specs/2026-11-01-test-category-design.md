@@ -9,14 +9,14 @@
 초보자가 "테스트 돌려 줘", "TDD로 해 줘" 같은 말을 **테스트가 돌고 통과·실패가 갈리는 그림으로 바로 이해**하고, 예문을 복사해 Claude에게 정확히 지시하게 한다.
 
 성공 기준:
-- `버그 · 디버깅 현상` 다음에 `테스트` 카테고리가 생기고, 하위항목 6개에 카드 72개가 들어간다(옮긴 3개 포함).
+- `버그 · 디버깅 현상` 다음에 `테스트` 카테고리가 생기고, 하위항목 6개에 카드 71개가 들어간다(옮긴 3개 포함).
 - 모든 카드가 도판 형식이고, 테스트가 실행되는 카드는 공용 테스트 실행 모형 `runner()`로 그린다.
 - 옮긴 카드 3개의 즐겨찾기·외운 체크·옛 주소가 끊기지 않는다.
 - 7장 점검을 모두 통과한다.
 
 ## 2. 범위
 
-포함: 새 카테고리와 하위항목, 카드 72개, 기존 카드 3개 이동, 공용 모형 `runner()`, 직접 조작 카드 4개, 비유 그림 3개, 증상 색인 12개, 글꼴 서브셋 갱신, PRODUCT.md·PLAN.md 개수 표기 갱신, 점검 스크립트 확장.
+포함: 새 카테고리와 하위항목, 카드 71개, 기존 카드 3개 이동, 공용 모형 `runner()`, 직접 조작 카드 4개, 비유 그림 3개, 증상 색인 12개, 글꼴 서브셋 갱신, PRODUCT.md·PLAN.md 개수 표기 갱신, 점검 스크립트 확장.
 
 다루는 영역(사용자 선택): 테스트 개념·종류, 테스트 코드 쓰기(Jest·Vitest 기준), 브라우저 자동 테스트(Playwright 기준), 수동 QA·출시 전 점검.
 
@@ -29,7 +29,7 @@
 - 하위항목: 공통 기본·필수·모션용어 및 연출·심화 + 추가 `kind` 테스트 종류("무엇을 어디까지 확인하느냐에 따른 테스트 이름") + 공통 추천 개념.
 - 모션용어 및 연출은 "테스트가 돌면서 움직이거나 바뀌는 것"으로 채운다.
 
-## 4. 용어 목록 (72개)
+## 4. 용어 목록 (71개)
 
 `*` = 다른 카테고리에서 옮겨 옴, `▶` = 직접 조작, `◎` = 비유 그림 곁들임. 한글명은 `한글 · 풀이` 형식으로 구현 때 정한다.
 
@@ -39,8 +39,8 @@ Testing\*, Test Case, Test Suite, Test Code, Test Runner, Assertion▶, Pass / F
 ### 4.2 필수 (15)
 describe · it, expect, Matcher(toBe·toEqual), Mock▶, Stub, Spy, Test Double◎, Fixture, beforeEach · afterEach, Arrange-Act-Assert, Snapshot Test, Test File Naming(.test.js·.spec.js), Jest, Vitest, Playwright
 
-### 4.3 모션용어 및 연출 (10)
-Red-Green-Refactor, Watch Mode, Auto-waiting, Test Timeout, Test Retry, Parallel Test, Headless vs Headed, Trace Viewer, Snapshot Update, Flaky Test\*▶
+### 4.3 모션용어 및 연출 (9)
+Red-Green-Refactor, Auto-waiting, Test Timeout, Test Retry, Parallel Test, Headless vs Headed, Trace Viewer, Snapshot Update, Flaky Test\*▶
 
 ### 4.4 심화 (12)
 TDD, BDD, Test Pyramid, Test Isolation, Deterministic Test, Dependency Injection, Locator, Page Object Model, Coverage Threshold, Mutation Testing◎, Property-based Testing, Contract Testing
@@ -65,7 +65,8 @@ Happy Path vs Unhappy Path, Given-When-Then, Bug First Test(버그를 먼저 실
 | Edge Case(기본)·Reproduce·Expected vs Actual·Minimal Reproduction(버그) | 그대로 둠 → Happy Path vs Unhappy Path·Assertion·Bug First Test에서 연결 |
 | CI/CD·GitHub Actions·Pipeline(배포) | 그대로 둠 → Required Check·Broken Build에서 연결 |
 | Acceptance Criteria(AI) | 그대로 둠 → Acceptance Test·Given-When-Then에서 연결 |
-| Hot Reload(기본) | 그대로 둠 → Watch Mode에서 연결 |
+| Hot Reload(기본) | 그대로 둠(Watch Mode 카드가 이미 연결) |
+| Watch Mode(터미널/모션) | 계획 단계에서 발견. 새로 만들지 않고 Red-Green-Refactor·Vitest에서 연결 |
 | Lighthouse·Slow 3G Test(성능) | 그대로 둠 → Performance · Load Test에서 연결 |
 | Selector(프론트엔드, CSS) | 뜻이 다름 → Locator에서 연결 |
 
