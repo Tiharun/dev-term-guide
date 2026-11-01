@@ -225,6 +225,12 @@ check('aaaa', () => { const x = g.byId.get('net-dns-record').x; return /AAAA[^,]
 check('rngname', () => Object.entries(g.D).filter(([, p]) => typeof p.h === 'string' && /<label class="mk-rng">(?:(?!<\/label>)[\s\S])*<b>/.test(p.h)).map(([k]) => k).join(', '));    // 슬라이더 옆 숫자는 aria-valuetext가 읽으므로 이름에서 뺀다
 check('live', () => Object.entries(g.D).filter(([, p]) => p.init && /\.mk-hint/.test(String(p.init)) && /textContent/.test(String(p.init)) && !/class="mk-hint" aria-live="polite"/.test(String(p.h))).map(([k]) => k).join(', '));    // 조작하면 바뀌는 결과 문장은 화면 낭독기가 읽게 aria-live
 check('nwt', () => Object.entries(g.D).flatMap(([k, p]) => [...String(p.h || '').matchAll(/<span class="mk-nwt">([^<]*)<\/span>/g)].filter(m => m[1].split(/\s/).some(w => w.length > 15)).map(m => k + ':' + m[1])).join(', '));    // 세로 배치에서 긴 낱말이 옆 메시지를 한 줄 2~3글자로 좁힌다(320px 측정). 긴 값은 s로(DESIGN 네트워크 배치)
+const MB_WRONG = {'In-app Purchase': 'Checkout', 'Push Token': 'Token', 'App Lifecycle': 'Cold Start'};    // 이름만 같고 뜻이 다른 카드(git·AI·서버)로 가는 연결
+check('mbref', () => Object.entries(MB_WRONG).filter(([en, r]) => (g.find(en).r || []).includes(r)).map(([en, r]) => en + '→' + r).join(', '));
+const ALIAS = {'콜드 스타트': 'mobile-app-launch', '웜 스타트': 'mobile-app-launch', '키체인': 'mobile-secure-storage', '키스토어': 'mobile-secure-storage'};    // spec: 괄호 풀이(Cold·Warm Start, Keychain·Keystore)는 ko에
+check('alias', () => Object.entries(ALIAS).filter(([q, id]) => !vm.runInContext(`search(${JSON.stringify(q)})`, ctx).slice(0, 5).some(t => t.id === id)).map(([q]) => q).join(', '));
+check('mtword', () => Object.entries(g.D).filter(([, p]) => [...String(p.h || '').matchAll(/<span class="mk-mts[^"]*"><b aria-hidden="true">[^<]*<\/b>([^<]*)<\/span>/g)].some(m => /^[\d.,%\s]*$/.test(m[1]))).map(([k]) => k).join(', '));    // 단계 상태는 기호가 아니라 글자로 읽혀야 한다(숫자만이면 완료·진행 중을 못 읽음)
+check('itt', () => { const t = g.byId.get('mobile-internal-testing-track'), s = t.x + g.D[t.v].h; return /몇 시간/.test(s) && !/몇 분 안에/.test(s) ? '' : t.x; });    // 처음 올리면 테스트 링크가 열리기까지 몇 시간 걸릴 수 있다(support.google.com 9845334)
 const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
   const b = Buffer.from(html.match(/FONT:START[\s\S]*?base64,([A-Za-z0-9+/=]+)/)[1], 'base64'), set = new Set();
   let t;
