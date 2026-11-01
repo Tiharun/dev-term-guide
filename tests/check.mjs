@@ -61,7 +61,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'basics/core': 8, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -125,6 +125,15 @@ check('base', () => vm.runInContext(`(() => {
   if (/ A"|mk-tl|mk-nwx|mk-nwy/.test(net([{k:'pc'},{k:'pc'}], [{m:[{t:'a'}]}], {still:true}))) e.push('net still');
   const nl = net([{k:'pc'}], [], {label:'x'}); if (!nl.includes('role="group"') || !nl.includes('aria-label="x"')) e.push('net label');
   if (!net(Array(3).fill({k:'pc'})).startsWith('<div class="mk-nw s"') || net(Array(4).fill({k:'pc'})).startsWith('<div class="mk-nw s"')) e.push('net s');    // 아이콘 2~3개는 좁은 그림판에서도 가로
+  const ru = runner([{n:'더하기', s:'pass'}, {n:'빼기', s:'fail', e:'1', a:'2'}]);
+  if (!ru.includes('mk-ru') || (ru.match(/class="mk-rur /g) || []).length !== 2) e.push('runner');
+  if (!['✓', '통과', '✕', '실패', '기대', '실제', '통과 1 · 실패 1'].every(x => ru.includes(x))) e.push('runner 글자');
+  if (!/<span class="mk-ruw[^"]*" aria-hidden="true">실행 중/.test(ru)) e.push('runner 실행 중');    // "실행 중"은 읽지 않고 결과 글자만 읽는다
+  const re = runner([{n:'<b>&', s:'pass'}], {file:'<i>', code:['a<b']}); if (re.includes('<b>') || re.includes('<i>') || !re.includes('&lt;b&gt;&amp;')) e.push('runner esc');
+  if (!thr(() => runner(Array(7).fill({n:'a', s:'pass'}))) || !thr(() => runner([{n:'a', s:'ok'}]))) e.push('runner throw');
+  if (/ A"|mk-tl|mk-rux|mk-ruy|실행 중/.test(runner([{n:'a', s:'pass'}], {still:true}))) e.push('runner still');
+  const rl = runner([], {label:'x'}); if (!rl.includes('role="group"') || !rl.includes('aria-label="x"') || !rl.includes('통과 0 · 실패 0')) e.push('runner label');
+  if (!runner([{n:'a', s:'skip'}]).includes('건너뜀 1') || runner([{n:'a', s:'pass'}]).includes('건너뜀')) e.push('runner skip');
   return e.join(', ');
 })()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
@@ -133,13 +142,19 @@ check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{anima
 check('nframe', () => { const P = 10 * +html.match(/\.mk-nwm\.A,\.mk-nwd\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 네트워크 그림의 멈춘 장면은 점이 다 도착한 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => ['x', 'y'].some(a => { const m = html.match(new RegExp(`@keyframes mk-nw${a}${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`));
     return !m || +m[1] > P; })).join(', '); });
+check('rframe', () => { const P = 10 * +html.match(/\.mk-rur\.A,[^{]*\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 테스트 실행 모형의 멈춘 장면은 결과가 다 나온 뒤
+  return [1, 2, 3, 4, 5, 6].filter(k => ['x', 'y'].some(a => { const m = html.match(new RegExp(`@keyframes mk-ru${a}${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`));
+    return !m || +m[1] > P; })).join(', '); });
 check('thl', () => { const m = [...html.matchAll(/\{([coe]):'((?:[^'\\]|\\.)*)', h:'((?:[^'\\]|\\.)*)'\}/g)];    // 터미널 줄의 h는 그 줄 글자에 있어야 한다
   return !m.length ? 'h 없음' : m.filter(x => !x[2].includes(x[3])).map(x => x[3]).join(', '); });
 check('cat', () => { const c = g.CATS[1], i = g.CATS.findIndex(x => x.id === 'server'), nt = g.CATS[i + 1];
   if (!(c && c.id === 'terminal' && c.secs.map(s => s.id).join() === 'basic,core,motion,adv,cmd,tip')) return 'CATS[1] ' + (c && c.id);
   if (!(nt && nt.id === 'net' && nt.secs.map(s => s.id).join() === 'basic,core,motion,adv,proto,tip')) return 'server 다음 ' + (nt && nt.id);
+  const b = g.CATS.findIndex(x => x.id === 'bug'), ts = g.CATS[b + 1];
+  if (!(ts && ts.id === 'test' && ts.secs.map(s => s.id).join() === 'basic,core,motion,adv,kind,tip')) return 'bug 다음 ' + (ts && ts.id);
   return g.CATS[i].desc === '웹사이트를 돌리는 컴퓨터와 그 운영에 관한 말' ? '' : 'server desc'; });
 check('nv', () => g.TERMS.filter(t => t.c === 'net' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 네트워크 카드는 모두 도판 형식
+check('tv', () => g.TERMS.filter(t => t.c === 'test' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 테스트 카드는 모두 도판 형식
 check('ps', () => g.TERMS.filter(t => 'ps' in t && (typeof t.ps !== 'string' || !t.ps.trim())).map(t => t.en).join(', '));
 const PS_CMD = ['ls', 'pwd', 'touch', 'grep', 'find', 'which', 'curl', 'tail', 'ps', 'kill', '--help'];    // Windows PowerShell 5.1에서 쳐 보니 그림의 bash 결과와 달랐던 명령(Task 6 측정)
 check('pscmd', () => { const a = g.TERMS.filter(t => t.c === 'terminal' && t.s === 'cmd' && 'ps' in t).map(t => t.en).join(); return a === PS_CMD.join() ? '' : 'ps ' + a; });
