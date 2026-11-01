@@ -159,6 +159,11 @@ check('symcount', () => g.SYMPTOMS.length !== 111 ? 'length ' + g.SYMPTOMS.lengt
 check('total', () => g.TERMS.length === 1118 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
+check('signal', () => { const w = g.byId.get('net-webrtc').x, p = g.byId.get('net-p2p').x; return /신호 서버/.test(w) && /서버/.test(p) ? '' : w + ' / ' + p; });    // WebRTC는 연결 정보(SDP·ICE)를 신호 서버로 주고받아야 연결된다(MDN Signaling and video calling)
+check('aaaa', () => { const x = g.byId.get('net-dns-record').x; return /AAAA[^,]*RFC 3596/.test(x) ? '' : x; });    // u는 RFC 1035라 AAAA 출처(RFC 3596)를 본문에 적는다
+check('rngname', () => Object.entries(g.D).filter(([, p]) => typeof p.h === 'string' && /<label class="mk-rng">(?:(?!<\/label>)[\s\S])*<b>/.test(p.h)).map(([k]) => k).join(', '));    // 슬라이더 옆 숫자는 aria-valuetext가 읽으므로 이름에서 뺀다
+check('live', () => Object.entries(g.D).filter(([, p]) => p.init && /\.mk-hint/.test(String(p.init)) && /textContent/.test(String(p.init)) && !/class="mk-hint" aria-live="polite"/.test(String(p.h))).map(([k]) => k).join(', '));    // 조작하면 바뀌는 결과 문장은 화면 낭독기가 읽게 aria-live
+check('nwt', () => Object.entries(g.D).flatMap(([k, p]) => [...String(p.h || '').matchAll(/<span class="mk-nwt">([^<]*)<\/span>/g)].filter(m => m[1].split(/\s/).some(w => w.length > 15)).map(m => k + ':' + m[1])).join(', '));    // 세로 배치에서 긴 낱말이 옆 메시지를 한 줄 2~3글자로 좁힌다(320px 측정). 긴 값은 s로(DESIGN 네트워크 배치)
 const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
   const b = Buffer.from(html.match(/FONT:START[\s\S]*?base64,([A-Za-z0-9+/=]+)/)[1], 'base64'), set = new Set();
   let t;

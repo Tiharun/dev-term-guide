@@ -2454,7 +2454,7 @@ T('net','core',[
  {en:'Proxy',ko:'프록시 · 대신 요청하는 서버',d:'내 요청을 대신 받아 목적지에 전달해 주는 중간 서버예요.',x:'목적지 서버에는 내 PC 대신 프록시 주소가 보여요.',p:'회사 프록시 때문에 npm install이 안 될 때 설정 방법을 알려줘',r:['Reverse Proxy','VPN'],l:2,o:0,v:'u-proxy'},
  {en:'VPN',ko:'VPN · 암호화된 전용 통로',d:'인터넷 위에 암호화된 통로를 만들어, 멀리서도 회사 네트워크 안에 있는 것처럼 접속하게 해 주는 기술이에요.',p:'VPN을 켜면 왜 일부 사이트가 느려지는지 설명해줘',r:['Man-in-the-Middle','Encryption'],l:1,o:0,v:'u-vpn'},
  {en:'Hostname',ko:'호스트 이름 · 기기를 부르는 이름',d:'네트워크에서 기기나 서버를 숫자 대신 부르는 이름이에요. 주소창에서는 :// 뒤부터 포트·경로 앞까지예요.',p:'이 주소에서 호스트 이름이 어디까지인지 짚어줘',r:['Localhost','DNS'],l:1,o:0,v:'u-hostname'},
- {en:'DNS Record',ko:'DNS 레코드 · 이름과 값을 적은 줄',d:'DNS 서버에 적힌 정보 한 줄이에요. 이름과 그 이름이 가리키는 값을 짝지어 둬요.',x:'A는 IPv4 주소, AAAA는 IPv6 주소, CNAME은 다른 이름, MX는 메일 서버를 가리켜요.',p:'내 도메인에 연결된 DNS 레코드를 확인하는 방법을 알려줘',r:['DNS','Domain'],l:2,o:1,u:RFC(1035),v:'u-dns-record'},
+ {en:'DNS Record',ko:'DNS 레코드 · 이름과 값을 적은 줄',d:'DNS 서버에 적힌 정보 한 줄이에요. 이름과 그 이름이 가리키는 값을 짝지어 둬요.',x:'A는 IPv4 주소, AAAA는 IPv6 주소(RFC 3596), CNAME은 다른 이름, MX는 메일 서버를 가리켜요.',p:'내 도메인에 연결된 DNS 레코드를 확인하는 방법을 알려줘',r:['DNS','Domain'],l:2,o:1,u:RFC(1035),v:'u-dns-record'},
  {en:'MAC Address',ko:'MAC 주소 · 장치마다 붙은 번호',d:'기기의 네트워크 장치마다 붙은 번호예요. 같은 네트워크 안에서 기기를 구분할 때 써요.',x:'IP 주소는 네트워크를 옮기면 바뀌어요. MAC 주소는 장치에 붙어 있지만, 요즘 휴대폰·노트북은 와이파이마다 다른 주소를 쓰기도 해요.',p:'내 PC의 MAC 주소를 확인하는 방법을 알려줘',r:['IP Address','Router'],l:2,o:0,v:'u-mac-address'},
 ]);
 T('net','motion',[
@@ -2481,7 +2481,7 @@ T('net','adv',[
  {en:'QUIC',ko:'QUIC · UDP 위의 빠른 연결',d:'UDP 위에서 연결 맺기와 암호화를 한 번에 하는 전송 방식이에요. HTTP/3가 이걸 써요.',x:'TCP와 TLS를 따로 맺을 때보다 첫 데이터를 빨리 보낼 수 있어요.',p:'내 사이트가 HTTP/3(QUIC)로 연결되는지 확인하는 방법을 알려줘',r:['HTTP/2','UDP','TLS Handshake'],l:3,o:1,u:RFC(9000),v:'u-quic'},
  {en:'DNS Resolver',ko:'DNS 리졸버 · 대신 물어봐 주는 서버',d:'내 기기 대신 여러 DNS 서버에 차례로 물어 도메인의 IP 주소를 찾아 주는 서버예요.',x:'찾은 답은 TTL 동안 기억해 두고, 같은 질문에는 바로 답해요.',p:'내 PC가 어떤 DNS 리졸버를 쓰는지 확인하는 방법을 알려줘',r:['DNS','DNS Record','DNS Propagation'],l:3,o:0,v:'u-dns-resolver'},
  {en:'Port Forwarding',ko:'포트 포워딩 · 밖에서 들어오는 길',d:'공유기에 규칙을 넣어, 밖에서 특정 포트로 온 요청을 집 안의 한 기기로 넘겨 주는 설정이에요.',x:'규칙이 없으면 공유기는 밖에서 온 요청을 어느 기기에 줄지 몰라 넘기지 않아요.',p:'밖에서 우리 집 개발 서버에 들어올 수 있게 포트 포워딩하는 방법을 알려줘',r:['Port','NAT','Router'],l:2,o:0,v:'u-port-forwarding'},
- {en:'P2P',ko:'P2P · 기기끼리 직접',d:'서버를 거치지 않고 기기끼리 직접 데이터를 주고받는 방식이에요.',x:'영상 통화나 파일 공유에 쓰여요. 공유기의 NAT 때문에 직접 연결이 막힐 때도 있어요.',p:'두 브라우저가 서버 없이 직접 연결되게 만드는 방법을 알려줘',r:['NAT','Port Forwarding','WebRTC'],l:2,o:0,v:'u-p2p'},
+ {en:'P2P',ko:'P2P · 기기끼리 직접',d:'서버를 거치지 않고 기기끼리 직접 데이터를 주고받는 방식이에요.',x:'영상 통화나 파일 공유에 쓰여요. 처음 서로를 찾을 때는 서버 도움을 받기도 하고, 공유기의 NAT 때문에 직접 연결이 막힐 때도 있어요.',p:'두 브라우저가 직접 연결되게 만드는 방법을 알려줘',r:['NAT','Port Forwarding','WebRTC'],l:2,o:0,v:'u-p2p'},
 ]);
 T('net','proto',[
  {en:'Well-known Port',ko:'잘 알려진 포트 · 0~1023번',d:'널리 쓰는 서비스에 미리 정해 둔 0번부터 1023번까지의 포트예요.',x:'SSH는 22번, DNS는 53번, HTTPS는 443번처럼 정해져 있어요.',p:'내 서버에서 지금 열려 있는 잘 알려진 포트를 확인하는 방법을 알려줘',r:['Port','SSH'],l:2,o:1,u:RFC(6335),v:'u-well-known-port'},
@@ -2493,7 +2493,7 @@ T('net','proto',[
  {en:'FTP / SFTP',ko:'FTP · SFTP · 파일 보내기',d:'서버와 파일을 주고받는 규칙이에요. FTP는 21번, SFTP는 SSH 연결(22번) 안에서 움직여요.',x:'이름은 비슷해도 SFTP는 FTP와 다른 규칙이에요.',p:'서버에 파일을 올릴 때 SFTP로 접속하는 방법을 알려줘',r:['SSH','Port'],l:2,o:1,u:RFC(959),v:'u-ftp-sftp'},
  {en:'SMTP',ko:'SMTP · 메일 보내기',d:'메일을 보내고 메일 서버끼리 넘겨주는 규칙이에요.',x:'메일 앱은 보통 587번으로 메일을 맡기고, 메일 서버끼리는 25번으로 넘겨요.',p:'회원가입 확인 메일을 SMTP로 보내게 설정해줘',r:['IMAP / POP3','Email Verification','Port'],l:2,o:1,u:RFC(5321),v:'u-smtp'},
  {en:'IMAP / POP3',ko:'IMAP · POP3 · 메일 받기',d:'메일 서버에 있는 메일을 가져오는 규칙이에요.',x:'IMAP은 메일을 서버에 둔 채 다루고, POP3는 보통 내려받은 뒤 서버에서 지워요.',p:'메일 앱을 IMAP으로 연결하는 설정 값을 알려줘',r:['SMTP','Port'],l:2,o:1,u:RFC(9051),v:'u-imap-pop3'},
- {en:'WebRTC',ko:'WebRTC · 브라우저끼리 직접',d:'브라우저끼리 중간 서버 없이 영상·음성·데이터를 주고받는 기술이에요.',x:'영상 통화나 화면 공유 웹앱에서 써요.',p:'두 브라우저가 WebRTC로 영상 통화를 하게 만들어줘',r:['WebSocket','P2P'],l:3,o:1,u:MDN('Web/API/WebRTC_API'),v:'u-webrtc'},
+ {en:'WebRTC',ko:'WebRTC · 브라우저끼리 직접',d:'브라우저끼리 중간 서버 없이 영상·음성·데이터를 주고받는 기술이에요.',x:'영상 통화나 화면 공유 웹앱에서 써요. 처음 연결할 때는 서로의 연결 정보를 전해 주는 신호 서버가 필요해요.',p:'두 브라우저가 WebRTC로 영상 통화를 하게 만들어줘',r:['WebSocket','P2P'],l:3,o:1,u:MDN('Web/API/WebRTC_API'),v:'u-webrtc'},
 ]);
 T('net','tip',[
  {en:'Port Already in Use',ko:'포트 이미 사용 중',d:'띄우려는 포트를 다른 프로그램이 이미 쓰고 있어 서버를 켤 수 없는 상태예요.',x:'Node에서는 EADDRINUSE 오류로 보여요. 켜 둔 서버를 끄거나 다른 포트로 띄우면 돼요.',p:'3000번 포트가 이미 사용 중이래. 어떤 프로그램이 쓰는지 찾아서 해결해줘',r:['Port','Dev Server Port'],l:1,o:0,v:'u-port-already-in-use'},
@@ -4862,7 +4862,7 @@ Object.assign(D, {
   'u-ping':{h:net([{k:'pc'}, {k:'server'}], [{m:[{t:'에코 요청'}, {t:'에코 응답 · 왕복 23ms', r:1}]}]), m:1, cap:'ping은 에코 요청을 보내고 응답이 돌아오기까지 걸린 시간을 재요. 23ms는 예시예요'},
   'u-latency':{h:vs('가까운 서버', net([{k:'pc'}, {k:'server', s:'왕복 예: 20ms'}], [{m:[{t:'요청'}, {t:'응답', r:1}]}]), '먼 서버', net([{k:'pc'}, {k:'cloud'}, {k:'server', s:'왕복 예: 200ms'}], [{m:[{t:'요청'}, {t:'응답', r:1}]}, {m:[{t:'요청'}, {t:'응답', r:1}]}])), m:1,
     cap:'같은 요청도 서버가 멀면 오가는 데 더 오래 걸려요. ms 숫자는 예시예요'},
-  'u-packet-loss':{h:`<div class="mk-nwbox">${NLOSS(20)}</div><label class="mk-rng">손실률<input type="range" min="0" max="50" step="10" value="20" aria-valuetext="20%"><b>20%</b></label><span class="mk-hint" aria-live="polite">${NLOSS_SAY(20)}</span>`, m:1,
+  'u-packet-loss':{h:`<div class="mk-nwbox">${NLOSS(20)}</div><label class="mk-rng">손실률<input type="range" min="0" max="50" step="10" value="20" aria-valuetext="20%"><b aria-hidden="true">20%</b></label><span class="mk-hint" aria-live="polite">${NLOSS_SAY(20)}</span>`, m:1,
     cap:'손실률을 올리면 가는 길에 사라지는 조각이 늘고, 그만큼 다시 보내야 해요',
     init: s => { const box = s.querySelector('.mk-nwbox'), say = s.querySelector('.mk-hint'), rg = s.querySelector('input'), out = s.querySelector('.mk-rng b');
       rg.addEventListener('input', () => { const r = +rg.value; box.innerHTML = NLOSS(r); say.textContent = NLOSS_SAY(r); out.textContent = r + '%'; rg.setAttribute('aria-valuetext', r + '%'); }); }},
@@ -4940,7 +4940,7 @@ Object.assign(D, {
   'u-imap-pop3':{h:vs('IMAP', NPAIRS([['143', '잠그지 않은 연결'], ['993', '처음부터 TLS로 잠금']]), 'POP3', NPAIRS([['110', '잠그지 않은 연결'], ['995', '처음부터 TLS로 잠금']])),
     cap:'두 규칙 모두 처음부터 잠근 연결을 쓰는 번호가 따로 있어요'},
   'u-webrtc':{h:net([{k:'pc', t:'브라우저 A'}, {k:'pc', t:'브라우저 B'}], [{m:[{t:'영상'}, {t:'음성', r:1}, {t:'데이터'}]}]), m:1,
-    cap:'중간 서버 없이 브라우저끼리 영상·음성·데이터를 바로 주고받을 수 있어요'},
+    cap:'연결을 맺고 나면 브라우저끼리 영상·음성·데이터를 바로 주고받을 수 있어요'},
 });
 
 /* net: tip — EADDRINUSE 줄은 Node 22.21에서 같은 포트에 서버 두 개를 띄워 잰 문구(잰 포트 5199, 그림의 3000은 예시). 거부 화면은 Playwright Chromium(ko-KR)으로 듣는 프로그램이 없는 127.0.0.1 포트를 열어 잰 글자(포트는 예시). hosts 경로는 이 PC(Windows)와 WSL에서 확인, hosts 내용은 예시. ipconfig는 Microsoft Learn, Vite --host는 vite.dev server.host, 캡티브 포털 정의는 RFC 8952. 주소는 사설(RFC 1918)·문서용(RFC 5737) 예시 */
