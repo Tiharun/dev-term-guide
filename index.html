@@ -422,7 +422,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-mopb{display:grid;grid-template-columns:1fr 1fr;margin:4px -10px 0;border-top:1px solid var(--rule)}.mk-mopb>span{padding:7px 0;font-weight:800;color:var(--mark-text)}.mk-mopb>span+span{border-left:1px solid var(--rule)}
 .mk-mocam{flex:1;min-height:40px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:#fff;font-size:11.5px}.mk-mosh{flex:none;align-self:center;width:34px;height:34px;border:3px solid var(--ink);border-radius:50%;background:var(--plate)}
 .mk-mono{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}.mk-moweb{flex:1;display:flex;flex-direction:column;gap:3px;padding:6px;font-size:11.5px;line-height:1.4}.mk-moweb .mk-url{margin:0 0 3px}.mk-moweb.mk-hl{outline-offset:-2px}
-.mk-mocf{display:flex;flex-direction:column;align-items:center;gap:4px;width:min(340px,100%)}.mk-mocf>.mk-card,.mk-mocf>.mk-two{width:100%}.mk-mocf .mk-card{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:12px}.mk-moar{line-height:1;color:var(--muted)}
+.mk-mocf{display:flex;flex-direction:column;align-items:center;gap:4px;width:min(340px,100%)}.mk-mocf>.mk-card,.mk-mocf>.mk-two{width:100%}.mk-mocf>.mk-tablet{max-width:100%}.mk-mocf .mk-card{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:12px}.mk-moar{line-height:1;color:var(--muted)}
 /* 모바일 필수 부품: 코드 블록, 개발 도구 막대, 쌓인 화면·앱 상태 옆 표시, 오프라인 띠, 두 플랫폼 비교 줄, 링크 말풍선 */
 .mk-mocf>.mk-mocd,.mk-mocf>.mk-moide{width:100%}.mk-mocd{margin:0;padding:8px 10px;border-radius:8px;background:var(--ink);color:#fff;font:11.5px/1.6 var(--mono);text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
 .mk-moide{display:flex;flex-direction:column;gap:4px}.mk-mobar{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:11.5px}.mk-mobar>em{font-style:normal;padding:1px 8px;border:1px solid var(--rule);border-radius:999px;background:var(--plate)}.mk-mobar>.mk-hl{padding:1px 6px;border-radius:6px;font-weight:800}
@@ -2372,6 +2372,18 @@ T('mobile','store',[
  {en:'Privacy Label / Data Safety',ko:'개인정보 라벨·데이터 보안 · 모으는 정보 밝히기',d:'앱이 어떤 개인정보를 모으고 어디에 쓰는지 스토어 페이지에 밝히는 항목이에요. Apple은 앱 개인정보 보호(App Privacy), Google은 데이터 보안(Data safety)이라고 불러요.',x:'개발자가 관리 화면에서 답한 내용이 스토어 앱 페이지에 보여요. Apple은 새 앱과 업데이트를 제출할 때 이 답이 있어야 하고, 앱에 넣은 다른 회사 코드가 모으는 정보도 적어요(2026-11 확인).',p:'우리 앱이 모으는 정보를 정리해서 App Privacy와 Data safety 답을 만들어줘',r:['Personal Data','Privacy Policy'],l:2,o:1,u:'https://developer.apple.com/support/app-privacy-on-the-app-store/',v:'u-privacy-label-data-safety'},
  {en:'Staged Rollout',ko:'단계적 출시 · 일부에게 먼저 내보내기',d:'새 버전을 모든 사용자에게 한 번에 보내지 않고, 일부에게 먼저 보낸 뒤 조금씩 늘리는 출시 방법이에요.',x:'Apple은 자동 업데이트를 켠 사용자에게 7일에 걸쳐 1%·2%·5%·10%·20%·50%·100%로 늘려요. Google Play는 비율을 직접 정하고, 문제가 생기면 멈출 수 있어요(2026-11 확인). 그래서 아직 업데이트를 못 받은 사람도 있어요.',p:'이번 업데이트를 단계적 출시로 10%부터 내보내줘',r:['Canary Release','Feature Flag','Rollback Deploy'],l:2,o:1,u:'https://developer.apple.com/help/app-store-connect/update-your-app/release-a-version-update-in-phases',v:'u-staged-rollout'},
  {en:'OTA Update',ko:'OTA 업데이트 · 스토어 없이 코드 바꾸기',d:'스토어에 새 버전을 올리지 않고, 이미 깔린 앱이 인터넷으로 새 코드를 받아 바뀌게 하는 거예요.',x:'Expo는 eas update로 JavaScript·스타일·이미지를 바꿔 보내요. 네이티브 코드나 권한을 바꾸면 새로 빌드해 스토어에 올려야 하고, 스토어 규칙도 그대로 지켜요(2026-11 확인).',p:'오타를 고친 화면을 eas update로 바로 내보내줘',r:['Release','Hotfix'],l:3,o:1,u:'https://docs.expo.dev/eas/update/introduction/',v:'u-ota-update'},
+]);
+T('mobile','tip',[
+ {en:'App vs Web',ko:'앱 대 웹 · 무엇으로 만들지 고르기',d:'같은 서비스를 휴대폰에 까는 앱으로 만들지, 주소로 여는 웹으로 만들지 고르는 일이에요.',x:'웹은 설치 없이 주소로 바로 열리고, 고치면 바로 바뀌어요. 앱은 스토어에서 받아야 하지만 알림, 카메라 같은 기기 기능을 더 깊게 써요. 흔히 웹으로 먼저 시험해 보고, 기기 기능이 꼭 필요할 때 앱을 만들어요.',p:'이 서비스를 앱으로 만들지 웹으로 만들지 장단점을 비교해줘',r:['PWA','Responsive Web Design','Mobile First'],l:1,o:0,v:'u-app-vs-web'},
+ {en:'Ask Permission in Context',ko:'필요한 순간에 권한 묻기 · 쓸 때 물어보기',d:'앱을 켜자마자 권한을 몰아서 묻지 않고, 그 기능을 쓰려는 순간에 물어보는 방법이에요.',x:'사진 버튼을 누를 때 카메라를 물으면 왜 필요한지 바로 알아서 허용하기 쉬워요. 보통 한 번 거절되면 다시 묻기 어려워서, 그 기능을 쓸 때 설정 화면으로 가는 길을 알려 줘요.',p:'앱 시작할 때 묻는 권한을 없애고, 기능을 쓰는 순간에 묻도록 바꿔줘',r:['Permission Request','Permission'],l:1,o:0,v:'u-ask-permission-in-context'},
+ {en:'Test on Real Device',ko:'실제 기기 테스트 · 내 휴대폰으로 확인',d:'시뮬레이터·에뮬레이터만 믿지 않고 진짜 휴대폰에 깔아서 확인하는 거예요.',x:'시뮬레이터는 컴퓨터 성능으로 돌고 마우스로 눌러서, 실제 휴대폰의 속도, 손가락으로 누르는 느낌, 카메라 같은 장치와 다를 수 있어요. 흔히 출시 전에 iPhone과 Android 휴대폰을 한 대씩은 써 봐요.',p:'시뮬레이터 말고 실제 휴대폰에서도 확인해줘',r:['Check on mobile','E2E Test','Manual Testing','Simulator vs Emulator'],l:1,o:0,v:'u-test-on-real-device'},
+ {en:'Minimum OS Version',ko:'최소 OS 버전 · 지원할 가장 낮은 버전',d:'앱이 돌아가는 가장 낮은 iOS·Android 버전이에요. 이보다 오래된 휴대폰에는 깔리지 않아요.',x:'Android는 minSdk보다 낮은 버전의 기기에는 설치되지 않고, Google Play도 그 기기에는 앱을 보여 주지 않아요(2026-11 확인). 최소 버전을 올리면 새 기능은 쓰기 쉽지만, 옛 휴대폰 사용자는 업데이트를 못 받아요.',p:'이 앱의 최소 iOS·Android 버전이 어디에 적혀 있는지 찾아줘',r:['Force Update','iOS','Android'],l:2,o:1,u:'https://developer.android.com/guide/topics/manifest/uses-sdk-element',v:'u-minimum-os-version'},
+ {en:'App Size',ko:'앱 크기 · 내려받는 용량',d:'스토어에서 앱을 받을 때 내려받는 용량과, 깔린 뒤 휴대폰에서 차지하는 용량이에요.',x:'크기가 크면 데이터나 저장 공간이 걱정돼 받기를 미루기 쉬워요. 안 쓰는 그림과 라이브러리를 빼고, Android는 AAB로 올려 기기에 맞는 것만 받게 해요.',p:'앱 크기를 키우는 큰 파일과 안 쓰는 라이브러리를 찾아 줄여줘',r:['Bundle Size','IPA / AAB'],l:2,o:0,v:'u-app-size'},
+ {en:'Crash Reporting',ko:'충돌 보고 · 앱이 꺼진 기록 모으기',d:'사용자 휴대폰에서 앱이 갑자기 꺼지면, 그 순간의 기록을 모아 개발자에게 보여 주는 도구예요.',x:'Firebase Crashlytics는 꺼진 지점의 기록(스택 트레이스)을 보고 같은 원인끼리 하나의 문제로 묶어, 몇 명이 겪었는지 보여 줘요(2026-11 확인). 사용자가 말해 주지 않아도 어디서 꺼졌는지 알 수 있어요.',p:'앱이 꺼지면 기록이 남게 충돌 보고 도구를 연결해줘',r:['Crash','Jank','Stack Trace'],l:2,o:1,u:'https://firebase.google.com/docs/crashlytics',v:'u-crash-reporting'},
+ {en:'Tablet Support',ko:'태블릿 지원 · 큰 화면에 맞추기',d:'휴대폰 화면을 그대로 늘리지 않고, 태블릿처럼 넓은 화면에 맞게 배치를 바꾸는 거예요.',x:'넓은 화면에서는 목록과 상세를 나란히 두거나, 아래 탭 대신 옆 메뉴를 써요. 가로·세로 회전과 폴더블도 함께 확인해요. Google Play는 큰 화면 기준을 맞추지 못한 앱 페이지에 경고를 보여 줘요(2026-11 확인).',p:'태블릿에서는 목록과 상세가 나란히 보이게 화면을 나눠줘',r:['Touch Target','Orientation','Foldable','Viewport'],l:2,o:1,u:'https://developer.android.com/docs/quality-guidelines/adaptive-app-quality',v:'u-tablet-support'},
+ {en:'VoiceOver / TalkBack',ko:'보이스오버·톡백 · 화면을 읽어 주는 기능',d:'화면을 보기 어려운 사람을 위해 휴대폰이 화면 내용을 소리로 읽어 주는 기능이에요. iPhone은 VoiceOver, Android는 TalkBack이에요.',x:'그림만 있는 버튼은 이름이 없으면 무엇을 하는지 알 수 없게 읽혀요. React Native는 accessibilityLabel로 읽어 줄 이름을 붙여요(2026-11 확인). 직접 켜고 앱을 한 번 써 보면 빠진 곳이 잘 보여요.',p:'그림만 있는 버튼에 화면 읽기용 이름을 붙여줘',r:['Web Accessibility','Accessibility Test','Alt Text'],l:2,o:1,u:'https://reactnative.dev/docs/accessibility',v:'u-voiceover-talkback'},
+ {en:'Ratings & Reviews',ko:'별점과 리뷰 · 스토어 평가 받기',d:'사용자가 스토어에 남기는 별점과 글이에요. 앱 안에서 스토어 평가 창을 띄워 부탁할 수 있어요.',x:'평가 창은 스토어가 띄우고, 언제 보일지도 스토어가 정해요. Apple은 1년에 최대 3번만 보여 주고, Google은 버튼을 눌러 이 창을 띄우지 말라고 안내해요(2026-11 확인). 보통 주문을 마친 뒤처럼 기분 좋은 순간에 부탁해요.',p:'주문을 세 번 마친 사용자에게 스토어 평가 창을 띄워줘',r:['Store Listing','Rating','Feedback'],l:2,o:1,u:'https://developer.android.com/guide/playcore/in-app-review',v:'u-ratings-reviews'},
+ {en:'Expo Go',ko:'엑스포 고 · 빌드 없이 열어 보는 앱',d:'휴대폰에 깔아 두면, 내 컴퓨터에서 띄운 Expo 프로젝트를 빌드하지 않고 바로 열어 볼 수 있는 앱이에요.',x:'처음 배우거나 빠르게 시험할 때 좋아요. 다만 Expo SDK에 들어 있는 네이티브 기능만 쓸 수 있고 앱 이름과 아이콘도 내 것이 아니라서, 실제로 낼 앱은 개발 빌드로 만들어요(2026-11 확인).',p:'npx expo start로 띄워서 내 휴대폰의 Expo Go로 열어 보게 해줘',r:['Expo','Development Build','React Native'],l:1,o:1,u:'https://docs.expo.dev/develop/development-builds/introduction/',v:'u-expo-go'},
 ]);
 </script>
 <script>
@@ -5850,6 +5862,46 @@ Object.assign(D, {
       + track([{t:'코드 고침', s:'done', n:'JavaScript·이미지'}, {t:'올리기', s:'done', n:'스토어 심사 없음'}, {t:'앱이 새 코드 받음', s:'now'}],
       {label:'eas update로 올리면 스토어를 거치지 않고 깔린 앱이 새 코드를 받아요'}) + '</div>', m:1,
     cap:'JavaScript·이미지만 고쳤다면 스토어를 거치지 않고 깔린 앱이 새 코드를 받아요'},
+});
+/* mobile: tip — 공식 문서 확인: minSdk보다 낮은 기기에는 설치 안 됨·Google Play가 거름(developer.android.com/guide/topics/manifest/uses-sdk-element) ·
+   Crashlytics는 스택 트레이스로 같은 원인을 묶음(firebase.google.com/docs/crashlytics) · 큰 화면은 옆 메뉴, 기준 미달 앱에 Play 경고(developer.android.com/docs/quality-guidelines/adaptive-app-quality) ·
+   accessibilityLabel을 VoiceOver·TalkBack이 읽음(reactnative.dev/docs/accessibility) · 평가 창은 1년 3번(developer.apple.com requestReview), 버튼으로 띄우지 않음(developer.android.com/guide/playcore/in-app-review) ·
+   Expo Go는 SDK에 든 네이티브만(docs.expo.dev/develop/development-builds/introduction), 앱 이름·아이콘 못 바꿈(github.com/expo/fyi expo-go-usage) · AAB(developer.android.com/guide/app-bundle).
+   예시: 상품·가격, 버전 번호, 앱 크기, 사용자 수, 파일 이름 */
+const MAPERM = (what, why) => `<div class="mk-modim"><div class="mk-mopm"><b>‘장보기’에서 ${what}에 접근하려고 해요</b>${why}<div class="mk-mopb"><span>거부</span><span>허용</span></div></div></div>`;
+const MHEART = '<svg width="14" height="13" viewBox="0 0 14 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M7 12S1 8.2 1 4.3A3 3 0 0 1 7 3a3 3 0 0 1 6 1.3C13 8.2 7 12 7 12z"/></svg>';
+const MREAD = (say, note) => `<span class="mk-li">우유 1L · 2,900원</span><span class="mk-btn ghost mk-hl">${MHEART}</span><span class="mk-help">읽어 주는 말: “${say}”</span><span class="mk-help">${note}</span>`;
+Object.assign(D, {
+  'u-app-vs-web':{h:MDUO(['여는 방법', '설치', '고친 뒤'], [['웹', '주소를 눌러 열기', '필요 없음', '바로 바뀜'], ['앱', '아이콘을 눌러 열기', '스토어에서 받기', '업데이트를 받아야 바뀜']]),
+    cap:'웹은 주소로 바로 열고, 앱은 스토어에서 받아 깔아요. 고친 내용이 닿는 길도 달라요'},
+  'u-ask-permission-in-context':{h:`<div class="cmp"><div class="bad" data-l="켜자마자 몰아서 묻기">${app([{t:'장보기', b:MAPERM('위치', '앱을 켜자마자 세 번째로 묻는 권한이에요')}], {still:true, label:'앱을 켜자마자 위치 권한을 묻는 창'})}</div>`
+      + `<div class="good" data-l="쓸 때 묻기">${app([{t:'리뷰 쓰기', b:'<span class="mk-li">우유 1L · 별 5개</span><span class="mk-btn ghost">사진 찍어 붙이기</span>', tap:[50, 40]},
+      {t:'리뷰 쓰기', b:MAPERM('카메라', '리뷰에 붙일 사진을 찍을 때 써요'), go:'fade'}],
+      {label:'사진 찍어 붙이기를 누르는 순간 카메라 권한을 물어요'})}</div></div>`, m:1,
+    cap:'켜자마자 몰아서 물으면 왜 필요한지 몰라요. 사진 버튼을 누를 때 물으면 이유가 바로 보여요'},
+  'u-test-on-real-device':{h:track([{t:'시뮬레이터', s:'done', n:'마우스로 눌러 봄'}, {t:'내 휴대폰', s:'fail', w:'문제', n:'손가락엔 버튼이 작아요'}, {t:'고쳐서 다시 확인', s:'wait'}],
+      {label:'시뮬레이터에서는 됐지만 내 휴대폰에서 버튼이 작은 문제를 찾았어요'}), m:1,
+    cap:'시뮬레이터에서 괜찮아도 손가락으로 눌러 보면 다른 문제가 보여요'},
+  'u-minimum-os-version':{h:`<div class="mk-mocf">${MDUO(['앱의 최소 버전', '설치'], [['Android 14 휴대폰', 'Android 8', '받을 수 있어요'], ['Android 7 휴대폰', 'Android 8', '목록에 안 보여요']])}<span class="mk-help">최소 버전은 예시예요</span></div>`,
+    cap:'앱이 정한 최소 버전보다 낮은 휴대폰에는 앱이 깔리지 않아요'},
+  'u-app-size':{h:`<div class="mk-mocf">${MDUO(['크기', '들어 있는 것'], [['줄이기 전', '180MB', '안 쓰는 큰 그림·라이브러리까지'], ['줄인 뒤', '60MB', '쓰는 것만 · 기기에 맞게 나눠 받기']])}<span class="mk-help">크기는 예시예요</span></div>`,
+    cap:'안 쓰는 것을 빼고 기기에 맞는 것만 받게 하면 내려받는 용량이 줄어요'},
+  'u-crash-reporting':{h:browser('<b>Crashlytics · 문제</b><span class="mk-li">TypeError · CartScreen.js 42줄</span><span class="mk-li">사용자 128명 · 새로 생김</span><span class="mk-li">Android 14 · 1.2.0 (42)</span>', {url:'console.firebase.google.com'}),
+    cap:'앱이 꺼진 곳과 겪은 사람 수, 기기·버전을 한 문제로 묶어 보여 줘요'},
+  'u-tablet-support':{h:'<div class="mk-mocf"><div class="mk-tablet"><div class="mk-scr"><nav class="mk-md"><span class="on"><b>우유 1L</b>2,900원</span><span><b>달걀 10구</b>4,500원</span><span><b>두유</b>1,800원</span></nav>'
+      + '<div class="mk-scr"><b>우유 1L</b><span class="mk-help">오늘 도착</span><span class="mk-btn">담기</span></div></div></div><span class="mk-help">휴대폰에서는 목록을 누르면 상세로 넘어가요</span></div>',
+    cap:'넓은 화면에서는 목록과 상세를 나란히 보여 줘요. 휴대폰 화면을 그대로 늘리지 않아요'},
+  'u-voiceover-talkback':{h:`<div class="cmp"><div class="bad" data-l="이름 없음">${app([{t:'상품', b:MREAD('버튼', '무엇을 하는 버튼인지 몰라요')}], {still:true, label:'이름 없는 하트 버튼을 버튼이라고만 읽는 화면'})}</div>`
+      + `<div class="good" data-l="이름 붙임">${app([{t:'상품', b:MREAD('찜하기, 버튼', 'accessibilityLabel에 적은 이름이에요')}], {still:true, label:'하트 버튼을 찜하기 버튼이라고 읽는 화면'})}</div></div>`,
+    cap:'그림만 있는 버튼에 이름을 붙여야 화면 읽기 기능이 무슨 버튼인지 말해 줘요'},
+  'u-ratings-reviews':{h:app([{t:'주문 내역', b:'<span class="mk-li">우유 1L · 배송 완료</span><span class="mk-help">세 번째 주문을 잘 받았어요</span>'},
+      {t:'주문 내역', b:'<div class="mk-modim"><div class="mk-mopm"><b>‘장보기’가 마음에 드세요?</b>별을 눌러 평가해 주세요<span class="mk-hl">☆☆☆☆☆</span><div class="mk-mopb"><span>나중에</span></div></div></div>', go:'fade'}],
+      {label:'주문을 받은 뒤 스토어 평가 창이 떠요'}), m:1,
+    cap:'기분 좋은 순간에 스토어 평가 창을 띄워요. 창이 뜰지는 스토어가 정해요'},
+  'u-expo-go':{h:`<div class="mk-mocf">${term([{c:'npx expo start', h:'npx expo start'}], {still:true, end:false})}<b class="mk-moar" aria-hidden="true">↓</b>`
+      + app([{t:'Expo Go', b:'<span class="mk-li">최근 연 프로젝트</span><span class="mk-li"><b>장보기</b> · 개발 중</span><span class="mk-help">내 컴퓨터에서 띄운 프로젝트예요</span>', tap:[50, 40]}, {t:'장보기', b:MSHOP, go:'fade'}],
+      {label:'Expo Go에서 장보기 프로젝트를 누르면 앱이 바로 열려요'}) + '</div>', m:1,
+    cap:'컴퓨터에서 띄운 프로젝트를 휴대폰의 Expo Go로 빌드 없이 열어 봐요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
