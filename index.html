@@ -2653,7 +2653,6 @@ T('deploy','env',[
 ]);
 T('deploy','tip',[
  {en:'Deploy Checklist',ko:'배포 체크리스트',d:'배포 전에 확인할 항목 목록. 빌드, 링크, 모바일, 오류.',p:'배포 전에 확인할 체크리스트를 만들고 하나씩 확인해줘',r:['Deploy'],l:1,o:0,v:'checkbox'},
- {en:'Smoke Test',ko:'스모크 테스트 · 기본 동작 확인',d:'배포 직후 핵심 기능만 빠르게 눌러 보는 확인.',p:'배포 후 로그인·결제만 스모크 테스트해줘',r:['Testing'],l:2,o:0,v:'checkbox'},
  {en:'Friday Deploy',ko:'금요일 배포',d:'문제가 생겨도 대응하기 어려운 금요일 늦은 배포를 피하자는 현업 농담 겸 습관.',j:'"금요일엔 배포 안 해요"',p:'큰 변경은 금요일 저녁 말고 다음 주 초에 배포하자',r:['Deploy'],l:1,o:0,jg:1,v:{big:'금 18:00',sub:'배포 금지(?)'}},
  {en:'Version Pinning',ko:'버전 고정',d:'패키지 버전을 정확히 고정해 갑자기 바뀌지 않게 하는 것.',p:'패키지 버전을 정확한 숫자로 고정해줘',r:['Dependency','Lock File'],l:3,o:0,v:{code:'"react": "18.3.1"'}},
  {en:'Lock File',ko:'잠금 파일',d:'설치된 패키지 정확한 버전을 기록한 파일. package-lock.json.',p:'lock 파일도 같이 커밋해줘',r:['npm'],l:2,o:0,v:{tree:['package.json','package-lock.json'],hl:[1]}},
@@ -2900,7 +2899,7 @@ T('test','motion',[
 T('test','adv',[
  {en:'TDD',ko:'테스트 주도 개발 · 테스트부터 쓰는 개발',d:'기능 코드보다 테스트를 먼저 쓰고, 그 테스트를 통과시키는 쪽으로 코드를 만들어 가는 개발 방식이에요.',x:'Kent Beck이 정리한 방식으로 흔히 소개돼요. 실패하는 테스트, 통과, 정리(Red-Green-Refactor)를 짧게 되풀이해요.',p:'이 기능을 TDD로 만들어줘. 실패하는 테스트부터 쓰고 하나씩 통과시켜줘',r:['Red-Green-Refactor'],l:3,o:0,v:'u-tdd'},
  {en:'BDD',ko:'행동 주도 개발 · 사용자 행동으로 테스트 쓰기',d:'기능이 사용자에게 어떻게 동작해야 하는지를 누구나 읽을 수 있는 문장으로 먼저 정하고, 그 문장대로 테스트하는 개발 방식이에요.',x:'흔히 "~일 때(Given) ~하면(When) ~된다(Then)" 모양으로 써요. 기획자·개발자·QA가 같은 문장을 보고 이야기할 수 있어요.',p:'장바구니 기능의 동작을 Given-When-Then 문장으로 먼저 정리하고, 그대로 테스트로 만들어줘',r:['TDD'],l:3,o:0,v:'u-bdd'},
- {en:'Test Pyramid',ko:'테스트 피라미드 · 아래일수록 많이, 빠르게',d:'단위 테스트를 가장 많이, 통합 테스트를 그보다 적게, E2E 테스트를 가장 적게 두라는 테스트 비율 그림이에요.',x:'아래 층일수록 빠르고 싸서 많이 두고, 위 층일수록 느리고 깨지기 쉬워 꼭 필요한 흐름만 두는 게 보통이에요. 알맞은 비율은 팀마다 달라요.',p:'우리 프로젝트 테스트를 테스트 피라미드 기준으로 나눠 보고, 단위 테스트로 옮길 수 있는 E2E 테스트를 찾아줘',r:['Testing','Automated Test'],l:3,o:0,v:'u-test-pyramid'},
+ {en:'Test Pyramid',ko:'테스트 피라미드 · 아래일수록 많이, 빠르게',d:'단위 테스트를 가장 많이, 통합 테스트를 그보다 적게, E2E 테스트를 가장 적게 두라는 테스트 비율 그림이에요.',x:'아래 층일수록 빠르고 싸서 많이 두고, 위 층일수록 느리고 깨지기 쉬워 꼭 필요한 흐름만 두는 게 보통이에요. 알맞은 비율은 팀마다 달라요.',p:'우리 프로젝트 테스트를 테스트 피라미드 기준으로 나눠 보고, 단위 테스트로 옮길 수 있는 E2E 테스트를 찾아줘',r:['Unit Test','Integration Test','E2E Test','Automated Test'],l:3,o:0,v:'u-test-pyramid'},
  {en:'Test Isolation',ko:'테스트 격리 · 테스트끼리 영향 주지 않기',d:'테스트 하나가 다른 테스트가 남긴 데이터나 상태에 기대거나 영향을 받지 않게, 서로 떼어 놓고 돌리는 것이에요.',x:'격리되지 않으면 순서를 바꾸거나 하나만 돌릴 때 결과가 달라져요. Playwright는 테스트마다 새 브라우저 컨텍스트를 만들어 다른 테스트와 섞이지 않게 해요.',p:'테스트를 하나만 돌리면 실패해. 다른 테스트에 기대는 부분을 찾아서 서로 격리해줘',r:['Works on My Machine','beforeEach / afterEach'],l:3,o:1,u:'https://playwright.dev/docs/browser-contexts',v:'u-test-isolation'},
  {en:'Deterministic Test',ko:'결정적 테스트 · 언제 돌려도 같은 결과',d:'같은 코드라면 언제, 어디서, 몇 번을 돌려도 결과가 똑같이 나오는 테스트예요.',x:'지금 시각, 무작위 값, 네트워크 속도, 실행 순서에 기대면 결과가 바뀔 수 있어요. 이런 값은 고정하거나 가짜로 바꿔요.',p:'내 PC에선 통과하는데 CI에서만 실패해. 시각이나 무작위 값에 기대는 부분을 고정해서 항상 같은 결과가 나오게 해줘',r:['Works on My Machine','Flaky Test'],l:3,o:0,v:'u-deterministic-test'},
  {en:'Dependency Injection',ko:'의존성 주입 · 필요한 것을 밖에서 넣어 주기',d:'함수나 클래스가 쓸 도구(데이터베이스, 결제 API 등)를 안에서 직접 만들지 않고 밖에서 넘겨받게 만드는 방식이에요.',x:'밖에서 넘겨받으면 테스트할 때 진짜 대신 가짜를 넣을 수 있어 테스트하기 쉬워져요.',p:'이 함수가 결제 API를 직접 부르지 않고 매개변수로 받게 바꿔서, 테스트에서 가짜를 넣을 수 있게 해줘',r:['Test Double','Mock'],l:3,o:0,v:'u-dependency-injection'},
@@ -2910,6 +2909,22 @@ T('test','adv',[
  {en:'Mutation Testing',ko:'돌연변이 테스트 · 코드를 일부러 바꿔 테스트 시험하기',d:'코드를 일부러 조금씩 바꾼 돌연변이를 만들고, 테스트가 그 바뀐 코드를 잡아내는지(실패하는지) 보며 테스트가 얼마나 꼼꼼한지 재는 방법이에요.',x:'돌연변이에서 테스트가 실패하면 잡은 것(killed), 모두 통과하면 놓친 것(survived)이에요. 잡은 비율을 돌연변이 점수라고 해요. 자바스크립트에서는 StrykerJS 같은 도구를 써요.',p:'StrykerJS로 돌연변이 테스트를 돌려서 테스트가 놓친 돌연변이를 찾아줘',r:['Test Coverage','Assertion'],l:3,o:1,u:'https://stryker-mutator.io/docs/',v:'u-mutation-testing'},
  {en:'Property-based Testing',ko:'속성 기반 테스트 · 무작위 입력으로 규칙 확인',d:'예시 값 몇 개 대신, 도구가 만든 수많은 무작위 입력에서도 늘 지켜져야 하는 규칙(속성)이 맞는지 확인하는 테스트예요.',x:'자바스크립트에서는 fast-check 같은 도구를 써요. 규칙이 깨지는 입력을 찾으면 그 입력을 되도록 작게 줄여서 보여 줘요.',p:'정렬 함수에 fast-check로 속성 기반 테스트를 추가해줘. 정렬한 뒤에도 길이가 같은지 확인해줘',r:['Test Case','Assertion'],l:3,o:1,u:'https://fast-check.dev/docs/introduction/what-is-property-based-testing/',v:'u-property-based-testing'},
  {en:'Contract Testing',ko:'계약 테스트 · 프론트엔드와 API의 약속 확인',d:'프론트엔드(소비자)와 API(제공자)가 주고받기로 약속한 요청·응답 모양을 서로 따로 테스트해서 맞는지 확인하는 방법이에요.',x:'Pact 같은 도구는 프론트엔드 테스트를 돌릴 때 약속(계약) 파일을 만들고, API 쪽은 그 계약대로 응답하는지 확인해요. 두 앱을 함께 띄우지 않아도 돼요.',p:'프론트엔드가 쓰는 주문 API 응답 모양을 Pact 계약 테스트로 만들어줘',r:['API','Mock'],l:3,o:1,u:'https://docs.pact.io/',v:'u-contract-testing'},
+]);
+T('test','kind',[
+ {en:'Unit Test',ko:'단위 테스트 · 함수 하나씩 확인',d:'함수나 모듈처럼 가장 작은 단위 하나를 따로 떼어 확인하는 테스트예요.',x:'빠르고 어디가 틀렸는지 찾기 쉬워서 가장 많이 두는 게 보통이에요. 데이터베이스나 네트워크 같은 바깥 기능은 가짜로 바꿔 두곤 해요.',p:'getTotal 함수에 단위 테스트를 추가해줘. 빈 장바구니와 상품 여러 개를 확인해줘',r:['Test Pyramid','Mock','Integration Test'],l:1,o:0,v:'u-unit-test'},
+ {en:'Integration Test',ko:'통합 테스트 · 여러 부분을 이어서 확인',d:'따로 만든 부분 여러 개(함수, 데이터베이스, API 등)를 이어 붙였을 때 함께 잘 동작하는지 확인하는 테스트예요.',x:'단위 테스트가 모두 통과해도, 이어 붙이는 곳에서 값 모양이 달라 실패할 수 있어요. 그 이음새를 확인해요.',p:'주문 저장 함수가 테스트용 데이터베이스에 잘 저장하고 다시 읽히는지 통합 테스트를 만들어줘',r:['Unit Test','E2E Test','Test Pyramid'],l:2,o:0,v:'u-integration-test'},
+ {en:'E2E Test',ko:'E2E 테스트 · 사용자처럼 처음부터 끝까지',d:'실제 브라우저를 띄워 사용자처럼 화면을 누르고 입력하면서, 한 흐름이 처음부터 끝까지 되는지 확인하는 테스트예요.',x:'End-to-End의 줄임말이에요. Playwright 같은 도구를 써요. 가장 실제에 가깝지만 느리고 깨지기 쉬워서, 꼭 필요한 흐름만 두는 게 보통이에요.',p:'로그인부터 주문 완료까지 Playwright E2E 테스트를 만들어줘',r:['Playwright','Test Pyramid','Cross-browser'],l:1,o:0,v:'u-e2e-test'},
+ {en:'Component Test',ko:'컴포넌트 테스트 · 화면 조각 하나 확인',d:'버튼, 입력칸, 카드처럼 화면 조각(컴포넌트) 하나만 따로 그려 놓고, 누르거나 값이 바뀔 때 제대로 보이는지 확인하는 테스트예요.',x:'페이지 전체를 띄우지 않아 E2E 테스트보다 빠르고, 함수만 보는 단위 테스트보다 실제 화면에 가까워요.',p:'수량 버튼 컴포넌트에서 +를 누르면 숫자가 1 늘어나는지 컴포넌트 테스트를 만들어줘',r:['Unit Test','E2E Test'],l:2,o:0,v:'u-component-test'},
+ {en:'API Test',ko:'API 테스트 · 요청 보내고 응답 확인',d:'화면 없이 API에 직접 요청을 보내고, 돌아온 상태 코드와 응답 내용이 맞는지 확인하는 테스트예요.',x:'Playwright 테스트에는 API 요청을 보내는 request가 들어 있어요. 화면을 거치지 않아서 빠르게 돌아요.',p:'주문 API에 요청을 보내 성공 상태 코드와 응답 모양을 확인하는 API 테스트를 만들어줘',r:['API','HTTP Status Code','Contract Testing'],l:2,o:1,u:'https://playwright.dev/docs/api-testing',v:'u-api-test'},
+ {en:'Smoke Test',ko:'스모크 테스트 · 켜자마자 핵심만 확인',d:'배포하거나 새로 빌드한 직후, 로그인·결제처럼 가장 중요한 기능이 일단 돌아가는지만 빠르게 확인하는 테스트예요.',x:'이름은 전자 장비에 처음 전원을 넣고 연기가 나는지 보던 확인에서 왔다는 설명이 흔해요. 통과하면 더 자세한 테스트로 넘어가요.',p:'배포 후 로그인·결제만 스모크 테스트해줘',r:['Testing','Sanity Test','Deploy Checklist'],l:2,o:0,v:'u-smoke-test'},
+ {en:'Regression Test',ko:'회귀 테스트 · 예전 기능이 다시 망가졌는지',d:'코드를 고치거나 기능을 더한 뒤, 예전에 잘 되던 기능이 다시 망가지지 않았는지 확인하는 테스트예요.',x:'예전에 고친 버그를 다시 확인하는 테스트도 여기에 들어가요. 자동 테스트를 CI에서 매번 돌리는 이유 가운데 하나예요.',p:'쿠폰 기능을 더했어. 예전 장바구니 기능이 망가지지 않았는지 회귀 테스트를 돌려줘',r:['Regression','Automated Test','CI/CD'],l:2,o:0,v:'u-regression-test'},
+ {en:'Visual Regression Test',ko:'시각적 회귀 테스트 · 화면 사진 비교',d:'기준 화면 사진을 저장해 두고, 코드를 바꾼 뒤 찍은 화면과 비교해서 모양이 달라졌는지 확인하는 테스트예요.',x:'Playwright는 toHaveScreenshot()을 처음 실행할 때 기준 사진을 만들고, 다음 실행부터 그 사진과 비교해요. 일부러 바꾼 화면이면 --update-snapshots로 기준 사진을 새로 만들어요.',p:'장바구니 화면에 toHaveScreenshot 시각적 회귀 테스트를 추가해줘',r:['Regression Test','Snapshot Update','Screenshot'],l:3,o:1,u:'https://playwright.dev/docs/test-snapshots',v:'u-visual-regression-test'},
+ {en:'Acceptance Test',ko:'인수 테스트 · 요구대로 됐는지 최종 확인',d:'만든 기능이 처음 정한 요구 조건(완료 조건)을 모두 만족하는지, 받아들이기 전에 확인하는 테스트예요.',x:'사용자나 고객이 직접 확인하면 사용자 인수 테스트(UAT, User Acceptance Testing)라고 불러요. 완료 조건을 하나씩 확인하는 모양이 보통이에요.',p:'비밀번호 찾기 기능의 완료 조건을 인수 테스트 목록으로 만들어줘',r:['Acceptance Criteria','Usability Test','A/B Test'],l:2,o:0,v:'u-acceptance-test'},
+ {en:'Exploratory Testing',ko:'탐색적 테스트 · 정해진 순서 없이 써 보기',d:'미리 적어 둔 테스트 케이스 없이, 사람이 직접 써 보면서 그때그때 떠오르는 방법으로 문제를 찾는 테스트예요.',x:'자동 테스트가 미처 생각하지 못한 이상한 입력이나 순서를 찾는 데 좋아요. 찾은 문제는 적어 두었다가 자동 테스트로 옮기곤 해요.',p:'회원가입 화면에서 해 볼 만한 이상한 입력과 순서를 10가지 떠올려서 탐색적 테스트 목록으로 정리해줘',r:['Manual Testing','Edge Case','Test Case'],l:2,o:0,v:'u-exploratory-testing'},
+ {en:'Sanity Test',ko:'새니티 테스트 · 고친 곳만 빠르게 확인',d:'작은 수정을 한 뒤, 고친 부분과 그 주변이 제대로 되는지만 빠르게 확인하는 테스트예요.',x:'스모크 테스트와 비슷해서 둘을 섞어 쓰는 경우도 많아요. 보통 스모크 테스트는 핵심 기능을 넓게, 새니티 테스트는 고친 곳을 좁게 본다고 나눠요.',p:'결제 버튼 문구만 고쳤어. 결제 화면 주변만 새니티 테스트로 빠르게 확인해줘',r:['Smoke Test','Regression Test'],l:3,o:0,v:'u-sanity-test'},
+ {en:'Performance / Load Test',ko:'성능/부하 테스트 · 많이 몰려도 버티는지',d:'화면이나 API가 얼마나 빠른지(성능), 사용자가 한꺼번에 몰려도 버티는지(부하) 확인하는 테스트예요.',x:'부하 테스트는 가짜 사용자 여러 명이 동시에 요청을 보내는 상황을 만들어 응답 시간과 오류 비율을 봐요. 화면이 뜨는 속도는 Lighthouse로도 재요.',p:'주문 API에 동시 사용자를 100명, 500명, 1000명으로 늘려 가며 부하 테스트하고 응답 시간을 표로 정리해줘',r:['Lighthouse','Slow 3G Test','Load Balancer'],l:3,o:0,v:'u-performance-load-test'},
+ {en:'Accessibility Test',ko:'접근성 테스트 · 누구나 쓸 수 있는지 확인',d:'키보드만 쓰는 사람, 화면 낭독기를 쓰는 사람까지 누구나 화면을 쓸 수 있는지 확인하는 테스트예요.',x:'Playwright 문서는 @axe-core/playwright로 자동 검사하는 방법을 보여 줘요. 다만 많은 접근성 문제는 사람이 직접 확인해야만 찾을 수 있다고 해요.',p:'메인 화면에 axe 접근성 자동 검사를 추가하고, 키보드만으로 쓸 수 있는지 직접 확인할 목록도 만들어줘',r:['Web Accessibility','Manual Testing'],l:2,o:1,u:'https://playwright.dev/docs/accessibility-testing',v:'u-accessibility-test'},
+ {en:'Static Analysis',ko:'정적 분석 · 실행하지 않고 코드 검사',d:'코드를 실행하지 않고 읽기만 해서 실수, 형식 문제, 타입 오류를 찾아내는 검사예요.',x:'자바스크립트에서는 ESLint로 실수를 찾고(Lint), TypeScript는 tsc --noEmit으로 결과 파일 없이 타입만 검사해요(Type Check). 테스트를 돌리기 전에 먼저 돌리는 게 보통이에요.',p:'커밋 전에 npx eslint와 npx tsc --noEmit을 돌려서 나온 문제를 고쳐줘',r:['TypeScript','Test Pyramid'],l:2,o:1,u:'https://eslint.org/docs/latest/use/getting-started',v:'u-static-analysis'},
 ]);
 </script>
 <script>
@@ -3015,6 +3030,7 @@ const MOVED = {
   'server-ping':'net-ping', 'server-latency':'net-latency',
   'bug-testing':'test-testing',
   'bug-flaky-test':'test-flaky-test',
+  'deploy-smoke-test':'test-smoke-test',
 };
 T('front','layout',[
  {en:'Breakpoint',ko:'브레이크포인트 · 화면 너비 기준점',d:'"이 너비부터 배치를 바꾼다"고 정한 화면 폭. 예: 768px.',x:'디버거의 breakpoint(중단점)와 다른 뜻이에요.',p:'768px 브레이크포인트에서 메뉴를 햄버거로 바꿔줘',r:['Media Query','Responsive Web Design'],l:1,o:0,v:'breakpoint'},
@@ -5282,6 +5298,58 @@ Object.assign(D, {
     + `${runner([{n:'프론트엔드 테스트 · 계약 만들기', s:'pass'}, {n:'API 확인 · 계약대로 응답', s:'fail', e:'total', a:'price'}],
       {file:'주문 계약', code:['요청: GET /orders/1', '응답: { id: 1, total: 3000 }']})}</div>`, m:1,
     cap:'프론트엔드가 기대한 응답 모양을 계약으로 남기고, API가 그 모양대로 답하는지 따로 확인해요'},
+});
+/* test: kind — 공식 문서 확인: toHaveScreenshot, 처음 실행 때 기준 사진, --update-snapshots(playwright.dev/docs/test-snapshots) ·
+   @axe-core/playwright, AxeBuilder, violations toEqual([]), 많은 문제는 수동 확인(playwright.dev/docs/accessibility-testing) ·
+   request fixture, request.post, ok()(playwright.dev/docs/api-testing) · npx eslint 파일(eslint.org/docs/latest/use/getting-started) ·
+   noEmit(typescriptlang.org/tsconfig/noEmit.html) · 이름 유래·sanity testing과 섞어 쓰임(en.wikipedia.org/wiki/Smoke_testing_(software)). 예시: 함수·파일 이름, 금액, 사용자 수, 응답 시간 */
+const TSMOKE = '<svg viewBox="0 0 110 100" aria-hidden="true"><rect class="s y" x="22" y="48" width="66" height="40" rx="6"/>'
+  + '<path class="s t" d="M49 63a8 8 0 1 0 12 0M55 59v8"/><path class="s" d="M88 78h10v16"/>'
+  + '<path class="s r" stroke-dasharray="3 4" d="M45 42c-5-5 5-9 0-14s5-9 0-14M65 42c-5-5 5-9 0-14s5-9 0-14"/></svg>';
+Object.assign(D, {
+  'u-unit-test':{h:runner([{n:'빈 장바구니는 0원', s:'pass'}, {n:'상품 2개는 3000원', s:'pass'}],
+    {file:'cart.test.js', code:['expect(getTotal([])).toBe(0);', 'expect(getTotal([1000, 2000])).toBe(3000);']}), m:1,
+    cap:'함수 하나에 값을 넣고 나온 값만 확인해요. 화면이나 서버 없이 바로 돌아요'},
+  'u-integration-test':{h:runner([{n:'주문 저장', s:'pass'}, {n:'저장한 주문 다시 읽기', s:'pass'}],
+    {file:'order.int.test.js', code:['const order = { id: 1, total: 3000 };', 'await saveOrder(db, order);', 'expect(await findOrder(db, 1)).toEqual(order);']}), m:1,
+    cap:'주문 저장 함수와 테스트용 데이터베이스를 이어 붙여, 저장한 값이 그대로 읽히는지 확인해요'},
+  'u-e2e-test':{h:`<div class="mk-rust">${browser('<div class="mk-ruaw"><b>주문 완료</b><small>주문번호 1024 · 3000원</small></div>', {url:'localhost:3000/order/done'})}`
+    + `${runner([{n:'로그인', s:'pass'}, {n:'장바구니 담기', s:'pass'}, {n:'결제하기', s:'pass'}, {n:'주문 완료 화면 보기', s:'pass'}],
+      {file:'checkout.spec.js', code:["await page.goto('/login');", '// 로그인, 장바구니 담기, 결제하기 ...', "await expect(page.getByText('주문 완료'))", '  .toBeVisible();']})}</div>`, m:1,
+    cap:'브라우저를 띄워 로그인부터 주문 완료 화면까지, 사용자가 누르는 순서대로 확인해요'},
+  'u-component-test':{h:runner([{n:'처음에는 0', s:'pass'}, {n:'+ 누르면 1', s:'pass'}],
+    {file:'Counter.test.jsx', code:['render(<Counter />);', "await user.click(screen.getByRole('button',", "  { name: '+' }));", "expect(screen.getByText('1')).toBeVisible();"]}), m:1,
+    cap:'수량 버튼 조각 하나만 그려 놓고, +를 눌렀을 때 숫자가 바뀌는지 봐요'},
+  'u-api-test':{h:`<div class="mk-rust">${net([{k:'pc', t:'테스트'}, {k:'server', t:'주문 API'}], [{m:[{t:'POST /api/orders'}, {t:'201 · id: 7', r:1}]}])}`
+    + `${runner([{n:'주문 만들기 요청', s:'pass'}, {n:'응답에 id가 있어요', s:'pass'}],
+      {file:'orders.spec.js', code:["const res = await request.post('/api/orders',", '  { data: { total: 3000 } });', 'expect(res.ok()).toBeTruthy();', 'expect((await res.json()).id).toBe(7);']})}</div>`, m:1,
+    cap:'화면을 거치지 않고 API에 바로 요청을 보내, 성공했는지와 응답 내용을 확인해요'},
+  'u-smoke-test':{h:pair(TSMOKE, runner([{n:'로그인', s:'pass'}, {n:'결제', s:'pass'}], {file:'배포 직후 · smoke.spec.js'})), m:1,
+    cap:'기계에 전원을 넣고 연기가 나는지부터 보듯, 배포하자마자 로그인과 결제만 빠르게 눌러 봐요'},
+  'u-regression-test':{h:runner([{n:'새 기능 · 쿠폰 적용', s:'pass'}, {n:'예전 기능 · 배송비 계산', s:'fail', e:'3000', a:'0'}], {file:'cart.test.js'}), m:1,
+    cap:'쿠폰 기능을 더했더니 예전에 되던 배송비 계산이 망가졌어요. 회귀 테스트가 바로 잡아냈어요'},
+  'u-visual-regression-test':{h:`<div class="mk-rust">${browser('<div class="mk-ruaw"><b>장바구니</b><small>상품 2개 · 5000원</small><span class="mk-btn mk-hl">주문하기</span></div>', {url:'localhost:3000/cart'})}`
+    + `${runner([{n:'장바구니 화면 비교', s:'fail', e:'기준 사진과 같음', a:'버튼 자리 달라짐'}],
+      {file:'cart.spec.js', code:["await page.goto('/cart');", 'await expect(page).toHaveScreenshot();']})}</div>`, m:1,
+    cap:'기준 사진과 비교했더니 주문하기 버튼 자리가 달라져서 실패했어요'},
+  'u-acceptance-test':{h:runner([{n:'비밀번호 찾기 메일이 와요', s:'pass'}, {n:'메일 링크는 30분 뒤 만료돼요', s:'pass'}, {n:'새 비밀번호로 로그인돼요', s:'pass'}],
+    {file:'완료 조건 · 비밀번호 찾기'}), m:1,
+    cap:'처음 정한 완료 조건을 하나씩 확인하고, 모두 통과해야 받아들여요'},
+  'u-exploratory-testing':{h:runner([{n:'이름에 특수문자 넣기', s:'pass'}, {n:'가입 버튼 두 번 빨리 누르기', s:'fail', e:'가입 1번', a:'가입 2번'}, {n:'가입 중에 뒤로 가기', s:'pass'}],
+    {file:'탐색 메모 · 회원가입'}), m:1,
+    cap:'정해진 순서 없이 써 보다가, 가입 버튼을 빨리 두 번 누르면 두 번 가입되는 문제를 찾았어요'},
+  'u-sanity-test':{h:runner([{n:'결제 버튼 문구', s:'pass'}, {n:'결제 버튼 누르기', s:'pass'}, {n:'나머지 화면', s:'skip'}], {file:'결제 버튼 문구 고친 뒤'}), m:1,
+    cap:'고친 결제 버튼과 그 주변만 확인하고, 나머지는 건너뛰어요'},
+  'u-performance-load-test':{h:runner([{n:'동시 사용자 100명', s:'pass', ms:180}, {n:'동시 사용자 500명', s:'pass', ms:420}, {n:'동시 사용자 1000명', s:'fail', e:'1초 이내', a:'4.2초'}],
+    {file:'주문 API 부하 테스트'}), m:1,
+    cap:'동시 사용자를 늘려 가며 요청을 보냈더니, 1000명에서 응답이 기준보다 느려졌어요'},
+  'u-accessibility-test':{h:runner([{n:'메인 화면 자동 검사', s:'fail', e:'위반 0개', a:'위반 1개 · 이미지 대체 텍스트 없음'}, {n:'키보드만으로 쓰기 · 사람이 확인', s:'skip'}],
+    {file:'a11y.spec.js', code:['const results = await new AxeBuilder({ page })', '  .analyze();', 'expect(results.violations).toEqual([]);']}), m:1,
+    cap:'자동 검사가 대체 텍스트 없는 이미지를 찾았어요. 키보드만으로 쓰기 같은 부분은 사람이 직접 확인해요'},
+  'u-static-analysis':{h:`<div class="mk-rust">${TCODE('src/cart.ts', ['// 쓰지 않는 변수', 'const total = 3000;', '// number 자리에 글자를 넣었어요', "const price: number = '3000';", 'export { price };'])}`
+    + `${term([{c:'npx eslint src/cart.ts'}, {e:'✖ 1 problem (1 error, 0 warnings)'}, {c:'npx tsc --noEmit'},
+      {e:'src/cart.ts:4:7 - error TS2322:'}, {e:"Type 'string' is not assignable"}, {e:"to type 'number'."}], {prompt:'$', end:false})}</div>`, m:1,
+    cap:'코드를 실행하지 않고 읽기만 해서, 쓰지 않는 변수와 타입이 맞지 않는 곳을 찾아냈어요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
