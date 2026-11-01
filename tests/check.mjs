@@ -68,7 +68,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'deploy/tip': 7 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -143,6 +143,23 @@ check('base', () => vm.runInContext(`(() => {
   const rb = rbar(72, {goal:80, label:'커버리지'}); if (!['커버리지 72%', '기준 80%', 'width:72%', 'left:80%'].every(x => rb.includes(x))) e.push('rbar');
   if (!rbar(130).includes('width:100%') || !rbar(-5).includes('width:0%') || rbar(50).includes('기준')) e.push('rbar 범위');
   if (!runner([{n:'a', s:'skip'}]).includes('건너뜀 1') || runner([{n:'a', s:'pass'}]).includes('건너뜀')) e.push('runner skip');
+  const ap = app([{t:'홈', b:'a', tap:[50, 80]}, {t:'상세', b:'b', go:'modal'}], {label:'흐름'});
+  if (!['mk-mo', 'mk-phone', 'role="group"', 'aria-label="흐름"', '9:41', 'class="mk-most" aria-hidden="true"', 'modal mk-mok2 A', 'mk-motap mk-motk1 A', 'left:50%;top:80%'].every(x => ap.includes(x))) e.push('app');
+  if ((ap.match(/class="mk-mos[ "]/g) || []).length !== 2 || (ap.match(/<section class="mk-mos[^"]*" aria-hidden="true">/g) || []).length !== 1) e.push('app 장면');    // 맨 위 장면만 읽는다
+  if (!/<i class="mk-motap[^"]*" style="[^"]*" aria-hidden="true">/.test(ap)) e.push('app 점');
+  if (!app([{t:'a'}, {t:'b'}]).includes('push mk-mok2 A')) e.push('app 기본 전환');
+  const ae = app([{t:'<b>&'}]); if (ae.includes('<b>&') || !ae.includes('&lt;b&gt;&amp;')) e.push('app esc');
+  if (!thr(() => app([])) || !thr(() => app(Array(5).fill({t:'a'}))) || !thr(() => app([{t:'a'}, {t:'b', go:'zoom'}])) || !thr(() => app([{t:'a', tap:[1, 1]}]))) e.push('app throw');
+  const as = app([{t:'a', tap:[1, 1]}, {t:'b', go:'fade'}], {still:true});
+  if (/ A"|mk-mok|mk-motap/.test(as) || (as.match(/aria-hidden="true">/g) || []).length !== 2) e.push('app still');    // 상태 표시줄 1 + 지나간 장면 1
+  const tr = track([{t:'빌드', s:'done'}, {t:'심사', s:'fail', w:'거절', n:'설명 부족'}, {t:'출시', s:'wait'}]);
+  if (!['✓', '완료', '✕', '거절', '…', '대기', '설명 부족', 'mk-rux2 A', 'mk-mty3 A'].every(x => tr.includes(x)) || tr.includes('실패') || (tr.match(/class="mk-mtc /g) || []).length !== 3) e.push('track');
+  if (!/<i class="mk-mtr[^"]*" aria-hidden="true">/.test(tr) || !tr.includes('<b aria-hidden="true">✓</b>')) e.push('track 읽기');
+  const tn = track([{t:'a', s:'now'}]); if (!tn.includes('●') || !tn.includes('진행 중')) e.push('track now');
+  if (!thr(() => track([])) || !thr(() => track(Array(6).fill({t:'a', s:'done'}))) || !thr(() => track([{t:'a', s:'ok'}])) || !thr(() => track([{t:'a', s:'toString'}]))) e.push('track throw');
+  if (/ A"|mk-rux|mk-mty|mk-mtr/.test(track([{t:'a', s:'done'}], {still:true}))) e.push('track still');
+  if (track([{t:'<i>', s:'done', n:'&'}]).includes('<i>')) e.push('track esc');
+  const tl = track([{t:'a', s:'done'}], {label:'x'}); if (!tl.includes('role="group"') || !tl.includes('aria-label="x"')) e.push('track label');
   return e.join(', ');
 })()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
@@ -154,7 +171,15 @@ check('nframe', () => { const P = 10 * +html.match(/\.mk-nwm\.A,\.mk-nwd\.A\{ani
 check('rframe', () => { const P = 10 * +html.match(/\.mk-rur\.A,[^{]*\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 테스트 실행 모형의 멈춘 장면은 결과가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6].filter(k => ['x', 'y'].some(a => { const m = html.match(new RegExp(`@keyframes mk-ru${a}${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`));
     return !m || +m[1] > P; })).join(', '); });
+check('aframe', () => { const P = 10 * +html.match(/\.mk-mos\.A,\.mk-motap\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 앱 화면 모형의 멈춘 장면은 장면이 다 들어오고 손가락 점이 사라진 뒤
+  const s = [2, 3, 4].flatMap(k => ['pu', 'mo', 'fa'].map(a => [a, k])).filter(([a, k]) => { const m = html.match(new RegExp(`@keyframes mk-mo${a}${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,([\\d.]+)%\\{(?:transform:none|opacity:1)\\}`));
+    return !m || +m[1] > P || +m[2] < P; }).map(([a, k]) => a + k);
+  const t = [1, 2, 3].filter(k => { const m = html.match(new RegExp(`@keyframes mk-motk${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%`)); return !m || +m[1] > P; }).map(k => 'tk' + k);
+  return [...s, ...t].join(', '); });
+check('kframe', () => { const P = 10 * +html.match(/\.mk-mtr\.A,\.mk-mts\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 단계 띠의 멈춘 장면은 고리가 사라진 뒤
+  return [1, 2, 3, 4, 5].filter(k => { const m = html.match(new RegExp(`@keyframes mk-mty${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%`)); return !m || +m[1] > P; }).join(', '); });
 check('tm', () => g.TERMS.filter(t => t.c === 'test' && g.D[t.v] && g.D[t.v].m && !/ A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 테스트 그림에는 움직이는 것이 있어야 한다
+check('mm', () => g.TERMS.filter(t => t.c === 'mobile' && g.D[t.v] && g.D[t.v].m && !/ A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 모바일 그림에는 움직이는 것이 있어야 한다
 check('thl', () => { const m = [...html.matchAll(/\{([coe]):'((?:[^'\\]|\\.)*)', h:'((?:[^'\\]|\\.)*)'\}/g)];    // 터미널 줄의 h는 그 줄 글자에 있어야 한다
   return !m.length ? 'h 없음' : m.filter(x => !x[2].includes(x[3])).map(x => x[3]).join(', '); });
 check('cat', () => { const c = g.CATS[1], i = g.CATS.findIndex(x => x.id === 'server'), nt = g.CATS[i + 1];
@@ -162,9 +187,12 @@ check('cat', () => { const c = g.CATS[1], i = g.CATS.findIndex(x => x.id === 'se
   if (!(nt && nt.id === 'net' && nt.secs.map(s => s.id).join() === 'basic,core,motion,adv,proto,tip')) return 'server 다음 ' + (nt && nt.id);
   const b = g.CATS.findIndex(x => x.id === 'bug'), ts = g.CATS[b + 1];
   if (!(ts && ts.id === 'test' && ts.secs.map(s => s.id).join() === 'basic,core,motion,adv,kind,tip')) return 'bug 다음 ' + (ts && ts.id);
+  const f = g.CATS.findIndex(x => x.id === 'front'), mo = g.CATS[f + 1];
+  if (!(mo && mo.id === 'mobile' && mo.secs.map(s => s.id).join() === 'basic,core,motion,adv,store,tip')) return 'front 다음 ' + (mo && mo.id);
   return g.CATS[i].desc === '웹사이트를 돌리는 컴퓨터와 그 운영에 관한 말' ? '' : 'server desc'; });
 check('nv', () => g.TERMS.filter(t => t.c === 'net' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 네트워크 카드는 모두 도판 형식
 check('tv', () => g.TERMS.filter(t => t.c === 'test' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 테스트 카드는 모두 도판 형식
+check('mv', () => g.TERMS.filter(t => t.c === 'mobile' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 모바일 카드는 모두 도판 형식
 check('ps', () => g.TERMS.filter(t => 'ps' in t && (typeof t.ps !== 'string' || !t.ps.trim())).map(t => t.en).join(', '));
 const PS_CMD = ['ls', 'pwd', 'touch', 'grep', 'find', 'which', 'curl', 'tail', 'ps', 'kill', '--help'];    // Windows PowerShell 5.1에서 쳐 보니 그림의 bash 결과와 달랐던 명령(Task 6 측정)
 check('pscmd', () => { const a = g.TERMS.filter(t => t.c === 'terminal' && t.s === 'cmd' && 'ps' in t).map(t => t.en).join(); return a === PS_CMD.join() ? '' : 'ps ' + a; });

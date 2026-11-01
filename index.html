@@ -303,7 +303,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-tbar>span{margin-left:6px;font-size:11px;color:#a9b8d0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mk-tbody{font-family:var(--mono);font-size:12px;line-height:1.6;color:#e6ecf7;white-space:pre;overflow-x:auto;padding:10px 12px}.mk-tbody>div{min-height:1.6em}
 .mk-tp{color:#a8d49a}.mk-te{color:#ff9e94}.mk-tc{display:inline-block}.mk-tbody .mk-hl{outline-offset:1px;border-radius:3px}
-.cmp>div:has(>.mk-term),.cmp>div:has(>.mk-nw),.cmp>div:has(>.mk-ru),.cmp>div:has(>.mk-rust),.cmp>div:has(>.mk-rupl){min-width:0;grid-template-columns:minmax(0,1fr)}
+.cmp>div:has(>.mk-term),.cmp>div:has(>.mk-nw),.cmp>div:has(>.mk-ru),.cmp>div:has(>.mk-rust),.cmp>div:has(>.mk-rupl),.cmp>div:has(>.mk-mo),.cmp>div:has(>.mk-mt){min-width:0;grid-template-columns:minmax(0,1fr)}
 .mk-tcur{display:inline-block;width:.6em;height:1.1em;vertical-align:text-bottom;background:#e6ecf7}.mk-tcur.A{animation:blink 1s step-end infinite}
 .mk-tr.A,.mk-tc.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-tc.A{animation-timing-function:steps(12)}
 .mk-tl1{animation-name:mk-tl1}.mk-tl2{animation-name:mk-tl2}.mk-tl3{animation-name:mk-tl3}.mk-tl4{animation-name:mk-tl4}.mk-tl5{animation-name:mk-tl5}.mk-tl6{animation-name:mk-tl6}.mk-tl7{animation-name:mk-tl7}.mk-tl8{animation-name:mk-tl8}
@@ -395,6 +395,23 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-rbar{display:grid;gap:5px;width:min(300px,100%);font-size:12px;color:var(--ink);text-align:left}.mk-rbt{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 8px}.mk-rbt span{color:var(--muted)}
 .mk-rbb{position:relative;height:12px;border-radius:3px;background:var(--rule-2)}.mk-rbb i{position:absolute;top:0;bottom:0;left:0;border-radius:3px;background:var(--ink)}.mk-rbb i.lo{background:var(--mark)}.mk-rbb s{position:absolute;top:-4px;bottom:-4px;width:2px;margin-left:-1px;background:var(--mark-text);box-shadow:0 0 0 1px var(--plate)}
 .mk-rupy{display:grid;justify-items:center;gap:4px;width:min(300px,100%)}.mk-rupy>div{padding:6px 4px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);text-align:center;font-size:11.5px;line-height:1.3;color:var(--ink)}.mk-rupy>div:last-child{background:var(--sky)}.mk-rupy b{display:block;font-size:12.5px}
+/* 앱 화면 모형 app(): 장면을 겹쳐 쌓고 뒤 장면이 30·50·70%에 들어와 앞 장면을 덮는다. 멈춘 장면(88%)은 마지막 장면 */
+.mk-mo{display:flex;justify-content:center;max-width:100%}.mk-most{flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 4px;font:800 11px/1 var(--sans);color:var(--ink)}.mk-most svg{display:block}
+.mk-mov{position:relative;flex:1;min-height:0;overflow:hidden;border-radius:8px}.mk-mos{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;min-width:0;background:var(--plate);overflow:hidden;overflow-wrap:anywhere}
+.mk-mos.modal{top:12px;padding:8px 8px 0;border:1.5px solid var(--ink);border-bottom:0;border-radius:12px 12px 0 0}.mk-mot{flex:none;padding-bottom:5px;border-bottom:1px solid var(--rule-2);font-size:13px;font-weight:800}.mk-mob{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px}
+.mk-motap{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border:2px solid var(--mark);border-radius:50%;background:color-mix(in srgb,var(--mark) 25%,transparent);opacity:0;pointer-events:none}
+/* 단계 띠 track(): 상태 글자는 테스트 모형의 mk-rux 키프레임을 그대로 써서 단계마다 10%씩 늦게 나온다 */
+.mk-mt{container-type:inline-size;width:100%}.mk-mtl{list-style:none;display:flex;justify-content:center;gap:18px}.mk-mtc{position:relative;flex:1 1 0;min-width:0;max-width:150px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 6px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);text-align:center;font-size:12px;line-height:1.35;color:var(--ink);overflow-wrap:anywhere}
+.mk-mtc:not(:last-child)::after{content:'→';content:'→' / '';position:absolute;top:50%;left:100%;width:18px;margin-top:-9px;font-weight:800;line-height:18px;text-align:center;color:var(--muted)}
+.mk-mtn{font-weight:800}.mk-mts{display:inline-flex;gap:3px;font-size:11.5px;font-weight:800;white-space:nowrap}.mk-mtd{font-size:11px;color:var(--muted)}.mk-mtc.done .mk-mts{color:var(--ok)}.mk-mtc.fail{border-color:var(--mark-text)}.mk-mtc.fail .mk-mts{color:var(--mark-text)}.mk-mtc.now{border-color:var(--mark);box-shadow:inset 0 0 0 1px var(--mark)}.mk-mtc.wait .mk-mts{color:var(--muted)}
+.mk-mtr{position:absolute;inset:-5px;border:2px solid var(--mark);border-radius:11px;opacity:0;pointer-events:none}
+@container (max-width:240px){.mk-mtl{flex-direction:column;align-items:center}.mk-mtc{width:100%;max-width:none}.mk-mtc:not(:last-child)::after{content:'↓';content:'↓' / '';top:100%;left:50%;margin:0 0 0 -9px}}
+@container (max-width:440px){.mk-mtl:has(>li:nth-child(4)){flex-direction:column;align-items:center}.mk-mtl:has(>li:nth-child(4))>.mk-mtc{width:100%;max-width:none}.mk-mtl:has(>li:nth-child(4))>.mk-mtc:not(:last-child)::after{content:'↓';content:'↓' / '';top:100%;left:50%;margin:0 0 0 -9px}}
+.mk-mos.A,.mk-motap.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:var(--ease)}.mk-mtr.A,.mk-mts.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
+.mk-mos.push.mk-mok2{animation-name:mk-mopu2}.mk-mos.modal.mk-mok2{animation-name:mk-momo2}.mk-mos.fade.mk-mok2{animation-name:mk-mofa2}.mk-mos.push.mk-mok3{animation-name:mk-mopu3}.mk-mos.modal.mk-mok3{animation-name:mk-momo3}.mk-mos.fade.mk-mok3{animation-name:mk-mofa3}.mk-mos.push.mk-mok4{animation-name:mk-mopu4}.mk-mos.modal.mk-mok4{animation-name:mk-momo4}.mk-mos.fade.mk-mok4{animation-name:mk-mofa4}.mk-motk1{animation-name:mk-motk1}.mk-motk2{animation-name:mk-motk2}.mk-motk3{animation-name:mk-motk3}.mk-mty1{animation-name:mk-mty1}.mk-mty2{animation-name:mk-mty2}.mk-mty3{animation-name:mk-mty3}.mk-mty4{animation-name:mk-mty4}.mk-mty5{animation-name:mk-mty5}
+@keyframes mk-mopu2{0%,30%{transform:translateX(100%)}34%,96%{transform:none}96.1%,100%{transform:translateX(100%)}}@keyframes mk-momo2{0%,30%{transform:translateY(100%)}34%,96%{transform:none}96.1%,100%{transform:translateY(100%)}}@keyframes mk-mofa2{0%,30%{opacity:0}34%,96%{opacity:1}96.1%,100%{opacity:0}}@keyframes mk-mopu3{0%,50%{transform:translateX(100%)}54%,96%{transform:none}96.1%,100%{transform:translateX(100%)}}@keyframes mk-momo3{0%,50%{transform:translateY(100%)}54%,96%{transform:none}96.1%,100%{transform:translateY(100%)}}@keyframes mk-mofa3{0%,50%{opacity:0}54%,96%{opacity:1}96.1%,100%{opacity:0}}@keyframes mk-mopu4{0%,70%{transform:translateX(100%)}74%,96%{transform:none}96.1%,100%{transform:translateX(100%)}}@keyframes mk-momo4{0%,70%{transform:translateY(100%)}74%,96%{transform:none}96.1%,100%{transform:translateY(100%)}}@keyframes mk-mofa4{0%,70%{opacity:0}74%,96%{opacity:1}96.1%,100%{opacity:0}}@keyframes mk-motk1{0%,24.9%{opacity:0}25%,30%{opacity:1}30.1%,100%{opacity:0}}@keyframes mk-motk2{0%,44.9%{opacity:0}45%,50%{opacity:1}50.1%,100%{opacity:0}}@keyframes mk-motk3{0%,64.9%{opacity:0}65%,70%{opacity:1}70.1%,100%{opacity:0}}
+@keyframes mk-mty1{0%,14%{opacity:0}15%,24%{opacity:1}25%,100%{opacity:0}}@keyframes mk-mty2{0%,24%{opacity:0}25%,34%{opacity:1}35%,100%{opacity:0}}@keyframes mk-mty3{0%,34%{opacity:0}35%,44%{opacity:1}45%,100%{opacity:0}}@keyframes mk-mty4{0%,44%{opacity:0}45%,54%{opacity:1}55%,100%{opacity:0}}@keyframes mk-mty5{0%,54%{opacity:0}55%,64%{opacity:1}65%,100%{opacity:0}}
+.mk-mobox{width:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:12px}.stage:has(>.mk-mobox){padding-top:50px}
 .mk-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:0 14px;border-radius:8px;border:1.5px solid var(--ink);
   background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;touch-action:manipulation}
 .mk-btn.ghost{background:transparent;color:var(--ink)}
@@ -403,7 +420,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -1560,6 +1577,7 @@ CAT('terminal','터미널 · 명령줄','글자로 명령을 입력해 컴퓨터
 CAT('web','웹사이트','웹사이트가 어떻게 생기고 움직이는지에 관한 말', [['parts','페이지 구성요소','웹페이지 각 부분의 이름']]);
 CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹디자인 · 앱 화면 · 디자인 툴 · 폰트까지', [['app','앱·프로그램 UI','데스크톱 프로그램과 앱 화면의 부품'],['form','폼·입력','정보를 입력하고 고르는 화면 부품'],['feedback','상태·피드백','로딩·오류·완료처럼 지금 상태를 알려 주는 부품'],['nav','내비게이션','화면 사이를 오가게 해 주는 메뉴와 버튼'],['data','표·목록','많은 정보를 표·목록·차트로 보여 주는 방법'],['style','시각 스타일','화면 전체 느낌을 정하는 디자인 흐름과 효과'],['gesture','제스처·조작','손가락·마우스·키보드로 화면을 다루는 방법'],['device','기기 화면','휴대폰·모니터 화면 자체의 특징'],['media','이미지·미디어','사진·동영상·움직이는 그림을 다루는 말'],['tool','디자인 툴 (Figma)','디자인 툴에서 쓰는 말'],['font','폰트·타이포그래피','글자를 다루는 말'],['color','색상','색을 정확히 부르는 말']]);
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위']]);
+CAT('mobile','모바일 앱','휴대폰 앱을 만들고 스토어에 내보내는 말', [['store','앱 스토어·출시','앱을 스토어에 올리고 사용자에게 내보내는 과정의 말']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법']]);
 CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
 CAT('server','서버','웹사이트를 돌리는 컴퓨터와 그 운영에 관한 말', [['status','HTTP 상태코드','서버가 돌려주는 숫자의 뜻']]);
@@ -3305,6 +3323,28 @@ const rbar = (pct, { goal, label } = {}) => {
   const c = n => Math.max(0, Math.min(100, n)), p = c(pct), g = goal != null ? c(goal) : null;
   return `<div class="mk-rbar"><div class="mk-rbt"><b>${label ? esc(label) + ' ' : ''}${p}%</b>${g != null ? `<span>기준 ${g}%</span>` : ''}</div>`
     + `<div class="mk-rbb"><i${g != null && p < g ? ' class="lo"' : ''} style="width:${p}%"></i>${g != null ? `<s style="left:${g}%"></s>` : ''}</div></div>`;
+};
+/* 앱 화면 모형: 상태 표시줄 + 겹쳐 쌓인 장면. 맨 위(마지막) 장면만 읽고 나머지는 aria-hidden */
+const MO_GO = ['push', 'modal', 'fade'];
+const MO_BAT = '<svg viewBox="0 0 22 10" width="22" height="10"><rect x=".75" y=".75" width="17.5" height="8.5" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="2.6" y="2.6" width="11" height="4.8" rx="1" fill="currentColor"/><rect x="19.6" y="3.4" width="1.8" height="3.2" rx=".6" fill="currentColor"/></svg>';
+const app = (scenes = [], { still = false, label, notch = true } = {}) => {
+  if (scenes.length < 1 || scenes.length > 4) throw new Error('app: 장면은 1~4개');
+  const body = scenes.map(({ t, b = '', tap, go = 'push' }, i) => {
+    const k = i + 1, last = k === scenes.length;
+    if (i && !MO_GO.includes(go)) throw new Error('app: 전환 ' + go);
+    if (last && tap) throw new Error('app: 마지막 장면에는 tap이 없어요');
+    const dot = tap && !still ? `<i class="mk-motap mk-motk${k} A" style="left:${+tap[0]}%;top:${+tap[1]}%" aria-hidden="true"></i>` : '';
+    return `<section class="mk-mos${i ? ` ${go}${still ? '' : ` mk-mok${k} A`}` : ''}"${last ? '' : ' aria-hidden="true"'}><b class="mk-mot">${esc(t)}</b><div class="mk-mob">${b}</div>${dot}</section>`;
+  }).join('');
+  return `<div class="mk-mo"${label ? ` role="group" aria-label="${esc(label)}"` : ''}>${phone(`<div class="mk-most" aria-hidden="true"><span>9:41</span>${MO_BAT}</div><div class="mk-mov">${body}</div>`, { notch })}</div>`;
+};
+/* 단계 띠: 기호는 읽지 않고 상태 글자만 읽는다 */
+const MT_S = {done:['✓', '완료'], fail:['✕', '실패'], now:['●', '진행 중'], wait:['…', '대기']};
+const track = (steps = [], { still = false, label } = {}) => {
+  if (steps.length < 1 || steps.length > 5) throw new Error('track: 단계는 1~5개');
+  steps.forEach(t => { if (!Object.hasOwn(MT_S, t.s)) throw new Error('track: 상태 ' + t.s); });
+  return `<div class="mk-mt"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><ol class="mk-mtl">${steps.map(({ t, s, n, w }, i) => { const k = i + 1, [g, d] = MT_S[s];
+    return `<li class="mk-mtc ${s}">${still ? '' : `<i class="mk-mtr mk-mty${k} A" aria-hidden="true"></i>`}<b class="mk-mtn">${esc(t)}</b><span class="mk-mts${still ? '' : ` mk-rux${k} A`}"><b aria-hidden="true">${g}</b>${esc(w ?? d)}</span>${n ? `<span class="mk-mtd">${esc(n)}</span>` : ''}</li>`; }).join('')}</ol></div>`;
 };
 /* 직접 조작 도우미: stage 안 요소에만 붙인다. grab은 끌기(포인터 캡처, 취소되면 c=true), keys는 키 → 값 */
 const grab = (el, h) => { let o = null;
