@@ -303,7 +303,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-tbar>span{margin-left:6px;font-size:11px;color:#a9b8d0;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mk-tbody{font-family:var(--mono);font-size:12px;line-height:1.6;color:#e6ecf7;white-space:pre;overflow-x:auto;padding:10px 12px}.mk-tbody>div{min-height:1.6em}
 .mk-tp{color:#a8d49a}.mk-te{color:#ff9e94}.mk-tc{display:inline-block}.mk-tbody .mk-hl{outline-offset:1px;border-radius:3px}
-.cmp>div:has(>.mk-term),.cmp>div:has(>.mk-nw),.cmp>div:has(>.mk-ru),.cmp>div:has(>.mk-rust),.cmp>div:has(>.mk-rupl),.cmp>div:has(>.mk-mo),.cmp>div:has(>.mk-mt){min-width:0;grid-template-columns:minmax(0,1fr)}
+.cmp>div:has(>.mk-term),.cmp>div:has(>.mk-nw),.cmp>div:has(>.mk-ru),.cmp>div:has(>.mk-rust),.cmp>div:has(>.mk-rupl),.cmp>div:has(>.mk-mo),.cmp>div:has(>.mk-mt),.cmp>div:has(>.mk-dc),.cmp>div:has(>.mk-fw){min-width:0;grid-template-columns:minmax(0,1fr)}
 .mk-tcur{display:inline-block;width:.6em;height:1.1em;vertical-align:text-bottom;background:#e6ecf7}.mk-tcur.A{animation:blink 1s step-end infinite}
 .mk-tr.A,.mk-tc.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-tc.A{animation-timing-function:steps(12)}
 .mk-tl1{animation-name:mk-tl1}.mk-tl2{animation-name:mk-tl2}.mk-tl3{animation-name:mk-tl3}.mk-tl4{animation-name:mk-tl4}.mk-tl5{animation-name:mk-tl5}.mk-tl6{animation-name:mk-tl6}.mk-tl7{animation-name:mk-tl7}.mk-tl8{animation-name:mk-tl8}
@@ -434,6 +434,24 @@ a.tag:hover{background:var(--ink);color:#fff}
 /* 모바일 모션 부품: 아이콘 배지, 화면 키보드, 화면 아래에 붙는 입력칸 */
 .mk-moi{position:relative}.mk-mobg{position:absolute;top:-6px;right:-8px;min-width:19px;height:19px;padding:0 4px;border:2px solid var(--plate);border-radius:10px;background:var(--mark-text);color:#fff;font:800 11px/15px var(--sans)}
 .mk-mobot{flex:none;margin-top:auto}.mk-mokb{position:absolute;left:0;right:0;bottom:0;height:62px;border-radius:6px 6px 0 0;background:repeating-linear-gradient(180deg,var(--sky) 0 5px,transparent 5px 19px),repeating-linear-gradient(90deg,var(--sky) 0 3px,var(--plate) 3px 16px) var(--sky)}.mk-mokb.in{position:static;flex:none}
+.mk-dc{width:min(100%,340px);border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12px;line-height:1.45;text-align:left}
+.mk-dct{padding:5px 10px;border-bottom:1.5px solid var(--ink);border-radius:6.5px 6.5px 0 0;background:var(--fig);font:700 11.5px/1.35 var(--mono);overflow-wrap:anywhere}
+.mk-dcb{display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px}.mk-dck{min-width:0;overflow-wrap:anywhere}.mk-dck.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
+.mk-dch{display:block;font-size:13.5px;font-weight:800;line-height:1.3}.mk-dck ul{padding-left:16px}.mk-dck ul.mk-dcc{display:grid;gap:3px;padding:0;list-style:none}.mk-dcc li{display:flex;gap:6px}.mk-dcc b{flex:none;font-weight:400}
+.mk-dck table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11.5px;line-height:1.35}.mk-dck th,.mk-dck td{padding:3px 5px;border:1px solid var(--rule);text-align:left;vertical-align:top;overflow-wrap:anywhere}.mk-dck th{background:var(--fig);font-weight:800}
+.mk-fw{width:min(100%,320px);color:var(--ink);font-size:12px;line-height:1.35}.mk-fwl{display:flex;flex-direction:column;gap:22px;list-style:none}
+.mk-fwr{position:relative;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center}.mk-fwr.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:12px}
+.mk-fwr+.mk-fwr::before{content:'';position:absolute;top:-22px;left:calc(50% - .75px);width:1.5px;height:22px;background:var(--ink)}.mk-fwr:not(.two)+.mk-fwr.two::before{height:11px}
+.mk-fwr:not(.two)+.mk-fwr.two::after{content:'';position:absolute;top:-11px;left:calc(25% - 3.75px);right:calc(25% - 3.75px);height:11px;border:1.5px solid var(--ink);border-bottom:0}
+.mk-fwr.two+.mk-fwr.two::before{left:calc(25% - 3.75px);right:calc(25% - 3.75px);width:auto;background:none;border:solid var(--ink);border-width:0 1.5px}
+.mk-fwn{position:relative;isolation:isolate;width:min(100%,200px);min-width:0;padding:7px 10px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);text-align:center;overflow-wrap:anywhere}.mk-fwr.two .mk-fwn{width:100%}.mk-fwn.end{padding:7px 14px;border-radius:999px}
+.mk-fwn.q{padding:15px 30px;border-color:transparent;background:none}.mk-fwn.q::before,.mk-fwn.q::after{content:'';position:absolute;inset:0;z-index:-1;background:var(--ink);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}.mk-fwn.q::after{background:var(--plate);clip-path:polygon(50% 2px,calc(100% - 3.5px) 50%,50% calc(100% - 2px),3.5px 50%)}
+.mk-fwn.on{border-color:var(--mark);box-shadow:inset 0 0 0 1px var(--mark)}.mk-fwn.q.on{border-color:transparent;box-shadow:none}.mk-fwn.q.on::before{background:var(--mark)}
+.mk-fwe{display:block;font-size:11px;font-weight:800;color:var(--mark-text)}.mk-fwm{margin-right:4px;font-size:11px;color:var(--mark)}.mk-fwt{font-weight:700}
+.mk-fwd{position:absolute;top:-6px;left:calc(50% - 5px);width:10px;height:10px;border-radius:50%;background:var(--mark);box-shadow:0 0 0 2px var(--plate);opacity:0}.mk-fwd.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:var(--ease)}
+.mk-fwy1{animation-name:mk-fwy1}.mk-fwy2{animation-name:mk-fwy2}.mk-fwy3{animation-name:mk-fwy3}.mk-fwy4{animation-name:mk-fwy4}.mk-fwz1{animation-name:mk-fwz1}.mk-fwz2{animation-name:mk-fwz2}.mk-fwz3{animation-name:mk-fwz3}.mk-fwz4{animation-name:mk-fwz4}.mk-fwz5{animation-name:mk-fwz5}
+@keyframes mk-fwy1{0%,9.9%{opacity:0}10%,24.9%{opacity:1}25%,100%{opacity:0}}@keyframes mk-fwy2{0%,24.9%{opacity:0}25%,39.9%{opacity:1}40%,100%{opacity:0}}@keyframes mk-fwy3{0%,39.9%{opacity:0}40%,54.9%{opacity:1}55%,100%{opacity:0}}@keyframes mk-fwy4{0%,54.9%{opacity:0}55%,69.9%{opacity:1}70%,100%{opacity:0}}
+@keyframes mk-fwz1{0%,9.9%{opacity:0}10%,100%{opacity:1}}@keyframes mk-fwz2{0%,24.9%{opacity:0}25%,100%{opacity:1}}@keyframes mk-fwz3{0%,39.9%{opacity:0}40%,100%{opacity:1}}@keyframes mk-fwz4{0%,54.9%{opacity:0}55%,100%{opacity:1}}@keyframes mk-fwz5{0%,69.9%{opacity:0}70%,100%{opacity:1}}
 .mk-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:0 14px;border-radius:8px;border:1.5px solid var(--ink);
   background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;touch-action:manipulation}
 .mk-btn.ghost{background:transparent;color:var(--ink)}
@@ -442,7 +460,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-fw,.mk-pl) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-fw,.mk-pl) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -1610,6 +1628,7 @@ CAT('security','보안','사이트와 사용자를 지키는 말', [['attack','�
 CAT('perf','성능 · 최적화','빠르고 가볍게 만드는 말', [['metric','측정 지표','속도를 숫자로 재는 기준']]);
 CAT('bug','버그 · 디버깅 현상','뭔가 이상할 때 그 현상을 부르는 말', [['symptom','화면 증상 모음','눈에 보이는 이상 현상의 이름']]);
 CAT('test','테스트','코드와 화면이 의도대로 동작하는지 확인하는 방법의 말', [['kind','테스트 종류','무엇을 어디까지 확인하느냐에 따른 테스트 이름']]);
+CAT('plan','기획 · 문서','무엇을 만들지 정하고 글로 남기는 말', [['docs','문서 종류','자주 쓰는 문서의 이름과 쓰임']]);
 CAT('ai','AI · Claude와 일하기','AI에게 일을 잘 맡기기 위한 말', [['phrase','지시 표현 모음','그대로 쓰면 되는 지시 문장']]);
 </script>
 <script>
@@ -3465,6 +3484,39 @@ const track = (steps = [], { still = false, label } = {}) => {
   steps.forEach(t => { if (!Object.hasOwn(MT_S, t.s)) throw new Error('track: 상태 ' + t.s); });
   return `<div class="mk-mt"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><ol class="mk-mtl">${steps.map(({ t, s, n, w }, i) => { const k = i + 1, [g, d] = MT_S[s];
     return `<li class="mk-mtc ${s}">${still ? '' : `<i class="mk-mtr mk-mty${k} A" aria-hidden="true"></i>`}<b class="mk-mtn">${esc(t)}</b><span class="mk-mts${still ? '' : ` mk-rux${k} A`}"><b aria-hidden="true">${g}</b>${esc(w ?? d)}</span>${n ? `<span class="mk-mtd">${esc(n)}</span>` : ''}</li>`; }).join('')}</ol></div>`;
+};
+/* 문서 모형: 블록은 {h 제목 | p 문단 | ul 목록 | tb 표(첫 줄이 머리) | ck 체크 목록 [글, 참/거짓]} 1~6개. k번째 블록은 mk-rux{k}로 나타나고 기호는 읽지 않는다 */
+const DC_B = {
+  h: v => `<b class="mk-dch">${esc(v)}</b>`,
+  p: v => `<p>${esc(v)}</p>`,
+  ul: v => `<ul>${v.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`,
+  tb: ([hd, ...rs]) => `<table><thead><tr>${hd.map(x => `<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${rs.map(r => `<tr>${r.map(x => `<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>`,
+  ck: v => `<ul class="mk-dcc">${v.map(([x, d]) => `<li><b aria-hidden="true">${d ? '☑' : '☐'}</b><span class="sr">${d ? '완료: ' : '안 함: '}</span>${esc(x)}</li>`).join('')}</ul>`,
+};
+const doc = (blocks = [], { title = '문서', still = false, hl, label } = {}) => {
+  if (blocks.length < 1 || blocks.length > 6) throw new Error('doc: 블록은 1~6개');
+  const body = blocks.map((b, i) => { const [key] = Object.keys(b);
+    if (!Object.hasOwn(DC_B, key)) throw new Error('doc: 블록 종류 ' + key);
+    return `<div class="mk-dck${i === hl ? ' mk-hl' : ''}${still ? '' : ` mk-rux${i + 1} A`}">${DC_B[key](b[key])}</div>`; }).join('');
+  return `<div class="mk-dc"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-dct">${esc(title)}</div><div class="mk-dcb">${body}</div></div>`;
+};
+/* 흐름도: 줄은 칸 1~2개 {t 글, k box|q|end, e 들어오는 선 이름} 1~5줄. 2칸 줄은 질문 칸 하나인 줄이나 2칸 줄 아래에만 두고 갈래는 합치지 않는다.
+   path[i]는 줄 i에서 지나는 칸이고, 점은 줄 k에서 15k-5%에 나타난다(마지막 줄 점만 끝까지 남음) */
+const FW_K = ['box', 'q', 'end'];
+const flow = (rows = [], { path = rows.map(() => 0), still = false, label } = {}) => {
+  if (rows.length < 1 || rows.length > 5) throw new Error('flow: 줄은 1~5개');
+  rows.forEach((r, i) => { const up = rows[i - 1];
+    if (r.length < 1 || r.length > 2) throw new Error('flow: 한 줄에 칸은 1~2개');
+    r.forEach(c => { if (!FW_K.includes(c.k ?? 'box')) throw new Error('flow: 칸 종류 ' + c.k); });
+    if (r.length === 2 && !(up && (up.length === 2 || up[0].k === 'q'))) throw new Error('flow: 갈래는 질문 칸 아래에서');
+    if (r.length === 1 && up && up.length === 2) throw new Error('flow: 갈래는 합치지 않아요');
+    if (!r[path[i]]) throw new Error('flow: 경로 칸 없음');
+    if (r.length === 2 && up.length === 2 && path[i] !== path[i - 1]) throw new Error('flow: 경로가 갈래를 건너뛰어요');
+  });
+  return `<div class="mk-fw"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><ol class="mk-fwl">${rows.map((r, i) => { const k = i + 1;
+    return `<li class="mk-fwr${r.length === 2 ? ' two' : ''}">${r.map(({ t, k: kd = 'box', e }, j) => { const on = path[i] === j;
+      return `<div class="mk-fwn ${kd}${on ? ' on' : ''}">${e ? `<span class="mk-fwe">${esc(e)}</span>` : ''}${on ? '<span class="sr">지나는 길: </span><b class="mk-fwm" aria-hidden="true">●</b>' : ''}<span class="mk-fwt">${esc(t)}</span>`
+        + `${on && !still ? `<i class="mk-fwd mk-fw${k === rows.length ? 'z' : 'y'}${k} A" aria-hidden="true"></i>` : ''}</div>`; }).join('')}</li>`; }).join('')}</ol></div>`;
 };
 /* 직접 조작 도우미: stage 안 요소에만 붙인다. grab은 끌기(포인터 캡처, 취소되면 c=true), keys는 키 → 값 */
 const grab = (el, h) => { let o = null;

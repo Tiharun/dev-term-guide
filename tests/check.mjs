@@ -74,7 +74,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -166,6 +166,20 @@ check('base', () => vm.runInContext(`(() => {
   if (/ A"|mk-rux|mk-mty|mk-mtr/.test(track([{t:'a', s:'done'}], {still:true}))) e.push('track still');
   if (track([{t:'<i>', s:'done', n:'&'}]).includes('<i>')) e.push('track esc');
   const tl = track([{t:'a', s:'done'}], {label:'x'}); if (!tl.includes('role="group"') || !tl.includes('aria-label="x"')) e.push('track label');
+  const dc = doc([{h:'회의록'}, {p:'<b>&'}, {ul:['a','b']}, {tb:[['이름','할 일'],['민지','견적']]}, {ck:[['검토', true], ['배포', false]]}], {title:'회의록.md', hl:2, label:'문서'});
+  if (!['mk-dc', 'role="group"', 'aria-label="문서"', '회의록.md', '&lt;b&gt;&amp;', '<th>이름</th>', '<td>견적</td>', '☑', '☐', '<span class="sr">완료: </span>', '<span class="sr">안 함: </span>', 'mk-rux5 A'].every(x => dc.includes(x)) || dc.includes('<b>&')) e.push('doc');
+  if ([...dc.matchAll(/class="mk-dck([^"]*)"/g)].map(x => x[1].includes('mk-hl')).join() !== 'false,false,true,false,false') e.push('doc hl');
+  if (/ A"|mk-rux/.test(doc([{p:'a'}], {still:true}))) e.push('doc still');
+  if (!thr(() => doc([])) || !thr(() => doc(Array(7).fill({p:'a'}))) || !thr(() => doc([{x:1}]))) e.push('doc throw');
+  const fw = flow([[{t:'담기'}], [{t:'로그인?', k:'q'}], [{t:'장바구니', k:'end', e:'예'}, {t:'로그인 화면', k:'end', e:'아니오'}]], {path:[0,0,1], label:'흐름'});
+  if (!['mk-fw', 'role="group"', 'aria-label="흐름"', '<span class="mk-fwe">예</span>', '<span class="mk-fwe">아니오</span>', 'mk-fwy1 A', 'mk-fwy2 A', 'mk-fwz3 A'].every(x => fw.includes(x))) e.push('flow');
+  if ([...fw.matchAll(/class="mk-fwn (\\w+)( on)?"/g)].map(x => !!x[2]).join() !== 'true,true,false,true') e.push('flow on');
+  if ((fw.match(/<span class="sr">지나는 길: <\\/span>/g) || []).length !== 3 || (fw.match(/<b class="mk-fwm" aria-hidden="true">●<\\/b>/g) || []).length !== 3 || !/<i class="mk-fwd[^"]*" aria-hidden="true">/.test(fw)) e.push('flow 읽기');
+  if (flow([[{t:'<i>&'}]]).includes('<i>&')) e.push('flow esc');
+  const fs1 = flow([[{t:'a'}]], {still:true}); if (/ A"|mk-fwd/.test(fs1) || !fs1.includes('●')) e.push('flow still');
+  if (!thr(() => flow([])) || !thr(() => flow(Array(6).fill([{t:'a'}]))) || !thr(() => flow([[{t:'a'},{t:'b'},{t:'c'}]])) || !thr(() => flow([[{t:'a', k:'x'}]]))) e.push('flow throw');
+  if (!thr(() => flow([[{t:'a'}],[{t:'b'},{t:'c'}]])) || !thr(() => flow([[{t:'q',k:'q'}],[{t:'b'},{t:'c'}],[{t:'d'}]])) || !thr(() => flow([[{t:'a'}]], {path:[1]}))
+    || !thr(() => flow([[{t:'q',k:'q'}],[{t:'b'},{t:'c'}],[{t:'d'},{t:'e'}]], {path:[0,0,1]}))) e.push('flow 갈래 throw');
   return e.join(', ');
 })()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
@@ -184,8 +198,15 @@ check('aframe', () => { const P = 10 * +html.match(/\.mk-mos\.A,\.mk-motap\.A\{a
   return [...s, ...t].join(', '); });
 check('kframe', () => { const P = 10 * +html.match(/\.mk-mtr\.A,\.mk-mts\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 단계 띠의 멈춘 장면은 고리가 사라진 뒤
   return [1, 2, 3, 4, 5].filter(k => { const m = html.match(new RegExp(`@keyframes mk-mty${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%`)); return !m || +m[1] > P; }).join(', '); });
+check('dframe', () => { const P = 10 * +html.match(/\.mk-dck\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 문서 모형의 멈춘 장면은 블록이 다 보인 뒤
+  return [1, 2, 3, 4, 5, 6].filter(k => { const m = html.match(new RegExp(`@keyframes mk-rux${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,100%\\{opacity:1\\}`)); return !m || +m[1] > P; }).join(', '); });
+check('fframe', () => { const P = 10 * +html.match(/\.mk-fwd\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 흐름도의 멈춘 장면은 점이 마지막 칸에만 있다
+  const z = [1, 2, 3, 4, 5].filter(k => { const m = html.match(new RegExp(`@keyframes mk-fwz${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,100%\\{opacity:1\\}`)); return !m || +m[1] > P; }).map(k => 'z' + k);
+  const y = [1, 2, 3, 4].filter(k => { const m = html.match(new RegExp(`@keyframes mk-fwy${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%\\{opacity:0\\}`)); return !m || +m[1] > P; }).map(k => 'y' + k);
+  return [...z, ...y].join(', '); });
 check('tm', () => g.TERMS.filter(t => t.c === 'test' && g.D[t.v] && g.D[t.v].m && !/ A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 테스트 그림에는 움직이는 것이 있어야 한다
 check('mm', () => g.TERMS.filter(t => t.c === 'mobile' && g.D[t.v] && g.D[t.v].m && !/ A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 모바일 그림에는 움직이는 것이 있어야 한다
+check('pm', () => g.TERMS.filter(t => t.c === 'plan' && g.D[t.v] && g.D[t.v].m && !/ A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 기획 그림에는 움직이는 것이 있어야 한다
 check('thl', () => { const m = [...html.matchAll(/\{([coe]):'((?:[^'\\]|\\.)*)', h:'((?:[^'\\]|\\.)*)'\}/g)];    // 터미널 줄의 h는 그 줄 글자에 있어야 한다
   return !m.length ? 'h 없음' : m.filter(x => !x[2].includes(x[3])).map(x => x[3]).join(', '); });
 check('cat', () => { const c = g.CATS[1], i = g.CATS.findIndex(x => x.id === 'server'), nt = g.CATS[i + 1];
@@ -195,10 +216,15 @@ check('cat', () => { const c = g.CATS[1], i = g.CATS.findIndex(x => x.id === 'se
   if (!(ts && ts.id === 'test' && ts.secs.map(s => s.id).join() === 'basic,core,motion,adv,kind,tip')) return 'bug 다음 ' + (ts && ts.id);
   const f = g.CATS.findIndex(x => x.id === 'front'), mo = g.CATS[f + 1];
   if (!(mo && mo.id === 'mobile' && mo.secs.map(s => s.id).join() === 'basic,core,motion,adv,store,tip')) return 'front 다음 ' + (mo && mo.id);
+  const a = g.CATS.findIndex(x => x.id === 'ai'), pl = g.CATS[a - 1];
+  if (!(pl && pl.id === 'plan' && pl.secs.map(s => s.id).join() === 'basic,core,motion,adv,docs,tip')) return 'ai 앞 ' + (pl && pl.id);
   return g.CATS[i].desc === '웹사이트를 돌리는 컴퓨터와 그 운영에 관한 말' ? '' : 'server desc'; });
 check('nv', () => g.TERMS.filter(t => t.c === 'net' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 네트워크 카드는 모두 도판 형식
 check('tv', () => g.TERMS.filter(t => t.c === 'test' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 테스트 카드는 모두 도판 형식
 check('mv', () => g.TERMS.filter(t => t.c === 'mobile' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 모바일 카드는 모두 도판 형식
+check('pv', () => g.TERMS.filter(t => t.c === 'plan' && !(typeof t.v === 'string' && t.v.startsWith('u-'))).map(t => t.en).join(', '));    // 기획 카드는 모두 도판 형식
+const PDM = {};    // 직접 조작 기획 카드 → 그림에 있어야 할 버튼 이름·표시
+check('pdm', () => Object.entries(PDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 check('ps', () => g.TERMS.filter(t => 'ps' in t && (typeof t.ps !== 'string' || !t.ps.trim())).map(t => t.en).join(', '));
 const PS_CMD = ['ls', 'pwd', 'touch', 'grep', 'find', 'which', 'curl', 'tail', 'ps', 'kill', '--help'];    // Windows PowerShell 5.1에서 쳐 보니 그림의 bash 결과와 달랐던 명령(Task 6 측정)
 check('pscmd', () => { const a = g.TERMS.filter(t => t.c === 'terminal' && t.s === 'cmd' && 'ps' in t).map(t => t.en).join(); return a === PS_CMD.join() ? '' : 'ps ' + a; });
@@ -231,6 +257,9 @@ const ALIAS = {'콜드 스타트': 'mobile-app-launch', '웜 스타트': 'mobile
 check('alias', () => Object.entries(ALIAS).filter(([q, id]) => !vm.runInContext(`search(${JSON.stringify(q)})`, ctx).slice(0, 5).some(t => t.id === id)).map(([q]) => q).join(', '));
 check('mtword', () => Object.entries(g.D).filter(([, p]) => [...String(p.h || '').matchAll(/<span class="mk-mts[^"]*"><b aria-hidden="true">[^<]*<\/b>([^<]*)<\/span>/g)].some(m => /^[\d.,%\s]*$/.test(m[1]))).map(([k]) => k).join(', '));    // 단계 상태는 기호가 아니라 글자로 읽혀야 한다(숫자만이면 완료·진행 중을 못 읽음)
 check('itt', () => { const t = g.byId.get('mobile-internal-testing-track'), s = t.x + g.D[t.v].h; return /몇 시간/.test(s) && !/몇 분 안에/.test(s) ? '' : t.x; });    // 처음 올리면 테스트 링크가 열리기까지 몇 시간 걸릴 수 있다(support.google.com 9845334)
+check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
+  return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
+    ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
 const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
   const b = Buffer.from(html.match(/FONT:START[\s\S]*?base64,([A-Za-z0-9+/=]+)/)[1], 'base64'), set = new Set();
   let t;
