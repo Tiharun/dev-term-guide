@@ -61,7 +61,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'basics/core': 8, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
