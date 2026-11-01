@@ -154,6 +154,7 @@ check('nframe', () => { const P = 10 * +html.match(/\.mk-nwm\.A,\.mk-nwd\.A\{ani
 check('rframe', () => { const P = 10 * +html.match(/\.mk-rur\.A,[^{]*\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 테스트 실행 모형의 멈춘 장면은 결과가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6].filter(k => ['x', 'y'].some(a => { const m = html.match(new RegExp(`@keyframes mk-ru${a}${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`));
     return !m || +m[1] > P; })).join(', '); });
+check('tm', () => g.TERMS.filter(t => t.c === 'test' && g.D[t.v] && g.D[t.v].m && !/ A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 테스트 그림에는 움직이는 것이 있어야 한다
 check('thl', () => { const m = [...html.matchAll(/\{([coe]):'((?:[^'\\]|\\.)*)', h:'((?:[^'\\]|\\.)*)'\}/g)];    // 터미널 줄의 h는 그 줄 글자에 있어야 한다
   return !m.length ? 'h 없음' : m.filter(x => !x[2].includes(x[3])).map(x => x[3]).join(', '); });
 check('cat', () => { const c = g.CATS[1], i = g.CATS.findIndex(x => x.id === 'server'), nt = g.CATS[i + 1];
