@@ -31,7 +31,7 @@
 
 ## 4. 용어 목록 (71개)
 
-`▶` = 직접 조작, `◎` = 비유 그림 곁들임. 한글명은 `한글 · 풀이` 형식으로 구현 때 정한다. 측정: 아래 영문명은 기존 1,186개와 겹치지 않고(소문자 비교), 그림 키 `u-<slug>`도 기존과 겹치지 않는다.
+`▶` = 직접 조작, `◎` = 비유 그림 곁들임. 영문명의 `·`는 기존 형식에 맞춰 ` / `로 쓰고, 괄호 풀이(Cold·Warm Start, Keychain·Keystore)는 `ko`에 넣는다. 한글명은 `한글 · 풀이` 형식으로 구현 때 정한다. 측정: 아래 영문명은 기존 1,186개와 겹치지 않고(소문자 비교), 그림 키 `u-<slug>`도 기존과 겹치지 않는다.
 
 ### 4.1 기본 (11)
 Mobile App, iOS, Android, Native App, Hybrid App, Cross-platform, WebView, Screen, App Icon, Push Notification, Permission Request▶
@@ -40,16 +40,16 @@ Mobile App, iOS, Android, Native App, Hybrid App, Cross-platform, WebView, Scree
 React Native, Flutter, Expo, Swift, Kotlin, Xcode, Android Studio, Simulator vs Emulator, Navigation Stack▶, App Lifecycle▶, Deep Link, Offline Support▶, Local Notification, iOS vs Android Differences
 
 ### 4.3 모션용어 및 연출 (9)
-Screen Transition, Modal Presentation, Keyboard Avoiding, Fast Refresh, App Launch (Cold · Warm Start), Background Refresh, App Icon Badge, Notification Tap, Force Update
+Screen Transition, Modal Presentation, Keyboard Avoiding, Fast Refresh, App Launch, Background Refresh, App Icon Badge, Notification Tap, Force Update
 
 ### 4.4 심화 (11)
-Native Module, Development Build, Platform-specific Code, Universal Link · App Link, APNs · FCM, Push Token, Secure Storage (Keychain · Keystore), Biometric Authentication, App Sandbox◎, Background Task Limits, In-app Purchase
+Native Module, Development Build, Platform-specific Code, Universal Link / App Link, APNs / FCM, Push Token, Secure Storage, Biometric Authentication, App Sandbox◎, Background Task Limits, In-app Purchase
 
 ### 4.5 앱 스토어·출시 (16)
-App Store vs Google Play, Developer Account, App Store Connect, Google Play Console, Bundle ID · Package Name, Code Signing◎, Version · Build Number, IPA · AAB, TestFlight, Internal Testing Track, App Review, App Rejection, Store Listing, Privacy Label · Data Safety, Staged Rollout, OTA Update
+App Store vs Google Play, Developer Account, App Store Connect, Google Play Console, Bundle ID / Package Name, Code Signing◎, Version / Build Number, IPA / AAB, TestFlight, Internal Testing Track, App Review, App Rejection, Store Listing, Privacy Label / Data Safety, Staged Rollout, OTA Update
 
 ### 4.6 추천 개념 (10)
-App vs Web, Ask Permission in Context(필요한 순간에 권한 묻기), Test on Real Device, Minimum OS Version, App Size, Crash Reporting, Tablet Support, VoiceOver · TalkBack, Ratings & Reviews, Expo Go
+App vs Web, Ask Permission in Context(필요한 순간에 권한 묻기), Test on Real Device, Minimum OS Version, App Size, Crash Reporting, Tablet Support, VoiceOver / TalkBack, Ratings & Reviews, Expo Go
 
 ### 4.7 겹치는 카드 처리 (측정: 기존 영문명 1,186개와 대조, 모두 그대로 두고 연결만)
 
@@ -68,7 +68,7 @@ App vs Web, Ask Permission in Context(필요한 순간에 권한 묻기), Test o
 | Hot Reload(기본) | Fast Refresh |
 | Permission·Principle of Least Privilege(보안) | Permission Request, App Sandbox |
 | Release·Release Notes·Feature Flag·Canary Release·Rollback Deploy(배포) | Staged Rollout, OTA Update |
-| Semantic Versioning(기본) | Version · Build Number |
+| Semantic Versioning(기본) | Version / Build Number |
 | Cold Start(서버, 뜻 다름) | App Launch |
 | Crash·Jank(버그) | Crash Reporting |
 | Push·git push(Git, 뜻 다름) | Push Notification에서 구분 안내 |
@@ -86,13 +86,13 @@ App vs Web, Ask Permission in Context(필요한 순간에 권한 묻기), Test o
 
 ## 5. 그림 구조
 
-- **공용 모형 `app(scenes, opt)`**: 화면 모형 부품 모음(`phone`·`term`·`net`·`runner`, [index.html:3238](../../../index.html)~3310) 옆에 추가한다.
+- **공용 모형 `app(scenes, opt)`**: 화면 모형 부품 모음(`phone`·`term`·`net`·`runner`, [index.html:3238](../../../index.html)~3310) 옆에 추가한다. CSS 접두어는 `mk-mo`(app)·`mk-mt`(track)다(측정: `mk-ap`는 이미 쓰임).
   - 기존 `phone()` 틀 안에 상태 표시줄(시간·배터리 글자)을 얹고, 장면 1~4개를 10초 주기로 바꿔 보인다.
   - 장면 `{t 화면 제목, b 본문 HTML, tap 누를 곳(선택), go 'push'|'modal'|'fade'}`. `push`는 오른쪽에서 밀려 들어옴, `modal`은 아래에서 올라옴, `fade`는 겹쳐 바뀜. `tap`이 있으면 장면이 바뀌기 직전에 손가락 점이 그 자리에 찍힌다.
   - 재생: 터미널·테스트 모형과 같은 구조(주기 10초, 음수 지연으로 멈춘 장면이 마지막 장면, 보일 때만 재생, 다시 재생 가능). 동작 줄이기 설정이면 멈춘 마지막 장면 + 재생 버튼.
   - 접근성: 지나간 장면은 `aria-hidden`, 그림 전체 흐름은 `opt.label`로 요약한다.
   - 장면 5개 이상이면 오류를 던진다(`runner()`의 6줄 제한과 같은 방식).
-- **공용 모형 `track(steps, opt)`**: 단계 띠 1~5칸(예: 빌드 → 업로드 → 심사 → 출시). 단계 `{t 이름, s 'done'|'fail'|'now'|'wait', n 아래 설명(선택)}`. 표시가 왼쪽부터 단계를 따라 이동하고, 상태는 기호와 글자를 함께 쓴다(✓ 통과, ✕ 거절, ● 진행 중, … 대기). 좁으면(240px 이하) 세로로 쌓는다. 재생 규칙은 `app()`과 같다.
+- **공용 모형 `track(steps, opt)`**: 단계 띠 1~5칸(예: 빌드 → 업로드 → 심사 → 출시). 단계 `{t 이름, s 'done'|'fail'|'now'|'wait', n 아래 설명(선택), w 상태 글자(선택)}`. 표시가 왼쪽부터 단계를 따라 이동하고, 상태는 기호와 글자를 함께 쓴다(기본 ✓ 완료, ✕ 실패, ● 진행 중, … 대기. 단계마다 글자를 바꿀 수 있다: 심사 ✕ 거절). 좁으면(240px 이하) 세로로 쌓는다. 재생 규칙은 `app()`과 같다.
 - **기존 모형 재사용**: 명령은 `term()`(예: `npx expo start`), 푸시 전달은 `net()`(아이콘 `server`·`cloud`·`phone` 이미 있음, [index.html:3256](../../../index.html)), 앱 vs 웹·WebView는 `browser()`와 `app()`를 `pair()`처럼 화살표로 잇는다.
 - **직접 조작 4장**(`init`, 기존 `tkeys`·`keys` 도우미 재사용, 버튼은 포커스 가능하고 키보드로도 누름, 결과 문장은 `aria-live`):
   - Permission Request: 권한 창에서 허용 → 카메라 화면, 거부 → "설정에서 켜 주세요" 안내. 거부한 뒤 다시 누르면 창이 다시 안 뜨는 모습(플랫폼 규칙은 4.8대로 확인 후 문장 확정).
@@ -100,7 +100,7 @@ App vs Web, Ask Permission in Context(필요한 순간에 권한 묻기), Test o
   - App Lifecycle: "홈으로 내리기"·"다시 열기"·"오래 두기" 버튼. 상태(앞에서 실행 중·뒤로 내려감·종료됨)를 글자로 보이고, 오래 두면 입력하던 글이 사라진 채 처음 화면으로 열린다.
   - Offline Support: "인터넷" 켜기·끄기와 "미리 저장" 켜기·끄기. 인터넷이 끊기면 미리 저장이 켜진 경우 저장된 목록 + "오프라인" 띠, 꺼진 경우 빈 화면 오류.
 - **비유 그림**: 이름이 비유인 App Sandbox(모래놀이 상자: 앱마다 자기 상자 안에서만 논다)·Code Signing(봉인 도장: 누가 만들었고 안 바뀌었음을 찍어 둠)만. 모형 옆에 화살표로 잇는다(`pair()`).
-- **흐름이 없는 카드**: iOS vs Android Differences·App Store vs Google Play는 두 칸 비교, Version · Build Number·IPA · AAB는 이름표·파일 그림, 도구 카드(Xcode·Android Studio·Expo 등)는 대표 화면이나 명령과 결과를 짝지은 그림.
+- **흐름이 없는 카드**: iOS vs Android Differences·App Store vs Google Play는 두 칸 비교, Version / Build Number·IPA / AAB는 이름표·파일 그림, 도구 카드(Xcode·Android Studio·Expo 등)는 대표 화면이나 명령과 결과를 짝지은 그림.
 - 휴대폰 틀은 190px라 좁은 그림판(320px)에서 직접 조작 카드의 옆 표시(쌓인 화면 등)는 휴대폰 아래로 내린다.
 
 ## 6. 데이터
@@ -112,10 +112,10 @@ App vs Web, Ask Permission in Context(필요한 순간에 권한 묻기), Test o
 | 묶음 | 증상 | 용어 |
 |---|---|---|
 | 크기·화면 | 키보드가 입력창을 가려요 | Keyboard Avoiding |
-| 느림 | 앱이 켜지는 데 오래 걸려요 | App Launch (Cold · Warm Start) |
+| 느림 | 앱이 켜지는 데 오래 걸려요 | App Launch |
 | 반응·클릭 | 뒤로 가기를 눌렀더니 앱이 꺼져요 | Navigation Stack |
 | 오류·안 됨 | 푸시 알림이 안 와요 | Push Token |
-| 오류·안 됨 | 링크를 누르면 앱 대신 웹사이트가 열려요 | Universal Link · App Link |
+| 오류·안 됨 | 링크를 누르면 앱 대신 웹사이트가 열려요 | Universal Link / App Link |
 | 오류·안 됨 | 앱을 내렸다 열면 처음 화면으로 돌아가요 | App Lifecycle |
 | 오류·안 됨 | 권한을 거부했더니 다시 안 물어봐요 | Permission Request |
 | 오류·안 됨 | 앱 심사에서 거절됐어요 | App Rejection |
