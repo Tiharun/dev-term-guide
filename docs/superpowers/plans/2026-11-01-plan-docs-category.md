@@ -212,7 +212,7 @@
 | Functional Specification | Spec, Pseudocode |
 | Screen Design Document | Mockup, Design Spec |
 | Technical Design Document | API Documentation |
-| WBS · Gantt Chart | Dependency |
+| WBS · Gantt Chart | (없음 — 기존 Dependency는 패키지 뜻이라 달지 않음) |
 | Test Plan | Test Case |
 | User Manual | Table of Contents, README |
 | Glossary | Glossary Habit |
@@ -286,7 +286,7 @@
 
 **Task 7 추가:**
 - 그림: TL;DR·Write for the Reader·Keep Docs Updated·Show with Example은 `cmp`(나쁜 예·좋은 예 모두 `doc(…, {still:true})`), 5 Whys는 `flow()` 5줄(마지막 `end`가 근본 원인), 나머지는 `doc()`.
-- Out of Scope의 `p` 예: "이번 범위 밖이야. 쿠폰 기능은 만들지 마줘" 같은 지시문.
+- Out of Scope의 `p` 예: "이번 범위 밖이야. 쿠폰 기능은 만들지 말아 줘" 같은 지시문.
 
 ### Task 8: 증상 색인 10개
 

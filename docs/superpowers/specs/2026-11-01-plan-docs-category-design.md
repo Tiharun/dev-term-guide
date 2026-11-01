@@ -64,7 +64,6 @@ TL;DR, Action Item, 5 Whys, Out of Scope, Decision Log, Write for the Reader, Ke
 | Issue·README·Changelog(Git/추천), Code Review(Git/필수) | Ticket, User Manual, Decision Log, Review Request |
 | Release Notes(배포/모션), Postmortem(배포/심화) | Change Request, Retrospective, 5 Whys |
 | API Documentation(백엔드) | Technical Design Document |
-| Dependency(기본/필수) | WBS, Gantt Chart |
 | Data Flow(데이터베이스/모션)·Login Flow(보안/모션) | Flowchart, Screen Flow |
 | Test Case(테스트/기본) | Test Plan |
 

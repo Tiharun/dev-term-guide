@@ -254,6 +254,8 @@ check('symcount', () => g.SYMPTOMS.length !== 145 ? 'length ' + g.SYMPTOMS.lengt
 check('total', () => g.TERMS.length === 1328 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
+check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
+  .concat(/마줘/.test(g.byId.get('plan-out-of-scope').p) ? ['마줘'] : []).join(', '));    // Dependency 카드는 패키지 뜻이라 작업 선후 관계 카드에 달지 않음
 check('signal', () => { const w = g.byId.get('net-webrtc').x, p = g.byId.get('net-p2p').x; return /신호 서버/.test(w) && /서버/.test(p) ? '' : w + ' / ' + p; });    // WebRTC는 연결 정보(SDP·ICE)를 신호 서버로 주고받아야 연결된다(MDN Signaling and video calling)
 check('aaaa', () => { const x = g.byId.get('net-dns-record').x; return /AAAA[^,]*RFC 3596/.test(x) ? '' : x; });    // u는 RFC 1035라 AAAA 출처(RFC 3596)를 본문에 적는다
 check('rngname', () => Object.entries(g.D).filter(([, p]) => typeof p.h === 'string' && /<label class="mk-rng">(?:(?!<\/label>)[\s\S])*<b>/.test(p.h)).map(([k]) => k).join(', '));    // 슬라이더 옆 숫자는 aria-valuetext가 읽으므로 이름에서 뺀다
