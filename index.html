@@ -2855,12 +2855,29 @@ T('test','basic',[
  {en:'Test Suite',ko:'테스트 스위트 · 테스트 묶음',d:'관련된 테스트 케이스를 한데 모아 함께 돌리는 묶음이에요.',x:'보통 기능 하나나 파일 하나 단위로 묶어요.',p:'장바구니 테스트 스위트만 따로 돌려줘',r:['Test Case','Test Runner'],l:2,o:0,v:'u-test-suite'},
  {en:'Test Code',ko:'테스트 코드 · 확인하는 코드',d:'만든 코드를 불러 결과가 맞는지 자동으로 확인하는 코드예요.',x:'기능 코드와 따로 파일을 두고, 기능 코드를 바꿀 때마다 다시 돌려요.',p:'add 함수에 테스트 코드를 써줘',r:['Function','Test Case'],l:1,o:0,v:'u-test-code'},
  {en:'Test Runner',ko:'테스트 러너 · 테스트 실행기',d:'테스트 파일을 찾아 돌리고 통과·실패를 모아 보여 주는 프로그램이에요.',p:'테스트 러너 결과에서 실패한 테스트가 뭔지 알려줘',r:['Terminal','Test Suite'],l:2,o:0,v:'u-test-runner'},
- {en:'Assertion',ko:'어서션 · 결과 확인 줄',d:'"이 값은 이래야 한다"고 적어 두고 실제 값과 비교하는 줄이에요.',x:'기대값과 실제값이 다르면 그 자리에서 테스트가 실패해요.',p:'이 테스트에 합계가 맞는지 확인하는 assertion을 추가해줘',r:['Expected vs Actual'],l:2,o:0,v:'u-assertion'},
+ {en:'Assertion',ko:'어서션 · 결과 확인 줄',d:'"이 값은 이래야 한다"고 적어 두고 실제 값과 비교하는 줄이에요.',x:'기대값과 실제값이 다르면 그 자리에서 테스트가 실패해요.',p:'이 테스트에 합계가 맞는지 확인하는 assertion을 추가해줘',r:['Expected vs Actual','expect'],l:2,o:0,v:'u-assertion'},
  {en:'Pass / Fail',ko:'통과 / 실패 · 테스트 결과',d:'기대한 대로면 통과, 하나라도 다르면 실패로 표시돼요.',p:'실패한 테스트의 기대값과 실제값을 비교해서 원인을 알려줘',r:['Assertion','Expected vs Actual'],l:1,o:0,v:'u-pass-fail'},
  {en:'Automated Test',ko:'자동 테스트 · 명령 하나로 도는 확인',d:'사람 대신 테스트 코드가 정해진 확인을 매번 똑같이 돌리는 방식이에요.',x:'코드를 바꿀 때마다 금방 다시 돌릴 수 있어서 CI에서 자주 돌려요.',p:'커밋 전에 자동 테스트를 전부 돌려줘',r:['Test Code','CI/CD','Manual Testing'],l:1,o:0,v:'u-automated-test'},
  {en:'Manual Testing',ko:'수동 테스트 · 사람이 직접 눌러 보기',d:'사람이 화면을 직접 눌러 보며 의도대로 되는지 확인하는 방식이에요.',x:'보기 좋은지, 쓰기 편한지처럼 코드로 확인하기 어려운 것을 볼 때 좋아요.',p:'이 화면을 수동 테스트로 눌러 볼 점검 목록을 만들어줘',r:['Automated Test','Usability Test'],l:1,o:0,v:'u-manual-testing'},
  {en:'QA',ko:'큐에이 · 품질 보증',d:'출시 전에 제품이 기준대로 동작하는지 테스트하고 확인하는 일이에요.',x:'Quality Assurance의 줄임말이에요. 이 일을 맡은 사람이나 팀을 QA라고 부르기도 해요.',p:'출시 전 QA 점검표를 기능별로 만들어줘',r:['Design QA','Penetration Test'],l:1,o:0,v:'u-qa'},
  {en:'Test Coverage',ko:'테스트 커버리지 · 테스트가 지나간 코드 비율',d:'테스트를 돌리는 동안 실행된 코드가 전체의 몇 %인지 나타낸 값이에요.',x:'100%여도 버그가 없다는 뜻은 아니에요. 실행됐을 뿐 결과를 제대로 확인했는지는 따로 봐야 해요.',p:'테스트 커버리지를 재서 테스트가 안 지나간 코드를 알려줘',r:['Test Code'],l:2,o:0,v:'u-test-coverage'},
+]);
+T('test','core',[
+ {en:'describe / it',ko:'디스크라이브 / 잇 · 테스트 묶음과 한 개',d:'describe로 관련 테스트를 묶고, it으로 테스트 하나를 적어요.',x:'it은 test와 같은 뜻의 다른 이름이에요. Jest·Vitest 모두 같은 모양으로 써요.',p:'장바구니 기능을 describe로 묶고 it으로 테스트를 3개 써줘',r:['Test Suite','Test Case'],l:2,o:1,u:'https://jestjs.io/docs/api',v:'u-describe-it'},
+ {en:'expect',ko:'익스펙트 · 확인 시작',d:'expect(실제값) 뒤에 Matcher를 붙여 "이 값은 이래야 한다"를 적는 함수예요.',x:'Jest·Vitest·Playwright 모두 expect로 확인을 시작해요.',p:'이 테스트에 expect로 반환값을 확인하는 줄을 넣어줘',r:['Assertion','Matcher'],l:2,o:1,u:'https://jestjs.io/docs/expect',v:'u-expect'},
+ {en:'Matcher',ko:'매처 · 비교 방법',d:'expect 뒤에 붙여 실제값을 어떻게 비교할지 정하는 함수예요. toBe, toEqual 등이 있어요.',x:'toBe는 Object.is로 같은 값인지 보고, toEqual은 객체 안 내용을 하나씩 비교해요. 내용이 같아도 따로 만든 객체면 toBe로는 실패해요.',p:'객체를 비교하는 테스트라 toBe 대신 toEqual로 바꿔줘',r:['expect','Object'],l:2,o:1,u:'https://jestjs.io/docs/expect',v:'u-matcher'},
+ {en:'Mock',ko:'목 · 가짜로 바꿔 끼우기',d:'테스트할 때 진짜 API나 모듈 대신 정해 둔 가짜를 끼워 넣는 것이에요.',x:'진짜를 부르면 느리고 결과가 그때그때 달라질 수 있어요. Jest는 jest.mock, Vitest는 vi.mock으로 모듈을 가짜로 바꿔요.',p:'날씨 API를 vi.mock으로 바꿔서 네트워크 없이 테스트가 돌게 해줘',r:['Mock Data','Stub','Spy','Test Double'],l:2,o:1,u:'https://vitest.dev/api/vi',v:'u-mock'},
+ {en:'Stub',ko:'스텁 · 정해 둔 답만 주는 가짜',d:'불리면 미리 정해 둔 값만 돌려주는 가짜 함수나 객체예요.',x:'흔히 정해 둔 답만 필요하면 Stub, 어떻게 불렸는지까지 확인하면 Mock이라고 나눠요. 도구 안에서는 둘 다 mock 함수로 만드는 경우가 많아요.',p:'환율 API는 항상 1300을 돌려주는 stub으로 바꿔서 계산만 테스트해줘',r:['Mock','Test Double'],l:2,o:0,v:'u-stub'},
+ {en:'Spy',ko:'스파이 · 불렸는지 엿보기',d:'함수가 몇 번, 어떤 값으로 불렸는지 기록해 두고 확인하는 것이에요.',x:'Jest는 jest.spyOn, Vitest는 vi.spyOn으로 만들어요. jest.spyOn은 기본으로 원래 함수도 그대로 실행해요.',p:'저장 버튼을 누르면 save 함수가 한 번 불리는지 spyOn으로 확인해줘',r:['Mock','Function'],l:2,o:1,u:'https://jestjs.io/docs/jest-object',v:'u-spy'},
+ {en:'Test Double',ko:'테스트 더블 · 테스트용 대역',d:'테스트에서 진짜 대신 쓰는 가짜를 모두 부르는 말이에요. Mock, Stub, Spy 등이 여기 들어가요.',x:'영화에서 위험한 장면을 대신하는 스턴트 대역(stunt double)에서 따온 이름이라고 흔히 소개돼요.',p:'결제 API는 테스트 더블로 바꿔서 실제 결제 없이 주문 테스트를 돌려줘',r:['Mock','Stub','Spy'],l:2,o:0,v:'u-test-double'},
+ {en:'Fixture',ko:'픽스처 · 테스트 준비물',d:'여러 테스트에 똑같이 필요한 데이터나 환경을 미리 준비해 둔 것이에요.',x:'Playwright에서는 테스트 함수가 받는 page처럼 미리 준비해 넘겨주는 환경을 fixture라고 불러요. 도구마다 뜻이 조금 달라요.',p:'로그인한 사용자 상태를 fixture로 만들어서 테스트마다 다시 쓰게 해줘',r:['Seed Data','Dummy Data'],l:2,o:1,u:'https://playwright.dev/docs/test-fixtures',v:'u-fixture'},
+ {en:'beforeEach / afterEach',ko:'비포 이치 / 애프터 이치 · 테스트마다 앞뒤로 실행',d:'테스트 하나하나가 시작하기 전과 끝난 뒤에 매번 실행할 코드를 적는 곳이에요.',x:'beforeEach에서 준비하고 afterEach에서 치우면 앞 테스트가 남긴 것이 다음 테스트에 섞이지 않아요.',p:'테스트마다 장바구니를 비우도록 beforeEach를 추가해줘',r:['Fixture','Test Suite'],l:2,o:1,u:'https://jestjs.io/docs/api',v:'u-beforeeach-aftereach'},
+ {en:'Arrange-Act-Assert',ko:'준비-실행-확인 · 테스트를 쓰는 세 단계',d:'테스트를 준비(Arrange), 실행(Act), 확인(Assert) 세 덩어리로 나눠 쓰는 흔한 방식이에요.',x:'덩어리 사이를 한 줄씩 비우면 무엇을 확인하는 테스트인지 읽기 쉬워요.',p:'이 테스트를 Arrange-Act-Assert 순서로 나눠 정리해줘',r:['Test Code','Assertion'],l:2,o:0,v:'u-arrange-act-assert'},
+ {en:'Snapshot Test',ko:'스냅샷 테스트 · 저장해 둔 결과와 비교',d:'처음 돌릴 때 결과를 파일로 저장해 두고, 다음부터 그 결과와 똑같은지 비교하는 테스트예요.',x:'Jest·Vitest는 toMatchSnapshot으로 써요. 일부러 바꾼 거라면 스냅샷을 갱신해야 다시 통과해요.',p:'이 컴포넌트 출력에 toMatchSnapshot 테스트를 추가해줘',r:['Assertion','Test Code'],l:2,o:1,u:'https://jestjs.io/docs/snapshot-testing',v:'u-snapshot-test'},
+ {en:'Test File Naming',ko:'테스트 파일 이름 · .test.js와 .spec.js',d:'테스트 도구가 테스트 파일을 알아보도록 이름 끝에 .test나 .spec을 붙이는 규칙이에요.',x:'Jest·Vitest·Playwright 모두 기본으로 .test.js·.spec.js 같은 이름을 찾아요. Jest는 __tests__ 폴더 안 파일도 찾아요. 규칙은 설정에서 바꿀 수 있어요.',p:'테스트 파일 이름을 도구가 찾을 수 있게 .test.js로 바꿔줘',r:['Test Runner','Test Code'],l:1,o:1,u:'https://vitest.dev/config/include',v:'u-test-file-naming'},
+ {en:'Jest',ko:'제스트 · 자바스크립트 테스트 도구',d:'자바스크립트 코드를 테스트하는 도구예요. 테스트 파일을 찾아 돌리고 결과를 보여 줘요.',x:'package.json의 test 명령을 jest로 두고 npm test로 돌리는 경우가 많아요. expect와 mock 기능이 함께 들어 있어요.',p:'이 프로젝트에 Jest를 설치하고 npm test로 돌아가게 설정해줘',r:['Test Runner','npm'],l:2,o:1,u:'https://jestjs.io/docs/getting-started',v:'u-jest'},
+ {en:'Vitest',ko:'비테스트 · Vite 기반 테스트 도구',d:'Vite 기반의 테스트 도구예요. expect·describe 같은 쓰는 법이 Jest와 비슷해요.',x:'대화형 터미널에서 npx vitest를 치면 파일을 고칠 때마다 다시 도는 watch 모드로 돌아요. 한 번만 돌리려면 vitest run을 써요.',p:'Vitest를 watch 모드로 켜 두고 고칠 때마다 테스트가 다시 돌게 해줘',r:['Watch Mode','Test Runner'],l:2,o:1,u:'https://vitest.dev/guide/cli',v:'u-vitest'},
+ {en:'Playwright',ko:'플레이라이트 · 브라우저를 움직이는 테스트 도구',d:'진짜 브라우저를 열어 클릭·입력을 대신 하면서 화면이 맞는지 확인하는 도구예요.',x:'npx playwright test로 돌려요. 테스트 함수가 받는 page로 주소를 열고, 누르고, 확인해요.',p:'로그인 화면을 Playwright로 열어 이메일을 넣고 로그인되는지 테스트해줘',r:['Browser','Fixture'],l:2,o:1,u:'https://playwright.dev/docs/writing-tests',v:'u-playwright'},
 ]);
 </script>
 <script>
@@ -5071,6 +5088,66 @@ Object.assign(D, {
       const on = {normal:true, vip:false}, key = {'일반 손님 테스트':'normal', 'VIP 테스트':'vip'};
       const set = () => { box.innerHTML = TCOV(on); say.textContent = TCOV_SAY(on); ks.forEach(b => b.setAttribute('aria-pressed', on[key[b.dataset.k]])); };
       ks.forEach(b => b.addEventListener('click', () => { on[key[b.dataset.k]] = !on[key[b.dataset.k]]; set(); })); set(); }},
+});
+
+/* test: core — 공식 문서 확인: toBe는 Object.is, toEqual은 내용을 재귀 비교(jestjs.io/docs/expect) · jest.fn·jest.spyOn·jest.mock(jestjs.io/docs/jest-object) ·
+   vi.fn·vi.spyOn·vi.mock, vi.mock은 import보다 먼저 실행(vitest.dev/api/vi) · it은 test의 별칭, beforeEach·afterEach는 테스트마다 앞뒤(jestjs.io/docs/api) ·
+   toMatchSnapshot(jestjs.io/docs/snapshot-testing) · 파일 이름 기본값 Jest testMatch·Vitest include·Playwright testMatch · npm test와 "test": "jest"(jestjs.io/docs/getting-started) ·
+   npx vitest는 대화형 터미널에서 watch, vitest run은 한 번(vitest.dev/guide/cli) · npx playwright test(playwright.dev/docs/running-tests) · fixture page(playwright.dev/docs/test-fixtures).
+   예시: 함수·파일 이름(getWeather, cart.test.js 등), ms, 값 */
+const TMOCK_REAL = [{s:'pass', ms:1840}, {s:'fail', ms:5000, e:'맑음 21°', a:'시간 초과'}, {s:'pass', ms:2310}];
+const TMOCK_C = ["import { getWeather } from './weatherApi';", "test('오늘 날씨 보여 주기', async () => {", "  expect(await getWeather()).toBe('맑음 21°');", '});'];
+const TMOCK_R = (k, n) => k === 'mock' ? {s:'pass', ms:12} : TMOCK_REAL[n % 3];
+const TMOCK = (k, n) => runner([{n:'오늘 날씨 보여 주기', ...TMOCK_R(k, n)}], {file:'weather.test.js', still:true, label:k + '로 돌린 결과',
+  code:k === 'mock' ? [TMOCK_C[0], "vi.mock('./weatherApi', () => ({ getWeather: async () => '맑음 21°' }));", ...TMOCK_C.slice(1)] : TMOCK_C});
+const TMOCK_SAY = (k, n) => { const r = TMOCK_R(k, n);
+  return k === 'mock' ? `가짜 응답이라 ${r.ms}ms 만에 매번 같은 결과예요`
+    : (r.s === 'pass' ? `진짜 API를 불러 ${r.ms}ms 걸렸어요` : `진짜 API가 ${r.ms}ms 안에 답하지 않아 실패했어요`) + '. 누를 때마다 결과가 달라질 수 있어요'; };
+const TSTUNT = '<svg viewBox="0 0 110 100" aria-hidden="true"><path class="s y" d="M30 12a9 9 0 1 1 0 18a9 9 0 1 1 0-18z"/><path class="s y" d="M16 92V52c0-9 6-14 14-14s14 5 14 14v40z"/>'
+  + '<path class="s t" d="M80 12a9 9 0 1 1 0 18a9 9 0 1 1 0-18z"/><path class="s t" d="M66 92V52c0-9 6-14 14-14s14 5 14 14v40z"/><path class="s" d="M48 64h13M56 59l5 5-5 5"/></svg>';
+Object.assign(D, {
+  'u-describe-it':{h:runner([{n:'장바구니 › 담으면 1개가 돼요', s:'pass'}, {n:'장바구니 › 빼면 0개가 돼요', s:'pass'}],
+    {file:'cart.test.js', code:["describe('장바구니', () => {", "  it('담으면 1개가 돼요', ...);", "  it('빼면 0개가 돼요', ...);", '});']}), m:1,
+    cap:'describe 하나에 it 두 개라서, 장바구니 묶음 안에 테스트가 두 개 있어요'},
+  'u-expect':{h:runner([{n:'add(2, 3)은 5', s:'pass'}], {file:'math.test.js', code:['expect(add(2, 3))  // 실제값', '  .toBe(5);        // 기대값']}), m:1,
+    cap:'expect 괄호 안에 실제값을, 뒤에 붙인 toBe에 기대값을 넣어요'},
+  'u-matcher':{h:runner([{n:'toBe로 비교', s:'fail', e:'같은 객체', a:'내용만 같은 다른 객체'}, {n:'toEqual로 비교', s:'pass'}],
+    {file:'user.test.js', code:["const user = { name: '민지' };", "expect(user).toBe({ name: '민지' });", "expect(user).toEqual({ name: '민지' });"]}), m:1,
+    cap:'내용이 같아도 따로 만든 객체라 toBe는 실패하고, 내용을 비교하는 toEqual은 통과해요'},
+  'u-mock':{h:`<div class="mk-rubox">${TMOCK('진짜 API', 0)}</div>${tkeys(['진짜 API', 'mock'])}<span class="mk-hint" aria-live="polite">${TMOCK_SAY('진짜 API', 0)}</span>`,
+    cap:'진짜 API와 mock을 번갈아 눌러 보세요. mock은 빠르고 늘 같은 결과예요',
+    init: s => { const box = s.querySelector('.mk-rubox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      let k = '진짜 API', n = 0;
+      const set = () => { box.innerHTML = TMOCK(k, n); say.textContent = TMOCK_SAY(k, n); ks.forEach(b => b.setAttribute('aria-pressed', b.dataset.k === k)); };
+      ks.forEach(b => b.addEventListener('click', () => { if (b.dataset.k === '진짜 API') n++; k = b.dataset.k; set(); })); set(); }},
+  'u-stub':{h:runner([{n:'10달러는 13,000원', s:'pass'}], {file:'price.test.js', code:['const getRate = () => 1300;  // stub', '', 'expect(toWon(10, getRate)).toBe(13000);']}), m:1,
+    cap:'환율을 묻는 함수 대신 늘 1300을 돌려주는 stub을 넣어, 계산이 맞는지만 확인해요'},
+  'u-spy':{h:runner([{n:'저장을 누르면 save가 1번 불려요', s:'pass'}], {file:'form.test.js', code:["const spy = vi.spyOn(api, 'save');", 'clickSave();', 'expect(spy).toHaveBeenCalledTimes(1);']}), m:1,
+    cap:'spy가 save 함수에 붙어 몇 번 불렸는지 세고, 1번이 맞는지 확인해요'},
+  'u-test-double':{h:pair(TSTUNT, runner([{n:'가짜 결제로 주문 완료', s:'pass'}], {file:'order.test.js', code:['// 진짜 결제 API 대신 가짜', "const pay = vi.fn(() => '결제 완료');"]})), m:1,
+    cap:'위험한 장면을 대역 배우가 대신하듯, 진짜 결제 대신 가짜가 답해 줘요'},
+  'u-fixture':{h:runner([{n:'장바구니 열기', s:'pass'}], {file:'cart.spec.js', code:["test('장바구니 열기', async ({ page }) => {", "  await page.goto('http://localhost:3000/cart');", '});']}), m:1,
+    cap:'테스트 함수가 받는 page가 Playwright가 미리 준비해 넘겨 준 fixture예요'},
+  'u-beforeeach-aftereach':{h:runner([{n:'담으면 1개', s:'pass'}, {n:'두 번 담으면 2개', s:'pass'}],
+    {file:'cart.test.js', code:['beforeEach(() => cart.clear());', "test('담으면 1개', ...);", "test('두 번 담으면 2개', ...);"]}), m:1,
+    cap:'테스트가 시작될 때마다 장바구니를 먼저 비워서, 앞 테스트에서 담은 상품이 남지 않아요'},
+  'u-arrange-act-assert':{h:runner([{n:'사과를 담으면 1개', s:'pass'}],
+    {file:'cart.test.js', code:['// 준비', 'const cart = new Cart();', '', '// 실행', "cart.add('사과');", '', '// 확인', 'expect(cart.count).toBe(1);']}), m:1,
+    cap:'준비하고, 한 번 실행하고, 결과를 확인해요. 세 덩어리로 나누면 읽기 쉬워요'},
+  'u-snapshot-test':{h:runner([{n:'버튼 글자', s:'fail', e:'<button>저장</button>', a:'<button>저장하기</button>'}], {file:'button.test.js', code:['expect(render(Button)).toMatchSnapshot();']}), m:1,
+    cap:'저장해 둔 스냅샷과 지금 결과가 달라 실패했어요. 일부러 바꾼 거라면 스냅샷을 갱신해요'},
+  'u-test-file-naming':{h:runner([{n:'math.test.js › 더하기', s:'pass'}, {n:'cart.spec.js › 담기', s:'pass'}],
+    {file:'src 폴더', code:['math.js', 'math.test.js  // 찾음', 'cart.spec.js  // 찾음', 'cart-test.js  // 못 찾음']}), m:1,
+    cap:'.test.js·.spec.js로 끝나는 두 파일만 테스트로 찾아 돌려요. cart-test.js는 이름 규칙에 안 맞아 빠져요'},
+  'u-jest':{h:`<div class="mk-rust">${term([{c:'npm test'}, {o:'> jest'}], {end:false})}`
+    + `${runner([{n:'math.test.js › 더하기', s:'pass', ms:2}, {n:'cart.test.js › 담기', s:'pass', ms:5}])}</div>`, m:1,
+    cap:'npm test가 package.json에 적어 둔 jest를 실행하고, Jest가 테스트 파일을 찾아 결과를 보여 줘요'},
+  'u-vitest':{h:`<div class="mk-rust">${term([{c:'npx vitest'}], {end:false})}`
+    + `${runner([{n:'math.test.js › 더하기', s:'pass', ms:1}, {n:'cart.test.js › 담기', s:'pass', ms:3}])}</div>`, m:1,
+    cap:'npx vitest가 테스트를 돌린 뒤 켜진 채로 기다려요. 파일을 고쳐 저장하면 다시 돌아요'},
+  'u-playwright':{h:`<div class="mk-rust">${term([{c:'npx playwright test'}], {end:false})}`
+    + `${runner([{n:'첫 화면 제목이 보여요', s:'pass', ms:820}, {n:'로그인 버튼을 누르면 이동해요', s:'pass', ms:1350}])}</div>`, m:1,
+    cap:'npx playwright test가 브라우저를 열어 화면을 누르고 확인한 결과를 보여 줘요'},
 });
 
 const visual = t => {
