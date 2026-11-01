@@ -2355,6 +2355,24 @@ T('mobile','adv',[
  {en:'Background Task Limits',ko:'백그라운드 작업 제한 · 뒤에 있는 앱의 일 줄이기',d:'배터리를 아끼려고 시스템이 뒤로 내려간 앱의 작업을 미루거나 줄이는 규칙이에요.',x:'Android는 기기가 쉬는 중인지, 앱을 얼마나 자주 쓰는지에 따라 작업을 미뤄요. 꼭 끝내야 할 일은 WorkManager 같은 예약 도구에 맡기고, 정해진 시각에 돈다고 믿지 않아요(2026-11 확인).',p:'앱을 닫아도 사진 올리기가 끝나게 WorkManager로 백그라운드 작업을 넣어줘',r:['Background Refresh','App Lifecycle','Background Process'],l:3,o:1,u:'https://developer.android.com/topic/performance/power/power-details',v:'u-background-task-limits'},
  {en:'In-app Purchase',ko:'인앱 결제 · 앱 안에서 사는 것',d:'앱 안에서 유료 기능이나 구독을 사는 거예요. iOS는 StoreKit, Android는 Google Play Billing으로 만들어요.',x:'팔 상품은 먼저 App Store Connect·Play Console에 등록해요. 결제 창은 스토어가 띄우고 앱은 결과를 받아요. 수수료와 예외 규칙은 바뀌니 각 스토어 정책에서 확인해요.',p:'프리미엄 기능을 월 구독으로 살 수 있게 인앱 결제를 넣어줘',r:['Checkout'],l:3,o:1,u:'https://developer.apple.com/documentation/storekit',v:'u-in-app-purchase'},
 ]);
+T('mobile','store',[
+ {en:'App Store vs Google Play',ko:'앱 스토어 대 구글 플레이 · 두 앱 장터',d:'iPhone 앱은 Apple의 App Store에서, Android 앱은 Google의 Google Play에서 내려받아요. 두 곳에 따로 올려야 해요.',x:'관리 화면, 올리는 파일, 미리 시험하는 방법, 심사 규칙이 서로 달라요. 한 곳에 올렸다고 다른 곳에 저절로 생기지 않아요.',p:'이 앱을 App Store와 Google Play에 둘 다 올리려면 무엇이 필요한지 정리해줘',r:['iOS','Android','iOS vs Android Differences'],l:1,o:0,v:'u-app-store-vs-google-play'},
+ {en:'Developer Account',ko:'개발자 계정 · 스토어에 올릴 자격',d:'스토어에 앱을 올리려면 먼저 만들어야 하는 개발자용 계정이에요.',x:'Apple Developer Program은 1년에 99달러로 매년 갱신하고, Google Play 개발자 계정은 등록할 때 25달러를 한 번 내요(2026-11 확인). 금액은 지역 통화로 보일 수 있어요.',p:'App Store와 Google Play 개발자 계정을 만들 때 준비할 것을 알려줘',r:['App Store Connect','Google Play Console'],l:2,o:1,u:'https://developer.apple.com/support/enrollment/',v:'u-developer-account'},
+ {en:'App Store Connect',ko:'앱 스토어 커넥트 · Apple 앱 관리 화면',d:'App Store에 낼 앱을 등록하고 관리하는 Apple의 웹 화면이에요.',x:'올라온 빌드를 TestFlight로 시험하고, 심사에 제출하고, 개인정보 항목과 단계적 출시를 여기서 정해요(2026-11 확인).',p:'App Store Connect에서 새 버전을 심사에 제출하는 순서를 알려줘',r:['App Store vs Google Play','TestFlight'],l:2,o:1,u:'https://developer.apple.com/help/app-store-connect/',v:'u-app-store-connect'},
+ {en:'Google Play Console',ko:'구글 플레이 콘솔 · Google 앱 관리 화면',d:'Google Play에 낼 앱을 등록하고 관리하는 Google의 웹 화면이에요.',x:'AAB를 올려 테스트 트랙에서 시험하고, 스토어 등록정보와 데이터 보안 항목을 채우고, 출시 비율을 정해요(2026-11 확인).',p:'Google Play Console에서 내부 테스트 트랙에 앱을 올리는 순서를 알려줘',r:['App Store vs Google Play','Internal Testing Track'],l:2,o:1,u:'https://support.google.com/googleplay/android-developer/answer/6112435',v:'u-google-play-console'},
+ {en:'Bundle ID / Package Name',ko:'번들 ID·패키지 이름 · 앱의 고유 이름',d:'스토어와 휴대폰이 앱을 하나로 알아보는 고유 이름이에요. iOS는 Bundle ID, Android는 Package Name(애플리케이션 ID)이라고 불러요.',x:'보통 com.example.shop처럼 웹 주소를 거꾸로 쓰고 앱 이름을 붙여요. iOS는 App Store Connect에 첫 빌드를 올린 뒤 못 바꾸고, Android도 출시한 뒤 바꾸면 Google Play가 다른 앱으로 봐요(2026-11 확인).',p:'이 앱의 Bundle ID와 Package Name을 com.example.shop으로 맞춰줘',r:['Domain'],l:2,o:1,u:'https://developer.android.com/build/configure-app-module',v:'u-bundle-id-package-name'},
+ {en:'Code Signing',ko:'코드 서명 · 만든 사람을 찍는 도장',d:'앱 파일에 만든 사람의 인증서로 디지털 서명을 붙여, 누가 만들었고 그 뒤로 바뀌지 않았는지 확인하게 하는 거예요.',x:'서명한 뒤 코드가 바뀌면 서명이 맞지 않아요. Android는 서명한 앱만 설치되고, 스토어는 개발용 디버그 인증서로 서명한 앱을 받지 않아요(2026-11 확인).',p:'스토어에 올릴 릴리스 빌드에 코드 서명을 설정해줘',r:['SSL Certificate'],l:3,o:1,u:'https://developer.android.com/studio/publish/app-signing',v:'u-code-signing'},
+ {en:'Version / Build Number',ko:'버전·빌드 번호 · 앱에 붙는 두 번호',d:'사용자가 보는 버전(1.2.0)과, 빌드를 올릴 때마다 커지는 빌드 번호(42)예요.',x:'Android는 versionName이 보이는 버전, versionCode가 빌드 번호이고, versionCode는 올릴 때마다 더 큰 수여야 해요(2026-11 확인). iOS도 보이는 버전과 빌드 번호를 따로 둬요.',p:'새로 올릴 빌드의 버전을 1.2.1로 바꾸고 빌드 번호를 하나 올려줘',r:['Semantic Versioning','Force Update'],l:2,o:1,u:'https://developer.android.com/studio/publish/versioning',v:'u-version-build-number'},
+ {en:'IPA / AAB',ko:'IPA·AAB · 스토어에 올리는 앱 파일',d:'스토어에 올리는 앱 묶음 파일이에요. iOS는 IPA, Android는 AAB(Android App Bundle)를 써요.',x:'Google Play는 2021년 8월부터 새 앱을 AAB로 받고, 그걸로 기기마다 맞는 APK를 만들어 내려보내요(2026-11 확인).',p:'Google Play에 올릴 AAB 파일을 릴리스용으로 빌드해줘',r:['Build','Artifact'],l:3,o:1,u:'https://developer.android.com/guide/app-bundle',v:'u-ipa-aab'},
+ {en:'TestFlight',ko:'테스트플라이트 · iPhone 앱 미리 시험',d:'App Store에 내기 전에 테스터가 iPhone에 앱을 미리 깔아 써 보게 하는 Apple의 서비스예요.',x:'팀 안의 내부 테스터는 100명까지, 바깥의 외부 테스터는 10,000명까지 초대해요. 외부 테스터에게는 베타 심사를 거쳐 보내고, 올린 빌드는 90일 뒤 못 써요(2026-11 확인).',p:'이번 빌드를 TestFlight로 팀원들에게 보내줘',r:['Manual Testing','Internal Testing Track'],l:2,o:1,u:'https://developer.apple.com/help/app-store-connect/test-a-beta-version/overview-of-testflight/',v:'u-testflight'},
+ {en:'Internal Testing Track',ko:'내부 테스트 트랙 · Android 앱 미리 시험',d:'Google Play에 내기 전에 정한 테스터에게만 앱을 먼저 보내는 Play Console의 시험 단계예요.',x:'이메일로 테스터를 100명까지 정하고, 올리면 보통 몇 분 안에 받을 수 있어요. 더 넓게 시험하려면 비공개·공개 테스트 트랙을 써요(2026-11 확인).',p:'이 AAB를 내부 테스트 트랙에 올려 팀원들이 받게 해줘',r:['Manual Testing','E2E Test','TestFlight'],l:2,o:1,u:'https://support.google.com/googleplay/android-developer/answer/9845334',v:'u-internal-testing-track'},
+ {en:'App Review',ko:'앱 심사 · 스토어가 앱을 확인하는 단계',d:'스토어에 내기 전에 Apple·Google이 앱이 규칙에 맞는지 확인하는 단계예요. Git의 Code Review(코드 검토)와는 뜻이 달라요.',x:'Apple은 App Review Guidelines로 심사하고, 제출의 90%를 평균 24시간 안에 심사한다고 안내해요(2026-11 확인). 업데이트도 다시 심사를 받아요.',p:'제출하기 전에 App Review Guidelines에서 확인할 점을 정리해줘',r:['Code Review','App Rejection'],l:1,o:1,u:'https://developer.apple.com/app-store/review/guidelines/',v:'u-app-review'},
+ {en:'App Rejection',ko:'앱 거절 · 심사에서 떨어짐',d:'심사에서 규칙에 맞지 않는 곳이 나와 출시가 막힌 상태예요.',x:'스토어가 거절 이유를 알려 주면 그 부분을 고쳐 다시 제출해요. 로그인이 필요한 앱은 심사하는 사람이 써 볼 테스트 계정을 함께 적어 둬요.',p:'앱 심사에서 거절된 이유를 읽고 고칠 곳을 찾아줘',r:['App Review','Test Account'],l:2,o:0,v:'u-app-rejection'},
+ {en:'Store Listing',ko:'스토어 등록정보 · 스토어의 앱 소개 페이지',d:'스토어에서 사람들이 보는 앱 소개 페이지예요. 이름, 아이콘, 설명, 스크린샷이 들어가요.',x:'App Store Connect와 Play Console에서 각각 채워요. 글자 수와 스크린샷 크기 규칙은 스토어마다 달라서 관리 화면 안내를 따라요.',p:'스토어 등록정보에 넣을 앱 설명과 스크린샷 문구를 써줘',r:['App Icon','Screenshot'],l:1,o:0,v:'u-store-listing'},
+ {en:'Privacy Label / Data Safety',ko:'개인정보 라벨·데이터 보안 · 모으는 정보 밝히기',d:'앱이 어떤 개인정보를 모으고 어디에 쓰는지 스토어 페이지에 밝히는 항목이에요. Apple은 앱 개인정보 보호(App Privacy), Google은 데이터 보안(Data safety)이라고 불러요.',x:'개발자가 관리 화면에서 답한 내용이 스토어 앱 페이지에 보여요. Apple은 새 앱과 업데이트를 제출할 때 이 답이 있어야 하고, 앱에 넣은 다른 회사 코드가 모으는 정보도 적어요(2026-11 확인).',p:'우리 앱이 모으는 정보를 정리해서 App Privacy와 Data safety 답을 만들어줘',r:['Personal Data','Privacy Policy'],l:2,o:1,u:'https://developer.apple.com/support/app-privacy-on-the-app-store/',v:'u-privacy-label-data-safety'},
+ {en:'Staged Rollout',ko:'단계적 출시 · 일부에게 먼저 내보내기',d:'새 버전을 모든 사용자에게 한 번에 보내지 않고, 일부에게 먼저 보낸 뒤 조금씩 늘리는 출시 방법이에요.',x:'Apple은 자동 업데이트를 켠 사용자에게 7일에 걸쳐 1%·2%·5%·10%·20%·50%·100%로 늘려요. Google Play는 비율을 직접 정하고, 문제가 생기면 멈출 수 있어요(2026-11 확인). 그래서 아직 업데이트를 못 받은 사람도 있어요.',p:'이번 업데이트를 단계적 출시로 10%부터 내보내줘',r:['Canary Release','Feature Flag','Rollback Deploy'],l:2,o:1,u:'https://developer.apple.com/help/app-store-connect/update-your-app/release-a-version-update-in-phases',v:'u-staged-rollout'},
+ {en:'OTA Update',ko:'OTA 업데이트 · 스토어 없이 코드 바꾸기',d:'스토어에 새 버전을 올리지 않고, 이미 깔린 앱이 인터넷으로 새 코드를 받아 바뀌게 하는 거예요.',x:'Expo는 eas update로 JavaScript·스타일·이미지를 바꿔 보내요. 네이티브 코드나 권한을 바꾸면 새로 빌드해 스토어에 올려야 하고, 스토어 규칙도 그대로 지켜요(2026-11 확인).',p:'오타를 고친 화면을 eas update로 바로 내보내줘',r:['Release','Hotfix'],l:3,o:1,u:'https://docs.expo.dev/eas/update/introduction/',v:'u-ota-update'},
+]);
 </script>
 <script>
 /* ===== 05 백엔드 ===== */
@@ -5774,6 +5792,64 @@ Object.assign(D, {
       {t:'프리미엄', b:'<div class="mk-mono"><b>구독 중이에요</b><span class="mk-help">스토어가 결제 결과를 앱에 알려 줬어요</span></div>', go:'fade'}],
       {label:'구독을 누르면 스토어 결제 창이 뜨고, 결제가 끝나면 앱이 구독 중으로 바뀌어요'}), m:1,
     cap:'앱 안에서 사도 결제는 App Store·Google Play가 처리하고, 앱은 결과를 받아 기능을 열어요'},
+});
+/* mobile: store — 공식 문서 확인: Apple Developer Program 연 99달러(developer.apple.com/support/enrollment), Google Play 등록비 한 번 25달러(support.google.com/googleplay/android-developer/answer/6112435) ·
+   첫 빌드를 올린 뒤 Bundle ID를 못 바꿈(help.apple.com Xcode), 출시 뒤 애플리케이션 ID를 바꾸면 다른 앱(developer.android.com/build/configure-app-module) ·
+   서명 뒤 코드가 바뀌면 서명 무효(help.apple.com Xcode 코드 서명), 서명한 앱만 설치·디버그 인증서 거부(developer.android.com/studio/publish/app-signing) ·
+   versionName·versionCode(developer.android.com/studio/publish/versioning) · 새 앱은 AAB, Google Play가 APK를 만듦(developer.android.com/guide/app-bundle) ·
+   TestFlight 내부 100명·외부 10,000명·90일(developer.apple.com/help/app-store-connect/test-a-beta-version/overview-of-testflight) · 내부 테스트 100명·몇 분(support.google.com/googleplay/android-developer/answer/9845334) ·
+   제출의 90%를 24시간 안에 심사(developer.apple.com App Review) · App Privacy는 새 앱·업데이트 제출에 필요(developer.apple.com/support/app-privacy-on-the-app-store), Data safety(g.co/play/datasafety) ·
+   단계적 출시 7일 1~100%(developer.apple.com/help/app-store-connect/update-your-app/release-a-version-update-in-phases), Google 비율·멈춤(support.google.com/googleplay/android-developer/answer/6346149) ·
+   EAS Update는 JS·스타일·이미지, 네이티브가 바뀌면 새 빌드(docs.expo.dev/eas/update/introduction). 예시: 앱 이름, 주소, 버전 번호, 출시 비율, 거절 이유 */
+/* 비유 그림: 봉인 도장이 찍힌 문서. 누가 만들었고 안 바뀌었음을 찍어 둠 */
+const MSEAL = '<svg viewBox="0 0 110 100" aria-hidden="true"><rect class="s y" x="12" y="14" width="64" height="72" rx="4"/><path class="s" d="M22 30h44M22 42h44M22 54h28"/>'
+  + '<path class="s t" d="M70 78l-6 18 9-5 6 5V84M88 78l6 18-9-5-6 5V84"/><circle class="s t" cx="79" cy="68" r="17"/><path class="s" d="M71 68l6 6 10-11"/></svg>';
+const MDOC = '<svg width="16" height="19" viewBox="0 0 16 19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2 1h8l4 4v13H2z M10 1v4h4"/></svg> ';
+/* 두 칸 비교: 칸마다 이름 + 항목 줄 */
+const MDUO = (keys, cols) => `<div class="mk-two">${cols.map(([n, ...v]) => `<div class="mk-card mk-modc"><b>${n}</b>${keys.map((k, i) => `<span><small>${k}</small>${v[i]}</span>`).join('')}</div>`).join('')}</div>`;
+Object.assign(D, {
+  'u-app-store-vs-google-play':{h:MDUO(['기기', '관리 화면', '올리는 파일', '미리 시험'], [['App Store', 'iPhone · iPad', 'App Store Connect', 'IPA', 'TestFlight'], ['Google Play', 'Android 휴대폰', 'Google Play Console', 'AAB', '테스트 트랙']]),
+    cap:'iPhone 앱은 App Store, Android 앱은 Google Play에 따로 올려요. 관리 화면도 파일도 달라요'},
+  'u-developer-account':{h:`<div class="mk-mocf">${MDUO(['비용', '내는 때'], [['Apple Developer Program', '1년 99달러', '매년 갱신'], ['Google Play 개발자 계정', '25달러', '등록할 때 한 번']])}<span class="mk-help">2026년 11월 확인 · 지역 통화로 보일 수 있어요</span></div>`,
+    cap:'Apple은 해마다, Google은 처음 한 번 등록비를 내야 앱을 올릴 수 있어요'},
+  'u-app-store-connect':{h:browser('<b>장보기</b><span class="mk-li">빌드 1.2.0 (42)</span><span class="mk-li">TestFlight로 보내기</span><span class="mk-li">심사 제출 · 단계적 출시</span>', {url:'appstoreconnect.apple.com'}),
+    cap:'올라온 빌드를 TestFlight로 시험하고, 심사에 내고, 출시 방법까지 여기서 정해요'},
+  'u-google-play-console':{h:browser('<b>장보기</b><span class="mk-li">내부 테스트 트랙</span><span class="mk-li">스토어 등록정보 · 데이터 보안</span><span class="mk-li">프로덕션 · 출시 비율 20%</span>', {url:'play.google.com/console'}),
+    cap:'AAB를 올려 테스트 트랙에서 시험하고, 소개 페이지와 데이터 항목을 채워 출시해요'},
+  'u-bundle-id-package-name':{h:'<div class="mk-mocf"><div class="mk-card"><span class="mk-help">내 웹 주소</span><b>example.com</b></div><b class="mk-moar" aria-hidden="true">↓</b>'
+      + '<div class="mk-card"><span class="mk-help">거꾸로 쓰고 앱 이름을 붙여요</span><b>com.example.shop</b></div><span class="mk-help">iOS는 Bundle ID, Android는 Package Name · 스토어에 올린 뒤엔 바꾸지 않아요</span></div>',
+    cap:'웹 주소를 거꾸로 쓴 이름이라 다른 앱과 겹치지 않아요. 한 번 올리면 그대로 써요'},
+  'u-code-signing':{h:pair(MSEAL, track([{t:'빌드', s:'done'}, {t:'서명', s:'done', n:'내 인증서로 도장'}, {t:'업로드', s:'done', n:'스토어가 도장 확인'}],
+      {label:'빌드한 앱에 인증서로 서명한 뒤 스토어에 올려요'})), m:1,
+    cap:'봉인 도장처럼 누가 만들었고 그 뒤로 안 바뀌었음을 찍어 둬요. 코드가 바뀌면 도장이 맞지 않아요'},
+  'u-version-build-number':{h:`<div class="mk-mocf">${MDUO(['이름', '규칙'], [['1.2.0', '보이는 버전 · versionName', '사용자가 스토어에서 봐요'], ['42', '빌드 번호 · versionCode', '올릴 때마다 더 큰 수']])}<span class="mk-help">같은 1.2.0을 고쳐 다시 올려도 빌드 번호는 43으로 올려요</span></div>`,
+    cap:'사용자는 1.2.0을 보고, 스토어는 빌드 번호로 어느 빌드가 새것인지 알아봐요'},
+  'u-ipa-aab':{h:`<div class="mk-mocf">${MDUO(['기기', '올리는 곳'], [[MDOC + 'IPA', 'iPhone · iPad', 'App Store Connect'], [MDOC + 'AAB', 'Android', 'Google Play Console']])}<span class="mk-help">Google Play는 AAB로 기기마다 맞는 APK를 만들어요</span></div>`,
+    cap:'iOS는 IPA, Android는 AAB 파일로 묶어 각 스토어에 올려요'},
+  'u-testflight':{h:track([{t:'빌드 올리기', s:'done'}, {t:'베타 심사', s:'done', n:'외부 테스터일 때만'}, {t:'테스터가 설치', s:'now', n:'90일 동안 써요'}],
+      {label:'빌드를 올리고, 외부 테스터라면 베타 심사를 거쳐 테스터가 설치해요'}), m:1,
+    cap:'App Store에 내기 전에 테스터가 iPhone에 깔아 써 봐요. 내부는 100명, 외부는 10,000명까지예요'},
+  'u-internal-testing-track':{h:track([{t:'AAB 올리기', s:'done'}, {t:'테스터 정하기', s:'done', n:'이메일로 100명까지'}, {t:'테스터가 설치', s:'now', n:'보통 몇 분 안에'}],
+      {label:'AAB를 올리고 테스터를 정하면 몇 분 안에 테스터가 설치해요'}), m:1,
+    cap:'정한 테스터만 Google Play에서 먼저 받아 써 봐요'},
+  'u-app-review':{h:track([{t:'제출', s:'done'}, {t:'심사', s:'now', n:'규칙에 맞는지 확인'}, {t:'출시', s:'wait'}], {label:'제출한 앱을 스토어가 심사한 뒤 출시해요'}), m:1,
+    cap:'제출한 앱이 스토어 규칙에 맞는지 확인받아야 출시돼요. 코드 리뷰와는 다른 말이에요'},
+  'u-app-rejection':{h:track([{t:'제출', s:'done'}, {t:'심사', s:'fail', w:'거절', n:'심사용 로그인 계정이 없어요'}, {t:'고쳐서 다시 제출', s:'wait'}],
+      {label:'심사에서 거절되어 이유를 고쳐 다시 제출해야 해요'}), m:1,
+    cap:'심사에서 거절되면 알려 준 이유를 고쳐 다시 제출해요'},
+  'u-store-listing':{h:app([{t:'App Store', b:'<span class="mk-li"><i class="mk-moi me" aria-hidden="true">장</i><b>장보기</b></span><span class="mk-help">동네 마트 장보기를 집까지 배달해요</span><span class="mk-btn">받기</span><span class="mk-li">스크린샷 · 새로운 기능 · 평가</span>'}],
+      {still:true, label:'스토어의 장보기 앱 소개 페이지'}),
+    cap:'앱 이름, 아이콘, 설명, 스크린샷을 채우면 스토어에 이 페이지로 보여요'},
+  'u-privacy-label-data-safety':{h:app([{t:'App Store', b:'<b>앱 개인정보 보호</b><span class="mk-li">나와 연결되는 데이터 · 이메일, 구매 내역</span><span class="mk-li">추적에 쓰는 데이터 · 없음</span><span class="mk-help">개발자가 관리 화면에 답한 내용이에요</span>'}],
+      {still:true, label:'스토어 앱 페이지의 개인정보 항목'}),
+    cap:'앱이 모으는 정보를 개발자가 답하면 스토어 앱 페이지에 이렇게 보여요'},
+  'u-staged-rollout':{h:track([{t:'1일째', s:'done', w:'1%'}, {t:'4일째', s:'done', w:'10%'}, {t:'6일째', s:'now', w:'50%'}, {t:'7일째', s:'wait', w:'100%'}],
+      {label:'Apple 단계적 출시는 7일에 걸쳐 1%에서 100%까지 늘려요'}), m:1,
+    cap:'새 버전을 일부에게 먼저 보내고 날마다 늘려요. 아직 못 받은 사용자도 있어요'},
+  'u-ota-update':{h:`<div class="mk-mocf">${term([{c:'eas update', h:'eas update'}], {still:true, end:false})}<b class="mk-moar" aria-hidden="true">↓</b>`
+      + track([{t:'코드 고침', s:'done', n:'JavaScript·이미지'}, {t:'올리기', s:'done', n:'스토어 심사 없음'}, {t:'앱이 새 코드 받음', s:'now'}],
+      {label:'eas update로 올리면 스토어를 거치지 않고 깔린 앱이 새 코드를 받아요'}) + '</div>', m:1,
+    cap:'JavaScript·이미지만 고쳤다면 스토어를 거치지 않고 깔린 앱이 새 코드를 받아요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
