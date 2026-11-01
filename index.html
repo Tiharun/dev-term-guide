@@ -423,6 +423,14 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-mocam{flex:1;min-height:40px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:#fff;font-size:11.5px}.mk-mosh{flex:none;align-self:center;width:34px;height:34px;border:3px solid var(--ink);border-radius:50%;background:var(--plate)}
 .mk-mono{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}.mk-moweb{flex:1;display:flex;flex-direction:column;gap:3px;padding:6px;font-size:11.5px;line-height:1.4}.mk-moweb .mk-url{margin:0 0 3px}.mk-moweb.mk-hl{outline-offset:-2px}
 .mk-mocf{display:flex;flex-direction:column;align-items:center;gap:4px;width:min(340px,100%)}.mk-mocf>.mk-card,.mk-mocf>.mk-two{width:100%}.mk-mocf .mk-card{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:12px}.mk-moar{line-height:1;color:var(--muted)}
+/* 모바일 필수 부품: 코드 블록, 개발 도구 막대, 쌓인 화면·앱 상태 옆 표시, 오프라인 띠, 두 플랫폼 비교 줄, 링크 말풍선 */
+.mk-mocf>.mk-mocd,.mk-mocf>.mk-moide{width:100%}.mk-mocd{margin:0;padding:8px 10px;border-radius:8px;background:var(--ink);color:#fff;font:11.5px/1.6 var(--mono);text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
+.mk-moide{display:flex;flex-direction:column;gap:4px}.mk-mobar{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:11.5px}.mk-mobar>em{font-style:normal;padding:1px 8px;border:1px solid var(--rule);border-radius:999px;background:var(--plate)}.mk-mobar>.mk-hl{padding:1px 6px;border-radius:6px;font-weight:800}
+.mk-mostk{display:flex;flex-direction:column;gap:6px;width:136px;font-size:12px}.mk-mostk ol{display:flex;flex-direction:column-reverse;gap:4px;margin:0;padding:0;list-style:none}.mk-mostk li{padding:5px 8px;border:1px solid var(--rule);border-radius:8px;background:var(--plate)}.mk-mostk li.mk-hl{font-weight:800}
+.mk-mosv{display:flex;align-items:center;gap:6px;padding:6px 8px;border:1px solid var(--rule);border-radius:8px;background:var(--plate);font-weight:800}.mk-mosv>i{font-style:normal;color:var(--mark-text)}
+.mk-moph{color:var(--muted)}.mk-mooff{align-self:flex-start;padding:2px 8px;border-radius:6px;background:var(--mark-bg);color:var(--mark-text);font-size:11px;font-weight:800}
+.mk-modc{display:flex;flex-direction:column;gap:6px;text-align:left}.mk-modc>span{display:flex;flex-direction:column;font-size:11.5px;line-height:1.35}.mk-modc>span>small{font-size:11px;color:var(--muted)}
+.mk-mobub{align-self:flex-start;max-width:100%;padding:6px 9px;border-radius:12px;background:var(--sky);font-size:11.5px;line-height:1.4;overflow-wrap:anywhere}.mk-mobub>u{display:block;color:var(--mark-text);font-weight:800}
 .mk-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:0 14px;border-radius:8px;border:1.5px solid var(--ink);
   background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;touch-action:manipulation}
 .mk-btn.ghost{background:transparent;color:var(--ink)}
@@ -2303,6 +2311,22 @@ T('mobile','basic',[
  {en:'App Icon',ko:'앱 아이콘 · 앱을 여는 작은 그림',d:'홈 화면에서 눌러 앱을 여는 작은 그림이에요.',x:'스토어 목록에도 같이 보여서 앱의 첫인상이 돼요. 작게 보여도 알아볼 수 있게 단순하게 그려요.',p:'앱 아이콘을 장바구니 모양으로 단순하게 바꿔줘',r:['Icon','Badge'],l:1,o:0,v:'u-app-icon'},
  {en:'Push Notification',ko:'푸시 알림 · 앱이 보내는 알림',d:'앱을 열고 있지 않아도 휴대폰 화면에 띄워 주는 알림이에요.',x:'Git의 Push(코드를 올리기)와는 다른 말이에요. iOS와 Android 13 이상에서는 사용자가 알림을 허용해야 받아요(2026-11 확인).',p:'주문한 상품이 배송을 시작하면 푸시 알림을 보내줘',r:['Push','Badge','Notification Dot'],l:1,o:1,u:'https://developer.android.com/develop/ui/views/notifications/notification-permission',v:'u-push-notification'},
  {en:'Permission Request',ko:'권한 요청 · 기능을 써도 되는지 묻기',d:'앱이 카메라·위치·사진 같은 기능을 쓰기 전에 사용자에게 허락을 받는 창이에요.',x:'거부하면 다시 묻지 못할 수 있어요. iOS는 처음 고른 답을 기억하고, Android 11 이상은 두 번 거부하면 창을 더 띄우지 않아요. 그다음엔 사용자가 설정에서 켜야 해요(2026-11 확인).',p:'사진 버튼을 누를 때 카메라 권한을 요청하고, 거부했으면 설정을 여는 안내를 보여줘',r:['Permission','Principle of Least Privilege'],l:2,o:1,u:'https://developer.android.com/about/versions/11/privacy/permissions',v:'u-permission-request'},
+]);
+T('mobile','core',[
+ {en:'React Native',ko:'리액트 네이티브 · React로 만드는 앱',d:'React와 JavaScript로 iOS 앱과 Android 앱을 함께 만드는 도구예요.',x:'웹 화면을 띄우지 않고 각 플랫폼의 진짜 화면 부품으로 그려요. 새로 시작할 때는 흔히 Expo와 함께 써요.',p:'이 웹 화면을 React Native 화면으로 옮겨줘',r:['React','Cross-platform'],l:2,o:0,v:'u-react-native'},
+ {en:'Flutter',ko:'플러터 · Dart로 만드는 앱 도구',d:'Google이 만든 도구로, Dart 언어 코드 한 벌로 여러 플랫폼의 앱을 만들어요.',x:'flutter run으로 앱을 띄운 뒤 터미널에서 r을 누르면 화면 상태를 그대로 둔 채 고친 코드가 반영돼요(hot reload). debug 모드에서만 돼요(2026-11 확인).',p:'Flutter로 상품 목록 화면을 만들어줘',r:['Cross-platform','Hot Reload'],l:2,o:1,u:'https://docs.flutter.dev/tools/hot-reload',v:'u-flutter'},
+ {en:'Expo',ko:'엑스포 · React Native를 쉽게 쓰는 도구',d:'React Native 앱을 만들고 띄우고 내보내는 일을 쉽게 해 주는 도구 모음이에요.',x:'npx create-expo-app으로 프로젝트를 만들고 npx expo start로 띄워요. 새 프로젝트는 휴대폰의 Expo Go 앱으로 바로 열어 볼 수 있어요(2026-11 확인).',p:'Expo로 새 앱 프로젝트를 만들고 휴대폰에서 띄워줘',r:['React Native','Cross-platform'],l:2,o:1,u:'https://docs.expo.dev/get-started/create-a-project',v:'u-expo'},
+ {en:'Swift',ko:'스위프트 · Apple 앱을 만드는 언어',d:'Apple이 만든 프로그래밍 언어로, iOS 앱을 만들 때 주로 써요.',x:'Mac의 Xcode에서 써요. 화면은 보통 SwiftUI로 Text("우유 1L")처럼 코드로 그려요.',p:'이 화면을 Swift와 SwiftUI로 만들어줘',r:['iOS','Xcode','Native App'],l:2,o:0,v:'u-swift'},
+ {en:'Kotlin',ko:'코틀린 · Android 앱을 만드는 언어',d:'Android 앱을 만들 때 주로 쓰는 프로그래밍 언어예요.',x:'Android Studio에서 써요. 화면은 보통 Jetpack Compose로 Text("우유 1L")처럼 코드로 그려요.',p:'이 화면을 Kotlin과 Jetpack Compose로 만들어줘',r:['Android','Android Studio','Native App'],l:2,o:0,v:'u-kotlin'},
+ {en:'Xcode',ko:'엑스코드 · Apple 앱 개발 프로그램',d:'Apple이 만든 앱 개발 프로그램으로, Mac에서 돌아가요.',x:'코드를 쓰고 실행 버튼(▶)을 누르면 고른 시뮬레이터나 연결한 iPhone에서 앱이 떠요(2026-11 확인).',p:'Xcode에서 이 앱을 iPhone 시뮬레이터로 실행하는 방법을 알려줘',r:['iOS','Swift','Simulator vs Emulator'],l:2,o:1,u:'https://developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices',v:'u-xcode'},
+ {en:'Android Studio',ko:'안드로이드 스튜디오 · Android 앱 개발 프로그램',d:'Android 앱을 만드는 개발 프로그램이에요.',x:'코드를 쓰고 실행 버튼을 누르면 에뮬레이터나 연결한 휴대폰에서 앱이 떠요. Android Emulator도 함께 들어 있어요(2026-11 확인).',p:'Android Studio에서 에뮬레이터를 만들어 이 앱을 실행해줘',r:['Android','Kotlin','Simulator vs Emulator'],l:2,o:1,u:'https://developer.android.com/studio/run/emulator',v:'u-android-studio'},
+ {en:'Simulator vs Emulator',ko:'시뮬레이터 대 에뮬레이터 · 컴퓨터 속 가상 휴대폰',d:'휴대폰 없이 컴퓨터에 가상 휴대폰을 띄워 앱을 돌려 보는 프로그램이에요. iOS는 Simulator, Android는 Emulator라고 불러요.',x:'둘 다 진짜 휴대폰과 성능·기능이 똑같지는 않아요. 카메라처럼 기기에 달린 기능은 실제 휴대폰에서도 확인해요(2026-11 확인).',p:'이 앱을 iOS 시뮬레이터와 Android 에뮬레이터에서 둘 다 띄워 확인해줘',r:['Xcode','Android Studio','Check on mobile'],l:2,o:1,u:'https://developer.android.com/studio/run/emulator',v:'u-simulator-vs-emulator'},
+ {en:'Navigation Stack',ko:'내비게이션 스택 · 쌓이는 화면 묶음',d:'새 화면을 열면 위에 쌓이고, 뒤로 가면 맨 위 화면이 빠지는 구조예요.',x:'첫 화면에서 Android의 뒤로 가기를 누르면 앱을 벗어나 홈 화면으로 가요. Android 12부터는 이때 앱을 끝내지 않고 뒤로 내려 둬요(2026-11 확인).',p:'상품 상세에서 뒤로 가면 상품 목록으로 돌아오게 내비게이션 스택을 고쳐줘',r:['Back Button','Tab Bar','Edge Swipe'],l:2,o:1,u:'https://developer.android.com/guide/components/tasks-and-back-stack',v:'u-navigation-stack'},
+ {en:'App Lifecycle',ko:'앱 생명주기 · 앱이 켜지고 내려가고 끝나는 흐름',d:'앱이 앞에서 실행 중인지, 뒤로 내려갔는지, 끝났는지처럼 앱의 상태가 바뀌는 흐름이에요.',x:'뒤로 내린 앱을 오래 두면 시스템이 메모리를 비우려고 앱을 끝낼 수 있어요. 쓰던 글은 앱이 미리 저장해 둬야 다시 열었을 때 남아 있어요.',p:'앱을 내렸다가 다시 열어도 쓰던 글이 남아 있게 해줘',r:['Cold Start','Background Process'],l:2,o:0,v:'u-app-lifecycle'},
+ {en:'Deep Link',ko:'딥 링크 · 앱 안 특정 화면으로 가는 링크',d:'누르면 앱의 첫 화면이 아니라 정해 둔 화면을 바로 여는 링크예요.',x:'메시지나 웹에서 상품 링크를 누르면 앱의 그 상품 화면이 열려요. 앱이 그 주소를 받겠다고 미리 등록해 둬야 해요(2026-11 확인).',p:'공유한 상품 링크를 누르면 앱의 상품 상세 화면이 열리게 딥 링크를 만들어줘',r:['URL','Push Notification'],l:2,o:1,u:'https://developer.android.com/training/app-links/deep-linking',v:'u-deep-link'},
+ {en:'Offline Support',ko:'오프라인 지원 · 인터넷이 끊겨도 쓰기',d:'인터넷이 끊겨도 미리 저장해 둔 내용으로 앱을 쓸 수 있게 하는 거예요.',x:'불러온 목록을 기기에 저장해 두고, 끊기면 저장본과 "오프라인" 표시를 보여 줘요. 다시 연결되면 보통 바뀐 내용을 서버와 맞춰요.',p:'인터넷이 끊겨도 마지막으로 본 주문 목록을 보여 주게 오프라인 지원을 넣어줘',r:['Cache','Local Storage','Sync'],l:2,o:0,v:'u-offline-support'},
+ {en:'Local Notification',ko:'로컬 알림 · 앱이 스스로 예약하는 알림',d:'서버 없이 앱이 휴대폰 안에서 시간을 정해 띄우는 알림이에요.',x:'푸시 알림은 서버가 보내고, 로컬 알림은 앱이 미리 예약해요. 예약해 두면 앱이 실행 중이 아니어도 그 시간에 떠요(2026-11 확인).',p:'매일 오후 6시에 장보기 목록을 알려 주는 로컬 알림을 넣어줘',r:['Push Notification','Toast'],l:2,o:1,u:'https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/add(_:withcompletionhandler:)',v:'u-local-notification'},
+ {en:'iOS vs Android Differences',ko:'iOS와 Android 차이 · 두 휴대폰의 다른 점',d:'같은 앱이라도 iOS와 Android는 뒤로 가는 방법, 스토어, 개발 도구, 디자인 지침이 달라요.',x:'Android는 시스템 뒤로 가기가 있고, iOS는 보통 왼쪽 위 뒤로 버튼이나 왼쪽 끝에서 밀어 돌아가요. 한쪽에서만 보지 말고 둘 다 띄워 봐요.',p:'이 화면이 iOS와 Android에서 다르게 동작해야 할 곳을 찾아줘',r:['Haptic Feedback','Human Interface Guidelines','Material Design'],l:2,o:0,v:'u-ios-vs-android-differences'},
 ]);
 </script>
 <script>
@@ -5497,7 +5521,7 @@ const MPERM = s => app([MPERM_B[s]], {still:true, label:'권한 요청 화면'})
 const MPERM_SAY = {start:'권한 창이 떴어요. 허용이나 거부를 눌러 보세요', yes:'허용했어요. 이제 카메라 화면이 열려요',
   no:'거부했어요. 카메라를 쓸 수 없어서 앱이 설정에서 켜 달라고 안내해요', done:'이미 답했어요. 바꾸려면 휴대폰 설정에서 바꿔요',
   askask:'아직 답하지 않아서 권한 창이 그대로 있어요', askyes:'이미 허용해서 다시 묻지 않고 카메라를 바로 써요',
-  askno:'창이 다시 안 떠요. iOS는 한 번 답하면, Android 11 이상은 두 번 거부하면 다시 묻지 않아요. 설정에서 직접 켜야 해요'};
+  askno:'iOS는 한 번, Android 11 이상은 두 번 거부하면 다시 묻지 않아요'};
 Object.assign(D, {
   'u-mobile-app':{h:app([{t:'홈 화면', b:MHOME(), tap:[50, 54]}, {t:'장보기', b:MSHOP, go:'fade'}], {label:'홈 화면에서 장보기 아이콘을 누르면 앱이 열려요'}), m:1,
     cap:'홈 화면의 아이콘을 누르면 설치해 둔 앱이 바로 열려요'},
@@ -5533,6 +5557,103 @@ Object.assign(D, {
         if (st !== 'ask') return set('done');
         st = b.dataset.k === '허용' ? 'yes' : 'no'; set(st); }));
       set('start'); }},
+});
+/* mobile: core — 공식 문서 확인: flutter run 뒤 터미널에서 r = hot reload, debug 모드만(docs.flutter.dev/tools/hot-reload) ·
+   npx create-expo-app·npx expo start, 새 프로젝트는 Expo Go로 열림(docs.expo.dev/get-started/create-a-project) ·
+   Xcode 실행 대상은 시뮬레이터 또는 연결한 기기, 시뮬레이터는 기기 성능·기능을 그대로 따라 하지 않음(developer.apple.com/documentation/xcode/running-your-app-on-simulated-or-physical-devices) ·
+   Android Emulator는 Android Studio에 들어 있음(developer.android.com/studio/run/emulator) ·
+   첫 화면에서 뒤로: Android 11 이하는 끝냄, 12 이상은 뒤로 내림(developer.android.com/guide/components/tasks-and-back-stack) ·
+   딥 링크는 manifest intent filter로 등록(developer.android.com/training/app-links/deep-linking) ·
+   로컬 알림은 앱이 실행 중이 아니어도 뜸(developer.apple.com UNUserNotificationCenter add). 예시: 상품 이름·가격, 주소, 메모 글 */
+const MITEM = {t:'상품 상세', b:'<b>우유 1L</b><span>2,900원</span>'};
+/* 코드 → 앱 화면: head는 코드 위 한 줄(언어 이름이나 도구 막대) */
+const MSRC = (head, code, label) => `<div class="mk-mocf"><div class="mk-moide">${head}<pre class="mk-mocd">${esc(code)}</pre></div><b class="mk-moar" aria-hidden="true">↓</b>${app([MITEM], {label})}</div>`;
+const MRUN = (lines, scene, label) => `<div class="mk-mocf">${term(lines, {end:false})}<b class="mk-moar" aria-hidden="true">↓</b>${app([scene], {label})}</div>`;
+const MIDE = (name, dev) => `<div class="mk-mobar"><b>${name}</b><span class="mk-hl">▶ 실행</span><em>${dev}</em></div>`;
+const MSWIFT = 'VStack {\n  Text("우유 1L")\n  Text("2,900원")\n}', MKT = 'Column {\n  Text("우유 1L")\n  Text("2,900원")\n}';
+/* 쌓인 화면 직접 조작: 화면은 MNAV 순서로 4장까지 쌓인다 */
+const MNAV = ['홈', '상품 목록', '상품 상세', '장바구니'];
+const MNAV_B = ['<span class="mk-li">과일</span><span class="mk-li">채소</span><span class="mk-li">우유·달걀</span>',
+  '<span class="mk-li">우유 1L · 2,900원</span><span class="mk-li">두유 · 1,800원</span>', MITEM.b + '<span class="mk-btn">장바구니 담기</span>',
+  '<span class="mk-li">우유 1L · 1개</span><span class="mk-help">합계 2,900원</span><span class="mk-btn">주문하기</span>'];
+const MSTACK = n => app([{t:MNAV[n - 1], b:MNAV_B[n - 1]}], {still:true, label:`맨 위 화면: ${MNAV[n - 1]}`})
+  + `<div class="mk-mostk"><b>쌓인 화면 ${n}장</b><ol>${MNAV.slice(0, n).map((x, i) => `<li${i === n - 1 ? ' class="mk-hl"' : ''}>${x}${i === n - 1 ? ' · 맨 위' : ''}</li>`).join('')}</ol></div>`;
+/* 앱 상태 직접 조작: fg 앞에서 실행 중 → bg 뒤로 내려감 → gone 종료됨. keep은 쓰던 글이 남았는지 */
+const MLIFE_S = {fg:['▶', '앞에서 실행 중'], bg:['⏸', '뒤로 내려감'], gone:['■', '종료됨']};
+const MLIFE = (st, keep) => app([st === 'fg' ? {t:'장보기 메모', b:keep ? '<span class="mk-in">장보기: 우유, 달걀</span>' : '<span class="mk-in mk-moph">새 메모</span>'}
+  : {t:'홈 화면', b:MHOME()}], {still:true, label:st === 'fg' ? '장보기 메모 화면' : '홈 화면'})
+  + `<div class="mk-mostk"><b>앱 상태</b><span class="mk-mosv"><i aria-hidden="true">${MLIFE_S[st][0]}</i>${MLIFE_S[st][1]}</span></div>`;
+const MLIFE_SAY = {start:'버튼을 눌러 앱을 내리고, 오래 두고, 다시 열어 보세요', down:'앱을 내렸어요. 화면은 홈이지만 앱은 뒤에서 기다려요',
+  downbg:'이미 뒤로 내려가 있어요', downgone:'앱이 이미 끝났어요. 다시 열기를 눌러 보세요',
+  longfg:'먼저 홈으로 내려 보세요', long:'오래 두었더니 시스템이 메모리를 비우려고 앱을 끝냈어요', longgone:'이미 끝난 앱이에요',
+  openfg:'이미 앞에서 열려 있어요', open:'뒤에서 기다리던 앱이 그대로 열렸어요', opengone:'처음 화면부터 다시 열렸어요. 저장하지 않은 글은 사라졌어요'};
+/* 오프라인 직접 조작: 인터넷·미리 저장 켜고 끄기 */
+const MOFF_L = '<span class="mk-li">우유 1L · 2,900원</span><span class="mk-li">달걀 10구 · 4,500원</span>';
+const MOFF = (net, save) => app([{t:'상품 목록', b:net ? MOFF_L + '<span class="mk-help">방금 불러옴</span>'
+  : save ? '<span class="mk-mooff">오프라인 · 저장된 내용</span>' + MOFF_L + '<span class="mk-help">마지막으로 저장한 목록이에요</span>'
+  : '<div class="mk-mono"><b>연결할 수 없어요</b><span class="mk-help">인터넷 연결을 확인해 주세요</span></div>'}], {still:true, label:'상품 목록 화면'});
+const MOFF_SAY = {start:'인터넷과 미리 저장을 켜고 꺼 보세요', on1:'인터넷으로 목록을 불러오고, 끊길 때를 위해 저장해 둬요',
+  on0:'인터넷으로 목록을 불러와요. 저장은 꺼져 있어요', off1:'인터넷이 끊겨서 미리 저장해 둔 목록을 보여 줘요', off0:'인터넷이 끊겼는데 저장해 둔 게 없어서 빈 화면이에요'};
+Object.assign(D, {
+  'u-react-native':{h:MSRC('<span class="mk-help">React Native · JavaScript</span>', '<View>\n  <Text>우유 1L</Text>\n  <Text>2,900원</Text>\n</View>', 'React 코드로 쓴 글자가 휴대폰 화면에 그대로 나와요'),
+    cap:'React로 쓴 코드가 웹 화면이 아니라 휴대폰의 진짜 화면 부품으로 그려져요'},
+  'u-flutter':{h:MRUN([{c:'flutter run'}, {o:'Flutter run key commands.'}, {o:'r Hot reload.', h:'r'}], MITEM, 'flutter run으로 상품 상세 화면이 휴대폰에 떠요'), m:1,
+    cap:'flutter run으로 앱을 띄우고, 코드를 고친 뒤 r을 누르면 화면이 바로 바뀌어요'},
+  'u-expo':{h:MRUN([{c:'npx expo start'}, {o:'Starting Metro Bundler'}], {t:'장보기', b:MSHOP}, 'npx expo start로 장보기 앱이 휴대폰에 떠요'), m:1,
+    cap:'npx expo start로 개발 서버를 켜면 휴대폰에서 앱을 바로 열어 볼 수 있어요'},
+  'u-swift':{h:MSRC('<span class="mk-help">Swift · SwiftUI</span>', MSWIFT, 'Swift 코드로 쓴 글자가 iPhone 화면에 나와요'),
+    cap:'Swift로 쓴 코드가 iPhone 앱 화면이 돼요'},
+  'u-kotlin':{h:MSRC('<span class="mk-help">Kotlin · Jetpack Compose</span>', MKT, 'Kotlin 코드로 쓴 글자가 Android 화면에 나와요'),
+    cap:'Kotlin으로 쓴 코드가 Android 앱 화면이 돼요'},
+  'u-xcode':{h:MSRC(MIDE('Xcode', 'iPhone 시뮬레이터'), MSWIFT, 'Xcode에서 실행하면 iPhone 시뮬레이터에 앱이 떠요'),
+    cap:'Xcode에서 실행할 곳을 고르고 ▶을 누르면 그 시뮬레이터에 앱이 떠요'},
+  'u-android-studio':{h:MSRC(MIDE('Android Studio', 'Android 에뮬레이터'), MKT, 'Android Studio에서 실행하면 에뮬레이터에 앱이 떠요'),
+    cap:'Android Studio에서 기기를 고르고 실행하면 에뮬레이터에 앱이 떠요'},
+  'u-simulator-vs-emulator':{h:`<div class="mk-mocf"><div class="mk-two"><div class="mk-card mk-modc"><b>iOS Simulator</b><span><small>여는 곳</small>Mac의 Xcode</span><span><small>띄우는 것</small>가상 iPhone·iPad</span></div>
+    <div class="mk-card mk-modc"><b>Android Emulator</b><span><small>여는 곳</small>Android Studio</span><span><small>띄우는 것</small>가상 Android 기기</span></div></div>
+    <span class="mk-help">둘 다 진짜 휴대폰과 성능·기능이 똑같지 않아요</span></div>`,
+    cap:'iOS는 Simulator, Android는 Emulator로 컴퓨터에 가상 휴대폰을 띄워요'},
+  'u-navigation-stack':{h:`<div class="mk-mobox">${MSTACK(1)}</div>${tkeys(['다음 화면', '뒤로'])}<span class="mk-hint" aria-live="polite">다음 화면을 누르면 쌓이고, 뒤로를 누르면 맨 위가 빠져요</span>`,
+    cap:'다음 화면·뒤로를 눌러 화면이 쌓이고 빠지는 걸 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint');
+      let n = 1;
+      const set = (m) => { box.innerHTML = MSTACK(n); say.textContent = m; };
+      s.querySelectorAll('.mk-tkey').forEach(b => b.addEventListener('click', () => {
+        if (b.dataset.k === '다음 화면') return n < MNAV.length ? (n++, set(`${MNAV[n - 1]} 화면을 위에 쌓았어요. 쌓인 화면 ${n}장`)) : set('예시는 4장까지예요. 뒤로를 눌러 보세요');
+        if (n > 1) return n--, set(`맨 위를 빼고 ${MNAV[n - 1]} 화면으로 돌아왔어요. 쌓인 화면 ${n}장`);
+        set('첫 화면이에요. Android는 여기서 뒤로 가면 앱을 벗어나요'); })); }},
+  'u-app-lifecycle':{h:`<div class="mk-mobox">${MLIFE('fg', true)}</div>${tkeys(['홈으로 내리기', '다시 열기', '오래 두기'])}<span class="mk-hint" aria-live="polite">${MLIFE_SAY.start}</span>`,
+    cap:'앱을 내리고 오래 둔 뒤 다시 열면 쓰던 글이 어떻게 되는지 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint');
+      let st = 'fg', keep = true;
+      const go = (to, m) => { st = to; box.innerHTML = MLIFE(st, keep); say.textContent = MLIFE_SAY[m]; };
+      s.querySelectorAll('.mk-tkey').forEach(b => b.addEventListener('click', () => {
+        const k = b.dataset.k;
+        if (k === '홈으로 내리기') return st === 'fg' ? go('bg', 'down') : go(st, 'down' + st);
+        if (k === '오래 두기') return st === 'bg' ? go('gone', 'long') : go(st, 'long' + st);
+        if (st === 'fg') return go(st, 'openfg');
+        if (st === 'gone') keep = false;
+        go('fg', st === 'gone' ? 'opengone' : 'open'); })); }},
+  'u-deep-link':{h:app([{t:'메시지', b:'<span class="mk-mobub">이 우유 어때?<u>shop.example.com/i/42</u></span>', tap:[44, 29]},
+      {t:'상품 상세', b:MITEM.b + '<span class="mk-btn">장바구니 담기</span>', go:'fade'}], {label:'메시지의 상품 링크를 누르면 장보기 앱의 그 상품 화면이 열려요'}), m:1,
+    cap:'링크를 누르면 앱의 첫 화면이 아니라 그 상품 화면이 바로 열려요'},
+  'u-offline-support':{h:`<div class="mk-mobox">${MOFF(true, true)}</div>${tkeys(['인터넷', '미리 저장'])}<span class="mk-hint" aria-live="polite">${MOFF_SAY.start}</span>`,
+    cap:'인터넷을 끊어 보고, 미리 저장을 켰을 때와 껐을 때를 비교해 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      const on = {'인터넷':true, '미리 저장':true};
+      const set = m => { box.innerHTML = MOFF(on['인터넷'], on['미리 저장']); say.textContent = m;
+        ks.forEach(b => b.setAttribute('aria-pressed', on[b.dataset.k])); };
+      ks.forEach(b => b.addEventListener('click', () => { on[b.dataset.k] = !on[b.dataset.k];
+        set(MOFF_SAY[(on['인터넷'] ? 'on' : 'off') + (on['미리 저장'] ? 1 : 0)]); }));
+      set(MOFF_SAY.start); }},
+  'u-local-notification':{h:app([{t:'장보기 목록', b:MOFF_L + '<span class="mk-btn ghost">이따가 알려 주기</span>', tap:[50, 56]},
+      {t:'잠금 화면', b:'<div class="mk-mont"><b>장보기 앱 · 지금</b>장 보러 갈 시간이에요. 우유, 달걀</div><span class="mk-help">앱이 예약해 둔 시간에 떴어요. 서버는 쓰지 않았어요</span>', go:'fade'}],
+      {label:'이따가 알려 주기를 누르면 예약해 둔 시간에 잠금 화면에 알림이 떠요'}), m:1,
+    cap:'앱이 휴대폰 안에서 시간을 예약해 두고, 그 시간이 되면 알림을 띄워요'},
+  'u-ios-vs-android-differences':{h:`<div class="mk-two">${[['iOS', '왼쪽 위 뒤로 버튼, 왼쪽 끝에서 밀기', 'App Store', 'Xcode · Swift', 'Human Interface Guidelines'],
+      ['Android', '시스템 뒤로 가기', 'Google Play', 'Android Studio · Kotlin', 'Material Design']].map(([n, ...v]) =>
+      `<div class="mk-card mk-modc"><b>${n}</b>${['뒤로 가기', '스토어', '개발 도구', '디자인 지침'].map((k, i) => `<span><small>${k}</small>${v[i]}</span>`).join('')}</div>`).join('')}</div>`,
+    cap:'같은 앱이라도 뒤로 가는 법, 스토어, 개발 도구, 디자인 지침이 달라요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
