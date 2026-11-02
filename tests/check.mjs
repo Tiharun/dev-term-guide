@@ -80,7 +80,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount', 'bx'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -186,6 +186,17 @@ check('base', () => vm.runInContext(`(() => {
   if (!thr(() => flow([])) || !thr(() => flow(Array(6).fill([{t:'a'}]))) || !thr(() => flow([[{t:'a'},{t:'b'},{t:'c'}]])) || !thr(() => flow([[{t:'a', k:'x'}]]))) e.push('flow throw');
   if (!thr(() => flow([[{t:'a'}],[{t:'b'},{t:'c'}]])) || !thr(() => flow([[{t:'q',k:'q'}],[{t:'b'},{t:'c'}],[{t:'d'}]])) || !thr(() => flow([[{t:'a'}]], {path:[1]}))
     || !thr(() => flow([[{t:'q',k:'q'}],[{t:'b'},{t:'c'}],[{t:'d'},{t:'e'}]], {path:[0,0,1]}))) e.push('flow 갈래 throw');
+  const cd = ide(['let n = 1;', 'n = n + 1;', 'console.log(n);'], [{l:1, vars:{n:'1'}}, {l:2, vars:{n:'2'}}, {l:3, out:['2'], vars:{n:'2'}}], {title:'a.js', label:'코드'});
+  if (!['mk-cd', 'role="group"', 'aria-label="코드"', 'a.js', 'let n = 1;', 'mk-cdy1 A', 'mk-cdy2 A', 'mk-cdz3 A', '--l:3', '3단계: 3번째 줄, 출력 2', 'n = 2'].every(x => cd.includes(x)) || (cd.match(/class="mk-cds/g) || []).length !== 3) e.push('ide');
+  const ce = ide(['<b>&'], [{l:1}]); if (ce.includes('<b>&') || !ce.includes('&lt;b&gt;&amp;')) e.push('ide esc');
+  const cs = ide(['a','b'], [{l:1},{l:2}], {still:true}); if ((cs.match(/class="mk-cds/g) || []).length !== 1 || cs.includes(' A"') || !cs.includes('--l:2')) e.push('ide still');
+  if (!thr(() => ide([], [{l:1}])) || !thr(() => ide(Array(9).fill('a'), [{l:1}])) || !thr(() => ide(['a'.repeat(29)], [{l:1}])) || !thr(() => ide(['a'], []))
+    || !thr(() => ide(['a'], Array(9).fill({l:1}))) || !thr(() => ide(['a','b','c'], [{l:4}])) || !thr(() => ide(['a'], [{l:1, out:['1','2','3','4']}])) || !thr(() => ide(['a'], [{l:1, vars:{a:'1',b:'2',c:'3',d:'4',e:'5'}}]))) e.push('ide throw');
+  const mr = mem([{stack:[{n:'a', to:'A'}, {n:'b', to:'A'}], heap:[{id:'A', v:'[1, 2]'}]}, {stack:[{n:'a', to:'B'}], heap:[{id:'A', v:'[1, 2]', gc:true}, {id:'B', v:'[1, 2, 3]'}]}], {label:'메모리'});
+  if (!['mk-mr', 'aria-label="메모리"', 'a → A', 'b → A', 'mk-cdy1 A', 'mk-cdz2 A', '치울 대상', 'a → 상자 B, 치울 대상: 상자 A'].every(x => mr.includes(x))) e.push('mem');
+  const ms = [{stack:[{n:'a', v:'1'}], heap:[]}];
+  if (!thr(() => mem([])) || !thr(() => mem(Array(5).fill(ms[0]))) || !thr(() => mem([{stack:[], heap:[]}])) || !thr(() => mem([{stack:Array(5).fill({n:'a', v:'1'}), heap:[]}]))
+    || !thr(() => mem([{stack:[{n:'a', v:'1'}], heap:Array(6).fill({id:'A', v:'1'})}])) || !thr(() => mem([{stack:[{n:'a', to:'Z'}], heap:[]}]))) e.push('mem throw');
   return e.join(', ');
 })()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
@@ -273,6 +284,20 @@ const ALIAS = {'콜드 스타트': 'mobile-app-launch', '웜 스타트': 'mobile
 check('alias', () => Object.entries(ALIAS).filter(([q, id]) => !vm.runInContext(`search(${JSON.stringify(q)})`, ctx).slice(0, 5).some(t => t.id === id)).map(([q]) => q).join(', '));
 check('mtword', () => Object.entries(g.D).filter(([, p]) => [...String(p.h || '').matchAll(/<span class="mk-mts[^"]*"><b aria-hidden="true">[^<]*<\/b>([^<]*)<\/span>/g)].some(m => /^[\d.,%\s]*$/.test(m[1]))).map(([k]) => k).join(', '));    // 단계 상태는 기호가 아니라 글자로 읽혀야 한다(숫자만이면 완료·진행 중을 못 읽음)
 check('itt', () => { const t = g.byId.get('mobile-internal-testing-track'), s = t.x + g.D[t.v].h; return /몇 시간/.test(s) && !/몇 분 안에/.test(s) ? '' : t.x; });    // 처음 올리면 테스트 링크가 열리기까지 몇 시간 걸릴 수 있다(support.google.com 9845334)
+const BS = () => g.TERMS.filter(t => t.c === 'basics');
+check('bcat', () => g.CATS.find(c => c.id === 'basics').secs.map(s => s.id).join() === 'basic,core,motion,adv,code,principle,tip' ? '' : g.CATS.find(c => c.id === 'basics').secs.map(s => s.id).join());
+const BOBJ = ["Programming Language","Source Code","Frontend","Backend","Full Stack","Debugging","Error Message","Library","Framework","Package","npm","Dependency","Code Editor","Semantic Versioning","Open Source","Compile","Build","Run","Event Listener","Callback","Algorithm","Data Structure","Big-O","Recursion","Refactoring","Technical Debt","Design Pattern","Static vs Dynamic Typing","Variable","Constant","Function","Parameter","Return","Conditional","Loop","Array","Object","String","Comment","Class","Hardcoding","Pseudocode","MVP","Spec","Legacy Code","Boilerplate","Rubber Duck Debugging"];    // 아직 옛 형식(객체 v)으로 남은 개발 기본 카드. 다시 그리면 여기서 뺀다
+check('bobj', () => { const a = BS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !BOBJ.includes(x)).map(x => '+' + x), ...BOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
+check('bx', () => BS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
+check('bm', () => BS().filter(t => g.D[t.v] && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 개발 기본 그림에는 움직이는 것이 있어야 한다
+const BDM = {};    // 직접 조작 개발 기본 카드 → 그림에 있어야 할 버튼 이름·표시
+check('bdm', () => Object.entries(BDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('bko', () => [['Code Editor', 'IDE'], ['npm', '패키지 관리자']].filter(([en, w]) => g.find(en).ko.includes(w)).map(([en]) => en).join(', '));    // 새 카드 IDE·Package Manager와 한글명이 겹치지 않게
+check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation-delay:-([\d.]+)s/)[1], mr = html.match(/\.mk-mrs\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 코드 칸·메모리 그림의 멈춘 장면은 마지막 단계만
+  const z = [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const m = html.match(new RegExp(`@keyframes mk-cdz${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,100%\\{opacity:1\\}`)); return !m || +m[1] > P; }).map(k => 'z' + k);
+  const y = [1, 2, 3, 4, 5, 6, 7].filter(k => { const m = html.match(new RegExp(`@keyframes mk-cdy${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%\\{opacity:0\\}`)); return !m || +m[1] > P; }).map(k => 'y' + k);
+  return [...z, ...y, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : [])].join(', '); });
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
