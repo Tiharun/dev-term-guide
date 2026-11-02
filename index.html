@@ -2080,6 +2080,13 @@ T('basics','motion',[
  {en:'Callback',ko:'콜백 · 나중에 부르는 함수',d:'"이 일이 끝나면 이걸 실행해"라고 넘겨주는 함수.',p:'데이터를 다 불러온 뒤 실행할 콜백을 넣어줘',r:['Asynchronous','Function'],l:2,o:1,u:MDN('Glossary/Callback_function'),v:{flow:['작업 시작','완료','콜백 실행'],hl:[2]}},
  {en:'Asynchronous',ko:'비동기',d:'오래 걸리는 일을 기다리지 않고 다른 일을 먼저 하는 방식.',x:'동기는 줄 서서 하나씩, 비동기는 번호표 받고 다른 일 하기.',p:'데이터를 비동기로 불러오고 그동안 로딩을 보여줘',r:['Callback'],l:2,o:1,u:MDN('Glossary/Asynchronous'),v:'delay'},
  {en:'Hot Reload',ko:'핫 리로드 · 바로 반영',d:'코드를 저장하면 새로고침 없이 화면에 바로 반영되는 기능.',p:'저장해도 화면이 안 바뀌어. 핫 리로드가 되는지 확인해줘',r:['Dev Server'],l:2,o:0,v:'fade'},
+ {en:'Interpreter',ko:'인터프리터 · 바로 실행기',d:'코드를 한 줄씩 읽으면서 바로 실행하는 프로그램이에요. 흔히 JavaScript와 Python이 이 방식으로 돌아가요.',x:'컴파일은 코드를 통째로 먼저 번역해 두고 실행하고, 인터프리터는 읽는 대로 바로 실행해요. 요즘 JavaScript 엔진은 두 방식을 섞어 쓰기도 해요.',p:'이 스크립트를 인터프리터로 한 줄씩 실행하면서 어디서 멈추는지 보여줘',r:['Compile'],l:2,o:0,v:'u-interpreter'},
+ {en:'Runtime',ko:'런타임 · 실행 환경',d:'코드가 실제로 돌아가는 환경이에요. JavaScript는 브라우저나 Node.js 같은 런타임 위에서 돌아가요.',x:'실행(Run)은 프로그램을 돌리는 일이고, 런타임은 그 프로그램이 돌아가는 바탕이에요. 같은 JavaScript라도 런타임에 따라 쓸 수 있는 기능이 달라요.',p:'이 코드가 브라우저 런타임에서도 Node.js 런타임에서도 돌아가는지 확인해줘',r:['Run'],l:2,o:1,u:'https://nodejs.org/en/learn/getting-started/introduction-to-nodejs',v:'u-runtime'},
+ {en:'Promise',ko:'프로미스 · 나중 결과 약속',d:'오래 걸리는 일이 나중에 성공할지 실패할지를 담아 두는 JavaScript 값이에요.',x:'프로미스는 처음엔 대기(pending)였다가, 일이 끝나면 이행(fulfilled)이나 거부(rejected) 가운데 하나가 돼요. 콜백을 줄줄이 넘기는 대신 결과를 값으로 들고 다닐 수 있어요.',p:'이 콜백 코드를 Promise를 쓰는 방식으로 바꿔줘',r:['Asynchronous','Callback'],l:2,o:1,u:MDN('Web/JavaScript/Reference/Global_Objects/Promise'),v:'u-promise'},
+ {en:'Async/Await',ko:'async/await · 기다렸다 이어 가기',d:'async 함수 안에서 await를 붙이면, 프로미스가 끝날 때까지 기다렸다가 다음 줄로 넘어가요.',x:'async 함수는 언제나 프로미스를 돌려줘요. await를 빼먹으면 결과 대신 아직 안 끝난 프로미스를 받게 돼요.',p:'이 fetch 코드를 async/await로 바꾸고 빠진 await가 있는지 봐줘',r:['Asynchronous','Callback'],l:2,o:1,u:MDN('Web/JavaScript/Reference/Statements/async_function'),v:'u-async-await'},
+ {en:'Event Loop',ko:'이벤트 루프',d:'지금 하는 코드를 다 끝낸 뒤, 기다리던 일(콜백)을 하나씩 꺼내 실행하는 JavaScript의 순서 규칙이에요.',x:'setTimeout에 0을 줘도 바로 실행되지 않아요. 지금 돌고 있는 코드가 끝나야 대기열에 있던 콜백 차례가 와요.',p:'이 코드의 출력 순서가 왜 이렇게 나오는지 이벤트 루프로 설명해줘',r:['Asynchronous','Callback'],l:3,o:1,u:MDN('Web/API/Window/setTimeout'),v:'u-event-loop'},
+ {en:'Thread',ko:'스레드 · 일하는 줄기',d:'프로그램 안에서 코드를 실행하는 하나의 줄기예요. 스레드가 여럿이면 여러 일을 동시에 할 수 있어요.',x:'JavaScript는 기본적으로 스레드 하나에서 돌아가요. 그래서 오래 걸리는 계산을 메인 스레드에서 하면 화면이 멈춰요.',p:'무거운 계산 때문에 메인 스레드가 막히지 않게 바꿔줘',r:['Main Thread'],l:3,o:1,u:MDN('Glossary/Thread'),v:'u-thread'},
+ {en:'Garbage Collection',ko:'가비지 컬렉션 · 메모리 자동 청소',d:'더 이상 닿을 수 없는 값을 찾아 그 메모리를 자동으로 비워 주는 기능이에요.',x:'JavaScript는 메모리를 직접 비우지 않아도 가비지 컬렉션이 치워 줘요. 다만 안 쓰는 값을 어딘가에서 계속 붙잡고 있으면 치우지 못해 메모리 누수가 생겨요.',p:'이 페이지에서 메모리가 계속 늘어나. 가비지 컬렉션이 못 치우는 값이 있는지 찾아줘',r:['Memory Leak'],l:3,o:1,u:MDN('Web/JavaScript/Guide/Memory_management'),v:'u-garbage-collection'},
 ]);
 T('basics','adv',[
  {en:'Algorithm',ko:'알고리즘',d:'문제를 푸는 단계별 방법.',p:'목록 정렬을 더 빠른 알고리즘으로 바꿔줘',r:['Data Structure','Big-O'],l:2,o:0,v:{flow:['입력','단계별 처리','결과']}},
@@ -6437,6 +6444,37 @@ Object.assign(D, {
     cap:'설치·업데이트·삭제를 대신 해 줘요'},
   'u-snippet':{h:BTWO(['입력', bcode('log'), bhelp('고르면')], ['들어온 코드', bcode('console.log();')], true),
     cap:'짧은 단어 하나로 정해 둔 코드가 들어와요'},
+});
+/* basics: motion — 출처 확인(2026-11): Node.js 소개(JavaScript runtime environment), MDN Promise·async function·setTimeout(0 지연은 다음 이벤트 차례)·Glossary Thread·Memory management. 흔히: 인터프리터 뜻(MDN 용어집 없음).
+   측정(node): await 있음 → 데이터, 없음 → Promise { <pending> }, 출력 순서 1 2 3. 예시: get은 1초 뒤 '데이터'를 주는 예시 함수, 변수 이름·값 */
+const BAWAIT = {
+  'await 있음': {line:'  const d = await get();', out:'데이터', d:'데이터', say:'await가 get()이 끝날 때까지 기다려서 데이터가 찍혀요'},
+  'await 없음': {line:'  const d = get();', out:'Promise { <pending> }', d:'Promise', say:'기다리지 않아서 아직 안 끝난 프로미스가 찍혀요'},
+};
+const bawait = k => ide(['async function load() {', BAWAIT[k].line, '  console.log(d);', '}', 'load();'], [{l:3, out:[BAWAIT[k].out], vars:{d:BAWAIT[k].d}}],
+  {still:true, label:k + '일 때 3번째 줄 출력: ' + BAWAIT[k].out});
+Object.assign(D, {
+  'u-interpreter':{h:BTWO(['컴파일', bhelp('① 코드 전체를 번역'), bhelp('② 번역본 실행')], ['인터프리터', bhelp('한 줄 읽고 바로 실행'), bhelp('다음 줄 읽고 바로 실행')]),
+    cap:'통째로 번역해 두느냐, 읽는 대로 실행하느냐의 차이예요'},
+  'u-runtime':{h:BTWO(['브라우저', bhelp('JavaScript 실행'), bhelp('+ 화면, 클릭 같은 기능')], ['Node.js', bhelp('JavaScript 실행'), bhelp('+ 브라우저 밖, 파일 같은 기능')]),
+    cap:'같은 JavaScript도 돌아가는 곳에 따라 쓸 수 있는 기능이 달라요'},
+  'u-promise':{h:flow([[{t:'프로미스 만들기 · 데이터 요청'}], [{t:'대기 · pending', k:'q'}], [{t:'이행 · fulfilled', k:'end', e:'성공'}, {t:'거부 · rejected', k:'end', e:'실패'}]],
+      {label:'프로미스는 대기였다가 성공하면 이행, 실패하면 거부가 되는 흐름'}), m:1,
+    cap:'대기였다가 이행이나 거부 둘 중 하나로 끝나요'},
+  'u-async-await':{h:`<div class="mk-mobox">${bawait('await 있음')}</div>${tpick(['await 있음', 'await 없음'], 'await 있음')}<span class="mk-hint" aria-live="polite">${BAWAIT['await 있음'].say}</span>`,
+    cap:'await 있음·없음을 눌러 출력이 어떻게 달라지는지 보세요',
+    init: s => { const box = s.querySelector('.mk-mobox'), say = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      ks.forEach(b => b.addEventListener('click', () => {
+        box.innerHTML = bawait(b.dataset.k); psay(say, BAWAIT[b.dataset.k].say); ks.forEach(x => x.setAttribute('aria-pressed', x === b)); })); }},
+  'u-event-loop':{h:ide(["console.log('1');", 'setTimeout(() => {', "  console.log('3');", '}, 0);', "console.log('2');"],
+      [{l:1, out:['1']}, {l:2, out:['1'], vars:{'대기열':'콜백 1개'}}, {l:5, out:['1', '2'], vars:{'대기열':'콜백 1개'}}, {l:3, out:['1', '2', '3']}],
+      {label:'1을 찍고 콜백을 대기열에 넣은 뒤 2를 찍고, 마지막에 콜백이 3을 찍는 순서'}), m:1,
+    cap:'0초를 줘도 지금 코드가 끝난 뒤에 실행돼요'},
+  'u-thread':{h:BTWO(['스레드 1개', bhelp('① 계산'), bhelp('② 화면 그리기'), bhelp('하나씩 차례로')], ['스레드 2개', bhelp('줄기 1: 화면 그리기'), bhelp('줄기 2: 계산'), bhelp('동시에')]),
+    cap:'줄기가 하나면 차례로, 여럿이면 동시에 일해요'},
+  'u-garbage-collection':{h:mem([{stack:[{n:'user', to:'A'}], heap:[{id:'A', v:'{ 이름 }'}]}, {stack:[{n:'user', v:'null'}], heap:[{id:'A', v:'{ 이름 }', gc:true}]}, {stack:[{n:'user', v:'null'}], heap:[]}],
+      {label:'user가 null이 되면 상자 A에 닿는 길이 끊겨 치울 대상이 되고, 가비지 컬렉션이 비우는 장면'}), m:1,
+    cap:'아무도 가리키지 않는 상자는 자동으로 치워져요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
