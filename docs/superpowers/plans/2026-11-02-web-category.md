@@ -19,6 +19,8 @@
 **스펙 보충(스펙에 없는 것을 계획이 정함):**
 - **브랜치**: `web-category`에서 작업한다. main 병합은 사용자 확인 뒤에 한다.
 - **이름 접두사**: 새 클래스는 `mk-sp`로 시작한다. 측정: 지금 0건이다. 결과 줄 등장은 기존 `mk-rux{k}`(1~6, `dframe` 점검이 지킴)를 다시 쓴다.
+- **함수 위치**: `wlen`은 `ide` 바로 앞 최상위 `const`, `wlayers`·직접 조작 상태 표는 `bpick`(6744줄)처럼 해당 `Object.assign(D, …)` 바로 앞 `const`로 둔다(객체 리터럴 안에 두지 않음).
+- **새 클래스 이름**: Scroll Progress Indicator `mk-wpg`(키프레임 `mk-wpg`), Heatmap `mk-whm`, QR Code `mk-wqr`. `mk-sp`는 serp 전용이다.
 - **`hl`은 0부터 센다.** `hl: 0`은 첫 줄이다. "내 사이트 없음"은 `hl`이 `undefined`일 때만이다(0을 거짓으로 읽으면 안 됨).
 - **한글 폭**: `ide`의 한글 2자 계산을 `wlen(s)`로 꺼내 `ide`·`serp`가 같이 쓴다. 바뀌는 것은 `ide`의 한 줄뿐이다.
 - **옛 형식 점검**: 측정상 지금 웹 카드 33장의 `v`가 객체다. 목록 `WOBJ`로 관리한다. Task 7에서 16장을 빼면 17장이 남는다(스펙의 "그대로 둘 33장" = 17장 + 문자열 키 16장).
@@ -50,10 +52,10 @@
 3. **직접 조작의 끝 경우**: 같은 버튼 두 번, Tab·Enter·Space로도 오류 없이 같은 문장이 나와야 한다. 전환율은 구매 ≤ 방문인 조합만 있고, 퍼센트가 정수로 맞아떨어져야 한다. → Task 4·7 브라우저 확인
 4. **자주 틀리는 사실**:
    - Bounce Rate는 GA4에서 "참여하지 않은 세션 비율"이다.
-   - robots.txt는 수집만 막고, 검색에서 빼려면 noindex를 쓴다.
+   - robots.txt는 수집만 막고, 검색에서 빼려면 noindex를 쓴다. noindex는 크롤러가 그 페이지를 열 수 있어야 통한다(robots.txt로 막으면 못 읽음).
    - Canonical URL은 힌트다.
-   - iOS의 Chrome도 WebKit을 쓴다.
-   - 팝업 차단은 사용자 클릭 없이 연 창을 막는다.
+   - iOS의 Chrome도 "지금은" WebKit을 쓴다. EU·일본은 다른 엔진을 허용하지만 Chrome이 Blink판을 내놓지는 않았다(시점 표현 필수).
+   - 팝업 차단은 사용자 클릭 없이 연 창을 막는다. 클릭 뒤 `await`·지연으로 사용자 활성화가 끝난 뒤 연 창도 막힌다(증상 "눌러도 새 창이 안 떠요"의 설명).
    - 출처와 다르면 안 된다. → Task 2~6 출처 확인, 디렉터 검토 ③
 5. **이름만 비슷한 다른 카드로 가는 연결**: Bounce Rate→Bounce·Debounce, Event Tracking→Event, Time on Page→Session, Pop-up Blocker→Popover·Modal, Logo→Brand Color는 `r`에 달지 않는다. → Task 1 `wwrong`
 
@@ -129,7 +131,7 @@
   - **`wlen(s) -> number`**: 한글(`/[ᄀ-ᇿ㄰-㆏가-힯]/`)은 2, 나머지는 1로 센 길이. `ide`가 이것을 쓴다.
   - **`serp(q, rows, opt = {}) -> string`**
     - `q`: 검색어(`wlen` 20 이하). 넘으면 `throw new Error('serp: 검색어는 20자까지')`
-    - `rows[i] = {t, u, d = '', tag}`: 1~4줄(`'serp: 결과는 1~4줄'`). 한도는 `t` 32(`'serp: 제목은 32자까지'`), `d` 60(`'serp: 설명은 60자까지'`), `u` 40(`'serp: 주소는 40자까지'`)이고, 모두 `wlen`으로 센다.
+    - `rows[i] = {t, u, d = '', tag}`: 1~4줄(`'serp: 결과는 1~4줄'`). 한도는 `t` 32(`'serp: 제목은 32자까지'`), `d` 60(`'serp: 설명은 60자까지'`), `u` 40(`'serp: 주소는 40자까지'`), `tag` 12(`'serp: 꼬리표는 12자까지'`)이고, 모두 `wlen`으로 센다.
     - `opt`: `{hl, still = false, label}`
       - `hl`: 내 사이트 줄 번호(0부터). `undefined`가 아닌데 정수 0~n-1이 아니면 `'serp: 내 사이트 줄 ' + hl`
       - `label`이 있으면 루트에 `role="group"`·`aria-label`
@@ -147,6 +149,7 @@
       - 글자는 모두 `esc`한다.
     - CSS
       - `.mk-sp{container:sp/inline-size}`
+      - `.mk-spr.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}`(384줄 `.mk-rur.A…` 규칙과 같은 값). `mk-rux{k}`는 `animation-name`만 준다.
       - `.mk-spu`·`.mk-spd`는 `overflow-wrap:anywhere`이고, 가로 스크롤은 없다.
       - `.mk-spr.on`: `--mark` 테두리 + `내 사이트` 글자(색만으로 나누지 않음)
       - `.mk-spno`: 점선 테두리 + `--ink` 흐린 글자
@@ -171,6 +174,7 @@
   - `wm`: web 카드 중 `v`가 `u-`로 시작하고 `D[v].m`인데 `h`에 `/[" ]A["\s]/`가 없는 영문명. 기존 문자열 키 그림 16장은 형식이 달라 대상에서 뺀다.
   - `wdm`: `bdm`과 같은 방식으로 `WDM`을 확인한다(`init` 있음 + 글자 모두 있음).
   - `wou`: web 카드 중 `o === 1`인데 `u`가 없는 영문명
+  - `spcss`: index.html CSS에 `.mk-spr.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}`가 있다.
   - `wwrong`: `WB_WRONG`의 카드가 있으면 그 `r`에 금지 이름이 없다(카드가 아직 없으면 통과).
   - `base`에 더할 것
     - `const sp = serp('웹 공부', [{t:'웹 기초 정리', u:'example.com/web', d:'처음 보는 말을 그림으로', tag:'광고'}, {t:'<b>&', u:'a.com', d:''}], {hl:1, label:'검색'})`
@@ -179,9 +183,9 @@
     - `serp('a', [{t:'x', u:'u'}], {hl:0})`에 `내 사이트 1번째`가 있고 `mk-spno`가 없다.
     - `serp('a', [{t:'x', u:'u'}])`에 `mk-spno`·`내 사이트는 결과에 없어요`·`내 사이트 없음`이 있다.
     - `serp('a', [{t:'x', u:'u'}], {still:true})`에 ` A"`·`mk-rux`가 없다.
-    - throw: 결과 0줄, 5줄, 검색어 21자, 제목 33자, 한글 제목 17자(34), 설명 61자, 주소 41자, `hl:2`(2줄), `hl:-1`, `hl:0.5`, `hl:'0'`
+    - throw: 결과 0줄, 5줄, 검색어 21자, 제목 33자, 한글 제목 17자(34), 설명 61자, 주소 41자, 꼬리표 13자, `hl:2`(2줄), `hl:-1`, `hl:0.5`, `hl:'0'`
     - 안 던짐: 제목 32자, 한글 제목 16자
-- [ ] **Step 2: 실패 확인**: `node tests/check.mjs` → `FAIL wcat`, `FAIL base: … serp is not defined`. `wobj`·`wou`·`wm`·`wwrong`은 이미 통과해야 한다(측정 기준). 아니면 Ruling.
+- [ ] **Step 2: 실패 확인**: `node tests/check.mjs` → `FAIL wcat`, `FAIL spcss`, `FAIL base: … serp is not defined`. `wobj`·`wou`·`wm`·`wwrong`은 이미 통과해야 한다(측정 기준). 아니면 Ruling.
 - [ ] **Step 3: 구현**: Interfaces대로 `CAT`, `wlen`, `serp`, CSS를 만든다. `.mk-spr.on` 테두리와 `.mk-spno` 글자 대비(그래픽 3:1, 글자 4.5:1)를 better-colors 방식으로 재고 커밋 본문에 적는다.
 - [ ] **Step 4: 점검 통과**: `OK <수>`, `LATER wx: …`(45장 이름)
 - [ ] **Step 5: 브라우저 확인**
@@ -210,11 +214,11 @@
 
 | Task | 카드 → 그림 |
 |---|---|
-| 2 | Web App `vs`(읽는 웹사이트 / 쓰고 저장하는 웹 앱) · Subdomain `addr(['blog','example','com'], {y:[0]})` · Homepage `browser`(주소 `example.com/`, 메뉴·첫 화면) · Web Standards `doc` 표(같은 코드 · 브라우저 3개 · ✓ 같은 결과) · Progressive Enhancement `flow`(HTML만: 읽힘 → +CSS: 보기 좋음 → +JS: 편함) · Scroll Progress Indicator `browser` + 위쪽 막대가 차오름(`A`, `m:1`) · Service Worker `net`(브라우저 ↔ 서비스 워커 ↔ 서버, 끊기면 저장본) · Web App Manifest `pair(doc(manifest.json 블록), phone(홈 화면 아이콘))` · Hydration `track`(HTML 도착 → JS 도착 → 연결 → 버튼 동작) |
+| 2 | Web App `vs`(읽는 웹사이트 / 쓰고 저장하는 웹 앱) · Subdomain `addr(['blog','example','com'], {y:[0]})` · Homepage `browser`(주소 `example.com/`, 메뉴·첫 화면) · Web Standards `doc` 표(같은 코드 · 브라우저 3개 · ✓ 같은 결과) · Progressive Enhancement `flow`(HTML만: 읽힘 → +CSS: 보기 좋음 → +JS: 편함) · Scroll Progress Indicator `browser` + 위쪽 막대가 차오름(`A`, `m:1`) · Service Worker `net`(`{k:'pc',t:'브라우저'}` ↔ `{k:'router',t:'서비스 워커'}` ↔ `{k:'server',t:'서버'}`, 끊기면 저장본). NWI 키는 pc·phone·router·modem·cloud·server·dns·wall뿐이다 · Web App Manifest `pair(doc(manifest.json 블록), phone(홈 화면 아이콘))` · Hydration `track`(HTML 도착 → JS 도착 → 연결 → 버튼 동작) |
 | 3 | Feature Section·Pricing Section·Testimonial·About Page·Contact Page·Coming Soon Page `browser`(그 부분 강조) · Logo `browser`(머리 왼쪽 로고 강조, 회사 로고 아님) · Slug `addr(['example.com','blog','web-tips'], {sep:'/', y:[2]})` · No-code Builder `pair`(블록 목록 → 완성 화면) |
-| 4 | Search Engine·Keyword·Structured Data(꼬리표 `별점 4.5(예시)`) `serp` · Crawler `net`(크롤러 → 내 사이트, 링크 따라 다음 페이지) · Indexing `serp`(`hl` 없음) + `track`(수집 → 색인 → 결과) · Title Tag·Meta Description `pair(코드, serp)`(그 칸 강조) · Canonical URL `flow`(주소 A·주소 B → 대표 주소) · robots.txt▶ · Backlink `net`(다른 사이트 → 내 사이트) · UTM Parameter▶ · QR Code `pair`(CSS 칸 무늬 "모양 예시" → `browser` 주소) |
+| 4 | Search Engine·Keyword·Structured Data(꼬리표 `별점 4.5(예시)`) `serp` · Crawler `net`(`{k:'server',t:'크롤러'}` → `{k:'server',t:'내 사이트'}` → `{k:'server',t:'다음 페이지'}`, 링크 따라) · Indexing `serp`(`hl` 없음) + `track`(수집 → 색인 → 결과) · Title Tag·Meta Description `pair(코드, serp)`(그 칸 강조) · Canonical URL `doc` 표(들어온 주소 · 대표 주소: `example.com/a?ref=1` → `example.com/a`, `example.com/a/` → `example.com/a`. `flow`는 갈래 합치기를 막아 못 씀) · robots.txt▶ · Backlink `net`(`{k:'server',t:'다른 사이트'}` → `{k:'server',t:'내 사이트'}`) · UTM Parameter▶ · QR Code `pair`(CSS 칸 무늬 "모양 예시" → `browser` 주소) |
 | 5 | Address Bar·Bookmark·Browser Extension·Pop-up Blocker·Autofill `browser`(그 부분 강조) · Rendering `track`(HTML 읽기 → DOM → 스타일 → 그리기) · Browser Engine `doc` 표(브라우저 · 엔진) · Refresh `flow`(누름 → 다시 요청 → 새 화면) · iframe `browser` 안 `browser` · User Agent `doc`(요청 머리 `User-Agent: …` 줄) · Browser History `doc` 목록(방문 순서) |
-| 6 | Page View·Unique Visitor·Time on Page·Retention Rate·Event Tracking `doc` 표 · Referrer `net`(검색 → 내 사이트, "어디서 왔나") · Bounce Rate `rbar` + 문장 · Funnel `flow`(방문 → 상품 → 장바구니 → 결제, 수는 예시) · Heatmap `browser`(누른 곳 점 + "많이 누름" 글자) |
+| 6 | Page View·Unique Visitor·Time on Page·Retention Rate·Event Tracking `doc` 표 · Referrer `net`(`{k:'cloud',t:'검색'}` → `{k:'server',t:'내 사이트'}`, "어디서 왔나") · Bounce Rate `rbar` + 문장 · Funnel `flow`(방문 → 상품 → 장바구니 → 결제, 수는 예시) · Heatmap `browser`(누른 곳 점 + "많이 누름" 글자) |
 
 Task별 정해 둔 것:
 
@@ -231,15 +235,16 @@ Task별 정해 둔 것:
   - 출처: Google 검색 센터(robots.txt 소개, canonical, 구조화 데이터, 제목·스니펫), MDN(`<title>`, `<meta name="description">`)
   - **robots.txt▶**
     - `tpick(['허용', '차단'], '허용')` + 파일 칸(`User-agent: *` / `Allow: /` 또는 `Disallow: /`) + 크롤러 결과 줄(`✓ 수집함` / `✕ 수집 안 함`) + `.mk-hint aria-live="polite"`(`psay`)
-    - 상태 표 `WROBOT = {'허용': {line, res, say}, '차단': {…}}`. 차단 `say`에 "검색에서 빼려면 noindex를 써요"를 넣는다.
+    - 상태 표 `WROBOT = {'허용': {line, res, say}, '차단': {…}}`. 차단 `say`에 "검색에서 빼려면 noindex를 써요. noindex는 크롤러가 열 수 있어야 보여요"를 넣는다.
+    - 조작은 기존 `bpick(WROBOT, f)`(6744줄: `.mk-mobox` 안을 `f(k)`로 바꾸고 `psay`·`aria-pressed`)를 `init`에 쓴다. 그림 틀은 `.mk-tkey` 버튼 + `.mk-mobox` + `.mk-hint`다. UTM·HTML·Conversion Rate도 같은 방식이다.
     - `WDM['robots.txt'] = ['허용', '차단', 'aria-pressed', 'User-agent']`
   - **UTM Parameter▶**
-    - `tpick(['카톡', '인스타', '메일'], '카톡')` + `addr(['example.com/sale', 'utm_source=kakao', 'utm_medium=social'], {sep:'?&', y:[1]})` 모양 + `psay`. 구분자는 `?`·`&`를 칸별로 바르게 보이게 한다(`addr`의 `sep`가 하나뿐이면 칸 글자에 구분자를 넣고 `sep:''`).
+    - `tpick(['카톡', '인스타', '메일'], '카톡')` + `addr(['example.com/sale', '?utm_source=kakao', '&utm_medium=social'], {sep:'', y:[1]})` + `psay`. 구분자 `?`·`&`는 칸 글자에 넣는다(`sep`는 칸 사이에 같은 문자열 하나를 찍음).
     - 값: 카톡 `kakao`, 인스타 `instagram`, 메일 `newsletter`(모두 예시)
     - `WDM['UTM Parameter'] = ['카톡', '인스타', '메일', 'utm_source', 'aria-pressed']`
 - **Task 5**
   - `r`: Address Bar→`URL`, Rendering→`DOM`·`Render Blocking`, Browser Engine→`Cross-browser`·`Browser`, Refresh→`Hard Refresh`, Bookmark→`URL`, Browser Extension→`Browser`, iframe→`Embed`, User Agent→`Cross-browser`, Autofill→`Input Field`, Browser History→`Back Button`. Pop-up Blocker는 `r` 없음.
-  - x 짝: Rendering vs SSR·CSR, Browser Engine vs Browser, Refresh vs Hard Refresh, Address Bar의 검색 vs Search Engine, Pop-up Blocker vs design의 Popover·Modal(r 금지)
+  - x 짝: Rendering vs SSR·CSR, Browser Engine vs Browser, Refresh vs Hard Refresh, Address Bar의 검색 vs Search Engine, Pop-up Blocker vs design의 Popover·Modal(r 금지), 클릭 뒤 지연으로 막히는 경우
   - 출처: MDN(Glossary Rendering engine·User agent, `<iframe>`, `window.open` 팝업), 각 브라우저 공식 문서(엔진 이름, iOS 브라우저의 WebKit)
 - **Task 6**
   - `r`: Page View→`Analytics`, Unique Visitor→`Page View`, Referrer→`UTM Parameter`, Bounce Rate→`Above the Fold`·`Conversion Rate`, Time on Page→`Analytics`, Funnel→`Analytics`·`Conversion Rate`, Heatmap→`Analytics`, Retention Rate→`Analytics`, Event Tracking→`Analytics`
@@ -256,7 +261,7 @@ Task별 정해 둔 것:
 
 **Interfaces:**
 - Consumes: `addr`, `net`, `pair`, `browser`, `serp`, `track`, `doc`, `vs`, `rbar`, `tpick`, `psay`
-- Produces: `wlayers(k: 1|2|3) -> string`(같은 버튼을 HTML만 / +CSS / +JavaScript로 그린 `browser()`). 범위 밖 k는 `throw new Error('wlayers: 1~3')`. D 묶음 안 지역 함수다.
+- Produces: `wlayers(k: 1|2|3) -> string`(같은 버튼을 HTML만 / +CSS / +JavaScript로 그린 `browser()`). 범위 밖 k는 `throw new Error('wlayers: 1~3')`. `/* web: redraw */` `Object.assign` 바로 앞 `const`다.
 
 - [ ] **Step 1: 실패하는 점검 추가**
   - `REDRAWN`에 `'web/basic','web/core','web/motion','web/adv','web/parts','web/search','web/browser','web/traffic','web/tip'`을 더한다.
@@ -267,9 +272,9 @@ Task별 정해 둔 것:
 - [ ] **Step 2: 실패 확인**: `FAIL redrawn:web/…`(16장 이름), `FAIL wobj`, `FAIL wdm`
 - [ ] **Step 3: 그림**: 스펙 3.2 표대로 16장의 `v`를 바꾼다.
   - 다시 그릴 16장(측정: 지금 `v`가 `flow`·`big`·`stack`인 카드): URL, Domain, HTML, CSS, JavaScript, Hosting, Hyperlink, SEO, Cookie, SSR, CSR, SSG, Cross-browser, Static Site, CMS, Conversion Rate
-  - **HTML▶** `u-web-layers`: `tpick(['HTML만', '+ CSS', '+ JavaScript'], '+ JavaScript')` + `wlayers(k)` + `psay`. 고르면 그림 칸을 `wlayers(k)`로 바꾼다.
+  - **HTML▶** `u-web-layers`: `tpick(['HTML만', '+ CSS', '+ JavaScript'], 'HTML만')` + `wlayers(k)` + `psay`. 고르면 그림 칸을 `wlayers(k)`로 바꾼다.
   - **CSS** `u-web-css` = `wlayers(2)`, **JavaScript** `u-web-js` = `wlayers(3)`(멈춘 장면, `m` 없음)
-  - **Conversion Rate▶**: `tpick(['방문 200명 · 구매 4명', '방문 200명 · 구매 10명', '방문 50명 · 구매 10명'], …)`. 고르면 `rbar(pct, {label:'전환율'})`과 문장("200명 중 4명이 샀어요. 전환율 2%(예시)")을 다시 그린다. 값은 2%·5%·20%다(정수, 구매 ≤ 방문).
+  - **Conversion Rate▶**: `tpick(['방문 200명 · 구매 4명', '방문 200명 · 구매 10명', '방문 50명 · 구매 10명'], '방문 200명 · 구매 4명')`. 고르면 `rbar(pct, {label:'전환율'})`과 문장("200명 중 4명이 샀어요. 전환율 2%(예시)")을 다시 그린다. 값은 2%·5%·20%다(정수, 구매 ≤ 방문).
   - SEO: `serp(…, {hl:0})` 아래 `track`(크롤링 → 색인 → 순위 → 노출, 모두 `done`)
   - Cookie: `net` 메시지 `Set-Cookie: lang=ko`(응답) / `Cookie: lang=ko`(다음 요청). `nwt` 점검(15자 넘는 단어 금지)에 걸리면 줄을 나눈다.
   - Domain: `addr(['www','example','com'], {y:[1], sub:'사람이 외우는 이름 · 실제 주소는 203.0.113.10 같은 숫자(예시)'})`
