@@ -85,7 +85,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'basics/principle': 10, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8 };    // sec: 카드 수
-const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const LATER = ['font', 'doccount', 'bx'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
@@ -293,7 +293,7 @@ check('mtword', () => Object.entries(g.D).filter(([, p]) => [...String(p.h || ''
 check('itt', () => { const t = g.byId.get('mobile-internal-testing-track'), s = t.x + g.D[t.v].h; return /몇 시간/.test(s) && !/몇 분 안에/.test(s) ? '' : t.x; });    // 처음 올리면 테스트 링크가 열리기까지 몇 시간 걸릴 수 있다(support.google.com 9845334)
 const BS = () => g.TERMS.filter(t => t.c === 'basics');
 check('bcat', () => g.CATS.find(c => c.id === 'basics').secs.map(s => s.id).join() === 'basic,core,motion,adv,code,principle,tip' ? '' : g.CATS.find(c => c.id === 'basics').secs.map(s => s.id).join());
-const BOBJ = ["Programming Language","Source Code","Frontend","Backend","Full Stack","Debugging","Error Message","Library","Framework","Package","npm","Dependency","Code Editor","Semantic Versioning","Open Source","Compile","Build","Run","Event Listener","Callback","Algorithm","Data Structure","Big-O","Recursion","Refactoring","Technical Debt","Design Pattern","Static vs Dynamic Typing","Variable","Constant","Function","Parameter","Return","Conditional","Loop","Array","Object","String","Comment","Class","Hardcoding","Pseudocode","MVP","Spec","Legacy Code","Boilerplate","Rubber Duck Debugging"];    // 아직 옛 형식(객체 v)으로 남은 개발 기본 카드. 다시 그리면 여기서 뺀다
+const BOBJ = ["Source Code","Error Message","npm","Dependency","Code Editor","Event Listener","Data Structure","Recursion","Refactoring","Static vs Dynamic Typing","Variable","Constant","Function","Parameter","Conditional","Loop","Array","Object","String","Comment","Hardcoding","Pseudocode","Spec","Boilerplate"];    // 아직 옛 형식(객체 v)으로 남은 개발 기본 카드. 다시 그리면 여기서 뺀다
 check('bobj', () => { const a = BS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !BOBJ.includes(x)).map(x => '+' + x), ...BOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
 check('bx', () => BS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
 check('bm', () => BS().filter(t => g.D[t.v] && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 개발 기본 그림에는 움직이는 것이 있어야 한다
