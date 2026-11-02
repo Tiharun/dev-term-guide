@@ -91,10 +91,14 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'basics/principle': 10, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
-  'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9 };    // sec: 카드 수
-const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+  'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
+  'front/basic': 9, 'front/core': 14, 'front/motion': 10, 'front/adv': 9, 'front/layout': 12,
+  'front/unit': 8, 'front/css': 0, 'front/event': 0, 'front/react': 0, 'front/build': 0, 'front/tip': 8 };    // sec: 카드 수
+const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
+  'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const LATER = ['fobj', 'fukey', 'fsym', 'fx', 'font', 'doccount', 'redrawn:front/core', 'redrawn:front/adv', 'redrawn:front/unit', 'redrawn:front/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
+const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
 const file = process.argv[2] || 'index.html';
 const html = fs.readFileSync(file, 'utf8');
@@ -118,7 +122,7 @@ const at = k => { const [c, s] = k.includes('/') ? k.split('/') : ['design', k],
 
 check('v', () => g.TERMS.filter(t => !t.v || (typeof t.v === 'string' && !g.D[t.v])).map(t => t.en).join(', '));
 check('dup', () => { const seen = new Set(), dup = new Set();
-  g.TERMS.forEach(t => { const k = t.en.toLowerCase(); if (seen.has(k) && !ALLOW_DUP.includes(k)) dup.add(t.en); seen.add(k); });
+  g.TERMS.forEach(t => { const k = norm(t.en); if (seen.has(k) && !ALLOW_DUP.map(norm).includes(k)) dup.add(t.en); seen.add(k); });
   return [...dup].join(', '); });
 check('ref', () => [...g.TERMS.flatMap(t => (t.r || []).map(r => [t.en, r])), ...g.SYMPTOMS.flatMap(s => s.t.map(r => [s.q, r]))]
   .filter(([, r]) => !g.find(r)).map(([a, r]) => `${a}→${r}`).join(', '));
@@ -406,6 +410,20 @@ check('wsym', () => WS().filter(t => { const p = typeof t.v === 'string' ? g.D[t
 check('symcss', () => (html.match(/content:'[^']*[→←↑↓✓✕★][^']*'(?! \/ '')/g) || []).filter(c => !html.includes(c + " / ''")).join(' '));    // CSS 기호도 대체 글 ''
 const WB_WRONG = {'Bounce Rate': ['Bounce', 'Debounce'], 'Event Tracking': ['Event'], 'Time on Page': ['Session'], 'Pop-up Blocker': ['Popover', 'Modal'], 'Logo': ['Brand Color']};    // 이름만 비슷한 카드
 check('wwrong', () => Object.entries(WB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'web' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
+check('dupre', () => norm('Async/Await') !== norm('async / await') || norm('Dark Mode') !== norm('dark mode') || norm('Next.js') !== norm('nextjs') || norm('CSS-in-JS') === norm('CSS') ? '이름 정규화' : '');
+const FS = () => g.TERMS.filter(t => t.c === 'front');
+check('fcat', () => { const a = g.CATS.find(c => c.id === 'front').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,layout,unit,css,event,react,build,tip' ? '' : a; });
+check('fobj', () => FS().filter(t => typeof t.v === 'object').map(t => t.en).join(', '));    // 옛 형식 그림 0장
+const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid', 'Gap', 'Align Items', 'Justify Content', 'Position Sticky', 'Z-index', 'Overflow',
+  'Component', 'Media Query', 'Border Radius', 'Box Shadow', 'Transition', 'Keyframes', 'Transform', 'Hover', 'Focus', 'Animation Duration', 'Intersection Observer',
+  'Rotate', 'State', 'Max Width', 'Column', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 34장(측정)
+check('fukey', () => FS().filter(t => !FKEEP.includes(t.en) && !(typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v])).map(t => t.en).join(', '));
+check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
+check('fx', () => FS().filter(t => !t.x).map(t => t.en).join(', '));
+check('fm', () => FS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v].m && !WA(g.D[t.v].h)).map(t => t.en).join(', '));
+check('fou', () => FS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+const FB_WRONG = {'Key': ['Key-Value', 'API Key'], 'Input Event': ['Event'], 'CSS Inheritance': ['Inheritance'], 'Context API': ['Context'], 'Lifecycle': ['App Lifecycle']};    // 이름만 비슷한 다른 뜻
+check('fwrong', () => Object.entries(FB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'front' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
