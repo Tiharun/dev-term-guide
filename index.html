@@ -437,6 +437,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-spg,.mk-spme{margin-top:2px;padding:1px 7px;border:1px solid var(--rule);border-radius:6px;font:800 11px/1.35 var(--sans);color:var(--muted)}.mk-spme{border-color:var(--mark);color:var(--mark-text)}
 .mk-spno{margin:0;padding:7px 10px;border:1.5px dashed var(--muted);border-radius:8px;color:var(--muted)}
 .mk-spr.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
+.mk-wqr{display:grid;grid-template-columns:repeat(7,10px);padding:8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate)}.mk-wqr i{width:10px;height:10px}.mk-wqr i.b{background:var(--ink)}
 .mk-wpg{display:block;flex:none;height:4px;margin:-12px -12px 4px;background:var(--mark);transform-origin:left;transform:scaleX(.88)}.mk-wpg.A{animation:mk-wpg 10s linear -8.8s infinite}@keyframes mk-wpg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .mk-cds.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-mrs.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-cdy1{animation-name:mk-cdy1}.mk-cdz1{animation-name:mk-cdz1}.mk-cdy2{animation-name:mk-cdy2}.mk-cdz2{animation-name:mk-cdz2}.mk-cdy3{animation-name:mk-cdy3}.mk-cdz3{animation-name:mk-cdz3}.mk-cdy4{animation-name:mk-cdy4}.mk-cdz4{animation-name:mk-cdz4}.mk-cdy5{animation-name:mk-cdy5}.mk-cdz5{animation-name:mk-cdz5}.mk-cdy6{animation-name:mk-cdy6}.mk-cdz6{animation-name:mk-cdz6}.mk-cdy7{animation-name:mk-cdy7}.mk-cdz7{animation-name:mk-cdz7}.mk-cdy8{animation-name:mk-cdy8}.mk-cdz8{animation-name:mk-cdz8}
@@ -2338,6 +2339,20 @@ T('web','parts',[
  {en:'Testimonial',ko:'후기 · 고객 추천',d:'써 본 사람의 말을 이름과 함께 보여 주는 영역이에요.',x:'후기 섹션은 고른 몇 개만 보여 주고, 리뷰 목록은 별점과 함께 모두 모아 보여 줘요.',p:'가격 섹션 위에 고객 후기 3개를 넣어줘',r:['Landing Page'],l:1,o:0,v:'u-testimonial'},
  {en:'About Page',ko:'소개 페이지',d:'회사나 만든 사람이 누구인지 알려 주는 페이지예요.',x:'소개 페이지는 누구인지를, 문의 페이지는 연락하는 방법을 담아요.',p:'회사 소개 페이지를 /about 주소로 만들어줘',r:['Contact Page'],l:1,o:0,v:'u-about-page'},
  {en:'Contact Page',ko:'문의 페이지 · 연락처',d:'이메일, 전화, 문의 폼처럼 연락하는 방법을 모은 페이지예요.',x:'문의 페이지는 연락 방법을, 소개 페이지는 누구인지를 담아요. 문의 폼을 두면 보낸 내용을 한곳에 모을 수 있어요.',p:'이메일과 내용을 받는 문의 페이지를 만들어줘',r:['About Page','Form'],l:1,o:0,v:'u-contact-page'},
+]);
+T('web','search',[
+ {en:'Search Engine',ko:'검색 엔진 · 검색 사이트',d:'검색어를 넣으면 관련 페이지를 찾아 순서대로 보여 주는 서비스예요.',x:'검색 엔진은 웹 전체에서 페이지를 찾고, 사이트 안 검색은 그 사이트 안에서만 찾아요. SEO는 검색 엔진에 내 페이지가 잘 나오게 다듬는 일이에요.',p:'검색 엔진 결과에 잘 보이게 이 페이지의 제목과 설명을 다듬어줘',r:['SEO'],l:1,o:1,u:MDN('Glossary/Search_engine'),v:'u-search-engine'},
+ {en:'Crawler',ko:'크롤러 · 검색 로봇',d:'링크를 따라 다니며 페이지를 읽어 모으는 검색 엔진의 프로그램이에요.',x:'크롤러는 페이지를 읽어 오고(수집), 색인은 읽은 내용을 정리해 저장해요. 읽어 왔다고 모두 색인되지는 않아요.',p:'크롤러가 모든 페이지를 찾게 내부 링크를 정리해줘',r:['SEO'],l:2,o:1,u:MDN('Glossary/Crawler'),v:'u-crawler'},
+ {en:'Indexing',ko:'색인 · 인덱싱',d:'검색 엔진이 읽어 온 페이지를 정리해 검색 결과에 낼 수 있게 저장하는 일이에요.',x:'크롤러는 페이지를 읽어 오고, 색인은 그 내용을 정리해 저장해요. 색인되지 않은 페이지는 검색 결과에 나오지 않아요.',p:'새 페이지가 검색에 색인됐는지 확인하는 방법을 알려줘',r:['Crawler'],l:2,o:1,u:'https://developers.google.com/search/docs/fundamentals/how-search-works',v:'u-indexing'},
+ {en:'Keyword',ko:'키워드 · 검색어',d:'사람들이 무언가를 찾을 때 검색창에 넣는 낱말이에요.',x:'키워드는 사람이 검색창에 넣는 말이고, 태그는 사이트 안에서 글을 묶는 이름표예요. 같은 낱말을 억지로 반복하기보다 사람들이 실제로 쓰는 말로 써요.',p:'이 글에 맞는 키워드를 골라 제목과 첫 문단에 자연스럽게 넣어줘',r:['SEO'],l:1,o:0,v:'u-keyword'},
+ {en:'Title Tag',ko:'제목 태그 · title',d:'브라우저 탭과 검색 결과 제목에 쓰이는 페이지 이름을 적는 HTML 태그예요.',x:'제목 태그는 탭과 검색 결과의 제목을, 메타 태그는 설명 같은 페이지 정보를, Open Graph는 링크를 공유할 때 보이는 카드를 정해요. 검색 결과 제목은 검색 엔진이 바꿔 보여 줄 수도 있어요.',p:'페이지마다 내용에 맞는 title 태그를 넣어줘',r:['Meta Tag'],l:1,o:1,u:MDN('Web/HTML/Reference/Elements/title'),v:'u-title-tag'},
+ {en:'Meta Description',ko:'메타 설명 · description',d:'검색 결과 제목 아래에 보일 수 있는 페이지 요약을 적는 meta 태그예요.',x:'메타 설명은 검색 결과의 설명 줄을, Open Graph 설명은 링크를 공유할 때 카드의 설명을 정해요. 검색 엔진이 본문에서 다른 문장을 골라 보여 줄 수도 있어요.',p:'페이지 내용을 두 문장으로 요약해 meta description에 넣어줘',r:['Meta Tag','Open Graph'],l:1,o:1,u:'https://developers.google.com/search/docs/appearance/snippet',v:'u-meta-description'},
+ {en:'Canonical URL',ko:'대표 주소 · 캐노니컬',d:'내용이 같은 주소가 여럿일 때 검색 엔진에 알려 주는 대표 주소예요.',x:'Canonical은 대표 주소를 알려 주는 신호이고, Redirect는 사람과 크롤러를 실제로 다른 주소로 옮겨요. Google 문서는 rel="canonical"을 강한 신호라고 불러요.',p:'?ref= 가 붙은 주소들이 하나로 모이게 canonical 링크를 넣어줘',r:['SEO'],l:2,o:1,u:'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',v:'u-canonical-url'},
+ {en:'robots.txt',ko:'로봇 규칙 파일',d:'크롤러에게 사이트의 어느 주소를 읽어도 되는지 알려 주는 파일이에요.',x:'robots.txt는 수집만 막고, 검색 결과에서 빼려면 noindex를 써요. robots.txt로 막은 주소도 설명 없이 검색 결과에 나올 수 있어요.',p:'관리자 페이지는 크롤러가 읽지 않게 robots.txt를 만들어줘',r:['Sitemap'],l:2,o:1,u:'https://developers.google.com/search/docs/crawling-indexing/robots/intro',v:'u-robots-txt'},
+ {en:'Structured Data',ko:'구조화 데이터',d:'가격, 별점처럼 페이지 속 정보를 검색 엔진이 알아듣게 정해진 형식으로 적은 것이에요.',x:'메타 태그는 페이지 전체 정보를, 구조화 데이터는 가격·별점처럼 내용 속 항목을 알려 줘요. 넣어도 별점 같은 꾸밈(리치 결과)이 꼭 보이지는 않아요.',p:'상품 페이지에 가격과 별점 구조화 데이터를 JSON-LD로 넣어줘',r:['SEO'],l:3,o:1,u:'https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data',v:'u-structured-data'},
+ {en:'Backlink',ko:'백링크 · 들어오는 링크',d:'다른 사이트에서 내 사이트로 걸어 둔 링크예요.',x:'하이퍼링크는 링크 전체를, 백링크는 다른 사이트에서 내 사이트로 들어오는 링크만 말해요. 순위를 올리려고 링크를 사고파는 일은 Google 스팸 정책에 어긋나요.',p:'우리 사이트로 들어오는 백링크를 확인하는 방법을 알려줘',r:['SEO','Hyperlink'],l:2,o:1,u:'https://developers.google.com/search/docs/essentials/spam-policies',v:'u-backlink'},
+ {en:'UTM Parameter',ko:'UTM 매개변수 · 유입 꼬리표',d:'주소 뒤에 붙여 방문자가 어느 홍보에서 왔는지 알려 주는 꼬리표예요.',x:'UTM은 주소에 직접 붙이는 꼬리표이고, Referrer는 브라우저가 알려 주는 직전 페이지 주소예요. 꼬리표가 달라도 같은 페이지가 열려요.',p:'카톡·인스타·메일 홍보 링크에 각각 utm_source를 달아줘',r:['URL','Analytics'],l:2,o:1,u:'https://support.google.com/analytics/answer/10917952',v:'u-utm-parameter'},
+ {en:'QR Code',ko:'QR 코드',d:'휴대폰 카메라로 비추면 담긴 주소가 바로 열리는 네모 무늬예요.',x:'QR 코드는 주소를 무늬로 바꾼 것이라, 인쇄한 뒤에는 담긴 주소를 바꿀 수 없어요. 주소에 UTM을 달면 QR로 들어온 방문을 따로 셀 수 있어요.',p:'행사 포스터에 넣을 QR 코드를 utm_source=poster 주소로 만들어줘',r:['URL'],l:1,o:0,v:'u-qr-code'},
 ]);
 T('web','tip',[
  {en:'Static Site',ko:'정적 사이트',d:'누가 봐도 같은 내용을 보여 주는, 미리 만든 파일로 된 사이트.',x:'로그인·글쓰기처럼 사람마다 내용이 달라지면 동적 사이트.',p:'회사 소개는 정적 사이트로 충분해. 서버 없이 만들어줘',r:['SSG','Hosting'],l:1,o:0,v:{flow:['미리 만든 HTML','그대로 전송']}},
@@ -6854,6 +6869,59 @@ Object.assign(D, {
     cap:'블록을 골라 끌어 놓으면 코드 없이 화면이 만들어져요'},
   'u-coming-soon-page':{h:browser(`<div class="mk-card mk-f mk-hl"><b>곧 열어요</b>${whelp('12월 1일 열어요 (예시)')}<span class="mk-in">이메일</span><span class="mk-btn">알림 받기</span></div>`),
     cap:'열기 전에는 날짜와 알림 신청만 두어 기다리게 해요'},
+});
+/* web: search — 출처 확인(2026-11): MDN Glossary Search engine·Crawler, MDN <title>, Google 검색 센터(검색 작동 방식: 색인은 보장 안 됨,
+   스니펫, 중복 URL 통합: rel=canonical은 강한 신호, robots.txt 소개: 수집만 막고 noindex로 뺌·막힌 주소도 설명 없이 나옴,
+   구조화 데이터 소개·정책: 리치 결과 보장 안 됨, 스팸 정책: 링크 사고팔기), GA4 도움말 UTM. 흔히: Keyword·QR Code. 예시: 주소·검색어·가격·별점 */
+const WROBOT = {
+  '허용':{line:'Allow: /', res:'✓ 수집함', say:'허용하면 크롤러가 페이지를 읽어 가요'},
+  '차단':{line:'Disallow: /', res:'✕ 수집 안 함', say:'차단하면 크롤러가 읽지 않아요. 검색에서 빼려면 noindex를 써요. noindex는 크롤러가 열 수 있어야 보여요'},
+};
+const wrobot = k => `<div class="mk-f">${doc([{p:'User-agent: *'}, {p:WROBOT[k].line}], {title:'robots.txt', still:true, hl:1})}<span class="mk-help mk-hl">크롤러 ${esc(WROBOT[k].res)}</span></div>`;
+const WUTM = {
+  '카톡':{v:'kakao', m:'social', say:'카톡으로 보낸 링크는 utm_source=kakao로 들어와요'},
+  '인스타':{v:'instagram', m:'social', say:'인스타에 올린 링크는 utm_source=instagram으로 들어와요'},
+  '메일':{v:'newsletter', m:'email', say:'메일로 보낸 링크는 utm_source=newsletter로 들어와요'},
+};
+const wutm = k => addr(['example.com/sale', '?utm_source=' + WUTM[k].v, '&utm_medium=' + WUTM[k].m], {sep:'', y:[1], sub:'색칠한 칸이 어디서 왔는지 알려 줘요 (값은 예시)'});
+const WQR = ['1110101', '1010011', '1110100', '0001011', '1110010', '1010101', '1110110'];
+Object.assign(D, {
+  'u-search-engine':{h:serp('웹 기초', [{t:'웹 기초 정리', u:'example.com/web', d:'웹사이트가 움직이는 원리'}, {t:'처음 배우는 HTML', u:'example.org/html'}, {t:'웹 용어 사전', u:'example.net/words'}],
+      {hl:0, label:'검색어 웹 기초로 찾은 결과 세 줄, 내 사이트가 첫 줄'}), m:1,
+    cap:'검색어를 넣으면 관련 페이지를 골라 순서대로 보여 줘요'},
+  'u-crawler':{h:net([{k:'server', t:'크롤러'}, {k:'server', t:'내 사이트'}, {k:'server', t:'다음 페이지'}], [{m:[{t:'읽기'}]}, {m:[{t:'링크 따라'}]}],
+      {label:'크롤러가 내 사이트를 읽고, 링크를 따라 다음 페이지로 가요'}), m:1,
+    cap:'크롤러는 링크를 따라 페이지를 하나씩 읽어 가요'},
+  'u-indexing':{h:pair(track([{t:'수집', s:'done', n:'크롤러가 읽어 와요'}, {t:'색인', s:'fail', w:'안 됨'}, {t:'검색 결과', s:'wait'}], {still:true}),
+      serp('웹 기초', [{t:'웹 용어 사전', u:'example.net/words'}], {still:true})),
+    cap:'읽어 왔어도 색인되지 않으면 검색 결과에 나오지 않아요'},
+  'u-keyword':{h:serp('웹 용어 쉽게', [{t:'웹 용어 쉽게 정리', u:'example.com/words'}, {t:'개발 용어 사전', u:'example.org/dev'}],
+      {hl:0, label:'검색어 웹 용어 쉽게로 찾은 결과, 그 말이 담긴 내 사이트가 첫 줄'}), m:1,
+    cap:'검색창에 넣은 말이 키워드예요. 그 말이 담긴 페이지가 나와요'},
+  'u-title-tag':{h:pair(doc([{p:'<title>웹 기초 정리</title>'}], {title:'index.html', still:true, hl:0}),
+      serp('웹 기초', [{t:'웹 기초 정리', u:'example.com/web'}], {hl:0, still:true})),
+    cap:'title 태그에 적은 이름이 검색 결과의 제목이 돼요'},
+  'u-meta-description':{h:pair(doc([{p:'name="description"'}, {p:'content="웹사이트가 움직이는 원리"'}], {title:'<meta> 태그', still:true, hl:1}),
+      serp('웹 기초', [{t:'웹 기초 정리', u:'example.com/web', d:'웹사이트가 움직이는 원리'}], {hl:0, still:true})),
+    cap:'description에 적은 요약이 제목 아래 설명 줄로 보일 수 있어요'},
+  'u-canonical-url':{h:doc([{tb:[['들어온 주소', '대표 주소'], ['example.com/a?ref=1', 'example.com/a'], ['example.com/a/', 'example.com/a']]}],
+      {title:'대표 주소 정하기', label:'두 주소를 example.com/a 하나로 모아요'}), m:1,
+    cap:'꼬리표가 붙은 주소들을 대표 주소 하나로 모아 알려요'},
+  'u-robots-txt':{h:`<div class="mk-mobox">${wrobot('허용')}</div>${tpick(['허용', '차단'], '허용')}<span class="mk-hint" aria-live="polite">${WROBOT['허용'].say}</span>`,
+    cap:'허용과 차단을 눌러 크롤러가 읽는지 보세요',
+    init:bpick(WROBOT, wrobot)},
+  'u-structured-data':{h:serp('운동화', [{t:'가벼운 운동화', u:'example.com/shoes', d:'59,000원 (예시)', tag:'별점 4.5'}, {t:'운동화 고르는 법', u:'example.org/tips'}],
+      {hl:0, label:'구조화 데이터를 넣은 내 사이트 결과에 별점 꼬리표가 붙어요'}), m:1,
+    cap:'가격과 별점을 알려 주면 결과에 꾸밈이 붙을 수 있어요(별점은 예시)'},
+  'u-backlink':{h:net([{k:'server', t:'다른 사이트'}, {k:'server', t:'내 사이트'}], [{m:[{t:'링크'}]}],
+      {label:'다른 사이트의 링크가 내 사이트로 들어와요'}), m:1,
+    cap:'다른 사이트에서 내 사이트로 들어오는 링크예요'},
+  'u-utm-parameter':{h:`<div class="mk-mobox">${wutm('카톡')}</div>${tpick(['카톡', '인스타', '메일'], '카톡')}<span class="mk-hint" aria-live="polite">${WUTM['카톡'].say}</span>`,
+    cap:'홍보 채널을 눌러 주소 꼬리표가 어떻게 바뀌는지 보세요',
+    init:bpick(WUTM, wutm)},
+  'u-qr-code':{h:pair(`<div class="mk-f"><span class="mk-wqr" aria-hidden="true">${WQR.join('').split('').map(b => `<i${b === '1' ? ' class="b"' : ''}></i>`).join('')}</span>${whelp('무늬는 모양 예시')}</div>`,
+      browser(`<b>가을 행사</b>${lines(80, 60)}`, {url:'example.com/event'})),
+    cap:'카메라로 비추면 무늬에 담긴 주소가 열려요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
