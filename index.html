@@ -2354,6 +2354,19 @@ T('web','search',[
  {en:'UTM Parameter',ko:'UTM 매개변수 · 유입 꼬리표',d:'주소 뒤에 붙여 방문자가 어느 홍보에서 왔는지 알려 주는 꼬리표예요.',x:'UTM은 주소에 직접 붙이는 꼬리표이고, Referrer는 브라우저가 알려 주는 직전 페이지 주소예요. 꼬리표가 달라도 같은 페이지가 열려요.',p:'카톡·인스타·메일 홍보 링크에 각각 utm_source를 달아줘',r:['URL','Analytics'],l:2,o:1,u:'https://support.google.com/analytics/answer/10917952',v:'u-utm-parameter'},
  {en:'QR Code',ko:'QR 코드',d:'휴대폰 카메라로 비추면 담긴 주소가 바로 열리는 네모 무늬예요.',x:'QR 코드는 주소를 무늬로 바꾼 것이라, 인쇄한 뒤에는 담긴 주소를 바꿀 수 없어요. 주소에 UTM을 달면 QR로 들어온 방문을 따로 셀 수 있어요.',p:'행사 포스터에 넣을 QR 코드를 utm_source=poster 주소로 만들어줘',r:['URL'],l:1,o:0,v:'u-qr-code'},
 ]);
+T('web','browser',[
+ {en:'Address Bar',ko:'주소창',d:'사이트 주소를 보여 주고, 주소나 검색어를 넣는 브라우저 맨 위 칸이에요.',x:'주소창에 주소를 넣으면 그 사이트로 바로 가고, 주소가 아닌 말을 넣으면 브라우저에 정해 둔 검색 엔진으로 검색해요. 검색 엔진은 주소창이 대신 불러 주는 별도 서비스예요.',p:'메뉴를 누를 때마다 주소창의 주소도 그 페이지 주소로 바뀌게 해줘',r:['URL'],l:1,o:0,v:'u-address-bar'},
+ {en:'Rendering',ko:'렌더링 · 화면 그리기',d:'브라우저가 받은 HTML과 CSS를 읽어 화면에 그리는 과정이에요.',x:'SSR·CSR은 HTML을 서버와 브라우저 중 어디서 만드는지를 말하고, 렌더링은 브라우저가 그 HTML을 화면에 그리는 과정을 말해요. CSS를 늦게 받으면 그리기도 늦어져요.',p:'첫 화면이 늦게 그려지는 이유를 렌더링 단계별로 찾아줘',r:['DOM','Render Blocking'],l:2,o:1,u:MDN('Web/Performance/Guides/Critical_rendering_path'),v:'u-rendering'},
+ {en:'Browser Engine',ko:'브라우저 엔진 · 렌더링 엔진',d:'브라우저 안에서 웹페이지를 실제로 읽고 그리는 핵심 프로그램이에요.',x:'브라우저는 탭과 주소창까지 포함한 프로그램 전체이고, 엔진은 그 안에서 페이지를 그리는 부분이에요. iOS의 브라우저 앱은 지금(2026년) 기본으로 WebKit을 쓰고, EU와 일본에서만 다른 엔진을 허가받아 쓸 수 있어요.',p:'이 기능이 Blink, Gecko, WebKit 엔진에서 모두 되는지 확인해줘',r:['Cross-browser','Browser'],l:2,o:1,u:MDN('Glossary/Rendering_engine'),v:'u-browser-engine'},
+ {en:'Refresh',ko:'새로고침',d:'지금 보는 페이지를 서버에 다시 요청해 새로 불러오는 일이에요.',x:'새로고침은 저장해 둔 파일(캐시)을 다시 쓸 수 있고, 강력 새로고침은 캐시를 건너뛰고 모두 다시 받아요. 고친 화면이 안 바뀌면 강력 새로고침을 먼저 해 봐요.',p:'새로고침해도 입력한 내용이 남게 저장해줘',r:['Hard Refresh'],l:1,o:0,v:'u-refresh'},
+ {en:'Bookmark',ko:'북마크 · 즐겨찾기',d:'나중에 다시 가려고 페이지 주소를 브라우저에 저장해 두는 기능이에요.',x:'북마크는 내가 골라 저장한 주소이고, 방문 기록은 브라우저가 알아서 남기는 지나온 주소예요.',p:'북마크했을 때 알아보기 쉽게 페이지 title과 favicon을 넣어줘',r:['URL'],l:1,o:0,v:'u-bookmark'},
+ {en:'Browser Extension',ko:'브라우저 확장 · 확장 프로그램',d:'광고 차단, 번역처럼 브라우저에 기능을 더하는 작은 프로그램이에요.',x:'확장 프로그램은 브라우저에 설치해 여러 사이트에서 동작하고, 웹 앱은 한 사이트 안에서만 동작해요. 확장은 보고 있는 페이지 내용을 읽을 수 있어서 믿을 만한 것만 설치해요.',p:'이 화면이 광고 차단 확장 때문에 깨지는지 확인해줘',r:['Browser'],l:2,o:1,u:MDN('Mozilla/Add-ons/WebExtensions'),v:'u-browser-extension'},
+ {en:'Pop-up Blocker',ko:'팝업 차단',d:'사이트가 허락 없이 새 창을 띄우지 못하게 브라우저가 막는 기능이에요.',x:'팝업 차단은 브라우저가 새 창을 막는 기능이고, 페이지 안에 뜨는 모달은 새 창이 아니라서 막히지 않아요. 버튼을 누른 뒤 기다렸다가(await) 창을 열면 누른 효과가 끝나 막힐 수 있어요.',p:'버튼을 누르면 바로 새 창이 열리게 window.open을 클릭 처리 맨 앞으로 옮겨줘',r:[],l:2,o:1,u:MDN('Web/API/Window/open'),v:'u-pop-up-blocker'},
+ {en:'iframe',ko:'아이프레임 · 끼워 넣은 창',d:'웹페이지 안에 다른 웹페이지를 창처럼 끼워 넣는 HTML 태그예요.',x:'Embed는 지도나 영상처럼 남의 콘텐츠를 넣는 일을 넓게 말하고, iframe은 그때 자주 쓰는 태그예요. 다른 사이트를 끼워 넣으면 바깥 페이지 코드가 그 안을 마음대로 건드리지 못해요.',p:'지도 페이지를 iframe으로 넣고 크기를 화면에 맞춰줘',r:['Embed'],l:2,o:1,u:MDN('Web/HTML/Reference/Elements/iframe'),v:'u-iframe'},
+ {en:'User Agent',ko:'사용자 에이전트 · UA',d:'요청을 보낸 브라우저와 기기가 무엇인지 서버에 알려 주는 글자 줄이에요.',x:'브라우저 엔진은 페이지를 그리는 프로그램이고, User Agent는 어떤 브라우저인지 알리는 이름표예요. 이름표는 바꿀 수 있어서, 기능 지원은 이름표보다 기능 자체로 확인하는 편이 안전해요.',p:'사용자 에이전트 대신 기능 확인으로 브라우저 차이를 처리해줘',r:['Cross-browser'],l:2,o:1,u:MDN('Glossary/User_agent'),v:'u-user-agent'},
+ {en:'Autofill',ko:'자동 채우기 · 자동 입력',d:'이름, 주소, 이메일처럼 전에 넣은 값을 브라우저가 입력 칸에 대신 채워 주는 기능이에요.',x:'자동 채우기는 브라우저가 저장해 둔 값을 칸에 넣고, 자동완성(Autocomplete)은 입력하는 동안 추천 목록을 보여 줘요. HTML의 autocomplete 속성은 이름과 달리 자동 채우기를 돕는 속성이에요.',p:'회원가입 폼에 autocomplete 속성을 알맞게 달아줘',r:['Input Field'],l:2,o:1,u:MDN('Web/HTML/Reference/Attributes/autocomplete'),v:'u-autofill'},
+ {en:'Browser History',ko:'방문 기록 · 히스토리',d:'브라우저가 지금까지 열어 본 페이지 주소를 순서대로 남겨 둔 목록이에요.',x:'방문 기록은 지나온 주소 목록이고, 뒤로 가기 버튼은 그 목록에서 한 칸 전으로 돌아가는 일이에요. 비공개(시크릿) 창은 창을 닫으면 방문 기록을 남기지 않아요.',p:'탭을 바꿀 때마다 주소가 바뀌어 뒤로 가기로 돌아올 수 있게 해줘',r:['Back Button'],l:1,o:0,v:'u-browser-history'},
+]);
 T('web','tip',[
  {en:'Static Site',ko:'정적 사이트',d:'누가 봐도 같은 내용을 보여 주는, 미리 만든 파일로 된 사이트.',x:'로그인·글쓰기처럼 사람마다 내용이 달라지면 동적 사이트.',p:'회사 소개는 정적 사이트로 충분해. 서버 없이 만들어줘',r:['SSG','Hosting'],l:1,o:0,v:{flow:['미리 만든 HTML','그대로 전송']}},
  {en:'CMS',ko:'씨엠에스 · 콘텐츠 관리 도구',d:'코드 없이 글과 이미지를 올리고 고칠 수 있는 관리 프로그램. WordPress 등.',p:'직원이 직접 공지를 올릴 수 있게 CMS를 붙여줘',r:['Admin Page'],l:2,o:0,v:{flow:['관리자 글 작성','CMS','사이트 반영']}},
@@ -6922,6 +6935,35 @@ Object.assign(D, {
   'u-qr-code':{h:pair(`<div class="mk-f"><span class="mk-wqr" aria-hidden="true">${WQR.join('').split('').map(b => `<i${b === '1' ? ' class="b"' : ''}></i>`).join('')}</span>${whelp('무늬는 모양 예시')}</div>`,
       browser(`<b>가을 행사</b>${lines(80, 60)}`, {url:'example.com/event'})),
     cap:'카메라로 비추면 무늬에 담긴 주소가 열려요'},
+});
+/* web: browser — 출처 확인(2026-11): MDN Critical rendering path(DOM·CSSOM·렌더 트리·레이아웃), MDN Glossary Rendering engine(Blink·Gecko·WebKit),
+   Apple App Review 2.5.6(WebKit, EU·일본 대체 엔진 허가), MDN WebExtensions, MDN Window.open(팝업은 사용자 입력에 바로 응해 열어야 함)·Transient activation(시간이 지나면 끝남),
+   MDN iframe, MDN Glossary User agent, MDN autocomplete 속성. 흔히: Address Bar·Refresh·Bookmark·Browser History. 예시: 주소·시각·이메일 */
+Object.assign(D, {
+  'u-address-bar':{h:browser(`<b>회사 소개</b>${lines(90, 70)}`, {url:'example.com/about'}).replace('class="mk-url"', 'class="mk-url mk-hl"'),
+    cap:'맨 위 칸에 지금 페이지 주소가 보이고, 여기에 주소나 검색어를 넣어요'},
+  'u-rendering':{h:track([{t:'HTML 읽기', s:'done'}, {t:'DOM 만들기', s:'done'}, {t:'스타일 계산', s:'now', n:'CSS를 붙여요'}, {t:'화면 그리기', s:'wait'}],
+      {label:'HTML을 읽어 DOM을 만들고, 스타일을 계산한 뒤 화면에 그려요'}), m:1,
+    cap:'받은 코드를 단계별로 바꿔 마지막에 화면에 그려요'},
+  'u-browser-engine':{h:doc([{tb:[['브라우저', '엔진'], ['Chrome · Edge', 'Blink'], ['Firefox', 'Gecko'], ['Safari', 'WebKit'], ['iOS의 Chrome', 'WebKit (지금 기본)']]}],
+      {title:'브라우저와 엔진', label:'Chrome과 Edge는 Blink, Firefox는 Gecko, Safari와 iOS의 Chrome은 WebKit을 써요'}), m:1,
+    cap:'겉모습이 다른 브라우저도 같은 엔진을 쓸 수 있어요'},
+  'u-refresh':{h:flow([[{t:'새로고침 누름'}], [{t:'서버에 다시 요청'}], [{t:'새 화면', k:'end'}]], {label:'새로고침을 누르면 서버에 다시 요청해 새 화면을 받아요'}), m:1,
+    cap:'같은 주소를 다시 요청해 화면을 새로 받아요'},
+  'u-bookmark':{h:browser(`<div class="mk-cols"><span class="mk-help mk-hl">★ 웹 기초</span><span class="mk-help">★ 할 일</span></div><b>웹 기초 정리</b>${lines(85, 60)}`, {url:'example.com/web'}),
+    cap:'★ 줄에 저장해 둔 페이지를 눌러 바로 다시 열어요'},
+  'u-browser-extension':{h:browser(`<span class="mk-help mk-hl">확장: 번역 켜짐</span><b>Hello → 안녕하세요</b>${lines(80, 60)}`, {url:'example.org'}),
+    cap:'브라우저에 단 확장이 여러 사이트에서 기능을 더해요'},
+  'u-pop-up-blocker':{h:browser(`<b>이벤트</b>${lines(80)}<div class="mk-card mk-f mk-hl"><b>✕ 팝업을 막았어요</b>${whelp('example.com이 새 창을 열려고 했어요')}</div>`, {url:'example.com/event'}),
+    cap:'누르지 않았는데 새 창을 열면 브라우저가 막아요'},
+  'u-iframe':{h:browser(`<b>오시는 길</b><div class="mk-hl">${browser(`<b>지도</b>${lines(70, 50)}`, {url:'map.example.net'})}</div>`, {url:'example.com/contact'}),
+    cap:'페이지 안에 다른 사이트의 페이지를 창처럼 끼워 넣어요'},
+  'u-user-agent':{h:doc([{h2:'요청 머리'}, {p:'GET /index.html'}, {p:'User-Agent: Mozilla/5.0 (예시)'}], {title:'브라우저 → 서버', hl:2, label:'요청에 User-Agent 줄을 붙여 어떤 브라우저인지 알려요'}), m:1,
+    cap:'요청마다 어떤 브라우저인지 적은 이름표를 붙여 보내요'},
+  'u-autofill':{h:browser(`<b>회원가입</b><span class="mk-in mk-hl">minsu@example.com</span>${whelp('저장된 값으로 채웠어요 (예시)')}<span class="mk-in">비밀번호</span><span class="mk-btn">가입하기</span>`, {url:'example.com/join'}),
+    cap:'전에 넣은 값을 브라우저가 칸에 대신 채워요'},
+  'u-browser-history':{h:doc([{p:'10:02  example.com'}, {p:'10:05  example.com/blog'}, {p:'10:07  example.com/blog/web-tips'}], {title:'방문 기록', hl:2, label:'열어 본 주소가 시간 순서로 쌓여요'}), m:1,
+    cap:'열어 본 주소가 시간 순서로 쌓여요(시각은 예시)'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
