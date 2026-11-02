@@ -335,6 +335,8 @@ check('wm', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-
 const WDM = {'robots.txt': ['허용', '차단', 'aria-pressed', 'User-agent'], 'UTM Parameter': ['카톡', '인스타', '메일', 'utm_source', 'aria-pressed'],
   'HTML': ['HTML만', '+ CSS', '+ JavaScript', 'aria-pressed'], 'Conversion Rate': ['구매 4명', '구매 10명', 'aria-pressed', '(예시)']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글자
 check('wdm', () => Object.entries(WDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('wlayers', () => ['u-web-layers', 'u-web-css', 'u-web-js'].filter(k => (g.D[k].h.match(/mk-ln/g) || []).length !== 2).join(', '));    // 본문 줄은 HTML만일 때부터 있어요(CSS는 모양만)
+check('wdomain', () => (g.D['u-web-domain'].h.match(/class="y"/g) || []).length !== 2 || !g.D['u-web-domain'].h.includes('하위 이름') ? 'example.com 두 칸·하위 이름' : '');
 check('wfix', () => [    // 디렉터 검토 B: 다른 사이트에서 오면 Referer는 보통 도메인까지만(기본 strict-origin-when-cross-origin), 세션 뜻, 제목은 검색 엔진이 바꿀 수 있음, 이탈 조건 셋
   [!g.find('Referrer').x.includes('도메인까지만'), 'Referrer x'], [!g.D['u-referrer'].cap.includes('도메인'), 'Referrer cap'],
   [!g.find('Bounce Rate').x.includes('세션은'), 'Bounce Rate 세션'], [!g.D['u-title-tag'].cap.includes('보통'), 'Title Tag cap'],
