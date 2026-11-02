@@ -301,6 +301,8 @@ const BDM = {'Async/Await': ['await 있음', 'await 없음', 'aria-pressed'], 'I
 check('bdm', () => Object.entries(BDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 check('bko', () => [['Code Editor', 'IDE'], ['npm', '패키지 관리자']].filter(([en, w]) => g.find(en).ko.includes(w)).map(([en]) => en).join(', '));    // 새 카드 IDE·Package Manager와 한글명이 겹치지 않게
 check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
+  return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
 check('fcode', () => /\.mk-f>code\{white-space:pre\}/.test(html) ? '' : '줄 앞 공백이 사라져요');    // bcode 들여쓰기
 check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation-delay:-([\d.]+)s/)[1], mr = html.match(/\.mk-mrs\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 코드 칸·메모리 그림의 멈춘 장면은 마지막 단계만

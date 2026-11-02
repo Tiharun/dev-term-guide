@@ -2138,7 +2138,7 @@ T('basics','code',[
  {en:'Indentation',ko:'들여쓰기',d:'코드 줄 앞에 빈칸을 넣어, 어느 줄이 어느 블록 안에 들어 있는지 보이게 하는 것이에요.',x:'흔히 2칸이나 4칸을 써요. Prettier는 기본으로 2칸을 써요. Python처럼 들여쓰기가 틀리면 아예 실행되지 않는 언어도 있어요.',p:'이 파일 들여쓰기를 2칸으로 맞춰줘',r:[],l:1,o:0,v:'u-indentation'},
  {en:'Arrow Function',ko:'화살표 함수',d:'=>를 써서 함수를 짧게 적는 JavaScript 문법이에요.',x:'function으로 만든 함수보다 짧게 쓸 수 있어요. 다만 객체의 메서드나 new로 만드는 생성자로는 쓰지 않아요.',p:'이 function 함수들을 화살표 함수로 바꿔줘',r:[],l:2,o:1,u:MDN('Web/JavaScript/Reference/Functions/Arrow_functions'),v:'u-arrow-function'},
  {en:'Key-Value',ko:'키-값 · 이름과 값의 짝',d:'이름(키) 하나에 값 하나를 짝지어 저장하는 방식이에요. 객체와 JSON이 이렇게 생겼어요.',x:'키로 값을 찾아요. 같은 객체 안에서 키는 겹치지 않아요. 키-값 짝 하나가 객체의 속성 하나예요.',p:'이 목록을 id를 키로 하는 키-값 객체로 바꿔줘',r:[],l:1,o:1,u:MDN('Web/JavaScript/Guide/Working_with_objects'),v:'u-key-value'},
- {en:'Truthy·Falsy',ko:'참 같은 값 · 거짓 같은 값',d:'if 같은 조건에 넣었을 때 참으로 취급되는 값을 truthy, 거짓으로 취급되는 값을 falsy라고 해요.',x:'false, 0, 빈 문자열, null, undefined, NaN은 falsy예요. 그 밖은 모두 truthy라서 문자열 \'0\'이나 빈 배열 []도 참으로 취급돼요.',p:'값이 0일 때도 통과해야 하는데 if에서 걸러져. falsy 때문인지 봐줘',r:[],l:2,o:1,u:MDN('Glossary/Falsy'),v:'u-truthy-falsy'},
+ {en:'Truthy·Falsy',ko:'참 같은 값 · 거짓 같은 값',d:'if 같은 조건에 넣었을 때 참으로 취급되는 값을 truthy, 거짓으로 취급되는 값을 falsy라고 해요.',x:'false, 0, -0, 0n, 빈 문자열, null, undefined, NaN은 falsy예요. 그 밖은 거의 모두 truthy라서 문자열 \'0\'이나 빈 배열 []도 참으로 취급돼요.',p:'값이 0일 때도 통과해야 하는데 if에서 걸러져. falsy 때문인지 봐줘',r:[],l:2,o:1,u:MDN('Glossary/Falsy'),v:'u-truthy-falsy'},
  {en:'Template Literal',ko:'템플릿 리터럴',d:'백틱(`)으로 감싼 문자열이에요. 안에 ${ }를 쓰면 변수나 식의 값을 끼워 넣을 수 있어요.',x:'따옴표 문자열은 +로 이어 붙여야 하지만, 템플릿 리터럴은 ${name}처럼 그 자리에 바로 넣어요. 여러 줄도 그대로 쓸 수 있어요.',p:'+로 이어 붙인 이 문자열들을 템플릿 리터럴로 바꿔줘',r:[],l:1,o:1,u:MDN('Web/JavaScript/Reference/Template_literals'),v:'u-template-literal'},
  {en:'Variable Scope',ko:'변수 스코프 · 변수가 보이는 범위',d:'변수를 쓸 수 있는 코드 범위예요. let과 const는 만든 중괄호 { } 블록 안에서만 보여요.',x:'블록 안에서 만든 변수를 밖에서 쓰면 오류가 나요. 기획에서 말하는 범위(Scope)는 이번에 만들 일의 범위라서 뜻이 달라요.',p:'이 변수가 왜 밖에서 undefined인지 스코프를 따져서 설명해줘',r:['Variable'],l:2,o:1,u:MDN('Glossary/Scope'),v:'u-variable-scope'},
 ]);
@@ -6544,7 +6544,7 @@ Object.assign(D, {
     cap:'가져온 add를 내 파일에서 바로 써요'},
 });
 /* basics: code 2 — 출처 확인(2026-11): MDN 화살표 함수·객체 다루기·Glossary Falsy·Truthy·템플릿 리터럴·Glossary Scope, Prettier tabWidth 기본 2. 흔히: 들여쓰기 2칸·4칸.
-   측정(node): Boolean(0) false, Boolean('') false, Boolean('0') true, Boolean([]) true, `안녕, ${name}` → 안녕, 민지, 블록 밖 x → ReferenceError: x is not defined. 예시: 변수 이름·값 */
+   측정(node): Boolean(0) false, Boolean(-0) false, Boolean(0n) false, Boolean('') false, Boolean('0') true, Boolean([]) true, `안녕, ${name}` → 안녕, 민지, 블록 밖 x → ReferenceError: x is not defined. 예시: 변수 이름·값 */
 Object.assign(D, {
   'u-indentation':{h:BCMP('나쁜 예: 들여쓰기 없음', ['if (ok) {', 'console.log(1);', '}'], '좋은 예: 2칸 들여쓰기', ['if (ok) {', '  console.log(1);', '}']),
     cap:'안쪽 줄을 밀어 넣으면 블록이 한눈에 보여요'},
@@ -6552,7 +6552,7 @@ Object.assign(D, {
     cap:'같은 일을 하는 함수를 더 짧게 적어요'},
   'u-key-value':{h:BTWO(['키', bcode('name'), bcode('age')], ['값', bcode("'민지'"), bcode('20')]),
     cap:'키 하나에 값 하나가 짝이에요'},
-  'u-truthy-falsy':{h:BTWO(['falsy · 거짓 취급', bcode('false'), bcode('0'), bcode("''"), bcode('null'), bcode('undefined'), bcode('NaN')], ['truthy · 참 취급', bcode('true'), bcode('1'), bcode("'0'"), bcode('[]')]),
+  'u-truthy-falsy':{h:BTWO(['falsy · 거짓 취급', bcode('false'), bcode('0'), bcode('-0'), bcode('0n'), bcode("''"), bcode('null'), bcode('undefined'), bcode('NaN')], ['truthy · 참 취급', bcode('true'), bcode('1'), bcode("'0'"), bcode('[]')]),
     cap:'문자열 \'0\'과 빈 배열은 참으로 취급돼요'},
   'u-template-literal':{h:ide(["const name = '민지';", 'const s = `안녕, ${name}`;', 'console.log(s);'], [{l:1, vars:{name:'민지'}}, {l:2, vars:{name:'민지', s:'안녕, 민지'}}, {l:3, out:['안녕, 민지'], vars:{name:'민지', s:'안녕, 민지'}}],
       {label:'템플릿 리터럴에 name을 끼워 넣어 안녕, 민지가 찍히는 코드'}), m:1,
