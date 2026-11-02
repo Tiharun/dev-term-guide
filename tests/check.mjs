@@ -432,9 +432,9 @@ check('fdmrun', () => vm.runInContext(`(() => { const bad = [], s = new Set(['h2
   if ((fspec(s).match(/덮임/g) || []).length !== 1 || fspec(s).includes('.title')) bad.push('덮임 1개');
   if (!fspecSay(s).includes('#main 규칙이 이겨요')) bad.push('조사');
   if ((fvis('opacity:0').match(/mk-fvon/g) || []).length !== 1) bad.push('표 한 행');
-  if (!fbub('button', false).includes('반응한 곳: button, li, ul')) bad.push('버블링');
-  if (!fbub('button', true).includes('반응한 곳: button, li') || fbub('button', true).includes('li, ul')) bad.push('전파 막기');
-  if (!fbub('li', true).includes('반응한 곳: li') || fbub('li', true).includes('li, ul')) bad.push('li 막기');
+  if (!fbub('button', false).includes('지나간 곳: button, li, ul')) bad.push('버블링');
+  if (!fbub('button', true).includes('지나간 곳: button, li') || fbub('button', true).includes('li, ul')) bad.push('전파 막기');
+  if (!fbub('li', true).includes('지나간 곳: li') || fbub('li', true).includes('li, ul')) bad.push('li 막기');
   return bad.join(', '); })()`, ctx));
 check('fdirb', () => { const r = [], D = g.D;    // 디렉터 B 지적
   if (!D['u-front-visibility'].h.includes('<b>고름</b><code>visibility:<wbr>hidden')) r.push('visibility 고름·끊김');
@@ -447,6 +447,20 @@ check('fdirb', () => { const r = [], D = g.D;    // 디렉터 B 지적
   if ((FC('Form Validation').x || '').includes('서버가 받은 값')) r.push('폼 검사 x');
   if ((FC('Fetch').x || '').includes('reject')) r.push('Fetch reject');
   if (D['u-front-css-inheritance'].h.includes('navy')) r.push('상속 색');
+  return r.join(', '); });
+check('fdirc', () => { const r = [], D = g.D, cb = FC('Cache Busting');    // 디렉터 C 지적
+  if (/Ctrl/.test(cb.d) || !/버전/.test(cb.d) || !/Ctrl\+Shift\+R/.test(cb.x || '') || /강제 새로고침/.test(cb.ko)) r.push('캐시 d·x·ko');
+  if (!D['u-front-visibility'].h.includes('opacity') || !vm.runInContext(`FVIS['opacity:0'].say`, ctx).includes('읽을 수 있어요')) r.push('opacity 말');
+  if (!vm.runInContext(`fbub('button', false)`, ctx).includes('지나간 곳: button, li, ul')) r.push('지나간 곳');
+  if (!D['u-front-position'].h.includes('위치를 정한 조상 기준')) r.push('position 조상');
+  if (!D['u-front-request-animation-frame'].h.includes('계속하려면 다시 요청해요')) r.push('rAF 다시 요청');
+  const one = vm.runInContext(`[fspecSay(new Set(['#main'])), fspecSay(new Set(['h2'])), fspec(new Set(['h2']))]`, ctx);
+  if (!one[0].includes('#main만 켜져서 주황이에요') || !one[1].includes('h2만 켜져서 초록이에요') || !one[2].includes('var(--moss)')) r.push('한 규칙 말·색');
+  if (/--ch3|--mark\)/.test(vm.runInContext(`JSON.stringify(FSPEC)`, ctx))) r.push('대비 낮은 색');
+  const say = vm.runInContext(`[fbubSay('button', false), fbubSay('li', true)]`, ctx);
+  if (!say[0].includes('ul까지 올라가요') || !say[1].includes('ul은 반응하지 않아요')) r.push('fbubSay');
+  if (!['aria-pressed', 'fspec(on)'].every(x => String(D['u-front-specificity'].init).includes(x)) || !['stop = !stop', 'fbub(t, stop)'].every(x => String(D['u-front-event-bubbling'].init).includes(x))) r.push('init');
+  if (!html.includes('.stage:has(>.mk-mobox){padding-top:50px;padding-bottom:22px}')) r.push('조작 그림 아래 여백');    // 다시 보기 단추가 없어 44px가 빈칸
   return r.join(', '); });
 check('ftext', () => FS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('fxn', () => FS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장

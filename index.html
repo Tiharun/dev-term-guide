@@ -486,7 +486,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-cds.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-mrs.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-cdy1{animation-name:mk-cdy1}.mk-cdz1{animation-name:mk-cdz1}.mk-cdy2{animation-name:mk-cdy2}.mk-cdz2{animation-name:mk-cdz2}.mk-cdy3{animation-name:mk-cdy3}.mk-cdz3{animation-name:mk-cdz3}.mk-cdy4{animation-name:mk-cdy4}.mk-cdz4{animation-name:mk-cdz4}.mk-cdy5{animation-name:mk-cdy5}.mk-cdz5{animation-name:mk-cdz5}.mk-cdy6{animation-name:mk-cdy6}.mk-cdz6{animation-name:mk-cdz6}.mk-cdy7{animation-name:mk-cdy7}.mk-cdz7{animation-name:mk-cdz7}.mk-cdy8{animation-name:mk-cdy8}.mk-cdz8{animation-name:mk-cdz8}
 @keyframes mk-cdy1{0%,9.9%{opacity:0}10%,19.9%{opacity:1}20%,100%{opacity:0}}@keyframes mk-cdy2{0%,19.9%{opacity:0}20%,29.9%{opacity:1}30%,100%{opacity:0}}@keyframes mk-cdy3{0%,29.9%{opacity:0}30%,39.9%{opacity:1}40%,100%{opacity:0}}@keyframes mk-cdy4{0%,39.9%{opacity:0}40%,49.9%{opacity:1}50%,100%{opacity:0}}@keyframes mk-cdy5{0%,49.9%{opacity:0}50%,59.9%{opacity:1}60%,100%{opacity:0}}@keyframes mk-cdy6{0%,59.9%{opacity:0}60%,69.9%{opacity:1}70%,100%{opacity:0}}@keyframes mk-cdy7{0%,69.9%{opacity:0}70%,79.9%{opacity:1}80%,100%{opacity:0}}@keyframes mk-cdy8{0%,79.9%{opacity:0}80%,89.9%{opacity:1}90%,100%{opacity:0}}@keyframes mk-cdz1{0%,9.9%{opacity:0}10%,100%{opacity:1}}@keyframes mk-cdz2{0%,19.9%{opacity:0}20%,100%{opacity:1}}@keyframes mk-cdz3{0%,29.9%{opacity:0}30%,100%{opacity:1}}@keyframes mk-cdz4{0%,39.9%{opacity:0}40%,100%{opacity:1}}@keyframes mk-cdz5{0%,49.9%{opacity:0}50%,100%{opacity:1}}@keyframes mk-cdz6{0%,59.9%{opacity:0}60%,100%{opacity:1}}@keyframes mk-cdz7{0%,69.9%{opacity:0}70%,100%{opacity:1}}@keyframes mk-cdz8{0%,79.9%{opacity:0}80%,100%{opacity:1}}
-.mk-mobox{width:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:12px}.stage:has(>.mk-mobox){padding-top:50px}
+.mk-mobox{width:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:12px}.stage:has(>.mk-mobox){padding-top:50px;padding-bottom:22px}
 /* 모바일 기본 부품: 홈 화면 아이콘, 스토어 줄, 잠금 화면 알림, 권한 창, 카메라, 웹뷰 영역, 코드 → 앱 */
 .mk-mohm{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 4px;padding-top:4px}.mk-moic{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;font-size:11px;line-height:1.2;text-align:center}.mk-moic.mk-hl{outline-offset:2px}
 .mk-moi{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--sky);font:800 13px/1 var(--sans);color:var(--ink)}.mk-moi.me{background:var(--mark-bg);color:var(--mark-text);box-shadow:inset 0 0 0 1.5px var(--mark-text)}
@@ -2540,7 +2540,7 @@ T('front','tip',[
  {en:'prefers-color-scheme',ko:'시스템 밝기 설정 따르기',d:'사용자 기기가 다크 모드인지 알아내는 CSS 조건.',p:'기기가 다크 모드면 자동으로 어두운 색을 쓰게 해줘',r:['Dark Mode'],l:2,o:1,u:MDN('Web/CSS/@media/prefers-color-scheme'),v:'u-front-prefers-color-scheme'},
  {en:'DevTools',ko:'개발자 도구',d:'브라우저에서 F12로 여는 도구. 요소·스타일·오류를 직접 볼 수 있어요.',x:'요소와 스타일을 보는 탭을 Chrome은 Elements, Firefox는 Inspector라고 불러요. 이름만 다르고 하는 일은 같아요.',p:'개발자 도구 Console 탭에 뜬 빨간 오류를 붙일게. 원인을 알려줘',r:['Console','Inspect Element'],l:1,o:0,v:'u-front-devtools'},
  {en:'Inspect Element',ko:'요소 검사',d:'화면 요소를 오른쪽 클릭하고 "검사"를 골라 그 요소의 HTML·CSS를 보는 기능.',p:'요소 검사로 보니 이 상자 margin이 40px이야. 줄여줘',r:['DevTools'],l:1,o:0,v:'u-front-inspect-element'},
- {en:'Cache Busting',ko:'캐시 무시 · 강제 새로고침',d:'고쳤는데도 예전 화면이 보일 때 브라우저 저장본을 무시하고 새로 받는 것. Ctrl+Shift+R.',p:'수정이 반영 안 돼. 캐시 문제인지 확인해줘',r:['Cache'],l:2,o:0,v:'u-front-cache-busting'},
+ {en:'Cache Busting',ko:'캐시 무효화 · 캐시 버스팅',d:'파일이 바뀔 때 파일 이름이나 주소에 버전을 붙여, 브라우저가 저장본 대신 새 파일을 받게 하는 방법이에요.',x:'강제 새로고침(Ctrl+Shift+R)은 내 브라우저 한 곳에서만 저장본을 건너뛰어요. 캐시 무효화는 파일 이름을 바꿔 모든 방문자가 새 파일을 받게 해요.',p:'수정이 반영 안 돼. 캐시 문제인지 확인해줘',r:['Cache', 'Hard Refresh'],l:2,o:0,v:'u-front-cache-busting'},
  {en:'Polyfill',ko:'폴리필',d:'옛 브라우저에 없는 기능을 비슷하게 채워 주는 코드.',p:'옛 Safari에서도 되게 폴리필이 필요한지 확인해줘',r:['Cross-browser'],l:3,o:1,u:MDN('Glossary/Polyfill'),v:'u-front-polyfill'},
 ]);
 </script>
@@ -7205,21 +7205,21 @@ const FVIS_ROWS = [['display:none', '없음', '안 됨', '안 읽음'], ['visibi
 const fvis = k => `<table class="mk-fvt"><thead><tr><th>방법</th><th>자리</th><th>클릭</th><th>화면 낭독기</th></tr></thead><tbody>${FVIS_ROWS.map(([m, ...c]) =>
   `<tr${m === k ? ' class="mk-fvon"' : ''}><td>${m === k ? '<b>고름</b>' : ''}<code>${m.replace(':', ':<wbr>')}</code></td>${c.map(x => `<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 const fcss = (title, ...ls) => `<div class="mk-fcd">${doc(ls.map(t => ({p:t})), {title, still:true})}</div>`;    // pair 왼쪽 코드 칸
-const FSPEC = [['h2', 'h2 { color: teal }', '태그', '--ch3', '청록'], ['.title', '.title { color: blue }', '클래스', '--ch1', '파랑'], ['#main', '#main { color: orange }', '아이디', '--mark', '주황']];    // 낮은 것부터
+const FSPEC = [['h2', 'h2 { color: green }', '태그', '--moss', '초록'], ['.title', '.title { color: blue }', '클래스', '--ch1', '파랑'], ['#main', '#main { color: orange }', '아이디', '--mark-text', '주황']];    // 낮은 것부터
 const fspecOn = on => FSPEC.filter(([k]) => on.has(k));
 const fspec = on => { const r = fspecOn(on), w = r[r.length - 1];
   return `<div class="mk-fst">${devtools({tab:'요소', dom:[[0, '<h2 id="main" class="title">']], hl:0, css:r.slice().reverse().map((x, i) => i ? {t:x[1], off:1} : x[1]),
     label:w ? `${w[0]} 규칙이 이겼어요` : '켠 규칙이 없어요'})}<p class="mk-fsp"><b style="color:var(${w ? w[3] : '--ink'})">제목</b>글자 색: ${w ? w[4] : '기본 남색'}</p></div>`; };
 const fspecSay = on => { const r = fspecOn(on), w = r[r.length - 1];
-  return !r.length ? '규칙 없음: 기본 글자색이에요' : r.length === 1 ? `${w[0]}만 켜져서 그 색이에요` : `${w[0]} 규칙이 이겨요. ${w[2]}가 ${r[r.length - 2][2]}보다 우선이에요`; };    // 단계 말은 모두 받침이 없어 "가"
+  return !r.length ? '규칙 없음: 기본 글자색이에요' : r.length === 1 ? `${w[0]}만 켜져서 ${w[4]}이에요` : `${w[0]} 규칙이 이겨요. ${w[2]}가 ${r[r.length - 2][2]}보다 우선이에요`; };    // 단계 말은 모두 받침이 없어 "가"
 const FBUB = {button:{say:'button을 눌렀어요.'}, li:{say:'li를 눌렀어요.'}};
 const fbubPath = (t, stop) => (t === 'button' ? [2, 1, 0] : [1, 0]).slice(0, stop ? (t === 'button' ? 2 : 1) : undefined);
 const fbub = (t, stop) => { const pth = fbubPath(t, stop), nm = ['ul', 'li', 'button'];
   return `<div class="mk-fst">${domtree([[0, 'ul', '처리기'], [1, 'li', t === 'li' ? (stop ? '누른 곳·멈춤' : '누른 곳') : stop ? '여기서 멈춤' : '처리기'], [2, 'button', t === 'button' ? '누른 곳' : '']],
-    {path:pth, still:true})}<p class="mk-fsp">반응한 곳: ${pth.map(i => nm[i]).join(', ')}</p></div>`; };
+    {path:pth, still:true})}<p class="mk-fsp">지나간 곳: ${pth.map(i => nm[i]).join(', ')}</p></div>`; };
 const fbubSay = (t, stop) => `${FBUB[t].say} ${stop ? 'li에서 전파를 막아 ul은 반응하지 않아요' : '클릭이 ul까지 올라가요'}`;
 const FVIS = {'display:none':{say:'자리까지 사라지고, 누를 수도 화면 낭독기가 읽을 수도 없어요'}, 'visibility:hidden':{say:'자리는 남지만, 누를 수 없고 화면 낭독기도 읽지 않아요'},
-  'opacity:0':{say:'투명할 뿐이라 자리도 남고, 누를 수 있고 화면 낭독기도 읽어요'}};
+  'opacity:0':{say:'투명할 뿐이라 자리도 남고, 누를 수 있고 화면 낭독기가 읽을 수 있어요'}};
 const FBOX = (...xs) => `<div class="mk-fib">${xs.map(x => `<span>${x}</span>`).join('')}</div>`;
 Object.assign(D, {
   'u-front-specificity':{h:`<div class="mk-mobox">${fspec(new Set(FSPEC.map(([k]) => k)))}</div>${tkeys(FSPEC.map(([k]) => k)).replace(/data-k="[^"]*"/g, m => m + ' aria-pressed="true"')}`
@@ -7348,7 +7348,7 @@ Object.assign(D, {
 });
 /* front: 전용 그림 — 공유 그림 14장. 출처는 카드 u(MDN). 16.7ms는 60Hz 화면 예시(1000ms ÷ 60). clamp 값, 폭 숫자, 파일 이름은 예시 */
 const fpos = () => `<div class="mk-fdp mk-fps">${[['static', '<i class="a"></i>', '원래 자리'], ['relative', '<i class="a g"></i><i class="b"></i>', '제자리에서 16px 옮김(예시)'],
-  ['absolute', '<b>부모</b><i class="c"></i>', '부모 상자 기준'], ['fixed', '<b>화면</b><i class="c"></i>', '화면 기준, 스크롤해도 그대로']]
+  ['absolute', '<b>조상</b><i class="c"></i>', '위치를 정한 조상 기준'], ['fixed', '<b>화면</b><i class="c"></i>', '화면 기준, 스크롤해도 그대로']]
   .map(([k, d, w]) => `<div><code>position: ${k}</code><span class="f${k === 'fixed' ? ' s' : ''}" aria-hidden="true">${d}</span>${whelp(w)}</div>`).join('')}</div>`;
 const fof = () => `<div class="mk-fof">${[['fill', 'a', '찌그러짐'], ['contain', 'b', '양옆 여백'], ['cover', 'c', '위아래 잘림']]
   .map(([k, c, w]) => `<div><code>${k}</code><span class="f" aria-hidden="true"><span class="ph ${c}"><i></i></span></span>${whelp(w)}</div>`).join('')}</div>`;
@@ -7364,7 +7364,7 @@ Object.assign(D, {
     cap:'화면에서 고른 버튼의 HTML 줄이 개발자 도구에서 바로 골라져요'},
   'u-front-position':{h:fpos(), cap:'position 값에 따라 기준 상자와 옮겨 가는 곳이 달라져요'},
   'u-front-request-animation-frame':{h:track([{t:'1번째 그리기', s:'done', w:'위치 계산', n:'0ms'}, {t:'2번째 그리기', s:'done', w:'위치 계산', n:'약 16.7ms(60Hz 예시)'},
-      {t:'3번째 그리기', s:'now', w:'위치 계산', n:'약 33.3ms'}], {label:'화면을 새로 그릴 때마다 한 번씩 위치를 계산해요. 60Hz 화면이면 약 16.7ms마다예요'}), m:1,
+      {t:'3번째 그리기', s:'now', w:'위치 계산', n:'약 33.3ms'}], {label:'화면을 새로 그리기 전에 한 번 위치를 계산해요. 계속하려면 다시 요청해요. 60Hz 화면이면 약 16.7ms마다예요'}), m:1,
     cap:'화면을 새로 그리는 박자마다 한 번씩 위치를 계산해요'},
   'u-front-reduced-motion':{h:vs('설정 꺼짐', `<div class="mk-frm"><i aria-hidden="true"></i><i aria-hidden="true"></i><span>카드</span></div>${whelp('미끄러져 들어와요')}`,
       '설정 켜짐', `<div class="mk-frm"><span>카드</span></div>${whelp('바로 나타나요')}`),
