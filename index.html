@@ -3761,9 +3761,11 @@ const mem = (scenes = [], { still = false, label } = {}) => {
 };
 /* 검색 결과 모형: q 검색어(20자), rows 1~4줄 {t 제목 32자, u 주소 40자, d 설명 60자, tag 꼬리표 12자}, hl 내 사이트 줄(0부터, 없으면 결과에 없음). 줄 k는 mk-rux{k}로 나타난다 */
 const serp = (q, rows = [], { hl, still = false, label } = {}) => {
+  if (typeof q !== 'string' || !q) throw new Error('serp: 검색어가 없어요');
   if (wlen(q) > 20) throw new Error('serp: 검색어는 20자까지');
   if (rows.length < 1 || rows.length > 4) throw new Error('serp: 결과는 1~4줄');
   rows.forEach(({ t = '', u = '', d = '', tag = '' }) => {
+    if (!t || !u) throw new Error('serp: 제목과 주소는 꼭 넣어요');
     if (wlen(t) > 32) throw new Error('serp: 제목은 32자까지');
     if (wlen(d) > 60) throw new Error('serp: 설명은 60자까지');
     if (wlen(u) > 40) throw new Error('serp: 주소는 40자까지');

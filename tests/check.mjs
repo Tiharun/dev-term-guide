@@ -215,6 +215,7 @@ check('base', () => vm.runInContext(`(() => {
     || !thr(() => serp('a', [{t:'가'.repeat(17), u:'u'}])) || !thr(() => serp('a', [{t:'x', u:'u', d:'a'.repeat(61)}])) || !thr(() => serp('a', [{t:'x', u:'a'.repeat(41)}]))
     || !thr(() => serp('a', [{t:'x', u:'u', tag:'a'.repeat(13)}])) || !thr(() => serp('a', [r1[0], r1[0]], {hl:2})) || !thr(() => serp('a', r1, {hl:-1}))
     || !thr(() => serp('a', r1, {hl:0.5})) || !thr(() => serp('a', r1, {hl:'0'}))) e.push('serp throw');
+  if (!thr(() => serp('a', [{u:'u'}])) || !thr(() => serp('a', [{t:'x'}])) || !thr(() => serp(undefined, r1)) || !thr(() => serp('', r1))) e.push('serp 누락');
   if (thr(() => serp('a', [{t:'a'.repeat(32), u:'u'}])) || thr(() => serp('a', [{t:'가'.repeat(16), u:'u'}]))) e.push('serp 한도');
   return e.join(', ');
 })()`, ctx));
