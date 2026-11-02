@@ -8,7 +8,7 @@
 - 객체 v 22장, 공유 그림 14장 다시 그리기
 - 직접 조작 3장(Specificity·Event Bubbling·Visibility)
 
-남은 일(react·build 카드, x 채움, Key, 증상, 글꼴·문서)은 계획서 ②가 한다.
+남은 일(react·build 카드, basic·adv·layout·tip 새 카드 8장, x 채움, Key, 증상, 글꼴·문서)은 계획서 ②가 한다.
 
 **Architecture:** `index.html` 하나에서 작업한다.
 - 도우미는 `ide`·`mem`·`serp` 뒤, `/* 직접 조작 도우미 … */`([index.html:3853](../../../index.html)) 앞에 둔다.
@@ -30,7 +30,10 @@
 - **LATER 사용**:
   - Task 2에서 아직 못 지키는 점검은 `LATER`에 넣는다. 빼는 시점: `fobj`와 `redrawn:front/core·adv·unit·tip`는 Task 4, `fukey`·`fsym`은 Task 5.
   - `fx`(x 빠짐)는 계획서 ②에서 뺀다.
+  - `doccount`(PRODUCT.md 용어 수)는 Task 3에서 1450장이 되면 실패하므로 Task 2부터 `LATER`에 두고, 계획서 ② 6단계 문서 갱신에서 뺀다(web 선례).
   - `font`도 web과 같이 `LATER`에 둔다. 스펙 9장은 중간 Task에 "피하거나 갱신"이라 했지만, 서브셋 재생성은 계획서 ② 6단계 한 번으로 모은다. 그 사이 없는 글자는 대체 글꼴로 보일 뿐이다.
+- **그림 속 색**: 직접 조작의 결과 미리보기 등 "색 이름"이 필요한 곳은 토큰 셋만 쓴다. `--mark`=주황, `--ch1`=파랑, `--ch3`=청록, 그리고 `--ink`=남색. 코드 글의 색 이름도 이 넷에 맞춘다(`orange`·`blue`·`teal`·`navy`).
+- **r 예외**: Vendor Prefix는 계획서 ①에서 r 0개다(유일한 후보 PostCSS가 계획서 ②). 계획서 ②에서 r을 단다.
 - **r 시점**: 같은 Task와 앞 Task 카드만 단다. 계획서 ②의 카드(useState·PostCSS 등)를 가리키는 r은 그 카드를 넣을 때 단다. 예: Controlled Input의 `useState`, Vendor Prefix↔PostCSS.
 - **직접 조작 시점**: Task 3에서 세 카드의 멈춘 그림을 먼저 만들고, Task 6에서 같은 키에 `init`과 버튼을 붙인다.
 - **dom 들여쓰기**: `devtools`의 dom 줄은 깊이당 2칸이다. 28자 한도는 `wlen(글) + 2 × 깊이`로 센다.
@@ -48,7 +51,7 @@
   - 새 카드 `d`·`x`는 해요체다. `x`는 2~3문장이고, 짝이 있으면 차이를 먼저 쓴다.
   - `p`: "~해줘" 지시문에 정식 용어를 넣는다. `l`: 1~3.
   - `ko`는 기존 front 형식(`한글 · 풀이`)을 따른다.
-- `r`은 1~3개이고, 스펙 4장 후보 중 이미 있는 카드만 단다. 다른 카테고리 카드 본문은 바꾸지 않는다.
+- `r`은 1~3개이고, 스펙 4장 r 후보나 5장 x 짝 중 이미 있는 카드만 단다(예외는 스펙 보충의 Vendor Prefix). 다른 카테고리 카드 본문은 바꾸지 않는다.
 - `o:1`은 MDN 같은 1차 출처를 직접 열어 확인했을 때만 쓴다. 그때 `u`(`MDN('…')`)를 단다. 출처는 원장에 적는다.
 - 커밋:
   - 한국어 `feat:`/`fix:`/`docs:`로 쓰고 attribution 줄을 넣지 않는다.
@@ -66,7 +69,8 @@
    - `visibility:hidden`은 자리가 남고 클릭이 안 된다. `opacity:0`은 자리가 남고 클릭되며 화면 낭독기도 읽는다. `display:none`은 자리도 없고 낭독기도 안 읽는다.
    - `focus`는 버블링하지 않고 `focusin`은 한다.
    - `!important`는 명시도와 상관없이 일반 선언을 이긴다.
-   - CSS 상속은 `color`·`font` 같은 글자 속성만 물려받고 `border`·`margin`은 물려받지 않는다.
+   - CSS 상속은 주로 `color`·`font` 같은 글자 속성이 물려받아지고, `border`·`margin`은 물려받지 않는다.
+   - `fetch`는 404에도 reject하지 않는다. `res.ok`로 확인한다(Fetch의 x에 쓴다).
 
    MDN과 다르면 안 된다. → Task 3 출처 확인, 디렉터 검토 ③ 묶음 B
 
@@ -144,13 +148,14 @@
     - 강조: `hl` 노드는 `mk-dthl`(굵은 테두리 + `--mark-bg`). 꼬리표가 없으면 꼬리표 자리에 "강조"를 쓴다.
     - 경로: path의 k번째(1부터) 노드에 `<span class="mk-dtw${still ? '' : ` mk-rux${k} A`}">${k}번째</span>`. `mk-dtw`는 `--mark` 배경 칩이다.
     - 요약 `<p class="sr">`:
-      - 포함 관계: 깊이 1 이상 노드마다 `${부모 태그} 안에 ${태그}${꼬리표 ? `(${꼬리표})` : ''}`를 `, `로 잇고 `.`
+      - 포함 관계: 깊이 1 이상 노드마다 `${부모 태그} 안에 ${태그}${꼬리표 ? `(${꼬리표})` : ''}`를 `, `로 잇고 `.`. 자동 꼬리표 "강조"도 같은 자리에 들어간다(`li 안에 Item(강조)`).
       - path가 있으면 뒤에 ` 누른 곳 ${태그0}에서 ${나머지 태그 ', '} 순서로 전해져요`. path가 1칸이면 ` 누른 곳 ${태그0}에서만 반응해요`.
     - 오류 메시지는 `'domtree: '`로 시작한다.
   - `ide(code, steps, opts)` 확장:
-    - 코드 줄은 문자열 또는 `{t, err}`다. 한도는 `wlen(t) ≤ 28`이고, `err`도 비어 있지 않은 문자열로 `wlen ≤ 28`이다.
-    - `{t, err}` 줄은 `<li><code class="mk-cdw">t</code></li>`로 그리고, 바로 뒤에 `<li class="mk-cdem"><b>오류</b> ${esc(err)}</li>`를 붙인다(`list-style:none`, 높이 20px).
-    - 오류 줄 뒤 코드 li는 `value="실제 줄 번호"`를 단다.
+    - 코드 줄은 문자열 또는 `{t, err}`다. 한도는 `wlen(t) ≤ 28`이고, `err`는 비어 있지 않은 문자열로 `wlen ≤ 23`이다(앞의 "오류 " 5칸을 더해 28).
+    - `{t, err}` 줄은 `<li><code class="mk-cdw">t</code></li>`로 그리고, 바로 뒤에 `<li class="mk-cdem"><b>오류</b> ${esc(err)}</li>`를 붙인다(`list-style:none`, `white-space:pre`, 높이 20px).
+    - 오류 줄 뒤의 모든 코드 li에 `value="실제 줄 번호"`를 단다(첫 오류 줄 앞 li에는 달지 않는다).
+    - err 글은 실제 컴파일러 문구가 아니라 풀어 쓴 말이다. 그 사실은 그림의 cap에 적는다("오류 설명은 풀어 쓴 말").
     - 강조 띠 `--l`은 `l + (l보다 앞 줄의 오류 줄 수)`다.
     - 오류 없는 호출의 출력은 한 글자도 바뀌지 않는다.
 
@@ -188,9 +193,10 @@ check('fhelp', () => vm.runInContext(`(() => {
   no(() => domtree([[0, 'a'], [2, 'b']]), '깊이 건너뜀'); no(() => domtree([[0, 'a'], [1, 'b'], [2, 'c'], [3, 'd'], [4, 'e'], [5, 'f']]), '깊이 5');
   no(() => domtree(t3, {hl:[3]}), 'hl 범위'); no(() => domtree(t3, {path:[2, 0]}), '부모 아님'); no(() => domtree(t3, {path:Array(7).fill(0)}), 'path 7칸');
   no(() => domtree([[0, 'a'.repeat(13)], [1, 'b']]), '태그 13자'); no(() => domtree([[0, 'a', '가나다라마바사'], [1, 'b']]), '꼬리표 14자');
-  const ie = ide(['let a = 1;', {t:'a = "삼";', err:'숫자 자리예요(풀어 쓴 말)'}, 'log(a);'], [{l:3}], {still:true});
-  has(ie, ['<code class="mk-cdw">a = &quot;삼&quot;;</code>', '<li class="mk-cdem"><b>오류</b> 숫자 자리예요(풀어 쓴 말)</li>', '<li value="3">', '--l:4'], 'ide 오류');
-  no(() => ide([{t:'a', err:'x'.repeat(29)}], [{l:1}]), 'err 29자'); no(() => ide([{t:'a', err:''}], [{l:1}]), 'err 빈 글');
+  const ie = ide(['let a = 1;', {t:'a = "삼";', err:'숫자 자리예요'}, 'log(a);'], [{l:3}], {still:true});
+  has(ie, ['<code class="mk-cdw">a = &quot;삼&quot;;</code>', '<li class="mk-cdem"><b>오류</b> 숫자 자리예요</li>', '<li value="3">', '--l:4'], 'ide 오류');
+  if ((ie.match(/value=/g) || []).length !== 1) bad.push('ide value 수');
+  no(() => ide([{t:'a', err:'x'.repeat(24)}], [{l:1}]), 'err 24자'); no(() => ide([{t:'a', err:''}], [{l:1}]), 'err 빈 글');
   const plain = ide(['let n = 1;', 'n = n + 1;', 'console.log(n);'], [{l:2}]);
   if (/mk-cdw|mk-cdem|value=/.test(plain) || !plain.includes('--l:2')) bad.push('ide 기존 출력');
   return bad.join(', ');
@@ -205,6 +211,8 @@ Expected: `FAIL fhelp: devtools is not defined`
 - [ ] **Step 3: `ide` 확장**: 위 Interfaces대로 바꾼다. 한도 검사와 `pane`의 `--l`, 코드 줄 렌더만 손댄다. CSS `.mk-cdw`(물결 밑줄 `var(--mark-text)`)·`.mk-cdem`(`list-style:none`, 20px 줄, `var(--mark-text)`)을 ide CSS 뒤에 둔다.
 
 - [ ] **Step 4: `devtools`·`domtree` 구현**: `wlen`을 쓰고, 입력 검사를 먼저 한 뒤 HTML을 만든다. 검사 항목은 스펙 3.1·3.2와 Step 1 목록이다. CSS를 ide CSS 뒤에 두고, 506줄 넓은 그림 목록에 `.mk-dv`·`.mk-dt`를 넣는다.
+  - 칩 움직임: `.mk-dtw.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}`(308줄 `.mk-tr.A`와 같은 꼴). 키프레임은 기존 `mk-rux1~6`을 그대로 쓴다.
+  - 멈춘 장면 점검: `cdframe`(379줄)에 `.mk-dtw.A`의 delay도 `-8.8s`인지 보는 조건을 더한다(Step 1 점검에 함께 넣어 RED를 본다).
 
 - [ ] **Step 5: 통과 확인**
 
@@ -242,10 +250,10 @@ git commit -m "feat: 프론트엔드 그림 도우미 devtools·domtree와 ide �
 
 - [ ] **Step 1: 실패하는 점검 쓰기**
   - `COUNT`에 넣는다(측정값):
-    - `'front/basic': 10, 'front/core': 14, 'front/motion': 10, 'front/adv': 9, 'front/layout': 12`
+    - `'front/basic': 9, 'front/core': 14, 'front/motion': 10, 'front/adv': 9, 'front/layout': 12`
     - `'front/unit': 8, 'front/css': 0, 'front/event': 0, 'front/react': 0, 'front/build': 0, 'front/tip': 8`
   - `REDRAWN`에 `front/` 11개를 넣는다.
-  - `dup`: `const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');`로 비교한다. 허용 목록도 `ALLOW_DUP.map(norm)`로 바꿔 비교한다. 정규화 자체는 아래 `dupre`로 확인한다.
+  - `dup`: `const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');`로 비교한다. `norm`은 `ALLOW_DUP`(97줄) 바로 아래에 둔다(`dup`이 120줄에서 쓰므로 front 묶음에 두면 선언 전 접근 오류). 허용 목록도 `ALLOW_DUP.map(norm)`로 바꿔 비교한다. 정규화 자체는 아래 `dupre`로 확인한다.
   - web 묶음(`wwrong`) 뒤에 front 묶음을 둔다.
 
 ```js
@@ -265,7 +273,7 @@ const FB_WRONG = {'Key': ['Key-Value', 'API Key'], 'Input Event': ['Event'], 'CS
 check('fwrong', () => Object.entries(FB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'front' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 ```
 
-  - `LATER`에 넣는다: `'fobj', 'fukey', 'fsym', 'fx', 'font', 'redrawn:front/core', 'redrawn:front/adv', 'redrawn:front/unit', 'redrawn:front/tip'`
+  - `LATER`에 넣는다: `'fobj', 'fukey', 'fsym', 'fx', 'font', 'doccount', 'redrawn:front/core', 'redrawn:front/adv', 'redrawn:front/unit', 'redrawn:front/tip'`
 
 - [ ] **Step 2: 실패 확인**
 
@@ -277,7 +285,7 @@ Expected: `FAIL fcat: basic,core,motion,adv,layout,unit,tip`, `FAIL count:front/
 - [ ] **Step 4: 통과 확인**
 
 Run: `node tests/check.mjs`
-Expected: `FAIL` 없이 `OK <수>`. `LATER`가 9개 남는다(Step 1 목록). 빈 하위항목 4개는 화면에서 "카드 없음"으로 보이고, 계획서 ②까지 이 상태다.
+Expected: `FAIL` 없이 `OK <수>`. `LATER` 줄은 8개(`fobj`·`fukey`·`fsym`·`fx`·`redrawn:front/` 4개)이고, `font`·`doccount`는 아직 통과해서 줄이 안 나온다. 빈 하위항목 4개는 화면에서 "카드 없음"으로 보이고, 계획서 ②까지 이 상태다.
 
 - [ ] **Step 5: 커밋**
 
@@ -311,28 +319,28 @@ git commit -m "feat: 프론트엔드 하위항목 4개와 점검 기대값"
 
 | sec | en | ko | 그림 | r |
 |---|---|---|---|---|
-| css | Specificity▶ | 명시도 · 규칙 우선순위 | `devtools` 요소: dom `<h2 id="main" class="title">`, css `#main { color: red }` · `{t:'.title { color: blue }', off:1}` · `{t:'h2 { color: green }', off:1}`, hl 0 | Selector, Cascade |
-| css | Cascade | 캐스케이드 · 겹친 규칙 정리 | `devtools` 요소: 같은 명시도 `.btn` 두 줄, 뒤에 쓴 줄 `.btn { color: blue }`가 살고 앞 줄 `{t:'.btn { color: red }', off:1}` | Specificity |
+| css | Specificity▶ | 명시도 · 규칙 우선순위 | `devtools` 요소: dom `<h2 id="main" class="title">`, css `#main { color: orange }` · `{t:'.title { color: blue }', off:1}` · `{t:'h2 { color: teal }', off:1}`, hl 0 | Selector, Cascade |
+| css | Cascade | 캐스케이드 · 겹친 규칙 정리 | `devtools` 요소: dom `[[0,'<button class="btn">']]`, hl 0. css는 위에서부터 `.btn { color: blue }`(뒤에 쓴 규칙, 삶)·`{t:'.btn { color: orange }', off:1}`(앞에 쓴 규칙). DevTools처럼 이긴 규칙이 위다 | Specificity |
 | css | CSS Inheritance | CSS 상속 · 물려받는 스타일 | `pair`: `body { color: navy; border: 1px solid }` → 안쪽 p·li 글자도 남색(꼬리표 "물려받음"), 테두리는 body에만(꼬리표 "안 물려받음") | Cascade |
 | css | Pseudo-class | 가상 클래스 · 상태 선택 | `pair`: `a:hover { text-decoration: underline }` → 링크 둘 중 마우스 올린 쪽만 밑줄(꼬리표 "마우스 올림") | Hover, Focus |
 | css | Pseudo-element | 가상 요소 · 요소의 일부 | `pair`: `.req::after { content: "*" }` → 입력칸 이름 "이메일" 뒤에 별표(꼬리표 "CSS가 붙임") | Selector |
-| css | !important | 강제 우선 표시 | `devtools` 요소: `p { color: red !important }`가 살고 `{t:'#main p { color: blue }', off:1}` | Specificity |
+| css | !important | 강제 우선 표시 | `devtools` 요소: dom `[[0,'<div id="main">'],[1,'<p>안내</p>']]`, hl 1. css `p{color:teal!important}`(23자)가 살고 `{t:'#main p{color:blue}', off:1}` | Specificity |
 | css | CSS Reset | CSS 초기화 | `vs`: 리셋 전(브라우저 기본 여백이 있는 제목·목록) / 리셋 후(`* { margin: 0 }`, 여백 없음) | Margin |
 | css | Inline vs Block | 인라인과 블록 | `vs`: `span` 셋이 한 줄에 나란히 / `div` 셋이 줄마다 한 칸 | Display |
 | css | Display None | 표시 안 함 | `vs`: 상자 셋 / 가운데 `display: none`이면 빈자리 없이 두 상자가 붙음(꼬리표 "자리도 사라짐") | Display, Visibility |
-| css | Visibility▶ | 보이기·숨기기 | `doc` 표: 방법 · 자리 · 클릭 · 화면 낭독기 — `display:none` 없음·안 됨·안 읽음 / `visibility:hidden` 남음·안 됨·안 읽음 / `opacity:0` 남음·됨·읽음 | pointer-events, Display None |
+| css | Visibility▶ | 보이기·숨기기 | 전용 표 `fvis('display:none')`(방법 · 자리 · 클릭 · 화면 낭독기 — `display:none` 없음·안 됨·안 읽음 / `visibility:hidden` 남음·안 됨·안 읽음 / `opacity:0` 남음·됨·읽음). `fvis`는 Task 6 Interfaces의 것을 이 Task에서 먼저 만든다 | pointer-events, Display None |
 | css | Float | 플로트 · 띄워 감싸기 | `pair`: `img { float: left }` → 사진 오른쪽으로 글이 감싸 흐름 | Flexbox |
-| css | Vendor Prefix | 브라우저 접두사 | `doc` 표: 접두사 · 엔진 — `-webkit-` Chrome·Safari·Edge / `-moz-` Firefox, 아래 문단 "지금은 도구가 대신 붙여 줘요" | 없음(PostCSS가 계획서 ②에서 연결) |
-| event | Event Bubbling▶ | 이벤트 버블링 · 위로 전해짐 | `domtree([[0,'ul','처리기 있음'],[1,'li','처리기 있음'],[2,'button','누른 곳']], {path:[2,1,0]})`, `m:1` | Event Listener |
+| css | Vendor Prefix | 브라우저 접두사 | `doc` 표: 접두사 · 브라우저 — `-webkit-` Chrome·Safari·Edge·Opera(iOS의 Firefox 포함) / `-moz-` Firefox, 아래 문단 "지금은 도구가 대신 붙여 줘요" | 없음(PostCSS가 계획서 ②에서 연결) |
+| event | Event Bubbling▶ | 이벤트 버블링 · 위로 전해짐 | `domtree([[0,'ul','처리기 있음'],[1,'li','처리기 있음'],[2,'button','누른 곳']], {path:[2,1,0]})`, `m:1` | Event Listener, stopPropagation |
 | event | Event Delegation | 이벤트 위임 | `domtree([[0,'ul','처리기 하나'],[1,'li'],[1,'li','누른 곳'],[1,'li']], {path:[2,0]})`, `m:1` | Event Bubbling |
 | event | preventDefault | 기본 동작 막기 | `vs`: 막지 않음(`browser` 폼, 꼬리표 "페이지 새로고침, 입력값 사라짐") / `e.preventDefault()`(꼬리표 "페이지 그대로") | Form |
 | event | stopPropagation | 전파 막기 | `domtree([[0,'ul','반응 안 함'],[1,'li','여기서 멈춤'],[2,'button','누른 곳']], {path:[2,1]})`, `m:1` | Event Bubbling |
 | event | Input Event | 입력 이벤트 | `track`: `c` 입력 `w:'input 1번'` · `ca` `w:'input 2번'` · `cat` `w:'input 3번'` · 칸을 떠남 `w:'change 1번'`(모두 done) | Event Listener |
-| event | Keyboard Event | 키보드 이벤트 | `ide`: `box.addEventListener(` / `  'keydown', e => {` / `  if (e.key === 'Enter')` / `    send();` / `});`, 단계 `{l:3}`·`{l:4, out:['보냄']}`, `m:1` | Event Listener |
-| event | Form Validation | 폼 검사 | `ide` 오류 줄: `<input type="email"` / `{t:'  required>', err:'@가 없어요(풀어 쓴 말)'}` / `<button>보내기</button>`, 단계 `{l:2}` | Validation |
+| event | Keyboard Event | 키보드 이벤트 | `ide`: `box.addEventListener(` / `  'keydown', e => {` / `  if (e.key === 'Enter')` / `    send();` / `});`, 단계 `{l:3}`·`{l:4, out:[{t:'send() 실행', dim:1}]}`, `m:1` | Event Listener |
+| event | Form Validation | 폼 검사 | `ide` 오류 줄(`title:'index.html'`): `{t:'<input type="email"', err:'@가 없어요'}` / `  required>` / `<button>보내기</button>`, 단계 `{l:1}`, cap에 "오류 설명은 풀어 쓴 말" | Validation |
 | event | Controlled Input | 제어 입력 | `ide`: `const [v, setV]` / `  = useState('');` / `<input value={v}` / `  onChange={e =>` / `   setV(e.target.value)} />`, 단계 `{l:3, vars:{v:"''"}}`·`{l:5, vars:{v:"'a'"}}`, `m:1` | State |
 | event | Two-way Binding | 양방향 연결 | `pair`: `<input v-model="name">`(Vue 예) → 입력칸 "민지"와 위 글 "안녕, 민지"(꼬리표 "칸과 값이 서로 바뀜") | Controlled Input |
-| event | Fetch | 데이터 가져오기 | `devtools` 네트워크: `{name:'posts', status:200, type:'fetch'}`, `{name:'users', status:404, type:'fetch'}` | JSON, Async/Await |
+| event | Fetch | 데이터 가져오기 | `devtools` 네트워크: `{name:'posts', status:200, type:'fetch'}`, `{name:'users', status:404, type:'fetch'}`. x에 "404여도 fetch는 reject하지 않아 `res.ok`로 확인해요" | JSON, Async/Await |
 
 x 짝(스펙 5장):
 - Specificity vs Cascade vs !important, CSS Inheritance vs Cascade
@@ -368,15 +376,15 @@ Expected:
 
 - [ ] **Step 3: 그림**: 스펙 3.4 표대로 그린다. 정해 둔 것:
   - Display: 전용 HTML 네 칸(`.mk-fdp`). none 칸은 점선 빈칸 + "사라짐" 글자다.
-  - Virtual DOM: `vs(domtree(이전, {still:true}), '이전 나무', domtree(새, {hl:[바뀐 번호], still:true}), '새 나무')` + cap "바뀐 곳만 실제 화면에 반영해요". `vs`의 실제 인자 순서는 4366줄 정의를 따른다.
-  - TypeScript: `ide(['let price: number;', {t:'price = "삼천";', err:'숫자 자리에 글자를 넣었어요(풀어 쓴 말)'}], [{l:2}])`. err의 wlen이 28을 넘으면 "숫자 자리에 글자예요(풀어 쓴 말)"로 줄인다(ide가 막는다).
+  - Virtual DOM: `vs('이전 나무', domtree(이전, {still:true}), '새 나무', domtree(새, {hl:[바뀐 번호], still:true}))`(4366줄 정의 순서) + cap "바뀐 곳만 실제 화면에 반영해요".
+  - TypeScript: `ide(['let price: number;', {t:'price = "삼천";', err:'숫자 자리에 글자예요'}], [{l:2}])`(err wlen 20), cap에 "오류 설명은 풀어 쓴 말".
   - rem: track에 "16px(기본값)"·"20px로 바꾸면 2rem = 40px"을 넣는다.
-  - em: 15 = 20×1.5(예시)는 30px, 그 안은 45px이다.
+  - em: 부모 20px(예시) 안의 `1.5em`은 30px, 그 안의 `1.5em`은 45px이다.
   - px: 눈금자 + "글자 크기 설정을 키워도 그대로". 근거는 MDN `<length>`의 px 절이다.
   - DevTools: `devtools({tab:'요소', dom:[[0,'<main>'],[1,'<h1>제목</h1>']], css:['h1 { font-size: 32px }'], hl:1})`
   - DevTools x에 "Chrome은 Elements, Firefox는 Inspector"를 쓴다(스펙 3.1).
   - `m:1`은 움직이는 `track`·`domtree` 경로가 있는 그림에만 단다.
-- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER`는 `fukey`·`fsym`·`fx`·`font` 4개다.
+- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER` 목록은 `fukey`·`fsym`·`fx`·`font`·`doccount` 5개다(`font` 말고는 실패 줄로 나옴).
 - [ ] **Step 5: 브라우저 확인**: core·adv·layout·unit·tip·basic
 - [ ] **Step 6: 커밋**: `feat: 프론트엔드 글자상자 그림 22장 다시 그리기`
 
@@ -411,7 +419,7 @@ check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'respons
     - transition cap: `'처음 상태에서 바뀐 상태로 서서히 바뀐다'`
     - shadow cap: `'그림자 없음에서 깊은 그림자까지'`
     - 두 키는 다른 카테고리도 쓰므로 그림(h)은 건드리지 않는다.
-- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER`는 `fx`·`font` 2개다.
+- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER` 목록은 `fx`·`font`·`doccount` 3개다.
 - [ ] **Step 5: 브라우저 확인**: basic·core·motion·adv·layout·unit·tip
 - [ ] **Step 6: 커밋**: `feat: 프론트엔드 공유 그림 14장을 전용 그림으로`
 
@@ -430,29 +438,33 @@ check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'respons
 **Interfaces:**
 - Consumes: `devtools`·`domtree`(Task 1), `bpick(P, f)`(6844줄), `psay`(6345줄), `tpick(names, on)`(3690줄)
 - Produces:
-  - `FSPEC = [['h2','h2 { color: green }','태그'], ['.title','.title { color: blue }','클래스'], ['#main','#main { color: red }','아이디']]`(낮은 것부터)
+  - `FSPEC = [['h2','h2 { color: teal }','태그','--ch3','청록'], ['.title','.title { color: blue }','클래스','--ch1','파랑'], ['#main','#main { color: orange }','아이디','--mark','주황']]`(낮은 것부터. Task 3 그림과 같은 글)
   - `fspec(on: Set<string>) → string`
-    - 켠 규칙 중 가장 뒤(높은) 것만 살고, 나머지는 `off:1`인 `devtools` 요소 탭이다.
-    - 아래에 결과 제목 미리보기를 그린다. 이긴 규칙의 색 + "빨강"·"파랑"·"초록" 글자를 함께 쓴다.
+    - 켠 규칙만 스타일 칸에 넣는다(꺼진 규칙은 칸에서 뺀다). 켠 것 중 가장 높은 것만 살고 나머지는 `off:1`인 `devtools` 요소 탭이다. 켠 규칙이 0개면 css 없이 그린다.
+    - 아래에 결과 제목 미리보기를 그린다. 이긴 규칙의 토큰 색 + 색 이름 글자("주황"·"파랑"·"청록", 0개면 `--ink` "기본 남색")를 함께 쓴다.
   - `fspecSay(on) → string`
     - 0개: `'규칙 없음: 기본 글자색이에요'`
     - 1개: `'${이름}만 켜져서 그 색이에요'`
-    - 2개 이상: `'${이긴 이름}이 이겨요. ${이긴 단계}가 ${진 단계 중 가장 높은 것}보다 우선이에요'`
+    - 2개 이상: `'${이긴 이름} 규칙이 이겨요. ${이긴 단계}가 ${진 단계 중 가장 높은 것}보다 우선이에요'`(단계 말이 모두 받침 없는 말이라 "가"로 고정)
   - `FBUB = {button: …, li: …}`, `fbub(target, stop) → string`(domtree + 반응한 곳 문장)
     - 경로: button이면 `[2,1,0]`, li면 `[1,0]`. stop이면 li에서 끊는다(button → `[2,1]`, li → `[1]`).
     - 문장: `반응한 곳: button, li, ul` 식이다.
-  - `FVIS = {'display:none': {say}, 'visibility:hidden': {say}, 'opacity:0': {say}}`. `bpick(FVIS, fvis)`를 쓴다.
+  - `FVIS = {'display:none': {say}, 'visibility:hidden': {say}, 'opacity:0': {say}}`, `fvis(k: string) → string`. `bpick(FVIS, fvis)`를 쓴다.
+    - `fvis`는 `doc`을 쓰지 않는 전용 표(`<table class="mk-fvt">`, 머리 방법 · 자리 · 클릭 · 화면 낭독기)다. 고른 행만 `class="mk-fvon"` + 첫 칸에 `<b>고름</b>`. `doc`의 강조는 블록 단위라 한 행을 못 고르기 때문이다.
+    - `fvis`는 Task 3에서 이미 만들었다(Visibility 멈춘 그림). 여기서는 `FVIS`와 버튼만 더한다.
 
 - [ ] **Step 1: 실패하는 점검**
 
 ```js
 const FDM = {'Specificity': ['h2', '.title', '#main', 'aria-pressed', 'aria-live'], 'Event Bubbling': ['button', 'li', 'stopPropagation', 'aria-pressed', 'aria-live'],
   'Visibility': ['display:none', 'visibility:hidden', 'opacity:0', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
-check('fdm', () => Object.entries(FDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('fdm', () => Object.entries(FDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !String(p.init).includes('psay') || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));    // 결과 문장은 psay로 다시 읽힌다
 check('fdmrun', () => vm.runInContext(`(() => { const bad = [], s = new Set(['h2', '#main']);
   if (!fspecSay(new Set()).includes('규칙 없음')) bad.push('모두 끔');
   if (!fspecSay(s).includes('#main') || !fspecSay(s).includes('아이디')) bad.push('아이디 승');
-  if ((fspec(s).match(/덮임/g) || []).length !== 1) bad.push('덮임 1개');
+  if ((fspec(s).match(/덮임/g) || []).length !== 1 || fspec(s).includes('.title')) bad.push('덮임 1개');
+  if (!fspecSay(s).includes('#main 규칙이 이겨요')) bad.push('조사');
+  if ((fvis('opacity:0').match(/mk-fvon/g) || []).length !== 1) bad.push('표 한 행');
   if (!fbub('button', false).includes('반응한 곳: button, li, ul')) bad.push('버블링');
   if (!fbub('button', true).includes('반응한 곳: button, li') || fbub('button', true).includes('li, ul')) bad.push('전파 막기');
   if (!fbub('li', true).includes('반응한 곳: li') || fbub('li', true).includes('li, ul')) bad.push('li 막기');
@@ -463,10 +475,10 @@ check('fdmrun', () => vm.runInContext(`(() => { const bad = [], s = new Set(['h2
 - [ ] **Step 3: 구현**
   - Specificity: 버튼 셋은 `.mk-tkey`이고 각자 `aria-pressed`를 켜고 끈다(여러 개 가능, 처음엔 셋 다 켬). `init`에서 버튼마다 `.mk-mobox`를 `fspec(on)`으로 바꾸고 `psay(.mk-hint, fspecSay(on))`.
   - Event Bubbling: 누를 곳 `tpick(['button','li'], 'button')` + 토글 버튼 "li에서 전파 막기(stopPropagation)"(`aria-pressed`). 둘 다 `.mk-mobox`·`.mk-hint`를 갱신한다.
-  - Visibility: `tpick(['display:none','visibility:hidden','opacity:0'], 'display:none')` + `bpick(FVIS, fvis)`. 표는 Task 3의 doc 표에서 고른 행을 강조한 것이다.
+  - Visibility: `tpick(['display:none','visibility:hidden','opacity:0'], 'display:none')` + `bpick(FVIS, fvis)`.
   - `.mk-hint`는 `aria-live="polite"`이다. `init`에 `window`·`document`를 쓰지 않는다(`init` 점검).
   - 세 그림 모두 `m`이 없다(직접 조작이라 자동 재생 없음).
-- [ ] **Step 4: 통과 확인**: `FAIL` 없음, `LATER`는 `fx`·`font`
+- [ ] **Step 4: 통과 확인**: `FAIL` 없음, `LATER` 목록은 `fx`·`font`·`doccount`
 - [ ] **Step 5: 브라우저 확인**
   - Review Focus 4의 순서를 마우스와 키보드(Tab → Enter·Space)로 해 본다.
   - 결과 문장이 바뀌고 콘솔 오류가 0이어야 한다.
