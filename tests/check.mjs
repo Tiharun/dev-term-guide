@@ -86,7 +86,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount', 'wx'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -204,6 +204,18 @@ check('base', () => vm.runInContext(`(() => {
   const ms = [{stack:[{n:'a', v:'1'}], heap:[]}];
   if (!thr(() => mem([])) || !thr(() => mem(Array(5).fill(ms[0]))) || !thr(() => mem([{stack:[], heap:[]}])) || !thr(() => mem([{stack:Array(5).fill({n:'a', v:'1'}), heap:[]}]))
     || !thr(() => mem([{stack:[{n:'a', v:'1'}], heap:Array(6).fill({id:'A', v:'1'})}])) || !thr(() => mem([{stack:[{n:'a', to:'Z'}], heap:[]}]))) e.push('mem throw');
+  const sp = serp('웹 공부', [{t:'웹 기초 정리', u:'example.com/web', d:'처음 보는 말을 그림으로', tag:'광고'}, {t:'<b>&', u:'a.com', d:''}], {hl:1, label:'검색'});
+  if (!['mk-sp', 'role="group"', 'aria-label="검색"', '웹 공부', '광고', 'mk-rux1 A', 'mk-rux2 A', '내 사이트', '&lt;b&gt;&amp;', '검색어 웹 공부, 결과 2개, 내 사이트 2번째'].every(x => sp.includes(x))
+    || sp.includes('<b>&') || (sp.match(/class="mk-spr on/g) || []).length !== 1) e.push('serp');
+  const s0 = serp('a', [{t:'x', u:'u'}], {hl:0}); if (!s0.includes('내 사이트 1번째') || s0.includes('mk-spno')) e.push('serp hl0');
+  const sn = serp('a', [{t:'x', u:'u'}]); if (!['mk-spno', '내 사이트는 결과에 없어요', '내 사이트 없음'].every(x => sn.includes(x))) e.push('serp 없음');
+  const ss = serp('a', [{t:'x', u:'u'}], {still:true}); if (ss.includes(' A"') || ss.includes('mk-rux')) e.push('serp still');
+  const r1 = [{t:'x', u:'u'}];
+  if (!thr(() => serp('a', [])) || !thr(() => serp('a', Array(5).fill(r1[0]))) || !thr(() => serp('a'.repeat(21), r1)) || !thr(() => serp('a', [{t:'a'.repeat(33), u:'u'}]))
+    || !thr(() => serp('a', [{t:'가'.repeat(17), u:'u'}])) || !thr(() => serp('a', [{t:'x', u:'u', d:'a'.repeat(61)}])) || !thr(() => serp('a', [{t:'x', u:'a'.repeat(41)}]))
+    || !thr(() => serp('a', [{t:'x', u:'u', tag:'a'.repeat(13)}])) || !thr(() => serp('a', [r1[0], r1[0]], {hl:2})) || !thr(() => serp('a', r1, {hl:-1}))
+    || !thr(() => serp('a', r1, {hl:0.5})) || !thr(() => serp('a', r1, {hl:'0'}))) e.push('serp throw');
+  if (thr(() => serp('a', [{t:'a'.repeat(32), u:'u'}])) || thr(() => serp('a', [{t:'가'.repeat(16), u:'u'}]))) e.push('serp 한도');
   return e.join(', ');
 })()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
@@ -302,6 +314,20 @@ const BDM = {'Async/Await': ['await 있음', 'await 없음', 'aria-pressed'], 'I
 check('bdm', () => Object.entries(BDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 check('bko', () => [['Code Editor', 'IDE'], ['npm', '패키지 관리자']].filter(([en, w]) => g.find(en).ko.includes(w)).map(([en]) => en).join(', '));    // 새 카드 IDE·Package Manager와 한글명이 겹치지 않게
 check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+const WS = () => g.TERMS.filter(t => t.c === 'web');
+check('wcat', () => { const a = g.CATS.find(c => c.id === 'web').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,parts,search,browser,traffic,tip' ? '' : a; });
+const WOBJ = ['Website', 'Web Page', 'URL', 'Domain', 'Browser', 'HTML', 'CSS', 'JavaScript', 'Hosting', 'Hyperlink', 'Favicon', 'SEO', 'Meta Tag', 'Cookie',
+  'Local Storage', 'Landing Page', 'Routing', 'DOM', 'SSR', 'CSR', 'SSG', 'PWA', 'Sitemap', 'Cross-browser', 'Header', 'Hero Section', 'Footer',
+  'Sidebar', 'Static Site', 'CMS', 'Admin Page', 'A/B Test', 'Conversion Rate'];    // 옛 형식 그림이 남은 웹 카드(측정)
+check('wobj', () => { const a = WS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !WOBJ.includes(x)).map(x => '+' + x), ...WOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
+check('wx', () => WS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
+check('wm', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-') && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));
+const WDM = {};    // 직접 조작 그림: 영문명 → h에 있어야 할 글자
+check('wdm', () => Object.entries(WDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('wou', () => WS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+check('spcss', () => html.includes('.mk-spr.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}') ? '' : '검색 결과 줄이 움직이지 않아요');
+const WB_WRONG = {'Bounce Rate': ['Bounce', 'Debounce'], 'Event Tracking': ['Event'], 'Time on Page': ['Session'], 'Pop-up Blocker': ['Popover', 'Modal'], 'Logo': ['Brand Color']};    // 이름만 비슷한 카드
+check('wwrong', () => Object.entries(WB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'web' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
