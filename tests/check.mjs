@@ -192,6 +192,7 @@ check('base', () => vm.runInContext(`(() => {
   const cs = ide(['a','b'], [{l:1},{l:2}], {still:true}); if ((cs.match(/class="mk-cds/g) || []).length !== 1 || cs.includes(' A"') || !cs.includes('--l:2')) e.push('ide still');
   if (!thr(() => ide([], [{l:1}])) || !thr(() => ide(Array(9).fill('a'), [{l:1}])) || !thr(() => ide(['a'.repeat(29)], [{l:1}])) || !thr(() => ide(['a'], []))
     || !thr(() => ide(['a'], Array(9).fill({l:1}))) || !thr(() => ide(['a','b','c'], [{l:4}])) || !thr(() => ide(['a'], [{l:1, out:['1','2','3','4']}])) || !thr(() => ide(['a'], [{l:1, vars:{a:'1',b:'2',c:'3',d:'4',e:'5'}}]))) e.push('ide throw');
+  if (!thr(() => ide(['가'.repeat(15)], [{l:1}])) || thr(() => ide(['const 결과 = sum.toFixed(2);'], [{l:1}]))) e.push('ide 넓은 글자');    // 한글은 2자로 센다(28자 한도)
   const mr = mem([{stack:[{n:'a', to:'A'}, {n:'b', to:'A'}], heap:[{id:'A', v:'[1, 2]'}]}, {stack:[{n:'a', to:'B'}], heap:[{id:'A', v:'[1, 2]', gc:true}, {id:'B', v:'[1, 2, 3]'}]}], {label:'메모리'});
   if (!['mk-mr', 'aria-label="메모리"', 'a → A', 'b → A', 'mk-cdy1 A', 'mk-cdz2 A', '치울 대상', 'a → 상자 B, 치울 대상: 상자 A'].every(x => mr.includes(x))) e.push('mem');
   const ms = [{stack:[{n:'a', v:'1'}], heap:[]}];
@@ -297,7 +298,9 @@ check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', ')
 check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation-delay:-([\d.]+)s/)[1], mr = html.match(/\.mk-mrs\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 코드 칸·메모리 그림의 멈춘 장면은 마지막 단계만
   const z = [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const m = html.match(new RegExp(`@keyframes mk-cdz${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,100%\\{opacity:1\\}`)); return !m || +m[1] > P; }).map(k => 'z' + k);
   const y = [1, 2, 3, 4, 5, 6, 7].filter(k => { const m = html.match(new RegExp(`@keyframes mk-cdy${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%\\{opacity:0\\}`)); return !m || +m[1] > P; }).map(k => 'y' + k);
-  return [...z, ...y, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : [])].join(', '); });
+  const ln = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => !(t === 'y' && k === 8) && !html.includes(`.mk-cd${t}${k}{animation-name:mk-cd${t}${k}}`)).map(t => 'link ' + t + k));    // 연결 규칙이 빠지면 그 판은 늘 빈칸
+  const at = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => { const m = html.match(new RegExp(`@keyframes mk-cd${t}${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%`)); return m ? +m[1] !== 10 * k : !(t === 'y' && k === 8); }).map(t => 'at ' + t + k));    // 단계 k는 10k%에 나타난다
+  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : [])].join(', '); });
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });

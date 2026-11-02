@@ -415,11 +415,11 @@ a.tag:hover{background:var(--ink);color:#fff}
 /* 코드 칸(ide): 줄 번호 붙은 코드 + 단계 판(강조 띠·출력·변수). 판은 한 칸에 겹치고 단계 k는 10k%에 나타난다(마지막 판만 남음). 띠는 .mk-cdg 기준이라 쌓여도 코드 줄 위에 선다 */
 .mk-cd{container:cd/inline-size;width:min(100%,460px);border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:12px;line-height:1.45;text-align:left}
 .mk-cdt{padding:5px 10px;border-bottom:1.5px solid var(--ink);border-radius:6.5px 6.5px 0 0;background:var(--fig);font:700 11.5px/1.35 var(--mono);overflow-wrap:anywhere}
-.mk-cdg{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 128px}.mk-cdc{position:relative;z-index:1;margin:0;padding:8px 8px 8px 34px;font:12px/20px var(--mono);color:var(--muted)}.mk-cdc code{font:inherit;color:var(--ink);white-space:pre}
+.mk-cdg{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 128px}.mk-cdc{position:relative;z-index:1;margin:0;overflow-x:auto;padding:8px 8px 8px 34px;font:12px/20px var(--mono);color:var(--muted)}.mk-cdc code{font:inherit;color:var(--ink);white-space:pre}
 .mk-cdp{display:grid;border-left:1.5px solid var(--rule)}.mk-cds{grid-area:1/1;display:flex;flex-direction:column;gap:8px;min-width:0;padding:8px 10px}
 .mk-cdh{position:absolute;z-index:0;left:0;top:calc(8px + (var(--l) - 1) * 20px);width:calc(100% - 128px);height:20px;background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}
 .mk-cdo,.mk-cdv{display:flex;flex-direction:column;gap:2px;min-width:0;font:11.5px/1.4 var(--mono);overflow-wrap:anywhere}.mk-cdo b,.mk-cdv b{font:800 11px/1.35 var(--sans);color:var(--muted)}
-@container cd (max-width:360px){.mk-cdg{grid-template-columns:minmax(0,1fr)}.mk-cdc{padding:8px 4px 8px 24px;font-size:11px}.mk-cdp{border-left:0;border-top:1.5px solid var(--rule)}.mk-cdh{width:100%}.mk-cds{flex-direction:row}.mk-cdo,.mk-cdv{flex:1 1 0}}
+@container cd (max-width:380px){.mk-cdg{grid-template-columns:minmax(0,1fr)}.mk-cdc{padding:8px 4px 8px 24px;font-size:11px}.mk-cdp{border-left:0;border-top:1.5px solid var(--rule)}.mk-cdh{width:100%}.mk-cds{flex-direction:row}.mk-cdo,.mk-cdv{flex:1 1 0}}
 /* 메모리 그림(mem): 스택 이름표 → 힙 상자. 장면은 한 칸에 겹치고 코드 칸과 같은 키프레임을 쓴다. 치울 상자는 점선·흐린 글자·"치울 대상" 글자 */
 .mk-mr{container:mr/inline-size;width:min(100%,420px);color:var(--ink);font-size:12px;line-height:1.4;text-align:left}.mk-mrp{display:grid}
 .mk-mrs{grid-area:1/1;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px}
@@ -3652,7 +3652,7 @@ const flow = (rows = [], { path = rows.map(() => 0), still = false, label } = {}
 /* 코드 칸: code 1~8줄(줄마다 28자 이하), steps[i] = {l 강조 줄, out 그때까지 출력 0~3줄, vars 그때 변수 0~4개} 1~8개. 단계 k의 판은 10k%에 나타난다 */
 const ide = (code = [], steps = [], { title = 'app.js', still = false, label } = {}) => {
   if (code.length < 1 || code.length > 8) throw new Error('ide: 코드는 1~8줄');
-  if (code.some(c => c.length > 28)) throw new Error('ide: 한 줄은 28자까지');
+  if (code.some(c => [...c].reduce((n, ch) => n + (/[ᄀ-ᇿ㄰-㆏가-힯]/.test(ch) ? 2 : 1), 0) > 28)) throw new Error('ide: 한 줄은 28자까지');    // 한글은 폭이 두 배라 2자로 센다
   if (steps.length < 1 || steps.length > 8) throw new Error('ide: 단계는 1~8개');
   steps.forEach(({ l, out = [], vars = {} }) => {
     if (!(l >= 1 && l <= code.length)) throw new Error('ide: 줄 번호 ' + l);
