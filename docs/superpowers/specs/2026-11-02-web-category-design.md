@@ -31,7 +31,7 @@
 - 글꼴 서브셋, PRODUCT.md·PLAN.md·DESIGN.md의 개수·도우미 표기, 점검 기대값(`webparts` 포함) 갱신
 
 제외:
-- 다른 카테고리에 이미 있는 말: HTTP·DNS·캐시(net), 모달·탭·토스트(design), 404·Maintenance Page(server)
+- 다른 카테고리에 이미 있는 말: HTTP(back), DNS·캐시(net), Loading Speed·LCP(perf), GNB(design), 모달·탭·토스트(design), 404·Maintenance Page(server)
 - 증상 "오류·안 됨" 칩 재검토. ③ 마지막 AI 이후 한 번에 한다.
 - 헷갈림 칸 이름 변경, 기존 카드 이동, 다른 카테고리 카드 수정. r 연결만 예외다.
 
@@ -42,14 +42,15 @@
 - 위에 검색창이 있고 검색어(`q`)가 들어간다. 아래에 결과 줄 1~4개가 있다.
 - 결과 줄은 `{t 제목, u 주소, d 설명, tag 꼬리표}`다. 꼬리표 예: "광고", "별점 4.5(예시)".
 - `hl` 번째 줄을 강조한다(내 사이트). 강조는 색과 함께 "내 사이트" 글자로도 표시한다. 색만으로 구분하지 않는다.
+- `hl`을 주지 않으면 "내 사이트 없음" 상태다. 결과 아래에 "내 사이트는 결과에 없어요" 줄을 둔다(Indexing, 증상 "검색해도 안 나와요"용).
 - 움직임: k번째 결과는 기존 `doc()`처럼 `mk-rux{k}`로 나타난다(10s 주기). `still`이면 모두 보인다.
 - 한도(넘으면 오류):
   - 결과 1~4줄
   - 제목 32자, 설명 60자, 주소 40자(한글은 2자로 센다)
   - 검색어 20자
 - 좁은 그림판에서는 주소·설명이 줄을 바꾼다. 가로 스크롤은 하지 않는다.
-- 입력 검사: 빈 결과, 범위 밖 `hl`, 한도 초과는 오류를 던진다. 점검이 잡게 한다.
-- `.sr` 문장으로 "검색어 ○○, 결과 n개, 내 사이트 m번째"를 읽어 준다.
+- 입력 검사: 빈 결과, 범위 밖 `hl`(정수가 아니거나 0~n-1 밖), 한도 초과는 오류를 던진다. 점검이 잡게 한다.
+- `.sr` 문장으로 "검색어 ○○, 결과 n개, 내 사이트 m번째"(없으면 "내 사이트 없음")를 읽어 준다.
 - 대상(예): SEO, Search Engine, Indexing, Keyword, Title Tag, Meta Description, Canonical URL, Structured Data, Backlink
 
 ### 3.2 글자상자 16장 다시 그리기
@@ -57,9 +58,9 @@
 | 카드 | 새 그림 |
 |---|---|
 | URL | `addr`: https:// · 도메인 · 경로 · 쿼리 칸, 칸 아래 이름 |
-| Domain | `net`: 내 PC → DNS 서버("example.com 어디?" → "주소 93.184.x.x(예시)") → 서버 |
-| HTML ▶·CSS·JavaScript | 공통 그림 하나: 같은 버튼을 뼈대만 / +꾸밈 / +동작 세 층으로 보여 준다. HTML 카드는 층을 켜고 끄는 직접 조작이고, CSS·JavaScript 카드는 자기 층이 켜진 멈춘 장면이다 |
-| Hosting | `net`: 내 PC → 호스팅 서버(파일 올림), 방문자 → 호스팅 서버(페이지 받음) |
+| Domain | `addr`: www · example · com 칸(이름 부분 강조), 아래 "사람이 외우는 이름, 실제 주소는 203.0.113.10 같은 숫자(예시)". DNS 카드의 `net` 그림과 겹치지 않게 이름 구조만 보여 준다 |
+| HTML ▶·CSS·JavaScript | 공통 그림 하나: 같은 버튼을 뼈대만 / +꾸밈 / +동작 세 층으로 보여 준다. HTML 카드는 층을 켜고 끄는 직접 조작이고, CSS·JavaScript 카드는 자기 층이 켜진 멈춘 장면이다. `D['u-web-layers']`(HTML), `u-web-css`·`u-web-js`(멈춘 장면)로 두고 한 빌더 함수를 함께 쓴다. 틀은 `browser()`, 단추는 기존 `tpick`(aria-pressed), 결과 문장은 `psay` |
+| Hosting | `net`: 내 PC → 서버 아이콘에 이름 "호스팅 서버"(`{k:'server',t:'호스팅 서버'}`) ← 방문자 휴대폰. 파일 올림·페이지 받음 메시지 |
 | Hyperlink | `pair`: `<a href="/about">` 코드 → 밑줄 링크가 있는 `browser` 화면 |
 | SEO | `serp`: 검색 결과에서 내 사이트 줄이 강조됨, 아래 `track`(크롤링 → 색인 → 순위 → 노출) |
 | Cookie | `net`: 응답에 `Set-Cookie: lang=ko`, 다음 요청에 `Cookie: lang=ko` |
@@ -69,7 +70,7 @@
 | Cross-browser | `doc` 표: 브라우저별 결과(✓ 정상 / ✕ 버튼 깨짐을 기호와 글자로) |
 | Static Site | `vs`: 정적(누구에게나 같은 파일) vs 동적(사람마다 다르게 만든 화면) |
 | CMS | `pair`: 관리 화면에서 글 저장 → 사이트 화면에 반영 |
-| Conversion Rate ▶ | 방문 수·구매 수를 고르면 `rbar`와 "전환율 n%" 문장이 바뀐다 |
+| Conversion Rate ▶ | 방문 수·구매 수를 단추로 고르면 `init`이 `rbar`와 "전환율 n%" 문장을 다시 그린다. 고를 값은 구매 ≤ 방문인 조합만 둔다 |
 
 공통 규칙(DESIGN.md):
 - 그림 글자는 11px 이상이다.
@@ -98,11 +99,11 @@
 - r은 이미 있는 같은 뜻·짝 카드에만 단다. 후보:
   - Canonical URL↔SEO, robots.txt↔Sitemap, Crawler↔SEO
   - Rendering↔DOM·Render Blocking, Refresh↔Hard Refresh, Browser History↔Back Button
-  - iframe↔Embed, User Agent↔Cross-browser
+  - iframe↔Embed, User Agent·Browser Engine↔Cross-browser
   - Service Worker↔PWA·Offline Support, Hydration↔SSR, Progressive Enhancement↔Polyfill
-  - Web App↔Native App·PWA, Subdomain↔Domain, Navigation Bar↔Hamburger Menu
+  - Web App↔Native App·PWA, Subdomain↔Domain, Feature Section↔Hero Section
   - Heatmap·Funnel↔Analytics, Bounce Rate↔Above the Fold
-- 뜻이 다른 짝은 r 없이 x 안에서만 구분한다: Bounce Rate vs design의 Bounce·Debounce, Event Tracking vs basics의 Event, Time on Page vs back의 Session, Pop-up Blocker vs design의 Popover·Modal, Logo vs design의 Brand Color.
+- 뜻이 다른 짝은 r 없이 x 안에서만 구분한다: Bounce Rate vs design의 Bounce·perf의 Debounce, Event Tracking vs basics의 Event, Time on Page vs back의 Session, Pop-up Blocker vs design의 Popover·Modal, Logo vs design의 Brand Color.
 - 점검 기대값:
   - `COUNT`에 `web/*` 9개
   - `EXPECT`에 새 카드 영문명
@@ -111,9 +112,10 @@
 
 ## 5. 용어 목록 (새 50장)
 
-`▶`는 직접 조작이다. 측정: 아래 영문명은 기존 1,376개 영문명과 겹치지 않는다(소문자 부분 일치로 대조, 2026-11-02).
+`▶`는 직접 조작이다. 측정: 아래 영문명은 기존 카드 1,378장(고유 영문명 1,373개)과 겹치지 않는다(소문자 부분 일치로 대조, 2026-11-02).
 
 겹쳐서 뺀 것:
+- Navigation Bar(design의 GNB), Page Load(perf의 Loading Speed·LCP·FCP)
 - Tab, Browser Cache, Hard Refresh, DevTools, Embed, Back Button, Session
 - Skeleton UI, Loading Spinner, Back to Top, Dashboard, Breadcrumb, Mega Menu
 
@@ -123,9 +125,9 @@
 | core (2) | Web Standards, Progressive Enhancement |
 | motion (1) | Scroll Progress Indicator |
 | adv (3) | Service Worker, Web App Manifest, Hydration |
-| parts (6) | Navigation Bar, Logo, Pricing Section, Testimonial, About Page, Contact Page |
+| parts (6) | Feature Section, Logo, Pricing Section, Testimonial, About Page, Contact Page |
 | search (12) | Search Engine, Crawler, Indexing, Keyword, Title Tag, Meta Description, Canonical URL, robots.txt▶, Structured Data, Backlink, UTM Parameter▶, QR Code |
-| browser (11) | Address Bar, Rendering, Page Load, Refresh, Bookmark, Browser Extension, Pop-up Blocker, iframe, User Agent, Autofill, Browser History |
+| browser (11) | Address Bar, Rendering, Browser Engine, Refresh, Bookmark, Browser Extension, Pop-up Blocker, iframe, User Agent, Autofill, Browser History |
 | traffic (9) | Page View, Unique Visitor, Referrer, Bounce Rate, Time on Page, Funnel, Heatmap, Retention Rate, Event Tracking |
 | tip (3) | Slug, No-code Builder, Coming Soon Page |
 
@@ -143,11 +145,16 @@ x로 구분할 짝(뜻이 가까움):
 - Title Tag vs Meta Tag vs Open Graph
 - Canonical URL vs Redirect
 - Crawler vs Indexing
+- robots.txt(수집만 막음) vs noindex(검색에서 뺌): 막힌 주소도 설명 없이 결과에 나올 수 있어요
+- Canonical URL은 지시가 아니라 검색엔진에 주는 힌트
+- Bounce Rate(GA4: 참여하지 않은 세션 비율) vs "바로 나감"
+- Feature Section vs 기획의 Feature(기능)
+- Browser Engine vs Browser
 - Address Bar의 검색 vs Search Engine
 
 ## 6. 증상 색인 (12개)
 
-기존 157개와 대조했다. "고쳤는데 예전 화면이 보여요"와 "404가 떠요"는 이미 있어 뺐다. 계획서에서 문구를 다시 대조하고, 겹치면 같은 수의 대체 증상을 넣는다.
+기존 157개와 대조했다. "고쳤는데 예전 화면이 보여요", "404가 떠요", 빈 화면 셋("하얀 화면만 나와요", "첫 화면이 늦게 떠요", "기다리는 동안 빈 화면이에요")은 이미 있어 뺐다. robots.txt는 수집만 막으므로 그 카드 x에 noindex 차이를 꼭 쓴다. 계획서에서 문구를 다시 대조하고, 겹치면 같은 수의 대체 증상을 넣는다.
 
 | 증상 | 그룹 | 연결 카드 |
 |---|---|---|
@@ -158,11 +165,11 @@ x로 구분할 짝(뜻이 가까움):
 | Safari에서만 화면이 깨져요 | 크기·화면 | Cross-browser, User Agent |
 | 버튼을 눌러도 새 창이 안 떠요 | 반응·클릭 | Pop-up Blocker |
 | 방문은 많은데 구매가 없어요 | 오류·안 됨 | Conversion Rate, Funnel |
-| 들어오자마자 나가는 사람이 많아요 | 오류·안 됨 | Bounce Rate, Above the Fold |
+| 둘러보지 않고 바로 나가는 사람이 많아요 | 오류·안 됨 | Bounce Rate, Above the Fold |
 | 손님이 어디서 왔는지 모르겠어요 | 오류·안 됨 | UTM Parameter, Referrer |
-| 로그인이 자꾸 풀려요 | 오류·안 됨 | Cookie |
-| 다른 사이트에 넣은 내 페이지가 안 보여요 | 오류·안 됨 | iframe |
-| 첫 화면이 한참 하얗게 비어 있어요 | 느림 | CSR, SSR, Page Load |
+| 로그인이 자꾸 풀려요 | 오류·안 됨 | Cookie, Session, Token Expiry |
+| 다른 사이트에 넣은 내 페이지가 안 보여요 | 오류·안 됨 | iframe, Content Security Policy |
+| 주소 끝에 utm_ 같은 글자가 붙어 있어요 | 글자 | UTM Parameter, URL |
 
 ## 7. 진행 순서
 
@@ -188,7 +195,7 @@ Critical·Important는 RED→GREEN으로 고친다. Minor는 기록했다가 마
 - `node tests/check.mjs`가 전부 통과하고 `LATER`가 비어 있다.
 - 개수
   - 전체 카드 1,428개(1,378 + 50, `total`)
-  - 증상 169개(157 + 12, `symcount`)
+  - 증상 169개(157 + 12, `symcount`의 길이와 새 증상 목록 점검)
   - 다른 카테고리 개수는 그대로다.
   - 영문명 중복이 없고, 관련 용어·증상 대상이 모두 있다.
 - PRODUCT.md 개수 표기가 실제와 같다.
