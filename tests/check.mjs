@@ -92,7 +92,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9 };    // sec: 카드 수
-const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const LATER = ['font', 'doccount', 'wx'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
@@ -324,13 +324,13 @@ check('bko', () => [['Code Editor', 'IDE'], ['npm', '패키지 관리자']].filt
 check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
 const WS = () => g.TERMS.filter(t => t.c === 'web');
 check('wcat', () => { const a = g.CATS.find(c => c.id === 'web').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,parts,search,browser,traffic,tip' ? '' : a; });
-const WOBJ = ['Website', 'Web Page', 'URL', 'Domain', 'Browser', 'HTML', 'CSS', 'JavaScript', 'Hosting', 'Hyperlink', 'Favicon', 'SEO', 'Meta Tag', 'Cookie',
-  'Local Storage', 'Landing Page', 'Routing', 'DOM', 'SSR', 'CSR', 'SSG', 'PWA', 'Sitemap', 'Cross-browser', 'Header', 'Hero Section', 'Footer',
-  'Sidebar', 'Static Site', 'CMS', 'Admin Page', 'A/B Test', 'Conversion Rate'];    // 옛 형식 그림이 남은 웹 카드(측정)
+const WOBJ = ['Website', 'Web Page', 'Browser', 'Favicon', 'Meta Tag', 'Local Storage', 'Landing Page', 'Routing', 'DOM', 'PWA', 'Sitemap',
+  'Header', 'Hero Section', 'Footer', 'Sidebar', 'Admin Page', 'A/B Test'];    // 옛 형식 그림이 남은 웹 카드(측정)
 check('wobj', () => { const a = WS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !WOBJ.includes(x)).map(x => '+' + x), ...WOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
 check('wx', () => WS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
 check('wm', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-') && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));
-const WDM = {'robots.txt': ['허용', '차단', 'aria-pressed', 'User-agent'], 'UTM Parameter': ['카톡', '인스타', '메일', 'utm_source', 'aria-pressed']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글자
+const WDM = {'robots.txt': ['허용', '차단', 'aria-pressed', 'User-agent'], 'UTM Parameter': ['카톡', '인스타', '메일', 'utm_source', 'aria-pressed'],
+  'HTML': ['HTML만', '+ CSS', '+ JavaScript', 'aria-pressed'], 'Conversion Rate': ['구매 4명', '구매 10명', 'aria-pressed', '(예시)']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글자
 check('wdm', () => Object.entries(WDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 check('wfix', () => [    // 디렉터 검토 B: 다른 사이트에서 오면 Referer는 보통 도메인까지만(기본 strict-origin-when-cross-origin), 세션 뜻, 제목은 검색 엔진이 바꿀 수 있음, 이탈 조건 셋
   [!g.find('Referrer').x.includes('도메인까지만'), 'Referrer x'], [!g.D['u-referrer'].cap.includes('도메인'), 'Referrer cap'],

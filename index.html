@@ -438,6 +438,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-spno{margin:0;padding:7px 10px;border:1.5px dashed var(--muted);border-radius:8px;color:var(--muted)}
 .mk-spr.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-whs{position:relative;align-self:flex-start}.mk-wdot{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--mark);opacity:.6;pointer-events:none}
+.mk-wraw{align-self:flex-start;padding:1px 6px;border:1px solid var(--steel);border-radius:2px;background:var(--fig);color:var(--text);font:13px var(--serif)}.mk-wlink{align-self:flex-start;color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 .mk-wqr{display:grid;grid-template-columns:repeat(7,10px);padding:8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate)}.mk-wqr i{width:10px;height:10px}.mk-wqr i.b{background:var(--ink)}
 .mk-wpg{display:block;flex:none;height:4px;margin:-12px -12px 4px;background:var(--mark);transform-origin:left;transform:scaleX(.88)}.mk-wpg.A{animation:mk-wpg 10s linear -8.8s infinite}@keyframes mk-wpg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .mk-cds.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-mrs.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
@@ -2277,24 +2278,24 @@ T('terminal','tip',[
 T('web','basic',[
  {en:'Website',ko:'웹사이트',d:'여러 웹페이지가 한 주소 아래 모인 묶음.',p:'회사 소개 웹사이트를 5페이지로 만들어줘',r:['Web Page','Domain'],l:1,o:0,v:{tree:['example.com','├ 홈','├ 소개','└ 문의']}},
  {en:'Web Page',ko:'웹페이지',d:'브라우저에 보이는 한 장의 화면.',p:'문의 웹페이지를 하나 더 추가해줘',r:['Website'],l:1,o:0,v:{page:''}},
- {en:'URL',ko:'유알엘 · 웹 주소',d:'웹페이지의 정확한 주소. https://example.com/about 같은 것.',p:'소개 페이지 URL을 /about으로 바꿔줘',r:['Domain','Path'],l:1,o:1,u:MDN('Learn_web_development/Howto/Web_mechanics/What_is_a_URL'),v:{big:'https://example.com/about',sub:'프로토콜 · 도메인 · 경로'}},
- {en:'Domain',ko:'도메인',d:'example.com처럼 사이트를 찾아가는 이름.',p:'산 도메인을 사이트에 연결하는 방법을 알려줘',r:['URL','DNS'],l:1,o:1,u:MDN('Glossary/Domain_name'),v:{big:'example.com',sub:'사람이 기억하기 쉬운 주소 이름'}},
+ {en:'URL',ko:'유알엘 · 웹 주소',d:'웹페이지의 정확한 주소. https://example.com/about 같은 것.',p:'소개 페이지 URL을 /about으로 바꿔줘',r:['Domain','Path'],l:1,o:1,u:MDN('Learn_web_development/Howto/Web_mechanics/What_is_a_URL'),v:'u-web-url'},
+ {en:'Domain',ko:'도메인',d:'example.com처럼 사이트를 찾아가는 이름.',p:'산 도메인을 사이트에 연결하는 방법을 알려줘',r:['URL','DNS'],l:1,o:1,u:MDN('Glossary/Domain_name'),v:'u-web-domain'},
  {en:'Browser',ko:'브라우저',d:'웹페이지를 보여 주는 프로그램. Chrome, Edge, Safari 등.',p:'Safari 브라우저에서만 화면이 깨져. 확인해줘',r:['Cross-browser'],l:1,o:1,u:MDN('Glossary/Browser'),v:{win:'ct'}},
- {en:'HTML',ko:'에이치티엠엘 · 뼈대',d:'웹페이지의 내용과 구조를 만드는 언어. 제목, 문단, 버튼 등.',x:'HTML=뼈대, CSS=옷, JavaScript=움직임.',p:'이 화면 구조를 시맨틱 HTML로 다시 짜줘',r:['CSS','JavaScript'],l:1,o:1,u:MDN('Web/HTML'),v:{stack:['JavaScript · 움직임','CSS · 꾸밈','HTML · 뼈대'],hl:[2]}},
- {en:'CSS',ko:'씨에스에스 · 꾸밈',d:'색, 크기, 배치처럼 웹페이지의 모양을 정하는 언어.',p:'버튼 모양은 CSS로 둥글게 바꿔줘',r:['HTML'],l:1,o:1,u:MDN('Web/CSS'),v:{stack:['JavaScript · 움직임','CSS · 꾸밈','HTML · 뼈대'],hl:[1]}},
- {en:'JavaScript',ko:'자바스크립트 · 동작',d:'클릭하면 메뉴가 열리는 것처럼 웹페이지를 움직이게 하는 언어.',p:'버튼을 누르면 메뉴가 열리게 JavaScript로 만들어줘',r:['HTML','CSS'],l:1,o:1,u:MDN('Web/JavaScript'),v:{stack:['JavaScript · 움직임','CSS · 꾸밈','HTML · 뼈대'],hl:[0]}},
+ {en:'HTML',ko:'에이치티엠엘 · 뼈대',d:'웹페이지의 내용과 구조를 만드는 언어. 제목, 문단, 버튼 등.',x:'HTML=뼈대, CSS=옷, JavaScript=움직임.',p:'이 화면 구조를 시맨틱 HTML로 다시 짜줘',r:['CSS','JavaScript'],l:1,o:1,u:MDN('Web/HTML'),v:'u-web-layers'},
+ {en:'CSS',ko:'씨에스에스 · 꾸밈',d:'색, 크기, 배치처럼 웹페이지의 모양을 정하는 언어.',p:'버튼 모양은 CSS로 둥글게 바꿔줘',r:['HTML'],l:1,o:1,u:MDN('Web/CSS'),v:'u-web-css'},
+ {en:'JavaScript',ko:'자바스크립트 · 동작',d:'클릭하면 메뉴가 열리는 것처럼 웹페이지를 움직이게 하는 언어.',p:'버튼을 누르면 메뉴가 열리게 JavaScript로 만들어줘',r:['HTML','CSS'],l:1,o:1,u:MDN('Web/JavaScript'),v:'u-web-js'},
  {en:'Web App',ko:'웹 앱',d:'로그인해서 쓰고 저장하는, 프로그램처럼 동작하는 웹사이트예요.',x:'웹사이트는 주로 읽는 곳이고, 웹 앱은 무언가를 쓰고 저장하는 곳이에요. 둘의 경계는 뚜렷하지 않아요. 웹 앱을 설치해 앱처럼 쓰게 만든 것이 PWA예요.',p:'할 일을 적고 저장하는 웹 앱으로 만들어줘',r:['Native App','PWA'],l:1,o:0,v:'u-web-app'},
  {en:'Subdomain',ko:'서브도메인 · 하위 도메인',d:'blog.example.com의 blog처럼 도메인 앞에 붙인 이름이에요.',x:'blog.example.com의 blog는 서브도메인이고, example.com/blog의 /blog는 경로예요. 서브도메인은 다른 서버에 연결해 따로 운영할 수 있어요.',p:'blog 서브도메인을 만들어 블로그를 따로 연결해줘',r:['Domain'],l:1,o:0,v:'u-subdomain'},
  {en:'Homepage',ko:'홈페이지 · 첫 화면',d:'사이트 주소로 들어가면 처음 보이는 화면이에요.',x:'홈페이지는 사이트의 첫 화면이고, 랜딩 페이지는 광고나 이벤트로 들어온 사람에게 한 가지 행동을 권하는 페이지예요. 한국에서는 웹사이트 전체를 홈페이지라고 부르기도 해요.',p:'홈페이지 첫 화면에 메뉴와 소개 문구를 넣어줘',r:['Landing Page'],l:1,o:0,v:'u-homepage'},
 ]);
 T('web','core',[
  {en:'Responsive Web Design',ko:'반응형 웹',d:'PC·태블릿·휴대폰 화면 크기에 맞춰 배치가 알아서 바뀌는 웹.',j:'"반응형으로 해 주세요"',p:'휴대폰에서는 카드가 한 줄에 하나씩 보이게 반응형으로 해줘',r:['Breakpoint','Media Query'],l:1,o:1,u:MDN('Learn_web_development/Core/CSS_layout/Responsive_Design'),v:'responsive',sy:['화면 줄이면 깨져요']},
- {en:'Hosting',ko:'호스팅',d:'만든 웹사이트를 인터넷에 올려 둘 공간을 빌리는 것.',p:'이 정적 사이트를 무료 호스팅에 올리는 방법을 알려줘',r:['Domain','Deploy'],l:1,o:0,v:{flow:['내 파일','호스팅 서버','방문자']}},
- {en:'Hyperlink',ko:'하이퍼링크 · 링크',d:'누르면 다른 페이지나 위치로 이동하는 글자나 그림.',p:'로고를 누르면 홈으로 가는 링크를 걸어줘',r:['URL'],l:1,o:1,u:MDN('Web/HTML/Element/a'),v:{big:'자세히 보기 →',sub:'누르면 다른 페이지로 이동'}},
+ {en:'Hosting',ko:'호스팅',d:'만든 웹사이트를 인터넷에 올려 둘 공간을 빌리는 것.',p:'이 정적 사이트를 무료 호스팅에 올리는 방법을 알려줘',r:['Domain','Deploy'],l:1,o:0,v:'u-web-hosting'},
+ {en:'Hyperlink',ko:'하이퍼링크 · 링크',d:'누르면 다른 페이지나 위치로 이동하는 글자나 그림.',p:'로고를 누르면 홈으로 가는 링크를 걸어줘',r:['URL'],l:1,o:1,u:MDN('Web/HTML/Element/a'),v:'u-web-hyperlink'},
  {en:'Favicon',ko:'파비콘',d:'브라우저 탭 제목 옆에 뜨는 작은 아이콘.',p:'로고로 파비콘을 만들어서 넣어줘',r:['Icon'],l:1,o:1,u:MDN('Glossary/Favicon'),v:{win:'tt'}},
- {en:'SEO',ko:'에스이오 · 검색 최적화',d:'검색했을 때 내 사이트가 잘 나오도록 만드는 작업.',p:'페이지마다 제목과 설명을 넣어서 SEO를 챙겨줘',r:['Meta Tag','Sitemap'],l:2,o:1,u:MDN('Glossary/SEO'),v:{stack:['검색 결과 1위','2위','3위'],hl:[0]}},
+ {en:'SEO',ko:'에스이오 · 검색 최적화',d:'검색했을 때 내 사이트가 잘 나오도록 만드는 작업.',p:'페이지마다 제목과 설명을 넣어서 SEO를 챙겨줘',r:['Meta Tag','Sitemap'],l:2,o:1,u:MDN('Glossary/SEO'),v:'u-web-seo'},
  {en:'Meta Tag',ko:'메타 태그',d:'화면엔 안 보이지만 검색엔진·SNS에 페이지 정보를 알려 주는 태그.',p:'각 페이지에 description 메타 태그를 넣어줘',r:['SEO','Open Graph'],l:2,o:1,u:MDN('Web/HTML/Element/meta'),v:{code:'<meta name="description"\n  content="개발 용어를 그림으로 배워요">'}},
- {en:'Cookie',ko:'쿠키',d:'사이트가 브라우저에 남겨 두는 작은 기록. 로그인 유지 등에 써요.',p:'로그인 상태를 쿠키로 유지하는 방식인지 알려줘',r:['Local Storage','Session'],l:2,o:1,u:MDN('Web/HTTP/Cookies'),v:{flow:['서버','쿠키 저장','다음 방문 때 보냄']}},
+ {en:'Cookie',ko:'쿠키',d:'사이트가 브라우저에 남겨 두는 작은 기록. 로그인 유지 등에 써요.',p:'로그인 상태를 쿠키로 유지하는 방식인지 알려줘',r:['Local Storage','Session'],l:2,o:1,u:MDN('Web/HTTP/Cookies'),v:'u-web-cookie'},
  {en:'Local Storage',ko:'로컬 스토리지',d:'브라우저 안에 데이터를 저장해 두는 공간. 새로고침해도 남아요.',p:'즐겨찾기 목록을 로컬 스토리지에 저장해줘',r:['Cookie'],l:2,o:1,u:MDN('Web/API/Window/localStorage'),v:{tbl:[['키','값'],['theme','"dark"'],['pins','["css","html"]']]}},
  {en:'Landing Page',ko:'랜딩 페이지',d:'광고나 링크를 누르고 처음 도착하는, 한 가지 목적에 집중한 페이지.',p:'신제품 소개 랜딩 페이지를 만들어줘. 목표는 사전 신청이야',r:['CTA Button','Hero Section'],l:1,o:0,v:{page:'hr'}},
  {en:'SPA',ko:'에스피에이 · 한 페이지 앱',d:'페이지를 새로 불러오지 않고 한 페이지 안에서 내용만 바꿔 보여 주는 웹.',p:'메뉴를 눌러도 새로고침 없이 바뀌는 SPA 방식으로 만들어줘',r:['Routing','CSR'],l:2,o:1,u:MDN('Glossary/SPA'),v:'pagetrans'},
@@ -2313,14 +2314,14 @@ T('web','motion',[
 ]);
 T('web','adv',[
  {en:'DOM',ko:'돔 · 문서 객체 모델',d:'브라우저가 HTML을 읽어 만든 나무 모양 구조. JavaScript는 이걸 고쳐 화면을 바꿔요.',p:'버튼을 누르면 DOM에 새 항목을 추가해줘',r:['HTML','Virtual DOM'],l:2,o:1,u:MDN('Web/API/Document_Object_Model'),v:{tree:['html','├ head','└ body','   ├ header','   └ main','      └ button'],hl:[5]}},
- {en:'SSR',ko:'에스에스알 · 서버 사이드 렌더링',d:'서버가 화면을 완성해서 보내 주는 방식. 첫 화면이 빠르고 검색에 유리해요.',x:'서버가 완성해 주면 SSR, 브라우저가 조립하면 CSR.',p:'검색 노출이 중요하니 이 페이지는 SSR로 만들어줘',r:['CSR','SSG'],l:3,o:1,u:MDN('Glossary/SSR'),v:{flow:['서버에서 완성','HTML 전송','바로 표시'],hl:[0]}},
- {en:'CSR',ko:'씨에스알 · 클라이언트 사이드 렌더링',d:'빈 페이지를 받은 뒤 브라우저가 JavaScript로 화면을 조립하는 방식.',p:'관리자 화면은 CSR로 해도 돼',r:['SSR','SPA'],l:3,o:1,u:MDN('Glossary/CSR'),v:{flow:['빈 HTML','JS 다운로드','브라우저가 조립'],hl:[2]}},
- {en:'SSG',ko:'에스에스지 · 정적 사이트 생성',d:'미리 모든 페이지를 HTML로 만들어 두는 방식. 블로그·문서에 잘 맞아요.',p:'자주 안 바뀌는 페이지라 SSG로 미리 만들어줘',r:['SSR','Static Site'],l:3,o:0,v:{flow:['빌드 때 미리 생성','HTML 파일들','즉시 전송']}},
+ {en:'SSR',ko:'에스에스알 · 서버 사이드 렌더링',d:'서버가 화면을 완성해서 보내 주는 방식. 첫 화면이 빠르고 검색에 유리해요.',x:'서버가 완성해 주면 SSR, 브라우저가 조립하면 CSR.',p:'검색 노출이 중요하니 이 페이지는 SSR로 만들어줘',r:['CSR','SSG'],l:3,o:1,u:MDN('Glossary/SSR'),v:'u-web-ssr'},
+ {en:'CSR',ko:'씨에스알 · 클라이언트 사이드 렌더링',d:'빈 페이지를 받은 뒤 브라우저가 JavaScript로 화면을 조립하는 방식.',p:'관리자 화면은 CSR로 해도 돼',r:['SSR','SPA'],l:3,o:1,u:MDN('Glossary/CSR'),v:'u-web-csr'},
+ {en:'SSG',ko:'에스에스지 · 정적 사이트 생성',d:'미리 모든 페이지를 HTML로 만들어 두는 방식. 블로그·문서에 잘 맞아요.',p:'자주 안 바뀌는 페이지라 SSG로 미리 만들어줘',r:['SSR','Static Site'],l:3,o:0,v:'u-web-ssg'},
  {en:'PWA',ko:'피더블유에이 · 앱처럼 쓰는 웹',d:'홈 화면에 설치하고 오프라인에서도 쓸 수 있게 만든 웹.',p:'이 사이트를 휴대폰 홈 화면에 설치할 수 있게 PWA로 만들어줘',r:[],l:3,o:1,u:MDN('Web/Progressive_web_apps'),v:{cmp:['웹','<div class="page" style="width:110px"></div>','앱처럼','<div class="mini" style="width:70px;height:120px;border-radius:14px"></div>']}},
  {en:'Web Accessibility',ko:'웹 접근성',d:'눈이 불편하거나 키보드만 쓰는 사람도 사이트를 쓸 수 있게 만드는 것.',j:'"a11y"(접근성의 줄임말)',p:'이미지 대체 텍스트와 키보드 이동을 넣어서 웹 접근성을 챙겨줘',r:['Contrast','Attribute','Focus'],l:2,o:1,u:MDN('Web/Accessibility'),v:'contrast'},
  {en:'Open Graph',ko:'오픈 그래프 · 링크 미리보기',d:'카톡·SNS에 링크를 보냈을 때 뜨는 제목·이미지 미리보기 정보.',p:'카톡 공유 시 썸네일과 제목이 뜨게 Open Graph 태그를 넣어줘',r:['Meta Tag'],l:2,o:1,u:'https://ogp.me/',v:'card'},
  {en:'Sitemap',ko:'사이트맵',d:'사이트의 모든 페이지 주소 목록. 검색엔진이 페이지를 찾는 데 써요.',p:'검색엔진용 sitemap.xml을 만들어줘',r:['SEO'],l:2,o:1,u:'https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview',v:{tree:['sitemap.xml','├ /','├ /about','└ /contact']}},
- {en:'Cross-browser',ko:'크로스 브라우징 · 브라우저 호환',d:'Chrome·Safari·Edge 어디서 열어도 똑같이 보이고 동작하게 맞추는 것.',j:'"크로스 브라우징 체크해 주세요"',p:'Safari에서만 깨지는 부분을 찾아 크로스 브라우징을 맞춰줘',r:['Browser','Polyfill'],l:2,o:0,v:{flow:['Chrome','Safari','Edge'],hl:[1]}},
+ {en:'Cross-browser',ko:'크로스 브라우징 · 브라우저 호환',d:'Chrome·Safari·Edge 어디서 열어도 똑같이 보이고 동작하게 맞추는 것.',j:'"크로스 브라우징 체크해 주세요"',p:'Safari에서만 깨지는 부분을 찾아 크로스 브라우징을 맞춰줘',r:['Browser','Polyfill'],l:2,o:0,v:'u-web-cross-browser'},
  {en:'Service Worker',ko:'서비스 워커',d:'페이지 뒤에서 요청을 가로채 저장본을 꺼내 주는 스크립트예요. 인터넷이 끊겨도 화면을 보여 줄 수 있어요.',x:'서비스 워커는 페이지와 따로 돌아서 화면(DOM)을 직접 바꾸지 못해요. 보안 때문에 HTTPS에서만 동작해요.',p:'서비스 워커로 첫 화면을 저장해 오프라인에서도 열리게 해줘',r:['PWA','Offline Support'],l:3,o:1,u:MDN('Web/API/Service_Worker_API'),v:'u-service-worker'},
  {en:'Web App Manifest',ko:'웹 앱 매니페스트',d:'웹 앱의 이름, 아이콘, 시작 화면을 적은 파일이에요. 홈 화면에 설치할 때 쓰여요.',x:'매니페스트는 설치했을 때의 이름과 아이콘을 정하고, 오프라인 동작은 서비스 워커가 맡아요.',p:'manifest.json에 앱 이름과 아이콘을 넣어 홈 화면에 설치되게 해줘',r:['PWA'],l:3,o:1,u:MDN('Web/Progressive_web_apps/Manifest'),v:'u-web-app-manifest'},
  {en:'Hydration',ko:'하이드레이션',d:'서버가 보낸 HTML에 브라우저가 JavaScript 동작을 붙이는 일이에요.',x:'SSR은 서버가 HTML을 만들어 보내는 일이고, 하이드레이션은 그 HTML이 눌리게 만드는 일이에요. 끝나기 전에는 버튼이 보여도 눌러서 반응이 없을 수 있어요.',p:'하이드레이션이 끝나기 전에 버튼을 누르면 안 되는 문제를 고쳐줘',r:['SSR'],l:3,o:1,u:'https://react.dev/reference/react-dom/client/hydrateRoot',v:'u-hydration'},
@@ -2380,12 +2381,12 @@ T('web','traffic',[
  {en:'Event Tracking',ko:'이벤트 추적',d:'버튼 누름, 영상 재생, 파일 내려받기처럼 페이지 안에서 한 행동을 기록하는 일이에요.',x:'이벤트 추적은 방문자의 행동을 분석 도구로 보내는 일이고, 코드의 Event(클릭 같은 신호를 받는 것)와는 다른 말이에요. GA4는 페이지 뷰도 이벤트 하나로 세요.',p:'가입 버튼을 누를 때마다 이벤트로 기록해줘',r:['Analytics'],l:2,o:1,u:'https://support.google.com/analytics/answer/9322688',v:'u-event-tracking'},
 ]);
 T('web','tip',[
- {en:'Static Site',ko:'정적 사이트',d:'누가 봐도 같은 내용을 보여 주는, 미리 만든 파일로 된 사이트.',x:'로그인·글쓰기처럼 사람마다 내용이 달라지면 동적 사이트.',p:'회사 소개는 정적 사이트로 충분해. 서버 없이 만들어줘',r:['SSG','Hosting'],l:1,o:0,v:{flow:['미리 만든 HTML','그대로 전송']}},
- {en:'CMS',ko:'씨엠에스 · 콘텐츠 관리 도구',d:'코드 없이 글과 이미지를 올리고 고칠 수 있는 관리 프로그램. WordPress 등.',p:'직원이 직접 공지를 올릴 수 있게 CMS를 붙여줘',r:['Admin Page'],l:2,o:0,v:{flow:['관리자 글 작성','CMS','사이트 반영']}},
+ {en:'Static Site',ko:'정적 사이트',d:'누가 봐도 같은 내용을 보여 주는, 미리 만든 파일로 된 사이트.',x:'로그인·글쓰기처럼 사람마다 내용이 달라지면 동적 사이트.',p:'회사 소개는 정적 사이트로 충분해. 서버 없이 만들어줘',r:['SSG','Hosting'],l:1,o:0,v:'u-web-static-site'},
+ {en:'CMS',ko:'씨엠에스 · 콘텐츠 관리 도구',d:'코드 없이 글과 이미지를 올리고 고칠 수 있는 관리 프로그램. WordPress 등.',p:'직원이 직접 공지를 올릴 수 있게 CMS를 붙여줘',r:['Admin Page'],l:2,o:0,v:'u-web-cms'},
  {en:'Admin Page',ko:'관리자 페이지 · 어드민',d:'운영자만 들어가서 회원·주문·글을 관리하는 화면.',j:'"어드민", "백오피스"',p:'주문 목록을 볼 수 있는 어드민 페이지를 만들어줘',r:['CMS'],l:1,o:0,v:{win:'ct'}},
  {en:'Analytics',ko:'애널리틱스 · 방문 분석',d:'몇 명이 어디서 와서 무엇을 눌렀는지 기록·분석하는 도구.',p:'방문자 수를 볼 수 있게 Google Analytics를 연결해줘',r:['A/B Test','Conversion Rate'],l:2,o:0,v:'progress'},
  {en:'A/B Test',ko:'에이비 테스트',d:'두 가지 안을 나눠 보여 주고 어느 쪽 반응이 좋은지 비교하는 실험.',p:'버튼 문구 두 개로 A/B 테스트할 수 있게 만들어줘',r:['Conversion Rate'],l:2,o:0,v:{cmp:['A안','<span class="btnx">지금 가입</span>','B안','<span class="btnx o">무료로 시작</span>']}},
- {en:'Conversion Rate',ko:'전환율',d:'방문자 중 실제로 가입·구매 같은 목표 행동을 한 비율.',p:'가입 전환율이 낮아. 가입 단계를 줄여줘',r:['CTA Button','A/B Test'],l:2,o:0,v:{big:'3.2%',sub:'방문자 100명 중 3명이 구매'}},
+ {en:'Conversion Rate',ko:'전환율',d:'방문자 중 실제로 가입·구매 같은 목표 행동을 한 비율.',p:'가입 전환율이 낮아. 가입 단계를 줄여줘',r:['CTA Button','A/B Test'],l:2,o:0,v:'u-web-conversion-rate'},
  {en:'UX Writing',ko:'UX 라이팅 · 화면 문구',d:'버튼·안내·오류 문구를 사용자가 바로 이해하게 쓰는 것.',p:'"에러 발생" 대신 무엇이 문제고 어떻게 하면 되는지 문구를 바꿔줘',r:['Empty State'],l:2,o:0,v:'shake'},
  {en:'Slug',ko:'슬러그 · 주소 끝 이름',d:'example.com/blog/web-tips의 web-tips처럼 글 하나를 가리키는 주소 끝 이름이에요.',x:'URL은 주소 전체, Domain은 example.com 부분, Slug는 맨 끝 글 이름이에요. 슬러그는 소문자와 하이픈(-)으로 짧게 써요.',p:'글 제목으로 슬러그를 만들어 주소 끝에 붙여줘',r:['URL'],l:1,o:1,u:MDN('Glossary/Slug'),v:'u-slug'},
  {en:'No-code Builder',ko:'노코드 빌더',d:'코드 없이 블록을 끌어 놓아 사이트를 만드는 도구예요.',x:'노코드 빌더는 화면을 블록으로 짜서 만들고, CMS는 이미 있는 사이트의 글과 사진을 고쳐요. 둘을 함께 주는 도구도 있어요.',p:'노코드 빌더로 만든 사이트를 코드로 옮기면 무엇이 달라지는지 알려줘',r:['CMS'],l:1,o:0,v:'u-no-code-builder'},
@@ -7000,6 +7001,60 @@ Object.assign(D, {
     cap:'처음 온 사람이 얼마나 다시 오는지 시기별로 봐요(수는 예시)'},
   'u-event-tracking':{h:doc([{tb:[['이벤트', '횟수'], ['가입 버튼 누름', '52'], ['영상 재생', '130'], ['파일 내려받기', '17']]}], {title:'이번 주 이벤트 (예시)', label:'페이지 안에서 한 행동을 센 표'}), m:1,
     cap:'누르고 재생하고 내려받은 행동을 하나씩 기록해 세요(수는 예시)'},
+});
+/* web: redraw — 출처 확인(2026-11): MDN Set-Cookie·Cookie 헤더, RFC 5737(203.0.113.0/24는 문서용 주소). 예시: 주소·이름·수 */
+const WLAY = {'HTML만': {k:1, say:'뼈대만 있어요. 단추는 있지만 꾸밈도 동작도 없어요'}, '+ CSS': {k:2, say:'색과 모양이 생겼어요. 아직 눌러도 아무 일도 없어요'},
+  '+ JavaScript': {k:3, say:'누르면 장바구니에 담기는 동작이 생겼어요'}};
+const wlayers = k => {
+  if (![1, 2, 3].includes(k)) throw new Error('wlayers: 1~3');
+  const btn = k === 1 ? '<span class="mk-wraw">장바구니 담기</span>' : '<span class="mk-btn">장바구니 담기</span>';
+  return `<div class="mk-rust">${browser(`<b>새 운동화</b>${k > 1 ? lines(85, 60) : ''}${btn}${k === 3 ? '<span class="mk-help mk-hl">✓ 담았어요</span>' : ''}`
+    + whelp(['HTML ✓', k > 1 ? 'CSS ✓' : 'CSS –', k > 2 ? 'JavaScript ✓' : 'JavaScript –'].join(' · ')), {url:'example.com/shoes'})}</div>`;
+};
+const WCV = {'방문 200명 · 구매 4명': {pct:2, say:'200명 중 4명이 샀어요. 전환율 2%(예시)'}, '방문 200명 · 구매 10명': {pct:5, say:'200명 중 10명이 샀어요. 전환율 5%(예시)'},
+  '방문 50명 · 구매 10명': {pct:20, say:'50명 중 10명이 샀어요. 전환율 20%(예시)'}};
+const wcv = k => `<div class="mk-rust">${rbar(WCV[k].pct, {label:'전환율'})}</div>`;
+Object.assign(D, {
+  'u-web-url':{h:addr(['https://', 'example.com', '/blog', '?page=2'], {sep:'', y:[1], sub:'규칙 · 도메인 · 경로 · 쿼리 순서로 붙어요 (값은 예시)'}),
+    cap:'주소 하나가 여러 칸으로 나뉘어요. 색칠한 칸이 도메인이에요'},
+  'u-web-domain':{h:addr(['www', 'example', 'com'], {y:[1], sub:'사람이 외우는 이름 · 실제 주소는 203.0.113.10 같은 숫자(예시)'}),
+    cap:'도메인은 숫자로 된 주소 대신 외우기 쉽게 붙인 이름이에요'},
+  'u-web-layers':{h:`<div class="mk-mobox">${wlayers(1)}</div>${tpick(Object.keys(WLAY), 'HTML만')}<span class="mk-hint" aria-live="polite">${WLAY['HTML만'].say}</span>`,
+    init:bpick(WLAY, k => wlayers(WLAY[k].k)), cap:'단추를 눌러 뼈대에 꾸밈과 동작을 하나씩 더해 보세요'},
+  'u-web-css':{h:wlayers(2), cap:'CSS를 더하면 같은 단추에 색과 모양이 생겨요'},
+  'u-web-js':{h:wlayers(3), cap:'JavaScript를 더하면 누를 때 할 일이 생겨요'},
+  'u-web-hosting':{h:net([{k:'pc'}, {k:'server', t:'호스팅 서버'}, {k:'phone', t:'방문자'}], [{m:[{t:'파일 올림'}]}, {m:[{t:'요청', r:1}, {t:'페이지'}]}],
+      {label:'내 PC에서 올린 파일을 호스팅 서버가 방문자에게 보내 줘요'}), m:1,
+    cap:'파일을 서버에 올려 두면 방문자가 언제든 받아 가요'},
+  'u-web-hyperlink':{h:pair(doc([{p:'<a href="/about">'}, {p:'회사 소개</a>'}], {title:'HTML 코드', still:true}),
+      browser(`<b>우리 가게</b>${lines(80, 60)}<span class="mk-wlink mk-hl">회사 소개</span>${whelp('누르면 /about으로 가요')}`)),
+    cap:'a 태그로 감싼 글자가 밑줄 링크가 돼요'},
+  'u-web-seo':{h:`<div class="mk-rust">${serp('운동화 추천', [{t:'운동화 고르는 법', u:'example.com/shoes', d:'발 모양별로 골라 보세요'}, {t:'인기 운동화 10', u:'shop.example.net', d:'이번 주 많이 산 운동화'}], {hl:0, label:'검색 결과 첫 줄에 내 사이트가 나와요'})}`
+      + `${track([{t:'크롤링', s:'done'}, {t:'색인', s:'done'}, {t:'순위', s:'done'}, {t:'노출', s:'done'}], {still:true, label:'크롤링, 색인, 순위를 거쳐 검색 결과에 나와요'})}</div>`, m:1,
+    cap:'검색 엔진이 페이지를 모아 순위를 매긴 뒤 결과에 보여 줘요(검색어·주소는 예시)'},
+  'u-web-cookie':{h:net([{k:'pc', t:'브라우저'}, {k:'server'}], [{m:[{t:'요청'}, {t:'Set-Cookie: lang=ko', r:1}, {t:'Cookie: lang=ko'}]}],
+      {label:'서버가 응답에 쿠키를 붙이면 브라우저가 다음 요청에 돌려보내요'}), m:1,
+    cap:'서버가 준 쿠키를 브라우저가 기억했다가 다음 요청마다 함께 보내요(값은 예시)'},
+  'u-web-ssr':{h:net([{k:'pc', t:'브라우저', s:'받자마자 보여요'}, {k:'server', s:'HTML을 다 만들어요'}], [{m:[{t:'요청'}, {t:'완성된 HTML', r:1}]}],
+      {label:'서버가 HTML을 다 만들어 보내요'}), m:1,
+    cap:'서버에서 화면을 완성해 보내서 도착하자마자 보여요'},
+  'u-web-csr':{h:net([{k:'pc', t:'브라우저', s:'JS로 화면을 조립해요'}, {k:'server'}], [{m:[{t:'요청'}, {t:'빈 HTML + JS', r:1}]}],
+      {label:'서버는 빈 HTML과 JS를 보내고 브라우저가 화면을 만들어요'}), m:1,
+    cap:'빈 틀을 받은 브라우저가 JavaScript로 화면을 채워요'},
+  'u-web-ssg':{h:net([{k:'phone', t:'방문자 1'}, {k:'server', s:'배포 때 미리 만든 HTML'}, {k:'pc', t:'방문자 2'}],
+      [{m:[{t:'요청'}, {t:'같은 파일', r:1}]}, {m:[{t:'요청', r:1}, {t:'같은 파일'}]}], {label:'미리 만든 HTML을 누구에게나 똑같이 보내요'}), m:1,
+    cap:'배포할 때 HTML을 미리 만들어 두고, 요청마다 같은 파일을 보내요'},
+  'u-web-cross-browser':{h:doc([{tb:[['브라우저', '결과'], ['Chrome', '✓ 정상'], ['Safari', '✕ 버튼 깨짐'], ['Edge', '✓ 정상']]}, {p:'Safari에서 고쳐야 해요'}],
+      {title:'같은 페이지 확인 (예시)', hl:1, label:'Chrome과 Edge는 정상이고 Safari에서 버튼이 깨져요'}), m:1,
+    cap:'여러 브라우저에서 열어 보고 깨지는 곳을 찾아 고쳐요'},
+  'u-web-static-site':{h:vs('정적 사이트', `<b>회사 소개</b>${lines(90, 70)}${whelp('누가 봐도 같은 파일')}`,
+      '동적 사이트', `<b>민수 님의 주문</b>${lines(80, 60)}${whelp('사람마다 다르게 만든 화면')}`),
+    cap:'정적 사이트는 미리 만든 파일을 그대로, 동적 사이트는 사람마다 화면을 새로 만들어요'},
+  'u-web-cms':{h:pair(`<div class="mk-card mk-f"><b>글쓰기</b><span class="mk-in">휴무 안내</span><span class="mk-btn">저장</span></div>`,
+      browser(`<b>공지</b><div class="mk-card mk-f mk-hl"><b>휴무 안내</b>${lines(80)}</div>`, {url:'example.com/news'})),
+    cap:'관리 화면에서 글을 저장하면 코드를 고치지 않아도 사이트에 나타나요'},
+  'u-web-conversion-rate':{h:`<div class="mk-mobox">${wcv('방문 200명 · 구매 4명')}</div>${tpick(Object.keys(WCV), '방문 200명 · 구매 4명')}<span class="mk-hint" aria-live="polite">${WCV['방문 200명 · 구매 4명'].say}</span>`,
+    init:bpick(WCV, wcv), cap:'방문과 구매 수를 골라 전환율이 어떻게 바뀌는지 보세요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
