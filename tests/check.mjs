@@ -5,6 +5,8 @@ import vm from 'vm';
 import zlib from 'zlib';
 
 const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할 카드
+  'basics/basic': ['Programming Language', 'Source Code', 'Frontend', 'Backend', 'Full Stack', 'Bug', 'Debugging', 'Error Message', 'Software', 'Operating System', 'Bit·Byte', 'Script'],
+  'basics/core': ['Library', 'Framework', 'Package', 'npm', 'Dependency', 'Code Editor', 'Semantic Versioning', 'Open Source', 'IDE', 'Linter', 'Formatter', 'Package Manager', 'Snippet'],
   form: ['Checkbox', 'Radio Button', 'Toggle Switch', 'Dropdown', 'Form', 'Input Field', 'Placeholder',
     'Label', 'Helper Text', 'Inline Validation', 'Required Field', 'Text Area', 'Select Box', 'Autocomplete', 'Search Bar', 'Date Picker',
     'Slider', 'Quantity Stepper', 'File Upload', 'Dropzone', 'Segmented Control', 'Password Toggle', 'Floating Label', 'Disabled State',
@@ -76,7 +78,7 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
-  'basics/core': 8, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
+  'basics/basic': 12, 'basics/core': 13, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
@@ -263,7 +265,7 @@ const SYM_PLAN = ['일정이 자꾸 밀려요', '할 일이 계속 늘어나요'
 check('symcount', () => g.SYMPTOMS.length !== 145 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1328 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
+check('total', () => g.TERMS.length === 1337 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -281,7 +283,7 @@ check('live', () => Object.entries(g.D).filter(([, p]) => p.init && /\.mk-hint/.
 check('nwt', () => Object.entries(g.D).flatMap(([k, p]) => [...String(p.h || '').matchAll(/<span class="mk-nwt">([^<]*)<\/span>/g)].filter(m => m[1].split(/\s/).some(w => w.length > 15)).map(m => k + ':' + m[1])).join(', '));    // 세로 배치에서 긴 낱말이 옆 메시지를 한 줄 2~3글자로 좁힌다(320px 측정). 긴 값은 s로(DESIGN 네트워크 배치)
 const MB_WRONG = {'In-app Purchase': 'Checkout', 'Push Token': 'Token', 'App Lifecycle': 'Cold Start'};    // 이름만 같고 뜻이 다른 카드(git·AI·서버)로 가는 연결
 check('mbref', () => Object.entries(MB_WRONG).filter(([en, r]) => (g.find(en).r || []).includes(r)).map(([en, r]) => en + '→' + r).join(', '));
-const ALIAS = {'콜드 스타트': 'mobile-app-launch', '웜 스타트': 'mobile-app-launch', '키체인': 'mobile-secure-storage', '키스토어': 'mobile-secure-storage'};    // spec: 괄호 풀이(Cold·Warm Start, Keychain·Keystore)는 ko에
+const ALIAS = {'콜드 스타트': 'mobile-app-launch', '웜 스타트': 'mobile-app-launch', '키체인': 'mobile-secure-storage', '키스토어': 'mobile-secure-storage', 'IDE': 'basics-ide', '패키지 관리자': 'basics-package-manager'};    // spec: 괄호 풀이(Cold·Warm Start, Keychain·Keystore)는 ko에
 check('alias', () => Object.entries(ALIAS).filter(([q, id]) => !vm.runInContext(`search(${JSON.stringify(q)})`, ctx).slice(0, 5).some(t => t.id === id)).map(([q]) => q).join(', '));
 check('mtword', () => Object.entries(g.D).filter(([, p]) => [...String(p.h || '').matchAll(/<span class="mk-mts[^"]*"><b aria-hidden="true">[^<]*<\/b>([^<]*)<\/span>/g)].some(m => /^[\d.,%\s]*$/.test(m[1]))).map(([k]) => k).join(', '));    // 단계 상태는 기호가 아니라 글자로 읽혀야 한다(숫자만이면 완료·진행 중을 못 읽음)
 check('itt', () => { const t = g.byId.get('mobile-internal-testing-track'), s = t.x + g.D[t.v].h; return /몇 시간/.test(s) && !/몇 분 안에/.test(s) ? '' : t.x; });    // 처음 올리면 테스트 링크가 열리기까지 몇 시간 걸릴 수 있다(support.google.com 9845334)

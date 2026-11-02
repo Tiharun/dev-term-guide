@@ -2051,6 +2051,10 @@ T('basics','basic',[
  {en:'Bug',ko:'버그 · 오류',d:'프로그램이 의도와 다르게 동작하는 잘못.',p:'장바구니 수량이 두 번 늘어나는 버그가 있어. 원인을 찾아줘',r:['Debugging','Error Message'],l:1,o:0,v:'flicker'},
  {en:'Debugging',ko:'디버깅 · 오류 잡기',d:'버그의 원인을 찾아 고치는 과정.',p:'바로 고치지 말고 먼저 디버깅해서 원인부터 알려줘',r:['Bug','Console'],l:1,o:0,v:{flow:['증상 확인','원인 찾기','수정','다시 확인']}},
  {en:'Error Message',ko:'에러 메시지 · 오류 문구',d:'문제가 생겼을 때 프로그램이 알려 주는 문장. 원인을 찾는 가장 큰 단서예요.',p:'이 에러 메시지 전문을 붙일게. 무슨 뜻이고 어떻게 고쳐?',r:['Console','Stack Trace'],l:1,o:0,v:{code:'TypeError: Cannot read properties\nof undefined (reading "name")\n    at app.js:12'}},
+ {en:'Software',ko:'소프트웨어',d:'컴퓨터에서 돌아가는 프로그램을 통틀어 부르는 말이에요. 흔히 앱, 게임, 운영체제를 모두 소프트웨어라고 해요.',x:'하드웨어는 손으로 만질 수 있는 기계 부품이고, 소프트웨어는 그 위에서 돌아가는 프로그램이에요. 소스 코드를 실행할 수 있게 만든 결과물이 소프트웨어예요.',p:'이 소프트웨어가 돌아가려면 어떤 사양이 필요한지 정리해줘',r:[],l:1,o:0,v:'u-software'},
+ {en:'Operating System',ko:'운영체제 · OS',d:'컴퓨터 부품을 관리하고, 앱이 그 부품을 쓸 수 있게 이어 주는 기본 소프트웨어예요. 흔히 Windows, macOS, Android, iOS를 말해요.',x:'앱은 화면·메모리·파일을 직접 만지지 않고 운영체제에 부탁해요. 그래서 같은 앱도 운영체제마다 따로 만들어야 할 때가 있어요.',p:'이 앱이 Windows와 macOS 운영체제에서 모두 돌아가게 만들어줘',r:[],l:1,o:0,v:'u-operating-system'},
+ {en:'Bit·Byte',ko:'비트 · 바이트',d:'비트는 0 또는 1 하나를 담는 가장 작은 단위예요. 흔히 비트 8개를 묶어 1바이트라고 해요.',x:'컴퓨터는 값을 0과 1로 저장하고, 0과 1만으로 수를 적는 방법을 이진수라고 해요. 예를 들어 5는 이진수로 101이에요. 파일 크기의 KB·MB는 바이트를 세는 단위예요.',p:'이 이미지 파일이 몇 바이트인지 알려줘',r:[],l:1,o:0,v:'u-bit-byte'},
+ {en:'Script',ko:'스크립트',d:'위에서부터 차례로 실행되는 짧은 프로그램 파일이에요. JavaScript로 쓴 .js 파일이 흔한 예예요.',x:'스크립트는 따로 실행 파일을 만들지 않고 바로 돌리는 경우가 많아요. 반복 작업을 자동으로 하려고 흔히 써요.',p:'매일 하는 파일 정리를 스크립트로 만들어서 한 번에 돌리게 해줘',r:['JavaScript'],l:1,o:0,v:'u-script'},
 ]);
 T('basics','core',[
  {en:'Library',ko:'라이브러리',d:'남이 미리 만들어 둔 기능 묶음. 필요할 때 가져다 써요.',x:'라이브러리는 내가 골라 부르고, 프레임워크는 정해진 틀 안에 내가 코드를 채워요.',p:'날짜 계산은 직접 짜지 말고 검증된 라이브러리를 써줘',r:['Framework','Package'],l:1,o:0,v:{stack:['내 코드','라이브러리 (부르는 도구)'],hl:[1]}},
@@ -2061,6 +2065,11 @@ T('basics','core',[
  {en:'Code Editor',ko:'코드 에디터 · 코드 편집기',d:'코드를 쓰는 전용 프로그램. VS Code가 대표적이에요.',p:'VS Code에서 이 파일을 열어서 고칠 곳을 알려줘',r:['Terminal'],l:1,o:0,v:{win:'ct'}},
  {en:'Semantic Versioning',ko:'버전 번호 규칙',d:'1.4.2처럼 큰 변경.기능 추가.버그 수정 순으로 번호를 붙이는 규칙.',p:'버그만 고쳤으니 버전을 1.4.3으로 올려줘',r:['Package'],l:2,o:1,u:'https://semver.org/lang/ko/',v:{big:'1 . 4 . 2',sub:'큰 변경 · 기능 추가 · 버그 수정'}},
  {en:'Open Source',ko:'오픈 소스',d:'누구나 코드를 보고 쓰고 고칠 수 있게 공개한 소프트웨어.',p:'라이선스 문제 없는 오픈 소스 라이브러리를 추천해줘',r:[],l:1,o:0,v:{flow:['공개 코드','여러 사람 참여','함께 개선']}},
+ {en:'IDE',ko:'통합 개발 환경 · IDE',d:'코드 편집기에 빌드 도구와 디버거 같은 개발 도구를 한데 묶은 프로그램이에요.',x:'코드 에디터는 코드를 쓰는 데 집중하고, IDE는 쓰기부터 빌드·디버깅까지 한 프로그램 안에서 해요. VS Code는 확장을 더해 IDE처럼 쓰기도 해요.',p:'IDE에서 이 프로젝트를 열고 디버거로 멈춰서 값을 확인해줘',r:['Code Editor'],l:2,o:1,u:MDN('Glossary/IDE'),v:'u-ide'},
+ {en:'Linter',ko:'린터 · 코드 검사 도구',d:'코드에서 실수나 규칙에 어긋난 곳을 찾아 알려 주는 도구예요. ESLint가 대표적이에요.',x:'린터는 쓰지 않는 변수처럼 버그가 될 만한 곳을 잡고, 포매터는 띄어쓰기·줄바꿈 같은 모양만 맞춰요. 린터 중에는 일부 문제를 자동으로 고쳐 주는 것도 있어요.',p:'ESLint 린터를 돌리고 나온 경고를 고쳐줘',r:[],l:2,o:1,u:'https://eslint.org/docs/latest/use/core-concepts',v:'u-linter'},
+ {en:'Formatter',ko:'포매터 · 코드 모양 정리 도구',d:'띄어쓰기, 줄바꿈, 따옴표 같은 코드 모양을 정해진 규칙대로 맞춰 주는 도구예요. Prettier가 대표적이에요.',x:'포매터는 코드 모양만 바꾸고 동작은 그대로 둬요. 버그가 될 만한 곳을 찾는 일은 린터가 해요.',p:'저장할 때 Prettier 포매터가 코드 모양을 자동으로 맞추게 설정해줘',r:['Linter'],l:1,o:1,u:'https://prettier.io/docs/',v:'u-formatter'},
+ {en:'Package Manager',ko:'패키지 관리자',d:'프로젝트에 필요한 패키지를 설치·업데이트·삭제하고 목록을 관리해 주는 도구예요.',x:'npm은 패키지 관리자 가운데 하나예요. Yarn, pnpm도 같은 일을 하는 패키지 관리자예요.',p:'이 프로젝트는 pnpm 패키지 관리자로 의존성을 설치해줘',r:['npm','Package'],l:1,o:1,u:MDN('Learn_web_development/Extensions/Client-side_tools/Package_management'),v:'u-package-manager'},
+ {en:'Snippet',ko:'스니펫 · 코드 조각',d:'자주 쓰는 코드 모양을 미리 저장해 두고, 짧은 단어로 불러와 넣는 코드 조각이에요.',x:'코드 에디터에서 log 같은 짧은 단어를 고르면 정해 둔 코드가 한 번에 들어와요. 같은 코드를 손으로 다시 치지 않아서 오타가 줄어요.',p:'자주 쓰는 fetch 코드를 VS Code 스니펫으로 등록해줘',r:[],l:2,o:1,u:'https://code.visualstudio.com/docs/editing/userdefinedsnippets',v:'u-snippet'},
 ]);
 T('basics','motion',[
  {en:'Compile',ko:'컴파일 · 번역',d:'사람이 쓴 코드를 컴퓨터가 실행할 수 있는 형태로 바꾸는 것.',p:'컴파일 에러가 나. 어느 줄이 문제인지 알려줘',r:['Build'],l:2,o:0,v:{flow:['소스 코드','컴파일러','실행 파일'],e:['','']}},
@@ -6399,6 +6408,35 @@ Object.assign(D, {
       [{h:'버튼 규칙'}, {p:'버튼 높이는 44px 이상이에요.'}, {p:'예: 주문하기 버튼 48px'}],
       '크기를 말로만 적은 규칙', '숫자와 예시를 붙인 규칙'),
     cap:'예시를 붙이면 뜻이 하나로 좁혀져요'},
+});
+/* basics: basic·core — 출처 확인(2026-11): MDN Glossary IDE, MDN 패키지 관리, ESLint 핵심 개념, Prettier 문서·Prettier vs. Linters, VS Code 스니펫 문서, MDN JavaScript(스크립트 언어). 흔히: 소프트웨어·운영체제·비트·바이트·스크립트 뜻.
+   측정: node 출력(안녕하세요, 5, 101). 예시: hello.js·변수 이름·코드 줄, 린터 경고 문장(규칙 이름 no-unused-vars만 실제), log 스니펫 */
+const BTWO = (a, b, code) => `<div class="mk-two${code ? ' mk-fwcode' : ''}">${[a, b].map(([h, ...xs]) => `<div class="mk-card mk-f"><b>${esc(h)}</b>${xs.join('')}</div>`).join('')}</div>`;
+const bhelp = t => `<span class="mk-help">${esc(t)}</span>`, bcode = t => `<code>${esc(t)}</code>`;
+Object.assign(D, {
+  'u-software':{h:BTWO(['하드웨어', bhelp('손으로 만질 수 있는 부품'), bhelp('화면 · 키보드 · 메모리')], ['소프트웨어', bhelp('그 위에서 돌아가는 프로그램'), bhelp('운영체제 · 앱 · 게임')]),
+    cap:'만질 수 있으면 하드웨어, 그 위에서 돌아가면 소프트웨어예요'},
+  'u-operating-system':{h:flow([[{t:'앱 · 메신저, 브라우저'}], [{t:'운영체제 · Windows, Android', e:'부탁'}], [{t:'하드웨어 · 화면, 메모리, 저장 장치', k:'end', e:'관리'}]],
+      {label:'앱이 운영체제에 부탁하고 운영체제가 하드웨어를 관리하는 흐름'}), m:1,
+    cap:'앱은 운영체제를 거쳐 부품을 써요'},
+  'u-bit-byte':{h:ide(['const n = 0b00000101;', 'console.log(n);', 'console.log(n.toString(2));'],
+      [{l:1, vars:{n:'5'}}, {l:2, out:['5'], vars:{n:'5'}}, {l:3, out:['5', '101'], vars:{n:'5'}}],
+      {label:'0과 1 여덟 자리 00000101이 5이고, 5를 이진수로 쓰면 101인 코드'}), m:1,
+    cap:'0b 뒤 0과 1 여덟 칸이 8비트, 곧 1바이트예요'},
+  'u-script':{h:term([{c:'cat hello.js'}, {o:"console.log('안녕하세요');"}, {c:'node hello.js', h:'hello.js'}, {o:'안녕하세요'}],
+      {label:'hello.js 스크립트를 node로 실행해 안녕하세요가 찍히는 터미널'}), m:1,
+    cap:'파일을 바로 실행하면 위에서부터 차례로 돌아가요'},
+  'u-ide':{h:BTWO(['코드 에디터', bhelp('코드 쓰기')], ['IDE', bhelp('코드 쓰기'), bhelp('+ 빌드 도구'), bhelp('+ 디버거')]),
+    cap:'IDE는 편집기에 개발 도구를 더 묶은 프로그램이에요'},
+  'u-linter':{h:BTWO(['app.js', bcode('let total = 0;')], ['린터', bhelp('⚠ 1번째 줄: total을 만들고 쓰지 않았어요'), bhelp('규칙: no-unused-vars')], true),
+    cap:'쓰지 않는 변수처럼 버그가 될 만한 곳을 짚어 줘요'},
+  'u-formatter':{h:BTWO(['정리 전', bcode('let x=[1,2]')], ['정리 후', bcode('let x = [1, 2];')], true),
+    cap:'모양만 바뀌고 동작은 그대로예요'},
+  'u-package-manager':{h:flow([[{t:'패키지 저장소 · npm 레지스트리'}], [{t:'패키지 관리자 · npm, Yarn, pnpm', e:'내려받기'}], [{t:'내 프로젝트 · 설치 목록 기록', k:'end', e:'설치'}]],
+      {label:'패키지 관리자가 저장소에서 패키지를 내려받아 내 프로젝트에 설치하고 목록을 적는 흐름'}), m:1,
+    cap:'설치·업데이트·삭제를 대신 해 줘요'},
+  'u-snippet':{h:BTWO(['입력', bcode('log'), bhelp('고르면')], ['들어온 코드', bcode('console.log();')], true),
+    cap:'짧은 단어 하나로 정해 둔 코드가 들어와요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
