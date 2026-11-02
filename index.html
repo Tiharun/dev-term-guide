@@ -683,7 +683,10 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-md>span{display:flex;flex-direction:column;min-width:0;padding:3px 6px;border-radius:5px;font-size:11px;color:var(--muted)}.mk-md b{color:var(--ink);font-size:11.5px}.mk-md .on{background:var(--mark-bg)}
 /* 시각 스타일 — 스타일을 보여 주려고 일부 색을 직접 쓴다 */
 .cmp.mk-even>div::before{color:var(--ink)}
-.cmp.mk-cmpc>div{min-height:0}
+.cmp.mk-cmpc{grid-template-columns:minmax(0,1fr)}
+.cmp.mk-cmpc>div{min-height:0;min-width:0;padding-inline:8px}
+.mk-cmpc .mk-f{max-width:100%;overflow-x:auto}
+.mk-cmpc code{font:12px/1.6 var(--mono)}
 .mk-f>code{white-space:pre}
 .mk-yc{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .mk-ytile{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:var(--ch1);overflow:hidden}
@@ -2138,6 +2141,18 @@ T('basics','code',[
  {en:'Truthy·Falsy',ko:'참 같은 값 · 거짓 같은 값',d:'if 같은 조건에 넣었을 때 참으로 취급되는 값을 truthy, 거짓으로 취급되는 값을 falsy라고 해요.',x:'false, 0, 빈 문자열, null, undefined, NaN은 falsy예요. 그 밖은 모두 truthy라서 문자열 \'0\'이나 빈 배열 []도 참으로 취급돼요.',p:'값이 0일 때도 통과해야 하는데 if에서 걸러져. falsy 때문인지 봐줘',r:[],l:2,o:1,u:MDN('Glossary/Falsy'),v:'u-truthy-falsy'},
  {en:'Template Literal',ko:'템플릿 리터럴',d:'백틱(`)으로 감싼 문자열이에요. 안에 ${ }를 쓰면 변수나 식의 값을 끼워 넣을 수 있어요.',x:'따옴표 문자열은 +로 이어 붙여야 하지만, 템플릿 리터럴은 ${name}처럼 그 자리에 바로 넣어요. 여러 줄도 그대로 쓸 수 있어요.',p:'+로 이어 붙인 이 문자열들을 템플릿 리터럴로 바꿔줘',r:[],l:1,o:1,u:MDN('Web/JavaScript/Reference/Template_literals'),v:'u-template-literal'},
  {en:'Variable Scope',ko:'변수 스코프 · 변수가 보이는 범위',d:'변수를 쓸 수 있는 코드 범위예요. let과 const는 만든 중괄호 { } 블록 안에서만 보여요.',x:'블록 안에서 만든 변수를 밖에서 쓰면 오류가 나요. 기획에서 말하는 범위(Scope)는 이번에 만들 일의 범위라서 뜻이 달라요.',p:'이 변수가 왜 밖에서 undefined인지 스코프를 따져서 설명해줘',r:['Variable'],l:2,o:1,u:MDN('Glossary/Scope'),v:'u-variable-scope'},
+]);
+T('basics','principle',[
+ {en:'DRY',ko:'DRY · 반복하지 마라',d:'같은 코드를 여러 곳에 복사해 두지 말고, 한 곳에 모아 함께 쓰라는 원칙이에요.',x:'같은 계산이 세 곳에 있으면 하나를 고칠 때 나머지를 빠뜨리기 쉬워요. 함수나 상수로 한 곳에 모아요. 다만 우연히 비슷할 뿐인 코드까지 억지로 합치면 오히려 고치기 어려워져요.',p:'이 파일에서 똑같이 반복되는 코드를 함수 하나로 모아줘',r:['Function'],l:2,o:0,v:'u-dry'},
+ {en:'KISS',ko:'KISS · 단순하게 유지하라',d:'같은 일을 한다면 더 단순한 방법을 고르라는 원칙이에요.',x:'복잡한 코드는 읽기도, 고치기도, 버그를 찾기도 어려워요. 똑똑해 보이는 코드보다 다른 사람이 바로 이해하는 코드가 나아요.',p:'이 함수를 같은 동작을 하는 더 단순한 코드로 바꿔줘',r:[],l:2,o:0,v:'u-kiss'},
+ {en:'YAGNI',ko:'YAGNI · 필요할 때 만들어라',d:'나중에 필요할 것 같다는 이유만으로 기능을 미리 만들지 말라는 원칙이에요.',x:'미리 만든 기능은 끝내 안 쓰이기도 하고, 그동안 코드만 복잡하게 만들어요. 정말 필요해졌을 때 만들어요. AI에게 요청할 때도 요청한 것만 만들라고 적으면 도움이 돼요.',p:'요청한 기능만 만들고, 나중을 위한 옵션은 넣지 마',r:[],l:2,o:1,u:'https://martinfowler.com/bliki/Yagni.html',v:'u-yagni'},
+ {en:'Separation of Concerns',ko:'관심사 분리',d:'프로그램을 하는 일(관심사)별로 나눠, 각 부분이 자기 일만 하게 하는 원칙이에요.',x:'웹에서는 구조는 HTML, 모양은 CSS, 동작은 JavaScript로 나누는 것이 흔한 예예요. 이렇게 나누면 한 곳을 고쳐도 다른 곳이 덜 흔들려요.',p:'HTML 안에 섞인 스타일과 스크립트를 CSS, JS 파일로 나눠줘',r:[],l:3,o:0,v:'u-separation-of-concerns'},
+ {en:'Single Responsibility',ko:'단일 책임 원칙',d:'함수나 클래스 하나는 한 가지 일만 맡아야 한다는 원칙이에요.',x:'함수 하나가 저장도 하고, 메일도 보내고, 화면도 그리면 한 가지를 고칠 때 나머지가 깨지기 쉬워요. 고쳐야 할 이유가 하나뿐이도록 나누라는 뜻이에요.',p:'이 함수가 하는 일을 하나씩 나눠서 작은 함수로 쪼개줘',r:[],l:3,o:1,u:'https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html',v:'u-single-responsibility'},
+ {en:'Coupling·Cohesion',ko:'결합도 · 응집도',d:'결합도는 모듈끼리 서로 얼마나 기대는지, 응집도는 한 모듈 안의 코드가 한 가지 일에 얼마나 모여 있는지예요.',x:'결합도는 낮을수록, 응집도는 높을수록 좋아요. 그래야 한 모듈을 고쳐도 다른 모듈이 덜 깨지고, 고칠 곳도 한 군데에 모여 있어요.',p:'이 두 모듈이 서로 너무 얽혀 있어. 결합도를 낮춰줘',r:['Module'],l:3,o:0,v:'u-coupling-cohesion'},
+ {en:'Naming Convention',ko:'이름 짓기 규칙',d:'변수, 함수, 클래스, 파일 이름을 어떤 모양으로 지을지 정해 둔 규칙이에요.',x:'JavaScript에서는 변수와 함수는 userName 같은 camelCase, 클래스는 UserCard 같은 PascalCase를 써요. 상수는 MAX_SIZE처럼 대문자로 쓰는 팀도 흔해요. 함수 이름을 getUser처럼 동사로 시작하면 하는 일이 잘 보여요.',p:'이 파일의 변수와 함수 이름을 camelCase로 맞춰줘',r:[],l:1,o:1,u:'https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Code_style_guide/JavaScript',v:'u-naming-convention'},
+ {en:'Magic Number',ko:'매직 넘버',d:'코드에 뜻 설명 없이 박혀 있는 숫자예요.',x:'if (age >= 19)의 19가 무엇인지 코드만 봐서는 알기 어려워요. const ADULT_AGE = 19처럼 이름 붙인 상수로 바꾸면 뜻이 보이고, 바꿀 때도 한 곳만 고치면 돼요.',p:'코드에 박힌 숫자들을 이름 붙인 상수로 바꿔줘',r:['Hardcoding','Constant'],l:2,o:0,v:'u-magic-number'},
+ {en:'Code Smell',ko:'코드 냄새',d:'당장 버그는 아니지만, 더 깊은 문제가 있을 수 있다는 신호를 주는 코드 모양이에요.',x:'너무 긴 함수, 여기저기 복사된 코드, 인자가 너무 많은 함수가 흔한 예예요. 냄새를 찾으면 리팩터링으로 정리해요.',p:'이 파일에서 코드 냄새가 나는 곳을 찾아 목록으로 알려줘',r:['Refactoring'],l:2,o:1,u:'https://martinfowler.com/bliki/CodeSmell.html',v:'u-code-smell'},
+ {en:'Clean Code',ko:'클린 코드',d:'다른 사람이 읽고 고치기 쉽게 쓴 코드예요.',x:'뜻이 보이는 이름, 한 가지 일만 하는 짧은 함수, 일관된 형식이 특징이에요. 지저분한 코드를 클린 코드로 바꾸는 작업이 리팩터링이에요.',p:'동작은 그대로 두고 이 함수를 읽기 쉽게 다듬어줘',r:['Refactoring'],l:2,o:0,v:'u-clean-code'},
 ]);
 T('basics','tip',[
  {en:'Edge Case',ko:'엣지 케이스 · 예외 상황',d:'빈 값, 아주 긴 글처럼 흔하지 않지만 생길 수 있는 극단적인 경우.',p:'이름이 비었거나 아주 길 때 같은 엣지 케이스도 처리해줘',r:['Bug'],l:2,o:0,v:'ellipsis'},
@@ -6592,6 +6607,30 @@ Object.assign(D, {
   'u-stack-vs-heap':{h:mem([{stack:[{n:'age', v:'20'}, {n:'user', to:'A'}], heap:[{id:'A', v:"{ name: '민지' }"}]}], {still:true,
       label:'스택에는 age = 20과 상자 A를 가리키는 user가 있고, 힙의 상자 A에 객체가 있는 그림'}),
     cap:'작은 값은 스택에, 객체는 힙에 두고 가리켜요'},
+});
+/* basics: principle — 출처 확인(2026-11): Martin Fowler bliki YAGNI·CodeSmell(긴 메서드 예), Robert C. Martin SRP 글(one reason to change), MDN 코드 스타일(변수 camelCase, 클래스 PascalCase).
+   흔히: DRY·KISS·관심사 분리·결합도·응집도·매직 넘버·클린 코드, 상수 대문자 이름(MDN에 규칙 문장 없음). 예시: 변수·함수 이름, 1.1, 19, 200줄·인자 7개 같은 숫자 */
+Object.assign(D, {
+  'u-dry':{h:BCMP('나쁜 예: 같은 식 반복', ['a = price * 1.1;', 'b = cost * 1.1;', 'c = fee * 1.1;'], '좋은 예: 함수로 한 곳에', ['const tax = n => n * 1.1;', 'a = tax(price);', 'b = tax(cost);']),
+    cap:'1.1을 바꿀 때 고칠 곳이 한 군데예요'},
+  'u-kiss':{h:BCMP('나쁜 예: 돌아감', ['return n % 2 === 0', '  ? true : false;'], '좋은 예: 단순함', ['return n % 2 === 0;']),
+    cap:'결과가 같다면 더 짧고 단순하게 써요'},
+  'u-yagni':{h:BTWO(['지금 요청', bhelp('로그인 버튼')], ['미리 만든 것', bhelp('소셜 로그인 5종'), bhelp('2단계 인증'), bhelp('→ 아직 쓰는 곳 없음')]),
+    cap:'쓰일 때 만들면 코드가 가벼워요'},
+  'u-separation-of-concerns':{h:BTWO(['한곳에 섞음', bcode('<button'), bcode('  style="…"'), bcode('  onclick="…">')], ['나눠 둠', bhelp('HTML: 구조'), bhelp('CSS: 모양'), bhelp('JavaScript: 동작')], true),
+    cap:'구조, 모양, 동작을 따로 두면 고치기 쉬워요'},
+  'u-single-responsibility':{h:BCMP('나쁜 예: 한 함수가 다 함', ['function signup(u) {', '  db.insert(u);', '  mail.send(u.email);', '  page.show(u);', '}'], '좋은 예: 일 하나씩', ['function save(u) {…}', 'function notify(u) {…}', 'function show(u) {…}']),
+    cap:'함수 하나에 일 하나씩 맡겨요'},
+  'u-coupling-cohesion':{h:BTWO(['결합도는 낮게', bhelp('모듈끼리는'), bhelp('정해 둔 함수로만'), bhelp('주고받아요')], ['응집도는 높게', bhelp('비슷한 일은'), bhelp('한 모듈에'), bhelp('모아 둬요')]),
+    cap:'서로 덜 기대고, 안은 한 가지 일에 모아요'},
+  'u-naming-convention':{h:BTWO(['변수·함수 · camelCase', bcode('userName'), bcode('getUser()')], ['클래스 · PascalCase', bcode('UserCard'), bcode('new UserCard()')], true),
+    cap:'모양만 봐도 무엇인지 알 수 있어요'},
+  'u-magic-number':{h:BCMP('나쁜 예: 숫자만 있음', ['if (age >= 19) {…}'], '좋은 예: 이름 붙인 상수', ['const ADULT_AGE = 19;', 'if (age >= ADULT_AGE) {…}']),
+    cap:'숫자에 이름을 붙이면 뜻이 보여요'},
+  'u-code-smell':{h:BTWO(['흔한 냄새', bhelp('200줄짜리 함수'), bhelp('복사해 붙인 코드'), bhelp('인자 7개 함수')], ['정리 방법', bhelp('작은 함수로 나누기'), bhelp('한 곳에 모으기'), bhelp('객체 하나로 묶기')]),
+    cap:'버그는 아니어도 정리할 때라는 신호예요'},
+  'u-clean-code':{h:BCMP('나쁜 예: 뜻이 안 보임', ['function f(a) {', '  return a.filter(', '    x => x.s === 1);', '}'], '좋은 예: 뜻이 보임', ['function active(users) {', '  return users.filter(', '    u => u.isActive);', '}']),
+    cap:'이름만 읽어도 하는 일이 보여요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
