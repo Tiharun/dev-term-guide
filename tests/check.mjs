@@ -332,6 +332,10 @@ check('wx', () => WS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷�
 check('wm', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-') && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));
 const WDM = {'robots.txt': ['허용', '차단', 'aria-pressed', 'User-agent'], 'UTM Parameter': ['카톡', '인스타', '메일', 'utm_source', 'aria-pressed']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글자
 check('wdm', () => Object.entries(WDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('wfix', () => [    // 디렉터 검토 B: 다른 사이트에서 오면 Referer는 보통 도메인까지만(기본 strict-origin-when-cross-origin), 세션 뜻, 제목은 검색 엔진이 바꿀 수 있음, 이탈 조건 셋
+  [!g.find('Referrer').x.includes('도메인까지만'), 'Referrer x'], [!g.D['u-referrer'].cap.includes('도메인'), 'Referrer cap'],
+  [!g.find('Bounce Rate').x.includes('세션은'), 'Bounce Rate 세션'], [!g.D['u-title-tag'].cap.includes('보통'), 'Title Tag cap'],
+  [!g.D['u-bounce-rate'].h.includes('주요 이벤트'), 'Bounce Rate 그림']].filter(([b]) => b).map(([, n]) => n).join(', '));
 check('wou', () => WS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
 check('spcss', () => html.includes('.mk-spr.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}') ? '' : '검색 결과 줄이 움직이지 않아요');
 const WB_WRONG = {'Bounce Rate': ['Bounce', 'Debounce'], 'Event Tracking': ['Event'], 'Time on Page': ['Session'], 'Pop-up Blocker': ['Popover', 'Modal'], 'Logo': ['Brand Color']};    // 이름만 비슷한 카드
