@@ -93,7 +93,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
