@@ -2455,7 +2455,7 @@ T('front','core',[
  {en:'Gap',ko:'갭 · 사이 간격',d:'flex나 grid 안 상자들 사이의 간격.',x:'gap은 상자 사이만, margin은 상자 바깥 전체.',p:'카드 사이 gap을 16px로 맞춰줘',r:['Margin','Flexbox'],l:1,o:1,u:MDN('Web/CSS/gap'),v:'gap'},
  {en:'Align Items',ko:'정렬 · 얼라인',d:'상자들을 위·가운데·아래 중 어디에 맞출지 정하는 것.',j:'"가운데 정렬 맞춰 주세요"',p:'아이콘과 글자를 세로 가운데로 align-items: center 해줘',r:['Flexbox','Justify Content'],l:1,o:1,u:MDN('Web/CSS/align-items'),v:'align'},
  {en:'Justify Content',ko:'가로 배분 · 저스티파이',d:'상자들을 가로줄에서 왼쪽·가운데·양끝 등으로 나눠 놓는 것.',p:'로고는 왼쪽, 메뉴는 오른쪽 끝으로 space-between 해줘',r:['Align Items','Flexbox'],l:2,o:1,u:MDN('Web/CSS/justify-content'),v:'flex'},
- {en:'Position',ko:'포지션 · 위치 지정',d:'요소를 원래 자리에서 띄워 원하는 곳에 고정하는 방법. relative, absolute, fixed, sticky.',x:'absolute는 부모 기준, fixed는 화면 기준.',p:'채팅 버튼을 화면 오른쪽 아래에 position: fixed로 고정해줘',r:['Position Sticky','Z-index'],l:2,o:1,u:MDN('Web/CSS/position'),v:'u-front-position'},
+ {en:'Position',ko:'포지션 · 위치 지정',d:'요소를 원래 자리에서 띄워 원하는 곳에 고정하는 방법. relative, absolute, fixed, sticky.',x:'absolute는 위치를 정한 가장 가까운 조상을 기준으로 놓여요. fixed는 화면을 기준으로 놓여 스크롤해도 그대로예요.',p:'채팅 버튼을 화면 오른쪽 아래에 position: fixed로 고정해줘',r:['Position Sticky','Z-index'],l:2,o:1,u:MDN('Web/CSS/position'),v:'u-front-position'},
  {en:'Position Sticky',ko:'스티키 · 붙어 따라오기',d:'스크롤하다 정해진 위치에 닿으면 그 자리에 붙어 따라오는 위치 방식.',p:'목차를 스크롤해도 위에 붙어 있게 sticky로 해줘',r:['Sticky Header','Position'],l:2,o:1,u:MDN('Web/CSS/position#sticky_positioning'),v:'sticky'},
  {en:'Z-index',ko:'제트 인덱스 · 겹침 순서',d:'겹친 요소 중 무엇이 위에 올지 정하는 숫자. 클수록 위.',j:'"레이어 순서", "위로 올려 주세요"',p:'모달이 헤더 뒤로 숨어. 모달 z-index를 더 크게 해줘',r:['Position','Layer'],l:2,o:1,u:MDN('Web/CSS/z-index'),v:'zindex',sy:['뒤로 숨어요']},
  {en:'Overflow',ko:'오버플로 · 넘침',d:'내용이 상자보다 커서 넘칠 때 어떻게 할지(숨김·스크롤) 정하는 것.',p:'글이 상자 밖으로 넘쳐. overflow: hidden으로 잘라줘',r:['Text Ellipsis'],l:2,o:1,u:MDN('Web/CSS/overflow'),v:'overflow'},
@@ -2540,7 +2540,7 @@ T('front','tip',[
  {en:'prefers-color-scheme',ko:'시스템 밝기 설정 따르기',d:'사용자 기기가 다크 모드인지 알아내는 CSS 조건.',p:'기기가 다크 모드면 자동으로 어두운 색을 쓰게 해줘',r:['Dark Mode'],l:2,o:1,u:MDN('Web/CSS/@media/prefers-color-scheme'),v:'u-front-prefers-color-scheme'},
  {en:'DevTools',ko:'개발자 도구',d:'브라우저에서 F12로 여는 도구. 요소·스타일·오류를 직접 볼 수 있어요.',x:'요소와 스타일을 보는 탭을 Chrome은 Elements, Firefox는 Inspector라고 불러요. 이름만 다르고 하는 일은 같아요.',p:'개발자 도구 Console 탭에 뜬 빨간 오류를 붙일게. 원인을 알려줘',r:['Console','Inspect Element'],l:1,o:0,v:'u-front-devtools'},
  {en:'Inspect Element',ko:'요소 검사',d:'화면 요소를 오른쪽 클릭하고 "검사"를 골라 그 요소의 HTML·CSS를 보는 기능.',p:'요소 검사로 보니 이 상자 margin이 40px이야. 줄여줘',r:['DevTools'],l:1,o:0,v:'u-front-inspect-element'},
- {en:'Cache Busting',ko:'캐시 무효화 · 캐시 버스팅',d:'파일이 바뀔 때 파일 이름이나 주소에 버전을 붙여, 브라우저가 저장본 대신 새 파일을 받게 하는 방법이에요.',x:'강제 새로고침(Ctrl+Shift+R)은 내 브라우저 한 곳에서만 저장본을 건너뛰어요. 캐시 무효화는 파일 이름을 바꿔 모든 방문자가 새 파일을 받게 해요.',p:'수정이 반영 안 돼. 캐시 문제인지 확인해줘',r:['Cache', 'Hard Refresh'],l:2,o:0,v:'u-front-cache-busting'},
+ {en:'Cache Busting',ko:'캐시 무효화 · 캐시 버스팅',d:'파일이 바뀔 때 파일 이름이나 주소에 버전을 붙여, 브라우저가 저장본 대신 새 파일을 받게 하는 방법이에요.',x:'강력 새로고침(Ctrl+Shift+R)은 내 브라우저 한 곳에서만 저장본을 건너뛰어요. 캐시 무효화는 파일 이름을 바꿔 모든 방문자가 새 파일을 받게 해요.',p:'수정이 반영 안 돼. 캐시 문제인지 확인해줘',r:['Cache', 'Hard Refresh'],l:2,o:0,v:'u-front-cache-busting'},
  {en:'Polyfill',ko:'폴리필',d:'옛 브라우저에 없는 기능을 비슷하게 채워 주는 코드.',p:'옛 Safari에서도 되게 폴리필이 필요한지 확인해줘',r:['Cross-browser'],l:3,o:1,u:MDN('Glossary/Polyfill'),v:'u-front-polyfill'},
 ]);
 </script>

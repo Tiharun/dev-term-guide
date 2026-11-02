@@ -456,7 +456,9 @@ check('fdirc', () => { const r = [], D = g.D, cb = FC('Cache Busting');    // �
   if (!D['u-front-request-animation-frame'].h.includes('계속하려면 다시 요청해요')) r.push('rAF 다시 요청');
   const one = vm.runInContext(`[fspecSay(new Set(['#main'])), fspecSay(new Set(['h2'])), fspec(new Set(['h2']))]`, ctx);
   if (!one[0].includes('#main만 켜져서 주황이에요') || !one[1].includes('h2만 켜져서 초록이에요') || !one[2].includes('var(--moss)')) r.push('한 규칙 말·색');
-  if (/--ch3|--mark\)/.test(vm.runInContext(`JSON.stringify(FSPEC)`, ctx))) r.push('대비 낮은 색');
+  if (/"--ch3"|"--mark"/.test(vm.runInContext(`JSON.stringify(FSPEC)`, ctx))) r.push('대비 낮은 색');
+  if (!/위치를 정한/.test(FC('Position').x) || /부모 기준/.test(FC('Position').x)) r.push('Position x');
+  if (!/강력 새로고침/.test(cb.x || '')) r.push('강력 새로고침');
   const say = vm.runInContext(`[fbubSay('button', false), fbubSay('li', true)]`, ctx);
   if (!say[0].includes('ul까지 올라가요') || !say[1].includes('ul은 반응하지 않아요')) r.push('fbubSay');
   if (!['aria-pressed', 'fspec(on)'].every(x => String(D['u-front-specificity'].init).includes(x)) || !['stop = !stop', 'fbub(t, stop)'].every(x => String(D['u-front-event-bubbling'].init).includes(x))) r.push('init');
