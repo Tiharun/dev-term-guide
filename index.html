@@ -433,6 +433,20 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dtw.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-fvt{border-collapse:collapse;width:min(100%,380px);font:12px/1.4 var(--sans);color:var(--ink)}.mk-fvt th,.mk-fvt td{border:1px solid var(--rule);padding:4px 6px;text-align:left}.mk-fvt th{font-weight:800}.mk-fvt code{font:600 11.5px/1.4 var(--mono);overflow-wrap:anywhere}
 .cmp>div:has(>.mk-fpd){min-width:0;grid-template-columns:minmax(0,1fr)}.mk-fpd{width:100%;display:flex;justify-content:center}.mk-fpd .mk-browser{max-width:100%}
+.fig:has(.mk-fdp,.mk-fpx,.mk-fem,.mk-ffr,.mk-fvt) .figcap{position:static;margin:0 96px 11px 14px}
+.mk-fsc{border:1.5px solid var(--ink);border-radius:6px;padding:6px 8px;display:grid;gap:2px}.mk-fon{color:var(--mark-text)}
+.mk-fdp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:min(100%,380px)}.mk-fdp>div{border:1px solid var(--rule);border-radius:6px;background:var(--plate);padding:6px 8px;display:grid;gap:6px;align-content:start;font-size:12px;color:var(--ink)}
+.mk-fdp code{font:600 11.5px/1.4 var(--mono)}.mk-fdp .x{border:1.5px solid var(--ink);border-radius:4px;padding:1px 6px}.mk-fdp .bl{display:block}.mk-fdp .fx{display:flex;gap:4px}.mk-fdp .no{border:1.5px dashed var(--rule);border-radius:4px;padding:1px 6px;color:var(--muted)}
+.mk-fst{display:flex;flex-direction:column;align-items:center;gap:10px}
+.mk-ftw{padding:16px;border-radius:8px;background:var(--ink);color:var(--plate);font-size:12px}
+.mk-fct{display:grid;grid-template-columns:1fr 2.4fr 1fr;flex:1;font-size:11px;color:var(--muted);text-align:center}.mk-fct>span{display:grid;place-items:center}.mk-fct>b{display:grid;place-items:center;border:1.5px solid var(--ink);border-radius:4px;background:var(--plate);color:var(--ink);font-size:12px}
+.mk-ffw{width:100%;border:1px solid var(--rule);background:var(--plate);padding:8px 0;display:grid}.mk-ffw span{margin:0 22%;border:1.5px solid var(--ink);border-radius:4px;padding:6px 4px;text-align:center;font-size:12px;color:var(--ink)}.mk-ffw.f span{margin:0;border-radius:0;border-inline:0;background:var(--mark-bg)}
+.mk-fpx{display:grid;gap:4px;justify-items:start}.mk-fpx .r{width:128px;height:8px;border-bottom:1.5px solid var(--ink);background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 16px)}.mk-fpx .n{width:128px;display:flex;justify-content:space-between;font:11px/1.3 var(--mono);color:var(--muted)}
+.mk-fpx .b{width:128px;height:40px;border:1.5px solid var(--ink);border-radius:4px;display:grid;place-items:center;font:600 12px/1 var(--mono);background:var(--plate);color:var(--ink)}
+.mk-fem div{border:1.5px solid var(--ink);border-radius:6px;padding:6px 8px;background:var(--plate);display:grid;gap:6px}.mk-fem div div{border-color:var(--rule)}.mk-fem code{font:600 11.5px/1.4 var(--mono);color:var(--ink)}
+.mk-ffr{display:grid;grid-template-columns:1fr 2fr 1fr;gap:4px;width:min(100%,280px)}.mk-ffr span{border:1.5px solid var(--ink);border-radius:4px;padding:8px 0;text-align:center;font:600 12px/1.3 var(--mono);background:var(--plate);color:var(--ink)}.mk-ffr+p{margin:6px 0 0;font-size:12px;color:var(--muted)}
+.mk-fvr b,.mk-fvr .mk-fpl{color:var(--mark-text)}.mk-fvr .mk-btn{background:var(--plate);color:var(--mark-text);border:1.5px solid var(--mark-text)}
+.mk-fsm{display:grid;gap:4px;width:min(100%,150px)}.mk-fsm code{border:1.5px solid var(--ink);border-radius:4px;padding:3px 6px;font:600 11.5px/1.4 var(--mono);background:var(--plate);color:var(--ink);text-align:center}.mk-fsm.y code{border-color:var(--mark-text);color:var(--mark-text)}
 .mk-fvon td{background:var(--mark-bg)}.mk-fvon b{display:block;font:800 11px/1.3 var(--sans);color:var(--mark-text)}
 .mk-art:has(.mk-fcd){width:auto;max-width:190px}.mk-fcd .mk-dcb{gap:2px}.mk-fcd .mk-dcb p{margin:0;font:600 12px/1.5 var(--mono)}
 .mk-fib{display:flex;flex-wrap:wrap;gap:4px}.mk-fib span{border:1.5px solid var(--ink);border-radius:4px;padding:2px 8px;font-size:12px;background:var(--plate);color:var(--ink)}.mk-fib.b{flex-direction:column}
@@ -2417,11 +2431,11 @@ T('web','tip',[
 <script>
 /* ===== 04 프론트엔드 ===== */
 T('front','basic',[
- {en:'Tag',ko:'태그',d:'<p>, <button>처럼 HTML에서 요소의 종류를 정하는 꺾쇠 표시.',p:'이 글자는 <p> 대신 <h2> 태그로 바꿔줘',r:['Element','HTML'],l:1,o:1,u:MDN('Glossary/Tag'),v:{code:'<button>보내기</button>'}},
+ {en:'Tag',ko:'태그',d:'<p>, <button>처럼 HTML에서 요소의 종류를 정하는 꺾쇠 표시.',p:'이 글자는 <p> 대신 <h2> 태그로 바꿔줘',r:['Element','HTML'],l:1,o:1,u:MDN('Glossary/Tag'),v:'u-front-tag'},
  {en:'Element',ko:'요소 · 엘리먼트',d:'태그로 만든 화면의 부품 하나. 버튼 하나, 제목 하나가 각각 요소예요.',p:'이 요소만 오른쪽으로 옮겨줘',r:['Tag','DOM'],l:1,o:1,u:MDN('Glossary/Element'),v:'boxmodel'},
- {en:'Attribute',ko:'속성 · 어트리뷰트',d:'태그에 붙이는 추가 정보. href, src, alt 등.',p:'이미지에 alt 속성으로 설명을 넣어줘',r:['Tag'],l:1,o:1,u:MDN('Glossary/Attribute'),v:{code:'<img src="cat.png" alt="고양이 사진">'}},
- {en:'Selector',ko:'선택자 · 셀렉터',d:'CSS에서 어떤 요소를 꾸밀지 고르는 이름표. .card, #main, button 등.',p:'.card 선택자에만 그림자를 넣어줘',r:['Class Name','CSS'],l:1,o:1,u:MDN('Web/CSS/CSS_selectors'),v:{code:'.card { padding: 24px; }\n#main { width: 960px; }'}},
- {en:'Class Name',ko:'클래스 이름',d:'요소에 붙이는 스타일용 이름표. 같은 이름이면 같은 모양을 공유해요.',x:'#id는 한 페이지에 하나, .class는 여러 개에 붙일 수 있어요.',p:'버튼들에 btn-primary 클래스를 붙여서 같은 모양으로 맞춰줘',r:['Selector'],l:1,o:1,u:MDN('Web/HTML/Global_attributes/class'),v:{code:'<div class="card">...</div>\n<div class="card">...</div>'}},
+ {en:'Attribute',ko:'속성 · 어트리뷰트',d:'태그에 붙이는 추가 정보. href, src, alt 등.',p:'이미지에 alt 속성으로 설명을 넣어줘',r:['Tag'],l:1,o:1,u:MDN('Glossary/Attribute'),v:'u-front-attribute'},
+ {en:'Selector',ko:'선택자 · 셀렉터',d:'CSS에서 어떤 요소를 꾸밀지 고르는 이름표. .card, #main, button 등.',p:'.card 선택자에만 그림자를 넣어줘',r:['Class Name','CSS'],l:1,o:1,u:MDN('Web/CSS/CSS_selectors'),v:'u-front-selector'},
+ {en:'Class Name',ko:'클래스 이름',d:'요소에 붙이는 스타일용 이름표. 같은 이름이면 같은 모양을 공유해요.',x:'#id는 한 페이지에 하나, .class는 여러 개에 붙일 수 있어요.',p:'버튼들에 btn-primary 클래스를 붙여서 같은 모양으로 맞춰줘',r:['Selector'],l:1,o:1,u:MDN('Web/HTML/Global_attributes/class'),v:'u-front-class-name'},
  {en:'Box Model',ko:'박스 모델',d:'화면의 모든 상자는 내용·안쪽 여백·테두리·바깥 여백 네 겹으로 되어 있어요.',p:'박스 모델 기준으로 어느 여백 때문에 벌어졌는지 알려줘',r:['Margin','Padding','Border'],l:1,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Box_model'),v:'boxmodel'},
  {en:'Margin',ko:'마진 · 바깥 여백',d:'상자 테두리 바깥의 빈 공간. 다른 상자와의 거리.',x:'Margin은 상자 바깥, Padding은 상자 안쪽.',j:'"바깥 좀 띄워 주세요"',p:'카드끼리 너무 붙어 있어. 아래 margin을 24px 줘',r:['Padding','Gap','Box Model'],l:1,o:1,u:MDN('Web/CSS/margin'),v:'margin'},
  {en:'Padding',ko:'패딩 · 안쪽 여백',d:'상자 테두리와 내용 사이의 빈 공간.',x:'Margin은 상자 바깥, Padding은 상자 안쪽.',j:'"안쪽 좀 띄워 주세요"',p:'카드 안쪽 padding을 24px로 늘려줘',r:['Margin','Box Model'],l:1,o:1,u:MDN('Web/CSS/padding'),v:'padding'},
@@ -2437,7 +2451,7 @@ T('front','core',[
  {en:'Position Sticky',ko:'스티키 · 붙어 따라오기',d:'스크롤하다 정해진 위치에 닿으면 그 자리에 붙어 따라오는 위치 방식.',p:'목차를 스크롤해도 위에 붙어 있게 sticky로 해줘',r:['Sticky Header','Position'],l:2,o:1,u:MDN('Web/CSS/position#sticky_positioning'),v:'sticky'},
  {en:'Z-index',ko:'제트 인덱스 · 겹침 순서',d:'겹친 요소 중 무엇이 위에 올지 정하는 숫자. 클수록 위.',j:'"레이어 순서", "위로 올려 주세요"',p:'모달이 헤더 뒤로 숨어. 모달 z-index를 더 크게 해줘',r:['Position','Layer'],l:2,o:1,u:MDN('Web/CSS/z-index'),v:'zindex',sy:['뒤로 숨어요']},
  {en:'Overflow',ko:'오버플로 · 넘침',d:'내용이 상자보다 커서 넘칠 때 어떻게 할지(숨김·스크롤) 정하는 것.',p:'글이 상자 밖으로 넘쳐. overflow: hidden으로 잘라줘',r:['Text Ellipsis'],l:2,o:1,u:MDN('Web/CSS/overflow'),v:'overflow'},
- {en:'Display',ko:'디스플레이',d:'요소가 한 줄을 다 차지할지(block), 글자처럼 옆으로 붙을지(inline), 숨길지(none) 정하는 속성.',p:'휴대폰에선 이 메뉴를 display: none으로 숨겨줘',r:['Flexbox'],l:2,o:1,u:MDN('Web/CSS/display'),v:{stack:['block · 한 줄 통째로','inline · 글자처럼 옆으로','none · 숨김'],hl:[0]}},
+ {en:'Display',ko:'디스플레이',d:'요소가 한 줄을 다 차지할지(block), 글자처럼 옆으로 붙을지(inline), 숨길지(none) 정하는 속성.',p:'휴대폰에선 이 메뉴를 display: none으로 숨겨줘',r:['Flexbox'],l:2,o:1,u:MDN('Web/CSS/display'),v:'u-front-display'},
  {en:'Component',ko:'컴포넌트 · 부품',d:'버튼·카드처럼 여러 곳에서 다시 쓰도록 떼어 낸 화면 조각.',p:'상품 카드를 컴포넌트로 만들어서 목록에서 재사용해줘',r:['Props','State'],l:1,o:0,v:'card'},
  {en:'Media Query',ko:'미디어 쿼리',d:'화면 너비 같은 조건에 따라 다른 CSS를 적용하는 문법. 반응형의 핵심.',p:'768px 이하에서는 카드를 한 줄에 하나만 보이게 미디어 쿼리를 넣어줘',r:['Breakpoint','Responsive Web Design'],l:2,o:1,u:MDN('Web/CSS/CSS_media_queries/Using_media_queries'),v:'breakpoint'},
 ]);
@@ -2453,37 +2467,37 @@ T('front','motion',[
  {en:'Intersection Observer',ko:'화면 진입 감지',d:'요소가 화면에 들어왔는지 알려 주는 JavaScript 기능. 스크롤 등장 효과에 써요.',p:'Intersection Observer로 섹션이 보일 때만 애니메이션을 시작해줘',r:['Scroll Reveal','Lazy Loading'],l:3,o:1,u:MDN('Web/API/Intersection_Observer_API'),v:'scrollreveal'},
 ]);
 T('front','adv',[
- {en:'React',ko:'리액트',d:'화면을 컴포넌트 단위로 만드는 가장 널리 쓰이는 JavaScript 라이브러리.',p:'이 화면을 React 컴포넌트로 나눠서 만들어줘',r:['Component','State','Props'],l:2,o:1,u:'https://react.dev/learn',v:{tree:['App','├ Header','├ ProductList','│  └ ProductCard','└ Footer'],hl:[3]}},
+ {en:'React',ko:'리액트',d:'화면을 컴포넌트 단위로 만드는 가장 널리 쓰이는 JavaScript 라이브러리.',p:'이 화면을 React 컴포넌트로 나눠서 만들어줘',r:['Component','State','Props'],l:2,o:1,u:'https://react.dev/learn',v:'u-front-react'},
  {en:'State',ko:'상태 · 스테이트',d:'화면이 기억하는 바뀌는 값. 열림/닫힘, 입력한 글자 등. 바뀌면 화면이 다시 그려져요.',p:'메뉴 열림 여부를 state로 관리해줘',r:['Props','React'],l:2,o:1,u:'https://react.dev/learn/state-a-components-memory',v:'toggle'},
- {en:'Props',ko:'프롭스 · 전달값',d:'부모 컴포넌트가 자식 컴포넌트에 넘겨주는 값.',x:'props는 밖에서 받는 값, state는 안에서 기억하는 값.',p:'카드 제목과 가격을 props로 받게 해줘',r:['State','Component'],l:2,o:1,u:'https://react.dev/learn/passing-props-to-a-component',v:{flow:['부모','props 전달','자식 카드']}},
- {en:'Hook',ko:'훅',d:'useState, useEffect처럼 React 컴포넌트에 기능을 붙이는 함수.',p:'useEffect 훅으로 처음 열릴 때 데이터를 불러와줘',r:['State','React'],l:3,o:1,u:'https://react.dev/reference/react/hooks',v:{code:'const [open, setOpen] = useState(false);'}},
+ {en:'Props',ko:'프롭스 · 전달값',d:'부모 컴포넌트가 자식 컴포넌트에 넘겨주는 값.',x:'props는 밖에서 받는 값, state는 안에서 기억하는 값.',p:'카드 제목과 가격을 props로 받게 해줘',r:['State','Component'],l:2,o:1,u:'https://react.dev/learn/passing-props-to-a-component',v:'u-front-props'},
+ {en:'Hook',ko:'훅',d:'useState, useEffect처럼 React 컴포넌트에 기능을 붙이는 함수.',p:'useEffect 훅으로 처음 열릴 때 데이터를 불러와줘',r:['State','React'],l:3,o:1,u:'https://react.dev/reference/react/hooks',v:'u-front-hook'},
  {en:'Re-render',ko:'리렌더 · 다시 그리기',d:'state나 props가 바뀌어 화면을 다시 그리는 일. 너무 잦으면 느려져요.',j:'"리렌더 터진다"',p:'입력할 때마다 목록 전체가 리렌더되는지 확인하고 줄여줘',r:['State','Jank'],l:3,o:0,v:'flicker'},
- {en:'Virtual DOM',ko:'가상 돔',d:'화면을 바꾸기 전에 메모리 속 사본에서 먼저 비교해 바뀐 곳만 고치는 방식.',p:'화면 일부만 바뀌는데 전체가 다시 그려지는지 확인해줘',r:['DOM','React'],l:3,o:0,v:{flow:['새 화면 계산','이전과 비교','바뀐 곳만 반영'],hl:[1]}},
- {en:'TypeScript',ko:'타입스크립트',d:'JavaScript에 값의 종류(타입)를 적을 수 있게 한 언어. 실수를 미리 잡아 줘요.',p:'이 프로젝트를 TypeScript로 만들고 타입을 꼼꼼히 정해줘',r:['Static vs Dynamic Typing'],l:2,o:1,u:'https://www.typescriptlang.org/docs/',v:{code:'type User = { name: string; age: number };'}},
- {en:'Bundler',ko:'번들러',d:'여러 JS·CSS 파일을 브라우저가 받기 좋게 하나로 묶는 도구. Vite, webpack 등.',p:'Vite로 프로젝트를 만들고 빌드까지 설정해줘',r:['Build'],l:3,o:0,v:{flow:['파일 수십 개','번들러','파일 몇 개']}},
- {en:'Tailwind CSS',ko:'테일윈드',d:'class 이름에 p-4, text-lg처럼 짧은 스타일을 바로 적는 CSS 도구.',p:'이 카드를 Tailwind 클래스로 꾸며줘',r:['Class Name','CSS'],l:2,o:1,u:'https://tailwindcss.com/docs',v:{code:'<div class="p-6 rounded-xl shadow">'}},
+ {en:'Virtual DOM',ko:'가상 돔',d:'화면을 바꾸기 전에 메모리 속 사본에서 먼저 비교해 바뀐 곳만 고치는 방식.',p:'화면 일부만 바뀌는데 전체가 다시 그려지는지 확인해줘',r:['DOM','React'],l:3,o:0,v:'u-front-virtual-dom'},
+ {en:'TypeScript',ko:'타입스크립트',d:'JavaScript에 값의 종류(타입)를 적을 수 있게 한 언어. 실수를 미리 잡아 줘요.',p:'이 프로젝트를 TypeScript로 만들고 타입을 꼼꼼히 정해줘',r:['Static vs Dynamic Typing'],l:2,o:1,u:'https://www.typescriptlang.org/docs/',v:'u-front-typescript'},
+ {en:'Bundler',ko:'번들러',d:'여러 JS·CSS 파일을 브라우저가 받기 좋게 하나로 묶는 도구. Vite, webpack 등.',p:'Vite로 프로젝트를 만들고 빌드까지 설정해줘',r:['Build'],l:3,o:0,v:'u-front-bundler'},
+ {en:'Tailwind CSS',ko:'테일윈드',d:'class 이름에 p-4, text-lg처럼 짧은 스타일을 바로 적는 CSS 도구.',p:'이 카드를 Tailwind 클래스로 꾸며줘',r:['Class Name','CSS'],l:2,o:1,u:'https://tailwindcss.com/docs',v:'u-front-tailwind-css'},
 ]);
 T('front','layout',[
- {en:'Container',ko:'컨테이너 · 감싸는 틀',d:'내용을 일정 너비로 가운데 모아 주는 바깥 상자.',p:'본문을 최대 1200px 컨테이너로 가운데 정렬해줘',r:['Max Width','Wrapper'],l:1,o:0,v:{page:'mn'}},
+ {en:'Container',ko:'컨테이너 · 감싸는 틀',d:'내용을 일정 너비로 가운데 모아 주는 바깥 상자.',p:'본문을 최대 1200px 컨테이너로 가운데 정렬해줘',r:['Max Width','Wrapper'],l:1,o:0,v:'u-front-container'},
  {en:'Max Width',ko:'최대 너비',d:'아무리 화면이 넓어도 이 이상은 커지지 않게 막는 값.',p:'큰 모니터에서 글줄이 너무 길어. 본문 max-width를 720px로 해줘',r:['Container'],l:1,o:1,u:MDN('Web/CSS/max-width'),v:'responsive'},
  {en:'Column',ko:'단 · 열 · 컬럼',d:'화면을 세로로 나눈 칸. 2단, 3단 배치.',p:'PC에선 2단, 휴대폰에선 1단으로 해줘',r:['CSS Grid','Row'],l:1,o:0,v:'grid'},
  {en:'Row',ko:'행 · 줄 · 로우',d:'가로로 늘어선 한 줄.',p:'아이콘들을 한 row에 나란히 놓아줘',r:['Column'],l:1,o:0,v:'flex'},
  {en:'Center Alignment',ko:'가운데 정렬',d:'요소를 가로·세로 가운데에 놓는 것. 가장 자주 하는 요청이에요.',p:'로딩 아이콘을 화면 정가운데에 놓아줘',r:['Align Items','Justify Content'],l:1,o:0,v:'align'},
- {en:'Full Width',ko:'꽉 찬 너비 · 풀 와이드',d:'화면 양 끝까지 꽉 차는 너비.',p:'히어로 배경 이미지는 full width로, 글은 가운데 컨테이너 안에 둬',r:['Container'],l:1,o:0,v:{page:'hr'}},
+ {en:'Full Width',ko:'꽉 찬 너비 · 풀 와이드',d:'화면 양 끝까지 꽉 차는 너비.',p:'히어로 배경 이미지는 full width로, 글은 가운데 컨테이너 안에 둬',r:['Container'],l:1,o:0,v:'u-front-full-width'},
  {en:'Wrapper',ko:'래퍼 · 감싸기',d:'여러 요소를 한 덩어리로 묶으려고 감싸는 상자.',p:'제목과 버튼을 wrapper div로 감싸서 같이 움직이게 해줘',r:['Container'],l:2,o:0,v:'boxmodel'},
  {en:'Flex Wrap',ko:'줄바꿈 배치',d:'flex 상자가 한 줄에 다 안 들어갈 때 다음 줄로 넘기는 설정.',p:'태그가 넘치면 다음 줄로 내려가게 flex-wrap: wrap 해줘',r:['Flexbox'],l:2,o:1,u:MDN('Web/CSS/flex-wrap'),v:'chip'},
  {en:'Aspect Ratio',ko:'화면비 · 비율 고정',d:'가로세로 비율(16:9, 1:1)을 고정하는 것.',p:'썸네일을 모두 16:9 비율로 맞춰줘',r:['Object Fit'],l:1,o:1,u:MDN('Web/CSS/aspect-ratio'),v:'aspect'},
  {en:'Object Fit',ko:'이미지 채우기 방식',d:'틀과 이미지 비율이 다를 때 잘라서 채울지(cover), 다 보이게 할지(contain) 정하는 것.',p:'사진이 찌그러져. object-fit: cover로 잘라서 채워줘',r:['Aspect Ratio'],l:2,o:1,u:MDN('Web/CSS/object-fit'),v:'aspect',sy:['사진이 찌그러져요']},
 ]);
 T('front','unit',[
- {en:'px',ko:'픽셀',d:'화면 점 하나 크기를 기준으로 한 고정 단위.',p:'구분선은 1px로 해줘',r:['rem','em'],l:1,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Values_and_units'),v:{big:'16px',sub:'고정된 크기'}},
- {en:'rem',ko:'렘 · 기본 글자 배수',d:'기본 글자 크기(보통 16px)의 몇 배인지로 정하는 단위. 1rem=16px.',x:'rem은 맨 위 기본 크기 기준, em은 바로 부모 크기 기준.',p:'글자 크기를 px 대신 rem으로 바꿔서 확대해도 깨지지 않게 해줘',r:['em','px'],l:2,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Values_and_units'),v:{big:'1.5rem = 24px',sub:'기본 16px × 1.5'}},
- {en:'em',ko:'엠 · 부모 글자 배수',d:'부모 요소 글자 크기의 몇 배인지로 정하는 단위.',p:'버튼 안쪽 여백을 em으로 줘서 글자 크기에 따라 같이 커지게 해줘',r:['rem'],l:2,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Values_and_units'),v:{big:'2em',sub:'부모 글자 × 2'}},
+ {en:'px',ko:'픽셀',d:'화면 점 하나 크기를 기준으로 한 고정 단위.',p:'구분선은 1px로 해줘',r:['rem','em'],l:1,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Values_and_units'),v:'u-front-px'},
+ {en:'rem',ko:'렘 · 기본 글자 배수',d:'기본 글자 크기(보통 16px)의 몇 배인지로 정하는 단위. 1rem=16px.',x:'rem은 맨 위 기본 크기 기준, em은 바로 부모 크기 기준.',p:'글자 크기를 px 대신 rem으로 바꿔서 확대해도 깨지지 않게 해줘',r:['em','px'],l:2,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Values_and_units'),v:'u-front-rem'},
+ {en:'em',ko:'엠 · 부모 글자 배수',d:'부모 요소 글자 크기의 몇 배인지로 정하는 단위.',p:'버튼 안쪽 여백을 em으로 줘서 글자 크기에 따라 같이 커지게 해줘',r:['rem'],l:2,o:1,u:MDN('Learn_web_development/Core/Styling_basics/Values_and_units'),v:'u-front-em'},
  {en:'Percent',ko:'퍼센트 · %',d:'부모 상자 크기의 몇 퍼센트인지로 정하는 단위.',p:'이미지 너비를 100%로 해서 상자에 꽉 차게 해줘',r:['vw / vh'],l:1,o:0,v:'responsive'},
  {en:'vw / vh',ko:'화면 너비·높이 비율',d:'1vw는 화면 너비의 1%, 1vh는 화면 높이의 1%.',x:'휴대폰은 주소창 때문에 100vh가 화면보다 클 수 있어요. 그땐 dvh.',p:'첫 화면을 100vh 높이로 꽉 채워줘',r:['Viewport','Percent'],l:2,o:1,u:MDN('Web/CSS/length'),v:'viewport'},
- {en:'fr',ko:'에프알 · 남은 칸 나누기',d:'grid에서 남은 공간을 몇 대 몇으로 나눌지 정하는 단위.',p:'왼쪽은 1fr, 오른쪽은 2fr로 나눠줘',r:['CSS Grid'],l:2,o:1,u:MDN('Web/CSS/flex_value'),v:{tbl:[['1fr','2fr'],['⅓','⅔']]}},
+ {en:'fr',ko:'에프알 · 남은 칸 나누기',d:'grid에서 남은 공간을 몇 대 몇으로 나눌지 정하는 단위.',p:'왼쪽은 1fr, 오른쪽은 2fr로 나눠줘',r:['CSS Grid'],l:2,o:1,u:MDN('Web/CSS/flex_value'),v:'u-front-fr'},
  {en:'clamp()',ko:'클램프 · 최소·최대 사이',d:'최솟값·권장값·최댓값을 정해 그 사이에서 알아서 크기가 바뀌게 하는 함수.',p:'제목 글자를 clamp로 휴대폰 28px에서 PC 48px 사이로 바뀌게 해줘',r:['rem','Responsive Web Design'],l:3,o:1,u:MDN('Web/CSS/clamp'),v:'fontsize'},
- {en:'CSS Variable',ko:'CSS 변수 · 커스텀 속성',d:'--main-color처럼 값을 이름으로 저장해 여러 곳에서 쓰는 CSS 기능. 테마 바꾸기에 좋아요.',p:'자주 쓰는 색을 CSS 변수로 모아서 한 곳에서 바꾸게 해줘',r:['Design Token'],l:2,o:1,u:MDN('Web/CSS/Using_CSS_custom_properties'),v:{code:':root { --brand: #e0662b; }\n.btn { background: var(--brand); }'}},
+ {en:'CSS Variable',ko:'CSS 변수 · 커스텀 속성',d:'--main-color처럼 값을 이름으로 저장해 여러 곳에서 쓰는 CSS 기능. 테마 바꾸기에 좋아요.',p:'자주 쓰는 색을 CSS 변수로 모아서 한 곳에서 바꾸게 해줘',r:['Design Token'],l:2,o:1,u:MDN('Web/CSS/Using_CSS_custom_properties'),v:'u-front-css-variable'},
 ]);
 T('front','css',[
  {en:'Specificity',ko:'명시도 · 규칙 우선순위',d:'같은 요소에 규칙이 겹칠 때 어느 선택자가 더 구체적인지로 이길 규칙을 정하는 점수예요.',x:'명시도는 id, 클래스, 태그 순으로 세어 높은 쪽이 이겨요. 점수가 같을 때만 캐스케이드가 뒤에 쓴 규칙을 고르고, !important는 이 둘보다 먼저 따져요.',p:'이 버튼 색이 안 바뀌는 이유를 명시도로 찾아서 고쳐줘',r:['Selector','Cascade'],l:2,o:1,u:MDN('Web/CSS/CSS_cascade/Specificity'),v:'u-front-specificity'},
@@ -2512,14 +2526,14 @@ T('front','event',[
  {en:'Fetch',ko:'데이터 가져오기',d:'서버에 요청을 보내 JSON 같은 데이터를 받아 오는 브라우저 함수예요.',x:'fetch는 요청을 보내고 약속(Promise)을 돌려주고, async/await는 그 약속을 기다리는 문법이에요. 404여도 fetch는 reject하지 않아서 res.ok로 성공을 확인해요.',p:'글 목록을 fetch로 받아 오고, 실패하면 res.ok를 확인해서 안내 문구를 보여줘',r:['JSON','Async/Await'],l:2,o:1,u:MDN('Web/API/Fetch_API/Using_Fetch'),v:'u-front-fetch'},
 ]);
 T('front','tip',[
- {en:'Semantic HTML',ko:'시맨틱 HTML · 의미 있는 태그',d:'div만 쓰지 않고 header, nav, button처럼 역할에 맞는 태그를 쓰는 것.',p:'div로 만든 버튼을 진짜 <button>으로 바꿔줘',r:['Web Accessibility','HTML'],l:2,o:1,u:MDN('Glossary/Semantics'),v:{page:'nv'}},
+ {en:'Semantic HTML',ko:'시맨틱 HTML · 의미 있는 태그',d:'div만 쓰지 않고 header, nav, button처럼 역할에 맞는 태그를 쓰는 것.',p:'div로 만든 버튼을 진짜 <button>으로 바꿔줘',r:['Web Accessibility','HTML'],l:2,o:1,u:MDN('Glossary/Semantics'),v:'u-front-semantic-html'},
  {en:'Mobile First',ko:'모바일 퍼스트',d:'휴대폰 화면부터 먼저 설계하고 큰 화면으로 넓혀 가는 방식.',p:'모바일 퍼스트로 만들고 PC에서 2단으로 늘려줘',r:['Responsive Web Design'],l:2,o:0,v:'responsive'},
  {en:'Dark Mode',ko:'다크 모드',d:'어두운 배경에 밝은 글자로 바꾼 화면 테마.',p:'시스템 설정을 따라 다크 모드가 되게 prefers-color-scheme을 써줘',r:['CSS Variable','prefers-color-scheme'],l:1,o:0,v:'contrast'},
  {en:'prefers-color-scheme',ko:'시스템 밝기 설정 따르기',d:'사용자 기기가 다크 모드인지 알아내는 CSS 조건.',p:'기기가 다크 모드면 자동으로 어두운 색을 쓰게 해줘',r:['Dark Mode'],l:2,o:1,u:MDN('Web/CSS/@media/prefers-color-scheme'),v:'contrast'},
- {en:'DevTools',ko:'개발자 도구',d:'브라우저에서 F12로 여는 도구. 요소·스타일·오류를 직접 볼 수 있어요.',p:'개발자 도구 Console 탭에 뜬 빨간 오류를 붙일게. 원인을 알려줘',r:['Console','Inspect Element'],l:1,o:0,v:{win:'sb'}},
+ {en:'DevTools',ko:'개발자 도구',d:'브라우저에서 F12로 여는 도구. 요소·스타일·오류를 직접 볼 수 있어요.',x:'요소와 스타일을 보는 탭을 Chrome은 Elements, Firefox는 Inspector라고 불러요. 이름만 다르고 하는 일은 같아요.',p:'개발자 도구 Console 탭에 뜬 빨간 오류를 붙일게. 원인을 알려줘',r:['Console','Inspect Element'],l:1,o:0,v:'u-front-devtools'},
  {en:'Inspect Element',ko:'요소 검사',d:'화면 요소를 오른쪽 클릭 → "검사"로 그 요소의 HTML·CSS를 보는 기능.',p:'요소 검사로 보니 이 상자 margin이 40px이야. 줄여줘',r:['DevTools'],l:1,o:0,v:'boxmodel'},
  {en:'Cache Busting',ko:'캐시 무시 · 강제 새로고침',d:'고쳤는데도 예전 화면이 보일 때 브라우저 저장본을 무시하고 새로 받는 것. Ctrl+Shift+R.',p:'수정이 반영 안 돼. 캐시 문제인지 확인해줘',r:['Cache'],l:2,o:0,v:'fade'},
- {en:'Polyfill',ko:'폴리필',d:'옛 브라우저에 없는 기능을 비슷하게 채워 주는 코드.',p:'옛 Safari에서도 되게 폴리필이 필요한지 확인해줘',r:['Cross-browser'],l:3,o:1,u:MDN('Glossary/Polyfill'),v:{stack:['새 기능','폴리필 (빈자리 채움)','옛 브라우저'],hl:[1]}},
+ {en:'Polyfill',ko:'폴리필',d:'옛 브라우저에 없는 기능을 비슷하게 채워 주는 코드.',p:'옛 Safari에서도 되게 폴리필이 필요한지 확인해줘',r:['Cross-browser'],l:3,o:1,u:MDN('Glossary/Polyfill'),v:'u-front-polyfill'},
 ]);
 </script>
 <script>
@@ -7242,6 +7256,63 @@ Object.assign(D, {
     cap:'칸에 쓴 이름이 바로 위 인사말에도 보여요'},
   'u-front-fetch':{h:devtools({tab:'네트워크', net:[{name:'posts', status:200, type:'fetch'}, {name:'users', status:404, type:'fetch'}], label:'posts는 200으로 받았고 users는 404로 실패했어요'}),
     cap:'users는 404로 실패했지만 fetch는 오류를 던지지 않아 res.ok로 확인해요'},
+});
+/* front: 다시 그리기 — 글자상자 22장. 출처는 카드 u(MDN·react.dev·typescriptlang·tailwindcss). px가 글자 크기 설정과 무관한 것은 MDN <length>의 px 절. 예시: 이름·색·파일 이름·폭 숫자 */
+const fdisp = () => `<div class="mk-fdp">${[['block', '<span class="x bl">상자</span>', '한 줄 다 차지'], ['inline', '<span>글자 <span class="x">상자</span> 글자</span>', '글자 사이에'],
+  ['flex', '<span class="fx"><span class="x">1</span><span class="x">2</span><span class="x">3</span></span>', '안쪽을 나란히'], ['none', '<span class="no">사라짐</span>', '자리도 없음']]
+  .map(([k, d, w]) => `<div><code>display: ${k}</code>${d}${whelp(w)}</div>`).join('')}</div>`;
+const fsem = (y, ts) => `<div class="mk-fsm${y ? ' y' : ''}">${ts.map(t => `<code>${t}</code>`).join('')}</div>`;
+Object.assign(D, {
+  'u-front-tag':{h:pair(fcss('index.html', '<button>보내기</button>'), `<div class="mk-card mk-f"><span class="mk-btn">보내기</span>${whelp('화면의 버튼')}</div>`),
+    cap:'꺾쇠로 쓴 button 태그가 화면에 버튼으로 보여요'},
+  'u-front-attribute':{h:pair(`<div class="mk-fcd">${doc([{p:'<img src="cat.png"'}, {p:'alt="고양이 사진">'}], {title:'index.html', still:true, hl:1})}</div>`,
+      `<div class="mk-card mk-f"><i class="mk-img"></i>${whelp('대체 글: 고양이 사진')}</div>`),
+    cap:'src는 보여 줄 사진을, alt는 사진을 못 볼 때 읽을 글을 정해요'},
+  'u-front-selector':{h:pair(fcss('style.css', '.card h2 {', 'color: teal;', '}'),
+      `<div class="mk-card mk-f"><div class="mk-fsc"><b class="mk-fon">카드 제목</b>${whelp('선택됨')}</div><b>바깥 제목</b>${whelp('그대로')}</div>`),
+    cap:'카드 안의 제목만 골라 색을 바꾸고, 카드 밖 제목은 그대로예요'},
+  'u-front-class-name':{h:pair(fcss('index.html', '<a class="btn">저장</a>', '<a class="btn">취소</a>', '<a class="btn">삭제</a>'),
+      `<div class="mk-card mk-f"><span class="mk-btn">저장</span><span class="mk-btn">취소</span><span class="mk-btn">삭제</span>${whelp('같은 모양')}</div>`),
+    cap:'같은 class 이름을 붙인 셋이 같은 모양이 돼요'},
+  'u-front-display':{h:fdisp(), cap:'display 값 하나로 상자가 놓이는 방식이 달라져요'},
+  'u-front-react':{h:domtree([[0, 'App'], [1, 'Header'], [1, 'List'], [2, 'Item'], [2, 'Item', '바뀜']], {hl:[4], label:'App 안에 Header와 List, List 안에 Item 둘. 바뀐 Item 하나만 다시 그려요'}),
+    cap:'화면을 컴포넌트로 나누고, 바뀐 컴포넌트만 다시 그려요'},
+  'u-front-props':{h:`<div class="mk-fst">${domtree([[0, 'Card'], [1, 'Title', 'title="공지"']])}<div class="mk-card mk-f"><b>공지</b>${whelp('화면 제목')}</div></div>`,
+    cap:'부모 Card가 넘긴 title 값이 자식 Title의 제목으로 보여요'},
+  'u-front-hook':{h:doc([{tb:[['훅', '하는 일'], ['useState', '값 기억'], ['useEffect', '화면 밖 일'], ['useRef', '요소 잡기']]}], {title:'React 훅', still:true}),
+    cap:'use로 시작하는 함수로 컴포넌트에 기능을 붙여요'},
+  'u-front-virtual-dom':{h:vs('이전 나무', domtree([[0, 'ul'], [1, 'li', '사과'], [1, 'li', '배']], {still:true}),
+      '새 나무', domtree([[0, 'ul'], [1, 'li', '사과'], [1, 'li', '포도']], {hl:[2], still:true})),
+    cap:'두 나무를 비교해 바뀐 곳만 실제 화면에 반영해요'},
+  'u-front-typescript':{h:ide(['let price: number;', {t:'price = "삼천";', err:'숫자 자리에 글자예요'}], [{l:2}], {title:'app.ts'}), m:1,
+    cap:'숫자 자리에 글자를 넣으면 실행 전에 알려 줘요. 오류 설명은 풀어 쓴 말이에요'},
+  'u-front-bundler':{h:pair(fcss('src', 'a.js', 'b.js', 'style.css'), fcss('dist', 'bundle.js', 'bundle.css')),
+    cap:'여러 파일을 브라우저가 받기 좋게 몇 개로 묶어요'},
+  'u-front-tailwind-css':{h:pair(fcss('index.html', '<div class="p-4', 'rounded-lg', 'bg-blue-600">'), '<div class="mk-ftw">안내 상자</div>'),
+    cap:'class 이름 셋만으로 여백, 둥근 모서리, 배경색이 생겨요'},
+  'u-front-container':{h:`<div class="mk-fpd">${browser('<div class="mk-fct"><span>여백</span><b>컨테이너</b><span>여백</span></div>')}</div>`,
+    cap:'내용을 최대 폭 상자에 모으고 남는 양옆은 여백으로 둬요'},
+  'u-front-full-width':{h:vs('컨테이너 안', '<div class="mk-ffw"><span>양옆 여백</span></div>', '꽉 찬 너비', '<div class="mk-ffw f"><span>화면 끝까지</span></div>'),
+    cap:'꽉 찬 너비는 양옆 여백 없이 화면 끝까지 닿아요'},
+  'u-front-px':{h:`<div class="mk-fpx"><i class="r" aria-hidden="true"></i><span class="n"><span>0</span><span>16px</span></span><span class="b">16px</span>${whelp('글자 크기 설정을 키워도 그대로')}</div>`,
+    cap:'px는 정해 둔 크기 그대로라 설정을 바꿔도 변하지 않아요'},
+  'u-front-rem':{h:track([{t:'루트 글자', s:'done', w:'16px(기본값)'}, {t:'1rem', s:'done', w:'16px'}, {t:'2rem', s:'done', w:'32px'}, {t:'20px로 바꾸면', s:'done', w:'2rem = 40px'}],
+      {label:'루트 글자가 16px이면 1rem은 16px, 2rem은 32px. 20px로 바꾸면 2rem은 40px이에요'}), m:1,
+    cap:'rem은 루트 글자 크기의 배수라, 설정을 키우면 함께 커져요'},
+  'u-front-em':{h:'<div class="mk-fem"><div><code>부모 20px</code><div><code>1.5em = 30px</code><div><code>1.5em = 45px</code></div></div></div></div>',
+    cap:'글자 크기의 em은 부모 기준이라 겹치면 곱해져 계속 커져요'},
+  'u-front-fr':{h:'<div><div class="mk-ffr"><span>1fr</span><span>2fr</span><span>1fr</span></div><p>폭 1 : 2 : 1, 예: 100px · 200px · 100px</p></div>',
+    cap:'남은 폭을 fr 숫자의 비율대로 나눠요'},
+  'u-front-css-variable':{h:pair(fcss('style.css', ':root {', '--brand: teal; }', 'h2, a, button {', 'color: var(--brand) }'),
+      `<div class="mk-card mk-f mk-fvr"><b>제목</b><span class="mk-fpl">링크</span><span class="mk-btn">단추</span>${whelp('세 곳이 같은 색')}</div>`),
+    cap:'--brand 한 줄을 바꾸면 쓰는 곳이 모두 함께 바뀌어요'},
+  'u-front-semantic-html':{h:vs('div만 씀', fsem(0, ['div', 'div', 'div', 'div']) + whelp('역할 이름이 없어요'), '역할 태그', fsem(1, ['header', 'nav', 'main', 'footer']) + whelp('어디가 무엇인지 알 수 있어요')),
+    cap:'역할에 맞는 태그를 쓰면 화면 낭독기와 검색 엔진도 구역을 알아요'},
+  'u-front-devtools':{h:devtools({tab:'요소', dom:[[0, '<main>'], [1, '<h1>제목</h1>']], css:['h1 { font-size: 32px }'], hl:1, label:'요소 탭에서 h1 줄을 고르면 그 요소의 CSS가 옆에 보여요'}),
+    cap:'고른 요소의 HTML과 그 요소에 걸린 CSS를 함께 보여 줘요'},
+  'u-front-polyfill':{h:track([{t:'옛 브라우저', s:'fail', w:'기능 없음'}, {t:'폴리필 불러옴', s:'done', w:'빈자리 채움'}, {t:'같은 코드', s:'done', w:'동작함'}],
+      {label:'옛 브라우저에 없는 기능을 폴리필이 채워 같은 코드가 동작해요'}), m:1,
+    cap:'없는 기능을 폴리필이 채워 같은 코드가 옛 브라우저에서도 돌아가요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
