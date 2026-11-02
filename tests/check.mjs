@@ -98,7 +98,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 0, 'front/build': 0, 'front/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['fx', 'font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['fx', 'fxn', 'font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -422,6 +422,21 @@ const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid'
 check('fukey', () => FS().filter(t => !FKEEP.includes(t.en) && !(typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v])).map(t => t.en).join(', '));
 check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
 check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'responsive', 'contrast', 'aspect', 'fontsize', 'transition', 'shadow'].filter(k => !g.D[k]).join(', '));    // 공유 그림 키는 남긴다
+const FC = en => g.TERMS.find(t => t.c === 'front' && t.en === en) || {};
+check('fdirb', () => { const r = [], D = g.D;    // 디렉터 B 지적
+  if (!D['u-front-visibility'].h.includes('<b>고름</b><code>visibility:<wbr>hidden')) r.push('visibility 고름·끊김');
+  if (!html.includes('.mk-card.mk-fih{') || !html.includes('.mk-f.mk-frs{')) r.push('fih·frs 명시도');
+  if (!(FC('Pseudo-class').x || '').includes('보통 콜론')) r.push('Pseudo-class 보통');
+  if (!D['u-front-vendor-prefix'].h.includes('요즘의 Edge')) r.push('접두사 Edge');
+  if (D['u-front-preventdefault'].h.includes('example.com/join')) r.push('주소 잘림');
+  const tw = D['u-front-two-way-binding'].h; if (!(tw.indexOf('mk-in') < tw.indexOf('<b>안녕'))) r.push('양방향 순서');
+  if (/쓸 수 없어요/.test(FC('Event Delegation').x) || FC('Event Delegation').o !== 1 || !FC('Event Delegation').u) r.push('위임');
+  if ((FC('Form Validation').x || '').includes('서버가 받은 값')) r.push('폼 검사 x');
+  if ((FC('Fetch').x || '').includes('reject')) r.push('Fetch reject');
+  if (D['u-front-css-inheritance'].h.includes('navy')) r.push('상속 색');
+  return r.join(', '); });
+check('ftext', () => FS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('fxn', () => FS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 check('fx', () => FS().filter(t => !t.x).map(t => t.en).join(', '));
 check('fm', () => FS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v].m && !WA(g.D[t.v].h)).map(t => t.en).join(', '));
 check('fou', () => FS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
