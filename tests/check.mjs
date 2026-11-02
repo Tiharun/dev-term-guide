@@ -331,7 +331,9 @@ const WOBJ = ['Website', 'Web Page', 'Browser', 'Favicon', 'Meta Tag', 'Local St
   'Header', 'Hero Section', 'Footer', 'Sidebar', 'Admin Page', 'A/B Test'];    // 옛 형식 그림이 남은 웹 카드(측정)
 check('wobj', () => { const a = WS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !WOBJ.includes(x)).map(x => '+' + x), ...WOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
 check('wx', () => WS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
-check('wm', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-') && g.D[t.v].m && !/class="[^"]*\bA\b/.test(g.D[t.v].h)).map(t => t.en).join(', '));
+const WA = h => /class="(?:[^"]*\s)?A(?:\s[^"]*)?"/.test(h);    // 움직임 클래스 A가 따로 붙었는지
+check('wmre', () => WA('<i class="mk-A">') || !WA('<i class="x A y">') || !WA('<i class="A">') ? 'A 클래스 정규식' : '');
+check('wm', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-') && g.D[t.v].m && !WA(g.D[t.v].h)).map(t => t.en).join(', '));
 const WDM = {'robots.txt': ['허용', '차단', 'aria-pressed', 'User-agent'], 'UTM Parameter': ['카톡', '인스타', '메일', 'utm_source', 'aria-pressed'],
   'HTML': ['HTML만', '+ CSS', '+ JavaScript', 'aria-pressed'], 'Conversion Rate': ['구매 4명', '구매 10명', 'aria-pressed', '(예시)']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글자
 check('wdm', () => Object.entries(WDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
@@ -351,7 +353,8 @@ check('wmin', () => { const f = en => g.find(en), h = k => g.D[k].h;    // 디�
   return [[f('robots.txt').p.includes('관리자'), 'robots.txt p'], [html.includes('열 수 있어야 보여요'), 'robots 차단 말'],
     [f('Heatmap').d.includes('진한 색'), 'Heatmap d'], [!f('Autofill').r.includes('Autocomplete'), 'Autofill r'],
     [f('Pop-up Blocker').x.includes('누른 효과'), 'Pop-up Blocker x'], [!f('Browser Extension').x.includes('권한'), 'Browser Extension x'],
-    [!f('PWA').x.includes('Chrome'), 'PWA x'], [!f('Local Storage').x.includes('Safari'), 'Local Storage x'],
+    [!f('PWA').x.includes('Chrome'), 'PWA x'], [!f('Local Storage').x.includes('Safari를 쓰는 동안'), 'Local Storage x'], [!f('PWA').x.includes('스토어 없이도'), 'PWA 스토어'],
+    [f('Pop-up Blocker').x.includes('따로 연 창'), 'Pop-up 말'], [!h('u-browser-extension').includes('를 번역하면'), '확장 그림 읽기'],
     [!f('Meta Tag').x.includes('og:로 시작'), 'Meta Tag x'], [!f('A/B Test').x.includes('보통'), 'A/B Test x'], [!f('CMS').x.includes('보통'), 'CMS x'],
     [memo.length > 0, '메모 말투 ' + memo.join('·')], [!h('u-web-url').includes('프로토콜'), 'URL 그림'], [!h('u-web-static-site').includes('(예시)'), 'Static Site 그림'],
     [!f('Bounce Rate').x.includes('기본 10초') || !h('u-bounce-rate').includes('기본 10초'), 'Bounce Rate 10초'], [!f('Unique Visitor').x.includes('로그인'), 'Unique Visitor x'],
@@ -359,9 +362,11 @@ check('wmin', () => { const f = en => g.find(en), h = k => g.D[k].h;    // 디�
     [!g.SYMPTOMS.find(s => s.q === 'Safari에서만 화면이 깨져요').t.includes('Browser Engine'), 'Safari 증상'],
     [src('u-logo').includes('.replace(') || !h('u-logo').includes('<b class="mk-hl">로고</b>'), 'u-logo'],
     [src('u-address-bar').includes('.replace(') || !h('u-address-bar').includes('class="mk-url mk-hl"'), 'u-address-bar']].filter(([b]) => b).map(([, n]) => n).join(', '); });
-check('wsym', () => WS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-')).filter(t => {    // 기호는 읽지 않게 숨겨요
-  const p = g.D[t.v], a = (p.h + (p.cap || '')).replace(/<([a-z]+)[^>]*aria-hidden="true"[^>]*>[^<]*<\/\1>/g, '');
-  return /[✓✕★→]/.test(a); }).map(t => t.en).join(', '));
+const WSYM = h => /[✓✕★→←↑↓]|&(?:rarr|larr|uarr|darr|check|times|starf?|#8594|#10003|#9733);/.test(h.replace(/<([a-z]+)[^>]*aria-hidden="true"[^>]*>[^<]{1,2}<\/\1>/g, ''));    // 숨긴 칸은 기호 1~2자만
+check('wsymre', () => !WSYM('<b>&rarr; 다음</b>') || !WSYM('<span aria-hidden="true">→ 진짜 글</span>') || WSYM('<span aria-hidden="true">→</span> 다음') ? '기호 검사 구멍' : '');
+check('wsym', () => WS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)};    // 기호는 읽지 않게 숨겨요
+  return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
+check('symcss', () => (html.match(/content:'[^']*[→←↑↓✓✕★][^']*'(?! \/ '')/g) || []).filter(c => !html.includes(c + " / ''")).join(' '));    // CSS 기호도 대체 글 ''
 const WB_WRONG = {'Bounce Rate': ['Bounce', 'Debounce'], 'Event Tracking': ['Event'], 'Time on Page': ['Session'], 'Pop-up Blocker': ['Popover', 'Modal'], 'Logo': ['Brand Color']};    // 이름만 비슷한 카드
 check('wwrong', () => Object.entries(WB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'web' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
