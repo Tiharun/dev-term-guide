@@ -98,7 +98,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 0, 'front/build': 0, 'front/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['fukey', 'fsym', 'fx', 'font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['fx', 'font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -421,6 +421,7 @@ const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid'
   'Rotate', 'State', 'Max Width', 'Column', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 34장(측정)
 check('fukey', () => FS().filter(t => !FKEEP.includes(t.en) && !(typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v])).map(t => t.en).join(', '));
 check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
+check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'responsive', 'contrast', 'aspect', 'fontsize', 'transition', 'shadow'].filter(k => !g.D[k]).join(', '));    // 공유 그림 키는 남긴다
 check('fx', () => FS().filter(t => !t.x).map(t => t.en).join(', '));
 check('fm', () => FS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v].m && !WA(g.D[t.v].h)).map(t => t.en).join(', '));
 check('fou', () => FS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
