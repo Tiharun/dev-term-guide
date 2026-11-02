@@ -21,7 +21,10 @@
 - **화살표**: `mem()`의 화살표는 선을 긋지 않는다. 이름표 안의 `→ A` 글자와 상자 머리의 `A`로 잇는다. 좁은 화면에서 선이 깨지지 않게 하기 위해서다.
 - **mem 한도**: 스펙의 "상자 1~5"를 스택 칸 이름표 1~4개, 힙 칸 상자 0~5개로 나눈다. 값만 담는 장면은 힙이 0개일 수 있다.
 - **이름 접두사**: 새 클래스·키프레임 이름은 `mk-cd`(ide)·`mk-mr`(mem)로 시작한다. 측정: 지금 두 접두사 0건(`mk-id`·`mk-me`는 이미 있어서 쓰지 않음).
-- **다시 그린 것 점검**: 객체 `v`(옛 형식)를 써도 되는 카드는 목록 `BOBJ`로 관리한다. 처음에는 기존 53장이고, Task 8·9에서 28장을 빼면 25장이 남는다.
+- **다시 그린 것 점검**: 객체 `v`(옛 형식)를 써도 되는 카드는 목록 `BOBJ`로 관리한다. 측정: 기존 53장 중 6장(Bug, Event, Asynchronous, Hot Reload, Boolean, Edge Case)은 이미 `u-` 글자 키라서 처음 BOBJ는 47장이다. Task 8·9에서 28장을 빼면 19장이 남는다. 스펙의 "형식 유지 25장"은 이 19장과 `u-` 6장을 합한 수다.
+- **mem 화살표**: 스펙의 "화살표 1~5"는 장면 전체 기준이다. 값만 담는 장면(Stack vs Heap의 숫자 칸)은 화살표 0개를 허용하고, 대신 `to`가 없는 상자를 가리키면 오류를 낸다.
+- **좁은 화면의 강조 띠**: 강조 띠 `.mk-cdh`는 판이 아니라 `.mk-cdg` 기준 절대 위치다(판은 `position:static`). 그래서 판이 아래로 쌓여도 띠는 코드 칸 위에 남는다.
+- **증상 묶음**: "무거운 작업 중 화면이 멈춰요"만 `느림`, 나머지 11개는 `오류·안 됨`이다.
 
 ## Global Constraints
 
@@ -138,7 +141,7 @@
     - CSS
       - 강조 띠: `--l`로 위치를 잡는다(`top: calc((var(--l) - 1) * 줄 높이)`). 판들은 같은 grid 칸(`grid-area:1/1`)에 겹친다.
       - `.mk-cds.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}`
-      - 컨테이너: `.mk-cd{container:cd/inline-size}`. `@container cd (max-width:360px)`에서 코드 칸 아래에 판을 쌓는다. 이때 강조 띠는 코드 칸 쪽에 남아야 하므로, 띠는 `.mk-cdc` 위에 절대 위치로 둔다. 판의 출력·변수만 아래로 내린다. 방법은 구현이 정한다.
+      - 컨테이너: `.mk-cd{container:cd/inline-size}`. `@container cd (max-width:360px)`에서 `.mk-cdg`를 한 열로 바꿔 코드 칸 아래에 판을 쌓는다. 강조 띠는 스펙 보충대로 `.mk-cdg` 기준 절대 위치라 코드 칸 위에 남는다.
       - 코드는 `--mono`, 줄 번호는 `ol` 숫자를 쓴다. `white-space:pre`이고 줄바꿈하지 않는다(28자 한도가 넘침을 막는다).
     - 키프레임(k = 1~8, s = 10k):
       - `@keyframes mk-cdy{k}{0%,{s-0.1}%{opacity:0}{s}%,{s+9.9}%{opacity:1}{s+10}%,100%{opacity:0}}`
@@ -168,7 +171,7 @@
     - Code Editor `ko`: `코드 에디터 · 코드 편집기`
     - npm `ko`: `엔피엠 · 자바스크립트 패키지 도구`
   - **check.mjs**
-    - `BOBJ`: 기존 개발 기본 53장 영문명 배열
+    - `BOBJ`: 지금 `v`가 객체인 개발 기본 47장 영문명 배열
     - `BDM = {}`: 영문명 → 그림 `h`에 있어야 할 글자. Task 3·6·9가 채운다.
     - `LATER = ['font', 'doccount', 'bx']`
 
@@ -179,6 +182,7 @@
   - `bm`: basics 카드 그림에 `m`이 있으면 `h`에 `/ A["\s]/`가 있다(`mm`과 같다).
   - `bdm`: `PDM`과 같은 방식으로 `BDM`을 확인한다.
   - `bko`: Code Editor·npm의 `ko`에 `IDE`·`패키지 관리자`가 없다.
+  - `bou`: basics 카드 중 `o === 1`인데 `u`가 없는 영문명 목록이 빈다(스펙 8장).
   - `base`에 더할 것
     - `const cd = ide(['let n = 1;', 'n = n + 1;', 'console.log(n);'], [{l:1, vars:{n:'1'}}, {l:2, vars:{n:'2'}}, {l:3, out:['2'], vars:{n:'2'}}], {title:'a.js', label:'코드'})`
       - 들어 있어야 할 것: `mk-cd`, `role="group"`, `aria-label="코드"`, `a.js`, `let n = 1;`, `mk-cdy1 A`, `mk-cdy2 A`, `mk-cdz3 A`, `--l:3`, `3단계: 3번째 줄, 출력 2`, `n = 2`
@@ -199,7 +203,7 @@
 - [ ] **Step 2: 실패 확인**: `node tests/check.mjs` → 다음이 실패해야 한다.
   - `FAIL bcat`, `FAIL bko`, `FAIL cdframe`
   - `FAIL base: … ide is not defined`
-  - `bobj`는 이미 통과해야 한다(53장 그대로).
+  - `bobj`·`bou`는 이미 통과해야 한다(측정 기준 47장, o:1 카드는 모두 u가 있음 — Step 1에서 확인하고 아니면 Ruling).
 - [ ] **Step 3: 구현**: Interfaces대로 `CAT`, `ide`, `mem`, CSS, 키프레임, 한글명을 만든다. 강조 띠·`gc` 테두리의 대비(그래픽 3:1, 글자 4.5:1)를 better-colors 방식으로 재고 커밋 본문에 적는다.
 - [ ] **Step 4: 점검 통과**: `OK <수>`, `LATER bx: …`(53장 중 49장 이름)
 - [ ] **Step 5: 브라우저 확인**
@@ -235,8 +239,8 @@ Task별 정해 둔 것:
   - **Async/Await▶**
     - `tpick(['await 있음', 'await 없음'], 'await 있음')`과 `ide` still, `.mk-hint`(`psay`)로 만든다.
     - 상태 표 `BAWAIT = {'await 있음': {code, steps, say}, 'await 없음': {…}}`
-    - 코드 예(28자 이하): `async function load() {` / `  const d = await get();` / `  console.log(d);` / `}`
-    - 결과: 있음 → 출력 `데이터`, 없음 → 출력 `Promise {<pending>}`
+    - 코드 예(28자 이하, 예시): `async function load() {` / `  const d = await get();` / `  console.log(d);` / `}` / `load();`. 주석에 "get은 1초 뒤 '데이터'를 주는 예시 함수"라고 적는다.
+    - 결과: 있음 → 출력 `데이터`, 없음 → 출력 `Promise {<pending>}`(Chrome 콘솔 표기, 아직 안 끝난 상태라고 `say`로 풀어 줌). Task 3 출처 확인에서 MDN으로 맞는지 본다.
     - `BDM['Async/Await'] = ['await 있음', 'await 없음', 'aria-pressed']`
   - Event Loop는 `ide` 출력 순서로 그린다. 예: `setTimeout(…, 0)`이 동기 `console.log` 뒤에 찍힌다(MDN 확인).
 - **Task 4·5**
@@ -251,7 +255,7 @@ Task별 정해 둔 것:
     - 복사 후 수정 → `b`가 새 상자 B를 가리키고 A는 그대로다.
     - `BDM['Immutability'] = ['복사 후 수정', '직접 수정', 'aria-pressed']`
 - **Task 7**
-  - `r`: Magic Number→`Hardcoding`·`Constant`, DRY→`Function`, Code Smell→`Refactoring`, Clean Code→`Readability`, Coupling·Cohesion→`Module`
+  - `r`: Magic Number→`Hardcoding`·`Constant`, DRY→`Function`, Code Smell→`Refactoring`, Clean Code→`Refactoring`(design의 Readability는 글 가독성이라 달지 않음), Coupling·Cohesion→`Module`
   - 그림은 대부분 `cmp`(나쁜 예 코드 ↔ 좋은 예 코드)다. 좋은 예·나쁜 예 칸 안의 코드도 28자 이하다.
 - Task 7 뒤 **디렉터 검토 ③ 묶음 B**
 
@@ -262,13 +266,13 @@ Task별 정해 둔 것:
 **Files:** Modify `index.html`(23장 `v`, `/* basics: redraw … */` D 묶음), `tests/check.mjs`
 
 - [ ] **Step 1: 실패하는 점검 추가**
-  - `REDRAWN`에 `'basics/basic','basics/core','basics/motion','basics/adv','basics/code','basics/tip'`을 더한다.
+  - `REDRAWN`에 `'basics/basic','basics/core','basics/motion','basics/adv','basics/code','basics/principle','basics/tip'`을 더한다.
   - `BOBJ`에서 아래 23장을 뺀다.
 - [ ] **Step 2: 실패 확인**: `FAIL redrawn:basics/…`(23장 이름), `FAIL bobj`
 - [ ] **Step 3: 그림**: 스펙 3.3 표대로 23장의 `v`를 `'u-<slug>'`로 바꾼다.
   - 다시 그릴 23장(측정: 지금 `v`가 `flow`·`big`·`stack`인 카드): Programming Language, Library, Framework, MVP, Legacy Code, Frontend, Backend, Full Stack, Callback, Return, Class, Debugging, Package, Open Source, Build, Run, Algorithm, Technical Debt, Rubber Duck Debugging, Semantic Versioning, Big-O, Compile, Design Pattern
   - `vs` 또는 `doc`로 정할 4장: Programming Language·Legacy Code는 `vs`(같은 일을 다른 말/옛 코드와 새 코드), Design Pattern·Open Source는 `doc`(패턴 이름·라이선스 문서 모양)
-  - Big-O: 걸음 수 막대 3개(`O(1)`·`O(n)`·`O(n²)`, n = 8 예시). `tb` 또는 `.mk-two`로 그리고 "예시" 글자를 단다.
+  - Big-O: 걸음 수 막대 3개(`O(1)`·`O(n)`·`O(n²)`, n = 8 예시). `doc`의 `tb` 블록(입력 크기 n·걸음 수·막대 글자)으로 그리고 "예시" 글자를 단다.
   - Class: `pair(ide(...), mem(...))`. `pair`가 좁은 화면에서 세로로 쌓이는지 확인한다.
 - [ ] **Step 4: 점검 통과**: `OK <수>`
 - [ ] **Step 5: 브라우저 확인**: basics 6개 하위항목(principle 제외)
@@ -279,7 +283,7 @@ Task별 정해 둔 것:
 **Files:** Modify `index.html`, `tests/check.mjs`
 
 - [ ] **Step 1: 실패하는 점검 추가**
-  - `BOBJ`에서 Variable·Function·Conditional·Loop·Object를 뺀다(25장 남음).
+  - `BOBJ`에서 Variable·Function·Conditional·Loop·Object를 뺀다(19장 남음).
   - `BDM`에 더한다.
     - `'Loop': ['1번', '3번', '5번', 'aria-pressed']`
     - `'Conditional': ['age = 15', 'age = 20', 'aria-pressed']`
@@ -287,7 +291,7 @@ Task별 정해 둔 것:
 - [ ] **Step 3: 그림**
   - Variable·Function은 `ide`다. 기존 `v.code`의 코드를 그대로 쓰고 단계를 더한다.
   - Object는 `mem` 참조로 그린다.
-  - **Loop▶**: `for (let i = 0; i < N; i++)` 코드다. 고른 횟수만큼 `console.log(i)` 출력이 쌓인다. 출력은 3줄 한도라 5번이면 `…`, `3`, `4` 세 줄을 보이고, `say`가 "5번 돌았어요. 0부터 4까지 찍혀요"라고 알린다.
+  - **Loop▶**: `for (let i = 0; i < N; i++)` 코드다. 고른 횟수만큼 `console.log(i)` 출력이 쌓인다. 출력은 3줄 한도라 5번이면 `(0~2 생략)`, `3`, `4` 세 줄을 보이고(생략 줄은 흐린 글자로 실제 출력이 아님을 표시), `say`가 "5번 돌았어요. 0부터 4까지 찍혀요"라고 알린다.
   - **Conditional▶**: `if (age >= 18)`이다. 15이면 `else` 줄이 강조되고 출력 `청소년`, 20이면 `if` 줄이 강조되고 출력 `성인`이다.
   - 두 카드 모두 `tpick` + `ide` still + `.mk-hint`(`psay`)로 만든다.
 - [ ] **Step 4: 점검 통과**, **Step 5: 브라우저 확인**(Tab·Enter·Space, 같은 버튼 두 번), **Step 6: 커밋** `feat: 개발 기본 코드 그림 5장과 직접 조작`
@@ -300,7 +304,7 @@ Task별 정해 둔 것:
 - [ ] **Step 2**: 49장에 `x`를 넣는다. 해요체 2~3문장이고, 짝이 있으면 차이를 먼저 쓴다. 기존 `d`는 바꾸지 않는다. 사실 문장은 출처를 확인하고 원장에 적는다.
   - 짝 예: Library vs Framework, Compile vs Build, Bug vs Error Message, Frontend vs Backend, Variable vs Constant, Parameter vs Argument, Array vs Object, Hardcoding vs Magic Number
 - [ ] **Step 3**: `OK <수>`
-- [ ] **Step 4**: 기존 그림 25장(BOBJ)을 브라우저 3폭에서 확인한다. 넘침·11px 미만만 고친다.
+- [ ] **Step 4**: 그대로 둔 기존 그림 25장(BOBJ 19장 + `u-` 6장)을 브라우저 3폭에서 확인한다. 넘침·11px 미만만 고친다.
 - [ ] **Step 5: 커밋**: `feat: 개발 기본 헷갈림 칸 49장 채움`
 - [ ] **Step 6: 디렉터 검토 ③ 묶음 C**
 
@@ -309,7 +313,7 @@ Task별 정해 둔 것:
 - [ ] **Step 1: 실패하는 점검**: `symcount` 기대값 145 → 157
 - [ ] **Step 2: 실패 확인**: `FAIL symcount`
 - [ ] **Step 3: 데이터**
-  - 스펙 6장 12개를 넣는다. 묶음은 기존 `SYM` 묶음(3297줄)에서 고른다(대부분 `오류·안 됨`).
+  - 스펙 6장 12개를 넣는다. 묶음은 스펙 보충대로다(`느림` 1개, `오류·안 됨` 11개).
   - 넣기 전에 기존 증상 문구와 겹치는지 찾는다(`grep`). 겹치면 그 증상의 연결 카드에 새 카드를 더하고, 대신 같은 수의 새 증상을 넣는다. 원장에 Ruling으로 적는다.
   - 증상 대상은 모두 있는 영문명이어야 한다(`ref`).
 - [ ] **Step 4**: `OK <수>`
@@ -321,7 +325,7 @@ Task별 정해 둔 것:
 
 **Files:** Modify `index.html`(FONT 블록), `tests/check.mjs`, `PRODUCT.md`, `docs/PLAN.md`, `DESIGN.md`
 
-- [ ] **Step 1: 글꼴 원본 확인**: `C:\Users\HELLOW~1\AppData\Local\Temp\claude\C--Users-HelloWorld-Documents-Claude-Project-Programing-Guide\f8728c73-6f40-4446-afd9-00c24a2f3dc2\scratchpad\`에 `font_subset.py`와 `fontsrc\`가 있다(측정: 계획 작성 시점). 없으면 사용자에게 묻고 멈춘다.
+- [ ] **Step 1: 글꼴 원본 확인**: `C:\Users\HELLOW~1\AppData\Local\Temp\claude\C--Users-HelloWorld-Documents-Claude-Project-Programing-Guide\f8728c73-6f40-4446-afd9-00c24a2f3dc2\scratchpad\`에 `font_subset.py`와 `fontsrc\`가 있다(측정: 계획 작성 시점, 이전 세션 폴더). 있으면 이 세션 스크래치패드로 복사해 쓴다. 없으면 사용자에게 묻고 멈춘다.
 - [ ] **Step 2: 실패 확인**: `LATER = []` → `FAIL font`(새 글자가 있을 때), `FAIL doccount`
 - [ ] **Step 3: 서브셋**: `python -E -P font_subset.py index.html <Hahmlet.ttf> <작업 폴더>`
 - [ ] **Step 4: 문서**
