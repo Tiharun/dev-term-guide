@@ -683,6 +683,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-md>span{display:flex;flex-direction:column;min-width:0;padding:3px 6px;border-radius:5px;font-size:11px;color:var(--muted)}.mk-md b{color:var(--ink);font-size:11.5px}.mk-md .on{background:var(--mark-bg)}
 /* 시각 스타일 — 스타일을 보여 주려고 일부 색을 직접 쓴다 */
 .cmp.mk-even>div::before{color:var(--ink)}
+.cmp.mk-cmpc>div{min-height:0}
 .mk-yc{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .mk-ytile{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:var(--ch1);overflow:hidden}
 .mk-ytile.sk{background:linear-gradient(#6d9be6,#2f5fb3);border:1px solid #234a8f;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 2px 4px rgba(29,43,79,.35)}
@@ -2112,6 +2113,13 @@ T('basics','code',[
  {en:'String',ko:'문자열',d:'따옴표로 감싼 글자 값.',p:'숫자로 바꿔야 하는데 문자열로 들어오고 있어. 확인해줘',r:['Variable'],l:1,o:1,u:MDN('Glossary/String'),v:{code:'const greeting = "안녕하세요";'}},
  {en:'Comment',ko:'주석',d:'코드 안에 남기는 설명 메모. 실행되지 않아요.',p:'복잡한 부분에만 왜 이렇게 했는지 주석을 달아줘',r:['Source Code'],l:1,o:0,v:{code:'// 할인 가격 계산 (회원은 10%)\nconst price = base * 0.9;'}},
  {en:'Class',ko:'클래스 · 설계도',d:'같은 모양의 객체를 찍어 내는 틀.',x:'CSS의 class(스타일 이름표)와는 다른 뜻이에요.',p:'상품을 만드는 Product 클래스를 정의해줘',r:['Object'],l:2,o:1,u:MDN('Web/JavaScript/Reference/Classes'),v:{flow:['클래스','객체 1','객체 2'],hl:[0]}},
+ {en:'Syntax',ko:'문법 · 신택스',d:'코드를 쓰는 정해진 규칙이에요. 괄호, 따옴표, 세미콜론을 어디에 어떤 순서로 두는지 정해 둔 것이에요.',x:'문법이 틀리면 코드가 아예 실행되지 않고 문법 오류(SyntaxError)가 나요. 실행은 되는데 결과가 틀린 버그와는 달라요.',p:'이 코드에서 문법 오류가 난 곳을 찾아서 고쳐줘',r:[],l:1,o:1,u:MDN('Glossary/Syntax'),v:'u-syntax'},
+ {en:'Operator',ko:'연산자',d:'+, *, >처럼 값을 계산하거나 비교하는 기호예요.',x:'+, -, *, /는 계산, >, ===는 비교, &&, ||는 조건을 묶을 때 써요. %는 나눈 나머지를 구해요.',p:'두 값이 같은지 비교하는 연산자를 == 말고 ===로 바꿔줘',r:[],l:1,o:1,u:MDN('Glossary/Operator'),v:'u-operator'},
+ {en:'Expression',ko:'식 · 표현식',d:'계산하면 값 하나가 나오는 코드 조각이에요. 1 + 2 * 3은 7이 나오는 식이에요.',x:'식은 값이 나오는 조각이고, if나 for처럼 일을 시키는 한 단위는 흔히 문장(statement)이라고 해요. 식은 문장 안에 들어갈 수 있어요.',p:'이 긴 식을 이름 붙인 변수로 나눠서 읽기 쉽게 해줘',r:[],l:2,o:1,u:MDN('Web/JavaScript/Guide/Expressions_and_operators'),v:'u-expression'},
+ {en:'Method',ko:'메서드',d:'객체에 붙어 있는 함수예요. 점(.) 뒤에 이름과 괄호를 붙여 불러요.',x:'함수는 혼자 있어도 되지만, 메서드는 객체의 속성으로 들어 있는 함수예요. s.toUpperCase()의 toUpperCase가 문자열에 붙은 메서드예요.',p:'배열의 map 메서드로 이 for 반복문을 바꿔줘',r:['Function','Object'],l:2,o:1,u:MDN('Glossary/Method'),v:'u-method'},
+ {en:'Property',ko:'속성 · 프로퍼티',d:'객체 안에서 이름(키)과 값을 짝지어 둔 항목이에요. user.name처럼 점으로 꺼내요.',x:'변수는 혼자 이름이 붙은 값이고, 속성은 객체 안에 들어 있는 값이에요. 속성 값이 함수면 그 속성을 메서드라고 불러요.',p:'user 객체에 email 속성을 추가해줘',r:['Object'],l:1,o:1,u:MDN('Glossary/Property/JavaScript'),v:'u-property'},
+ {en:'Module',ko:'모듈',d:'코드를 기능별로 나눈 파일 한 묶음이에요. export로 내보내고 import로 가져와 써요.',x:'모듈은 내 프로젝트 안에서 코드를 나눈 파일이고, 패키지는 남이 만든 코드를 설치해 쓰는 묶음이에요. 패키지 안도 여러 모듈로 되어 있어요.',p:'app.js가 너무 길어. 기능별 모듈로 나눠줘',r:['Package'],l:2,o:1,u:MDN('Web/JavaScript/Guide/Modules'),v:'u-module'},
+ {en:'Import',ko:'임포트 · 가져오기',d:'다른 모듈이 내보낸(export) 기능을 지금 파일로 가져오는 문장이에요.',x:'import { add } from \'./math.js\'처럼 무엇을, 어디서 가져올지 적어요. 내보내지 않은 것은 가져올 수 없어요.',p:'이 함수를 utils.js에서 import해서 쓰게 바꿔줘',r:['Module'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/import'),v:'u-import'},
 ]);
 T('basics','tip',[
  {en:'Edge Case',ko:'엣지 케이스 · 예외 상황',d:'빈 값, 아주 긴 글처럼 흔하지 않지만 생길 수 있는 극단적인 경우.',p:'이름이 비었거나 아주 길 때 같은 엣지 케이스도 처리해줘',r:['Bug'],l:2,o:0,v:'ellipsis'},
@@ -6475,6 +6483,32 @@ Object.assign(D, {
   'u-garbage-collection':{h:mem([{stack:[{n:'user', to:'A'}], heap:[{id:'A', v:'{ 이름 }'}]}, {stack:[{n:'user', v:'null'}], heap:[{id:'A', v:'{ 이름 }', gc:true}]}, {stack:[{n:'user', v:'null'}], heap:[]}],
       {label:'user가 null이 되면 상자 A에 닿는 길이 끊겨 치울 대상이 되고, 가비지 컬렉션이 비우는 장면'}), m:1,
     cap:'아무도 가리키지 않는 상자는 자동으로 치워져요'},
+});
+/* basics: code — 출처 확인(2026-11): MDN Glossary Syntax·Operator·Method·Property, MDN 식과 연산자·모듈·import. 흔히: 문장(statement) 구분.
+   측정(node): 1 + 2 * 3 → 7, 7 % 2 → 1, 3 > 2 → true, 'hello'.toUpperCase() → HELLO, user.name → 민지, add(2, 3) → 5. 예시: 변수 이름·값·파일 이름 */
+const BCMP = (bl, bad, gl, good) => `<div class="cmp mk-cmpc"><div class="bad" data-l="${esc(bl)}"><div class="mk-f">${bad.map(bcode).join('')}</div></div>`
+  + `<div class="good" data-l="${esc(gl)}"><div class="mk-f">${good.map(bcode).join('')}</div></div></div>`;
+Object.assign(D, {
+  'u-syntax':{h:BCMP('나쁜 예: 문법 오류', ["console.log('안녕'"], '좋은 예', ["console.log('안녕');"]),
+    cap:'괄호 하나만 빠져도 안 돌아가요'},
+  'u-operator':{h:BTWO(['식', bcode('1 + 2 * 3'), bcode('7 % 2'), bcode('3 > 2')], ['결과', bcode('7'), bcode('1'), bcode('true')]),
+    cap:'곱셈이 덧셈보다 먼저, %는 나머지, >는 비교예요'},
+  'u-expression':{h:ide(['const total = 1 + 2 * 3;', 'console.log(total);'], [{l:1, vars:{total:'7'}}, {l:2, out:['7'], vars:{total:'7'}}],
+      {label:'식 1 + 2 * 3이 7로 계산되어 total에 담기고 7이 찍히는 코드'}), m:1,
+    cap:'식은 계산되어 값 하나가 돼요'},
+  'u-method':{h:ide(["const s = 'hello';", 'const t = s.toUpperCase();', 'console.log(t);'],
+      [{l:1, vars:{s:'hello'}}, {l:2, vars:{s:'hello', t:'HELLO'}}, {l:3, out:['HELLO'], vars:{s:'hello', t:'HELLO'}}],
+      {label:'문자열에 붙은 toUpperCase 메서드를 불러 HELLO가 찍히는 코드'}), m:1,
+    cap:'점 뒤에 붙은 함수가 메서드예요'},
+  'u-property':{h:ide(['const user = {', "  name: '민지',", '  age: 20,', '};', 'console.log(user.name);'],
+      [{l:2, vars:{'user.name':'민지'}}, {l:3, vars:{'user.name':'민지', 'user.age':'20'}}, {l:5, out:['민지'], vars:{'user.name':'민지', 'user.age':'20'}}],
+      {label:'user 객체에 name과 age 속성을 넣고 user.name으로 민지를 꺼내는 코드'}), m:1,
+    cap:'이름과 값의 짝 하나하나가 속성이에요'},
+  'u-module':{h:BTWO(['math.js', bcode('export const add ='), bcode('  (a, b) => a + b;')], ['app.js', bcode('import { add }'), bcode("  from './math.js';")], true),
+    cap:'한 파일이 내보내고, 다른 파일이 가져와 써요'},
+  'u-import':{h:ide(['import { add } from', "  './math.js';", 'console.log(add(2, 3));'], [{l:1, vars:{add:'함수'}}, {l:3, out:['5'], vars:{add:'함수'}}],
+      {label:'math.js에서 add를 가져와 add(2, 3)으로 5를 찍는 코드'}), m:1,
+    cap:'가져온 add를 내 파일에서 바로 써요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
