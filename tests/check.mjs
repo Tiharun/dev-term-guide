@@ -85,6 +85,8 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'web/search': ['Search Engine', 'Crawler', 'Indexing', 'Keyword', 'Title Tag', 'Meta Description', 'Canonical URL', 'robots.txt', 'Structured Data', 'Backlink', 'UTM Parameter', 'QR Code'],
   'web/browser': ['Address Bar', 'Rendering', 'Browser Engine', 'Refresh', 'Bookmark', 'Browser Extension', 'Pop-up Blocker', 'iframe', 'User Agent', 'Autofill', 'Browser History'],
   'web/traffic': ['Page View', 'Unique Visitor', 'Referrer', 'Bounce Rate', 'Time on Page', 'Funnel', 'Heatmap', 'Retention Rate', 'Event Tracking'],
+  'front/css': ['Specificity', 'Cascade', 'CSS Inheritance', 'Pseudo-class', 'Pseudo-element', '!important', 'CSS Reset', 'Inline vs Block', 'Display None', 'Visibility', 'Float', 'Vendor Prefix'],
+  'front/event': ['Event Bubbling', 'Event Delegation', 'preventDefault', 'stopPropagation', 'Input Event', 'Keyboard Event', 'Form Validation', 'Controlled Input', 'Two-way Binding', 'Fetch'],
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
@@ -93,7 +95,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 9, 'front/core': 14, 'front/motion': 10, 'front/adv': 9, 'front/layout': 12,
-  'front/unit': 8, 'front/css': 0, 'front/event': 0, 'front/react': 0, 'front/build': 0, 'front/tip': 8 };    // sec: 카드 수
+  'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 0, 'front/build': 0, 'front/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const LATER = ['fobj', 'fukey', 'fsym', 'fx', 'font', 'doccount', 'redrawn:front/core', 'redrawn:front/adv', 'redrawn:front/unit', 'redrawn:front/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
@@ -334,7 +336,7 @@ const SYM_WEB = ['검색해도 내 사이트가 안 나와요', '링크를 공�
 check('symcount', () => g.SYMPTOMS.length !== 169 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1428 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
+check('total', () => g.TERMS.length === 1450 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
