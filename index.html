@@ -420,6 +420,17 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-cdh{position:absolute;z-index:0;left:0;top:calc(8px + (var(--l) - 1) * 20px);width:calc(100% - 128px);height:20px;background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}
 .mk-cdo,.mk-cdv{display:flex;flex-direction:column;gap:2px;min-width:0;font:11.5px/1.4 var(--mono);overflow-wrap:anywhere}.mk-cdo b,.mk-cdv b{font:800 11px/1.35 var(--sans);color:var(--muted)}.mk-cdo .mk-cdx{color:var(--muted);font-style:italic}
 @container cd (max-width:380px){.mk-cdg{grid-template-columns:minmax(0,1fr)}.mk-cdc{padding:8px 4px 8px 24px;font-size:11px}.mk-cdp{border-left:0;border-top:1.5px solid var(--rule)}.mk-cdh{width:100%}.mk-cds{flex-direction:row}.mk-cdo,.mk-cdv{flex:1 1 0}}
+.mk-cdc code.mk-cdw{text-decoration:underline wavy var(--mark-text) 1px;text-underline-offset:4px}.mk-cdem{list-style:none;height:20px;white-space:pre;color:var(--mark-text)}.mk-cdem b{font:800 11px/20px var(--sans)}
+.mk-dv{container:dv/inline-size;width:min(100%,460px);border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);overflow:hidden;font:12px/1.5 var(--mono);text-align:left}.mk-dv code{font:inherit;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.mk-dvt{display:flex;flex-wrap:wrap;gap:4px 14px;padding:6px 10px;border-bottom:1.5px solid var(--rule);background:var(--fig);font:11.5px/1.4 var(--sans);color:var(--muted)}.mk-dvt .on{color:var(--ink);font-weight:800;text-decoration:underline 2px;text-underline-offset:5px}
+.mk-dvg{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.mk-dvd,.mk-dvs,.mk-dvc{min-width:0;margin:0;padding:6px 8px;list-style:none}.mk-dvs{border-left:1.5px solid var(--rule)}.mk-dvd li{padding:1px 4px 1px calc(4px + var(--d) * 2ch)}.mk-dvs li,.mk-dvc li{padding:1px 4px}
+.mk-dvon{background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}.mk-dvoff code{color:var(--muted);text-decoration:line-through}.mk-dvk{margin-left:6px;font:800 11px/1.3 var(--sans);color:var(--mark-text);white-space:nowrap}.mk-dverr,.mk-dverr code,.mk-dvf td{color:var(--mark-text)}.mk-dverr .mk-dvk{margin:0 6px 0 0}
+.mk-dvn{width:100%;border-collapse:collapse}.mk-dvn th{padding:4px 8px;border-bottom:1.5px solid var(--rule);font:800 11px/1.3 var(--sans);color:var(--muted);text-align:left}.mk-dvn td{padding:3px 8px;border-bottom:1px solid var(--rule-2)}
+@container dv (max-width:380px){.mk-dvg{grid-template-columns:minmax(0,1fr)}.mk-dvs{border-left:0;border-top:1.5px solid var(--rule)}}
+.mk-dtl{margin:0;padding:4px 2px;list-style:none;font:12px/1.5 var(--mono);text-align:left}.mk-dtn{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;margin:3px 0;padding:2px 6px 2px calc(10px + var(--d) * 16px);border:1.5px solid transparent;border-radius:6px}
+.mk-dtj{position:absolute;left:calc(var(--d) * 16px - 6px);top:-4px;width:10px;height:calc(50% + 4px);border-left:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}.mk-dtn[style="--d:0"] .mk-dtj{display:none}.mk-dtn code{color:var(--ink)}
+.mk-dtg{font:11px/1.3 var(--sans);color:var(--muted)}.mk-dthl{border-color:var(--ink);background:var(--mark-bg)}.mk-dtw{padding:1px 7px;border-radius:9px;background:var(--mark-text);color:var(--plate);font:800 11px/1.4 var(--sans);white-space:nowrap}
+.mk-dtw.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 /* 메모리 그림(mem): 스택 이름표 → 힙 상자. 장면은 한 칸에 겹치고 코드 칸과 같은 키프레임을 쓴다. 치울 상자는 점선·흐린 글자·"치울 대상" 글자 */
 .mk-mr{container:mr/inline-size;width:min(100%,420px);color:var(--ink);font-size:12px;line-height:1.4;text-align:left}.mk-mrp{display:grid}
 .mk-mrs{grid-area:1/1;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px}
@@ -503,7 +514,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -3800,21 +3811,23 @@ const flow = (rows = [], { path = rows.map(() => 0), still = false, label } = {}
         + `${on && !still ? `<i class="mk-fwd mk-fw${k === rows.length ? 'z' : 'y'}${k} A" aria-hidden="true"></i>` : ''}</div>`; }).join('')}</li>`; }).join('')}</ol></div>`;
 };
 const wlen = s => [...String(s)].reduce((n, ch) => n + (/[ᄀ-ᇿ㄰-㆏가-힯]/.test(ch) ? 2 : 1), 0);    // 한글은 폭이 두 배라 2자로 센다
-/* 코드 칸: code 1~8줄(줄마다 28자 이하), steps[i] = {l 강조 줄, out 그때까지 출력 0~3줄, vars 그때 변수 0~4개} 1~8개. 단계 k의 판은 10k%에 나타난다 */
+/* 코드 칸: code 1~8줄(줄마다 28자 이하, {t, err}이면 물결 밑줄 + 바로 아래 오류 설명 줄 23자 이하), steps[i] = {l 강조 줄, out 그때까지 출력 0~3줄, vars 그때 변수 0~4개} 1~8개. 단계 k의 판은 10k%에 나타난다 */
 const ide = (code = [], steps = [], { title = 'app.js', still = false, label } = {}) => {
   if (code.length < 1 || code.length > 8) throw new Error('ide: 코드는 1~8줄');
-  if (code.some(c => wlen(c) > 28)) throw new Error('ide: 한 줄은 28자까지');
+  if (code.some(c => wlen(c.t ?? c) > 28)) throw new Error('ide: 한 줄은 28자까지');
+  if (code.some(c => typeof c !== 'string' && !(typeof c.err === 'string' && c.err && wlen(c.err) <= 23))) throw new Error('ide: 오류 설명은 1~23자');
   if (steps.length < 1 || steps.length > 8) throw new Error('ide: 단계는 1~8개');
   steps.forEach(({ l, out = [], vars = {} }) => {
     if (!(l >= 1 && l <= code.length)) throw new Error('ide: 줄 번호 ' + l);
     if (out.length > 3) throw new Error('ide: 출력은 3줄까지');
     if (Object.keys(vars).length > 4) throw new Error('ide: 변수는 4개까지');
   });
-  const cnt = steps.length, list = a => a.length ? a.join('') : '<span>—</span>';
-  const pane = ({ l, out = [], vars = {} }, i) => `<div class="mk-cds${still ? '' : ` mk-cd${i + 1 === cnt ? 'z' : 'y'}${i + 1} A`}" style="--l:${l}" aria-hidden="true"><i class="mk-cdh" aria-hidden="true"></i>`
+  const cnt = steps.length, list = a => a.length ? a.join('') : '<span>—</span>', row = l => l + code.slice(0, l - 1).filter(c => c.err).length;    // 오류 설명 줄만큼 강조 띠가 내려간다
+  const pane = ({ l, out = [], vars = {} }, i) => `<div class="mk-cds${still ? '' : ` mk-cd${i + 1 === cnt ? 'z' : 'y'}${i + 1} A`}" style="--l:${row(l)}" aria-hidden="true"><i class="mk-cdh" aria-hidden="true"></i>`
     + `<div class="mk-cdo"><b>출력</b>${list(out.map(x => x.dim ? `<span class="mk-cdx">${esc(x.t)}</span>` : `<span>${esc(x)}</span>`))}</div><div class="mk-cdv"><b>변수</b>${list(Object.entries(vars).map(([a, b]) => `<span>${esc(a)} = ${esc(b)}</span>`))}</div></div>`;
   const sum = steps.map(({ l, out = [] }, i) => `${i + 1}단계: ${l}번째 줄${out.length ? ', 출력 ' + (out[out.length - 1].t || out[out.length - 1]) : ''}`).join('. ');
-  return `<div class="mk-cd"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-cdt">${esc(title)}</div><div class="mk-cdg"><ol class="mk-cdc">${code.map(c => `<li><code>${esc(c)}</code></li>`).join('')}</ol>`
+  return `<div class="mk-cd"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-cdt">${esc(title)}</div><div class="mk-cdg"><ol class="mk-cdc">${code.map((c, i) => `<li${row(i + 1) > i + 1 ? ` value="${i + 1}"` : ''}><code${c.err ? ' class="mk-cdw"' : ''}>${esc(c.t ?? c)}</code></li>`
+    + (c.err ? `<li class="mk-cdem"><b>오류</b> ${esc(c.err)}</li>` : '')).join('')}</ol>`
     + `<div class="mk-cdp">${still ? pane(steps[cnt - 1], cnt - 1) : steps.map(pane).join('')}</div></div><p class="sr">${esc(sum)}</p></div>`;
 };
 /* 메모리 그림: scenes[i] = {stack 이름표 1~4개 {n, v} 또는 {n, to 상자 id}, heap 상자 0~5개 {id, v, gc 치울 대상}} 1~4장면. 요약은 마지막 장면만 읽는다 */
@@ -3849,6 +3862,63 @@ const serp = (q, rows = [], { hl, still = false, label } = {}) => {
     + `${d ? `<span class="mk-spd">${esc(d)}</span>` : ''}${tag ? `<span class="mk-spg">${esc(tag)}</span>` : ''}${i === hl ? '<span class="mk-spme">내 사이트</span>' : ''}</li>`).join('');
   return `<div class="mk-sp"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-spq" aria-hidden="true"><span>검색</span>${esc(q)}</div><ol class="mk-spl">${li}</ol>`
     + `${hl === undefined ? '<p class="mk-spno" aria-hidden="true">내 사이트는 결과에 없어요</p>' : ''}<p class="sr">검색어 ${esc(q)}, 결과 ${rows.length}개, 내 사이트 ${hl === undefined ? '없음' : (hl + 1) + '번째'}</p></div>`;
+};
+/* 개발자 도구 그림: tab '요소'(dom 1~6줄 [깊이 0~3, 글], 글 + 깊이×2 ≤ 28자 · css 0~4줄 문자열 또는 {t, off} 24자 이하 · hl 선택 줄),
+   '콘솔'(con 1~4줄 문자열 또는 {t, err} 28자 이하), '네트워크'(net 1~4개 {name 16자 이하, status, type}). 다른 탭의 인자를 주면 오류 */
+const DV_TABS = ['요소', '콘솔', '네트워크'];
+const devtools = ({ tab, dom, css = [], hl, con, net, label } = {}) => {
+  const no = m => { throw new Error('devtools: ' + m); }, tx = c => c.t ?? c;
+  if (!DV_TABS.includes(tab)) no('탭은 요소·콘솔·네트워크');
+  if (tab !== '요소' && (dom || css.length || hl !== undefined)) no('dom·css·hl은 요소 탭에서만');
+  if (tab !== '콘솔' && con) no('con은 콘솔 탭에서만');
+  if (tab !== '네트워크' && net) no('net은 네트워크 탭에서만');
+  let body, sum;
+  if (tab === '요소') {
+    if (!dom || dom.length < 1 || dom.length > 6) no('dom은 1~6줄');
+    dom.forEach(([d, t]) => { if (!(d >= 0 && d <= 3)) no('깊이는 0~3'); if (wlen(t) + 2 * d > 28) no('dom 한 줄은 들여쓰기 포함 28자까지'); });
+    if (css.length > 4) no('css는 4줄까지');
+    if (css.some(c => wlen(tx(c)) > 24)) no('css 한 줄은 24자까지');
+    if (hl !== undefined && !(hl >= 0 && hl < dom.length)) no('hl 범위');
+    const off = css.filter(c => c.off).length;
+    body = `<div class="mk-dvg"><ol class="mk-dvd">${dom.map(([d, t], i) => `<li${i === hl ? ' class="mk-dvon"' : ''} style="--d:${d}"><code>${esc(t)}</code>${i === hl ? '<b class="mk-dvk">선택</b>' : ''}</li>`).join('')}</ol>`
+      + (css.length ? `<ul class="mk-dvs">${css.map(c => `<li${c.off ? ' class="mk-dvoff"' : ''}><code>${esc(tx(c))}</code>${c.off ? '<b class="mk-dvk">덮임</b>' : ''}</li>`).join('')}</ul>` : '') + '</div>';
+    sum = `개발자 도구 요소 탭, ${hl === undefined ? dom.length + '줄' : hl + 1 + '번째 줄 선택'}${off ? `, 덮인 규칙 ${off}개` : ''}`;
+  } else if (tab === '콘솔') {
+    if (!con || con.length < 1 || con.length > 4) no('con은 1~4줄');
+    if (con.some(c => wlen(tx(c)) > 28)) no('con 한 줄은 28자까지');
+    body = `<ul class="mk-dvc">${con.map(c => `<li${c.err ? ' class="mk-dverr"' : ''}>${c.err ? '<b class="mk-dvk">오류</b>' : ''}<code>${esc(tx(c))}</code></li>`).join('')}</ul>`;
+    sum = `개발자 도구 콘솔 탭, ${con.length}줄, 오류 ${con.filter(c => c.err).length}개`;
+  } else {
+    if (!net || net.length < 1 || net.length > 4) no('net은 1~4개');
+    if (net.some(r => wlen(r.name) > 16)) no('요청 이름은 16자까지');
+    body = `<table class="mk-dvn"><thead><tr><th>이름</th><th>상태</th><th>종류</th></tr></thead><tbody>${net.map(r => `<tr${r.status >= 400 ? ' class="mk-dvf"' : ''}><td><code>${esc(r.name)}</code></td>`
+      + `<td>${esc(r.status)}${r.status >= 400 ? '<b class="mk-dvk">실패</b>' : ''}</td><td>${esc(r.type)}</td></tr>`).join('')}</tbody></table>`;
+    sum = `개발자 도구 네트워크 탭, 요청 ${net.length}개, 실패 ${net.filter(r => r.status >= 400).length}개`;
+  }
+  return `<div class="mk-dv"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-dvt" aria-hidden="true">${DV_TABS.map(t => `<span${t === tab ? ' class="on"' : ''}>${t}</span>`).join('')}</div>`
+    + `${body}<p class="sr">${esc(sum)}</p></div>`;
+};
+/* DOM 나무 그림: nodes 2~8개 [깊이 0~4, 태그 12자 이하, 꼬리표 12자 이하], 첫 노드는 깊이 0, 한 번에 한 칸씩만 깊어진다.
+   hl 강조 노드, path 전파 경로 1~6칸(각 칸은 앞 칸의 부모). 경로 칩 k는 mk-rux{k}로 나타난다 */
+const domtree = (nodes = [], { hl = [], path = [], still = false, label } = {}) => {
+  const no = m => { throw new Error('domtree: ' + m); };
+  if (nodes.length < 2 || nodes.length > 8) no('노드는 2~8개');
+  nodes.forEach(([d, t, g], i) => {
+    if (!(d >= 0 && d <= 4)) no('깊이는 0~4');
+    if (i ? d > nodes[i - 1][0] + 1 : d !== 0) no('깊이는 0에서 시작해 한 칸씩 깊어진다');
+    if (wlen(t) > 12 || (g && wlen(g) > 12)) no('태그·꼬리표는 12자까지');
+  });
+  const par = i => { for (let j = i - 1; j >= 0; j--) if (nodes[j][0] === nodes[i][0] - 1) return j; return -1; };
+  if (hl.some(i => !(i >= 0 && i < nodes.length))) no('hl 범위');
+  if (path.length > 6 || path.some(i => !(i >= 0 && i < nodes.length))) no('path는 1~6칸');
+  path.forEach((i, k) => { if (k && par(path[k - 1]) !== i) no('path는 부모로만 올라간다'); });
+  const tag = i => nodes[i][2] || (hl.includes(i) ? '강조' : ''), nm = i => nodes[i][1];
+  const lis = nodes.map(([d, t], i) => { const k = path.indexOf(i) + 1, g = tag(i);
+    return `<li class="mk-dtn${hl.includes(i) ? ' mk-dthl' : ''}${k ? ' mk-dtp' : ''}" style="--d:${d}"><i class="mk-dtj"></i><code>&lt;${esc(t)}&gt;</code>`
+      + `${g ? `<span class="mk-dtg">${esc(g)}</span>` : ''}${k ? `<span class="mk-dtw${still ? '' : ` mk-rux${k} A`}">${k}번째</span>` : ''}</li>`; }).join('');
+  const sum = nodes.map(([d], i) => d ? `${nm(par(i))} 안에 ${nm(i)}${tag(i) ? `(${tag(i)})` : ''}` : '').filter(Boolean).join(', ') + '.'
+    + (!path.length ? '' : path.length === 1 ? ` 누른 곳 ${nm(path[0])}에서만 반응해요` : ` 누른 곳 ${nm(path[0])}에서 ${path.slice(1).map(nm).join(', ')} 순서로 전해져요`);
+  return `<div class="mk-dt"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><ol class="mk-dtl" aria-hidden="true">${lis}</ol><p class="sr">${esc(sum)}</p></div>`;
 };
 /* 직접 조작 도우미: stage 안 요소에만 붙인다. grab은 끌기(포인터 캡처, 취소되면 c=true), keys는 키 → 값 */
 const grab = (el, h) => { let o = null;

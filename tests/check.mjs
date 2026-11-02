@@ -226,6 +226,43 @@ check('base', () => vm.runInContext(`(() => {
   if (thr(() => serp('a', [{t:'a'.repeat(32), u:'u'}])) || thr(() => serp('a', [{t:'가'.repeat(16), u:'u'}]))) e.push('serp 한도');
   return e.join(', ');
 })()`, ctx));
+check('fhelp', () => vm.runInContext(`(() => {
+  const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(devtools|domtree|ide): /.test(e.message)) bad.push(w + ' 메시지'); } };
+  const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); });
+  const dv = devtools({tab:'요소', dom:[[0, '<div id="main">'], [1, '<h2 class="title">']], css:['#main h2 { color: red }', {t:'h2 { color: blue }', off:1}], hl:1});
+  has(dv, ['class="mk-dvt" aria-hidden="true"', '<span class="on">요소</span>', 'mk-dvon', '선택', 'mk-dvoff', '덮임', '&lt;div id=&quot;main&quot;&gt;',
+    '<p class="sr">개발자 도구 요소 탭, 2번째 줄 선택, 덮인 규칙 1개</p>'], 'dv요소');
+  has(devtools({tab:'요소', dom:[[0, 'a']], hl:0}), ['1번째 줄 선택'], 'dv hl0');
+  has(devtools({tab:'콘솔', con:['불러옴', {t:'posts is not defined', err:1}]}), ['<span class="on">콘솔</span>', 'mk-dverr', '오류', '개발자 도구 콘솔 탭, 2줄, 오류 1개'], 'dv콘솔');
+  has(devtools({tab:'네트워크', net:[{name:'posts', status:200, type:'fetch'}, {name:'users', status:404, type:'fetch'}]}), ['mk-dvf', '실패', '404', '개발자 도구 네트워크 탭, 요청 2개, 실패 1개'], 'dv네트워크');
+  const d1 = [[0, 'a']], w29 = 'x'.repeat(29);
+  no(() => devtools({tab:'소스', dom:d1}), '탭 이름'); no(() => devtools({tab:'요소'}), 'dom 없음'); no(() => devtools({tab:'요소', dom:d1, con:['a']}), '요소에 con');
+  no(() => devtools({tab:'콘솔', con:['a'], dom:d1}), '콘솔에 dom'); no(() => devtools({tab:'네트워크', net:[]}), 'net 0줄');
+  no(() => devtools({tab:'요소', dom:Array(7).fill([0, 'a'])}), 'dom 7줄'); no(() => devtools({tab:'요소', dom:[[4, 'a']]}), '깊이 4');
+  no(() => devtools({tab:'요소', dom:[[3, 'x'.repeat(23)]]}), '들여쓰기 포함 29자'); no(() => devtools({tab:'요소', dom:d1, css:Array(5).fill('a')}), 'css 5줄');
+  no(() => devtools({tab:'요소', dom:d1, css:['x'.repeat(25)]}), 'css 25자'); no(() => devtools({tab:'요소', dom:d1, hl:1}), 'hl 범위');
+  no(() => devtools({tab:'콘솔', con:Array(5).fill('a')}), 'con 5줄'); no(() => devtools({tab:'콘솔', con:[w29]}), 'con 29자');
+  no(() => devtools({tab:'네트워크', net:[{name:'x'.repeat(17), status:200, type:'fetch'}]}), '요청 이름 17자');
+  const dt = domtree([[0, 'div'], [1, 'ul'], [2, 'li'], [3, 'button', '누른 곳']], {path:[3, 2, 1, 0]});
+  has(dt, ['class="mk-dtl" aria-hidden="true"', 'mk-rux1 A', 'mk-rux4 A', '4번째', '&lt;button&gt;',
+    '<p class="sr">div 안에 ul, ul 안에 li, li 안에 button(누른 곳). 누른 곳 button에서 li, ul, div 순서로 전해져요</p>'], 'dt');
+  const ds = domtree([[0, 'div'], [1, 'ul'], [2, 'li']], {path:[2, 1], still:true});
+  if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(ds) || (ds.match(/mk-dtw/g) || []).length !== 2) bad.push('dt still');
+  has(domtree([[0, 'App'], [1, 'List'], [2, 'Item']], {hl:[2]}), ['mk-dthl', '강조'], 'dt hl');
+  has(domtree([[0, 'ul'], [1, 'li', '누른 곳']], {path:[1]}), ['누른 곳 li에서만 반응해요'], 'dt 1칸');
+  const t3 = [[0, 'div'], [1, 'ul'], [2, 'li']];
+  no(() => domtree([[0, 'a']]), '1노드'); no(() => domtree(Array(9).fill([0, 'a'])), '9노드'); no(() => domtree([[1, 'a'], [2, 'b']]), '첫 깊이');
+  no(() => domtree([[0, 'a'], [2, 'b']]), '깊이 건너뜀'); no(() => domtree([[0, 'a'], [1, 'b'], [2, 'c'], [3, 'd'], [4, 'e'], [5, 'f']]), '깊이 5');
+  no(() => domtree(t3, {hl:[3]}), 'hl 범위'); no(() => domtree(t3, {path:[2, 0]}), '부모 아님'); no(() => domtree(t3, {path:Array(7).fill(0)}), 'path 7칸');
+  no(() => domtree([[0, 'a'.repeat(13)], [1, 'b']]), '태그 13자'); no(() => domtree([[0, 'a', '가나다라마바사'], [1, 'b']]), '꼬리표 14자');
+  const ie = ide(['let a = 1;', {t:'a = "삼";', err:'숫자 자리예요'}, 'log(a);'], [{l:3}], {still:true});
+  has(ie, ['<code class="mk-cdw">a = &quot;삼&quot;;</code>', '<li class="mk-cdem"><b>오류</b> 숫자 자리예요</li>', '<li value="3">', '--l:4'], 'ide 오류');
+  if ((ie.match(/value=/g) || []).length !== 1) bad.push('ide value 수');
+  no(() => ide([{t:'a', err:'x'.repeat(24)}], [{l:1}]), 'err 24자'); no(() => ide([{t:'a', err:''}], [{l:1}]), 'err 빈 글');
+  const plain = ide(['let n = 1;', 'n = n + 1;', 'console.log(n);'], [{l:2}]);
+  if (/mk-cdw|mk-cdem|value=/.test(plain) || !plain.includes('--l:2')) bad.push('ide 기존 출력');
+  return bad.join(', ');
+})()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
     t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });
@@ -381,7 +418,8 @@ check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation
   const y = [1, 2, 3, 4, 5, 6, 7].filter(k => { const m = html.match(new RegExp(`@keyframes mk-cdy${k}\\{0%,[\\d.]+%\\{opacity:0\\}[\\d.]+%,[\\d.]+%\\{opacity:1\\}([\\d.]+)%,100%\\{opacity:0\\}`)); return !m || +m[1] > P; }).map(k => 'y' + k);
   const ln = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => !(t === 'y' && k === 8) && !html.includes(`.mk-cd${t}${k}{animation-name:mk-cd${t}${k}}`)).map(t => 'link ' + t + k));    // 연결 규칙이 빠지면 그 판은 늘 빈칸
   const at = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => { const m = html.match(new RegExp(`@keyframes mk-cd${t}${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%`)); return m ? +m[1] !== 10 * k : !(t === 'y' && k === 8); }).map(t => 'at ' + t + k));    // 단계 k는 10k%에 나타난다
-  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : [])].join(', '); });
+  const dw = html.match(/\.mk-dtw\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 전파 경로 칩도 마지막 단계에서 멈춘다
+  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : [])].join(', '); });
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
