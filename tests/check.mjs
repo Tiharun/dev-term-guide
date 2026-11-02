@@ -293,11 +293,11 @@ check('mtword', () => Object.entries(g.D).filter(([, p]) => [...String(p.h || ''
 check('itt', () => { const t = g.byId.get('mobile-internal-testing-track'), s = t.x + g.D[t.v].h; return /몇 시간/.test(s) && !/몇 분 안에/.test(s) ? '' : t.x; });    // 처음 올리면 테스트 링크가 열리기까지 몇 시간 걸릴 수 있다(support.google.com 9845334)
 const BS = () => g.TERMS.filter(t => t.c === 'basics');
 check('bcat', () => g.CATS.find(c => c.id === 'basics').secs.map(s => s.id).join() === 'basic,core,motion,adv,code,principle,tip' ? '' : g.CATS.find(c => c.id === 'basics').secs.map(s => s.id).join());
-const BOBJ = ["Source Code","Error Message","npm","Dependency","Code Editor","Event Listener","Data Structure","Recursion","Refactoring","Static vs Dynamic Typing","Variable","Constant","Function","Parameter","Conditional","Loop","Array","Object","String","Comment","Hardcoding","Pseudocode","Spec","Boilerplate"];    // 아직 옛 형식(객체 v)으로 남은 개발 기본 카드. 다시 그리면 여기서 뺀다
+const BOBJ = ["Source Code","Error Message","npm","Dependency","Code Editor","Event Listener","Data Structure","Recursion","Refactoring","Static vs Dynamic Typing","Constant","Parameter","Array","String","Comment","Hardcoding","Pseudocode","Spec","Boilerplate"];    // 아직 옛 형식(객체 v)으로 남은 개발 기본 카드. 다시 그리면 여기서 뺀다
 check('bobj', () => { const a = BS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !BOBJ.includes(x)).map(x => '+' + x), ...BOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
 check('bx', () => BS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
 check('bm', () => BS().filter(t => g.D[t.v] && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 개발 기본 그림에는 움직이는 것이 있어야 한다
-const BDM = {'Async/Await': ['await 있음', 'await 없음', 'aria-pressed'], 'Immutability': ['복사 후 수정', '직접 수정', 'aria-pressed']};    // 직접 조작 개발 기본 카드 → 그림에 있어야 할 버튼 이름·표시
+const BDM = {'Async/Await': ['await 있음', 'await 없음', 'aria-pressed'], 'Immutability': ['복사 후 수정', '직접 수정', 'aria-pressed'], 'Loop': ['1번', '3번', '5번', 'aria-pressed'], 'Conditional': ['age = 15', 'age = 20', 'aria-pressed']};    // 직접 조작 개발 기본 카드 → 그림에 있어야 할 버튼 이름·표시
 check('bdm', () => Object.entries(BDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 check('bko', () => [['Code Editor', 'IDE'], ['npm', '패키지 관리자']].filter(([en, w]) => g.find(en).ko.includes(w)).map(([en]) => en).join(', '));    // 새 카드 IDE·Package Manager와 한글명이 겹치지 않게
 check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));

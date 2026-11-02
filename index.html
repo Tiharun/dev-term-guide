@@ -418,7 +418,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-cdg{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 128px}.mk-cdc{position:relative;z-index:1;margin:0;overflow-x:auto;padding:8px 8px 8px 34px;font:12px/20px var(--mono);color:var(--muted)}.mk-cdc code{font:inherit;color:var(--ink);white-space:pre}
 .mk-cdp{display:grid;border-left:1.5px solid var(--rule)}.mk-cds{grid-area:1/1;display:flex;flex-direction:column;gap:8px;min-width:0;padding:8px 10px}
 .mk-cdh{position:absolute;z-index:0;left:0;top:calc(8px + (var(--l) - 1) * 20px);width:calc(100% - 128px);height:20px;background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}
-.mk-cdo,.mk-cdv{display:flex;flex-direction:column;gap:2px;min-width:0;font:11.5px/1.4 var(--mono);overflow-wrap:anywhere}.mk-cdo b,.mk-cdv b{font:800 11px/1.35 var(--sans);color:var(--muted)}
+.mk-cdo,.mk-cdv{display:flex;flex-direction:column;gap:2px;min-width:0;font:11.5px/1.4 var(--mono);overflow-wrap:anywhere}.mk-cdo b,.mk-cdv b{font:800 11px/1.35 var(--sans);color:var(--muted)}.mk-cdo .mk-cdx{color:var(--muted);font-style:italic}
 @container cd (max-width:380px){.mk-cdg{grid-template-columns:minmax(0,1fr)}.mk-cdc{padding:8px 4px 8px 24px;font-size:11px}.mk-cdp{border-left:0;border-top:1.5px solid var(--rule)}.mk-cdh{width:100%}.mk-cds{flex-direction:row}.mk-cdo,.mk-cdv{flex:1 1 0}}
 /* 메모리 그림(mem): 스택 이름표 → 힙 상자. 장면은 한 칸에 겹치고 코드 칸과 같은 키프레임을 쓴다. 치울 상자는 점선·흐린 글자·"치울 대상" 글자 */
 .mk-mr{container:mr/inline-size;width:min(100%,420px);color:var(--ink);font-size:12px;line-height:1.4;text-align:left}.mk-mrp{display:grid}
@@ -2115,15 +2115,15 @@ T('basics','adv',[
  {en:'Stack vs Heap',ko:'스택 · 힙',d:'프로그램이 값을 두는 두 메모리 자리예요. 스택은 차례대로 쌓았다 치우는 곳이고, 힙은 객체처럼 큰 값을 두는 넓은 곳이에요.',x:'JavaScript에서는 흔히 변수 이름표와 숫자 같은 작은 값을 스택에, 객체와 배열은 힙에 두고 스택에서 가리킨다고 설명해요. 힙에서 아무도 가리키지 않는 값은 가비지 컬렉션이 치워요.',p:'이 코드에서 어떤 값이 스택에, 어떤 값이 힙에 놓이는지 설명해줘',r:['Garbage Collection'],l:3,o:0,v:'u-stack-vs-heap'},
 ]);
 T('basics','code',[
- {en:'Variable',ko:'변수',d:'값을 담아 두는 이름 붙은 상자. 값이 바뀔 수 있어요.',p:'이 숫자를 변수에 담아서 여러 곳에서 쓰게 해줘',r:['Constant'],l:1,o:1,u:MDN('Glossary/Variable'),v:{code:'let count = 0;\ncount = count + 1;'}},
+ {en:'Variable',ko:'변수',d:'값을 담아 두는 이름 붙은 상자. 값이 바뀔 수 있어요.',p:'이 숫자를 변수에 담아서 여러 곳에서 쓰게 해줘',r:['Constant'],l:1,o:1,u:MDN('Glossary/Variable'),v:'u-variable'},
  {en:'Constant',ko:'상수',d:'한 번 정하면 바뀌지 않는 값을 담는 상자.',p:'사이트 이름은 상수로 한 곳에 모아줘',r:['Variable'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/const'),v:{code:'const SITE_NAME = "개발 용어 설정집";'}},
- {en:'Function',ko:'함수',d:'정해진 일을 하는 코드 묶음. 이름을 불러 몇 번이고 다시 써요.',p:'가격 계산 부분을 함수로 따로 빼줘',r:['Parameter','Return'],l:1,o:1,u:MDN('Glossary/Function'),v:{code:'function add(a, b) {\n  return a + b;\n}'}},
+ {en:'Function',ko:'함수',d:'정해진 일을 하는 코드 묶음. 이름을 불러 몇 번이고 다시 써요.',p:'가격 계산 부분을 함수로 따로 빼줘',r:['Parameter','Return'],l:1,o:1,u:MDN('Glossary/Function'),v:'u-function'},
  {en:'Parameter',ko:'매개변수 · 파라미터',d:'함수에 넣어 주는 값을 받는 자리. 실제로 넣는 값은 인자(argument)라고 해요.',p:'함수가 할인율을 파라미터로 받게 바꿔줘',r:['Function'],l:2,o:1,u:MDN('Glossary/Parameter'),v:{code:'function greet(name) {  // name = 매개변수\n  return "안녕 " + name;\n}\ngreet("민수");          // "민수" = 인자'}},
  {en:'Return',ko:'리턴 · 반환값',d:'함수가 일을 마치고 돌려주는 결과 값.',p:'이 함수가 계산 결과를 return 하게 해줘',r:['Function'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/return'),v:'u-return'},
- {en:'Conditional',ko:'조건문 · if',d:'"만약 ~라면 이걸 하고, 아니면 저걸 해"를 쓰는 문법.',p:'로그인했으면 내 정보, 아니면 로그인 버튼을 보여주는 조건문을 넣어줘',r:['Boolean'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/if...else'),v:{code:'if (isLoggedIn) {\n  showProfile();\n} else {\n  showLoginButton();\n}'}},
- {en:'Loop',ko:'반복문 · for',d:'같은 일을 여러 번 되풀이하는 문법.',p:'상품 목록을 반복문으로 돌면서 카드를 만들어줘',r:['Array'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/for'),v:{code:'for (const item of items) {\n  makeCard(item);\n}'}},
+ {en:'Conditional',ko:'조건문 · if',d:'"만약 ~라면 이걸 하고, 아니면 저걸 해"를 쓰는 문법.',p:'로그인했으면 내 정보, 아니면 로그인 버튼을 보여주는 조건문을 넣어줘',r:['Boolean'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/if...else'),v:'u-conditional'},
+ {en:'Loop',ko:'반복문 · for',d:'같은 일을 여러 번 되풀이하는 문법.',p:'상품 목록을 반복문으로 돌면서 카드를 만들어줘',r:['Array'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Statements/for'),v:'u-loop'},
  {en:'Array',ko:'배열',d:'여러 값을 순서대로 담은 목록. 0번부터 번호가 붙어요.',p:'메뉴 이름들을 배열에 담아서 관리해줘',r:['Object','Loop'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Global_Objects/Array'),v:{tbl:[['0번','1번','2번'],['"사과"','"배"','"귤"']]}},
- {en:'Object',ko:'객체',d:'"이름: 값" 짝을 여러 개 담은 상자.',p:'회원 정보를 이름·나이·이메일이 있는 객체로 만들어줘',r:['Array','JSON'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Global_Objects/Object'),v:{code:'const user = {\n  name: "민수",\n  age: 20\n};'}},
+ {en:'Object',ko:'객체',d:'"이름: 값" 짝을 여러 개 담은 상자.',p:'회원 정보를 이름·나이·이메일이 있는 객체로 만들어줘',r:['Array','JSON'],l:1,o:1,u:MDN('Web/JavaScript/Reference/Global_Objects/Object'),v:'u-object'},
  {en:'Boolean',ko:'불리언 · 참·거짓',d:'true(참)와 false(거짓) 두 가지 값만 가지는 종류.',p:'메뉴가 열렸는지를 isOpen 불리언으로 관리해줘',r:['Conditional'],l:1,o:1,u:MDN('Glossary/Boolean'),v:'toggle'},
  {en:'String',ko:'문자열',d:'따옴표로 감싼 글자 값.',p:'숫자로 바꿔야 하는데 문자열로 들어오고 있어. 확인해줘',r:['Variable'],l:1,o:1,u:MDN('Glossary/String'),v:{code:'const greeting = "안녕하세요";'}},
  {en:'Comment',ko:'주석',d:'코드 안에 남기는 설명 메모. 실행되지 않아요.',p:'복잡한 부분에만 왜 이렇게 했는지 주석을 달아줘',r:['Source Code'],l:1,o:0,v:{code:'// 할인 가격 계산 (회원은 10%)\nconst price = base * 0.9;'}},
@@ -3718,7 +3718,7 @@ const ide = (code = [], steps = [], { title = 'app.js', still = false, label } =
   });
   const cnt = steps.length, list = a => a.length ? a.join('') : '<span>—</span>';
   const pane = ({ l, out = [], vars = {} }, i) => `<div class="mk-cds${still ? '' : ` mk-cd${i + 1 === cnt ? 'z' : 'y'}${i + 1} A`}" style="--l:${l}" aria-hidden="true"><i class="mk-cdh" aria-hidden="true"></i>`
-    + `<div class="mk-cdo"><b>출력</b>${list(out.map(x => `<span>${esc(x)}</span>`))}</div><div class="mk-cdv"><b>변수</b>${list(Object.entries(vars).map(([a, b]) => `<span>${esc(a)} = ${esc(b)}</span>`))}</div></div>`;
+    + `<div class="mk-cdo"><b>출력</b>${list(out.map(x => x.dim ? `<span class="mk-cdx">${esc(x.t)}</span>` : `<span>${esc(x)}</span>`))}</div><div class="mk-cdv"><b>변수</b>${list(Object.entries(vars).map(([a, b]) => `<span>${esc(a)} = ${esc(b)}</span>`))}</div></div>`;
   const sum = steps.map(({ l, out = [] }, i) => `${i + 1}단계: ${l}번째 줄${out.length ? ', 출력 ' + out[out.length - 1] : ''}`).join('. ');
   return `<div class="mk-cd"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-cdt">${esc(title)}</div><div class="mk-cdg"><ol class="mk-cdc">${code.map(c => `<li><code>${esc(c)}</code></li>`).join('')}</ol>`
     + `<div class="mk-cdp">${still ? pane(steps[cnt - 1], cnt - 1) : steps.map(pane).join('')}</div></div><p class="sr">${esc(sum)}</p></div>`;
@@ -6714,6 +6714,39 @@ Object.assign(D, {
   'u-rubber-duck-debugging':{h:flow([[{t:'오리에게 코드를 한 줄씩 설명'}], [{t:'말과 코드가 다른가?', k:'q'}], [{t:'원인 발견', k:'end', e:'예'}, {t:'다음 줄 설명', e:'아니요'}]],
       {label:'오리 인형에게 코드를 한 줄씩 설명하다가, 말과 코드가 다른 곳에서 원인을 찾아요'}), m:1,
     cap:'소리 내어 설명하면 내 생각과 코드가 어긋난 곳이 보여요'},
+});
+/* basics: code 그림 — 측정(node): count 0 → 1, add(1, 2) → 3, user → { name: '민수', age: 20 }, n = 1·3·5 → 0 / 0 1 2 / 0 1 2 3 4, age 15 → 청소년, 20 → 성인. 예시: 변수 이름·값·횟수·나이 */
+const BLOOP = {
+  '1번': {out:['0'], i:'0', say:'1번 돌았어요. 0만 찍혀요'},
+  '3번': {out:['0', '1', '2'], i:'2', say:'3번 돌았어요. 0부터 2까지 찍혀요'},
+  '5번': {out:[{t:'(0~2 생략)', dim:true}, '3', '4'], i:'4', say:'5번 돌았어요. 0부터 4까지 찍혀요'},
+};
+const bloop = k => ide(['const n = ' + parseInt(k) + ';', 'for (let i = 0; i < n; i++)', '  console.log(i);'], [{l:3, out:BLOOP[k].out, vars:{n:String(parseInt(k)), i:BLOOP[k].i}}],
+  {still:true, label:k + ' 돌면 ' + BLOOP[k].say.split('. ')[1]});
+const BIF = {
+  'age = 15': {l:5, out:'청소년', say:'15는 18보다 작아서 else 쪽이 실행돼요'},
+  'age = 20': {l:3, out:'성인', say:'20은 18 이상이라 if 쪽이 실행돼요'},
+};
+const bif = k => ide(['const ' + k + ';', 'if (age >= 18) {', "  console.log('성인');", '} else {', "  console.log('청소년');", '}'], [{l:BIF[k].l, out:[BIF[k].out], vars:{age:k.slice(6)}}],
+  {still:true, label:k + '일 때 ' + BIF[k].l + '번째 줄이 실행되어 ' + BIF[k].out + '이 찍혀요'});
+const bpick = (P, f) => s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+  ks.forEach(x => x.addEventListener('click', () => { b.innerHTML = f(x.dataset.k); psay(h, P[x.dataset.k].say); ks.forEach(y => y.setAttribute('aria-pressed', y === x)); })); };
+Object.assign(D, {
+  'u-variable':{h:ide(['let count = 0;', 'count = count + 1;'], [{l:1, vars:{count:'0'}}, {l:2, vars:{count:'1'}}],
+      {label:'count에 0을 담았다가 1을 더해 1로 바꾸는 코드'}), m:1,
+    cap:'같은 이름에 담긴 값이 0에서 1로 바뀌어요'},
+  'u-function':{h:ide(['function add(a, b) {', '  return a + b;', '}', 'console.log(add(1, 2));'], [{l:4}, {l:2, vars:{a:'1', b:'2'}}, {l:4, out:['3']}],
+      {label:'add(1, 2)를 부르면 함수 안에서 1 + 2를 계산해 3이 찍히는 코드'}), m:1,
+    cap:'이름을 불러 함수 안의 코드를 실행해요'},
+  'u-object':{h:`<div class="mk-f">${['const user = {', '  name: "민수",', '  age: 20', '};'].map(bcode).join('')}</div>`
+      + mem([{stack:[{n:'user', to:'U'}], heap:[{id:'U', v:"{ name: '민수', age: 20 }"}]}], {still:true, label:'user가 이름과 나이를 담은 객체 상자 하나를 가리켜요'}),
+    cap:'이름과 값의 짝 여러 개가 상자 하나에 들어 있어요'},
+  'u-loop':{h:`<div class="mk-mobox">${bloop('3번')}</div>${tpick(['1번', '3번', '5번'], '3번')}<span class="mk-hint" aria-live="polite">${BLOOP['3번'].say}</span>`,
+    cap:'횟수를 눌러 출력이 몇 줄 쌓이는지 보세요',
+    init:bpick(BLOOP, bloop)},
+  'u-conditional':{h:`<div class="mk-mobox">${bif('age = 20')}</div>${tpick(['age = 15', 'age = 20'], 'age = 20')}<span class="mk-hint" aria-live="polite">${BIF['age = 20'].say}</span>`,
+    cap:'나이를 바꿔 어느 줄이 실행되는지 보세요',
+    init:bpick(BIF, bif)},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
