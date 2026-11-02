@@ -8,6 +8,7 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'basics/basic': ['Programming Language', 'Source Code', 'Frontend', 'Backend', 'Full Stack', 'Bug', 'Debugging', 'Error Message', 'Software', 'Operating System', 'Bit·Byte', 'Script'],
   'basics/core': ['Library', 'Framework', 'Package', 'npm', 'Dependency', 'Code Editor', 'Semantic Versioning', 'Open Source', 'IDE', 'Linter', 'Formatter', 'Package Manager', 'Snippet'],
   'basics/motion': ['Compile', 'Build', 'Run', 'Event', 'Event Listener', 'Callback', 'Asynchronous', 'Hot Reload', 'Interpreter', 'Runtime', 'Promise', 'Async/Await', 'Event Loop', 'Thread', 'Garbage Collection'],
+  'basics/adv': ['Algorithm', 'Data Structure', 'Big-O', 'Recursion', 'Refactoring', 'Technical Debt', 'Design Pattern', 'Static vs Dynamic Typing', 'OOP', 'Abstraction', 'Encapsulation', 'Inheritance', 'Interface', 'Functional Programming', 'Pure Function', 'Immutability', 'Closure', 'Higher-order Function', 'Stack vs Heap'],
   'basics/code': ['Variable', 'Constant', 'Function', 'Parameter', 'Return', 'Conditional', 'Loop', 'Array', 'Object', 'Boolean', 'String', 'Comment', 'Class', 'Syntax', 'Operator', 'Expression', 'Method', 'Property', 'Module', 'Import', 'Indentation', 'Arrow Function', 'Key-Value', 'Truthy·Falsy', 'Template Literal', 'Variable Scope'],
   form: ['Checkbox', 'Radio Button', 'Toggle Switch', 'Dropdown', 'Form', 'Input Field', 'Placeholder',
     'Label', 'Helper Text', 'Inline Validation', 'Required Field', 'Text Area', 'Select Box', 'Autocomplete', 'Search Bar', 'Date Picker',
@@ -80,7 +81,7 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
-  'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
+  'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
@@ -267,7 +268,7 @@ const SYM_PLAN = ['일정이 자꾸 밀려요', '할 일이 계속 늘어나요'
 check('symcount', () => g.SYMPTOMS.length !== 145 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1357 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
+check('total', () => g.TERMS.length === 1368 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -295,7 +296,7 @@ const BOBJ = ["Programming Language","Source Code","Frontend","Backend","Full St
 check('bobj', () => { const a = BS().filter(t => typeof t.v === 'object').map(t => t.en); return [...a.filter(x => !BOBJ.includes(x)).map(x => '+' + x), ...BOBJ.filter(x => !a.includes(x)).map(x => '-' + x)].join(', '); });
 check('bx', () => BS().filter(t => !t.x).map(t => t.en).join(', '));    // 헷갈림 칸
 check('bm', () => BS().filter(t => g.D[t.v] && g.D[t.v].m && !/[" ]A["\s]/.test(g.D[t.v].h)).map(t => t.en).join(', '));    // 재생 버튼이 붙는 개발 기본 그림에는 움직이는 것이 있어야 한다
-const BDM = {'Async/Await': ['await 있음', 'await 없음', 'aria-pressed']};    // 직접 조작 개발 기본 카드 → 그림에 있어야 할 버튼 이름·표시
+const BDM = {'Async/Await': ['await 있음', 'await 없음', 'aria-pressed'], 'Immutability': ['복사 후 수정', '직접 수정', 'aria-pressed']};    // 직접 조작 개발 기본 카드 → 그림에 있어야 할 버튼 이름·표시
 check('bdm', () => Object.entries(BDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 check('bko', () => [['Code Editor', 'IDE'], ['npm', '패키지 관리자']].filter(([en, w]) => g.find(en).ko.includes(w)).map(([en]) => en).join(', '));    // 새 카드 IDE·Package Manager와 한글명이 겹치지 않게
 check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
