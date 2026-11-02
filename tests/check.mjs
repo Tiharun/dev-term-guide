@@ -423,6 +423,19 @@ check('fukey', () => FS().filter(t => !FKEEP.includes(t.en) && !(typeof t.v === 
 check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
 check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'responsive', 'contrast', 'aspect', 'fontsize', 'transition', 'shadow'].filter(k => !g.D[k]).join(', '));    // 공유 그림 키는 남긴다
 const FC = en => g.TERMS.find(t => t.c === 'front' && t.en === en) || {};
+const FDM = {'Specificity': ['h2', '.title', '#main', 'aria-pressed', 'aria-live'], 'Event Bubbling': ['button', 'li', 'stopPropagation', 'aria-pressed', 'aria-live'],
+  'Visibility': ['display:none', 'visibility:hidden', 'opacity:0', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
+check('fdm', () => Object.entries(FDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !String(p.init).includes('psay') || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));    // 결과 문장은 psay로 다시 읽힌다
+check('fdmrun', () => vm.runInContext(`(() => { const bad = [], s = new Set(['h2', '#main']);
+  if (!fspecSay(new Set()).includes('규칙 없음')) bad.push('모두 끔');
+  if (!fspecSay(s).includes('#main') || !fspecSay(s).includes('아이디')) bad.push('아이디 승');
+  if ((fspec(s).match(/덮임/g) || []).length !== 1 || fspec(s).includes('.title')) bad.push('덮임 1개');
+  if (!fspecSay(s).includes('#main 규칙이 이겨요')) bad.push('조사');
+  if ((fvis('opacity:0').match(/mk-fvon/g) || []).length !== 1) bad.push('표 한 행');
+  if (!fbub('button', false).includes('반응한 곳: button, li, ul')) bad.push('버블링');
+  if (!fbub('button', true).includes('반응한 곳: button, li') || fbub('button', true).includes('li, ul')) bad.push('전파 막기');
+  if (!fbub('li', true).includes('반응한 곳: li') || fbub('li', true).includes('li, ul')) bad.push('li 막기');
+  return bad.join(', '); })()`, ctx));
 check('fdirb', () => { const r = [], D = g.D;    // 디렉터 B 지적
   if (!D['u-front-visibility'].h.includes('<b>고름</b><code>visibility:<wbr>hidden')) r.push('visibility 고름·끊김');
   if (!html.includes('.mk-card.mk-fih{') || !html.includes('.mk-f.mk-frs{')) r.push('fih·frs 명시도');

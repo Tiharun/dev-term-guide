@@ -434,6 +434,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-fvt{border-collapse:collapse;width:min(100%,380px);font:12px/1.4 var(--sans);color:var(--ink)}.mk-fvt th,.mk-fvt td{border:1px solid var(--rule);padding:4px 6px;text-align:left}.mk-fvt th{font-weight:800}.mk-fvt code{font:600 11.5px/1.4 var(--mono)}
 .cmp>div:has(>.mk-fpd){min-width:0;grid-template-columns:minmax(0,1fr)}.mk-fpd{width:100%;display:flex;justify-content:center}.mk-fpd .mk-browser{max-width:100%}
 .fig:has(.mk-fdp,.mk-fpx,.mk-fem,.mk-ffr,.mk-fvt,.mk-fwp,.mk-fpc,.mk-fof,.mk-fcl) .figcap{position:static;margin:0 96px 11px 14px}
+.mk-fsp{margin:0;font-size:12px;color:var(--ink);text-align:center}.mk-fsp b{font-size:17px;margin-right:6px}
 .mk-fli{margin:0;padding-left:18px;text-align:left}.mk-fwp{width:min(100%,360px);border:1px dashed var(--rule);border-radius:6px;padding:8px;display:grid;justify-items:center;gap:6px;font-size:12px;color:var(--ink)}.mk-fwp .w{border:1.5px solid var(--ink);border-radius:6px;padding:6px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px}.mk-fwp .w code{width:100%;text-align:center;font:600 11.5px/1.4 var(--mono)}.mk-fwp .w span{border:1px solid var(--rule);background:var(--plate);border-radius:4px;padding:6px 10px}
 .mk-fps .f{position:relative;height:50px;border:1px dashed var(--rule);border-radius:4px}.mk-fps .f.s{border:1.5px solid var(--ink)}.mk-fps .f>b{position:absolute;left:4px;top:2px;font-size:11px;font-weight:600;color:var(--muted)}.mk-fps .f i{position:absolute;width:30px;height:16px;border:1.5px solid var(--ink);border-radius:3px;background:var(--mark-bg)}.mk-fps .f i.g{background:none;border-style:dashed;border-color:var(--muted)}.mk-fps .a{left:6px;top:6px}.mk-fps .b{left:22px;top:22px}.mk-fps .c{right:4px;bottom:4px}
 .mk-frm{display:flex;align-items:center;gap:4px}.mk-frm i{width:16px;height:24px;border:1.5px dashed var(--muted);border-radius:4px}.mk-frm i+i{opacity:.6}.mk-frm span{border:1.5px solid var(--ink);border-radius:4px;padding:4px 8px;font-size:12px;color:var(--ink)}
@@ -7204,11 +7205,29 @@ const FVIS_ROWS = [['display:none', '없음', '안 됨', '안 읽음'], ['visibi
 const fvis = k => `<table class="mk-fvt"><thead><tr><th>방법</th><th>자리</th><th>클릭</th><th>화면 낭독기</th></tr></thead><tbody>${FVIS_ROWS.map(([m, ...c]) =>
   `<tr${m === k ? ' class="mk-fvon"' : ''}><td>${m === k ? '<b>고름</b>' : ''}<code>${m.replace(':', ':<wbr>')}</code></td>${c.map(x => `<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 const fcss = (title, ...ls) => `<div class="mk-fcd">${doc(ls.map(t => ({p:t})), {title, still:true})}</div>`;    // pair 왼쪽 코드 칸
+const FSPEC = [['h2', 'h2 { color: teal }', '태그', '--ch3', '청록'], ['.title', '.title { color: blue }', '클래스', '--ch1', '파랑'], ['#main', '#main { color: orange }', '아이디', '--mark', '주황']];    // 낮은 것부터
+const fspecOn = on => FSPEC.filter(([k]) => on.has(k));
+const fspec = on => { const r = fspecOn(on), w = r[r.length - 1];
+  return `<div class="mk-fst">${devtools({tab:'요소', dom:[[0, '<h2 id="main" class="title">']], hl:0, css:r.slice().reverse().map((x, i) => i ? {t:x[1], off:1} : x[1]),
+    label:w ? `${w[0]} 규칙이 이겼어요` : '켠 규칙이 없어요'})}<p class="mk-fsp"><b style="color:var(${w ? w[3] : '--ink'})">제목</b>글자 색: ${w ? w[4] : '기본 남색'}</p></div>`; };
+const fspecSay = on => { const r = fspecOn(on), w = r[r.length - 1];
+  return !r.length ? '규칙 없음: 기본 글자색이에요' : r.length === 1 ? `${w[0]}만 켜져서 그 색이에요` : `${w[0]} 규칙이 이겨요. ${w[2]}가 ${r[r.length - 2][2]}보다 우선이에요`; };    // 단계 말은 모두 받침이 없어 "가"
+const FBUB = {button:{say:'button을 눌렀어요.'}, li:{say:'li를 눌렀어요.'}};
+const fbubPath = (t, stop) => (t === 'button' ? [2, 1, 0] : [1, 0]).slice(0, stop ? (t === 'button' ? 2 : 1) : undefined);
+const fbub = (t, stop) => { const pth = fbubPath(t, stop), nm = ['ul', 'li', 'button'];
+  return `<div class="mk-fst">${domtree([[0, 'ul', '처리기'], [1, 'li', t === 'li' ? (stop ? '누른 곳·멈춤' : '누른 곳') : stop ? '여기서 멈춤' : '처리기'], [2, 'button', t === 'button' ? '누른 곳' : '']],
+    {path:pth, still:true})}<p class="mk-fsp">반응한 곳: ${pth.map(i => nm[i]).join(', ')}</p></div>`; };
+const fbubSay = (t, stop) => `${FBUB[t].say} ${stop ? 'li에서 전파를 막아 ul은 반응하지 않아요' : '클릭이 ul까지 올라가요'}`;
+const FVIS = {'display:none':{say:'자리까지 사라지고, 누를 수도 화면 낭독기가 읽을 수도 없어요'}, 'visibility:hidden':{say:'자리는 남지만, 누를 수 없고 화면 낭독기도 읽지 않아요'},
+  'opacity:0':{say:'투명할 뿐이라 자리도 남고, 누를 수 있고 화면 낭독기도 읽어요'}};
 const FBOX = (...xs) => `<div class="mk-fib">${xs.map(x => `<span>${x}</span>`).join('')}</div>`;
 Object.assign(D, {
-  'u-front-specificity':{h:devtools({tab:'요소', dom:[[0, '<h2 id="main" class="title">']], hl:0, css:['#main { color: orange }', {t:'.title { color: blue }', off:1}, {t:'h2 { color: teal }', off:1}],
-      label:'id 규칙 #main이 이기고 .title과 h2 규칙은 덮였어요'}),
-    cap:'한 제목에 규칙 셋이 겹치면 id로 고른 규칙이 이기고, 나머지는 덮여요'},
+  'u-front-specificity':{h:`<div class="mk-mobox">${fspec(new Set(FSPEC.map(([k]) => k)))}</div>${tkeys(FSPEC.map(([k]) => k)).replace(/data-k="[^"]*"/g, m => m + ' aria-pressed="true"')}`
+      + `<span class="mk-hint" aria-live="polite">${fspecSay(new Set(FSPEC.map(([k]) => k)))}</span>`,
+    cap:'규칙을 켜고 꺼서 어느 규칙이 이기는지 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')];
+      ks.forEach(x => x.addEventListener('click', () => { x.setAttribute('aria-pressed', x.getAttribute('aria-pressed') !== 'true');
+        const on = new Set(ks.filter(y => y.getAttribute('aria-pressed') === 'true').map(y => y.dataset.k)); b.innerHTML = fspec(on); psay(h, fspecSay(on)); })); }},
   'u-front-cascade':{h:devtools({tab:'요소', dom:[[0, '<button class="btn">']], hl:0, css:['.btn { color: blue }', {t:'.btn { color: orange }', off:1}],
       label:'뒤에 쓴 .btn 규칙이 이기고 앞에 쓴 규칙은 덮였어요'}),
     cap:'명시도가 같으면 뒤에 쓴 규칙이 이겨요. 개발자 도구는 이긴 규칙을 위에 보여 줘요'},
@@ -7231,16 +7250,22 @@ Object.assign(D, {
     cap:'인라인은 옆으로 이어지고, 블록은 한 줄을 다 차지해요'},
   'u-front-display-none':{h:vs('상자 셋', FBOX('A', 'B', 'C'), 'B에 display: none', FBOX('A', 'C') + whelp('B의 자리도 사라짐')),
     cap:'display: none을 준 상자는 자리까지 없어져 양옆이 붙어요'},
-  'u-front-visibility':{h:fvis('visibility:hidden'),
-    cap:'숨기는 방법마다 자리, 클릭, 화면 낭독기가 달라요'},
+  'u-front-visibility':{h:`<div class="mk-mobox">${fvis('visibility:hidden')}</div>${tpick(Object.keys(FVIS), 'visibility:hidden')}<span class="mk-hint" aria-live="polite">${FVIS['visibility:hidden'].say}</span>`,
+    cap:'숨기는 방법을 골라 자리, 클릭, 화면 낭독기가 어떻게 다른지 보세요',
+    init:bpick(FVIS, fvis)},
   'u-front-float':{h:pair(fcss('style.css', 'img {', 'float: left;', '}'),
       `<div class="mk-card mk-ffl"><i class="mk-img"></i><p>사진 오른쪽으로 글이 감싸 흘러요. 사진 아래로 내려가면 다시 왼쪽 끝부터 이어져요.</p></div>`),
     cap:'띄운 사진 옆으로 글이 감싸 흘러요'},
   'u-front-vendor-prefix':{h:doc([{tb:[['접두사', '브라우저'], ['-webkit-', 'Chrome, Safari, 요즘의 Edge, Opera, iOS의 Firefox'], ['-moz-', 'Firefox']]}, {p:'지금은 도구가 대신 붙여 줘요'}],
       {title:'브라우저 접두사', label:'-webkit-은 Chrome, Safari, 요즘의 Edge와 Opera, iOS의 Firefox, -moz-는 Firefox용이에요. 지금은 도구가 대신 붙여 줘요'}), m:1,
     cap:'예전엔 브라우저마다 다른 접두사를 붙였어요'},
-  'u-front-event-bubbling':{h:domtree([[0, 'ul', '처리기 있음'], [1, 'li', '처리기 있음'], [2, 'button', '누른 곳']], {path:[2, 1, 0], label:'button에서 생긴 클릭이 li, ul 순서로 올라가요'}), m:1,
-    cap:'누른 버튼에서 시작한 클릭이 부모 쪽으로 차례로 올라가요'},
+  'u-front-event-bubbling':{h:`<div class="mk-mobox">${fbub('button', false)}</div>${tpick(['button', 'li'], 'button')}`
+      + `<div class="mk-tkeys"><button type="button" class="mk-tkey" aria-pressed="false">li에서 전파 막기(stopPropagation)</button></div><span class="mk-hint" aria-live="polite">${fbubSay('button', false)}</span>`,
+    cap:'누를 곳을 고르고 전파를 막아 보며 클릭이 어디까지 올라가는지 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], pk = ks.filter(x => x.dataset.k), st = ks.find(x => !x.dataset.k);
+      let t = 'button', stop = false;
+      const go = () => { b.innerHTML = fbub(t, stop); psay(h, fbubSay(t, stop)); pk.forEach(y => y.setAttribute('aria-pressed', y.dataset.k === t)); st.setAttribute('aria-pressed', stop); };
+      pk.forEach(x => x.addEventListener('click', () => { t = x.dataset.k; go(); })); st.addEventListener('click', () => { stop = !stop; go(); }); }},
   'u-front-event-delegation':{h:domtree([[0, 'ul', '처리기 하나'], [1, 'li'], [1, 'li', '누른 곳'], [1, 'li']], {path:[2, 0], label:'두 번째 li를 누르면 클릭이 ul의 처리기 하나로 올라가요'}), m:1,
     cap:'항목마다 달지 않고 부모 하나가 올라온 클릭을 받아요'},
   'u-front-preventdefault':{h:vs('막지 않음', '<div class="mk-fpd">' + browser(`<span class="mk-in">이름</span><span class="mk-btn">보내기</span>${whelp('페이지 새로고침, 입력값 사라짐')}`, {url:'example.com'}) + '</div>',
