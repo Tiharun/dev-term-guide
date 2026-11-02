@@ -86,7 +86,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 
 const file = process.argv[2] || 'index.html';
@@ -305,6 +305,8 @@ check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', ')
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
+check('bfw', () => /<span>요청 오면/.test(g.D['u-framework'].h) ? '콘솔에 안 찍히는 설명이 실제 출력처럼 보여요' : /object Object/.test(g.D['u-framework'].h) ? '흐린 줄 요약이 깨져요' : '');    // 설명 줄은 흐린 글자(mk-cdx)로
+check('berr', () => ['Recursion', 'Constant'].filter(en => !g.find(en).x.includes('Chrome·Node')).join(', '));    // 오류 문구는 엔진마다 달라 V8 문구임을 밝힌다(MDN Errors)
 check('fcode', () => /\.mk-f>code\{white-space:pre\}/.test(html) ? '' : '줄 앞 공백이 사라져요');    // bcode 들여쓰기
 check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation-delay:-([\d.]+)s/)[1], mr = html.match(/\.mk-mrs\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 코드 칸·메모리 그림의 멈춘 장면은 마지막 단계만
   const z = [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const m = html.match(new RegExp(`@keyframes mk-cdz${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,100%\\{opacity:1\\}`)); return !m || +m[1] > P; }).map(k => 'z' + k);
