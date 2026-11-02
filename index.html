@@ -2332,6 +2332,12 @@ T('web','parts',[
  {en:'Above the Fold',ko:'첫 화면 · 스크롤 전 영역',d:'스크롤하지 않고 처음 보이는 화면 범위.',p:'가입 버튼이 스크롤 없이 첫 화면(above the fold)에 보이게 해줘',r:['Hero Section','Viewport'],l:2,o:0,v:'viewport'},
  {en:'Chip',ko:'칩 · 필터 태그',d:'선택한 조건이나 분류를 보여 주는 작고 둥근 버튼.',p:'카테고리 필터를 칩 형태로 가로로 늘어놔줘',r:['Badge','Tab'],l:1,o:0,v:'chip'},
  {en:'Divider',ko:'디바이더 · 구분선',d:'영역을 나누는 가는 선.',p:'목록 항목 사이에 1px 구분선을 넣어줘',r:['Whitespace'],l:1,o:1,u:MDN('Web/HTML/Element/hr'),v:'divider'},
+ {en:'Feature Section',ko:'기능 소개 섹션',d:'제품이 해 주는 일을 카드 몇 개로 나란히 보여 주는 영역이에요.',x:'기능 소개 섹션은 기능을 알리는 페이지 영역이고, 기획에서 말하는 Feature는 만들 기능 그 자체예요.',p:'히어로 아래에 기능 소개 섹션을 카드 3개로 넣어줘',r:['Hero Section'],l:1,o:0,v:'u-feature-section'},
+ {en:'Logo',ko:'로고',d:'머리글 왼쪽에 놓는 사이트의 이름표 그림이나 글자예요.',x:'로고는 보통 누르면 홈페이지로 가요. 로고에 쓸 색을 고르는 일은 디자인의 브랜드 색 이야기예요.',p:'헤더 왼쪽 로고를 누르면 홈으로 가게 해줘',r:['Header'],l:1,o:0,v:'u-logo'},
+ {en:'Pricing Section',ko:'가격 섹션 · 요금제',d:'요금제마다 가격과 들어 있는 기능을 나란히 보여 주는 영역이에요.',x:'가격 섹션은 요금제를 비교하게 보여 줄 뿐이고, 실제 돈을 받는 일은 결제 기능이 따로 맡아요.',p:'기본·프로 요금제를 나란히 비교하는 가격 섹션을 만들어줘',r:['CTA Button'],l:1,o:0,v:'u-pricing-section'},
+ {en:'Testimonial',ko:'후기 · 고객 추천',d:'써 본 사람의 말을 이름과 함께 보여 주는 영역이에요.',x:'후기 섹션은 고른 몇 개만 보여 주고, 리뷰 목록은 별점과 함께 모두 모아 보여 줘요.',p:'가격 섹션 위에 고객 후기 3개를 넣어줘',r:['Landing Page'],l:1,o:0,v:'u-testimonial'},
+ {en:'About Page',ko:'소개 페이지',d:'회사나 만든 사람이 누구인지 알려 주는 페이지예요.',x:'소개 페이지는 누구인지를, 문의 페이지는 연락하는 방법을 담아요.',p:'회사 소개 페이지를 /about 주소로 만들어줘',r:['Contact Page'],l:1,o:0,v:'u-about-page'},
+ {en:'Contact Page',ko:'문의 페이지 · 연락처',d:'이메일, 전화, 문의 폼처럼 연락하는 방법을 모은 페이지예요.',x:'문의 페이지는 연락 방법을, 소개 페이지는 누구인지를 담아요. 문의 폼을 두면 보낸 내용을 한곳에 모을 수 있어요.',p:'이메일과 내용을 받는 문의 페이지를 만들어줘',r:['About Page','Form'],l:1,o:0,v:'u-contact-page'},
 ]);
 T('web','tip',[
  {en:'Static Site',ko:'정적 사이트',d:'누가 봐도 같은 내용을 보여 주는, 미리 만든 파일로 된 사이트.',x:'로그인·글쓰기처럼 사람마다 내용이 달라지면 동적 사이트.',p:'회사 소개는 정적 사이트로 충분해. 서버 없이 만들어줘',r:['SSG','Hosting'],l:1,o:0,v:{flow:['미리 만든 HTML','그대로 전송']}},
@@ -2341,6 +2347,9 @@ T('web','tip',[
  {en:'A/B Test',ko:'에이비 테스트',d:'두 가지 안을 나눠 보여 주고 어느 쪽 반응이 좋은지 비교하는 실험.',p:'버튼 문구 두 개로 A/B 테스트할 수 있게 만들어줘',r:['Conversion Rate'],l:2,o:0,v:{cmp:['A안','<span class="btnx">지금 가입</span>','B안','<span class="btnx o">무료로 시작</span>']}},
  {en:'Conversion Rate',ko:'전환율',d:'방문자 중 실제로 가입·구매 같은 목표 행동을 한 비율.',p:'가입 전환율이 낮아. 가입 단계를 줄여줘',r:['CTA Button','A/B Test'],l:2,o:0,v:{big:'3.2%',sub:'방문자 100명 중 3명이 구매'}},
  {en:'UX Writing',ko:'UX 라이팅 · 화면 문구',d:'버튼·안내·오류 문구를 사용자가 바로 이해하게 쓰는 것.',p:'"에러 발생" 대신 무엇이 문제고 어떻게 하면 되는지 문구를 바꿔줘',r:['Empty State'],l:2,o:0,v:'shake'},
+ {en:'Slug',ko:'슬러그 · 주소 끝 이름',d:'example.com/blog/web-tips의 web-tips처럼 글 하나를 가리키는 주소 끝 이름이에요.',x:'URL은 주소 전체, Domain은 example.com 부분, Slug는 맨 끝 글 이름이에요. 슬러그는 소문자와 하이픈(-)으로 짧게 써요.',p:'글 제목으로 슬러그를 만들어 주소 끝에 붙여줘',r:['URL'],l:1,o:1,u:MDN('Glossary/Slug'),v:'u-slug'},
+ {en:'No-code Builder',ko:'노코드 빌더',d:'코드 없이 블록을 끌어 놓아 사이트를 만드는 도구예요.',x:'노코드 빌더는 화면을 블록으로 짜서 만들고, CMS는 이미 있는 사이트의 글과 사진을 고쳐요. 둘을 함께 주는 도구도 있어요.',p:'노코드 빌더로 만든 사이트를 코드로 옮기면 무엇이 달라지는지 알려줘',r:['CMS'],l:1,o:0,v:'u-no-code-builder'},
+ {en:'Coming Soon Page',ko:'오픈 예정 페이지',d:'사이트를 열기 전에 "곧 열어요" 안내와 알림 신청만 두는 페이지예요.',x:'오픈 예정 페이지는 출시 전에 알림 신청을 받고, 랜딩 페이지는 이미 나온 제품의 가입이나 구매를 권해요.',p:'오픈 날짜와 알림 신청 칸만 있는 오픈 예정 페이지를 만들어줘',r:['Landing Page'],l:1,o:0,v:'u-coming-soon-page'},
 ]);
 </script>
 <script>
@@ -6822,6 +6831,29 @@ Object.assign(D, {
   'u-hydration':{h:track([{t:'HTML 도착', s:'done', n:'글과 버튼이 보여요'}, {t:'JS 도착', s:'done'}, {t:'동작 붙이기', s:'now', n:'버튼마다 할 일을 연결해요'}, {t:'버튼 눌림', s:'wait'}],
       {label:'HTML이 먼저 오고, JavaScript가 동작을 붙인 뒤에 버튼이 눌려요'}), m:1,
     cap:'보이는 것과 눌리는 것 사이에 동작을 붙이는 단계가 있어요'},
+});
+/* web: parts·tip — 출처 확인(2026-11): MDN Glossary Slug. 흔히: 기능 소개·가격·후기·소개·문의 영역 이름, 노코드 빌더·오픈 예정 페이지 뜻. 예시: 회사 이름·가격·후기 글·날짜 */
+const wcard = (t, ...xs) => `<div class="mk-card mk-f"><b>${esc(t)}</b>${xs.join('')}</div>`, whelp = t => `<span class="mk-help">${esc(t)}</span>`;
+Object.assign(D, {
+  'u-feature-section':{h:browser(gnb(['소개', '제품', '문의']) + `<b>장보기를 더 쉽게</b><div class="mk-cols mk-hl">${['배송', '반품', '결제'].map(t => wcard(t, lines(80))).join('')}</div>`),
+    cap:'히어로 아래에 기능을 카드로 나란히 놓아 한눈에 보여 줘요'},
+  'u-logo':{h:browser(gnb(['소개', '제품', '문의']).replace('<b>로고</b>', '<b class="mk-hl">로고</b>') + `<b>새로 나온 제품</b>${lines(85, 60)}`),
+    cap:'머리글 왼쪽 로고는 사이트의 이름표예요. 누르면 보통 홈으로 가요'},
+  'u-pricing-section':{h:browser(`<b>요금제</b><div class="mk-cols mk-hl">${wcard('기본', '<span>0원</span>', whelp('글 10개'))}${wcard('프로', '<span>9,900원</span>', whelp('글 무제한'), '<span class="mk-btn">시작하기</span>')}</div>`, {url:'example.com/pricing'}),
+    cap:'요금제를 나란히 두어 가격과 기능을 비교하게 해요(가격은 예시)'},
+  'u-testimonial':{h:browser(`<b>써 본 사람들</b><div class="mk-card mk-f mk-hl"><b>“주문이 정말 쉬워요”</b>${whelp('김민수 · 고객 (예시)')}</div>${wcard('“배송이 빨라요”', whelp('이서연 · 고객 (예시)'))}`),
+    cap:'써 본 사람의 말을 이름과 함께 보여 주면 믿음이 생겨요'},
+  'u-about-page':{h:browser(gnb(['소개', '제품', '문의'], 0) + `<div class="mk-card mk-f mk-hl"><b>우리 이야기</b>${lines(90, 75, 60)}${whelp('2020년 서울에서 시작했어요 (예시)')}</div>`, {url:'example.com/about'}),
+    cap:'소개 페이지는 누가, 왜 만들었는지 알려 줘요'},
+  'u-contact-page':{h:browser(gnb(['소개', '제품', '문의'], 2) + `<div class="mk-card mk-f mk-hl"><b>문의하기</b><span class="mk-in">이메일</span><span class="mk-in">문의 내용</span><span class="mk-btn">보내기</span></div>`, {url:'example.com/contact'}),
+    cap:'문의 페이지는 연락할 방법을 한곳에 모아 둬요'},
+  'u-slug':{h:addr(['example.com', 'blog', 'web-tips'], {sep:'/', y:[2], sub:'색칠한 web-tips가 슬러그예요'}),
+    cap:'주소 맨 끝 이름이 글 하나를 가리켜요'},
+  'u-no-code-builder':{h:pair(doc([{ul:['＋ 제목', '＋ 사진', '＋ 버튼']}], {title:'블록 고르기', still:true}),
+      browser(`<b>제목</b><span class="mk-ln" style="width:100%;height:34px"></span><span class="mk-btn">버튼</span>`)),
+    cap:'블록을 골라 끌어 놓으면 코드 없이 화면이 만들어져요'},
+  'u-coming-soon-page':{h:browser(`<div class="mk-card mk-f mk-hl"><b>곧 열어요</b>${whelp('12월 1일 열어요 (예시)')}<span class="mk-in">이메일</span><span class="mk-btn">알림 받기</span></div>`),
+    cap:'열기 전에는 날짜와 알림 신청만 두어 기다리게 해요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;

@@ -81,13 +81,14 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'plan/docs': ['PRD', 'Functional Specification', 'Screen Design Document', 'Technical Design Document', 'Meeting Minutes', 'Project Proposal', 'WBS', 'Test Plan', 'User Manual', 'Runbook', 'FAQ', 'Glossary', 'One-pager', 'Gantt Chart'],
   'web/basic': ['Web App', 'Subdomain', 'Homepage'], 'web/core': ['Web Standards', 'Progressive Enhancement'], 'web/motion': ['Scroll Progress Indicator'],
   'web/adv': ['Service Worker', 'Web App Manifest', 'Hydration'],
+  'web/parts': ['Feature Section', 'Logo', 'Pricing Section', 'Testimonial', 'About Page', 'Contact Page'], 'web/tip': ['Slug', 'No-code Builder', 'Coming Soon Page'],
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
   'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'basics/principle': 10, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
   'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
-  'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12 };    // sec: 카드 수
+  'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
 const LATER = ['font', 'doccount', 'wx'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
@@ -286,8 +287,8 @@ const SYM_BASICS = ['await를 썼는데 기다리지 않아요', '배열을 바�
 check('symcount', () => g.SYMPTOMS.length !== 157 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1387 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
-check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 8 ? '' : 'parts ' + n; });
+check('total', () => g.TERMS.length === 1396 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
+check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
   .concat(/마줘/.test(g.byId.get('plan-out-of-scope').p) ? ['마줘'] : []).join(', '));    // Dependency 카드는 패키지 뜻이라 작업 선후 관계 카드에 달지 않음
