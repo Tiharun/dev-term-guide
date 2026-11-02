@@ -238,7 +238,7 @@ check('fhelp', () => vm.runInContext(`(() => {
   const dv = devtools({tab:'요소', dom:[[0, '<div id="main">'], [1, '<h2 class="title">']], css:['#main h2 { color: red }', {t:'h2 { color: blue }', off:1}], hl:1});
   has(dv, ['class="mk-dvt" aria-hidden="true"', '<span class="on">요소</span>', 'mk-dvon', '선택', 'mk-dvoff', '덮임', '&lt;div id=&quot;main&quot;&gt;',
     '<p class="sr">개발자 도구 요소 탭, 2번째 줄 선택, 덮인 규칙 1개</p>'], 'dv요소');
-  has(devtools({tab:'요소', dom:[[0, 'a']], hl:0}), ['1번째 줄 선택'], 'dv hl0');
+  has(devtools({tab:'요소', dom:[[0, 'a']], hl:0}), ['1번째 줄 선택', 'class="mk-dvg one"'], 'dv hl0'); if (dv.includes('mk-dvg one')) bad.push('dv 규칙 있는데 한 칸');    // 규칙이 없으면 dom 칸이 전체 폭을 쓴다
   has(devtools({tab:'콘솔', con:['불러옴', {t:'posts is not defined', err:1}]}), ['<span class="on">콘솔</span>', 'mk-dverr', '오류', '개발자 도구 콘솔 탭, 2줄, 오류 1개'], 'dv콘솔');
   has(devtools({tab:'네트워크', net:[{name:'posts', status:200, type:'fetch'}, {name:'users', status:404, type:'fetch'}]}), ['mk-dvf', '실패', '404', '개발자 도구 네트워크 탭, 요청 2개, 실패 1개'], 'dv네트워크');
   const d1 = [[0, 'a']], w29 = 'x'.repeat(29);
