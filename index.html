@@ -6520,8 +6520,8 @@ Object.assign(D, {
       ks.forEach(b => b.addEventListener('click', () => {
         box.innerHTML = bawait(b.dataset.k); psay(say, BAWAIT[b.dataset.k].say); ks.forEach(x => x.setAttribute('aria-pressed', x === b)); })); }},
   'u-event-loop':{h:ide(["console.log('1');", 'setTimeout(() => {', "  console.log('3');", '}, 0);', "console.log('2');"],
-      [{l:1, out:['1']}, {l:2, out:['1'], vars:{'대기열':'콜백 1개'}}, {l:5, out:['1', '2'], vars:{'대기열':'콜백 1개'}}, {l:3, out:['1', '2', '3']}],
-      {label:'1을 찍고 콜백을 대기열에 넣은 뒤 2를 찍고, 마지막에 콜백이 3을 찍는 순서'}), m:1,
+      [{l:1, out:['1']}, {l:2, out:['1'], vars:{'타이머':'콜백 기다림'}}, {l:5, out:['1', '2'], vars:{'대기열':'콜백 1개'}}, {l:3, out:['1', '2', '3']}],
+      {label:'1을 찍고 타이머에 콜백을 맡긴 뒤 2를 찍고, 지금 코드가 끝나면 대기열의 콜백이 3을 찍는 순서'}), m:1,
     cap:'0초를 줘도 지금 코드가 끝난 뒤에 실행돼요'},
   'u-thread':{h:BTWO(['스레드 1개', bhelp('① 계산'), bhelp('② 화면 그리기'), bhelp('하나씩 차례로')], ['스레드 2개', bhelp('줄기 1: 화면 그리기'), bhelp('줄기 2: 계산'), bhelp('동시에')]),
     cap:'줄기가 하나면 차례로, 여럿이면 동시에 일해요'},
