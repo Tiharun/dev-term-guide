@@ -117,7 +117,7 @@ const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
   'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip', 'server/basic', 'server/core', 'server/motion', 'server/adv', 'server/status', 'server/conf', 'server/scale', 'server/res', 'server/infra', 'server/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'srvsym', 'redrawn:server/basic', 'redrawn:server/core', 'redrawn:server/motion', 'redrawn:server/adv', 'redrawn:server/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'srvsym', 'redrawn:server/adv', 'redrawn:server/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -452,6 +452,17 @@ check('srvhelp', () => vm.runInContext(`(() => {
   no(() => metric({lines:L, x:X4, unit:'%', mark:{i:4, n:'a'}}), 'mark 범위'); no(() => metric({lines:L, x:X4, unit:'%', mark:{i:1.5, n:'a'}}), 'mark 정수'); no(() => metric({lines:L, x:X4, unit:'%', mark:{i:0, n:'a'.repeat(11)}}), 'mark 11폭');
   return bad.join(', ');
 })()`, ctx));
+check('srvstill', () => vm.runInContext(`(() => { const bad = [], n = (h, s) => h.split(s).length - 1, WA = h => /class="(?:[^"]*\s)?A(?:\s[^"]*)?"/.test(h);
+  const e = senv(2, '실제 사용자가 보는 곳');
+  if (n(e, '>강조<') !== 1 || !e.includes('실제 사용자가 보는 곳') || !e.includes('연습장') || !e.includes('내 컴퓨터') || e === senv(1, '실제 사용자가 보는 곳')) bad.push('senv');
+  const r = slb('rr'), c = slb('lc');
+  if (n(r, '요청 4<') !== 3 || !r.includes('>바쁨<') || !r.includes('Round Robin') || n(c, '요청 5<') !== 2 || !c.includes('요청 2<') || !c.includes('Least Connections') || WA(r + c)) bad.push('slb');
+  if (slbSay('rr') !== '차례대로 4개씩 나눠요' || slbSay('lc') !== '한가한 서버 1·3이 더 받아요') bad.push('slbSay');
+  const ok = sfail(false), dn = sfail(true);
+  if (n(ok, '요청 3<') !== 3 || ok.includes('고장') || !dn.includes('>고장<') || !dn.includes('>빠짐<') || !dn.includes('요청 5<') || !dn.includes('요청 4<') || dn.includes('요청 0') || WA(ok + dn)) bad.push('sfail');
+  if (sfailSay(false) !== '서버 3대가 나눠 받아요' || sfailSay(true) !== 'Health Check가 서버 2를 빼고 나머지가 받아요') bad.push('sfailSay');
+  [() => senv(3, 'a'), () => senv(0, ''), () => slb('ip'), () => slbSay('x'), () => sfail('y'), () => sfailSay(1)].forEach((f, k) => { try { f(); bad.push('안 막음 ' + k); } catch (e) { if (!/^(senv|slb|sfail): /.test(e.message)) bad.push('메시지 ' + k); } });
+  return bad.join(', '); })()`, ctx));
 check('srvcss', () => [['figcap sv', /[,(]\.mk-sv[,)][^{]*\.figcap\{position:static/], ['figcap mg', /[,(]\.mk-mg[,)][^{]*\.figcap\{position:static/], ['고장 점선', /\.mk-sv-down\{border-style:dashed\}/],
   ['2열', /@media \(max-width:420px\)\{\.mk-svs\[style\*="--n:4"\]\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/], ['서버 가로선', /\.mk-svs\{[^}]*background:linear-gradient/], ['db 가로선', /\.mk-svdb\{[^}]*center bottom/],
   ['db 세로선', /\.mk-svl\{[^}]*flex:1/], ['2열 점 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svd\{display:none\}/],
@@ -849,8 +860,7 @@ check('dbrevd', () => [...(['Atomicity', 'Consistency', 'Isolation', 'Durability
 check('dbreve', () => [['Hard Delete', 'COMMIT'], ['ERD', '1:N'], ['Timestamp', 'UTC로 바꿔 저장']].filter(([en, w]) => !(g.find(en)?.x || '').includes(w)).map(([en]) => en + ' x').join(', '));    // 검토 E: ROLLBACK 가능 시점, 그림의 1:N 표시, timestamptz는 시간대가 아니라 UTC 시각을 저장
 const SRVS = () => g.TERMS.filter(t => t.c === 'server');
 check('srvcat', () => { const a = g.CATS.find(c => c.id === 'server').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,status,conf,scale,res,infra,tip' ? '' : a; });
-const SRV_TODO = ["Localhost","Dev Server","Production","Cloud","Uptime","HTTPS","SSL Certificate","Web Server","Reverse Proxy","Load Balancer","Scaling","Downtime","Server Log","Storage",
-  "Request-Response Cycle","Cold Start","Restart","Traffic Spike","Failover","Graceful Shutdown","Linux","SSH","Docker","Container Image","Kubernetes","AWS","VPS","Serverless",
+const SRV_TODO = ["Linux","SSH","Docker","Container Image","Kubernetes","AWS","VPS","Serverless",
   "200 OK","301 Redirect","400 Bad Request","401 Unauthorized","403 Forbidden","404 Not Found","429 Too Many Requests","500 Internal Server Error","502 Bad Gateway","HTTP Status Code",
   "Development Environment","Staging","Monitoring","Cron Job","Redirect","Maintenance Page","Works on My Machine","Self-hosting"];    // 아직 u-server- 그림이 아닌 옛 서버 카드. 다시 그리면 여기서 뺀다
 const SRV_NOX = ["Localhost","Dev Server","Production","Cloud","Uptime","HTTPS","SSL Certificate","Web Server","Reverse Proxy","Load Balancer","Scaling","Downtime","Server Log","Storage",
