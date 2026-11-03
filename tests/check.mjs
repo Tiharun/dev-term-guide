@@ -459,8 +459,8 @@ check('srvstill', () => vm.runInContext(`(() => { const bad = [], n = (h, s) => 
   if (n(r, '요청 4<') !== 3 || !r.includes('>바쁨<') || !r.includes('Round Robin') || n(c, '요청 5<') !== 2 || !c.includes('요청 2<') || !c.includes('Least Connections') || WA(r + c)) bad.push('slb');
   if (slbSay('rr') !== '차례대로 4개씩 나눠요' || slbSay('lc') !== '한가한 서버 1·3이 더 받아요') bad.push('slbSay');
   const ok = sfail(false), dn = sfail(true);
-  if (n(ok, '요청 3<') !== 3 || ok.includes('고장') || !dn.includes('>고장<') || !dn.includes('>빠짐<') || !dn.includes('요청 5<') || !dn.includes('요청 4<') || dn.includes('요청 0') || WA(ok + dn)) bad.push('sfail');
-  if (sfailSay(false) !== '서버 3대가 나눠 받아요' || sfailSay(true) !== 'Health Check가 서버 2를 빼고 나머지가 받아요') bad.push('sfailSay');
+  if (n(ok, '요청 3<') !== 2 || ok.includes('고장') || !ok.includes('>예비<') || !ok.includes('>꺼짐<') || !dn.includes('>고장<') || !dn.includes('>빠짐<') || !dn.includes('>새로 켬<') || n(dn, '요청 3<') !== 2 || dn.includes('요청 0') || WA(ok + dn)) bad.push('sfail');
+  if (sfailSay(false) !== '서버 1·2가 나눠 받고 예비는 꺼져 있어요' || sfailSay(true) !== 'Health Check가 서버 2를 빼고 예비 서버가 대신 받아요') bad.push('sfailSay');    // 검토 B: 카드 d처럼 예비가 대신 받는다
   [() => senv(3, 'a'), () => senv(0, ''), () => slb('ip'), () => slbSay('x'), () => sfail('y'), () => sfailSay(1)].forEach((f, k) => { try { f(); bad.push('안 막음 ' + k); } catch (e) { if (!/^(senv|slb|sfail): /.test(e.message)) bad.push('메시지 ' + k); } });
   return bad.join(', '); })()`, ctx));
 check('srvcss', () => [['figcap sv', /[,(]\.mk-sv[,)][^{]*\.figcap\{position:static/], ['figcap mg', /[,(]\.mk-mg[,)][^{]*\.figcap\{position:static/], ['고장 점선', /\.mk-sv-down\{border-style:dashed\}/],
@@ -468,7 +468,7 @@ check('srvcss', () => [['figcap sv', /[,(]\.mk-sv[,)][^{]*\.figcap\{position:sta
   ['db 세로선', /\.mk-svl\{[^}]*flex:1/], ['2열 점 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svd\{display:none\}/],
   ['2열 테두리', /\.mk-svs\[style\*="--n:4"\]\{[^}]*border:1\.5px solid var\(--rule\)/], ['2열 칸 선 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svc::before,\.mk-svs\[style\*="--n:4"\] \.mk-svl\{display:none\}/],
   ['2열 버튼 끔', /@media \(max-width:420px\)\{[^@]*\.fig:has\(\.mk-svs\[style\*="--n:4"\]\) \.play\{display:none\}/],
-  ['묶음 안 터미널 폭', /\.mk-bkg:has\(>\.mk-term\)\{grid-template-columns:minmax\(0,1fr\)\}/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));    // 서버 배치도의 선·점선·2열 규칙
+  ['묶음 안 터미널 폭', /\.mk-bkg:has\(>\.mk-term\)\{grid-template-columns:minmax\(0,1fr\);justify-items:center\}/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));    // 서버 배치도의 선·점선·2열 규칙
 check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er', 'mk-sv', 'mk-mg'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
@@ -884,6 +884,10 @@ check('srvsameh', () => { const seen = {}; return SRVS().filter(t => typeof t.v 
 check('srvrel', () => [['Graceful Shutdown', 'Zero Downtime Deploy'], ['Maintenance Page', 'Status Page'], ['Downtime', 'Status Page'], ['Cloud', 'Hosting'], ['VPS', 'Hosting']]
   .filter(([en, r]) => !(g.find(en)?.r || []).includes(r)).map(([en, r]) => en + '-' + r).join(', '));    // 스펙 4장: 기존 server 카드에 더하는 r
 const SRV_XHAS = {'502 Bad Gateway': ['504'], '401 Unauthorized': ['403'], 'Uptime': ['43분'], 'SSL Certificate': ['TLS'], 'Docker': ['운영체제']};    // x에 꼭 있어야 할 말(Review Focus 3). 계획서 ②가 더한다
+check('srvfixb', () => { const h = k => g.D['u-server-' + k]?.h || '', W = h('works-on-my-machine');    // 검토 B 지적
+  return [['dev 끝 프롬프트', !h('dev-server').includes('mk-tcur')], ['ssh 끝 프롬프트', !h('ssh').includes('mk-tcur')], ['failover 예비', h('failover').includes('>예비<')],
+    ['cron 절대 경로', h('cron-job').includes('/srv/backup.sh')], ['serverless 플랫폼 경유', h('serverless').includes('결과')], ['docker 조건', h('docker').includes('도커가 있는 서버라면')],
+    ['womm 잘 됨', W.includes('잘 됨') && !W.includes('되는 중')]].filter(([, ok]) => !ok).map(([n]) => n).join(', '); });
 check('srvxhas', () => Object.entries(SRV_XHAS).filter(([en, w]) => { const t = g.find(en); return !t || !w.every(s => (t.x || '').includes(s)); }).map(([en]) => en).join(', '));
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });

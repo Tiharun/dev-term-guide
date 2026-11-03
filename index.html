@@ -435,7 +435,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-bkg{display:grid;gap:6px;width:100%;align-self:start;text-align:left}.mk-bks{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;padding:5px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font-size:12px;color:var(--ink);text-align:left}.mk-bks>b:first-child{font-weight:800}
 .mk-bkr{list-style:none;margin:0;padding:0;display:grid;gap:4px;width:100%;align-self:start}.mk-bkr li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;padding:3px 8px;border:1.5px solid var(--rule);border-radius:4px;background:var(--plate);font:12px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-bkr code{font:inherit}
 .mk-bkp{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12px;color:var(--ink)}.mk-bkp>b:first-child{min-width:2.4em}.mk-bkp>span{padding:1px 7px;border:1.5px solid var(--ink);border-radius:4px;background:var(--plate);font-family:var(--mono)}
-.cmp>div>.mk-bkrl{align-self:start}.mk-bkmo{padding:8px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-bkg:has(>.mk-browser){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkg>.mk-browser{max-width:100%}.mk-bkg:has(>.mk-term){grid-template-columns:minmax(0,1fr)}.mk-bkh{display:grid;gap:6px;justify-items:center;width:100%}.mk-bkr li.mk-bkf{border-color:var(--mark-text)}.mk-bkr li.mk-bkf>span{font:11px/1.4 var(--sans);color:var(--muted)}.mk-bkrl{display:grid;gap:6px;width:min(100%,400px);font-size:12px;color:var(--ink);text-align:left}
+.cmp>div>.mk-bkrl{align-self:start}.mk-bkmo{padding:8px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-bkg:has(>.mk-browser){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkg>.mk-browser{max-width:100%}.mk-bkg:has(>.mk-term){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkh{display:grid;gap:6px;justify-items:center;width:100%}.mk-bkr li.mk-bkf{border-color:var(--mark-text)}.mk-bkr li.mk-bkf>span{font:11px/1.4 var(--sans);color:var(--muted)}.mk-bkrl{display:grid;gap:6px;width:min(100%,400px);font-size:12px;color:var(--ink);text-align:left}
 .mk-sd{width:min(100%,440px);padding:4px;border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);font:12px/1.4 var(--sans);color:var(--ink);text-align:left}
 .mk-sdh{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}.mk-sdh span{margin:0 1px;padding:3px 0;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font:800 11px/1.3 var(--sans);text-align:center;word-break:keep-all;overflow-wrap:anywhere}
 .mk-sdl{margin:0;padding:2px 0 0;list-style:none}.mk-sdm{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px;padding:3px 6px 16px}.mk-sdm>span,.mk-sdm>b{position:relative;background:var(--plate)}
@@ -8413,14 +8413,14 @@ const slbK = k => { if (!Object.hasOwn(SLB, k)) throw new Error('slb: 없는 방
 const slb = kind => { const {name, got} = slbK(kind);
   return srvmap({front:'LB', servers:[{n:'서버 1', got:got[0]}, {n:'서버 2', st:'busy', got:got[1]}, {n:'서버 3', got:got[2]}], note:name, still:true}); };
 const slbSay = kind => slbK(kind).say;
-const SFAIL = {ok: [3, 3, 3], down: [5, 0, 4]};
 const sfailB = d => { if (typeof d !== 'boolean') throw new Error('sfail: 값은 참·거짓'); return d; };
-const sfail = down => { const g = SFAIL[sfailB(down) ? 'down' : 'ok'];
-  return srvmap({front:'LB', servers:[{n:'서버 1', got:g[0]}, down ? {n:'서버 2', st:'down', tag:'빠짐'} : {n:'서버 2', got:g[1]}, {n:'서버 3', got:g[2]}], note:down ? '고장 난 서버는 빼요' : '세 대 모두 정상', still:true}); };
-const sfailSay = down => sfailB(down) ? 'Health Check가 서버 2를 빼고 나머지가 받아요' : '서버 3대가 나눠 받아요';
+const sfail = down => { const d = sfailB(down);
+  return srvmap({front:'LB', servers:[{n:'서버 1', got:3}, d ? {n:'서버 2', st:'down', tag:'빠짐'} : {n:'서버 2', got:3}, d ? {n:'예비', st:'new', got:3} : {n:'예비', st:'off'}],
+    note:d ? '고장 나면 예비가 대신 받아요' : '예비 서버는 꺼진 채 기다려요', still:true}); };
+const sfailSay = down => sfailB(down) ? 'Health Check가 서버 2를 빼고 예비 서버가 대신 받아요' : '서버 1·2가 나눠 받고 예비는 꺼져 있어요';
 Object.assign(D,{
   'u-server-localhost':{h:bkStack(bkBox('내 컴퓨터', 'localhost:3000'), '<p class="mk-dgp">나만 열 수 있어요</p>')},
-  'u-server-dev-server':{h:term([{c:'npm run dev'}, {o:'Local: localhost:5173'}, {o:'파일을 저장하면 다시 그려요'}]), cap:'주소와 포트는 도구마다 달라요(Vite 예)', m:1},
+  'u-server-dev-server':{h:term([{c:'npm run dev'}, {o:'Local: localhost:5173'}, {o:'파일을 저장하면 다시 그려요'}], {end:false}), cap:'주소와 포트는 도구마다 달라요(Vite 예)', m:1},
   'u-server-production':{h:senv(2, '실제 사용자가 보는 곳')},
   'u-server-cloud':{h:srvmap({servers:[{n:'서버 1', got:2}, {n:'서버 2', got:2}], note:'남의 컴퓨터를 빌려 써요'}), m:1},
   'u-server-uptime':{h:bkRows(['99.9% 한 달 약 43분 멈춤', '예시'], ['99.99% 한 달 약 4분 멈춤', '예시']), cap:'30일 기준으로 계산했어요'},
@@ -8447,13 +8447,13 @@ Object.assign(D,{
    AWS 문서(EC2·S3·RDS). IP는 문서용 대역 203.0.113.0/24. 이름·숫자·시각·버전은 예시 */
 Object.assign(D,{
   'u-server-linux':{h:term([{c:'uname -s'}, {o:'Linux'}, {c:'ls /var/www'}, {o:'html  logs'}]), m:1},
-  'u-server-ssh':{h:term([{c:'ssh ubuntu@203.0.113.10'}, {o:'Welcome to Ubuntu'}, {o:'ubuntu@web-1:~$'}], {prompt:'$'}), cap:'주소와 이름은 예시예요', m:1},
-  'u-server-docker':{h:bkStack(bkPills('컨테이너', ['앱', '라이브러리', '설정']), '<p class="mk-dgp">어느 서버에서나 같게 돌아가요</p>')},
+  'u-server-ssh':{h:term([{c:'ssh ubuntu@203.0.113.10'}, {o:'Welcome to Ubuntu'}, {o:'ubuntu@web-1:~$'}], {prompt:'$', end:false}), cap:'주소와 이름은 예시예요', m:1},
+  'u-server-docker':{h:bkStack(bkPills('컨테이너', ['앱', '라이브러리', '설정']), '<p class="mk-dgp">도커가 있는 서버라면 같게 돌아가요</p>')},
   'u-server-container-image':{h:track([{t:'Dockerfile', s:'done'}, {t:'docker build', s:'done'}, {t:'이미지', s:'done'}, {t:'docker run 3번', s:'done'}, {t:'컨테이너 3개', s:'done'}]), m:1},
   'u-server-kubernetes':{h:srvmap({servers:[{n:'상자 1', got:2}, {n:'상자 2', st:'down'}, {n:'상자 3', got:2}, {n:'상자 4', st:'new', got:1}], note:'죽은 상자를 저절로 바꿔요'}), m:1},
   'u-server-aws':{h:bkPills('서비스 예', ['EC2 서버', 'S3 파일', 'RDS DB'])},
   'u-server-vps':{h:bkStack(bkBox('큰 컴퓨터 한 대', '칸 셋으로 나눔'), bkRows(['칸 1', ''], ['칸 2', '내 몫'], ['칸 3', '']))},
-  'u-server-serverless':{h:seq(['브라우저', '플랫폼', '함수'], [{from:0, to:1, t:'요청'}, {from:1, to:1, t:'함수 깨움'}, {from:1, to:2, t:'실행'}, {from:2, to:0, t:'응답'}]), cap:'쓴 만큼 내요', m:1},
+  'u-server-serverless':{h:seq(['브라우저', '플랫폼', '함수'], [{from:0, to:1, t:'요청'}, {from:1, to:1, t:'함수 깨움'}, {from:1, to:2, t:'실행'}, {from:2, to:1, t:'결과'}, {from:1, to:0, t:'응답'}]), cap:'쓴 만큼 내요', m:1},
   'u-server-200-ok':{h:httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: text/html'], body:['<h1>안녕하세요</h1>'], hl:['b0']})},
   'u-server-301-redirect':{h:httpmsg({kind:'응답', start:'301 Moved Permanently', head:['Location: /new'], hl:['h0']})},
   'u-server-400-bad-request':{h:bkStack(httpmsg({kind:'요청', start:'POST /signup', head:['Content-Type: application/json'], body:['{"email": }'], hl:['b0']}), httpmsg({kind:'응답', start:'400 Bad Request'})),
@@ -8469,10 +8469,10 @@ Object.assign(D,{
   'u-server-staging':{h:senv(1, '운영과 같게 만든 연습장')},
   'u-server-monitoring':{h:metric({lines:[{n:'CPU', pts:[30, 35, 40, 85, 60, 40]}, {n:'메모리', pts:[55, 56, 58, 62, 60, 58]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%', limit:{v:80, n:'알림 기준'}}),
     cap:'숫자는 예시예요'},
-  'u-server-cron-job':{h:bkStack(term([{c:'crontab -l'}, {o:'0 3 * * * backup.sh'}]), '<p class="mk-dgp">매일 03:00에 실행돼요</p>'), m:1},
+  'u-server-cron-job':{h:bkStack(term([{c:'crontab -l'}, {o:'0 3 * * * /srv/backup.sh'}]), '<p class="mk-dgp">매일 03:00에 실행돼요</p>'), m:1},
   'u-server-redirect':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'GET /old'}, {from:1, to:0, t:'301 Location'}, {from:0, to:1, t:'GET /new'}, {from:1, to:0, t:'200 OK'}]), m:1},
   'u-server-maintenance-page':{h:bkStack(browser('<p class="mk-dgp">점검 중이에요, 02:00까지</p>', {url:'example.com'})), cap:'시각은 예시예요'},
-  'u-server-works-on-my-machine':{h:bkStack(bkBox('내 컴퓨터', 'Node 22', '되는 중'), bkBox('서버', 'Node 18', '오류')), cap:'버전은 예시예요'},
+  'u-server-works-on-my-machine':{h:bkStack(bkBox('내 컴퓨터', 'Node 22', '잘 됨'), bkBox('서버', 'Node 18', '오류')), cap:'버전은 예시예요'},
   'u-server-self-hosting':{h:bkStack(bkBox('직접 운영', '서버·업데이트·백업을 내가'), bkBox('서비스 이용', '회사가 맡음'))},
 });
 const visual = t => {
