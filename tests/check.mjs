@@ -275,6 +275,36 @@ check('fhelp', () => vm.runInContext(`(() => {
   if (/mk-cdw|mk-cdem|value=/.test(plain) || !plain.includes('--l:2')) bad.push('ide 기존 출력');
   return bad.join(', ');
 })()`, ctx));
+check('bkhelp', () => vm.runInContext(`(() => {
+  const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(seq|httpmsg): /.test(e.message)) bad.push(w + ' 메시지'); } };
+  const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); });
+  const sq = seq(['브라우저', '서버', '저장소'], [{from:0, to:1, t:'POST /login'}, {from:1, to:1, t:'비밀번호 확인'}, {from:1, to:2, t:'세션 저장'}, {from:2, to:1, t:'저장됨', wait:1}, {from:1, to:0, t:'401', err:1}]);
+  has(sq, ['class="mk-sdh" aria-hidden="true"', 'class="mk-sdl" aria-hidden="true"', 'mk-cdz1 A', 'mk-cdz5 A', '브라우저가 서버에', '서버 처리', 'mk-sda l', 'mk-sdb', '>실패<', '>기다림<',
+    '<p class="sr">브라우저가 서버에 POST /login, 서버가 처리: 비밀번호 확인, 서버가 저장소에 세션 저장, 저장소가 서버에 저장됨 기다림, 서버가 브라우저에 401 실패 (실패 1개).</p>'], 'seq');
+  has(seq(['로그인', 'DB'], [{from:0, to:1, t:'a'}]), ['로그인이 DB에 a.'], '조사 받침');
+  has(seq(['API 관문', 'BFF'], [{from:1, to:0, t:'a'}]), ['BFF가 API 관문에 a.'], '조사 영문');
+  const st = seq(['a', 'b'], [{from:0, to:1, t:'x'}, {from:1, to:0, t:'y'}], {still:true});
+  if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(st) || /\\(실패/.test(st)) bad.push('seq still·실패 0개');
+  const L2 = ['a', 'b'], m1 = [{from:0, to:1, t:'x'}];
+  no(() => seq(['a'], m1), '세로줄 1개'); no(() => seq(['a', 'b', 'c', 'd', 'e'], m1), '세로줄 5개'); no(() => seq(['a', '가나다라a'], m1), '이름 9자'); no(() => seq(['앱', 'BFF', '글', '브라우저'], m1), '4줄 이름 7자'); seq(['앱', 'BFF', '글', '회원'], m1);    // 4줄은 320px에서 이름이 한 줄에 들도록 6자까지
+  no(() => seq(L2, []), '메시지 0개'); no(() => seq(L2, Array(9).fill(m1[0])), '메시지 9개'); no(() => seq(L2, [{from:0, to:2, t:'x'}]), 'to 범위');
+  no(() => seq(L2, [{from:-1, to:1, t:'x'}]), 'from 음수'); no(() => seq(L2, [{from:0.5, to:1, t:'x'}]), 'from 소수'); no(() => seq(L2, [{from:0, to:1, t:''}]), '빈 글');
+  no(() => seq(L2, [{from:0, to:1, t:'가나다라마바사아'}]), '글 16자'); no(() => seq(L2, [{from:0, to:1, t:'x', err:1, wait:1}]), '실패+기다림');
+  const hm = httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json', 'Authorization: Bearer …'], body:['{', '  "title": "첫 글"', '}'], hl:['h0', 'b1']});
+  has(hm, ['class="mk-hmt">HTTP 요청<span>(버전 줄임)</span>', 'class="mk-hmb" aria-hidden="true"', 'mk-hmgap', 'mk-hmon', '>강조<', '<code>  &quot;title&quot;: &quot;첫 글&quot;</code>',
+    '<p class="sr">HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄, 본문 2번째 줄</p>'], 'httpmsg');
+  has(httpmsg({kind:'요청', start:'GET /', head:['Accept: */*'], body:['a', 'b'], hl:['b1', 'h0']}), ['강조: Accept 줄, 본문 2번째 줄</p>'], 'httpmsg 강조 순서');
+  has(httpmsg({kind:'응답', start:'404 Not Found'}), ['>실패<', 'HTTP 응답, 404 Not Found, 헤더 0줄, 본문 0줄, 실패'], 'httpmsg 실패');
+  const ok = httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: text/plain']});
+  if (ok.includes('실패') || ok.includes('mk-hmgap')) bad.push('httpmsg 200·본문 없음');
+  has(httpmsg({kind:'요청', start:'OPTIONS /api', hl:['start']}), ['강조: 첫 줄'], 'httpmsg OPTIONS');
+  no(() => httpmsg({kind:'질문', start:'GET /'}), 'kind'); no(() => httpmsg({kind:'요청', start:'FETCH /'}), '메서드');
+  no(() => httpmsg({kind:'응답', start:'99 Low'}), '상태 99'); no(() => httpmsg({kind:'응답', start:'600 X'}), '상태 600'); no(() => httpmsg({kind:'응답', start:'2000 X'}), '상태 네 자리');
+  no(() => httpmsg({kind:'요청', start:'GET /' + 'a'.repeat(26)}), '첫 줄 31자'); no(() => httpmsg({kind:'요청', start:'GET /', head:Array(5).fill('A: b')}), '헤더 5줄');
+  no(() => httpmsg({kind:'요청', start:'GET /', body:Array(5).fill('a')}), '본문 5줄'); no(() => httpmsg({kind:'요청', start:'GET /', head:['']}), '빈 헤더');
+  no(() => httpmsg({kind:'요청', start:'GET /', hl:['h0']}), '없는 헤더 강조'); no(() => httpmsg({kind:'요청', start:'GET /', body:['a'], hl:['b1']}), '없는 본문 강조');
+  return bad.join(', ');
+})()`, ctx));
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
     t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });
@@ -534,7 +564,8 @@ check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation
   const ln = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => !(t === 'y' && k === 8) && !html.includes(`.mk-cd${t}${k}{animation-name:mk-cd${t}${k}}`)).map(t => 'link ' + t + k));    // 연결 규칙이 빠지면 그 판은 늘 빈칸
   const at = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => { const m = html.match(new RegExp(`@keyframes mk-cd${t}${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%`)); return m ? +m[1] !== 10 * k : !(t === 'y' && k === 8); }).map(t => 'at ' + t + k));    // 단계 k는 10k%에 나타난다
   const dw = html.match(/\.mk-dtw\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 전파 경로 칩도 마지막 단계에서 멈춘다
-  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : [])].join(', '); });
+  const sd = html.match(/\.mk-sdm\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 순서도 행도 마지막 단계에서 멈춘다
+  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : []), ...(!sd || 10 * +sd[1] !== P ? ['sdm'] : [])].join(', '); });
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
