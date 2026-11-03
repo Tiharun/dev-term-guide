@@ -439,6 +439,7 @@ check('srvhelp', () => vm.runInContext(`(() => {
   has(metric({lines:[{n:'z', pts:[0, 0, 0, 0]}], x:['a', 'b', 'c', 'd'], unit:'%'}), ['z 처음 0%, 가장 높음 0%(a), 끝 0%.</p>'], 'metric 0');
   const L = [{n:'a', pts:[1, 2, 3, 4]}], X4 = ['a', 'b', 'c', 'd'];
   has(metric({lines:L, x:X4, unit:'%'}), ['>b<', '>c<'], 'metric 4점 이름표');
+  const G4 = metric({lines:[{n:'a', pts:[1, 2, 3, 4]}], x:X4, max:1000, unit:'byte'}); has(G4, ['>a<', '>d<'], 'metric 4점 긴 눈금'); if (G4.includes('>b<') || G4.includes('>c<')) bad.push('metric 4점 긴 눈금 겹침');
   has(metric({lines:[{n:'a', pts:[0.1 + 0.2, 1, 2, 3]}], x:X4, unit:'%', limit:{v:0.1 + 0.2, n:'b'}}), ['a 처음 0.3%', '한도 b 0.3%', '>b 0.3%<'], 'metric 소수');
   no(() => metric({lines:[{n:'a', pts:[1, , 3, 4]}], x:X4, unit:'%'}), '빈 칸 값'); no(() => metric({lines:L, x:['a', , 'c', 'd'], unit:'%'}), '빈 칸 x'); no(() => metric({lines:[L[0], , ], x:X4, unit:'%'}), '빈 칸 선'); has(metric({lines:[{n:'a', pts:[0, 0.1, 0.2, 0.3]}], x:X4, max:0.1 * 3, unit:'%'}), ['>0.3%<'], 'metric max 소수');
   no(() => metric({lines:[], x:X4, unit:'%'}), '선 0개'); no(() => metric({lines:Array(4).fill(L[0]), x:X4, unit:'%'}), '선 4개'); no(() => metric({lines:[{n:'a'.repeat(11), pts:[1, 2, 3, 4]}], x:X4, unit:'%'}), '선 이름 11폭');
@@ -453,7 +454,9 @@ check('srvhelp', () => vm.runInContext(`(() => {
 })()`, ctx));
 check('srvcss', () => [['figcap sv', /[,(]\.mk-sv[,)][^{]*\.figcap\{position:static/], ['figcap mg', /[,(]\.mk-mg[,)][^{]*\.figcap\{position:static/], ['고장 점선', /\.mk-sv-down\{border-style:dashed\}/],
   ['2열', /@media \(max-width:420px\)\{\.mk-svs\[style\*="--n:4"\]\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/], ['서버 가로선', /\.mk-svs\{[^}]*background:linear-gradient/], ['db 가로선', /\.mk-svdb\{[^}]*center bottom/],
-  ['db 세로선', /\.mk-svl\{[^}]*flex:1/], ['2열 점 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svd\{display:none\}/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));    // 서버 배치도의 선·점선·2열 규칙
+  ['db 세로선', /\.mk-svl\{[^}]*flex:1/], ['2열 점 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svd\{display:none\}/],
+  ['2열 테두리', /\.mk-svs\[style\*="--n:4"\]\{[^}]*border:1\.5px solid var\(--rule\)/], ['2열 칸 선 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svc::before,\.mk-svs\[style\*="--n:4"\] \.mk-svl\{display:none\}/],
+  ['2열 버튼 끔', /@media \(max-width:420px\)\{[^@]*\.fig:has\(\.mk-svs\[style\*="--n:4"\]\) \.play\{display:none\}/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));    // 서버 배치도의 선·점선·2열 규칙
 check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er', 'mk-sv', 'mk-mg'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
