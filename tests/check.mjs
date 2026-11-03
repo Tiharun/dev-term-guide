@@ -763,6 +763,8 @@ const DB_SECRET = s => /\b01\d-\d{3,4}-\d{4}\b/.test(s) || /:\/\/[^:\s/]+:(?!\*{
 check('dbsafe', () => [...['010-1234-5678', 'postgres://app:pw1@db'].filter(x => !DB_SECRET(x)).map(x => '못 잡음 ' + x), ...(DB_SECRET('postgres://app:****@db') || DB_SECRET('010-…') ? ['오탐'] : []),
   ...DBS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && DB_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
 check('dbshare', () => ['stagger', 'chip', 'spring', 'rotate', 'progress', 'shake'].filter(k => !g.D[k]).join(', '));    // 옛 db 카드가 쓰던 공유 그림 키는 남긴다
+check('dbrevd', () => [...(['Atomicity', 'Consistency', 'Isolation', 'Durability'].every(w => (g.find('ACID')?.d || '').includes(w)) ? [] : ['ACID d']),
+  ...((g.find('Connection String')?.x || '').includes('PostgreSQL 주소 형식은') ? [] : ['Connection String x'])].join(', '));    // 검토 D: ACID는 영어 앞 글자, libpq는 키=값 형식도 받음
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
