@@ -404,7 +404,50 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   if (dwhereSay(0) !== '3줄 중 2줄이 조건에 맞아요' || dwhereSay(2) !== '3줄 중 1줄이 조건에 맞아요') bad.push('dwhereSay');
   [() => dwhere(3), () => dwhere(0.5), () => dwhereSay(-1)].forEach((f, k) => { try { f(); bad.push('안 막음 w' + k); } catch (e) { if (!/^dwhere: /.test(e.message)) bad.push('메시지 w' + k); } });
   return bad.join(', '); })()`, ctx));
-check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
+check('srvhelp', () => vm.runInContext(`(() => {
+  const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(srvmap|metric): /.test(e.message)) bad.push(w + ' 메시지'); } };
+  const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); }), WA = h => /class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(h);
+  const M = srvmap({front:'LB', servers:[{n:'서버 1', got:3}, {n:'서버 2', st:'down'}, {n:'서버 3', got:3, tag:'민수'}], db:'DB', note:'고장 난 서버는 빼요', label:'배치도 예'});
+  has(M, ['class="mk-sv" role="group" aria-label="배치도 예"', 'class="mk-svp" aria-hidden="true"', 'class="mk-svs" style="--n:3"', 'mk-sv-down', '<b class="mk-svk">고장</b>', '<span class="mk-svq">요청 3</span>',
+    '<span class="mk-svt">민수</span>', '<p class="mk-svn">고장 난 서버는 빼요</p>', 'mk-svd mk-srv1 A', 'mk-svd mk-srv3 A',
+    '<p class="sr">배치도. 사용자, LB, 서버 3대: 서버 1 요청 3, 서버 2 고장, 서버 3 요청 3(민수). DB. 고장 난 서버는 빼요.</p>'], 'srvmap');
+  if (M.includes('mk-srv2') || M.includes('요청 0')) bad.push('고장 서버 점·요청');
+  const S1 = srvmap({servers:[{n:'web-1', got:1}], still:true});
+  has(S1, ['<p class="sr">배치도. 사용자, 서버 1대: web-1 요청 1.</p>'], 'srvmap 최소'); if (WA(S1) || S1.includes('mk-svd') || S1.includes('mk-svk') || S1.includes('role=')) bad.push('srvmap still·기본');
+  const M4 = srvmap({user:{n:'민수', st:'ok'}, servers:[{n:'a', st:'busy', got:2}, {n:'b', st:'new'}, {n:'c', st:'drain', got:1}, {n:'d', st:'off'}], db:{n:'DB', st:'down'}});
+  has(M4, ['>바쁨<', '>새로 켬<', '>정리 중<', '>꺼짐<', 'style="--n:4"', 'mk-svd mk-srv1 A', '배치도. 민수, 서버 4대: a 바쁨 요청 2, b 새로 켬 요청 0, c 정리 중 요청 1, d 꺼짐. DB 고장.</p>'], 'srvmap 상태');
+  if (/mk-srv[234]/.test(M4)) bad.push('새로 켬 0·정리 중·꺼짐 서버 점');
+  const sv = [{n:'a', got:1}];
+  no(() => srvmap({servers:[]}), '서버 0대'); no(() => srvmap({servers:Array(5).fill({n:'a', got:1})}), '서버 5대'); no(() => srvmap({}), '서버 없음');
+  no(() => srvmap({user:'a'.repeat(11), servers:sv}), 'user 11폭'); no(() => srvmap({front:'a'.repeat(11), servers:sv}), 'front 11폭'); no(() => srvmap({db:'a'.repeat(11), servers:sv}), 'db 11폭');
+  no(() => srvmap({servers:[{n:'a'.repeat(7), got:1}]}), '서버 이름 7폭'); no(() => srvmap({servers:[{n:'a', got:1, tag:'a'.repeat(7)}]}), 'tag 7폭'); no(() => srvmap({servers:sv, note:'a'.repeat(29)}), 'note 29폭');
+  no(() => srvmap({servers:[{n:'a', st:'bad', got:1}]}), '서버 st'); no(() => srvmap({front:{n:'LB', st:'x'}, servers:sv}), 'front st'); no(() => srvmap({db:{n:'DB', st:'x'}, servers:sv}), 'db st');
+  no(() => srvmap({servers:[{n:'a', got:100}]}), 'got 100'); no(() => srvmap({servers:[{n:'a', got:1.5}]}), 'got 1.5'); no(() => srvmap({servers:[{n:'a', got:-1}]}), 'got -1');
+  no(() => srvmap({servers:[{n:'a', got:1}, {n:'b', st:'down', got:1}]}), 'down got'); no(() => srvmap({servers:[{n:'a', got:1}, {n:'b', st:'off', got:2}]}), 'off got'); no(() => srvmap({servers:[{n:'a'}, {n:'b'}]}), '받은 서버 없음');
+  const X6 = ['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'];
+  const G = metric({lines:[{n:'CPU', pts:[20, 40, 60, 95, 50, 30]}], x:X6, unit:'%', limit:{v:70, n:'늘림 기준'}, mark:{i:3, n:'이벤트'}, label:'CPU 그래프'});
+  has(G, ['class="mk-mg" role="group" aria-label="CPU 그래프"', 'class="mk-mgl" aria-hidden="true"', '<i class="mk-mgs mk-mgs1"></i>CPU', 'class="mk-mgb" aria-hidden="true"', '<svg class="mk-mgv"', 'class="mk-mgp1"',
+    'vector-effect="non-scaling-stroke"', 'class="mk-mgh"', 'class="mk-mgm"', '>늘림 기준 70%<', '>이벤트<', '>100%<', '>14:20<', 'class="mk-mgx" aria-hidden="true"',
+    '<p class="sr">그래프, 14:00부터 14:50까지. CPU 처음 20%, 가장 높음 95%(14:30), 끝 30%. 한도 늘림 기준 70%. 표시: 14:30 이벤트.</p>'], 'metric');
+  if (WA(G)) bad.push('metric 움직임');
+  const X7 = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7'];
+  const G2 = metric({lines:[{n:'요청 수', pts:[1, 2, 3, 4, 5, 6, 7]}, {n:'b', pts:[7, 6, 5, 4, 3, 2, 1]}, {n:'c', pts:[1, 1, 1, 1, 1, 1, 1]}], x:X7, max:10, unit:'건', mark:{i:0, n:'첫 요청'}});
+  has(G2, ['>a1<', '>a4<', '>a7<', 'class="mk-mgp2"', 'class="mk-mgp3"', '>10건<', '>첫 요청<',
+    '그래프, a1부터 a7까지. 요청 수 처음 1건, 가장 높음 7건(a7), 끝 7건. b 처음 7건, 가장 높음 7건(a1), 끝 1건. c 처음 1건, 가장 높음 1건(a1), 끝 1건. 표시: a1 첫 요청.</p>'], 'metric 3선');
+  if (G2.includes('>a2<') || G2.includes('>a6<') || G2.includes('mk-mgh') || G2.includes('role=')) bad.push('metric 빈 이름표·기본');
+  has(metric({lines:[{n:'z', pts:[0, 0, 0, 0]}], x:['a', 'b', 'c', 'd'], unit:'%'}), ['z 처음 0%, 가장 높음 0%(a), 끝 0%.</p>'], 'metric 0');
+  const L = [{n:'a', pts:[1, 2, 3, 4]}], X4 = ['a', 'b', 'c', 'd'];
+  no(() => metric({lines:[], x:X4, unit:'%'}), '선 0개'); no(() => metric({lines:Array(4).fill(L[0]), x:X4, unit:'%'}), '선 4개'); no(() => metric({lines:[{n:'a'.repeat(11), pts:[1, 2, 3, 4]}], x:X4, unit:'%'}), '선 이름 11폭');
+  no(() => metric({lines:[{n:'a', pts:[1, 2, 3]}], x:['a', 'b', 'c'], unit:'%'}), 'pts 3개'); no(() => metric({lines:[{n:'a', pts:Array(13).fill(1)}], x:Array(13).fill('a'), unit:'%'}), 'pts 13개');
+  no(() => metric({lines:[{n:'a', pts:[1, 2, 3, 101]}], x:X4, unit:'%'}), 'max 넘음'); no(() => metric({lines:[{n:'a', pts:[-1, 2, 3, 4]}], x:X4, unit:'%'}), '0 밑'); no(() => metric({lines:[{n:'a', pts:['1', 2, 3, 4]}], x:X4, unit:'%'}), '숫자 아님');
+  no(() => metric({lines:[{n:'a', pts:[1, 2, 3, NaN]}], x:X4, unit:'%'}), 'NaN'); no(() => metric({lines:[L[0], {n:'b', pts:[1, 2, 3, 4, 5]}], x:X4, unit:'%'}), 'pts 길이 다름');
+  no(() => metric({lines:L, x:['a', 'b', 'c'], unit:'%'}), 'x 길이'); no(() => metric({lines:L, x:['a', 'b', 'c', 'abcdef'], unit:'%'}), 'x 6폭');
+  no(() => metric({lines:L, x:X4}), 'unit 없음'); no(() => metric({lines:L, x:X4, unit:'abcde'}), 'unit 5폭'); no(() => metric({lines:L, x:X4, unit:'%', max:0}), 'max 0'); no(() => metric({lines:L, x:X4, unit:'%', max:'100'}), 'max 글자');
+  no(() => metric({lines:L, x:X4, unit:'%', limit:{v:101, n:'a'}}), 'limit 넘음'); no(() => metric({lines:L, x:X4, unit:'%', limit:{v:-1, n:'a'}}), 'limit 0 밑'); no(() => metric({lines:L, x:X4, unit:'%', limit:{v:50, n:'a'.repeat(11)}}), 'limit 11폭');
+  no(() => metric({lines:L, x:X4, unit:'%', mark:{i:4, n:'a'}}), 'mark 범위'); no(() => metric({lines:L, x:X4, unit:'%', mark:{i:1.5, n:'a'}}), 'mark 정수'); no(() => metric({lines:L, x:X4, unit:'%', mark:{i:0, n:'a'.repeat(11)}}), 'mark 11폭');
+  return bad.join(', ');
+})()`, ctx));
+check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er', 'mk-sv', 'mk-mg'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
     t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });
@@ -809,7 +852,10 @@ check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation
   const dw = html.match(/\.mk-dtw\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 전파 경로 칩도 마지막 단계에서 멈춘다
   const sd = html.match(/\.mk-sdm\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 순서도 행도 마지막 단계에서 멈춘다
   const dq = html.match(/\.mk-dqm\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 쿼리 결과 행도 마지막 단계에서 멈춘다
-  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : []), ...(!sd || 10 * +sd[1] !== P ? ['sdm'] : []), ...(!dq || 10 * +dq[1] !== P ? ['dqm'] : [])].join(', '); });
+  const sv = html.match(/\.mk-svd\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 서버 배치도의 요청 점은 멈춘 장면 전에 사라진다
+  const srv = [1, 2, 3, 4].flatMap(k => { const m = html.match(new RegExp(`@keyframes mk-srv${k}\\{((?:[^{}]*\\{[^}]*\\})*)\\}`)), e = m && m[1].match(/([\d.]+)%,100%\{opacity:0/);
+    if (!m || !e || +e[1] > P) return ['srv' + k]; return [...m[1].matchAll(/([a-z-]+):/g)].some(x => !['opacity', 'transform'].includes(x[1])) ? ['srv' + k + ' 속성'] : []; });
+  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : []), ...(!sd || 10 * +sd[1] !== P ? ['sdm'] : []), ...(!dq || 10 * +dq[1] !== P ? ['dqm'] : []), ...(!sv || 10 * +sv[1] !== P ? ['svd'] : []), ...srv].join(', '); });
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
