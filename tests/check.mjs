@@ -115,7 +115,7 @@ const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
   'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'doccount', 'redrawn:db/basic', 'redrawn:db/core', 'redrawn:db/motion', 'redrawn:db/adv', 'redrawn:db/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount', 'redrawn:db/adv', 'redrawn:db/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -388,6 +388,17 @@ check('dbhelp', () => vm.runInContext(`(() => {
   no(() => erd({tables:T2, links:{}}), 'links 배열 아님'); no(() => erd({tables:T2, hl:'students'}), 'hl 배열 아님');
   return bad.join(', ');
 })()`, ctx));
+check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => (h.match(re) || []).length;
+  if (n(dindex(false, true), />읽음</g) !== 5 || n(dindex(true, true), />읽음</g) !== 1 || dindex(true, false).includes('읽음') || !dindex(false, false).includes('인덱스 없음')) bad.push('dindex');
+  if (dindexSay(false, true) !== '5줄을 다 읽었어요' || dindexSay(true, true) !== '색인으로 1줄만 읽었어요' || !dindexSay(true, false).includes('찾기')) bad.push('dindexSay');
+  const ok = dtx(false, true), ng = dtx(true, true);
+  if (n(ok, /<li/g) !== 4 || !ok.includes('40000') || !ok.includes('COMMIT') || ok.includes('실패') || !ng.includes('50000') || ng.includes('40000') || !ng.includes('ROLLBACK') || !ng.includes('>실패<') || n(dtx(false, false), /<li/g) !== 0) bad.push('dtx');
+  if (!dtxSay(false, true).startsWith('COMMIT') || !dtxSay(true, true).startsWith('ROLLBACK') || !dtxSay(true, false).includes('실행')) bad.push('dtxSay');
+  const i = djoin('INNER'), l = djoin('LEFT');
+  if (!i.includes('결과 2줄') || i.includes('준호 NULL') || !l.includes('결과 3줄(name, item): 민수 책, 지영 펜, 준호 NULL') || /class="(?:[^"]*\s)?A(?:\s[^"]*)?"/.test(i + l)) bad.push('djoin');
+  if (!djoinSay('INNER').includes('빠졌어요') || !djoinSay('LEFT').includes('NULL')) bad.push('djoinSay');
+  [() => dindex('y', true), () => dtx(1, true), () => djoin('RIGHT'), () => dindexSay(true, 'n'), () => dtxSay('x', true), () => djoinSay('FULL')].forEach((f, k) => { try { f(); bad.push('안 막음 ' + k); } catch (e) { if (!/^(dindex|dtx|djoin): /.test(e.message)) bad.push('메시지 ' + k); } });
+  return bad.join(', '); })()`, ctx));
 check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
@@ -721,8 +732,7 @@ check('bksafe', () => [...['ab12'.repeat(7), 'at run (/app/server.js:12:5)', "lo
 check('bkshare', () => ['input', 'progress', 'scale', 'pulse', 'spinner', 'stagger', 'typing', 'shake', 'pagination'].filter(k => !g.D[k]).join(', '));    // 옛 back 카드가 쓰던 공유 그림 키는 남긴다
 const DBS = () => g.TERMS.filter(t => t.c === 'db');
 check('dbcat', () => { const a = g.CATS.find(c => c.id === 'db').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,sql,query,model,tx,ops,tip' ? '' : a; });
-const DB_TODO = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
-  "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // 아직 u-db- 그림이 아닌 옛 DB 카드. 다시 그리면 여기서 뺀다
+const DB_TODO = ["Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // 아직 u-db- 그림이 아닌 옛 DB 카드. 다시 그리면 여기서 뺀다
 const DB_NOX = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
   "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // x를 아직 안 쓴 옛 카드 48장. DB_TODO와 같은 이름이지만 따로 적는다(DB_TODO는 Task 4·5에서 줄어듦). 계획서 ②가 비운다
 check('dbukey', () => bkdiff(DBS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-db-') && g.D[t.v])).map(t => t.en), DB_TODO));

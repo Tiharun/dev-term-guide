@@ -452,6 +452,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dbt{table-layout:fixed;width:100%;border-collapse:collapse;font:12px/1.4 var(--mono);color:var(--ink)}.mk-dbt th,.mk-dbt td{padding:3px 4px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top;overflow-wrap:anywhere}.mk-dbt th{font-weight:800}.mk-dbt tbody tr:last-child td{border-bottom:0}
 .mk-dbk{margin-left:4px;font:800 11px/1.3 var(--sans);color:var(--mark-text);white-space:nowrap}.mk-dbn{font-style:italic;color:var(--muted)}.mk-dbon{background:var(--mark-bg)}.mk-dbt tr.mk-dbon>td:first-child{box-shadow:inset 3px 0 0 var(--mark)}
 .mk-dbe{margin:0;padding:5px 10px;font:12px/1.4 var(--sans);color:var(--muted)}
+.mk-dgp{margin:0;font:800 12px/1.4 var(--sans);color:var(--ink)}.mk-dgs{margin:0;padding:5px 10px 5px 30px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);font:12px/1.5 var(--sans);color:var(--ink)}.mk-dgs li{overflow-wrap:anywhere}.mk-dgs .mk-dbk{color:var(--mark-text)}
 .mk-dq{display:grid;gap:8px;width:min(100%,400px);text-align:left}.mk-dq>.mk-db{width:100%}.mk-dq>.mk-db+.mk-db{margin-top:0}
 .mk-dqr{display:grid;gap:1px;padding:5px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-dqr b{font:800 11px/1.4 var(--sans);color:var(--muted)}.mk-dqr code{font:700 12px/1.5 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
 .mk-dqh{font:800 11.5px/1.4 var(--sans);color:var(--ink)}.mk-dqf{margin:0;padding:6px 10px;border:1.5px solid var(--mark-text);border-radius:8px;background:var(--plate);font:12px/1.5 var(--sans);color:var(--ink)}.mk-dqf .mk-dbk{margin:0 6px 0 0}.mk-dqf span{display:block;font-size:11px;color:var(--muted)}
@@ -2822,34 +2823,34 @@ T('back','tip',[
 <script>
 /* ===== 06 데이터베이스 ===== */
 T('db','basic',[
- {en:'Table',ko:'테이블 · 표',d:'데이터를 행과 열로 정리한 표. 회원 표, 주문 표 등.',p:'회원 정보를 담을 users 테이블을 만들어줘',r:['Row','Column'],l:1,o:0,v:{tbl:[['id','이름','이메일'],['1','민수','m@a.com'],['2','지영','j@a.com']]}},
- {en:'Row',ko:'행 · 레코드',d:'테이블의 가로 한 줄. 데이터 하나(회원 한 명).',p:'제목 줄 아래에 버튼들을 한 줄(row)로 놓아줘',r:['Table','Column'],l:1,o:0,v:{tbl:[['id','이름'],['1','민수'],['2','지영']],hl:[0]}},
- {en:'Column',ko:'열 · 컬럼 · 필드',d:'테이블의 세로 한 칸. 데이터의 항목(이름, 이메일).',p:'users 테이블에 전화번호 컬럼을 추가해줘',r:['Table','Data Type'],l:1,o:0,v:{tbl:[['id','이름 ←','이메일'],['1','민수','m@a.com']]}},
- {en:'Primary Key',ko:'기본 키 · PK',d:'행 하나를 정확히 구분하는 고유 번호. 보통 id.',p:'각 테이블에 자동 증가하는 id 기본 키를 넣어줘',r:['Foreign Key'],l:2,o:0,v:{tbl:[['id (PK)','이름'],['1','민수'],['2','민수']]}},
- {en:'Foreign Key',ko:'외래 키 · FK',d:'다른 테이블의 기본 키를 가리켜 둘을 연결하는 값.',p:'주문 테이블에 user_id 외래 키를 넣어서 회원과 연결해줘',r:['Primary Key','Relation'],l:2,o:0,v:{flow:['orders.user_id','→','users.id']}},
- {en:'Data Type',ko:'데이터 타입 · 자료형',d:'컬럼에 들어갈 값의 종류. 숫자, 글자, 날짜, 참/거짓.',p:'가격은 정수 타입, 가입일은 날짜 타입으로 해줘',r:['Column'],l:1,o:0,v:{tbl:[['컬럼','타입'],['price','정수'],['created_at','날짜'],['name','글자']]}},
- {en:'Query',ko:'쿼리 · 데이터 요청문',d:'DB에 "이 조건의 데이터 줘"라고 묻는 명령.',p:'최근 7일 가입자를 찾는 쿼리를 짜줘',r:['SQL'],l:1,o:0,v:{code:'SELECT * FROM users\nWHERE age > 20;'}},
- {en:'Schema',ko:'스키마 · DB 설계도',d:'어떤 테이블에 어떤 컬럼이 있는지 정한 DB의 설계도.',p:'게시판에 필요한 DB 스키마를 그림으로 그려줘',r:['ERD','Table'],l:2,o:0,v:{tree:['users','├ id','├ name','└ email']}},
+ {en:'Table',ko:'테이블 · 표',d:'데이터를 행과 열로 정리한 표. 회원 표, 주문 표 등.',p:'회원 정보를 담을 users 테이블을 만들어줘',r:['Row','Column'],l:1,o:0,v:'u-db-table'},
+ {en:'Row',ko:'행 · 레코드',d:'테이블의 가로 한 줄. 데이터 하나(회원 한 명).',p:'제목 줄 아래에 버튼들을 한 줄(row)로 놓아줘',r:['Table','Column'],l:1,o:0,v:'u-db-row'},
+ {en:'Column',ko:'열 · 컬럼 · 필드',d:'테이블의 세로 한 칸. 데이터의 항목(이름, 이메일).',p:'users 테이블에 전화번호 컬럼을 추가해줘',r:['Table','Data Type'],l:1,o:0,v:'u-db-column'},
+ {en:'Primary Key',ko:'기본 키 · PK',d:'행 하나를 정확히 구분하는 고유 번호. 보통 id.',p:'각 테이블에 자동 증가하는 id 기본 키를 넣어줘',r:['Foreign Key'],l:2,o:0,v:'u-db-primary-key'},
+ {en:'Foreign Key',ko:'외래 키 · FK',d:'다른 테이블의 기본 키를 가리켜 둘을 연결하는 값.',p:'주문 테이블에 user_id 외래 키를 넣어서 회원과 연결해줘',r:['Primary Key','Relation'],l:2,o:0,v:'u-db-foreign-key'},
+ {en:'Data Type',ko:'데이터 타입 · 자료형',d:'컬럼에 들어갈 값의 종류. 숫자, 글자, 날짜, 참/거짓.',p:'가격은 정수 타입, 가입일은 날짜 타입으로 해줘',r:['Column'],l:1,o:0,v:'u-db-data-type'},
+ {en:'Query',ko:'쿼리 · 데이터 요청문',d:'DB에 "이 조건의 데이터 줘"라고 묻는 명령.',p:'최근 7일 가입자를 찾는 쿼리를 짜줘',r:['SQL'],l:1,o:0,v:'u-db-query'},
+ {en:'Schema',ko:'스키마 · DB 설계도',d:'어떤 테이블에 어떤 컬럼이 있는지 정한 DB의 설계도.',p:'게시판에 필요한 DB 스키마를 그림으로 그려줘',r:['ERD','Table'],l:2,o:0,v:'u-db-schema'},
 ]);
 T('db','core',[
- {en:'SQL',ko:'에스큐엘',d:'관계형 DB에 데이터를 묻고 저장하는 언어.',p:'이 조건을 SQL로 바꿔줘',r:['Query','RDBMS'],l:1,o:0,v:{code:'SELECT name FROM users\nORDER BY created_at DESC;'}},
- {en:'RDBMS',ko:'관계형 데이터베이스',d:'표(테이블)끼리 관계를 맺어 저장하는 DB. MySQL, PostgreSQL 등.',p:'이 서비스는 PostgreSQL로 만들어줘',r:['NoSQL','SQL'],l:2,o:0,v:{flow:['users','주문 연결','orders']}},
- {en:'NoSQL',ko:'노에스큐엘',d:'표 대신 문서(JSON) 같은 형태로 자유롭게 저장하는 DB. MongoDB 등.',p:'구조가 자주 바뀌는 데이터라 NoSQL이 나을지 알려줘',r:['RDBMS'],l:2,o:0,v:{code:'{ "name": "민수",\n  "tags": ["a", "b"] }'}},
- {en:'Relation',ko:'관계 · 릴레이션',d:'테이블끼리의 연결. 회원 한 명 ↔ 주문 여러 개.',p:'회원과 주문을 1:N 관계로 연결해줘',r:['Foreign Key','ERD'],l:2,o:0,v:{flow:['회원 1명','──','주문 N개']}},
- {en:'Index',ko:'인덱스 · 색인',d:'책 뒤 색인처럼 원하는 데이터를 빨리 찾게 해 주는 장치.',p:'이메일 검색이 느려. email 컬럼에 인덱스를 걸어줘',r:['Slow Query'],l:2,o:0,v:{tbl:[['색인','위치'],['m@a.com','3번째 줄'],['j@a.com','12번째 줄']]}},
- {en:'Migration',ko:'마이그레이션 · DB 구조 변경 기록',d:'테이블 구조를 바꾼 내역을 파일로 남겨 순서대로 적용하는 것.',p:'컬럼 추가를 마이그레이션 파일로 만들어줘',r:['Schema'],l:3,o:0,v:{flow:['v1 구조','변경 파일','v2 구조']}},
- {en:'Transaction',ko:'트랜잭션 · 묶음 처리',d:'여러 작업을 한 묶음으로 처리해 전부 성공하거나 전부 취소하는 것.',p:'결제와 재고 차감을 트랜잭션으로 묶어줘',r:['Rollback'],l:3,o:0,v:{stack:['결제','재고 차감','주문 저장'],hl:[0,1,2]}},
- {en:'Backup',ko:'백업',d:'데이터를 잃지 않게 복사본을 따로 저장해 두는 것.',p:'DB를 매일 새벽에 자동 백업하게 해줘',r:['Restore'],l:1,o:0,v:{flow:['DB','복사','백업 보관']}},
+ {en:'SQL',ko:'에스큐엘',d:'관계형 DB에 데이터를 묻고 저장하는 언어.',p:'이 조건을 SQL로 바꿔줘',r:['Query','RDBMS'],l:1,o:0,v:'u-db-sql'},
+ {en:'RDBMS',ko:'관계형 데이터베이스',d:'표(테이블)끼리 관계를 맺어 저장하는 DB. MySQL, PostgreSQL 등.',p:'이 서비스는 PostgreSQL로 만들어줘',r:['NoSQL','SQL'],l:2,o:0,v:'u-db-rdbms'},
+ {en:'NoSQL',ko:'노에스큐엘',d:'표 대신 문서(JSON) 같은 형태로 자유롭게 저장하는 DB. MongoDB 등.',p:'구조가 자주 바뀌는 데이터라 NoSQL이 나을지 알려줘',r:['RDBMS'],l:2,o:0,v:'u-db-nosql'},
+ {en:'Relation',ko:'관계 · 릴레이션',d:'테이블끼리의 연결. 회원 한 명 ↔ 주문 여러 개.',p:'회원과 주문을 1:N 관계로 연결해줘',r:['Foreign Key','ERD'],l:2,o:0,v:'u-db-relation'},
+ {en:'Index',ko:'인덱스 · 색인',d:'책 뒤 색인처럼 원하는 데이터를 빨리 찾게 해 주는 장치.',p:'이메일 검색이 느려. email 컬럼에 인덱스를 걸어줘',r:['Slow Query'],l:2,o:0,v:'u-db-index'},
+ {en:'Migration',ko:'마이그레이션 · DB 구조 변경 기록',d:'테이블 구조를 바꾼 내역을 파일로 남겨 순서대로 적용하는 것.',p:'컬럼 추가를 마이그레이션 파일로 만들어줘',r:['Schema'],l:3,o:0,v:'u-db-migration'},
+ {en:'Transaction',ko:'트랜잭션 · 묶음 처리',d:'여러 작업을 한 묶음으로 처리해 전부 성공하거나 전부 취소하는 것.',p:'결제와 재고 차감을 트랜잭션으로 묶어줘',r:['Rollback'],l:3,o:0,v:'u-db-transaction'},
+ {en:'Backup',ko:'백업',d:'데이터를 잃지 않게 복사본을 따로 저장해 두는 것.',p:'DB를 매일 새벽에 자동 백업하게 해줘',r:['Restore'],l:1,o:0,v:'u-db-backup'},
 ]);
 T('db','motion',[
- {en:'Data Flow',ko:'데이터 흐름',d:'입력한 값이 서버를 거쳐 DB에 저장되고 다시 화면에 나오기까지의 길.',p:'회원가입 데이터 흐름을 그림으로 보여줘',r:['Request Flow'],l:1,o:0,v:{flow:['입력','서버','DB 저장','화면 표시'],hl:[2]}},
- {en:'Join',ko:'조인 · 표 합치기',d:'두 테이블을 연결된 값 기준으로 합쳐 함께 보는 것.',p:'주문 목록에 회원 이름도 나오게 JOIN 해줘',r:['Relation','Foreign Key'],l:2,o:0,v:{tbl:[['주문','회원 이름'],['#101','민수'],['#102','지영']]}},
- {en:'Sorting',ko:'정렬',d:'데이터를 순서대로 늘어놓는 것. 최신순, 가격순.',p:'상품을 가격 낮은 순으로 정렬해줘',r:['Query'],l:1,o:0,v:'stagger'},
- {en:'Filtering',ko:'필터링 · 거르기',d:'조건에 맞는 데이터만 골라내는 것.',p:'재고가 있는 상품만 필터링해서 보여줘',r:['Query','Chip'],l:1,o:0,v:'chip'},
- {en:'Seed Data',ko:'시드 데이터 · 초기 데이터',d:'개발·시험용으로 DB에 미리 넣어 두는 데이터.',p:'테스트용 회원 10명과 글 30개를 시드 데이터로 넣어줘',r:['Mock Data'],l:2,o:0,v:'stagger'},
- {en:'Rollback',ko:'롤백 · 되돌리기',d:'실패했을 때 작업 전 상태로 되돌리는 것.',p:'결제가 실패하면 재고 차감도 롤백해줘',r:['Transaction'],l:2,o:0,v:'spring'},
- {en:'Replication',ko:'복제 · 레플리케이션',d:'DB를 여러 대에 복사해 두어 한 대가 고장 나도 버티게 하는 것.',p:'DB 서버가 고장 나도 버티게 복제 구성이 필요한지 알려줘',r:['Backup'],l:3,o:0,v:{flow:['원본 DB','복사','복제 DB']}},
- {en:'Sync',ko:'동기화 · 싱크',d:'두 곳의 데이터를 같게 맞추는 것.',p:'휴대폰과 PC의 메모가 동기화되게 해줘',r:['Replication'],l:2,o:0,v:'rotate'},
+ {en:'Data Flow',ko:'데이터 흐름',d:'입력한 값이 서버를 거쳐 DB에 저장되고 다시 화면에 나오기까지의 길.',p:'회원가입 데이터 흐름을 그림으로 보여줘',r:['Request Flow'],l:1,o:0,v:'u-db-data-flow'},
+ {en:'Join',ko:'조인 · 표 합치기',d:'두 테이블을 연결된 값 기준으로 합쳐 함께 보는 것.',p:'주문 목록에 회원 이름도 나오게 JOIN 해줘',r:['Relation','Foreign Key'],l:2,o:0,v:'u-db-join'},
+ {en:'Sorting',ko:'정렬',d:'데이터를 순서대로 늘어놓는 것. 최신순, 가격순.',p:'상품을 가격 낮은 순으로 정렬해줘',r:['Query'],l:1,o:0,v:'u-db-sorting'},
+ {en:'Filtering',ko:'필터링 · 거르기',d:'조건에 맞는 데이터만 골라내는 것.',p:'재고가 있는 상품만 필터링해서 보여줘',r:['Query','Chip'],l:1,o:0,v:'u-db-filtering'},
+ {en:'Seed Data',ko:'시드 데이터 · 초기 데이터',d:'개발·시험용으로 DB에 미리 넣어 두는 데이터.',p:'테스트용 회원 10명과 글 30개를 시드 데이터로 넣어줘',r:['Mock Data'],l:2,o:0,v:'u-db-seed-data'},
+ {en:'Rollback',ko:'롤백 · 되돌리기',d:'실패했을 때 작업 전 상태로 되돌리는 것.',p:'결제가 실패하면 재고 차감도 롤백해줘',r:['Transaction'],l:2,o:0,v:'u-db-rollback'},
+ {en:'Replication',ko:'복제 · 레플리케이션',d:'DB를 여러 대에 복사해 두어 한 대가 고장 나도 버티게 하는 것.',p:'DB 서버가 고장 나도 버티게 복제 구성이 필요한지 알려줘',r:['Backup'],l:3,o:0,v:'u-db-replication'},
+ {en:'Sync',ko:'동기화 · 싱크',d:'두 곳의 데이터를 같게 맞추는 것.',p:'휴대폰과 PC의 메모가 동기화되게 해줘',r:['Replication'],l:2,o:0,v:'u-db-sync'},
 ]);
 T('db','adv',[
  {en:'Normalization',ko:'정규화',d:'같은 데이터가 여러 곳에 중복되지 않게 표를 나누는 설계 방법.',p:'중복 저장되는 주소 정보를 정규화해서 따로 빼줘',r:['Schema'],l:3,o:0,v:{cmp:['중복','<div class="codebox" style="font-size:11px">주문1 서울시...\n주문2 서울시...</div>','정규화','<div class="codebox" style="font-size:11px">주소 표: 1=서울시\n주문 → 주소 1</div>']}},
@@ -8124,6 +8125,60 @@ Object.assign(D, {
       after:[{name:'users', cols:['id', 'name'], rows:[['2', '지영']]}, {name:'orders', cols:['id', 'user_id', 'item'], rows:[['2', '2', '펜']]}], label:'연쇄 삭제 실행'})), cap:'민수를 지우니 민수의 주문 두 줄도 지워져요', m:1},
   'u-db-denormalization':{h:bkStack(dbtab({name:'orders', tag:'복사해 둠', cols:['id', 'user_name', 'item'], rows:[['1', '민수', '책'], ['2', '민수', '펜'], ['3', '지영', '컵']], hl:{col:1}}),
     whelp('읽기는 빨라지고, 이름을 고칠 곳이 늘어나요')), cap:'회원 이름이 주문 줄마다 들어 있어요'},
+});
+/* db: 다시 그리기 basic·core·motion — 출처 확인(2026-11): PostgreSQL 18 문서 Indexes Introduction(색인 없으면 표 전체를 읽음)·Transactions(BEGIN·COMMIT·ROLLBACK, 전부 아니면 전무)·
+   Table Expressions(INNER·LEFT JOIN)·High Availability(복제 서버는 읽기, 고장 시 승격). 표의 이름·값·숫자는 예시. dindex·dtx·djoin은 계획서 ②가 버튼을 붙일 상태 함수 */
+const DIX = ['a@a.com', 'j@a.com', 'm@a.com', 'h@a.com', 's@a.com'];    // 찾는 값 m@a.com은 3번째
+const dbool = (f, ...xs) => { if (xs.some(x => typeof x !== 'boolean')) throw new Error(f + ': 값은 참·거짓'); };
+const dindex = (has, ran) => { dbool('dindex', has, ran);
+  return `<div class="mk-dq"><p class="mk-dgp">${has ? '인덱스 있음' : '인덱스 없음'} · email = m@a.com 찾기</p>`
+    + dbtab({name:'users', cols:['id', 'email'], rows:DIX.map((e, i) => [String(i + 1), e]), mark:ran ? DIX.map((_, i) => !has || i === 2 ? '읽음' : '') : undefined}) + '</div>'; };
+const dindexSay = (has, ran) => { dbool('dindex', has, ran); return !ran ? '찾기를 눌러 보세요' : has ? '색인으로 1줄만 읽었어요' : '5줄을 다 읽었어요'; };
+const DTX = {from:'민수', to:'지영', amt:10000, start:[50000, 10000]};
+const dtx = (fail, ran) => { dbool('dtx', fail, ran); const done = ran && !fail, bal = done ? [DTX.start[0] - DTX.amt, DTX.start[1] + DTX.amt] : DTX.start;
+  const steps = ran ? `<ol class="mk-dgs"><li>BEGIN</li><li>${DTX.from} 잔액 1만 원 빼기</li>${fail ? `<li>${DTX.to}에게 더하기<b class="mk-dbk">실패</b></li>` : `<li>${DTX.to} 잔액 1만 원 더하기</li>`}<li>${fail ? 'ROLLBACK: 둘 다 처음 값' : 'COMMIT: 둘 다 반영'}</li></ol>` : '';
+  return `<div class="mk-dq">${steps}${dbtab({name:'accounts', cols:['name', 'balance'], rows:[[DTX.from, String(bal[0])], [DTX.to, String(bal[1])]], hl:done ? {col:1} : []})}</div>`; };
+const dtxSay = (fail, ran) => { dbool('dtx', fail, ran); return !ran ? '실행을 눌러 보세요' : fail ? 'ROLLBACK: 둘 다 처음 값으로 돌아갔어요' : 'COMMIT: 둘 다 반영됐어요'; };
+const djk = k => { if (k !== 'INNER' && k !== 'LEFT') throw new Error('djoin: kind는 INNER·LEFT'); };
+const djoin = kind => { djk(kind); const L = kind === 'LEFT';
+  return qrun({still:true, sql:['SELECT name, item', 'FROM users u', `${kind} JOIN orders o`, 'ON u.id = o.user_id'],
+    from:[{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]}, {name:'orders', cols:['id', 'user_id', 'item'], rows:[['1', '1', '책'], ['2', '2', '펜']]}],
+    after:{name:'결과', cols:['name', 'item'], rows:[['민수', '책'], ['지영', '펜'], ...(L ? [['준호', 'NULL']] : [])]}, hl:L ? {cell:[2, 1]} : undefined}); };
+const djoinSay = kind => { djk(kind); return kind === 'INNER' ? '주문이 없는 준호가 빠졌어요' : '준호도 나와요, 주문은 NULL이에요'; };
+const DB_US = {name:'users', cols:[{n:'id', key:'PK'}, 'name', 'email'], rows:[['1', '민수', 'm@a.com'], ['2', '지영', 'j@a.com'], ['3', '준호', 'h@a.com']]};
+Object.assign(D, {
+  'u-db-table':{h:dbtab(DB_US), cap:'가로 한 줄은 행, 세로 한 칸은 열이에요'},
+  'u-db-row':{h:dbtab({...DB_US, hl:{row:1}}), cap:'강조한 가로 한 줄이 회원 한 명이에요'},
+  'u-db-column':{h:dbtab({...DB_US, hl:{col:2}}), cap:'email 열에는 모든 회원의 이메일이 들어가요'},
+  'u-db-primary-key':{h:dbtab({...DB_US, rows:[['1', '민수', 'm@a.com'], ['2', '민수', 'k@a.com'], ['3', '지영', 'j@a.com']], hl:{col:0}}), cap:'이름이 같아도 id로 구분해요'},
+  'u-db-foreign-key':{h:erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, 'name']}, {name:'orders', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}, 'item']}],
+    links:[{a:0, b:1, kind:'1:N', fk:'user_id'}], hl:['orders.user_id']}), cap:'orders.user_id가 users의 id를 가리켜요'},
+  'u-db-data-type':{h:doc([{tb:[['열', '타입', '예시 값'], ['price', '정수', '12000'], ['name', '글자', '민수'], ['birthday', '날짜', '05-14'], ['is_paid', '참·거짓', 'true']]}], {title:'열과 타입'}), cap:'타입이 다른 값은 DB가 받지 않아요', m:1},
+  'u-db-query':{h:qrun({sql:['SELECT title FROM posts', 'WHERE likes > 10'], from:[{name:'posts', cols:['id', 'title', 'likes'], rows:[['1', '공지', '3'], ['2', '후기', '25'], ['3', '질문', '12']]}],
+    pick: r => r.likes > 10, show:['title'], label:'쿼리 실행'}), cap:'좋아요가 10보다 많은 글의 제목만 받아요', m:1},
+  'u-db-schema':{h:erd({tables:[{name:'users', cols:[{n:'id', key:'PK', type:'정수'}, {n:'email', type:'글자'}, {n:'created_at', type:'날짜'}]},
+    {name:'posts', cols:[{n:'id', key:'PK', type:'정수'}, {n:'user_id', key:'FK', type:'정수'}, {n:'title', type:'글자'}]}], links:[{a:0, b:1, kind:'1:N', fk:'user_id'}]}), cap:'표를 만들기 전 설계도예요'},
+  'u-db-sql':{h:doc([{tb:[['명령', '하는 일'], ['SELECT', '가져오기'], ['INSERT', '넣기'], ['UPDATE', '고치기'], ['DELETE', '지우기']]}, {p:'예: SELECT * FROM users'}], {title:'SQL 명령 4개'}),
+    cap:'SQL은 DB에 묻고 시키는 말이에요', m:1},
+  'u-db-rdbms':{h:doc([{tb:[['약속', '뜻'], ['표로 저장', '행과 열'], ['키로 이음', 'PK와 FK'], ['SQL로 물음', 'SELECT …']]}, {p:'예: MySQL·PostgreSQL'}], {title:'관계형 DB'}), cap:'표끼리 키로 이어 두는 DB예요', m:1},
+  'u-db-nosql':{h:bkStack(dbtab({name:'users', tag:'표로 저장', cols:['id', 'name', 'city'], rows:[['1', '민수', '서울']]}), fcss('문서로 저장', '{ "id": 1, "name": "민수",', '  "tags": ["책", "펜"] }')),
+    cap:'NoSQL은 표 대신 문서처럼 묶어 저장하기도 해요'},
+  'u-db-relation':{h:doc([{tb:[['관계', '예'], ['1:1', '회원과 프로필'], ['1:N', '회원과 주문'], ['N:M', '학생과 강의']]}], {title:'표끼리 관계'}), cap:'한쪽 한 줄이 다른 쪽 몇 줄과 이어지는지로 나눠요', m:1},
+  'u-db-index':{h:dindex(false, true), cap:'인덱스가 없으면 5줄을 다 읽어야 찾아요'},
+  'u-db-migration':{h:term([{c:'ls migrations'}, {o:'001_users.sql'}, {o:'002_phone.sql'}, {o:'003_avatar.sql'}, {c:'npm run migrate'}, {o:'003_avatar.sql 적용함(예시)'}]), cap:'001·002는 이미 적용됐고 003이 새로 적용돼요', m:1},
+  'u-db-transaction':{h:dtx(true, true), cap:'중간에 실패하면 둘 다 처음 값으로 돌아가요'},
+  'u-db-backup':{h:track([{t:'DB', s:'done', w:'shop'}, {t:'매일 밤 복사', s:'done', w:'03:00(예시)'}, {t:'백업 파일 보관', s:'done', w:'다른 곳에 둠'}]), cap:'백업은 DB와 다른 곳에 둬요', m:1},
+  'u-db-data-flow':{h:seq(['브라우저', '서버', 'DB'], [{from:0, to:1, t:'저장 요청'}, {from:1, to:2, t:'INSERT …'}, {from:2, to:1, t:'저장됨'}, {from:1, to:2, t:'목록 조회'}, {from:2, to:1, t:'목록'}, {from:1, to:0, t:'새 목록'}, {from:0, to:0, t:'화면 표시'}]),
+    cap:'브라우저는 DB에 바로 가지 않고 서버를 거쳐요', m:1},
+  'u-db-join':{h:djoin('INNER'), cap:'user_id가 같은 줄끼리 붙여요'},
+  'u-db-sorting':{h:vs('가격순', bkRows(['펜 1000'], ['컵 5000'], ['책 12000']), '이름순', bkRows(['책 12000'], ['컵 5000'], ['펜 1000'])), cap:'같은 상품도 기준에 따라 순서가 달라요(가격 예시)'},
+  'u-db-filtering':{h:bkStack(bkPills('필터', ['1만 원 미만'], '선택됨'), qrun({sql:['SELECT * FROM products', 'WHERE price < 10000'], from:[{name:'products', cols:['name', 'price'], rows:[['책', '12000'], ['펜', '1000'], ['컵', '5000']]}],
+    pick: r => r.price < 10000, label:'필터 실행'})), cap:'화면에서 고른 필터가 뒤에서 이런 쿼리가 돼요', m:1},
+  'u-db-seed-data':{h:bkStack(term([{c:'npm run seed'}, {o:'회원 3명 넣음(예시)'}], {end:false}), dbtab({name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]})), cap:'개발용 DB에 처음 쓸 데이터를 넣어요', m:1},
+  'u-db-rollback':{h:seq(['앱', 'DB'], [{from:0, to:1, t:'BEGIN'}, {from:0, to:1, t:'출금 1만 원'}, {from:1, to:1, t:'오류', err:1}, {from:0, to:1, t:'ROLLBACK'}, {from:1, to:0, t:'되돌려짐'}]), cap:'오류가 나면 BEGIN 앞 상태로 되돌려요', m:1},
+  'u-db-replication':{h:seq(['서버', '원본 DB', '복제 DB'], [{from:0, to:1, t:'쓰기'}, {from:1, to:2, t:'복사'}, {from:1, to:1, t:'고장', err:1}, {from:2, to:2, t:'승격'}, {from:0, to:2, t:'쓰기·읽기'}]),
+    cap:'복제는 평소 읽기만 받고, 원본이 고장 나면 승격해 이어받아요', m:1},
+  'u-db-sync':{h:seq(['휴대폰', '서버'], [{from:0, to:0, t:'오프라인 수정'}, {from:0, to:1, t:'연결되면 보냄'}, {from:1, to:1, t:'같게 맞춤'}, {from:1, to:0, t:'최신 값 받음'}]), cap:'떨어져 있던 두 곳의 값을 같게 맞춰요', m:1},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
