@@ -574,9 +574,10 @@ check('bkm', () => BKS().filter(t => { const p = typeof t.v === 'string' && t.v.
 check('bkou', () => BKS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
 check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => (h.match(re) || []).length;
   if (n(brate(0), /<li/g) !== 0 || n(brate(4), /200 OK/g) !== 4 || brate(4).includes('429') || brate(4).includes('실패')) bad.push('brate 0·4');
-  if (n(brate(5), /429 Too Many Requests/g) !== 1 || n(brate(5), /200 OK/g) !== 4 || !brate(5).includes('실패')) bad.push('brate 5');
+  if (n(brate(5), /200 OK/g) !== 5 || brate(5).includes('429') || !brate(5).includes('1분에 5번')) bad.push('brate 5');
+  if (n(brate(6), /429 Too Many Requests/g) !== 1 || n(brate(6), /200 OK/g) !== 5 || !brate(6).includes('실패')) bad.push('brate 6');
   if (n(brate(9), /<li/g) !== 6) bad.push('brate 6행');
-  if (!brateSay(0).includes('없어요') || !brateSay(3).includes('1번 더') || !brateSay(4).includes('이제 더 보낼 수 없어요') || !brateSay(5).includes('429')) bad.push('brateSay');
+  if (!brateSay(0).includes('없어요') || !brateSay(4).includes('1번 더') || !brateSay(5).includes('이제 더 보낼 수 없어요') || !brateSay(6).includes('429')) bad.push('brateSay');
   const u = bauthz('일반 회원'), a = bauthz('관리자');
   if (!u.includes('403 Forbidden') || u.includes('200 OK') || !a.includes('200 OK') || a.includes('403') || !bauthzSay('일반 회원').includes('권한이 없어요')) bad.push('bauthz');
   [() => brate(-1), () => brate(1.5), () => bauthz('손님')].forEach((f, i) => { try { f(); bad.push('안 막음 ' + i); } catch (e) { if (!/^(brate|bauthz): /.test(e.message)) bad.push('메시지 ' + i); } });
@@ -584,6 +585,8 @@ check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   if (!bcacheSay([]).includes('없어요') || !bcacheSay(['miss']).includes('DB까지') || !bcacheSay(['miss', 'hit']).includes('바로')) bad.push('bcacheSay');
   if ((bidem('POST', 3).match(/<li/g) || []).length !== 3 || (bidem('PUT', 3).match(/<li/g) || []).length !== 1 || (bidem('PUT', 0).match(/<li/g) || []).length !== 0) bad.push('bidem');
   if (!bidemSay('POST', 3).includes('3개') || !bidemSay('PUT', 3).includes('1개') || !bidemSay('PUT', 3).startsWith('PUT을')) bad.push('bidemSay');
+  const p9 = bidem('POST', 9); if (n(p9, /<li/g) !== 6 || !p9.includes('새 글 9번') || p9.includes('새 글 3번')) bad.push('bidem 6행');
+  [() => brateSay(-1), () => bauthzSay('손님'), () => bcacheSay(['x']), () => bidemSay('GET', 1), () => bidemSay('PUT', -1)].forEach((f, i) => { try { f(); bad.push('안 막음 s' + i); } catch (e) { if (!/^(brate|bauthz|bcache|bidem): /.test(e.message)) bad.push('메시지 s' + i); } });
   [() => bcache(['x']), () => bidem('GET', 1), () => bidem('POST', -1), () => bidem('PUT', 1.5)].forEach((f, i) => { try { f(); bad.push('안 막음 c' + i); } catch (e) { if (!/^(bcache|bidem): /.test(e.message)) bad.push('메시지 c' + i); } });
   return bad.join(', '); })()`, ctx));
 check('bktext', () => BKS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
