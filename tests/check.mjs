@@ -734,6 +734,8 @@ check('dbou', () => DBS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', 
 const DB_WRONG = {'Column Alias': ['Alias'], 'Cascade Delete': ['Cascade'], 'Isolation Level': ['Test Isolation'], 'Optimistic Locking': ['Optimistic UI', 'Optimistic Update'],
   'Autocommit': ['Commit'], 'Check Constraint': ['Constraint'], 'Database Client': ['Client']};    // 이름만 비슷한 다른 뜻
 check('dbwrong', () => Object.entries(DB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'db' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
+const DB_FACT = [['Column Alias', '이름이 없는 열'], ['NOT NULL', '빈 칸 대신 기본값'], ['Check Constraint', '화면에서 하는 검증']];    // 검토 B: 사실과 다르거나 이어진 카드와 어긋난 말
+check('dbfact', () => [...DB_FACT.filter(([en, w]) => (g.find(en)?.x || '').includes(w)).map(([en]) => en), ...(g.D['u-db-subquery'].h.includes('users 테이블</') && g.D['u-db-subquery'].h.split('users 테이블</').length > 2 ? ['Subquery 결과 표 이름'] : [])].join(', '));
 check('dbtext', () => DBS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('dbxn', () => DBS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 const DB_SECRET = s => /\b01\d-\d{3,4}-\d{4}\b/.test(s) || /:\/\/[^:\s/]+:(?!\*{4}@)[^@\s]+@/.test(s);    // 전화번호 전체·가리지 않은 접속 비밀번호
