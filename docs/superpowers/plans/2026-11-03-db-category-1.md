@@ -34,6 +34,7 @@
 - **row 강조 표시**: 행 강조는 그 행 첫 칸 뒤에 `강조` 꼬리표, 열 강조는 머리 칸에, 칸 강조는 그 칸에 붙인다. 모두 배경 `var(--mark-bg)`와 함께다.
 - **측정값 보정**: 스펙 2장은 객체 v 41장·공유 그림 7장이라 했지만, 다시 재니 객체 v 40장·공유 그림 문자열 8장(Hard Delete `shake` 포함)이다. 합 48장은 같다. 원장에 `Ruling:`으로 적는다.
 - **스펙 표에서 바꾼 예시**(원장 `Ruling:`):
+  - qrun `hl`: 스펙은 표 2개일 때 `[hl0, hl1]`을 허용하지만, 표 2개를 쓰는 카드(Cascade Delete)에 강조가 없어 쓸 곳이 없다. 표 2개면 hl을 막는다(쓸 카드가 생기면 그때 더함).
   - Migration: 스펙은 `ls` 결과에 적용됨·대기를 붙였지만 `ls`는 상태를 출력하지 않는다. 파일 이름만 보이고 상태는 cap에 쓴다(Task 4).
   - LIKE: users 대신 products(민트차·녹차·민트캔디)로 한다. 사람 이름이 셋뿐이라 `'민%'`이 1줄만 걸려 "여러 줄 중 일부"가 안 보이기 때문이다. 스펙 3.4의 이름 규칙은 지킨다.
   - Auto Increment: 있던 줄을 2줄(민수·지영)로 두고 준호를 넣어 id 3이 생긴다(스펙은 "id 4"). 새 사람 이름을 만들지 않기 위해서다.
@@ -152,7 +153,7 @@
     - 바깥 `<div class="mk-dq">`(label은 dbtab과 같음). 위에서 아래로: 실행 전 표(`dbtab`, 2개면 위아래) → `<div class="mk-dqr" aria-hidden="true"><b>실행</b><code>SQL 줄마다</code></div>` → 결과.
     - `pick`: `from[0]` 행을 `{열 이름: 값}`으로 바꿔(`/^-?\d+(\.\d+)?$/`는 숫자, `'NULL'`은 `null`) 넘긴다. 고른 행은 실행 전 표에서 `{row}` 강조, 결과 표는 고른 행(`show`가 있으면 그 열만, 순서는 `show` 순서).
     - `del`: 고른 행은 실행 전 표에서 `mark` "지움"만 붙이고 `{row}` 강조는 하지 않는다. 결과 표는 남은 행 전체.
-    - `after`+`hl`: 결과 `<tr>`의 class는 dbtab이 준 `mk-dbon` 뒤에 붙인다(`class="mk-dbon mk-dqm mk-cdz1 A"`). `after` 표가 2개면 `hl`은 `[표0 hl, 표1 hl]` 길이 2 배열이다(강조 없는 표는 `null`). 길이가 2가 아니면 오류.
+    - `after`+`hl`: 결과 `<tr>`의 class는 dbtab이 준 `mk-dbon` 뒤에 붙인다(`class="mk-dbon mk-dqm mk-cdz1 A"`). `after` 표가 2개면 `hl`을 쓸 수 없다(주면 오류).
     - 결과 머리띠 `<div class="mk-dqh" aria-hidden="true">`: `결과 ${n}줄`, del은 `지운 뒤 남은 줄 ${n}줄`, `after` 표 2개면 `결과 표 2개`.
     - 결과 행 k(1부터, 결과 표가 둘이면 이어서 셈)의 `<tr>`에 `mk-dqm${still ? '' : ` mk-cdz${k} A`}`.
     - `err`: 결과 자리에 `<p class="mk-dqm mk-dqf${still ? '' : ' mk-cdz1 A'}"><b class="mk-dbk">실패</b>${err}<span>표는 그대로예요</span></p>` 하나.
@@ -207,7 +208,7 @@ check('dbhelp', () => vm.runInContext(`(() => {
   no(() => qrun({sql:['a'], from:[U2], after:A1, show:['id']}), 'show 홀로'); no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['id'], del:1}), 'show+del');
   no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['age']}), 'show 없는 열'); no(() => qrun({sql:['a'], from:[U2], after:A1, del:1}), 'del+after');
   no(() => qrun({sql:['a'], from:[U2], pick: () => true, hl:{row:0}}), 'hl+pick'); no(() => qrun({sql:['a'], from:[U2], err:'a'.repeat(29)}), 'err 29폭');
-  no(() => qrun({sql:['a'], from:[U2], pick: () => true, err:'a'}), 'pick+err'); no(() => qrun({sql:['a'], from:[U2], err:'a', del:1}), 'err+del'); no(() => qrun({sql:['a'], from:[U2, U2], after:[A1, A1], hl:{row:0}}), '표 2개 hl 모양');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, err:'a'}), 'pick+err'); no(() => qrun({sql:['a'], from:[U2], err:'a', del:1}), 'err+del'); no(() => qrun({sql:['a'], from:[U2, U2], after:[A1, A1], hl:{row:0}}), '표 2개 hl');
   no(() => qrun({sql:['a'], from:[U2], after:[A1, A1, A1]}), 'after 3개'); no(() => qrun({sql:['a'], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '하늘']]}}), '결과 값 밖');
   const F5 = {name:'t', cols:['a'], rows:Array(5).fill(['1'])}; no(() => qrun({sql:['a'], from:[U2], after:[F5, F5]}), '결과 10줄');
   const e = erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, {n:'email', type:'글자'}]}, {name:'orders', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}]}], links:[{a:0, b:1, kind:'1:N', fk:'user_id'}], hl:['orders.user_id']});
