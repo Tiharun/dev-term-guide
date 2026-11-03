@@ -27,7 +27,7 @@
 - **세로줄 이름**: 8자(wlen) 한도라 긴 이름은 줄인다(`세션 저장소`→`저장소`, `결제 서비스`→`결제사`, `로그인 서비스`→`로그인`, `다른 서버`→`외부`). 이 계획에서 쓰는 이름: `브라우저`·`서버`·`DB`·`내 서버`·`미들웨어`·`라우트`·`컨트롤러`·`서비스`·`저장소`·`워커`·`결제사`·`로그인`·`외부`·`앱`·`API 관문`·`BFF`·`주문`·`회원`·`알림`·`결제`·`글`.
   - 표에 없는 이름이 필요하면 8자 안에서 정하고 원장에 `Ruling:`으로 적는다.
 - **조사**: `.sr` 문장의 "가/이"는 세로줄 이름 끝 글자로 정한다. 한글이고 받침이 있으면 `이`, 받침이 없으면 `가`, 한글이 아니면 `가`(DB·BFF·API처럼 모음으로 끝나 읽히는 이름만 쓴다).
-- **httpmsg 줄 한도 30자**: 스펙 3.2는 28자(ide와 같음)지만 가장 흔한 헤더 `Content-Type: application/json`이 30자다. 줄이면 Content-Type·Request·Response 카드가 핵심 줄을 못 보여 주므로 30자로 정한다. 대신 꼬리표(강조·실패)는 줄 끝에 붙고 자리가 없으면 다음 줄로 내려간다(`flex-wrap`). 320px에서 들어가는지 Task 1 Step 5에서 잰다. ide·term의 한도는 그대로다.
+- **httpmsg 줄 한도 30자**: 스펙 3.2도 이 결정에 맞춰 30자로 고쳤다(처음엔 ide와 같은 28자). 가장 흔한 헤더 `Content-Type: application/json`이 30자다. 줄이면 Content-Type·Request·Response 카드가 핵심 줄을 못 보여 주므로 30자로 정한다. 대신 꼬리표(강조·실패)는 줄 끝에 붙고 자리가 없으면 다음 줄로 내려간다(`flex-wrap`). 320px에서 들어가는지 Task 1 Step 5에서 잰다. ide·term의 한도는 그대로다.
 - **실패 수**: `seq`의 `.sr` 끝 "(실패 n개)"는 실패가 1개 이상일 때만 붙인다. 스펙 3.1 예시의 "(실패 0개)"는 형식 예시로 보고, 0개를 읽어 주지 않는다.
 - **멈춘 직접 조작 그림**: Task 4·5에서 상태 함수(`brate`·`bauthz`·`bcache`·`bidem`)를 만들어 멈춘 그림을 그린다. 계획서 ②가 같은 함수에 버튼과 `init`을 붙인다.
 - **COUNT 키**: 접두사 없는 키는 design 카테고리다. back은 `back/<sec>`로 쓴다.
@@ -255,7 +255,7 @@ check('bkou', () => BKS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', 
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
   'Event-driven Architecture': ['Event'], 'Worker': ['Service Worker', 'Web Worker'], 'Lock': ['Lock File', 'Account Lockout'], 'Route Handler': ['Routing']};    // 이름만 비슷한 다른 뜻
 check('bkwrong', () => Object.entries(BK_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'back' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
-const BK_SECRET = s => (s.match(/[A-Za-z0-9_-]{24,}/g) || []).some(w => /\d/.test(w) && /[A-Za-z]/.test(w)) || /\bat\b[^\n]*\.(?:m?js|ts):\d+/.test(s) || /localStorage\.setItem\([^)]*(?:token|jwt|session)/i.test(s);    // 긴 영숫자 키·스택 추적·토큰 저장 모습
+const BK_SECRET = s => (s.match(/[A-Za-z0-9_-]{24,}/g) || []).some(w => /\d/.test(w) && /[A-Za-z]/.test(w)) || /\bat\b[^\n]{0,40}\.(?:m?js|ts):\d+/.test(s) || /localStorage\.setItem\([^)]*(?:token|jwt|session)/i.test(s);    // 긴 영숫자 키·스택 추적·토큰 저장 모습
 check('bksafe', () => [...['ab12'.repeat(7), 'at run (/app/server.js:12:5)', "localStorage.setItem('JWT', t)"].filter(x => !BK_SECRET(x)).map(x => '못 잡음 ' + x), ...(BK_SECRET('Access-Control-Allow-Origin') ? ['헤더 이름 오탐'] : []),
   ...BKS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && BK_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
 check('bkshare', () => ['input', 'progress', 'scale', 'pulse', 'spinner', 'stagger', 'typing', 'shake', 'pagination'].filter(k => !g.D[k]).join(', '));    // 옛 back 카드가 쓰던 공유 그림 키는 남긴다

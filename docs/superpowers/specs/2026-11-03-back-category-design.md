@@ -70,7 +70,7 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
   - `hl`: 강조할 줄 이름 배열(`'start'`, `'h0'`~`'h3'`, `'b0'`~`'b3'`). 강조는 배경색과 "강조" 글자로 한다.
 - 응답 상태 번호가 400 이상이면 첫 줄에 "실패" 글자를 붙인다.
 - 한도(넘으면 오류): 모든 줄 30자(`Content-Type: application/json`이 30자라 ide 28자보다 2자 넓힌다. 꼬리표는 자리가 없으면 다음 줄로 내린다), 헤더·본문 각 5줄 이상, kind가 요청·응답이 아님, 없는 줄을 가리키는 `hl`. 응답의 start가 100~599 상태 번호로 시작하지 않거나 요청의 start가 메서드(GET·HEAD·POST·PUT·PATCH·DELETE·OPTIONS)로 시작하지 않아도 오류다. OPTIONS는 CORS 사전 요청 때문에 넣는다.
-- 좁은 칸에 넣지 않는다: `pair` 왼쪽 칸은 110px(코드 칸 `fcss`도 최대 190px, [index.html:346](../../../index.html)·[464](../../../index.html))라 28자 줄이 넘친다. `httpmsg`는 그림판 전체 폭에 단독으로 두거나 두 개를 세로로 쌓는다.
+- 좁은 칸에 넣지 않는다: `pair` 왼쪽 칸은 110px(코드 칸 `fcss`도 최대 190px, [index.html:346](../../../index.html)·[464](../../../index.html))라 30자 줄이 넘친다. `httpmsg`는 그림판 전체 폭에 단독으로 두거나 두 개를 세로로 쌓는다.
 - 이름 `httpmsg`는 기존 `{http:200}` 그림 형식(server 상태 번호 카드, [index.html:278](../../../index.html))과 헷갈리지 않게 정했다.
 - `.sr` 문장: "HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄".
 - 대상(예): Request, Response, Request Header, Request Body, Response Header, Response Body, Content-Type, Payload, Bearer Token, API Key, Error Response, Health Check, Pagination API
@@ -188,7 +188,7 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
   - `EXPECT`에 새 카드 영문명
   - `REDRAWN`에 back 하위항목 10개, 새 점검 `bkobj`로 back 카드의 객체 v 0장을 따로 막는다(front `fobj`와 같은 방식. basics가 `bobj`를 써서 `bk` 접두사)
   - 새 점검 `bkukey`: back 97장의 v가 `u-back-`로 시작하고 `D`에 있다(마칠 때 예외 없음. 진행 중에는 남은 옛 카드 목록 `BK_TODO`가 줄어 비워진다)
-  - 새 점검 `bcat`: back 하위항목 순서가 `basic,core,motion,adv,api,arch,data,job,auth,tip`이다
+  - 새 점검 `bkcat`: back 하위항목 순서가 `basic,core,motion,adv,api,arch,data,job,auth,tip`이다
 
 ## 5. 용어 목록 (새 46장)
 
