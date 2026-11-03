@@ -629,6 +629,7 @@ const WSYM = h => /[✓✕★→←↑↓]|&(?:rarr|larr|uarr|darr|check|times|s
 check('wsymre', () => !WSYM('<b>&rarr; 다음</b>') || !WSYM('<span aria-hidden="true">→ 진짜 글</span>') || WSYM('<span aria-hidden="true">→</span> 다음') ? '기호 검사 구멍' : '');
 check('wsym', () => WS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)};    // 기호는 읽지 않게 숨겨요
   return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
+check('srvprim', () => g.TERMS.filter(t => t.c === 'server' && t.o && /wiki\./.test(t.u)).map(t => t.en).join(', '));    // o:1 출처는 1차 문서(위키 말고)
 check('symfit', () => html.includes('.steps .col.done{flex:0 0 auto;max-width:100%}') ? '' : '고른 증상 칸 폭 한도');    // 긴 증상을 고르면 320px에서 페이지가 옆으로 넘쳐요
 check('symcss', () => (html.match(/content:'[^']*[→←↑↓✓✕★][^']*'(?! \/ '')/g) || []).filter(c => !html.includes(c + " / ''")).join(' '));    // CSS 기호도 대체 글 ''
 const WB_WRONG = {'Bounce Rate': ['Bounce', 'Debounce'], 'Event Tracking': ['Event'], 'Time on Page': ['Session'], 'Pop-up Blocker': ['Popover', 'Modal'], 'Logo': ['Brand Color']};    // 이름만 비슷한 카드
