@@ -454,6 +454,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dbe{margin:0;padding:5px 10px;font:12px/1.4 var(--sans);color:var(--muted)}
 .mk-dgp{margin:0;font:800 12px/1.4 var(--sans);color:var(--ink)}.mk-dgs{margin:0;padding:5px 10px 5px 30px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);font:12px/1.5 var(--sans);color:var(--ink)}.mk-dgs li{overflow-wrap:anywhere}.mk-dgs .mk-dbk{color:var(--mark-text)}
 .mk-dq{display:grid;gap:8px;width:min(100%,400px);text-align:left}.mk-dq>.mk-db{width:100%}.mk-dq>.mk-db+.mk-db{margin-top:0}
+.mk-dg{grid-template-columns:auto minmax(0,1fr);align-items:start}.mk-dgl{margin:0;padding:6px 8px;list-style:none;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);font:12px/1.8 var(--mono);color:var(--ink)}.mk-dgl li{padding:0 4px;border-radius:4px;white-space:nowrap}.mk-dgr{display:grid;gap:8px;min-width:0}.mk-dgr>.mk-db{width:100%;margin:0}.mk-dgq{display:block;padding:6px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);font:12px/1.5 var(--mono);color:var(--ink);overflow-wrap:anywhere}@media (max-width:480px){.mk-dg{grid-template-columns:minmax(0,1fr)}}
 .mk-dqr{display:grid;gap:1px;padding:5px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-dqr b{font:800 11px/1.4 var(--sans);color:var(--muted)}.mk-dqr code{font:700 12px/1.5 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
 .mk-dqh{font:800 11.5px/1.4 var(--sans);color:var(--ink)}.mk-dqf{margin:0;padding:6px 10px;border:1.5px solid var(--mark-text);border-radius:8px;background:var(--plate);font:12px/1.5 var(--sans);color:var(--ink)}.mk-dqf .mk-dbk{margin:0 6px 0 0}.mk-dqf span{display:block;font-size:11px;color:var(--muted)}
 .mk-er{display:grid;width:min(100%,360px);text-align:left}.mk-erb{border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);overflow:hidden}.mk-erb.mk-eron{box-shadow:0 0 0 3px var(--mark-bg)}
@@ -2898,6 +2899,30 @@ T('db','model',[
  {en:'Junction Table',ko:'연결 테이블 · 다대다를 잇는 표',d:'다대다 관계를 잇기 위해 두 표 사이에 두는 표예요. 양쪽 id를 한 줄에 하나씩 담아요.',x:'다대다(Many-to-Many)는 관계의 모양이고, 연결 테이블은 그 관계를 실제로 저장하는 표예요. 두 외래 키(Foreign Key)를 묶어 복합 키로 쓰는 경우가 많아요.',p:'enrollments 연결 테이블에 student_id와 course_id 외래 키를 넣어줘',r:['Many-to-Many','Foreign Key'],l:2,o:1,u:'https://www.postgresql.org/docs/current/ddl-constraints.html',v:'u-db-junction-table'},
  {en:'Cascade Delete',ko:'연쇄 삭제 · 지우면 이어진 줄도 지움',d:'줄을 지우면, 그 줄을 가리키던 다른 표의 줄도 함께 지워요.',x:'CSS의 Cascade(규칙 우선순위)와는 다른 것으로, 외래 키(Foreign Key)에 거는 삭제 규칙이에요. 기본값(NO ACTION)이면 이 DELETE는 막혀요. 지운 줄은 되돌릴 수 없으니 꼭 필요한 곳에만 걸어요.',p:'회원을 지우면 그 회원의 주문도 지워지게 ON DELETE CASCADE를 걸어줘',r:['Foreign Key','Hard Delete'],l:2,o:1,u:'https://www.postgresql.org/docs/current/ddl-constraints.html',v:'u-db-cascade-delete'},
  {en:'Denormalization',ko:'비정규화 · 일부러 복사해 두기',d:'조인을 줄이려고 다른 표에 있는 값을 일부러 복사해 두는 설계예요.',x:'정규화(Normalization)는 같은 값을 한 곳에만 두고, 비정규화는 읽기를 빠르게 하려고 일부러 겹쳐 둬요. 대신 이름이 바뀌면 복사해 둔 곳을 모두 고쳐야 해요.',p:'주문 목록을 자주 읽으니 주문 표에 회원 이름을 복사해 두는 비정규화를 해줘',r:['Normalization','Join'],l:3,o:0,v:'u-db-denormalization'},
+]);
+T('db','tx',[
+ {en:'ACID',ko:'에이시드 · 트랜잭션이 지키는 네 약속',d:'트랜잭션이 지키는 네 가지 약속인 원자성·일관성·격리성·지속성의 앞 글자예요.',x:'Transaction은 여러 문장을 묶은 단위이고, ACID는 그 묶음이 지켜야 할 성질이에요. 그중 격리성을 얼마나 엄격하게 지킬지는 격리 수준(Isolation Level)으로 정해요.',p:'주문 저장과 결제를 ACID가 지켜지는 트랜잭션 하나로 묶어줘',r:['Transaction'],l:2,o:1,u:'https://www.postgresql.org/docs/current/glossary.html',v:'u-db-acid'},
+ {en:'Autocommit',ko:'자동 커밋 · 한 문장마다 바로 확정',d:'BEGIN 없이 보낸 SQL 문장을 DB가 하나씩 바로 확정하는 방식이에요.',x:'트랜잭션은 BEGIN으로 여러 문장을 묶어 한꺼번에 확정하고, 자동 커밋은 문장마다 따로 확정해요. 그래서 BEGIN으로 묶지 않은 UPDATE 두 개 중 두 번째가 실패해도 첫 번째는 되돌아가지 않아요. git의 Commit(코드 변경 기록)과는 다른 말이에요.',p:'재고와 주문 UPDATE가 자동 커밋으로 따로 확정되지 않게 BEGIN으로 묶어줘',r:['Transaction'],l:2,o:1,u:'https://www.postgresql.org/docs/current/sql-begin.html',v:'u-db-autocommit'},
+ {en:'Savepoint',ko:'세이브포인트 · 트랜잭션 안의 되돌릴 지점',d:'트랜잭션 안에 찍어 두는 중간 지점이에요. 실패하면 처음이 아니라 그 지점까지만 되돌려요.',x:'ROLLBACK은 트랜잭션 전체를 되돌리고, ROLLBACK TO는 세이브포인트 뒤의 일만 되돌려요. 되돌린 뒤에도 트랜잭션은 이어지고, 마지막에 COMMIT해야 확정돼요.',p:'쿠폰 적용 앞에 SAVEPOINT를 두고, 쿠폰이 실패하면 그 지점까지만 되돌려줘',r:['Rollback','Transaction'],l:3,o:1,u:'https://www.postgresql.org/docs/current/sql-savepoint.html',v:'u-db-savepoint'},
+ {en:'Isolation Level',ko:'격리 수준 · 동시에 고칠 때 얼마나 떼어 놓을지',d:'여러 트랜잭션이 같은 데이터를 동시에 다룰 때 서로를 얼마나 떼어 놓을지 정하는 단계예요.',x:'ACID의 격리성을 몇 단계로 나눈 것이고, 높을수록 덜 섞이지만 충돌로 다시 시도할 일이 늘어요. PostgreSQL 기본값은 READ COMMITTED예요. 테스트끼리 안 섞이게 하는 Test Isolation과는 다른 말이에요.',p:'결제 트랜잭션의 격리 수준을 REPEATABLE READ로 바꿔줘',r:['Dirty Read','Transaction'],l:3,o:1,u:'https://www.postgresql.org/docs/current/transaction-iso.html',v:'u-db-isolation-level'},
+ {en:'Dirty Read',ko:'더티 리드 · 확정 전 값을 읽음',d:'다른 트랜잭션이 아직 확정하지 않은 값을 읽는 일이에요. 그 값은 나중에 취소될 수 있어요.',x:'Lost Update는 저장이 덮이는 일이고, Dirty Read는 확정 전 값을 읽는 일이에요. SQL 표준은 가장 낮은 격리 수준에서 허용하지만, PostgreSQL은 어느 수준에서도 막아요.',p:'다른 DB로 옮길 때 Dirty Read가 생기는 격리 수준을 쓰는 곳이 있는지 찾아줘',r:['Isolation Level'],l:3,o:1,u:'https://www.postgresql.org/docs/current/transaction-iso.html',v:'u-db-dirty-read'},
+ {en:'Lost Update',ko:'갱신 손실 · 나중 저장이 앞 저장을 덮음',d:'두 사람이 같은 값을 읽고 각자 고쳐 저장해서, 나중 저장이 앞 저장을 덮어 버리는 일이에요.',x:'Race Condition은 순서에 따라 결과가 달라지는 버그 전체이고, Lost Update는 그중 DB 저장이 덮이는 경우예요. stock = stock - 1처럼 DB 안에서 계산하게 하거나, 낙관적·비관적 잠금으로 막아요.',p:'재고를 줄일 때 Lost Update가 생기지 않게 UPDATE에서 stock = stock - 1로 계산해줘',r:['Race Condition','Concurrency','Optimistic Locking'],l:3,o:0,v:'u-db-lost-update'},
+ {en:'Deadlock',ko:'교착 상태 · 서로 기다리다 멈춤',d:'두 트랜잭션이 서로 상대가 잡은 잠금을 기다리느라 둘 다 멈춘 상태예요.',x:'Lock은 한 번에 하나만 고치게 막는 장치이고, Deadlock은 그 잠금끼리 서로 막혀 풀리지 않는 상태예요. PostgreSQL은 이를 찾아 한쪽을 취소하고 deadlock detected 오류를 내요. 여러 줄을 잠글 때 늘 같은 순서로 잠그면 줄어요.',p:'deadlock detected 오류가 나지 않게 두 계좌를 늘 id 순서로 잠가줘',r:['Lock','Transaction'],l:3,o:1,u:'https://www.postgresql.org/docs/current/explicit-locking.html',v:'u-db-deadlock'},
+ {en:'Optimistic Locking',ko:'낙관적 잠금 · 저장할 때 바뀌었는지 확인',d:'잠그지 않고 고치다가, 저장할 때 그사이 누가 바꿨는지 확인하는 방식이에요.',x:'비관적 잠금은 읽을 때부터 DB 잠금을 걸고, 낙관적 잠금은 잠그지 않고 저장할 때 version 열 값으로 바뀌었는지 확인해요. 바뀌었으면 0줄이 고쳐지니 다시 읽고 시도해요. 화면을 먼저 바꾸는 Optimistic UI·Optimistic Update와는 다른 말이에요.',p:'게시글 수정에 version 열로 낙관적 잠금을 넣고, 0줄이 바뀌면 다시 시도해줘',r:['Lost Update','Pessimistic Locking'],l:3,o:0,v:'u-db-optimistic-locking'},
+ {en:'Pessimistic Locking',ko:'비관적 잠금 · 읽을 때부터 잠금',d:'고치려는 줄을 읽을 때부터 잠가서, 끝날 때까지 다른 트랜잭션이 그 줄을 고치지 못하게 하는 방식이에요.',x:'낙관적 잠금은 저장할 때 확인하고, 비관적 잠금은 SELECT … FOR UPDATE로 미리 잠가요. 잠긴 줄을 고치려는 쪽은 기다리지만, 그냥 SELECT로 읽는 것은 막지 않아요.',p:'재고를 읽을 때 SELECT … FOR UPDATE로 비관적 잠금을 걸어줘',r:['Lock','Optimistic Locking'],l:3,o:1,u:'https://www.postgresql.org/docs/current/explicit-locking.html',v:'u-db-pessimistic-locking'},
+ {en:'Connection Pool',ko:'연결 풀 · 미리 열어 둔 DB 연결',d:'DB 연결을 미리 몇 개 열어 두고, 요청마다 빌려 쓰고 돌려주는 방식이에요.',x:'연결 풀은 연결을 나눠 쓰는 장치이고, Too Many Connections는 연결 칸이 모자라 거절되는 오류예요. 요청마다 새로 연결하면 느리고 DB의 연결 한도를 빨리 채워요. 풀 크기는 DB가 받을 수 있는 연결 수보다 작게 잡아요.',p:'서버가 요청마다 DB에 새로 연결하지 않게 연결 풀을 써줘',r:['Too Many Connections'],l:2,o:1,u:'https://www.pgbouncer.org/',v:'u-db-connection-pool'},
+]);
+T('db','ops',[
+ {en:'Query Plan',ko:'쿼리 계획 · DB가 정한 찾는 방법',d:'쿼리를 받은 DB가 정한 데이터 찾는 방법이에요. 쿼리 앞에 EXPLAIN을 붙이면 볼 수 있어요.',x:'Slow Query는 오래 걸렸다는 결과이고, Query Plan은 왜 오래 걸렸는지 보여 주는 계획이에요. Seq Scan이면 표 전체를, Index Scan이면 인덱스로 찾은 거예요. EXPLAIN ANALYZE는 쿼리를 실제로 실행하니 UPDATE·DELETE에 쓸 때는 조심해요.',p:'느린 회원 검색 쿼리의 쿼리 계획을 EXPLAIN으로 보고 고쳐줘',r:['Index','Slow Query'],l:3,o:1,u:'https://www.postgresql.org/docs/current/using-explain.html',v:'u-db-query-plan'},
+ {en:'Full Table Scan',ko:'전체 테이블 스캔 · 처음부터 끝까지 다 읽기',d:'인덱스를 쓰지 않고 표의 첫 줄부터 마지막 줄까지 다 읽는 일이에요.',x:'Index는 찾을 위치를 바로 알려 주고, 전체 테이블 스캔은 모든 줄을 하나씩 확인해요. 줄이 적거나 대부분을 읽어야 할 때는 오히려 이쪽이 빠를 수 있어요.',p:'자주 쓰는 email 검색이 전체 테이블 스캔을 하는지 EXPLAIN으로 확인해줘',r:['Index','Query Plan'],l:2,o:1,u:'https://www.postgresql.org/docs/current/using-explain.html',v:'u-db-full-table-scan'},
+ {en:'Composite Index',ko:'복합 인덱스 · 열 여럿을 묶은 색인',d:'열 두 개 이상을 묶어 만든 인덱스예요. (city, age)처럼 열 순서가 정해져 있어요.',x:'인덱스는 보통 한 열로 정렬해 두고, 복합 인덱스는 왼쪽 열부터 차례로 정렬해 둬요. 그래서 왼쪽 열 조건이 있을 때 가장 잘 쓰이고, 오른쪽 열만으로 찾으면 덜 효율적이에요.',p:'city와 age로 자주 찾는 회원 검색에 (city, age) 복합 인덱스를 만들어줘',r:['Index'],l:3,o:1,u:'https://www.postgresql.org/docs/current/indexes-multicolumn.html',v:'u-db-composite-index'},
+ {en:'Read Replica',ko:'읽기 복제본 · 읽기만 나눠 받는 DB',d:'원본 DB를 복사해 두고 읽기 요청만 나눠 받는 DB예요.',x:'Replication은 DB를 여러 곳에 복사해 두는 방법 전체이고, Read Replica는 그 복사본에 읽기를 나눠 맡기는 쓰임이에요. 복사가 조금 늦을 수 있어서, 방금 쓴 글은 원본에서 읽게 하기도 해요.',p:'목록 조회는 읽기 복제본으로, 글 저장은 원본 DB로 보내줘',r:['Replication'],l:3,o:1,u:'https://www.postgresql.org/docs/current/hot-standby.html',v:'u-db-read-replica'},
+ {en:'Connection String',ko:'연결 문자열 · DB 접속 주소 한 줄',d:'사용자·비밀번호·호스트·포트·DB 이름을 한 줄에 적은 DB 접속 주소예요.',x:'Environment Variable은 값을 넣어 두는 칸이고, 연결 문자열은 그 칸에 넣는 DB 접속 값이에요. 비밀번호가 들어 있으니 코드에 적지 말고 .env 같은 환경 변수에 둬요. PostgreSQL은 postgres://나 postgresql://로 시작해요.',p:'DB 연결 문자열을 코드에서 빼서 DATABASE_URL 환경 변수로 읽어줘',r:['Environment Variable'],l:2,o:1,u:'https://www.postgresql.org/docs/current/libpq-connect.html',v:'u-db-connection-string'},
+ {en:'Too Many Connections',ko:'연결 초과 · DB 연결 칸이 꽉 참',d:'DB가 받을 수 있는 연결 수가 꽉 차서 새 연결을 거절하는 오류예요.',x:'Connection Pool은 연결을 나눠 쓰는 방법이고, 이 오류는 연결 칸이 모자랄 때 나요. PostgreSQL은 too many clients already, MySQL은 Too many connections로 알려요. 한도를 올리기 전에 연결 풀을 쓰고 닫지 않은 연결을 찾아요.',p:'too many clients already 오류가 나지 않게 연결 풀 크기를 줄이고 안 닫힌 연결을 찾아줘',r:['Connection Pool'],l:2,o:1,u:'https://www.postgresql.org/docs/current/runtime-config-connection.html',v:'u-db-too-many-connections'},
+ {en:'Query Timeout',ko:'쿼리 시간 초과 · 정한 시간을 넘으면 취소',d:'쿼리가 정해 둔 시간보다 오래 걸리면 DB가 그 쿼리를 취소하는 설정이에요.',x:'Timeout은 기다림을 끊는 일 전체이고, Query Timeout은 DB 안에서 쿼리 실행을 끊는 경우예요. PostgreSQL은 statement_timeout으로 정하고, 넘으면 canceling statement due to statement timeout 오류를 내요.',p:'오래 걸리는 쿼리가 DB를 붙잡지 않게 statement_timeout을 5초로 정해줘',r:['Timeout','Slow Query'],l:3,o:1,u:'https://www.postgresql.org/docs/current/runtime-config-client.html',v:'u-db-query-timeout'},
+ {en:'Point-in-Time Recovery',ko:'시점 복구 · 원하는 시각으로 되살림',d:'백업에 변경 기록을 이어 붙여, 원하는 시각의 DB로 되살리는 방법이에요.',x:'Restore는 백업한 그 시점으로만 돌아가고, 시점 복구는 백업 뒤 변경 기록(WAL)을 원하는 시각까지 다시 적용해요. 실수로 지운 바로 앞 시각으로 돌아갈 수 있지만, 변경 기록을 계속 모아 둬야 해요.',p:'실수로 지운 데이터를 시점 복구로 지우기 바로 전 시각으로 되살려줘',r:['Backup','Restore'],l:3,o:1,u:'https://www.postgresql.org/docs/current/continuous-archiving.html',v:'u-db-point-in-time-recovery'},
+ {en:'Database Dump',ko:'DB 덤프 · DB를 SQL 파일로 뽑기',d:'DB의 표와 데이터를 SQL 파일 하나로 뽑아내는 일이에요.',x:'Backup은 복사본을 두는 일 전체이고, 덤프는 그중 SQL 파일을 만드는 방법이에요. PostgreSQL은 pg_dump로 뽑고, 기본은 데이터를 COPY로, --inserts를 주면 INSERT로 적어요.',p:'shop DB를 pg_dump로 덤프해서 shop.sql로 저장해줘',r:['Backup','Restore'],l:2,o:1,u:'https://www.postgresql.org/docs/current/app-pgdump.html',v:'u-db-database-dump'},
+ {en:'Database Client',ko:'DB 클라이언트 · DB를 보는 프로그램',d:'DB에 접속해 표를 둘러보고, SQL을 실행해 결과를 보는 프로그램이에요.',x:'SQL은 DB에 묻는 말이고, DB 클라이언트는 그 말을 써서 보내고 결과를 보여 주는 프로그램이에요. psql처럼 터미널에서 쓰는 것도, 창에 표를 보여 주는 것도 있어요. 요청을 보내는 쪽을 뜻하는 Client와는 다른 말이에요.',p:'DB 클라이언트로 users 표를 열어 최근 가입한 회원 10명을 보여줘',r:['SQL'],l:1,o:0,v:'u-db-database-client'},
 ]);
 T('db','tip',[
  {en:'Hard Delete',ko:'완전 삭제',d:'데이터를 DB에서 진짜로 지우는 것. 되돌릴 수 없어요.',p:'완전 삭제 전에는 꼭 확인 창을 띄워줘',r:['Soft Delete'],l:2,o:0,v:'u-db-hard-delete'},
@@ -8125,6 +8150,54 @@ Object.assign(D, {
       after:[{name:'users', cols:['id', 'name'], rows:[['2', '지영']]}, {name:'orders', cols:['id', 'user_id', 'item'], rows:[['2', '2', '펜']]}], label:'연쇄 삭제 실행'})), cap:'민수를 지우니 민수의 주문 두 줄도 지워져요', m:1},
   'u-db-denormalization':{h:bkStack(dbtab({name:'orders', tag:'복사해 둠', cols:['id', 'user_name', 'item'], rows:[['1', '민수', '책'], ['2', '민수', '펜'], ['3', '지영', '컵']], hl:{col:1}}),
     whelp('읽기는 빨라지고, 이름을 고칠 곳이 늘어나요')), cap:'회원 이름이 주문 줄마다 들어 있어요'},
+});
+/* db: tx·ops — 출처 확인(2026-11): PostgreSQL 18 문서 Glossary(ACID)·BEGIN(자동 커밋)·SAVEPOINT·ROLLBACK TO SAVEPOINT·Transaction Isolation(기본값 READ COMMITTED, Dirty Read는 어느 수준에서도 없음)·
+   Explicit Locking(교착은 한쪽 취소, FOR UPDATE는 그냥 SELECT를 막지 않음)·Using EXPLAIN(Seq Scan·Index Scan)·Multicolumn Indexes(왼쪽 열, skip scan)·Hot Standby(읽기 전용)·
+   libpq Connection Strings(postgres:// URI)·max_connections·statement_timeout·Continuous Archiving(WAL로 시점 복구)·pg_dump(COPY, --inserts), PgBouncer(연결 풀). 숫자·이름·시각은 예시 */
+Object.assign(D, {
+  'u-db-acid':{h:doc([{tb:[['약속', '뜻'], ['원자성', '다 되거나 다 안 돼요'], ['일관성', '규칙을 지킨 상태로 끝나요'], ['격리성', '동시에 해도 섞이지 않아요'], ['지속성', '확정하면 꺼져도 남아요']]}], {title:'ACID'}),
+    cap:'트랜잭션이 지키는 네 약속이에요', m:1},
+  'u-db-autocommit':{h:seq(['앱', 'DB'], [{from:0, to:1, t:'UPDATE 재고'}, {from:1, to:1, t:'바로 확정'}, {from:0, to:1, t:'UPDATE 주문'}, {from:1, to:1, t:'바로 확정'}]),
+    cap:'BEGIN이 없으면 한 문장씩 바로 확정돼요', m:1},
+  'u-db-savepoint':{h:seq(['앱', 'DB'], [{from:0, to:1, t:'BEGIN'}, {from:0, to:1, t:'주문 저장'}, {from:0, to:1, t:'SAVEPOINT a'}, {from:0, to:1, t:'쿠폰 적용', err:1}, {from:0, to:1, t:'ROLLBACK TO a'}, {from:0, to:1, t:'COMMIT'}]),
+    cap:'쿠폰만 취소하고 주문은 남겨요', m:1},
+  'u-db-isolation-level':{h:doc([{tb:[['수준(PostgreSQL)', '막아 주는 일'], ['READ COMMITTED (기본값)', '확정 전 값 읽기'], ['REPEATABLE READ', '다시 읽으면 바뀌는 일'], ['SERIALIZABLE', '하나씩 한 것과 다른 결과']]}], {title:'격리 수준'}),
+    cap:'READ UNCOMMITTED는 READ COMMITTED처럼 동작해요. 표준 SQL 표와 조금 달라요', m:1},
+  'u-db-dirty-read':{h:seq(['A', 'DB', 'B'], [{from:0, to:1, t:'확정 전 수정'}, {from:2, to:1, t:'읽기'}, {from:1, to:2, t:'바뀐 값'}, {from:0, to:1, t:'ROLLBACK'}, {from:2, to:2, t:'사라진 값 씀', err:1}]),
+    cap:'표준은 가장 낮은 수준에서 허용하지만 PostgreSQL은 막아요', m:1},
+  'u-db-lost-update':{h:seq(['A', 'DB', 'B'], [{from:0, to:1, t:'재고 읽기'}, {from:1, to:0, t:'10'}, {from:2, to:1, t:'재고 읽기'}, {from:1, to:2, t:'10'}, {from:0, to:1, t:'9로 씀'}, {from:2, to:1, t:'9로 씀'}]),
+    cap:'둘이 하나씩 팔았는데 재고는 9예요(8이어야 해요)', m:1},
+  'u-db-deadlock':{h:seq(['A', 'DB', 'B'], [{from:0, to:1, t:'1번 줄 잠금'}, {from:2, to:1, t:'2번 줄 잠금'}, {from:0, to:1, t:'2번 줄 요청', wait:1}, {from:2, to:1, t:'1번 줄 요청', wait:1}, {from:1, to:2, t:'취소', err:1}]),
+    cap:'DB가 한쪽을 취소해요. 어느 쪽일지는 정할 수 없어요', m:1},
+  'u-db-optimistic-locking':{h:seq(['앱', 'DB'], [{from:0, to:1, t:'v=3일 때 수정'}, {from:1, to:0, t:'0줄 바뀜', err:1}, {from:0, to:0, t:'다시 읽기'}, {from:0, to:1, t:'v=4일 때 수정'}, {from:1, to:0, t:'1줄 바뀜'}]),
+    cap:'v는 고칠 때마다 1씩 느는 version 열이에요. 그사이 누가 고쳐 4가 됐어요', m:1},
+  'u-db-pessimistic-locking':{h:seq(['A', 'DB', 'B'], [{from:0, to:1, t:'FOR UPDATE'}, {from:2, to:1, t:'UPDATE', wait:1}, {from:0, to:1, t:'COMMIT'}, {from:1, to:2, t:'진행'}]),
+    cap:'B는 A가 끝날 때까지 기다려요. 그냥 SELECT는 막지 않아요', m:1},
+  'u-db-connection-pool':{h:track([{t:'미리 연 연결 5개', s:'done', w:'(예시)'}, {t:'요청이 하나 빌림', s:'done', w:'남은 연결 4개'}, {t:'쿼리 실행', s:'now'}, {t:'돌려줌', s:'done', w:'다시 5개'}]),
+    cap:'연결을 새로 열지 않고 빌려 쓰고 돌려줘요', m:1},
+  'u-db-query-plan':{h:term([{c:'EXPLAIN SELECT …'}, {o:'Seq Scan on users'}, {c:'CREATE INDEX …'}, {c:'EXPLAIN SELECT …'}, {o:'Index Scan using'}, {o:'  users_email_idx'}], {title:'psql', prompt:'shop=#'}),
+    cap:'Seq Scan은 표 전체를, Index Scan은 인덱스로 찾아요', m:1},
+  'u-db-full-table-scan':{h:track([{t:'1번째 줄 읽음', s:'done'}, {t:'2번째 줄 읽음', s:'done'}, {t:'3번째 줄 읽음', s:'now'}, {t:'마지막 줄까지', s:'wait', w:'10만 번째(예시)'}]),
+    cap:'같은 값이 더 있을 수 있어 끝까지 봐요', m:1},
+  'u-db-composite-index':{h:doc([{p:'인덱스 (city, age)'}, {tb:[['조건', '쓰임'], ["city = '서울'", '잘 쓰여요'], ['city와 age 둘 다', '잘 쓰여요'], ['age만', '덜 효율적이에요']]}], {title:'복합 인덱스'}),
+    cap:'왼쪽 열 조건이 있을 때 가장 잘 쓰여요(PostgreSQL 18부터는 city 값 종류가 적으면 age만으로도 효율적일 때가 있어요)', m:1},
+  'u-db-read-replica':{h:seq(['서버', '원본 DB', '복제 DB'], [{from:0, to:1, t:'글 쓰기'}, {from:1, to:2, t:'복사', wait:1}, {from:0, to:2, t:'글 읽기'}, {from:2, to:0, t:'아직 옛 글'}]),
+    cap:'읽기를 나눠 맡기지만 복사가 조금 늦을 수 있어요', m:1},
+  'u-db-connection-string':{h:doc([{p:'postgres://app:****@db.example.com:5432/shop'}, {tb:[['부분', '뜻'], ['app', '사용자'], ['****', '비밀번호(가림)'], ['db.example.com', '호스트'], ['5432', '포트'], ['shop', 'DB 이름']]}], {title:'.env 예시'}),
+    cap:'한 줄에 접속에 필요한 값이 다 들어 있어요', m:1},
+  'u-db-too-many-connections':{h:track([{t:'연결 칸 가득 참', s:'wait', w:'100개 중 100개(예시)'}, {t:'새 요청', s:'fail', w:'연결 거절'}]),
+    cap:'오류 원문: too many clients already(PostgreSQL 예)', m:1},
+  'u-db-query-timeout':{h:track([{t:'쿼리 시작', s:'done'}, {t:'5초 지남', s:'wait', w:'정한 시간(예시)'}, {t:'DB가 쿼리 취소', s:'fail'}]),
+    cap:'오류 원문: canceling statement due to statement timeout(PostgreSQL 예)', m:1},
+  'u-db-point-in-time-recovery':{h:track([{t:'03:00 백업', s:'done'}, {t:'14:05 실수로 삭제', s:'fail'}, {t:'14:04 시점으로', s:'done', w:'백업 + 변경 기록'}]),
+    cap:'시각은 예시예요. 변경 기록(WAL)을 백업 뒤에 이어 붙여요', m:1},
+  'u-db-database-dump':{h:term([{c:'pg_dump shop > shop.sql'}, {o:'(shop.sql 일부)'}, {o:'CREATE TABLE'}, {o:'  public.users ('}, {o:'COPY public.users'}, {o:'  (id, name) FROM stdin;'}], {prompt:'$'}),
+    cap:'기본은 COPY 줄, --inserts를 주면 INSERT로 나와요', m:1},
+  'u-db-database-client':{h:'<div class="mk-dq mk-dg"><ul class="mk-dgl" aria-hidden="true"><li class="mk-dbon">users<b class="mk-dbk">강조</b></li><li>orders</li><li>posts</li></ul>'
+    + '<div class="mk-dgr" aria-hidden="true"><code class="mk-dgq">SELECT * FROM users</code>'
+    + dbtab({name:'users', cols:['id', 'name', 'email'], rows:[['1', '민수', 'm@a.com'], ['2', '지영', 'j@a.com'], ['3', '준호', 'h@a.com']]}).replace(/<p class="sr">[^<]*<\/p>/, '')
+    + '</div><p class="sr">DB 클라이언트 화면. 표 목록 users, orders, posts. 쿼리 SELECT * FROM users. 결과 users 3줄.</p></div>',
+    cap:'표 목록, 쿼리 창, 결과 표가 한 화면에 있어요'},
 });
 /* db: 다시 그리기 basic·core·motion — 출처 확인(2026-11): PostgreSQL 18 문서 Indexes Introduction(색인 없으면 표 전체를 읽음)·Transactions(BEGIN·COMMIT·ROLLBACK, 전부 아니면 전무)·
    Table Expressions(INNER·LEFT JOIN)·High Availability(복제 서버는 읽기, 고장 시 승격). 표의 이름·값·숫자는 예시. dindex·dtx·djoin은 계획서 ②가 버튼을 붙일 상태 함수 */

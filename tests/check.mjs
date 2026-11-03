@@ -100,6 +100,8 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'back/auth': ['Access Token', 'Bearer Token', 'OAuth Scope', 'RBAC', 'Cookie vs Token', 'Session Store', 'Redirect URI', 'Webhook Signature', 'Service Account'],
   'db/query': ['INNER JOIN', 'LEFT JOIN', 'Aggregate Function', 'COUNT', 'HAVING', 'DISTINCT', 'LIKE', 'IN', 'BETWEEN', 'Subquery', 'Column Alias', 'IS NULL'],
   'db/model': ['NOT NULL', 'Default Value', 'Auto Increment', 'Composite Key', 'Surrogate Key', 'Check Constraint', 'One-to-Many', 'Many-to-Many', 'Junction Table', 'Cascade Delete', 'Denormalization'],
+  'db/tx': ['ACID', 'Autocommit', 'Savepoint', 'Isolation Level', 'Dirty Read', 'Lost Update', 'Deadlock', 'Optimistic Locking', 'Pessimistic Locking', 'Connection Pool'],
+  'db/ops': ['Query Plan', 'Full Table Scan', 'Composite Index', 'Read Replica', 'Connection String', 'Too Many Connections', 'Query Timeout', 'Point-in-Time Recovery', 'Database Dump', 'Database Client'],
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
@@ -110,7 +112,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
   'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 15, 'front/build': 10, 'front/tip': 9,
   'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 10, 'back/arch': 11, 'back/data': 12, 'back/job': 12, 'back/auth': 9, 'back/tip': 8,
-  'db/basic': 8, 'db/core': 8, 'db/motion': 8, 'db/adv': 8, 'db/sql': 8, 'db/query': 12, 'db/model': 11, 'db/tx': 0, 'db/ops': 0, 'db/tip': 8 };    // sec: 카드 수
+  'db/basic': 8, 'db/core': 8, 'db/motion': 8, 'db/adv': 8, 'db/sql': 8, 'db/query': 12, 'db/model': 11, 'db/tx': 10, 'db/ops': 10, 'db/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
@@ -474,7 +476,7 @@ const SYM_BACK = ['429가 떠요', '로그인했는데 401이 떠요', '로그�
 check('symcount', () => g.SYMPTOMS.length !== 193 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1552 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB
+check('total', () => g.TERMS.length === 1572 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -753,6 +755,10 @@ const DB_FIGFACT = [['u-db-transaction', 'h', '더하기<b'], ['u-db-join', 'cap
 check('dbfigfact', () => DB_FIGFACT.filter(([k, f, w]) => (g.D[k]?.[f] || '').includes(w)).map(([k]) => k).join(', '));
 check('dbtext', () => DBS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('dbxn', () => DBS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
+const DB_XHAS = {'Isolation Level': ['READ COMMITTED'], 'Dirty Read': ['PostgreSQL'], 'Deadlock': ['deadlock detected'], 'Pessimistic Locking': ['SELECT'],
+  'Too Many Connections': ['too many clients already', 'Too many connections'], 'Query Timeout': ['statement timeout'], 'Composite Index': ['왼쪽'],
+  'Autocommit': ['BEGIN'], 'Optimistic Locking': ['version']};    // x에 꼭 있어야 할 말(Review Focus 3·4). Task 2가 옛 카드를 더한다
+check('dbxhas', () => Object.entries(DB_XHAS).filter(([en, w]) => { const t = g.find(en); return !t || !w.every(s => (t.x || '').includes(s)); }).map(([en]) => en).join(', '));
 const DB_SECRET = s => /\b01\d-\d{3,4}-\d{4}\b/.test(s) || /:\/\/[^:\s/]+:(?!\*{4}@)[^@\s]+@/.test(s);    // 전화번호 전체·가리지 않은 접속 비밀번호
 check('dbsafe', () => [...['010-1234-5678', 'postgres://app:pw1@db'].filter(x => !DB_SECRET(x)).map(x => '못 잡음 ' + x), ...(DB_SECRET('postgres://app:****@db') || DB_SECRET('010-…') ? ['오탐'] : []),
   ...DBS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && DB_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
