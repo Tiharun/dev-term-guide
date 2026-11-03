@@ -384,8 +384,9 @@ const SYM_WEB = ['검색해도 내 사이트가 안 나와요', '링크를 공�
 const SYM_FRONT = ['CSS가 다른 규칙에 밀려 적용이 안 돼요', '안쪽 버튼을 눌렀는데 바깥 상자도 같이 반응해요', '버튼을 누르면 페이지가 새로고침돼요', '입력칸에 글자가 안 쳐져요',
   '같은 요청이 끝없이 반복돼요', '목록 순서를 바꾸면 입력값이 엉뚱한 줄에 남아요', '배열에 값을 넣었는데 화면이 그대로예요', 'props를 여러 단계로 계속 넘기고 있어요',
   '화면 낭독기가 버튼을 이상하게 읽어요', '숨겼는데 빈자리가 그대로 남아요', '브라우저마다 기본 여백이 달라요', '옛 브라우저에서 새 문법이 안 돼요'];
-check('symcount', () => g.SYMPTOMS.length !== 181 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_BACK = ['429가 떠요', '로그인했는데 401이 떠요', '로그인은 되는데 403이 떠요', '서버가 보낸 데이터를 못 읽어요', '웹훅이 같은 알림을 여러 번 보내요', '업로드한 파일이 서버에서 비어 있어요', '로그인 뒤 redirect_uri 오류가 나요', '동시에 사면 재고가 마이너스가 돼요', '다음 페이지에 같은 글이 또 나와요', '오류가 난 요청을 로그에서 못 찾겠어요', '외부 API가 멈추면 우리 서버도 멈춰요', '오래 걸리는 작업 때문에 응답이 늦어요'];    // 백엔드 계획서 ② Task 4 표
+check('symcount', () => g.SYMPTOMS.length !== 193 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
 check('total', () => g.TERMS.length === 1529 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
@@ -600,7 +601,7 @@ const BKP = en => { const t = g.TERMS.find(x => x.c === 'back' && x.en === en); 
 check('bkdm', () => Object.entries(BKDM).filter(([en, w]) => { const p = BKP(en); return !p || !p.init || !String(p.init).includes('psay') || ![...w, 'class="mk-mobox"', 'class="mk-hint"'].every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 const board = h => {    // 가짜 그림판: init이 쓰는 API만 흉내 낸다
   const el = () => ({innerHTML: '', textContent: '', attrs: {}, dataset: {}, on: {}, setAttribute(k, v) { this.attrs[k] = String(v); }, addEventListener(e, f) { (this.on[e] = this.on[e] || []).push(f); }, click() { (this.on.click || []).forEach(f => f()); }});
-  const box = el(), hint = el(); box.innerHTML = (h.match(/<div class="mk-mobox">([\s\S]*?)<\/div><div/) || [])[1] || ''; hint.textContent = (h.match(/<span class="mk-hint"[^>]*>([^<]*)<\/span>/) || [])[1] || '';
+  const box = el(), hint = el(); box.innerHTML = (h.match(/<div class="mk-mobox">([\s\S]*?)<\/div><div (?:class="mk-tkeys"|role="group")/) || [])[1] || ''; hint.textContent = (h.match(/<span class="mk-hint"[^>]*>([^<]*)<\/span>/) || [])[1] || '';
   const keys = [...h.matchAll(/<button([^>]*class="mk-tkey"[^>]*)>([^<]*)<\/button>/g)].map(m => { const b = el(), k = m[1].match(/data-k="([^"]*)"/), a = m[1].match(/aria-pressed="([^"]*)"/);
     b.textContent = m[2]; if (k) b.dataset.k = k[1]; if (a) b.attrs['aria-pressed'] = a[1]; return b; });
   return {box, hint, keys, key: t => keys.find(b => b.textContent === t), querySelector: q => q === '.mk-mobox' && h.includes('class="mk-mobox"') ? box : q === '.mk-hint' && h.includes('class="mk-hint"') ? hint : q === '.mk-tkey' ? keys[0] : null,
