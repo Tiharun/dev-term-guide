@@ -428,11 +428,11 @@ check('fobj', () => FS().filter(t => typeof t.v === 'object').map(t => t.en).joi
 const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid', 'Gap', 'Position Sticky', 'Z-index', 'Overflow',
   'Component', 'Media Query', 'Border Radius', 'Box Shadow', 'Transition', 'Keyframes', 'Transform', 'Hover', 'Focus', 'Animation Duration', 'Intersection Observer',
   'Rotate', 'State', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 30장(측정)
-check('fpre', () => /\.mk-fcd \.mk-dcb p\{[^}]*white-space:pre-wrap/.test(html) ? '' : 'fcss 줄 앞 공백이 사라짐');    // 디렉터 D
+check('fpre', () => { const ws = [...html.matchAll(/([^{}]*\.mk-fcd[^{}]*\bp)\{[^}]*white-space:([a-z-]+)/g)].map(m => m[2]); return ws.length && ws.every(w => w === 'pre-wrap') && !/\.mk-dcb p\{[^}]*white-space:(?!pre-wrap)/.test(html.slice(html.indexOf('.mk-fcd .mk-dcb p{'))) ? '' : 'fcss 줄 앞 공백이 사라짐'; });    // 디렉터 D
 check('fdvw', () => /\.mk-mobox>\.mk-fst\{width:100%\}/.test(html) ? '' : '직접 조작 안 개발자 도구 칸이 내용 폭으로 줄어듦');    // 320px에서 .mk-dv(container:inline-size)가 111px로 좁아지던 문제
 check('fdfix', () => { const f = en => g.TERMS.find(t => t.c === 'front' && t.en === en), bad = [];    // 디렉터 D 지적: 사실·그림 고침이 되돌아가지 않게
-  if (/붙여요/.test(f('Lifecycle').x) || /흐름에 할 일을 붙이는/.test(f('useEffect').x)) bad.push('Lifecycle·useEffect');
-  if (!/보통/.test(f('Webpack').x)) bad.push('Webpack'); if (!/CSS도/.test(f('Sass').x)) bad.push('Sass');
+  if (/붙여요/.test(f('Lifecycle').x) || /흐름에 할 일을 붙이는/.test(f('useEffect').x) || !/시작하고 정리/.test(f('Lifecycle').x) || !/시작하고 정리/.test(f('useEffect').x)) bad.push('Lifecycle·useEffect');
+  if (!/보통 설정 파일/.test(f('Webpack').x) || /꼭|반드시/.test(f('Webpack').x)) bad.push('Webpack'); if (!/중첩을 바로 지원/.test(f('Sass').x)) bad.push('Sass');
   if (FS().some(t => /styled-components/.test(t.p + t.x))) bad.push('CSS-in-JS');
   if (!f('Transpile').r.includes('Babel') || !f('Context API').r.includes('Props Drilling')) bad.push('r');
   const src = k => html.slice(html.indexOf(`'${k}':{h:`), html.indexOf('cap:', html.indexOf(`'${k}':{h:`)));
@@ -463,6 +463,21 @@ check('fdmrun', () => vm.runInContext(`(() => { const bad = [], s = new Set(['h2
   if (!fkeySay(false, 0, true).startsWith('귤을 뺐어요') || fkeySay(false, 0).includes('뺐어요')) bad.push('귤 뺌 문장');    // 디렉터 F: 다시 누르면 귤이 빠진다고 알림
   return bad.join(', '); })()`, ctx));
 check('fdirf', () => (FC('useEffect').x || '').includes('끝없이 반복') ? '' : 'useEffect 끝없는 반복 원인');    // 디렉터 F: 증상 연결 카드에 원인
+check('fdire', () => { const r = [], x = en => FC(en).x || '', D = g.D;    // 디렉터 E 지적
+  if (/아무리 키워도/.test(x('Z-index')) || !/부모보다 위에 있는 바깥 요소/.test(x('Z-index'))) r.push('Z-index');
+  ['Margin', 'Padding', 'Flexbox', 'Gap', 'Transition', 'Props', 'rem', 'vw / vh'].forEach(en => { if (x(en).split(/(?<=[.])\s/).some(t => !/요$/.test(t.replace(/\.$/, '')))) r.push('해요체 ' + en); });
+  [['Keyframes', 'transition'], ['Position Sticky', 'fixed'], ['Container', '래퍼'], ['Canvas', 'SVG']].forEach(([en, w]) => { if (!x(en).split('. ')[0].includes(w)) r.push('짝 먼저 ' + en); });
+  if (/바로 부모 크기/.test(x('rem')) || !/부모나 자기 글자 크기/.test(x('rem'))) r.push('rem');
+  if (/부모에 overflow/.test(x('Position Sticky')) || !/감싸는 상자 중 하나/.test(x('Position Sticky'))) r.push('sticky 조건');
+  if (/맨 위에서만/.test(x('Hook')) || !/가장 바깥/.test(x('Hook'))) r.push('Hook');
+  if (!(FC('Container Query').r || []).includes('Responsive Web Design') || !D['u-front-container-query'].h.includes('container-type: inline-size')) r.push('Container Query');
+  if (!D['u-front-next-js'].h.includes("'use client';")) r.push('Next.js use client');
+  if (D.sticky.h.includes('고정된') || (D.sticky.lab || []).length) r.push('sticky 꼬리표');
+  if (/<div class="track">(?:(?!<\/div>).)*<em>/.test(D.duration.h)) r.push('duration 글 가림');
+  if ((FC('vw / vh').ko || '').includes('·')) r.push('vw/vh 캡션');
+  if (!/\.mk-fmw\.n\{width:min\(100%,40px\)\}/.test(html)) r.push('Max Width 차이');
+  if (/하나로 묶/.test(x('Vite'))) r.push('Vite 하나로');
+  return r.join(', '); });
 check('freact', () => [['Controlled Input', 'useState'], ['State', 'Immutability'], ['Vendor Prefix', 'PostCSS']].filter(([en, w]) => !(FC(en).r || []).includes(w)).map(([en]) => en).join(', '));
 check('fdirb', () => { const r = [], D = g.D;    // 디렉터 B 지적
   if (!D['u-front-visibility'].h.includes('<b>고름</b><code>visibility:<wbr>hidden')) r.push('visibility 고름·끊김');
