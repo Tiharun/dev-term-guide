@@ -432,6 +432,9 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-dtj{position:absolute;left:calc(var(--d) * 16px - 6px);top:-4px;width:10px;height:calc(50% + 4px);border-left:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}.mk-dtn[style="--d:0"] .mk-dtj{display:none}.mk-dtn code{color:var(--ink)}
 .mk-dtg{font:11px/1.3 var(--sans);color:var(--muted)}.mk-dthl{border-color:var(--ink);background:var(--mark-bg)}.mk-dtw{padding:1px 7px;border-radius:9px;background:var(--mark-text);color:var(--plate);font:800 11px/1.4 var(--sans);white-space:nowrap}
 .mk-dtw.A{animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
+.mk-bkg{display:grid;gap:6px;width:100%;align-self:start;text-align:left}.mk-bks{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;padding:5px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font-size:12px;color:var(--ink);text-align:left}.mk-bks>b:first-child{font-weight:800}
+.mk-bkr{list-style:none;margin:0;padding:0;display:grid;gap:4px;width:100%;align-self:start}.mk-bkr li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;padding:3px 8px;border:1.5px solid var(--rule);border-radius:4px;background:var(--plate);font:12px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-bkr code{font:inherit}
+.mk-bkp{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12px;color:var(--ink)}.mk-bkp>b:first-child{min-width:2.4em}.mk-bkp>span{padding:1px 7px;border:1.5px solid var(--ink);border-radius:4px;background:var(--plate);font-family:var(--mono)}
 .mk-sd{width:min(100%,440px);padding:4px;border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);font:12px/1.4 var(--sans);color:var(--ink);text-align:left}
 .mk-sdh{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}.mk-sdh span{margin:0 1px;padding:3px 0;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font:800 11px/1.3 var(--sans);text-align:center;word-break:keep-all;overflow-wrap:anywhere}
 .mk-sdl{margin:0;padding:2px 0 0;list-style:none}.mk-sdm{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px;padding:3px 6px 16px}.mk-sdm>span,.mk-sdm>b{position:relative;background:var(--plate)}
@@ -2737,6 +2740,33 @@ T('back','api',[
  {en:'API Documentation',ko:'API 문서',d:'API 주소·보낼 값·받는 값을 적어 둔 설명서. Swagger 등.',p:'만든 API를 표로 정리해서 문서로 만들어줘',r:['Endpoint'],l:2,o:0,v:{tbl:[['주소','보낼 값','받는 값'],['POST /login','email, pw','token']]}},
  {en:'SDK',ko:'에스디케이',d:'어떤 서비스를 쉽게 쓰도록 만든 공식 도구 묶음.',p:'Stripe API를 직접 부르지 말고 공식 SDK로 연결해줘',r:['API','Library'],l:2,o:0,v:{stack:['내 코드','SDK','서비스 API'],hl:[1]}},
  {en:'CORS',ko:'코스 · 다른 출처 요청 허용',d:'다른 주소의 서버에 요청할 때 브라우저가 막는 보안 규칙. 서버가 허용해야 돼요.',j:'"CORS 에러 났어요"',p:'CORS 에러가 나. 서버에서 내 사이트 주소를 허용해줘',r:['Request Header'],l:3,o:1,u:MDN('Web/HTTP/Guides/CORS'),v:{flow:['내 사이트','다른 서버','허용 목록 확인'],hl:[2]}},
+]);
+T('back','arch',[
+ {en:'Node.js',ko:'노드제이에스 · 서버용 자바스크립트 실행기',d:'브라우저 밖, 주로 서버 컴퓨터에서 자바스크립트를 실행해 주는 실행기예요.',x:'Node.js는 서버 컴퓨터에서 자바스크립트를 돌리는 실행기(런타임)이고, 서버(Server)는 요청을 받아 응답하는 프로그램이나 컴퓨터 자체를 말해요. 백엔드는 그런 서버 쪽 일 전체를 가리키는 말이라, Node.js는 백엔드를 만드는 도구 중 하나예요.',p:'Node.js로 3000번 포트에서 기다리는 간단한 서버를 만들어줘',r:['Runtime','Server'],l:2,o:1,u:'https://nodejs.org/en/learn/getting-started/introduction-to-nodejs',v:'u-back-node-js'},
+ {en:'Backend Framework',ko:'백엔드 프레임워크 · 서버 뼈대',d:'주소별 처리, 요청 읽기, 응답 보내기 같은 서버의 반복 일을 미리 만들어 둔 뼈대예요.',x:'백엔드 프레임워크는 서버를 만들 때 쓰는 프레임워크이고, 프레임워크(Framework)는 화면이든 서버든 정해진 틀에 내 코드를 끼워 넣게 하는 도구 전체를 말해요. 주소와 처리 함수를 짝지어 등록해 두면, 요청이 올 때 프레임워크가 알맞은 함수를 불러 줘요.',p:'글 목록을 주는 GET /posts 주소를 백엔드 프레임워크로 만들어줘',r:['Framework','Route Handler'],l:2,o:1,u:'https://expressjs.com/en/starter/hello-world.html',v:'u-back-backend-framework'},
+ {en:'Route Handler',ko:'라우트 핸들러 · 주소별 처리 함수',d:'특정 주소와 메서드(POST /posts 등)로 온 요청을 맡아 처리하는 함수예요.',x:'라우트 핸들러는 서버에서 주소 하나를 맡는 함수이고, 웹의 라우팅(Routing)은 주소마다 어떤 화면을 보여 줄지 고르는 일이라 뜻이 달라요. 핸들러가 커지면 요청 받기는 컨트롤러(Controller), 업무 규칙은 서비스 층(Service Layer)으로 나눠요.',p:'POST /posts 라우트 핸들러가 글을 저장하고 201을 돌려주게 해줘',r:['Endpoint'],l:2,o:1,u:'https://www.rfc-editor.org/rfc/rfc9110.html#section-15.3.2',v:'u-back-route-handler'},
+ {en:'Controller',ko:'컨트롤러 · 요청을 받는 층',d:'요청에서 필요한 값을 꺼내 일을 서비스에 맡기고, 결과를 응답으로 돌려주는 층이에요.',x:'컨트롤러는 요청과 응답을 다루는 입구이고, 서비스 층(Service Layer)은 실제 업무 규칙을, 저장소(Repository)는 DB 읽고 쓰기를 맡아요. 라우트 핸들러(Route Handler)가 이런 컨트롤러 함수를 부르는 경우가 많아요.',p:'글 컨트롤러는 요청만 받고 저장 규칙은 서비스로 옮겨줘',r:['Route Handler','Service Layer'],l:3,o:1,u:MDN('Glossary/MVC'),v:'u-back-controller'},
+ {en:'Service Layer',ko:'서비스 층 · 업무 규칙 층',d:'제목 길이 검사, 재고 확인처럼 앱의 업무 규칙을 한곳에 모아 두는 층이에요.',x:'서비스 층은 무엇을 해도 되는지 규칙을 정하고, 컨트롤러(Controller)는 요청을 받고, 저장소(Repository)는 DB에 쓰는 일만 해요. 규칙이 한곳에 모여 있어서 웹 요청이든 예약 작업이든 같은 규칙을 다시 쓸 수 있어요.',p:'글 만들기 규칙을 서비스 층 함수 하나로 모아줘',r:['Controller','Repository Pattern'],l:3,o:1,u:'https://martinfowler.com/eaaCatalog/serviceLayer.html',v:'u-back-service-layer'},
+ {en:'Repository Pattern',ko:'저장소 패턴 · DB 일을 맡는 층',d:'DB에 저장하고 찾는 코드를 한 층에 모아, 다른 코드는 SQL을 몰라도 되게 하는 방식이에요.',x:'저장소 패턴은 저장해 줘, 찾아 줘 같은 함수 뒤에 DB 일을 숨기는 층이고, ORM은 그 안에서 객체와 테이블을 이어 주는 도구예요. 저장소만 바꾸면 DB를 바꾸거나 테스트용 가짜 저장소를 끼우기 쉬워요.',p:'글 DB 코드를 저장소 하나로 모으고 서비스는 그 함수만 쓰게 해줘',r:['ORM','Database'],l:3,o:1,u:'https://martinfowler.com/eaaCatalog/repository.html',v:'u-back-repository-pattern'},
+ {en:'MVC',ko:'MVC · 모델·뷰·컨트롤러',d:'앱을 데이터(Model), 화면(View), 둘을 이어 주는 부분(Controller) 셋으로 나누는 구조예요.',x:'관심사 분리(Separation of Concerns)는 하는 일별로 나누자는 원칙이고, MVC는 그 나눔을 모델·뷰·컨트롤러 세 칸으로 정해 둔 구조예요. 요청이 오면 컨트롤러가 모델에서 데이터를 받아 뷰에 넘겨요.',p:'이 서버 코드를 모델·뷰·컨트롤러 폴더로 나눠줘',r:['Separation of Concerns','Controller'],l:3,o:1,u:MDN('Glossary/MVC'),v:'u-back-mvc'},
+ {en:'Stateless vs Stateful',ko:'무상태와 상태 유지',d:'서버가 앞선 요청을 기억해 두면 상태 유지, 요청마다 필요한 정보를 다 받으면 무상태예요.',x:'상태 유지 서버는 로그인 같은 정보를 자기 안에 기억해서, 서버가 여러 대면 다른 서버는 그 사용자를 몰라요. 무상태 서버는 요청마다 토큰처럼 필요한 정보를 받아서 어느 서버가 받아도 같은 답을 줘요. HTTP 자체는 무상태이고, 세션(Session)은 쿠키로 상태를 이어 붙이는 방법이에요.',p:'서버를 여러 대로 늘려도 로그인이 풀리지 않게 무상태로 바꿔줘',r:['Session','JWT'],l:3,o:1,u:MDN('Web/HTTP/Guides/Overview'),v:'u-back-stateless-vs-stateful'},
+ {en:'API Gateway',ko:'API 게이트웨이 · 서비스들의 앞문',d:'여러 서비스 앞에서 모든 요청을 먼저 받아 확인하고, 알맞은 서비스로 넘겨 주는 앞문이에요.',x:'API 게이트웨이는 토큰 확인 같은 API 일을 하며 요청을 서비스에 나눠 주고, 리버스 프록시(Reverse Proxy)는 요청을 뒤 서버로 넘기는 일 자체에 가까워요. 미들웨어(Middleware)는 서버 하나 안에서 요청이 지나가는 함수이고, BFF는 화면 하나만을 위한 앞문이에요.',p:'주문·회원 서비스 앞에 API 게이트웨이를 두고 토큰 확인을 거기서 해줘',r:['Microservices','Reverse Proxy'],l:3,o:1,u:'https://microservices.io/patterns/apigateway.html',v:'u-back-api-gateway'},
+ {en:'BFF',ko:'BFF · 화면 전용 백엔드',d:'앱 화면 하나만을 위해 만든 백엔드로, 여러 서비스의 결과를 그 화면에 맞게 묶어 줘요.',x:'BFF는 화면(앱, 웹)마다 따로 두는 앞단 백엔드이고, API 게이트웨이(API Gateway)는 모든 화면이 함께 쓰는 하나의 앞문이에요. 화면이 요청을 여러 번 보내는 대신 BFF가 한 번에 모아 줘서 앱 코드가 단순해져요.',p:'앱 홈 화면용 BFF를 만들어 글과 회원 정보를 한 번에 주게 해줘',r:['API Gateway'],l:3,o:1,u:'https://samnewman.io/patterns/architectural/bff/',v:'u-back-bff'},
+ {en:'BaaS',ko:'백엔드 서비스 · 만들어 둔 백엔드',d:'로그인·DB·파일 저장 같은 백엔드 기능을 미리 만들어 두고 빌려 쓰게 해 주는 서비스예요.',x:'BaaS는 로그인·DB 같은 백엔드 기능 묶음을 통째로 빌려 쓰는 것이고, 서버리스 함수(Serverless Function)는 내가 쓴 함수 하나를 요청이 올 때만 실행해 주는 것이에요. BaaS로 시작하면 서버 코드를 거의 쓰지 않고 앱을 만들 수 있어요.',p:'로그인과 DB는 BaaS로 켜고 앱 화면부터 만들어줘',r:['Supabase','Serverless'],l:2,o:0,v:'u-back-baas'},
+]);
+T('back','data',[
+ {en:'Payload',ko:'페이로드 · 실제로 보내는 내용',d:'요청이나 응답에서 주소와 헤더를 빼고, 실제로 전하려는 내용이에요.',x:'페이로드는 요청과 응답 모두에 쓰는 말이고, 요청 본문(Request Body)은 요청에 담긴 페이로드를 가리켜요. 최신 HTTP 명세는 같은 것을 content라고 부르지만, 페이로드라는 말도 여전히 많이 써요.',p:'주문 API 페이로드에 상품과 수량만 담아줘',r:['Request Body'],l:2,o:1,u:MDN('Glossary/Payload_body'),v:'u-back-payload'},
+ {en:'Content-Type',ko:'콘텐츠 타입 · 내용 종류 표시',d:'본문이 JSON인지, 글인지, 파일인지 같은 내용 종류를 알려 주는 헤더예요.',x:'Content-Type은 지금 보내는 본문이 무엇인지 알리는 헤더이고, 멀티파트 폼 데이터(Multipart Form Data)는 그 헤더에 적는 값의 한 종류예요. 값이 틀리면 받는 쪽이 본문을 잘못 읽어요.',p:'JSON을 보낼 때 Content-Type을 application/json으로 붙여줘',r:['Request Header','JSON'],l:2,o:1,u:MDN('Web/HTTP/Reference/Headers/Content-Type'),v:'u-back-content-type'},
+ {en:'Serialization',ko:'직렬화 · 보낼 수 있는 글로 바꾸기',d:'메모리 속 객체를 저장하거나 보낼 수 있는 글(예: JSON)로 바꾸는 일이에요.',x:'직렬화는 객체를 글로 바꾸는 과정이고, JSON은 그렇게 바꾼 결과로 자주 쓰는 형식이에요. 받은 글을 다시 객체로 되돌리는 일은 역직렬화라고 하고, 자바스크립트에서는 JSON.stringify와 JSON.parse가 각각 맡아요.',p:'주문 객체를 JSON으로 직렬화해서 보내고 받는 쪽에서 다시 읽어줘',r:['JSON'],l:2,o:1,u:MDN('Glossary/Serialization'),v:'u-back-serialization'},
+ {en:'DTO',ko:'DTO · 주고받는 데이터 모양',d:'서버가 주고받을 데이터의 모양을 따로 정해 둔 객체로, 필요한 칸만 담아요.',x:'DTO는 밖으로 보낼 데이터의 모양을 정하는 것이고, 스키마 검사(Schema Validation)는 들어온 데이터가 정한 모양에 맞는지 확인하는 일이에요. DB 행을 그대로 보내면 비밀번호 해시 같은 칸까지 나갈 수 있어서 DTO로 골라 담아요.',p:'회원 응답은 DTO로 만들어 id와 email만 내보내줘',r:['Validation','Schema Validation'],l:3,o:1,u:'https://martinfowler.com/eaaCatalog/dataTransferObject.html',v:'u-back-dto'},
+ {en:'Error Response',ko:'오류 응답',d:'요청이 실패했을 때 상태 번호와 함께 무엇이 잘못됐는지 알려 주는 응답이에요.',x:'오류 응답은 받는 쪽이 읽는 실패 안내이고, 오류 처리(Error Handling)는 서버 안에서 실패를 잡아 그 응답을 만드는 과정이에요. 상태 번호(HTTP Status Code)로 종류를 알리고, 본문에는 오류 이름과 짧은 설명만 담아요. 스택 추적 같은 내부 정보는 로그에만 남겨요.',p:'잘못된 이메일이면 400과 오류 이름·설명을 JSON으로 돌려줘',r:['HTTP Status Code','Error Handling'],l:2,o:1,u:'https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html',v:'u-back-error-response'},
+ {en:'Schema Validation',ko:'스키마 검사',d:'어떤 칸이 어떤 형식인지 데이터 모양(스키마)을 정해 두고, 들어온 값이 그 모양에 맞는지 검사하는 것이에요.',x:'스키마 검사는 유효성 검사(Validation)를 미리 정한 모양 하나로 한 번에 하는 방법이에요. 폼 검사(Form Validation)는 브라우저가 보내기 전에 하는 검사라서, 서버는 스키마 검사로 한 번 더 확인해요.',p:'글 요청을 스키마로 검사해서 제목이 비면 400을 돌려줘',r:['Validation'],l:3,o:1,u:'https://json-schema.org/',v:'u-back-schema-validation'},
+ {en:'Multipart Form Data',ko:'멀티파트 폼 데이터 · 파일 담아 보내기',d:'파일과 글을 경계 줄로 칸을 나눠, 한 요청에 함께 담아 보내는 형식이에요.',x:'멀티파트 폼 데이터는 Content-Type에 적는 값의 한 종류이고, Content-Type은 본문 종류를 알리는 헤더 자체예요. 폼으로 파일을 올릴 때(File Upload) 본문을 경계 줄로 나누고 칸마다 이름(name)을 붙여요.',p:'사진과 제목을 멀티파트 폼 데이터로 한 번에 올려줘',r:['File Upload','Content-Type'],l:3,o:1,u:'https://www.rfc-editor.org/rfc/rfc7578',v:'u-back-multipart-form-data'},
+ {en:'UUID',ko:'UUID · 겹치지 않는 아이디',d:'128비트로 만든 긴 아이디로, 서로 맞춰 보지 않고 만들어도 겹칠 걱정이 거의 없어요.',x:'UUID는 아이디 값을 만드는 방식이고, 기본 키(Primary Key)는 행 하나를 구분하는 칸이라 UUID를 기본 키 값으로 쓸 수 있어요. 1, 2, 3 같은 순번은 다음 번호를 짐작하기 쉬워요. 다만 UUID를 안다고 볼 권한을 주면 안 돼요.',p:'글 아이디를 순번 대신 UUID로 만들어줘',r:['Primary Key'],l:2,o:1,u:'https://www.rfc-editor.org/rfc/rfc9562',v:'u-back-uuid'},
+ {en:'Cursor vs Offset Pagination',ko:'커서와 오프셋 페이지 나누기',d:'몇 번째부터 줄지(오프셋)로 나누거나, 마지막으로 본 항목 다음부터(커서) 나눠 받는 두 방식이에요.',x:'오프셋은 2쪽처럼 자리 번호로 자르고, 커서는 C 다음처럼 기준 항목으로 잘라요. 그 사이에 새 글이 끼면 오프셋은 같은 글이 또 나오거나 빠질 수 있어요. 둘 다 나눠 받기 API(Pagination API)를 만드는 방법이에요.',p:'새 글이 자주 생기는 목록이라 커서 방식으로 나눠 받게 해줘',r:['Pagination API'],l:3,o:1,u:'https://slack.engineering/evolving-api-pagination-at-slack/',v:'u-back-cursor-vs-offset-pagination'},
+ {en:'API Versioning',ko:'API 버전 관리',d:'API를 크게 바꿀 때 /v1, /v2처럼 버전을 나눠, 옛 앱이 깨지지 않게 하는 방법이에요.',x:'API 버전 관리는 주소나 헤더로 어느 약속을 쓸지 고르게 하는 것이고, 버전 번호 규칙(Semantic Versioning)은 1.4.2처럼 바뀐 크기를 번호로 알리는 규칙이에요. 이름 칸을 둘로 쪼개는 것처럼 기존 앱이 깨지는 변경은 새 버전으로 내요.',p:'이름 칸을 바꾸는 건 /v2로 내고 /v1은 그대로 둬줘',r:['Semantic Versioning'],l:3,o:1,u:'https://google.aip.dev/185',v:'u-back-api-versioning'},
+ {en:'OpenAPI',ko:'오픈API · API 명세 형식',d:'HTTP API의 주소, 보낼 값, 받는 값을 정해진 YAML·JSON 형식으로 적는 명세예요.',x:'OpenAPI는 API 문서를 쓰는 정해진 형식이고, API 문서(API Documentation)는 사람이 읽는 설명서 전체를 말해요. 형식이 정해져 있어서 문서 화면이나 테스트 코드를 자동으로 만들 수 있어요.',p:'글 API를 OpenAPI 명세 파일로 정리해줘',r:['API Documentation'],l:3,o:1,u:'https://spec.openapis.org/oas/latest.html',v:'u-back-openapi'},
+ {en:'Request ID',ko:'요청 아이디 · 요청 추적 번호',d:'요청마다 붙이는 고유 번호로, 로그에서 한 요청의 기록을 이어 찾게 해 줘요.',x:'요청 아이디는 로그 줄을 한 요청끼리 묶는 번호이고, 로깅(Logging)은 기록을 남기는 일 자체예요. 요청이 동시에 많아 로그가 섞여도 같은 번호만 찾으면 한 요청의 흐름이 보여요.',p:'요청마다 요청 아이디를 붙여 로그에 함께 남겨줘',r:['Logging'],l:3,o:1,u:'https://devcenter.heroku.com/articles/http-request-id',v:'u-back-request-id'},
 ]);
 T('back','tip',[
  {en:'Logging',ko:'로깅 · 기록 남기기',d:'서버에서 무슨 일이 있었는지 기록을 남기는 것. 문제 찾기의 기본.',p:'결제 실패 시 원인을 알 수 있게 로그를 남겨줘. 비밀번호는 빼고',r:['Monitoring'],l:2,o:0,v:'typing'},
@@ -7610,6 +7640,64 @@ Object.assign(D, {
     cap:'세로로 나눈 칸 하나가 단이에요. 1fr을 세 번 쓰면 단이 3개예요'},
   'u-front-max-width':{h:`<div class="mk-fst"><p class="mk-fsp"><code>max-width: 600px</code></p>${vs('넓은 화면', fmw(1) + whelp('600px에서 멈춤'), '좁은 화면', fmw(0) + whelp('화면만큼 줄어듦'))}</div>`,
     cap:'넓은 화면에선 정한 너비에서 멈추고, 좁은 화면에선 화면에 맞춰 줄어요'},
+});
+/* back: arch·data — 출처 확인(2026-11): nodejs.org Introduction to Node.js(브라우저 밖 V8), expressjs.com Hello world(app.get·app.listen 3000), RFC 9110 §15.3.2(201)·§15.5.1(400),
+   martinfowler.com Service Layer·Repository·Data Transfer Object, MDN Glossary MVC·Payload body·Serialization, MDN HTTP Overview(무상태)·Content-Type, microservices.io API gateway,
+   samnewman.io BFF, OWASP Error Handling Cheat Sheet, json-schema.org, RFC 7578 §4.1·§4.2·MDN POST(멀티파트), RFC 9562(128비트), slack.engineering 페이지 나누기, google.aip.dev/185,
+   spec.openapis.org, devcenter.heroku.com HTTP Request IDs. BaaS는 1차 출처를 못 찾아 o:0. 포트 3000·민지·req-7f3a·120ms·책 2권·3f2a는 예시, 코드는 예시 문법 */
+const BKS2 = (...xs) => `<div class="mk-bkg">${xs.join('')}</div>`, BKSV = (n, t, k) => `<div class="mk-bks"><b>${esc(n)}</b><span>${esc(t)}</span>${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
+const BKR = (...xs) => `<ul class="mk-bkr">${xs.map(([t, k]) => `<li><code>${esc(t)}</code>${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</li>`).join('')}</ul>`;
+const BKP = (n, xs, k) => `<div class="mk-bkp"><b>${esc(n)}</b>${xs.map(x => `<span>${esc(x)}</span>`).join('')}${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
+Object.assign(D, {
+  'u-back-node-js':{h:term([{c:'node server.js'}, {o:'3000번에서 기다려요(예시)'}], {end:false}), m:1,
+    cap:'서버가 켜져 요청을 기다려요. 출력 글은 풀어 쓴 말이에요'},
+  'u-back-backend-framework':{h:ide(["app.get('/posts',", '  (req, res) =>', '  res.json(posts));', 'app.listen(3000);'], [{l:4}, {l:1, out:['GET /posts 받음']}]), m:1,
+    cap:'주소와 처리 함수를 짝지어 등록해요. 프레임워크마다 문법은 달라요(예시 문법)'},
+  'u-back-route-handler':{h:ide(["app.post('/posts',", '  (req, res) => {', '    save(req.body);', '    res.status(201).end();', '});'], [{l:1}, {l:3}, {l:4, out:['201 Created']}]), m:1,
+    cap:'POST /posts 요청이 오면 이 함수가 맡아요(예시 문법)'},
+  'u-back-controller':{h:seq(['브라우저', '컨트롤러', '서비스'], [{from:0, to:1, t:'POST /posts'}, {from:1, to:1, t:'입력 꺼내기'}, {from:1, to:2, t:'글 만들어 줘'}, {from:2, to:1, t:'새 글'}, {from:1, to:0, t:'201 Created'}]), m:1,
+    cap:'컨트롤러는 받아서 넘기고, 결과를 응답으로 돌려줘요'},
+  'u-back-service-layer':{h:seq(['컨트롤러', '서비스', '저장소'], [{from:0, to:1, t:'글 만들기'}, {from:1, to:1, t:'제목 길이 검사'}, {from:1, to:2, t:'저장해 줘'}, {from:2, to:1, t:'저장됨'}, {from:1, to:0, t:'새 글'}]), m:1,
+    cap:'업무 규칙 검사는 서비스가 해요'},
+  'u-back-repository-pattern':{h:seq(['서비스', '저장소', 'DB'], [{from:0, to:1, t:'save(post)'}, {from:1, to:2, t:'INSERT …'}, {from:2, to:1, t:'저장됨'}, {from:1, to:0, t:'완료'}]), m:1,
+    cap:'서비스는 SQL을 몰라도 돼요'},
+  'u-back-mvc':{h:doc([{tb:[['칸', '하는 일', '예'], ['Model', '데이터와 규칙', '글'], ['View', '보여 줄 화면', '글 목록'], ['Controller', '요청을 받아 둘을 이음', '글 요청 처리']]}], {title:'글 게시판(예시)'}), m:1,
+    cap:'세 칸이 각자 자기 일만 해요'},
+  'u-back-stateless-vs-stateful':{h:vs('상태 유지', BKS2(BKSV('1번 서버', '민지 로그인 기억'), BKSV('2번 서버', '누구세요?', '실패')) + whelp('다음 요청이 2번 서버로 가면 몰라요'),
+      '무상태', BKS2(BKSV('1번 서버', '토큰 보고 민지 확인'), BKSV('2번 서버', '토큰 보고 민지 확인')) + whelp('요청마다 토큰을 들고 와요')),
+    cap:'무상태면 서버를 늘려도 누구인지 알 수 있어요. 민지는 예시예요'},
+  'u-back-api-gateway':{h:seq(['앱', 'API 관문', '주문'], [{from:0, to:1, t:'GET /orders'}, {from:1, to:1, t:'토큰 확인'}, {from:1, to:2, t:'주문 목록'}, {from:2, to:1, t:'목록'}, {from:1, to:0, t:'200 OK'}]), m:1,
+    cap:'모든 요청이 앞문을 먼저 지나요'},
+  'u-back-bff':{h:seq(['앱', 'BFF', '글', '회원'], [{from:0, to:1, t:'홈 화면 주세요'}, {from:1, to:2, t:'최신 글'}, {from:2, to:1, t:'글 3개'}, {from:1, to:3, t:'내 정보'}, {from:3, to:1, t:'이름'}, {from:1, to:1, t:'한 번에 묶기'}, {from:1, to:0, t:'200 OK'}]), m:1,
+    cap:'BFF가 두 서비스 결과를 홈 화면에 맞게 묶어요'},
+  'u-back-baas':{h:vs('직접 만듦', `<div class="mk-fib b"><span>로그인 코드</span><span>DB 서버</span><span>파일 저장 코드</span></div>${whelp('하나씩 만들고 돌봐요')}`,
+      'BaaS', `<div class="mk-fib b"><span>로그인 켜짐</span><span>DB 켜짐</span><span>파일 저장 켜짐</span></div>${whelp('설정 화면에서 켜요')}`),
+    cap:'백엔드 기능을 빌려 쓰면 서버 코드가 줄어요'},
+  'u-back-payload':{h:httpmsg({kind:'요청', start:'POST /api/orders', head:['Host: example.com', 'Content-Type: application/json'], body:['{"item":"책","qty":2}'], hl:['b0']}),
+    cap:'강조한 본문이 페이로드, 주소·헤더를 뺀 알맹이예요. 값은 예시예요'},
+  'u-back-content-type':{h:httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: application/json'], body:['{"ok":true}'], hl:['h0']}),
+    cap:'본문이 JSON이라고 알려 줘요'},
+  'u-back-serialization':{h:track([{t:'객체', s:'done', w:'메모리 속 값'}, {t:'JSON.stringify', s:'done', w:'글로 바꿈'}, {t:'전송', s:'done', w:'글이 오감'}, {t:'JSON.parse', s:'done', w:'다시 객체'}]), m:1,
+    cap:'보낼 때는 글로 바꾸고, 받으면 다시 객체로 되돌려요'},
+  'u-back-dto':{h:vs('DB 행 그대로', BKR(['id'], ['email'], ['passwordHash', '내보내면 안 됨'], ['createdAt']), 'DTO', BKR(['id'], ['email'])),
+    cap:'필요한 칸만 골라 담아 보내요'},
+  'u-back-error-response':{h:httpmsg({kind:'응답', start:'400 Bad Request', head:['Content-Type: application/json'], body:['{', '  "error": "invalid_email",', '  "message": "형식 오류"', '}'], hl:['b1']}),
+    cap:'오류 이름과 짧은 설명만 담고, 스택 추적은 넣지 않아요. 값은 예시예요'},
+  'u-back-schema-validation':{h:ide(['const Post = schema({', '  title: string().min(1),', '});', {t:"Post.parse({ title: '' });", err:'제목이 비었어요'}], [{l:4}], {title:'schema.js'}), m:1,
+    cap:'모양에 안 맞는 값을 막아요. 예시 문법, 오류 설명은 풀어 쓴 말이에요'},
+  'u-back-multipart-form-data':{h:httpmsg({kind:'요청', start:'POST /upload', head:['Content-Type: multipart/…'], body:['--경계(예시)', 'form-data; name="photo"', '(사진 파일 내용)', '--경계(예시)--'], hl:['h0']}),
+    cap:'Content-Type 값과 칸 머리 줄(Content-Disposition)을 줄였어요'},
+  'u-back-uuid':{h:doc([{tb:[['방식', '예', '특징'], ['순번', '1, 2, 3', '다음 번호를 짐작할 수 있어요'], ['UUID', '3f2a…-…(예시)', '겹칠 걱정이 거의 없어요']]}], {title:'아이디 만들기'}), m:1,
+    cap:'UUID는 아주 길어서 따로 맞춰 보지 않아도 돼요'},
+  'u-back-cursor-vs-offset-pagination':{h:vs('오프셋 ?page=2', BKS2(BKP('1쪽', ['A', 'B', 'C']), whelp('새 글 N이 맨 앞에 낌'), BKP('2쪽', ['C', 'D', 'E'], 'C 또 나옴')),
+      '커서 ?after=C', BKS2(BKP('1쪽', ['A', 'B', 'C']), whelp('새 글 N이 맨 앞에 낌'), BKP('다음', ['D', 'E', 'F']))),
+    cap:'새 글이 끼어도 커서는 C 다음부터 가져와요'},
+  'u-back-api-versioning':{h:doc([{tb:[['주소', '이름 칸'], ['/v1/users', 'name'], ['/v2/users', 'firstName, lastName']]}, {p:'옛 앱은 v1을 계속 써요'}], {title:'API 주소(예시)'}), m:1,
+    cap:'이름 칸이 바뀌어도 v1 주소는 그대로예요'},
+  'u-back-openapi':{h:ide(['paths:', '  /posts:', '    get:', '      summary: 글 목록', '      responses:', "        '200':", '          description: 성공'], [{l:2}, {l:4}, {l:7}], {title:'openapi.yaml'}), m:1,
+    cap:'주소·설명·응답을 정해진 칸에 적어요. 내용은 예시예요'},
+  'u-back-request-id':{h:term([{o:'[req-7f3a] GET /orders'}, {o:'[req-9b1c] GET /me'}, {o:'[req-7f3a] DB 조회 120ms'}, {e:'[req-7f3a] 결제 실패', h:'req-7f3a'}], {title:'서버 로그', end:false}), m:1,
+    cap:'같은 아이디만 따라가면 한 요청의 흐름이 보여요. 아이디와 시간은 예시예요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
