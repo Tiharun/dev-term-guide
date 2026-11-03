@@ -69,7 +69,7 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
   - `body`: 본문 줄 배열 0~4줄. 헤더와 본문 사이에는 빈 줄 칸을 그린다(HTTP 형식과 같음).
   - `hl`: 강조할 줄 이름 배열(`'start'`, `'h0'`~`'h3'`, `'b0'`~`'b3'`). 강조는 배경색과 "강조" 글자로 한다.
 - 응답 상태 번호가 400 이상이면 첫 줄에 "실패" 글자를 붙인다.
-- 한도(넘으면 오류): 모든 줄 28자(ide와 같음, DESIGN.md:256), 헤더·본문 각 5줄 이상, kind가 요청·응답이 아님, 없는 줄을 가리키는 `hl`. 응답의 start가 100~599 상태 번호로 시작하지 않거나 요청의 start가 메서드(GET·HEAD·POST·PUT·PATCH·DELETE·OPTIONS)로 시작하지 않아도 오류다. OPTIONS는 CORS 사전 요청 때문에 넣는다.
+- 한도(넘으면 오류): 모든 줄 30자(`Content-Type: application/json`이 30자라 ide 28자보다 2자 넓힌다. 꼬리표는 자리가 없으면 다음 줄로 내린다), 헤더·본문 각 5줄 이상, kind가 요청·응답이 아님, 없는 줄을 가리키는 `hl`. 응답의 start가 100~599 상태 번호로 시작하지 않거나 요청의 start가 메서드(GET·HEAD·POST·PUT·PATCH·DELETE·OPTIONS)로 시작하지 않아도 오류다. OPTIONS는 CORS 사전 요청 때문에 넣는다.
 - 좁은 칸에 넣지 않는다: `pair` 왼쪽 칸은 110px(코드 칸 `fcss`도 최대 190px, [index.html:346](../../../index.html)·[464](../../../index.html))라 28자 줄이 넘친다. `httpmsg`는 그림판 전체 폭에 단독으로 두거나 두 개를 세로로 쌓는다.
 - 이름 `httpmsg`는 기존 `{http:200}` 그림 형식(server 상태 번호 카드, [index.html:278](../../../index.html))과 헷갈리지 않게 정했다.
 - `.sr` 문장: "HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄".
@@ -186,8 +186,8 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 - 점검 기대값:
   - `COUNT`에 `back/*` 10개(아래 5장 개수)
   - `EXPECT`에 새 카드 영문명
-  - `REDRAWN`에 back 하위항목 10개, 새 점검 `bobj`로 back 카드의 객체 v 0장을 따로 막는다(front `fobj`와 같은 방식)
-  - 새 점검 `bukey`: back 97장의 v가 `u-back-`로 시작하고 `D`에 있다(예외 없음, front의 `FKEEP` 같은 목록을 두지 않는다)
+  - `REDRAWN`에 back 하위항목 10개, 새 점검 `bkobj`로 back 카드의 객체 v 0장을 따로 막는다(front `fobj`와 같은 방식. basics가 `bobj`를 써서 `bk` 접두사)
+  - 새 점검 `bkukey`: back 97장의 v가 `u-back-`로 시작하고 `D`에 있다(마칠 때 예외 없음. 진행 중에는 남은 옛 카드 목록 `BK_TODO`가 줄어 비워진다)
   - 새 점검 `bcat`: back 하위항목 순서가 `basic,core,motion,adv,api,arch,data,job,auth,tip`이다
 
 ## 5. 용어 목록 (새 46장)
@@ -254,7 +254,7 @@ x로 구분할 짝(뜻이 가까움):
 
 계획서 ①(도우미·구조·데이터·다시 그리기):
 1. `seq()`·`httpmsg()`와 입력 검사 점검
-2. 하위항목 4개, 점검 기대값(`bcat`·`bobj`·`bukey`·`BK_WRONG`. 아직 안 끝난 항목은 `LATER`)
+2. 하위항목 4개, 점검 기대값(`bkcat`·`bkobj`·`bkukey`·`BK_WRONG`. 옛 카드는 남은 목록으로, 그 밖에 안 끝난 항목은 `LATER`)
 3. arch·data 새 카드 23장
 4. 기존 51장 다시 그리기(직접 조작 4장은 정적 그림으로 먼저 두고 ②에서 바꿈)
 
@@ -284,7 +284,7 @@ Critical·Important·Minor 모두 고친다(사용자 지시: 미룬 것도 다 
 - PRODUCT.md 개수 표기가 실제와 같다.
 - 직접 조작 4장: `init`이 있고, 결과 문장에 `aria-live`가 있고, 문장 갱신은 `psay`로 한다.
 - 재생 버튼이 붙는 새 그림(`m:1`)에 움직이는 요소(`A` 클래스)가 있다.
-- back 카드의 객체 v가 0장이다(`bobj`). 97장 모두 `u-back-` 키를 쓴다(`bukey`). 하위항목 순서가 맞다(`bcat`).
+- back 카드의 객체 v가 0장이다(`bkobj`). 97장 모두 `u-back-` 키를 쓴다(`bkukey`). 하위항목 순서가 맞다(`bkcat`).
 - 뜻이 다른 짝(4장 목록)에는 r이 없다(`BK_WRONG`).
 - 백엔드 카테고리 모든 카드에 x가 있다. o:1이면 u가 있다.
 - `seq()`·`httpmsg()`가 한도를 넘거나 잘못된 입력을 받으면 오류를 던진다(새 점검).
@@ -296,7 +296,7 @@ Critical·Important·Minor 모두 고친다(사용자 지시: 미룬 것도 다 
 - 직접 조작 4장을 키보드로 조작할 수 있다.
 
 그 밖:
-- 디자인 품질: break-ui(`seq()` 세로줄 4개·메시지 8개·14자, `httpmsg()` 28자·헤더 4줄·본문 4줄)로 보고, better-ui·better-layout으로 그림을 다듬는다.
+- 디자인 품질: break-ui(`seq()` 세로줄 4개·메시지 8개·14자, `httpmsg()` 30자·헤더 4줄·본문 4줄)로 보고, better-ui·better-layout으로 그림을 다듬는다.
 - 문구: x·d는 better-writing·ux-writing 기준(짧고, 차이 먼저, 해요체)으로 쓴다.
 - 직접 조작은 better-accessibility로 키보드·읽기 순서를 본다.
 - 정의·설명의 사실은 Task마다 검색(MDN HTTP 문서, RFC 9110·6749·6750, OpenAPI·Node.js 공식 문서)으로 확인하고 출처를 원장에 남긴다.

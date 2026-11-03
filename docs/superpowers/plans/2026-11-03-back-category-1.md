@@ -23,7 +23,7 @@
 - **클래스 접두사**: `seq` = `mk-sd*`, `httpmsg` = `mk-hm*`, 직접 조작 멈춘 그림·전용 칸 = `mk-bk*`.
   - 측정: `mk-sd`·`mk-hm`·`mk-bk`는 0건이다. `mk-sq`는 이미 쓰인다(685줄 `.mk-sq`, 4388줄 아바타)라 쓰지 않는다.
 - **D 키**: `'u-back-' + slug(en)`. 예: `Stateless vs Stateful` → `u-back-stateless-vs-stateful`, `Pub/Sub` → `u-back-pub-sub`.
-  - 기존 `u-back-button`·`u-back-to-top`(design 카드)과 이름이 겹치지 않는지 Task 3·4·5 점검 `bukey`가 본다(back 카드만 대상).
+  - 기존 `u-back-button`·`u-back-to-top`(design 카드)과 이름이 겹치지 않는지 Task 3·4·5 점검 `bkukey`가 본다(back 카드만 대상).
 - **세로줄 이름**: 8자(wlen) 한도라 긴 이름은 줄인다(`세션 저장소`→`저장소`, `결제 서비스`→`결제사`, `로그인 서비스`→`로그인`, `다른 서버`→`외부`). 이 계획에서 쓰는 이름: `브라우저`·`서버`·`DB`·`내 서버`·`미들웨어`·`라우트`·`컨트롤러`·`서비스`·`저장소`·`워커`·`결제사`·`로그인`·`외부`·`앱`·`API 관문`·`BFF`·`주문`·`회원`·`알림`·`결제`·`글`.
   - 표에 없는 이름이 필요하면 8자 안에서 정하고 원장에 `Ruling:`으로 적는다.
 - **조사**: `.sr` 문장의 "가/이"는 세로줄 이름 끝 글자로 정한다. 한글이고 받침이 있으면 `이`, 받침이 없으면 `가`, 한글이 아니면 `가`(DB·BFF·API처럼 모음으로 끝나 읽히는 이름만 쓴다).
@@ -31,10 +31,14 @@
 - **실패 수**: `seq`의 `.sr` 끝 "(실패 n개)"는 실패가 1개 이상일 때만 붙인다. 스펙 3.1 예시의 "(실패 0개)"는 형식 예시로 보고, 0개를 읽어 주지 않는다.
 - **멈춘 직접 조작 그림**: Task 4·5에서 상태 함수(`brate`·`bauthz`·`bcache`·`bidem`)를 만들어 멈춘 그림을 그린다. 계획서 ②가 같은 함수에 버튼과 `init`을 붙인다.
 - **COUNT 키**: 접두사 없는 키는 design 카테고리다. back은 `back/<sec>`로 쓴다.
-- **LATER 사용**(Task 2에서 넣고 빼는 시점):
-  - `bsym`, `redrawn:back/basic·core·motion`: Task 4에서 뺀다.
-  - `bobj`, `bukey`, `redrawn:back/adv·api·tip`: Task 5에서 뺀다.
-  - `bx`(x 빠짐), `font`, `doccount`: 계획서 ②에서 뺀다. `doccount`는 Task 3에서 1506장이 되면 실패하므로 Task 2부터 둔다(front 선례).
+- **점검 이름**: basics가 이미 `BS`·`bcat`·`bobj`·`bx`·`bm`·`bou`·`bko`를 쓴다(측정: check.mjs:370~379). back 점검은 `bk` 접두사로 쓴다: `BKS`·`bkcat`·`bkobj`·`bkukey`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`·`bkhelp`·`bkstill`. 측정: `check('bk`는 0건이다. 스펙 8장도 이 이름으로 고쳤다.
+- **남은 옛 카드 목록**: 새 카드가 처음부터 점검되도록 `LATER` 대신 목록을 쓴다(basics `BOBJ` 방식). 목록과 실제가 다르면 `+이름`(목록에 없는데 아직 안 됨)·`-이름`(목록에 있는데 이미 됨)으로 실패한다.
+  - `BK_TODO`: 아직 `u-back-` 그림이 아닌 옛 카드. Task 2에 51장, Task 4에서 basic·core·motion 27장(Server~Queue)을 빼고, Task 5에서 비운다. `bkukey`가 본다. `bkobj`는 객체 v 카드가 이 목록 밖에 있으면 실패한다.
+  - `BK_NOX`: x가 없는 옛 카드 47장. 계획서 ②가 비운다. `bkx`가 본다.
+  - `BK_SYM`: 기호가 남은 옛 카드 `['Optimistic Update']`. Task 4가 비운다. `bksym`이 본다.
+- **LATER 사용**: `redrawn:back/basic·core·motion`은 Task 4, `redrawn:back/adv·api·tip`은 Task 5, `font`·`doccount`는 계획서 ②에서 뺀다.
+  - `doccount`는 Task 3에서 1506장이 되면 실패하므로 Task 2부터 둔다(front 선례).
+  - `font`는 새 문구의 글자가 Hahmlet 서브셋에 없으면 그 Task부터 `LATER font` 줄로 나온다(예: Task 5 `bcache`의 '녀'). 서브셋은 계획서 ②가 다시 만든다.
 - **r 시점**: 같은 Task와 앞 Task 카드, 이미 있는 다른 카테고리 카드만 단다. 계획서 ②의 카드(Worker·Access Token 등)를 가리키는 r은 그 카드를 넣을 때 단다.
 
 ## Global Constraints
@@ -42,7 +46,9 @@
 - 파일은 `index.html` 하나다. 외부 폰트·라이브러리·CDN은 쓰지 않는다.
 - 색은 도판 토큰(`--ink`·`--plate`·`--fig`·`--rule`·`--muted`·`--mark`·`--mark-bg`·`--mark-text`·`--ok`·`--mono`·`--sans`)만 쓴다. hex 값을 새로 쓰지 않는다.
 - 그림 글자는 11px 이상이다. `.fig`에는 그림자를 넣지 않는다.
-- 자동 애니메이션은 클래스 `A`를 쓴다. 주기 10s, 멈춘 장면은 `-8.8s`다. 움직이는 그림은 `m:1`이다.
+- 자동 애니메이션은 클래스 `A`를 쓴다. 주기 10s, 멈춘 장면은 `-8.8s`다.
+- `m:1`은 그림 h에 `A` 클래스가 있으면 달고, 없으면 달지 않는다. still이 아닌 `seq`·`track`·`doc`·`ide`·`term`이 `A`를 만든다. `fcss`·`httpmsg`·`vs` 칸만 있는 그림과 멈춘 직접 조작 그림은 `m`이 없다. 점검 `bkm`이 양쪽을 본다.
+- `ide` 단계의 `out` 항목은 문자열이다. 흐린 글만 `{t:'…', dim:1}`이다([index.html:3938](../../../index.html)). `{t:'…'}`만 쓰면 `[object Object]`로 나온다.
 - 상태는 색만으로 나누지 않는다(글자 "실패"·"기다림"·"강조"·"처리"를 함께 쓴다).
 - 읽히는 글에 `✓✕★→←↑↓`를 쓰지 않는다(`wsym` 규칙). 그림 속 숫자·키 값은 "(예시)"로 표시하고, 실제 키처럼 보이는 값은 줄임표로 쓴다(`sk_test_…`). 회사 로고·브랜드 이름은 쓰지 않는다("로그인 서비스", "결제 서비스").
 - 보안 습관: 토큰을 localStorage에 두는 모습을 그리지 않는다. 키를 보내는 쪽은 "내 서버"다. Error Response 본문에 스택 추적·내부 경로를 넣지 않는다.
@@ -64,7 +70,7 @@
 
 1. **320px의 가장 큰 입력**: `seq` 세로줄 4개(이름 8자) + 메시지 8개(글 14자, 실패·기다림 꼬리표), `httpmsg` 30자 줄 + "강조"·"실패" 꼬리표 + 헤더 4줄·본문 4줄이 가로 넘침 없이 들어가야 한다. → Task 1 브라우저 확인(시험 그림 `u-back-test`를 임시로 띄우고 커밋 전에 지움). 안 들어가면 스펙 10장대로 한도를 낮추고 원장에 적는다.
 2. **reduced-motion에서 순서도**: 움직임을 끄면 `seq`의 모든 행이 보여야 한다(빈 그림판으로 멈추면 안 됨). 멈춘 장면 `-8.8s`에서도 8행이 다 보인다. → Task 1 `cdframe` 확장, 브라우저 확인
-3. **조사와 읽는 순서**: `.sr`가 "저장소가", "로그인이", "API 관문이", "DB가"로 읽히고, 화살표 기호를 읽지 않는다. 처리 상자는 "서버가 처리: …"로 읽힌다. → Task 1 `bhelp`
+3. **조사와 읽는 순서**: `.sr`가 "저장소가", "로그인이", "API 관문이", "DB가"로 읽히고, 화살표 기호를 읽지 않는다. 처리 상자는 "서버가 처리: …"로 읽힌다. → Task 1 `bkhelp`
 4. **자주 틀리는 HTTP 사실**:
    - 401은 "누구인지 모름(인증 필요)", 403은 "누구인지 알지만 권한 없음"이다.
    - PUT·DELETE는 멱등이고 POST는 아니다. 202 Accepted는 "접수만 했고 아직 안 끝남"이다.
@@ -73,7 +79,7 @@
    - `Authorization: Bearer <토큰>` 형식이다.
 
    MDN·RFC 9110·6749·6750과 다르면 안 된다. → Task 3·4·5 출처 확인, 디렉터 검토 묶음 B·C
-5. **비밀 값처럼 보이는 글**: 그림에 실제 키처럼 긴 영숫자, 스택 추적(`at … .js:12`)이 없어야 한다. → Task 2 `bsafe`
+5. **비밀 값처럼 보이는 글**: 그림에 실제 키처럼 긴 영숫자, 스택 추적(`at … .js:12`)이 없어야 한다. → Task 2 `bksafe`
 
 ---
 
@@ -122,7 +128,7 @@
   - 새 도우미: `domtree`(4014줄) 뒤, 4034줄 주석 앞
   - CSS: devtools·domtree CSS(425~434줄) 뒤. `.mk-sdm.A` 규칙은 491줄 `.mk-cds.A` 옆
   - 넓은 그림 목록(553줄 `.fig:has(…)`)에 `.mk-sd`·`.mk-hm` 추가
-- Modify: `tests/check.mjs`: `fhelp`(241~277줄) 뒤에 `bhelp`, `cdframe`(531줄)에 `sqm`
+- Modify: `tests/check.mjs`: `fhelp`(241~277줄) 뒤에 `bkhelp`, `cdframe`(531줄)에 `sdm`
 - Modify: `DESIGN.md`: 도우미 표에 두 줄
 
 **Interfaces:**
@@ -146,15 +152,15 @@
       - 순서: 첫 줄 → 헤더 → (본문이 있으면) 빈 줄 `<div class="mk-hmr mk-hmgap"></div>` → 본문
       - 꼬리표: 강조 줄은 `<b class="mk-hmk">강조</b>`, 응답 상태 400 이상이면 첫 줄에 `<b class="mk-hmk">실패</b>`
       - 줄 글은 `white-space:pre`로 앞 공백을 지킨다.
-    - 끝 `<p class="sr">HTTP ${kind}, ${start}, 헤더 ${h}줄, 본문 ${b}줄</p>`. 강조가 있으면 `, 강조: ` + 이름(첫 줄은 `첫 줄`, 헤더는 `:` 앞 이름 + ` 줄`, 본문은 `본문 i번째 줄`)을 `, `로, 실패면 `, 실패`를 더한다.
+    - 끝 `<p class="sr">HTTP ${kind}, ${start}, 헤더 ${h}줄, 본문 ${b}줄</p>`. 강조가 있으면 `, 강조: ` + 이름(첫 줄은 `첫 줄`, 헤더는 `:` 앞 이름 + ` 줄`, 본문은 `본문 i번째 줄`)을 `, `로, 실패면 `, 실패`를 더한다. 강조 이름은 `hl` 순서와 상관없이 줄 순서(첫 줄 → 헤더 → 본문)로 늘어놓고, 본문 i는 1부터 센다.
     - 오류 메시지는 `'httpmsg: '`로 시작한다. 검사: kind가 `요청`·`응답`, start·head·body 모든 줄이 문자열·wlen ≤ 30(첫 줄·헤더는 빈 글 금지), head·body 각 0~4줄, 요청 start는 `/^(GET|HEAD|POST|PUT|PATCH|DELETE|OPTIONS) \S/`, 응답 start는 100~599 세 자리 + (끝 또는 공백), hl은 `start`·`h0`~`h(헤더 수-1)`·`b0`~`b(본문 수-1)`만.
 
-- [ ] **Step 1: 실패하는 점검 `bhelp` 쓰기**
+- [ ] **Step 1: 실패하는 점검 `bkhelp` 쓰기**
 
 `fhelp` 바로 뒤에 둔다. 형식은 `fhelp`와 같다.
 
 ```js
-check('bhelp', () => vm.runInContext(`(() => {
+check('bkhelp', () => vm.runInContext(`(() => {
   const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(seq|httpmsg): /.test(e.message)) bad.push(w + ' 메시지'); } };
   const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); });
   const sq = seq(['브라우저', '서버', '저장소'], [{from:0, to:1, t:'POST /login'}, {from:1, to:1, t:'비밀번호 확인'}, {from:1, to:2, t:'세션 저장'}, {from:2, to:1, t:'저장됨', wait:1}, {from:1, to:0, t:'401', err:1}]);
@@ -165,13 +171,14 @@ check('bhelp', () => vm.runInContext(`(() => {
   const st = seq(['a', 'b'], [{from:0, to:1, t:'x'}, {from:1, to:0, t:'y'}], {still:true});
   if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(st) || /\\(실패/.test(st)) bad.push('seq still·실패 0개');
   const L2 = ['a', 'b'], m1 = [{from:0, to:1, t:'x'}];
-  no(() => seq(['a'], m1), '세로줄 1개'); no(() => seq(['a', 'b', 'c', 'd', 'e'], m1), '세로줄 5개'); no(() => seq(['a', '가나다라마'], m1), '이름 9자');
+  no(() => seq(['a'], m1), '세로줄 1개'); no(() => seq(['a', 'b', 'c', 'd', 'e'], m1), '세로줄 5개'); no(() => seq(['a', '가나다라a'], m1), '이름 9자');
   no(() => seq(L2, []), '메시지 0개'); no(() => seq(L2, Array(9).fill(m1[0])), '메시지 9개'); no(() => seq(L2, [{from:0, to:2, t:'x'}]), 'to 범위');
   no(() => seq(L2, [{from:-1, to:1, t:'x'}]), 'from 음수'); no(() => seq(L2, [{from:0.5, to:1, t:'x'}]), 'from 소수'); no(() => seq(L2, [{from:0, to:1, t:''}]), '빈 글');
   no(() => seq(L2, [{from:0, to:1, t:'가나다라마바사아'}]), '글 16자'); no(() => seq(L2, [{from:0, to:1, t:'x', err:1, wait:1}]), '실패+기다림');
   const hm = httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json', 'Authorization: Bearer …'], body:['{', '  "title": "첫 글"', '}'], hl:['h0', 'b1']});
   has(hm, ['class="mk-hmt">HTTP 요청<span>(버전 줄임)</span>', 'class="mk-hmb" aria-hidden="true"', 'mk-hmgap', 'mk-hmon', '>강조<', '<code>  &quot;title&quot;: &quot;첫 글&quot;</code>',
     '<p class="sr">HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄, 본문 2번째 줄</p>'], 'httpmsg');
+  has(httpmsg({kind:'요청', start:'GET /', head:['Accept: */*'], body:['a', 'b'], hl:['b1', 'h0']}), ['강조: Accept 줄, 본문 2번째 줄</p>'], 'httpmsg 강조 순서');
   has(httpmsg({kind:'응답', start:'404 Not Found'}), ['>실패<', 'HTTP 응답, 404 Not Found, 헤더 0줄, 본문 0줄, 실패'], 'httpmsg 실패');
   const ok = httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: text/plain']});
   if (ok.includes('실패') || ok.includes('mk-hmgap')) bad.push('httpmsg 200·본문 없음');
@@ -190,7 +197,7 @@ check('bhelp', () => vm.runInContext(`(() => {
 - [ ] **Step 2: 실패 확인**
 
 Run: `node tests/check.mjs`
-Expected: `FAIL bhelp: seq is not defined`, `FAIL cdframe: sqm`
+Expected: `FAIL bkhelp: seq is not defined`, `FAIL cdframe: sdm`
 
 - [ ] **Step 3: `seq`·`httpmsg` 구현**: `wlen`·`esc`를 쓰고, 입력 검사를 먼저 한 뒤 HTML을 만든다. CSS를 devtools·domtree CSS 뒤에 두고, 491줄에 `.mk-sdm.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}`를 더한다. 키프레임은 기존 `mk-cdz1~8`을 그대로 쓴다. 553줄 넓은 그림 목록에 `.mk-sd`·`.mk-hm`을 넣는다.
 
@@ -207,7 +214,7 @@ Expected: `FAIL` 줄 없이 `OK <수>`
   - reduced-motion에서 8행이 모두 보이는지 본다.
   - 임시 키와 v를 지운다. `git diff`에 `u-back-test`가 없어야 한다.
 
-- [ ] **Step 6: DESIGN.md·커밋**: 도우미 표에 `seq(lanes, msgs, {still,label})`·`httpmsg({kind,start,head,body,hl,label})`를 한 줄씩 넣는다(한도와 "pair 왼쪽에 넣지 않음" 포함).
+- [ ] **Step 6: DESIGN.md·커밋**: 도우미 표에 `seq(lanes, msgs, {still,label})`·`httpmsg({kind,start,head,body,hl,label})`를 한 줄씩 넣는다(한도 seq 이름 8자·글 14자, httpmsg 줄 30자, "pair 왼쪽에 넣지 않음" 포함). 원장에 `Ruling: httpmsg 줄 한도 30자(Content-Type 헤더가 30자)`를 적는다.
 
 ```bash
 git add index.html tests/check.mjs DESIGN.md
@@ -225,7 +232,7 @@ git commit -m "feat: 백엔드 그림 도우미 seq·httpmsg"
 - Modify: `tests/check.mjs`(COUNT·REDRAWN·LATER, 새 back 점검 묶음)
 
 **Interfaces:**
-- Produces: 점검 이름 `bcat`·`bobj`·`bukey`·`bsym`·`bx`·`bm`·`bou`·`bwrong`·`bsafe`, 목록 `BK_WRONG`, 함수 `BS()`. Task 3~5와 계획서 ②가 기대값만 고친다.
+- Produces: 점검 이름 `bkcat`·`bkobj`·`bkukey`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`, 목록 `BK_TODO`·`BK_NOX`·`BK_SYM`·`BK_WRONG`, 함수 `BKS()`·`bkdiff()`·`BK_SECRET()`. Task 3~5와 계획서 ②는 목록과 기대값만 고친다.
 
 - [ ] **Step 1: 실패하는 점검 쓰기**
   - `COUNT`에 넣는다(측정값): `'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 8, 'back/arch': 0, 'back/data': 0, 'back/job': 0, 'back/auth': 0, 'back/tip': 8`
@@ -233,34 +240,43 @@ git commit -m "feat: 백엔드 그림 도우미 seq·httpmsg"
   - front 묶음(`fwrong`, 523줄) 뒤에 back 묶음을 둔다.
 
 ```js
-const BS = () => g.TERMS.filter(t => t.c === 'back');
-check('bcat', () => { const a = g.CATS.find(c => c.id === 'back').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,api,arch,data,job,auth,tip' ? '' : a; });
-check('bobj', () => BS().filter(t => typeof t.v === 'object').map(t => t.en).join(', '));    // 옛 형식 그림 0장
-check('bukey', () => BS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v])).map(t => t.en).join(', '));    // 예외 없음
-check('bsym', () => BS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
-check('bx', () => BS().filter(t => !t.x).map(t => t.en).join(', '));
-check('bm', () => BS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v].m && !WA(g.D[t.v].h)).map(t => t.en).join(', '));
-check('bou', () => BS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+const BKS = () => g.TERMS.filter(t => t.c === 'back');
+check('bkcat', () => { const a = g.CATS.find(c => c.id === 'back').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,api,arch,data,job,auth,tip' ? '' : a; });
+const BK_TODO = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authentication","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Session","Request Flow","Optimistic Update","Polling","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Microservices","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
+const BK_NOX = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Request Flow","Optimistic Update","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // x를 아직 안 쓴 옛 카드. 계획서 ②가 비운다
+const BK_SYM = ['Optimistic Update'];    // 기호가 남은 옛 카드. Task 4가 비운다
+const bkdiff = (a, list) => [...a.filter(x => !list.includes(x)).map(x => '+' + x), ...list.filter(x => !a.includes(x)).map(x => '-' + x)].join(', ');
+check('bkukey', () => bkdiff(BKS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v])).map(t => t.en), BK_TODO));
+check('bkobj', () => BKS().filter(t => typeof t.v === 'object' && !BK_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
+check('bksym', () => bkdiff(BKS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en), BK_SYM));
+check('bkx', () => bkdiff(BKS().filter(t => !t.x).map(t => t.en), BK_NOX));
+check('bkm', () => BKS().filter(t => { const p = typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v]; return p && !!p.m !== WA(p.h); }).map(t => t.en).join(', '));    // 재생 버튼(m)과 움직임(A)은 함께 있다
+check('bkou', () => BKS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
   'Event-driven Architecture': ['Event'], 'Worker': ['Service Worker', 'Web Worker'], 'Lock': ['Lock File', 'Account Lockout'], 'Route Handler': ['Routing']};    // 이름만 비슷한 다른 뜻
-check('bwrong', () => Object.entries(BK_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'back' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
-check('bsafe', () => BS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; const s = p ? p.h.replace(/<[^>]+>/g, ' ') : '';
-  return /\b[A-Za-z0-9_]{24,}\b/.test(s) || /\bat \S+\.js:\d/.test(s) || /localStorage\.setItem\([^)]*[Tt]oken/.test(s); }).map(t => t.en).join(', '));    // 비밀 값·스택 추적·토큰 저장 모습
+check('bkwrong', () => Object.entries(BK_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'back' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
+const BK_SECRET = s => (s.match(/[A-Za-z0-9_-]{24,}/g) || []).some(w => /\d/.test(w) && /[A-Za-z]/.test(w)) || /\bat\b[^\n]*\.(?:m?js|ts):\d+/.test(s) || /localStorage\.setItem\([^)]*(?:token|jwt|session)/i.test(s);    // 긴 영숫자 키·스택 추적·토큰 저장 모습
+check('bksafe', () => [...['ab12'.repeat(7), 'at run (/app/server.js:12:5)', "localStorage.setItem('JWT', t)"].filter(x => !BK_SECRET(x)).map(x => '못 잡음 ' + x), ...(BK_SECRET('Access-Control-Allow-Origin') ? ['헤더 이름 오탐'] : []),
+  ...BKS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && BK_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
+check('bkshare', () => ['input', 'progress', 'scale', 'pulse', 'spinner', 'stagger', 'typing', 'shake', 'pagination'].filter(k => !g.D[k]).join(', '));    // 옛 back 카드가 쓰던 공유 그림 키는 남긴다
 ```
 
-  - `LATER`에 넣는다: `'bobj', 'bukey', 'bsym', 'bx', 'font', 'doccount', 'redrawn:back/basic', 'redrawn:back/core', 'redrawn:back/motion', 'redrawn:back/adv', 'redrawn:back/api', 'redrawn:back/tip'`
+  - 두 목록은 2026-11-03에 잰 값이다(back 51장, x 없는 47장). Step 2 전에 `head -121 tests/check.mjs`로 만든 임시 `tests/_cnt.mjs`에서 한 번 더 재서 같은지 보고 지운다.
+  - `LATER`에 넣는다: `'font', 'doccount', 'redrawn:back/basic', 'redrawn:back/core', 'redrawn:back/motion', 'redrawn:back/adv', 'redrawn:back/api', 'redrawn:back/tip'`
 
 - [ ] **Step 2: 실패 확인**
 
 Run: `node tests/check.mjs`
-Expected: `FAIL bcat: basic,core,motion,adv,api,tip`, `FAIL count:back/arch: no sec ≠ 0`(data·job·auth도 같음). 아울러 `LATER bobj`(40장)·`LATER bukey`(51장)·`LATER bsym: Optimistic Update`·`LATER bx`(47장)·`LATER redrawn:back/` 6개가 나오고, `bm`·`bou`·`bwrong`·`bsafe`는 통과한다.
+Expected: `FAIL bkcat: basic,core,motion,adv,api,tip`, `FAIL count:back/arch: no sec ≠ 0`(data·job·auth도 같음). 아울러 `LATER redrawn:back/` 6개가 나온다. 나머지 새 점검(`bkukey`·`bkobj`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`)은 목록이 지금 상태와 같아서 통과한다.
 
 - [ ] **Step 3: CAT 고치기**: 1716줄 `['api',…]` 뒤에 스펙 4장의 네 항목(`arch`·`data`·`job`·`auth`, 이름과 설명 그대로)을 넣는다.
 
 - [ ] **Step 4: 통과 확인**
 
 Run: `node tests/check.mjs`
-Expected: `FAIL` 없이 `OK <수>`. `LATER` 줄은 10개(`bobj`·`bukey`·`bsym`·`bx`·`redrawn:back/` 6개)이고, `font`·`doccount`는 아직 통과해서 줄이 안 나온다. 빈 하위항목 4개는 화면에서 "카드 없음"으로 보이고, Task 3·계획서 ②까지 이 상태다.
+Expected: `FAIL` 없이 `OK <수>`. `LATER` 줄은 `redrawn:back/` 6개이고, `font`·`doccount`는 아직 통과해서 줄이 안 나온다. 빈 하위항목 4개는 화면에서 "카드 없음"으로 보이고, Task 3·계획서 ②까지 이 상태다.
+
+- [ ] **Step 4b: 돌연변이 확인**: `BK_TODO`에서 `"Server"`를 잠깐 빼면 `FAIL bkukey: +Server`, `BK_NOX`에서 빼면 `FAIL bkx: +Server`가 나오는지 보고 되돌린다(`git diff tests/check.mjs`로 원래대로인지 확인).
 
 - [ ] **Step 5: 커밋**
 
@@ -285,8 +301,8 @@ git commit -m "feat: 백엔드 하위항목 4개와 점검 기대값"
   - `EXPECT['back/arch']`, `EXPECT['back/data']`: 아래 표 순서 그대로
   - `COUNT['back/arch'] = 11`, `COUNT['back/data'] = 12`
   - `total`: 1483 → 1506
-- [ ] **Step 2: 실패 확인**: `FAIL expect:back/arch`·`expect:back/data`·`count:back/arch: 0 ≠ 11`·`count:back/data: 0 ≠ 12`·`total`
-- [ ] **Step 3~5**: 공통 절차 3~5. 모든 새 카드에 `x`와 `v:'u-back-<slug>'`를 넣는다. `seq`·`track`·`ide` 그림은 `m:1`이다.
+- [ ] **Step 2: 실패 확인**: `FAIL expect:back/arch`·`expect:back/data`·`count:back/arch: 0 ≠ 11`·`count:back/data: 0 ≠ 12`·`total`. 새 카드를 넣는 중 x나 `u-back-` 그림이 빠지면 `bkx`·`bkukey`가 `+이름`으로 바로 잡는다.
+- [ ] **Step 3~5**: 공통 절차 3~5. 모든 새 카드에 `x`와 `v:'u-back-<slug>'`를 넣는다. `m:1`은 Global Constraints 규칙대로다.
 - [ ] **Step 6: 브라우저 확인**: `#/c/back/arch`, `#/c/back/data`
 - [ ] **Step 7: 커밋**: `feat: 백엔드 서버 구조·데이터 주고받기 새 카드`
 
@@ -294,15 +310,15 @@ git commit -m "feat: 백엔드 하위항목 4개와 점검 기대값"
 
 | sec | en | ko | 그림 | r |
 |---|---|---|---|---|
-| arch | Node.js | 노드제이에스 · 서버용 자바스크립트 실행기 | `term`: `{c:'node server.js'}` · `{o:'3000번에서 기다려요(예시)'}`, `end:false` | Runtime, Server |
-| arch | Backend Framework | 백엔드 프레임워크 · 서버 뼈대 | `ide`: `app.get('/posts',` / `  (req, res) =>` / `  res.json(posts));` / `app.listen(3000);`, 단계 `{l:4}`·`{l:1, out:[{t:'GET /posts 받음'}]}`, cap "프레임워크마다 문법은 달라요(예시 문법)" | Framework, Route Handler |
-| arch | Route Handler | 라우트 핸들러 · 주소별 처리 함수 | `ide`: `app.post('/posts',` / `  (req, res) => {` / `    save(req.body);` / `    res.status(201).end();` / `});`, 단계 `{l:1}`·`{l:3}`·`{l:4, out:[{t:'201 Created'}]}` | Endpoint |
+| arch | Node.js | 노드제이에스 · 서버용 자바스크립트 실행기 | `term`: `{c:'node server.js'}` · `{o:'3000번에서 기다려요(예시)'}`, `end:false`, cap "출력 글은 풀어 쓴 말이에요" | Runtime, Server |
+| arch | Backend Framework | 백엔드 프레임워크 · 서버 뼈대 | `ide`: `app.get('/posts',` / `  (req, res) =>` / `  res.json(posts));` / `app.listen(3000);`, 단계 `{l:4}`·`{l:1, out:['GET /posts 받음']}`, cap "프레임워크마다 문법은 달라요(예시 문법)" | Framework, Route Handler |
+| arch | Route Handler | 라우트 핸들러 · 주소별 처리 함수 | `ide`: `app.post('/posts',` / `  (req, res) => {` / `    save(req.body);` / `    res.status(201).end();` / `});`, 단계 `{l:1}`·`{l:3}`·`{l:4, out:['201 Created']}` | Endpoint |
 | arch | Controller | 컨트롤러 · 요청을 받는 층 | `seq(['브라우저','컨트롤러','서비스'], [{0→1 'POST /posts'}, {1→1 '입력 꺼내기'}, {1→2 '글 만들어 줘'}, {2→1 '새 글'}, {1→0 '201 Created'}])` | Route Handler, Service Layer |
 | arch | Service Layer | 서비스 층 · 업무 규칙 층 | `seq(['컨트롤러','서비스','저장소'], [{0→1 '글 만들기'}, {1→1 '제목 길이 검사'}, {1→2 '저장해 줘'}, {2→1 '저장됨'}, {1→0 '새 글'}])` | Controller, Repository Pattern |
 | arch | Repository Pattern | 저장소 패턴 · DB 일을 맡는 층 | `seq(['서비스','저장소','DB'], [{0→1 'save(post)'}, {1→2 'INSERT …'}, {2→1 '저장됨'}, {1→0 '완료'}])`, cap "서비스는 SQL을 몰라도 돼요" | ORM, Database |
 | arch | MVC | MVC · 모델·뷰·컨트롤러 | `doc` 표 `[['칸','하는 일','예'],['Model','데이터와 규칙','글'],['View','보여 줄 화면','글 목록'],['Controller','요청을 받아 둘을 이음','글 요청 처리']]` | Separation of Concerns, Controller |
 | arch | Stateless vs Stateful | 무상태와 상태 유지 | `vs('상태 유지', 서버 두 대: 1번 서버 "민지 로그인 기억", 2번 서버 "누구세요?"(실패 꼬리표), '무상태', 요청마다 토큰을 들고 와서 어느 서버든 "민지" 확인)` 전용 HTML(`mk-bk` 접두사) | Session, JWT |
-| arch | API Gateway | API 게이트웨이 · 서비스들의 앞문 | `seq(['앱','API 관문','주문','회원'], [{0→1 'GET /orders'}, {1→1 '토큰 확인'}, {1→2 '주문 목록'}, {2→1 '목록'}, {1→0 '200 OK'}])` | Microservices, Reverse Proxy |
+| arch | API Gateway | API 게이트웨이 · 서비스들의 앞문 | `seq(['앱','API 관문','주문'], [{0→1 'GET /orders'}, {1→1 '토큰 확인'}, {1→2 '주문 목록'}, {2→1 '목록'}, {1→0 '200 OK'}])` | Microservices, Reverse Proxy |
 | arch | BFF | BFF · 화면 전용 백엔드 | `seq(['앱','BFF','글','회원'], [{0→1 '홈 화면 주세요'}, {1→2 '최신 글'}, {2→1 '글 3개'}, {1→3 '내 정보'}, {3→1 '이름'}, {1→1 '한 번에 묶기'}, {1→0 '200 OK'}])` | API Gateway |
 | arch | BaaS | 백엔드 서비스 · 만들어 둔 백엔드 | `vs('직접 만듦', 칸 셋 "로그인 코드"·"DB 서버"·"파일 저장 코드", 'BaaS', 설정 화면 칸 셋 "로그인 켜짐"·"DB 켜짐"·"파일 저장 켜짐")` | Supabase, Serverless |
 | data | Payload | 페이로드 · 실제로 보내는 내용 | `httpmsg({kind:'요청', start:'POST /api/orders', head:['Host: example.com','Content-Type: application/json'], body:['{"item":"책","qty":2}'], hl:['b0']})`, cap "주소·헤더를 뺀 알맹이" | Request Body |
@@ -311,7 +327,7 @@ git commit -m "feat: 백엔드 하위항목 4개와 점검 기대값"
 | data | DTO | DTO · 주고받는 데이터 모양 | `vs('DB 행 그대로', 줄 넷 id·email·passwordHash·createdAt(passwordHash 줄 "내보내면 안 됨" 꼬리표), 'DTO', 줄 둘 id·email)` 전용 HTML | Validation, Schema Validation |
 | data | Error Response | 오류 응답 | `httpmsg({kind:'응답', start:'400 Bad Request', head:['Content-Type: application/json'], body:['{','  "error": "invalid_email",','  "message": "형식 오류"','}'], hl:['b1']})`, cap "스택 추적은 넣지 않아요" | HTTP Status Code, Error Handling |
 | data | Schema Validation | 스키마 검사 | `ide`(`title:'schema.js'`): `const Post = schema({` / `  title: string().min(1),` / `});` / `{t:"Post.parse({ title: '' });", err:'제목이 비었어요'}`, 단계 `{l:4}`, cap "예시 문법, 오류 설명은 풀어 쓴 말" | Validation |
-| data | Multipart Form Data | 멀티파트 폼 데이터 · 파일 담아 보내기 | `httpmsg({kind:'요청', start:'POST /upload', head:['Content-Type: multipart/…'], body:['--경계(예시)','name="photo"; a.png','(사진 파일 내용)','--경계(예시)--'], hl:['h0']})`, cap "multipart/form-data를 줄였어요" | File Upload, Content-Type |
+| data | Multipart Form Data | 멀티파트 폼 데이터 · 파일 담아 보내기 | `httpmsg({kind:'요청', start:'POST /upload', head:['Content-Type: multipart/…'], body:['--경계(예시)','form-data; name="photo"','(사진 파일 내용)','--경계(예시)--'], hl:['h0']})`, cap "Content-Type 값과 칸 머리 줄(Content-Disposition)을 줄였어요" | File Upload, Content-Type |
 | data | UUID | UUID · 겹치지 않는 아이디 | `doc` 표 `[['방식','예','특징'],['순번','1, 2, 3','다음 번호를 짐작할 수 있어요'],['UUID','3f2a…-…(예시)','겹칠 걱정이 거의 없어요']]` | Primary Key |
 | data | Cursor vs Offset Pagination | 커서와 오프셋 페이지 나누기 | `vs('오프셋 ?page=2', 1쪽 A·B·C → 새 글 N이 맨 앞에 낌 → 2쪽 C·D·E(C에 "또 나옴" 꼬리표), '커서 ?after=C', 다음 D·E·F)` 전용 HTML | Pagination API |
 | data | API Versioning | API 버전 관리 | `doc`: 표 `[['주소','이름 칸'],['/v1/users','name'],['/v2/users','firstName, lastName']]` + 문단 "옛 앱은 v1을 계속 써요" | Semantic Versioning |
@@ -319,7 +335,7 @@ git commit -m "feat: 백엔드 하위항목 4개와 점검 기대값"
 | data | Request ID | 요청 아이디 · 요청 추적 번호 | `term`(`title:'서버 로그'`, `end:false`): `{o:'[req-7f3a] GET /orders'}` · `{o:'[req-9b1c] GET /me'}` · `{o:'[req-7f3a] DB 조회 120ms'}` · `{e:'[req-7f3a] 결제 실패', h:'req-7f3a'}` | Logging |
 
 - 표의 `{0→1 '…'}`는 `{from:0, to:1, t:'…'}`를 줄여 쓴 것이다(계획서 표기일 뿐 코드에 화살표를 쓰지 않는다).
-- seq 세로줄 이름은 스펙 보충 목록 안에서만 쓴다. 이 계획서의 seq 글은 모두 14자 이하로 쟀다(가장 긴 것 `'제목 길이 검사'`·`'홈 화면 주세요'`·`'결제 완료 POST'`·`'다음 요청+쿠키'` 14). 줄 글도 ide 28자·httpmsg 30자 안으로 쟀다.
+- seq 세로줄 이름은 스펙 보충 목록 안에서만 쓴다. 측정(node, wlen): 이 계획서의 seq 글 89개는 모두 14자 이하다(14자는 7개: `'제목 길이 검사'`·`'홈 화면 주세요'`·`'내 정보 만들기'`·`'결제 완료 POST'`·`'다음 요청+쿠키'`·`'허용 헤더 확인'`·`'변환 일감 넣기'`). 세로줄 이름은 8자 이하다. 줄 글도 ide 28자·httpmsg 30자 안으로 쟀다.
 - 전용 HTML(`mk-bk` 접두사)은 3장(Stateless vs Stateful·DTO·Cursor vs Offset Pagination)이다. `vs` 안쪽 칸은 좁으니 칸 글은 12자 이하로 하고, 320px에서 넘치면 칸을 세로로 쌓는다.
 
 x 짝(스펙 5장):
@@ -330,9 +346,9 @@ x 짝(스펙 5장):
 - DTO vs Schema Validation, Schema Validation vs Validation vs Form Validation(front)
 - UUID vs Primary Key, Request ID vs Logging, Cursor vs Offset Pagination vs Pagination API, API Versioning vs Semantic Versioning, OpenAPI vs API Documentation
 
-뜻이 다른 짝: Route Handler의 x는 web Routing(화면 주소에 맞는 화면 고르기)과 다르다고 쓰고, r에 넣지 않는다(`bwrong`).
+뜻이 다른 짝: Route Handler의 x는 web Routing(화면 주소에 맞는 화면 고르기)과 다르다고 쓰고, r에 넣지 않는다(`bkwrong`).
 
-출처: Node.js 공식 문서(About Node.js), MDN Glossary(MVC·Payload body·Serialization·UUID), MDN HTTP Content-Type·Messages·`multipart/form-data`(POST 문서), RFC 9110(상태 번호·Content-Type), RFC 9562(UUID), OpenAPI 명세(spec.openapis.org), MDN Glossary API·REST. 프레임워크 예 문법은 "예시 문법"으로만 쓴다.
+출처: Node.js 공식 문서(About Node.js), MDN Glossary(MVC·Payload body·Serialization·UUID), MDN HTTP Content-Type·Messages·`multipart/form-data`(POST 문서), RFC 7578 §4.2(칸마다 `Content-Disposition: form-data; name=…`), RFC 9110(상태 번호·Content-Type), RFC 9562(UUID), OpenAPI 명세(spec.openapis.org), MDN Glossary API·REST. 프레임워크 예 문법은 "예시 문법"으로만 쓴다.
 
 뒤이어 **디렉터 검토 묶음 B**
 
@@ -344,38 +360,41 @@ x 짝(스펙 5장):
 - Modify: `index.html`
   - 카드 27장의 v를 `'u-back-<slug>'`로 바꾼다.
   - 그림은 `/* back: 다시 그리기 basic·core·motion … */` 묶음으로 둔다. 상태 함수는 그 `Object.assign` 바로 앞 `const`로 둔다.
-- Modify: `tests/check.mjs`: `LATER`에서 `bsym`·`redrawn:back/basic·core·motion`을 빼고, `bstill`을 더한다.
+- Modify: `tests/check.mjs`: `BK_TODO`에서 27장을 빼고 `BK_SYM`을 비우고, `LATER`에서 `redrawn:back/basic·core·motion`을 빼고, `bkstill`을 더한다.
 
 **Interfaces:**
 - Consumes: `seq`·`httpmsg`(Task 1), `track`·`doc`·`pair`·`vs`·`browser`·`fcss`
 - Produces(계획서 ②가 버튼을 붙일 상태 함수):
   - `BRL = {max: 4, win: '10초'}`(예시 값)
   - `brate(sent: number) → string`: 보낸 요청 수만큼 행을 그린다(최대 6행, 넘으면 마지막 6행). k번째가 `max` 이하면 `200 OK`, 넘으면 `429 Too Many Requests` + 꼬리표 "실패" + "잠시 뒤 다시". 위에 `보낸 요청 n번 · 10초에 4번까지(예시)`.
-  - `brateSay(sent) → string`: 0번이면 `'아직 보낸 요청이 없어요'`, max 이하면 `'${n}번째 요청은 통과했어요. ${max - n}번 더 보낼 수 있어요'`, 넘으면 `'${n}번째 요청은 429예요. 시간이 지나면 다시 보낼 수 있어요'`
+  - `brateSay(sent) → string`: 0번이면 `'아직 보낸 요청이 없어요'`, max 미만이면 `'${n}번째 요청은 통과했어요. ${max - n}번 더 보낼 수 있어요'`, max와 같으면 `'${n}번째 요청은 통과했어요. 이제 더 보낼 수 없어요'`, 넘으면 `'${n}번째 요청은 429예요. 시간이 지나면 다시 보낼 수 있어요'`
   - `BAZ = {'일반 회원': {st: '403 Forbidden'}, '관리자': {st: '200 OK'}}`
   - `bauthz(role: string) → string`: `httpmsg` 요청 `DELETE /posts/7`(헤더 `Authorization: Bearer …`) 아래 `httpmsg` 응답 `BAZ[role].st`
   - `bauthzSay(role) → string`: 일반 회원 `'로그인은 됐지만 권한이 없어요. 403이에요'`, 관리자 `'관리자라서 지울 수 있어요. 200이에요'`
-  - 상태 함수 그림의 행은 `<li>`이고, 그 밖에 `<li>`를 쓰지 않는다(`bstill`이 행 수를 `<li`로 센다).
+  - 상태 함수 그림의 행은 `<li>`이고, 그 밖에 `<li>`를 쓰지 않는다(`bkstill`이 행 수를 `<li`로 센다).
   - 없는 역할·음수·정수 아닌 sent는 `'brate: '`·`'bauthz: '` 오류를 던진다.
 
 - [ ] **Step 1: 점검**
-  - `LATER`에서 `bsym`·`redrawn:back/basic`·`redrawn:back/core`·`redrawn:back/motion`을 뺀다.
+  - `BK_TODO`에서 basic·core·motion 27장(`"Server"`~`"Queue"`)을 빼고, `BK_SYM`을 `[]`로 비운다.
+  - `LATER`에서 `redrawn:back/basic`·`redrawn:back/core`·`redrawn:back/motion`을 뺀다.
   - 멈춘 직접 조작 그림과 상태 함수를 보는 점검을 더한다.
 
 ```js
-check('bstill', () => vm.runInContext(`(() => { const bad = [];
-  if ((brate(5).match(/429 Too Many Requests/g) || []).length !== 1 || (brate(5).match(/200 OK/g) || []).length !== 4) bad.push('brate 5');
-  if ((brate(9).match(/<li/g) || []).length !== 6) bad.push('brate 6행');
-  if (!brateSay(0).includes('없어요') || !brateSay(4).includes('0번 더') || !brateSay(5).includes('429')) bad.push('brateSay');
-  if (!bauthz('일반 회원').includes('403 Forbidden') || !bauthz('관리자').includes('200 OK') || !bauthzSay('일반 회원').includes('권한이 없어요')) bad.push('bauthz');
+check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => (h.match(re) || []).length;
+  if (n(brate(0), /<li/g) !== 0 || n(brate(4), /200 OK/g) !== 4 || brate(4).includes('429') || brate(4).includes('실패')) bad.push('brate 0·4');
+  if (n(brate(5), /429 Too Many Requests/g) !== 1 || n(brate(5), /200 OK/g) !== 4 || !brate(5).includes('실패')) bad.push('brate 5');
+  if (n(brate(9), /<li/g) !== 6) bad.push('brate 6행');
+  if (!brateSay(0).includes('없어요') || !brateSay(3).includes('1번 더') || !brateSay(4).includes('이제 더 보낼 수 없어요') || !brateSay(5).includes('429')) bad.push('brateSay');
+  const u = bauthz('일반 회원'), a = bauthz('관리자');
+  if (!u.includes('403 Forbidden') || u.includes('200 OK') || !a.includes('200 OK') || a.includes('403') || !bauthzSay('일반 회원').includes('권한이 없어요')) bad.push('bauthz');
   [() => brate(-1), () => brate(1.5), () => bauthz('손님')].forEach((f, i) => { try { f(); bad.push('안 막음 ' + i); } catch (e) { if (!/^(brate|bauthz): /.test(e.message)) bad.push('메시지 ' + i); } });
   return bad.join(', '); })()`, ctx));
 ```
 
 - [ ] **Step 2: 실패 확인**
-  - `FAIL bsym: Optimistic Update`
+  - `FAIL bkukey: +Server, +Client, …`(27장), `FAIL bkobj`(그중 객체 v 카드), `FAIL bksym: +Optimistic Update`
   - `FAIL redrawn:back/basic`·`core`·`motion`(flow·stack 그림 카드들)
-  - `FAIL bstill: brate is not defined`
+  - `FAIL bkstill: brate is not defined`
 - [ ] **Step 3: 그림**: 스펙 3.3 표의 basic·core·motion 27장대로 그린다. 정해 둔 것:
   - Server: `seq(['브라우저','서버'], [{0→1 '회원 정보 줘'}, {1→1 '회원 찾기'}, {1→0 '민지 정보'}])`
   - Database: `seq(['서버','DB'], [{0→1 '글 저장'}, {1→0 '저장됨'}, {0→1 '글 목록 조회'}, {1→0 '글 3개'}])`
@@ -397,8 +416,8 @@ check('bstill', () => vm.runInContext(`(() => { const bad = [];
   - Retry: `seq(['브라우저','서버'], [{0→1 '요청'}, {1→0 '503', err:1}, {0→1 '다시 요청'}, {1→0 '200 OK'}])`
   - Optimistic Update·Timeout·Queue·CRUD: `track`. Timeout은 "5초(예시)"를 쓰고, Optimistic Update의 되돌림 단계는 `fail`이다.
   - Client·API·Endpoint·JSON·REST API: 스펙 3.3대로(`browser`·`pair`+`fcss`·`doc`). API의 날씨 "맑음 18도(예시)".
-  - `m:1`은 움직이는 `seq`·`track`·`doc`이 있는 그림에만 단다. 직접 조작 두 장(멈춘 그림)은 `m`이 없다.
-- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER` 목록은 `bobj`·`bukey`·`bx`·`font`·`doccount`·`redrawn:back/adv·api·tip`이다(`font` 말고는 실패 줄로 나옴).
+  - `m:1`은 Global Constraints 규칙대로다. 직접 조작 두 장(멈춘 그림)은 `m`이 없다.
+- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER` 줄은 `redrawn:back/adv·api·tip` 3개다(새 글자가 서브셋에 없으면 `font`도 나온다).
 - [ ] **Step 5: 브라우저 확인**: basic·core·motion
 - [ ] **Step 6: 커밋**: `feat: 백엔드 basic·core·motion 그림 27장 다시 그리기`
 
@@ -410,7 +429,7 @@ check('bstill', () => vm.runInContext(`(() => { const bad = [];
 - Modify: `index.html`
   - 카드 24장의 v
   - 새 묶음 `/* back: 다시 그리기 adv·api·tip … */`
-- Modify: `tests/check.mjs`: `LATER`에서 `bobj`·`bukey`·`redrawn:back/adv·api·tip`을 빼고, `bstill`에 두 함수를 더한다.
+- Modify: `tests/check.mjs`: `BK_TODO`를 비우고, `LATER`에서 `redrawn:back/adv·api·tip`을 빼고, `bkstill`에 두 함수를 더한다.
 
 **Interfaces:**
 - Produces(계획서 ②가 버튼을 붙일 상태 함수):
@@ -418,40 +437,40 @@ check('bstill', () => vm.runInContext(`(() => { const bad = [];
   - `bcacheSay(log) → string`: 빈 배열이면 `'아직 보낸 요청이 없어요'`, 마지막이 miss면 `'캐시에 없어서 DB까지 다녀왔어요'`, hit면 `'캐시에 있어서 바로 왔어요'`
   - `bidem(method: 'POST' | 'PUT', times: number) → string`: `${method} 요청을 ${times}번 보냄` 아래 글 목록. POST면 글 `times`개, PUT이면 1개(times가 0이면 0개)
   - `bidemSay(method, times) → string`: `'POST를 ${n}번 보내서 글이 ${n}개예요'` / `'PUT을 ${n}번 보내도 글은 1개예요'`(0번이면 `'아직 보내지 않았어요'`)
-  - 잘못된 log 값·method·times는 `'bcache: '`·`'bidem: '` 오류를 던진다.
+  - 잘못된 log 값·method·times(음수·정수 아님)는 `'bcache: '`·`'bidem: '` 오류를 던진다.
 
 - [ ] **Step 1: 점검**
-  - `LATER`에서 `bobj`·`bukey`·`redrawn:back/adv`·`redrawn:back/api`·`redrawn:back/tip`을 뺀다.
-  - `bstill`의 `return` 앞에 더한다:
+  - `BK_TODO`를 `[]`로 비운다. `LATER`에서 `redrawn:back/adv`·`redrawn:back/api`·`redrawn:back/tip`을 뺀다.
+  - `bkstill`의 `return` 앞에 더한다:
 
 ```js
   if (!bcache(['miss', 'hit']).includes('느림') || !bcache(['miss', 'hit']).includes('빠름') || (bcache(Array(8).fill('hit')).match(/<li/g) || []).length !== 6) bad.push('bcache');
   if (!bcacheSay([]).includes('없어요') || !bcacheSay(['miss']).includes('DB까지') || !bcacheSay(['miss', 'hit']).includes('바로')) bad.push('bcacheSay');
   if ((bidem('POST', 3).match(/<li/g) || []).length !== 3 || (bidem('PUT', 3).match(/<li/g) || []).length !== 1 || (bidem('PUT', 0).match(/<li/g) || []).length !== 0) bad.push('bidem');
   if (!bidemSay('POST', 3).includes('3개') || !bidemSay('PUT', 3).includes('1개') || !bidemSay('PUT', 3).startsWith('PUT을')) bad.push('bidemSay');
-  [() => bcache(['x']), () => bidem('GET', 1), () => bidem('POST', -1)].forEach((f, i) => { try { f(); bad.push('안 막음 c' + i); } catch (e) { if (!/^(bcache|bidem): /.test(e.message)) bad.push('메시지 c' + i); } });
+  [() => bcache(['x']), () => bidem('GET', 1), () => bidem('POST', -1), () => bidem('PUT', 1.5)].forEach((f, i) => { try { f(); bad.push('안 막음 c' + i); } catch (e) { if (!/^(bcache|bidem): /.test(e.message)) bad.push('메시지 c' + i); } });
 ```
 
 - [ ] **Step 2: 실패 확인**
-  - `FAIL bobj`: 남은 객체 v 20장(GraphQL, JWT, OAuth, Microservices, Monolith, Cache, ORM, Serverless Function, Request Header, Request Body, Query Parameter, Path Parameter, API Key, API Documentation, SDK, CORS, try-catch, Idempotent, Mock Data, Health Check)
-  - `FAIL bukey`: 같은 20장 + Logging, Error Handling, Background Job, Pagination API
-  - `FAIL redrawn:back/adv`·`api`·`tip`, `FAIL bstill: bcache is not defined`
+  - `FAIL bkukey: +GraphQL, …`(24장)
+  - `FAIL bkobj`: 남은 객체 v 20장(GraphQL, JWT, OAuth, Microservices, Monolith, Cache, ORM, Serverless Function, Request Header, Request Body, Query Parameter, Path Parameter, API Key, API Documentation, SDK, CORS, try-catch, Idempotent, Mock Data, Health Check)
+  - `FAIL redrawn:back/adv`·`api`·`tip`, `FAIL bkstill: bcache is not defined`
 - [ ] **Step 3: 그림**: 스펙 3.3 표의 adv·api·tip 24장대로 그린다. 정해 둔 것:
-  - OAuth: `seq(['브라우저','내 서버','로그인'], [{0→2 '로그인 화면으로'}, {2→2 '사용자 동의'}, {2→0 '코드 들고 옴'}, {0→1 '코드 전달'}, {1→2 '토큰으로 교환'}, {2→1 '토큰'}])`. 마지막 두 행은 서버끼리다(RFC 6749 §4.1). cap "토큰은 브라우저를 거치지 않아요"
+  - OAuth: `seq(['브라우저','내 서버','로그인'], [{0→2 '로그인 화면'}, {2→2 '사용자 동의'}, {2→0 '코드 들고 옴'}, {0→1 '코드 전달'}, {1→2 '토큰으로 교환'}, {2→1 '토큰'}])`. 마지막 두 행은 서버끼리다(RFC 6749 §4.1). cap "이 방식(인가 코드)에서는 토큰이 브라우저를 거치지 않아요"
   - Microservices: `seq(['주문','결제','알림'], [{0→1 '결제 요청'}, {1→0 '완료'}, {0→2 '알림 보내기'}])`
-  - CORS: `seq(['브라우저','외부'], [{0→1 'GET /data'}, {1→0 '응답'}, {0→0 '허용 헤더 없음'}, {0→0 '읽기 막음', err:1}])`. cap "단순 요청 기준, 서버는 이미 처리했을 수 있어요"
+  - CORS: `seq(['브라우저','외부'], [{0→1 'GET /data'}, {1→0 '응답'}, {0→0 '허용 헤더 확인'}, {0→0 '읽기 막음', err:1}])`. cap "단순 요청 기준, 서버는 이미 처리했을 수 있어요"
   - Request Header·Request Body: `httpmsg` 요청 `POST /api/posts`, 헤더 2줄·본문 3줄, 각각 `h0`·`b1` 강조
   - API Key: `httpmsg` 요청 `GET /v1/weather`, 헤더 `x-api-key: sk_test_…` 강조. 그 위 이름표 "내 서버가 보냄", 아래 "화면 코드에 두지 않아요"(`mk-bk` 칸)
   - Pagination API: `httpmsg` 요청 `GET /posts?page=2&limit=10`, 첫 줄 강조
   - Health Check: `httpmsg` 응답 `200 OK`, 헤더 `Content-Type: application/json`, 본문 `{"status":"ok"}`
-  - Background Job: `seq(['브라우저','서버','워커'], [{0→1 '가입 요청'}, {1→0 '202 접수됨'}, {1→2 '환영 메일 일감'}, {2→2 '메일 보내기'}])`
+  - Background Job: `seq(['브라우저','서버','워커'], [{0→1 '사진 올리기'}, {1→2 '변환 일감 넣기'}, {1→0 '202 접수됨'}, {2→2 '썸네일 만들기'}])`. 일감을 넣은 뒤에 202를 보낸다. cap "접수만 하고 일은 워커가 나중에 해요"(RFC 9110 §15.3.3)
   - Cache ▶: 멈춘 그림은 `bcache(['miss', 'hit'])`. Idempotent ▶: 멈춘 그림은 `vs('POST', bidem('POST', 3), 'PUT', bidem('PUT', 3))`
   - JWT: `doc` 블록 셋(헤더 · 내용 · 서명)과 문단 "내용은 누구나 읽을 수 있어요". 값은 `eyJ…` 줄임표
   - Logging: `term`(`title:'서버 로그'`, `end:false`) 세 줄 `{o:'10:02:11 GET /posts 200 (예시)'}` 꼴
-  - try-catch: `ide`(`try {` / `  await pay();` / `} catch (e) {` / `  log(e.message);` / `}`), 단계 `{l:2, out:[{t:'결제 실패', dim:1}]}`·`{l:4, out:[{t:'오류 남김'}]}`
+  - try-catch: `ide`(`try {` / `  await pay();` / `} catch (e) {` / `  log(e.message);` / `}`), 단계 `{l:2, out:[{t:'결제 실패', dim:1}]}`·`{l:4, out:['오류 남김']}`
   - GraphQL·ORM·Mock Data·Path Parameter·Query Parameter·API Documentation·SDK·Monolith·Serverless Function·Error Handling: 스펙 3.3대로. 코드 칸은 `fcss`.
-  - `m:1`은 움직이는 그림에만 단다. 직접 조작 두 장(멈춘 그림)은 `m`이 없다.
-- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER` 목록은 `bx`·`font`·`doccount` 3개다.
+  - `m:1`은 Global Constraints 규칙대로다. 직접 조작 두 장(멈춘 그림)은 `m`이 없다.
+- [ ] **Step 4: 통과 확인**: `FAIL` 없음. `LATER` 줄은 `doccount`, 그리고 서브셋에 없는 새 글자가 있으면 `font`(예: '녀')다.
 - [ ] **Step 5: 브라우저 확인**: adv·api·tip, 그리고 basic~data 전체를 한 번 더(공유 CSS 영향)
 - [ ] **Step 6: 커밋**: `feat: 백엔드 adv·api·tip 그림 24장 다시 그리기`
 
