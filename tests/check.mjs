@@ -470,7 +470,7 @@ check('fobj', () => FS().filter(t => typeof t.v === 'object').map(t => t.en).joi
 const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid', 'Gap', 'Position Sticky', 'Z-index', 'Overflow',
   'Component', 'Media Query', 'Border Radius', 'Box Shadow', 'Transition', 'Keyframes', 'Transform', 'Hover', 'Focus', 'Animation Duration', 'Intersection Observer',
   'Rotate', 'State', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 30장(측정)
-check('fpre', () => { const ws = [...html.matchAll(/([^{}]*\.mk-fcd[^{}]*\bp)\{[^}]*white-space:([a-z-]+)/g)].map(m => m[2]); return ws.length && ws.every(w => w === 'pre-wrap') && !/\.mk-dcb p\{[^}]*white-space:(?!pre-wrap)/.test(html.slice(html.indexOf('.mk-fcd .mk-dcb p{'))) ? '' : 'fcss 줄 앞 공백이 사라짐'; });    // 디렉터 D
+check('fpre', () => { const ws = [...html.replace(/base64,[A-Za-z0-9+/=]+/g, 'base64,').matchAll(/([^{}]*\.mk-fcd[^{}]*\bp)\{[^}]*white-space:([a-z-]+)/g)].map(m => m[2]); return ws.length && ws.every(w => w === 'pre-wrap') && !/\.mk-dcb p\{[^}]*white-space:(?!pre-wrap)/.test(html.slice(html.indexOf('.mk-fcd .mk-dcb p{'))) ? '' : 'fcss 줄 앞 공백이 사라짐'; });    // 디렉터 D
 check('fdvw', () => /\.mk-mobox>\.mk-fst\{width:100%\}/.test(html) ? '' : '직접 조작 안 개발자 도구 칸이 내용 폭으로 줄어듦');    // 320px에서 .mk-dv(container:inline-size)가 111px로 좁아지던 문제
 check('fdfix', () => { const f = en => g.TERMS.find(t => t.c === 'front' && t.en === en), bad = [];    // 디렉터 D 지적: 사실·그림 고침이 되돌아가지 않게
   if (/붙여요/.test(f('Lifecycle').x) || /흐름에 할 일을 붙이는/.test(f('useEffect').x) || !/시작하고 정리/.test(f('Lifecycle').x) || !/시작하고 정리/.test(f('useEffect').x)) bad.push('Lifecycle·useEffect');
@@ -594,35 +594,39 @@ check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   [() => brateSay(-1), () => bauthzSay('손님'), () => bcacheSay(['x']), () => bidemSay('GET', 1), () => bidemSay('PUT', -1)].forEach((f, i) => { try { f(); bad.push('안 막음 s' + i); } catch (e) { if (!/^(brate|bauthz|bcache|bidem): /.test(e.message)) bad.push('메시지 s' + i); } });
   [() => bcache(['x']), () => bidem('GET', 1), () => bidem('POST', -1), () => bidem('PUT', 1.5)].forEach((f, i) => { try { f(); bad.push('안 막음 c' + i); } catch (e) { if (!/^(bcache|bidem): /.test(e.message)) bad.push('메시지 c' + i); } });
   return bad.join(', '); })()`, ctx));
-const BKDM = {'Rate Limit': ['요청 보내기', '시간 지나기', 'aria-live'], 'Idempotent': ['POST', 'PUT', '다시 보내기', '처음으로', 'aria-pressed', 'aria-live'],
+const BKDM = {'Rate Limit': ['요청 보내기', '시간 지나기', 'aria-live'], 'Idempotent': ['POST', 'PUT', '요청 보내기', '처음으로', 'aria-pressed', 'aria-live'],
   'Cache': ['요청 보내기', '캐시 비우기', 'aria-live'], 'Authorization': ['일반 회원', '관리자', '글 삭제', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
 const BKP = en => { const t = g.TERMS.find(x => x.c === 'back' && x.en === en); return t && g.D[t.v]; };
-check('bkdm', () => Object.entries(BKDM).filter(([en, w]) => { const p = BKP(en); return !p || !p.init || !String(p.init).includes('psay') || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('bkdm', () => Object.entries(BKDM).filter(([en, w]) => { const p = BKP(en); return !p || !p.init || !String(p.init).includes('psay') || ![...w, 'class="mk-mobox"', 'class="mk-hint"'].every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
 const board = h => {    // 가짜 그림판: init이 쓰는 API만 흉내 낸다
   const el = () => ({innerHTML: '', textContent: '', attrs: {}, dataset: {}, on: {}, setAttribute(k, v) { this.attrs[k] = String(v); }, addEventListener(e, f) { (this.on[e] = this.on[e] || []).push(f); }, click() { (this.on.click || []).forEach(f => f()); }});
-  const box = el(), hint = el(), keys = [...h.matchAll(/<button([^>]*class="mk-tkey"[^>]*)>([^<]*)<\/button>/g)].map(m => { const b = el(), k = m[1].match(/data-k="([^"]*)"/), a = m[1].match(/aria-pressed="([^"]*)"/);
+  const box = el(), hint = el(); box.innerHTML = (h.match(/<div class="mk-mobox">([\s\S]*?)<\/div><div/) || [])[1] || ''; hint.textContent = (h.match(/<span class="mk-hint"[^>]*>([^<]*)<\/span>/) || [])[1] || '';
+  const keys = [...h.matchAll(/<button([^>]*class="mk-tkey"[^>]*)>([^<]*)<\/button>/g)].map(m => { const b = el(), k = m[1].match(/data-k="([^"]*)"/), a = m[1].match(/aria-pressed="([^"]*)"/);
     b.textContent = m[2]; if (k) b.dataset.k = k[1]; if (a) b.attrs['aria-pressed'] = a[1]; return b; });
-  return {box, hint, keys, key: t => keys.find(b => b.textContent === t), querySelector: q => q === '.mk-mobox' ? box : q === '.mk-hint' ? hint : q === '.mk-tkey' ? keys[0] : null,
+  return {box, hint, keys, key: t => keys.find(b => b.textContent === t), querySelector: q => q === '.mk-mobox' && h.includes('class="mk-mobox"') ? box : q === '.mk-hint' && h.includes('class="mk-hint"') ? hint : q === '.mk-tkey' ? keys[0] : null,
     querySelectorAll: q => q === '.mk-tkey' ? keys : []};
 };
 check('bkdmrun', () => { const bad = [], st = ctx.setTimeout; ctx.setTimeout = f => f();
-  try { const run = en => { const p = BKP(en), s = board(p.h); p.init(s); return s; }, V = k => vm.runInContext(k, ctx);
+  try { const V = k => vm.runInContext(k, ctx), first = {'Rate Limit': V('brateSay(0)'), 'Idempotent': V("bidemSay('POST', 0)"), 'Cache': V('bcacheSay([])'), 'Authorization': V('BAZ_IDLE')};
+    const pic = {'Rate Limit': V('brate(0)'), 'Idempotent': V("bidem('POST', 0)"), 'Cache': V('bcache([])'), 'Authorization': V('whelp(BAZ_HELP)')};
+    const run = en => { const p = BKP(en), s = board(p.h); if (s.hint.textContent !== first[en]) bad.push(en + ' 첫 문장'); if (s.box.innerHTML !== pic[en]) bad.push(en + ' 첫 그림'); p.init(s); return s; };
     const r = run('Rate Limit'), rs = () => r.key('요청 보내기').click();
     for (let i = 0; i < 6; i++) rs(); if (!r.box.innerHTML.includes('429') || !r.hint.textContent.includes('429')) bad.push('rate 6');
     r.key('시간 지나기').click(); if (r.hint.textContent !== V('BRL_RESET')) bad.push('rate 리셋');
     rs(); if (r.box.innerHTML.includes('429') || !r.hint.textContent.includes('1번째 요청은 통과')) bad.push('rate 1');
-    const d = run('Idempotent'), ds = () => d.key('다시 보내기').click();
-    ds(); ds(); ds(); if (!d.hint.textContent.includes('3개')) bad.push('idem POST');
+    const d = run('Idempotent'), ds = () => d.key('요청 보내기').click();
+    if (!d.box.innerHTML.includes('POST /posts')) bad.push('idem 첫 그림');
+    ds(); ds(); ds(); if (!d.hint.textContent.includes('3개') || !d.box.innerHTML.includes('새 글 3번')) bad.push('idem POST');
     d.key('PUT').click(); if (!d.hint.textContent.includes('아직 보내지 않았어요') || d.key('POST').attrs['aria-pressed'] !== 'false' || d.key('PUT').attrs['aria-pressed'] !== 'true') bad.push('idem PUT 고르기');
-    ds(); ds(); ds(); if (!d.hint.textContent.includes('1개')) bad.push('idem PUT');
+    ds(); ds(); ds(); if (!d.hint.textContent.includes('1개') || !d.box.innerHTML.includes('PUT /posts/7') || !d.box.innerHTML.includes('7번 글')) bad.push('idem PUT');
     d.key('처음으로').click(); if (!d.hint.textContent.includes('아직')) bad.push('idem 처음');
     const c = run('Cache'), cs = () => c.key('요청 보내기').click();
     cs(); cs(); if (!c.hint.textContent.includes('바로')) bad.push('cache 2');
-    c.key('캐시 비우기').click(); if (c.hint.textContent !== V('BCK_CLEAR')) bad.push('cache 비우기');
-    cs(); if (!c.hint.textContent.includes('DB까지')) bad.push('cache 3');
+    c.key('캐시 비우기').click(); if (c.hint.textContent !== V('BCK_CLEAR') || !c.box.innerHTML.includes(V('BCK_EMPTY'))) bad.push('cache 비우기');
+    cs(); if (!c.hint.textContent.includes('DB까지') || c.box.innerHTML.includes(V('BCK_EMPTY'))) bad.push('cache 3');
     const a = run('Authorization');
     a.key('글 삭제').click(); if (!a.hint.textContent.includes('로그인은 됐지만 권한이 없어요') || !a.box.innerHTML.includes('403')) bad.push('authz 회원');
-    a.key('관리자').click(); if (!a.hint.textContent.includes('아직')) bad.push('authz 고르기');
+    a.key('관리자').click(); if (a.hint.textContent !== V('BAZ_IDLE') || a.key('관리자').attrs['aria-pressed'] !== 'true' || a.key('일반 회원').attrs['aria-pressed'] !== 'false') bad.push('authz 고르기');
     a.key('글 삭제').click(); if (!a.box.innerHTML.includes('200 OK')) bad.push('authz 관리자');
   } finally { ctx.setTimeout = st; }
   return bad.join(', '); });
