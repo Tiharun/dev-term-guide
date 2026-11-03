@@ -5,6 +5,7 @@
 - ③은 남은 12개 카테고리를 사이트 순서(basics → web → front → back → db → server → git → deploy → security → perf → bug → ai)로 하나씩 보강한다. 이 문서는 다섯 번째(db, 화면 이름 "데이터베이스")다.
 - 진행 방식은 back과 같다. 구현은 메인 세션이 하고, 설계서·계획서·구현 묶음 검토는 디렉터 에이전트(Opus 5.5, effort high)가 한다. 판단은 메인이 하고 원장에 남긴다.
 - 사용자 지시(2026-11-03): 초보자가 가장 이해하기 좋은 도구·도우미가 있으면 최대한 다 쓴다. 사용자 선택(브레인스토밍): 도우미는 "쿼리 실행 + 관계도", 하위항목 4개 모두, 직접 조작 4장, 방식은 "결과를 적어 두기(A) + 줄 고르기 함수(C) 섞기".
+- 디렉터 설계서 검토(1차, Critical 2·Important 12·Minor 6)를 반영한 판이다. PLAN.md 칩 메모 줄은 측정해 보니 57줄이 맞아 그대로 둔다(Ruling).
 
 ## 1. 목적과 성공 기준
 
@@ -25,7 +26,7 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
   - 해요체 2~3문장으로 쓴다.
   - 헷갈리는 짝이 있으면 차이를 먼저 쓴다.
 - 기존 48장의 그림을 모두 전용 그림으로 바꾼다(3.4). 측정(2026-11-03): 객체 v 41장(tbl·flow·code·stack·tree·cmp·big), 공유 그림 문자열 7장(Sorting·Seed Data·N+1 Problem `stagger`, Filtering `chip`, Rollback `spring`, Sync `rotate`, Slow Query `progress`, Hard Delete `shake`). 공유 그림 키 자체는 지우지 않는다.
-- 새 그림 도우미 `qrun()`·`erd()`와 표 그리기 `dbtab()`(3.1~3.3). back의 `seq()`를 다시 쓴다.
+- 새 그림 도우미 `qrun()`·`erd()`와 표 그리기 `dbtab()`(3.1~3.3). back의 `seq()`와 전용 그림 조각 `bkStack`·`bkBox`·`bkRows`·`bkPills`([index.html:7684](../../../index.html))를 다시 쓴다. db 그림 `D` 항목은 back 그림 뒤에 두어 이 조각들이 먼저 정의되게 한다.
 - 직접 조작 4장: WHERE, Join, Index, Transaction(3.6)
 - 증상 색인 12개 추가(6장)
 - 글꼴 서브셋, PRODUCT.md·PLAN.md·DESIGN.md의 개수·도우미 표기, 점검 기대값 갱신
@@ -39,20 +40,22 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 
 ## 3. 그림 구조
 
-글자 폭은 back과 같이 `wlen`으로 센다(한글 2, 그 밖 1). 아래 "N폭"은 이 값이다.
+글자 폭은 back과 같이 `wlen`으로 센다(한글 2, 그 밖 1). 아래 "N폭"은 이 값이다. `dbtab`·`erd`는 움직이지 않는 그림(`m:0`)이고, `qrun`만 결과 행이 차례로 나타난다(`m:1`).
 
 ### 3.1 `dbtab()` — DB 표 (새로)
 
-- `dbtab({name, cols, rows, hl, mark, label})`
-  - `name`: 표 이름(예: `users`), 10폭까지. 표 위 머리띠에 "users 테이블"로 쓴다.
-  - `cols`: 열 이름 배열 1~3개, 각 8폭까지. 항목은 문자열이거나 `{n, key}`이고, `key`는 `'PK'`·`'FK'` 중 하나다. 열 이름 옆에 "PK"·"FK" 글자 꼬리표를 붙인다.
-  - `rows`: 행 배열 0~5개. 칸 값은 문자열이고 8폭까지다. 값 `'NULL'`은 기울인 회색 글자 "NULL"로 그리고, 빈 문자열 `''`은 "빈 글자" 꼬리표로 그린다(NULL과 구분).
+- `dbtab({name, tag, cols, rows, hl, mark, label})`
+  - `name`: 표 이름(예: `users`), 12폭까지. 표 위 머리띠에 "users 테이블"로 쓴다.
+  - `tag`: 머리띠 앞에 붙이는 짧은 이름표(예: "소프트 삭제"), 12폭까지. 두 표를 세로로 쌓아 비교할 때 쓴다.
+  - `cols`: 열 이름 배열 1~3개, 각 10폭까지(`created_at`·`student_id`가 10폭). 항목은 문자열이거나 `{n, key}`이고, `key`는 `'PK'`·`'FK'` 중 하나다. 열 이름 옆에 "PK"·"FK" 글자 꼬리표를 붙인다.
+  - `rows`: 행 배열 0~5개. 칸 값은 문자열이고 10폭까지다. 날짜·시각은 `'10-01'`·`'14:05'`처럼 짧은 예시로 쓴다. 값 `'NULL'`은 기울인 회색 글자 "NULL"로 그리고, 빈 문자열 `''`은 "빈 글자" 꼬리표로 그린다(NULL과 구분).
   - `hl`: 강조. `{row: i}`·`{col: j}`·`{cell: [i, j]}` 중 하나이거나 그 배열. 강조는 배경색과 "강조" 글자로 한다(색만으로 구분하지 않음).
-  - `mark`: 행마다 붙이는 꼬리표 배열(예: `['읽음','읽음','건너뜀',…]`). 행 수와 같아야 한다. Index·Full Table Scan이 쓴다.
+  - `mark`: 행마다 붙이는 꼬리표 배열(예: `['읽음','읽음','건너뜀',…]`). 행 수와 같아야 하고, 꼬리표는 6폭까지다. Index·Cascade Delete·DELETE가 쓴다.
 - 행이 0개면 "결과 없음(0줄)"을 쓴다.
-- 입력 검사(넘으면 오류): 이름·열·칸 폭, 열 수, 행 수, 행마다 칸 수가 열 수와 다름, 없는 행·열을 가리키는 `hl`, 행 수와 다른 `mark`, `key`가 PK·FK가 아님.
+- 입력 검사(넘으면 오류): 이름·이름표·열·칸 폭, 열 수, 행 수, 행마다 칸 수가 열 수와 다름, 없는 행·열을 가리키는 `hl`, 행 수와 다른 `mark`·꼬리표 폭, `key`가 PK·FK가 아님.
 - `.sr` 문장: "users 테이블, 열 3개(id, 이름, 이메일), 행 3줄. 1줄: 1, 민수, m@a.com …" 식으로 칸을 읽는다. 강조·꼬리표도 글로 읽는다.
-- 320px에서 열 3개 × 8폭이 넘치면 계획서 ① Task 1에서 칸 폭 한도를 6폭으로 줄인다(break-ui로 잰다).
+- 320px(그림판 안쪽 약 244px, 추측)에서 3열 × 10폭이 들어가는지 계획서 ① Task 1에서 break-ui로 잰다. 넘치면 칸 안 줄바꿈을 허용하고 칸 안쪽 여백을 줄여 넘침 0을 지킨다(글자 11px 하한은 유지). 칸 폭 한도는 낮추지 않는다(`m@a.com`·`category`·`COUNT(*)`가 깨지므로).
+- `dbtab`은 `vs` 칸 안에 넣지 않는다. `vs` 한 칸은 320px에서 약 96px라 표가 들어가지 않는다(측정: `.cmp` 두 칸·간격 12px·안쪽 여백 10px, [index.html:204](../../../index.html)). 표끼리 비교는 `tag`를 단 `dbtab` 두 개를 `bkStack`으로 세로로 쌓는다.
 
 ### 3.2 `qrun()` — 쿼리 실행 (새로)
 
@@ -60,12 +63,13 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
   - `sql`: 쿼리 글. 1~4줄, 줄마다 28폭까지(back `ide`와 같은 한도).
   - `from`: 실행 전 표 1~2개(`dbtab` 입력과 같은 모양). 2개는 JOIN·Subquery·Cascade Delete처럼 두 표가 필요할 때만 쓴다.
   - 결과는 `pick`·`after`·`err` 중 **정확히 하나**로 정한다(둘 이상이거나 없으면 오류):
-    - `pick: r => …` — 줄 고르기 함수. `from[0]`의 각 행을 `{열이름: 값}` 객체로 받아 참·거짓을 돌려준다. 고른 행은 실행 전 표에서도 강조되고, 결과 표가 된다. WHERE·LIKE·IN·BETWEEN·IS NULL·Filtering처럼 줄만 거르는 쿼리에 쓴다. 결과를 손으로 적지 않으므로 쿼리와 어긋날 수 없다.
-    - `del: 1`(pick과 함께) — DELETE. 고른 행에 "지움" 꼬리표를 달고, 결과 표는 남은 행이다. 머리띠는 "지운 뒤 남은 줄"이다.
-    - `after: {name, cols, rows}` — 결과 표를 직접 적는다. JOIN·GROUP BY·COUNT·ORDER BY·INSERT·UPDATE처럼 행을 합치거나 바꾸는 쿼리에 쓴다.
-    - `err: '메시지'` — 막힌 쿼리. 결과 자리에 "실패" 글자와 메시지(28폭까지)를 쓰고, 실행 전 표는 그대로임을 "표는 그대로예요"로 쓴다. NOT NULL·Check Constraint·Unique Constraint·Composite Key가 쓴다.
-  - `hl`: `after` 결과 표의 강조(`dbtab`의 `hl`과 같은 모양). 새로 생기거나 바뀐 칸을 가리킨다.
-- `after` 값 점검(넘으면 오류): 결과 칸 값은 (1) 실행 전 표 어딘가에 있는 값, (2) 숫자, (3) `'NULL'`, (4) `hl`로 가리킨 칸 중 하나여야 한다. 손으로 적은 결과가 실행 전 표와 엇나가는 일을 줄인다. 열 이름은 점검하지 않는다(Column Alias·COUNT 열 이름이 새로 생김).
+    - `pick: r => …` — 줄 고르기 함수. `from[0]`의 각 행을 `{열이름: 값}` 객체로 받아 참·거짓을 돌려준다. 값은 숫자 모양 글(`'25'`)이면 숫자, `'NULL'`이면 `null`, 그 밖은 글자로 바꿔 넘긴다. 고른 행은 실행 전 표에서도 강조되고, 결과 표가 된다. WHERE·LIKE·IN·BETWEEN·IS NULL처럼 줄만 거르는 쿼리에 쓴다. 결과를 손으로 적지 않으므로 쿼리와 어긋날 수 없다.
+    - `del: 1` — DELETE. `pick`과만 함께 쓴다(`after`·`err`와 함께면 오류). 고른 행에 "지움" 꼬리표를 달고, 결과 표는 남은 행이다. 머리띠는 "지운 뒤 남은 줄"이다.
+    - `after` — 결과 표를 직접 적는다. 표 하나 `{name, cols, rows}` 또는 표 1~2개 배열이다(Cascade Delete는 users·orders 두 표가 모두 바뀜). JOIN·GROUP BY·COUNT·ORDER BY·INSERT·UPDATE처럼 행을 합치거나 바꾸는 쿼리에 쓴다.
+    - `err: '메시지'` — 막힌 쿼리. 결과 자리에 "실패" 글자와 **한국어 요약** 메시지(28폭까지, 예: "이미 있는 이메일이에요")를 쓰고, 실행 전 표는 그대로임을 "표는 그대로예요"로 쓴다. 실제 오류 원문(예: `duplicate key value violates unique constraint`)은 28폭을 넘으므로 cap이나 x에 "(PostgreSQL 예)"와 함께 쓴다. NOT NULL·Check Constraint·Unique Constraint·Composite Key가 쓴다.
+  - `hl`: `after` 결과 표의 강조(`dbtab`의 `hl`과 같은 모양). 새로 생기거나 바뀐 칸을 가리킨다. `after`일 때만 쓴다(`pick`은 고른 행을 저절로 강조하고, `err`에는 결과 표가 없다). 표가 두 개면 `[hl0, hl1]`이다.
+- `after` 값 점검(넘으면 오류): 결과 칸 값은 (1) 실행 전 표 어딘가에 있는 값, (2) 숫자, (3) `'NULL'`, (4) `hl`로 가리킨 칸 중 하나여야 한다. 손으로 적은 결과가 실행 전 표와 엇나가는 일을 줄인다. 열 이름은 점검하지 않는다(Column Alias·집계 열 이름이 새로 생김).
+- 집계 함수를 쓰는 SQL에는 `AS`로 열 이름을 붙인다(예: `COUNT(*) AS 개수`). 붙이지 않으면 PostgreSQL은 함수 이름(`count`·`sum`)을 열 이름으로 쓰고, `COUNT`가 둘이면 같은 이름이 둘 생긴다([PostgreSQL SELECT](https://www.postgresql.org/docs/current/sql-select.html)). 열 이름 폭 문제도 함께 풀린다.
 - 배치: 세 폭 모두 세로로 쌓는다. 실행 전 표(2개면 위아래로) → "실행" 띠와 SQL → 결과 표. 320px에서 표 두 개를 나란히 두면 넘치기 때문이다(추측, Task 1에서 잼).
 - 움직임: 결과 행이 차례로 나타난다(기존 `mk-cdz{k}` 키프레임, `seq`의 `.mk-sqm.A`와 같은 규칙의 새 클래스). `still`이면 모두 보이는 마지막 장면이다. 결과가 `err`면 "실패" 줄 하나만 나타난다.
 - SQL 글자는 쿼리 그대로 두지만, 결과 표 위 머리띠는 "결과 2줄"처럼 줄 수를 쓴다.
@@ -75,13 +79,14 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 ### 3.3 `erd()` — 관계도 (새로)
 
 - `erd({tables, links, hl, label})`
-  - `tables`: 표 상자 2~3개, 항목 `{name, cols}`. 이름 10폭, 열 1~4개, 열 이름 10폭. 열은 `dbtab`처럼 문자열 또는 `{n, key}`.
-  - `links`: 이웃한 두 상자를 잇는 선 배열, 항목 `{a, b, kind, fk}`. `a`·`b`는 이웃한 표 번호(|a−b| = 1). `kind`는 `'1:1'`·`'1:N'`·`'N:1'`·`'N:M'` 중 하나. `fk`는 둘 중 한 표에 `key:'FK'`로 있는 열 이름이다. `N:M`은 `fk`가 없어야 하고, 선 옆에 "중간 표가 필요해요"를 쓴다.
+  - `tables`: 표 상자 2~3개, 항목 `{name, cols}`. 이름 12폭(`enrollments`가 11폭), 열 1~4개, 열 이름 10폭. 열은 `dbtab`처럼 문자열 또는 `{n, key}`.
+  - `links`: 이웃한 두 상자를 잇는 선 배열, 항목 `{a, b, kind, fk}`. `a`·`b`는 이웃한 표 번호(|a−b| = 1). `kind`는 `'1:1'`·`'1:N'`·`'N:1'`·`'N:M'` 중 하나이고 `a : b` 순서로 읽는다(`'1:N'`은 a 하나에 b 여럿).
+  - `fk`는 FK 열 이름이고 놓이는 표가 정해져 있다: `'1:N'`이면 b 표, `'N:1'`이면 a 표, `'1:1'`이면 둘 중 하나에 `key:'FK'`로 있어야 한다. `N:M`은 `fk`가 없어야 하고, 선 옆에 "중간 표가 필요해요"를 쓴다.
   - `hl`: 강조할 표 이름 또는 `'표.열'` 배열.
 - 배치: 상자를 세로로 쌓고, 상자 사이 칸에 "1 : N" 꼬리표와 "orders.user_id로 이어져요" 글을 쓴다. 선 모양은 장식(`aria-hidden`)이고, 관계는 글로 전한다. 읽히는 글에 화살표 기호를 쓰지 않는다.
-- 입력 검사(넘으면 오류): 표 수, 이름·열 폭과 수, 이웃하지 않은 `a`·`b`, 잘못된 `kind`, FK가 아닌 `fk`, `N:M`에 `fk`, 없는 이름을 가리키는 `hl`.
+- 입력 검사(넘으면 오류): 표 수, 이름·열 폭과 수, 이웃하지 않은 `a`·`b`, 잘못된 `kind`, FK가 아니거나 `kind`가 정한 표에 없는 `fk`, `N:M`에 `fk`, 없는 이름을 가리키는 `hl`.
 - `.sr` 문장: "관계도. users 표(id PK, 이름), orders 표(id PK, user_id FK). users 하나에 orders 여럿, orders.user_id로 이어져요."
-- 대상: Primary Key, Foreign Key, Schema, RDBMS, Relation, ERD, Normalization, One-to-Many, Many-to-Many, Junction Table, Denormalization
+- 대상: Foreign Key, Schema, ERD, Normalization, One-to-Many, Many-to-Many, Junction Table. 같은 users·orders 1:N 그림이 여러 장에 반복되지 않게 카드마다 표나 강조를 다르게 한다(3.4·3.5).
 
 ### 3.4 기존 48장 다시 그리기
 
@@ -89,60 +94,61 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 
 | 하위항목 | 카드 | 새 그림 |
 |---|---|---|
-| basic | Table | `dbtab` users 3열·3행, cap에 "가로 한 줄 = 행, 세로 한 칸 = 열" |
+| basic | Table | `dbtab` users 3열·3행, cap "가로 한 줄 = 행, 세로 한 칸 = 열" |
 | basic | Row | `dbtab` users, 2번째 행 강조 "회원 한 명" |
 | basic | Column | `dbtab` users, 이메일 열 강조 |
-| basic | Primary Key | `erd` users·orders, `users.id` 강조 |
+| basic | Primary Key | `dbtab` users에 이름이 같은 "민수" 두 줄, id 열(PK) 강조, cap "이름이 같아도 id로 구분해요" |
 | basic | Foreign Key | `erd` users·orders(1:N, user_id), `orders.user_id` 강조 |
-| basic | Data Type | `doc` 표: 열 · 타입 · 예시 값(price 정수 12000, name 글자 민수, created_at 날짜, is_paid 참·거짓) |
-| basic | Query | `qrun` `SELECT * FROM users WHERE age > 20` + `pick` |
+| basic | Data Type | `doc` 표: 열 · 타입 · 예시 값(price 정수 12000, name 글자 민수, created_at 날짜 10-01, is_paid 참·거짓) |
+| basic | Query | `qrun` posts 표, `SELECT title FROM posts` / `WHERE likes > 10` + `pick`(WHERE 직접 조작의 users 표와 다름) |
 | basic | Schema | `erd` users·posts, 열마다 타입을 이름 옆에 적음(예: `email 글자`), cap "표를 만들기 전 설계도" |
-| core | SQL | `qrun` `SELECT name FROM users ORDER BY name` + `after` |
-| core | RDBMS | `erd` users·orders(1:N), cap "표끼리 키로 이어 저장" |
-| core | NoSQL | `vs`: 왼쪽 `dbtab` users 행, 오른쪽 JSON 문서 한 개(`fcss`) |
-| core | Relation | `erd` users·orders 1:N, cap "회원 한 명 · 주문 여러 개" |
+| core | SQL | `doc` 표: 명령 네 가지(SELECT 가져오기 · INSERT 넣기 · UPDATE 고치기 · DELETE 지우기)와 짧은 예 |
+| core | RDBMS | `doc` 표: 약속 셋(표로 저장 · 키로 이음 · SQL로 물음), 예 MySQL·PostgreSQL |
+| core | NoSQL | `bkStack`: `dbtab` users(tag "표로 저장") 위, JSON 문서 한 개(`fcss`, "문서로 저장") 아래 |
+| core | Relation | `doc` 표: 관계 세 종류 1:1(회원·프로필) · 1:N(회원·주문) · N:M(학생·강의) |
 | core | Index ▶ | 인덱스 있음·없음을 고르고 "찾기"를 누르면 읽은 줄이 5줄·1줄로 바뀜 |
-| core | Migration | `qrun` `ALTER TABLE users ADD phone TEXT;` + `after`(phone 열 NULL, 열 강조) |
+| core | Migration | `term`: `ls migrations` 결과 001_users.sql · 002_phone.sql(적용됨) · 003_avatar.sql(대기), 이어서 `npm run migrate`와 "003 적용함"(예시). 바꾼 내역이 파일로 쌓이고 차례로 적용됨을 보임 |
 | core | Transaction ▶ | "중간에 실패" 켜고 끄기 + "실행": 모두 반영 또는 모두 되돌림 |
 | core | Backup | `track`: DB → 매일 밤 복사(예시) → 백업 파일 보관 |
 | motion | Data Flow | `seq` 브라우저·서버·DB: 저장 요청 → INSERT → 저장됨 → 목록 조회 → 화면 표시 |
-| motion | Join ▶ | INNER·LEFT를 고르면 주문 없는 회원 줄이 사라지거나 NULL과 함께 나타남 |
-| motion | Sorting | `qrun` `ORDER BY price` + `after`(정렬된 3줄) |
-| motion | Filtering | `qrun` `WHERE price < 10000` + `pick` |
-| motion | Seed Data | `term` `npm run seed` → "회원 3명 넣음(예시)" + `dbtab` 결과 |
+| motion | Join ▶ | users·orders 두 표에서 INNER·LEFT를 고르면 주문 없는 회원 줄이 사라지거나 NULL과 함께 나타남 |
+| motion | Sorting | `vs`: 같은 상품 셋을 가격순 vs 이름순(`bkRows`, 표 아님). SQL은 ORDER BY 카드가 맡음 |
+| motion | Filtering | 화면 필터 칩 "1만 원 미만"(선택됨, `bkPills`) 아래에 그 뒤에서 도는 `qrun` products 표 `WHERE price < 10000` + `pick` |
+| motion | Seed Data | `term` `npm run seed`와 "회원 3명 넣음(예시)" + `dbtab` 결과 |
 | motion | Rollback | `seq` 앱·DB: BEGIN → 출금 → 처리(오류) 실패 → ROLLBACK → 되돌려짐 |
-| motion | Replication | `seq` 서버·원본 DB·복제 DB: 쓰기 → 복사 → 읽기는 복제에서 |
-| motion | Sync | `seq` 휴대폰·서버: 오프라인에서 고침 → 연결되면 보냄 → 처리(같게 맞춤) → 최신 값 받음 |
-| adv | Normalization | 세로 쌓기: `dbtab` orders(회원 이름이 줄마다 반복, 강조) → `erd` users·orders |
-| adv | N+1 Problem | `seq` 서버·DB: 글 목록 1번 → 작성자 조회 ×3 → cap "글 100개면 101번, JOIN이면 1번" |
+| motion | Replication | `seq` 서버·원본 DB·복제 DB: 쓰기 → 복사 → 처리(고장) 실패 → 쓰기·읽기(서버가 복제에), cap "원본이 고장 나도 복제가 이어받아요" |
+| motion | Sync | `seq` 휴대폰·서버: 처리(오프라인 수정) → 연결되면 보냄 → 처리(같게 맞춤) → 최신 값 받음 |
+| adv | Normalization | `bkStack`: `dbtab` orders(tag "나누기 전", 회원 이름이 줄마다 반복, 강조) 위, `erd` users·orders 아래 |
+| adv | N+1 Problem | `seq` 서버·DB: 글 목록 조회 1번 → 작성자 조회 3번, cap "글 100개면 101번, JOIN이면 1번" |
 | adv | Slow Query | `term` 느린 쿼리 로그 두 줄(duration 3200 ms 예시 + SQL) |
-| adv | Redis | `seq` 서버·Redis·DB: 조회 → 없음 → DB 조회 → Redis에 저장 → 다음엔 Redis에서 바로 |
+| adv | Redis | `seq` 서버·Redis·DB: 조회 → 없음 → 조회 → 결과 → 저장 → 다시 조회 → 바로 응답 |
 | adv | ERD | `erd` users·posts·comments(1:N, 1:N) |
-| adv | Soft Delete | `qrun` `UPDATE posts SET deleted_at = …` + `after`(deleted_at 칸 강조) |
-| adv | Sharding | `seq` 서버·DB 1·DB 2: 회원 7번 저장 → DB 1, 회원 1500번 저장 → DB 2(나누는 기준 예시) |
-| adv | Supabase | `stack`: DB(PostgreSQL) · 로그인 · 파일 저장, DB 칸 강조 |
+| adv | Soft Delete | `qrun` `UPDATE posts` / `SET deleted_at = '11-03'` / `WHERE id = 2` + `after`(deleted_at 칸 강조, 날짜 예시) |
+| adv | Sharding | `seq` 서버·DB 1·DB 2: 7번 저장(서버가 DB 1에) → 1500번 저장(서버가 DB 2에), cap "나누는 기준은 예시: 1000번까지 DB 1" |
+| adv | Supabase | `bkStack`·`bkBox`: DB(PostgreSQL) · 로그인 · 파일 저장, DB 칸 강조 |
 | sql | SELECT | `qrun` `SELECT name, email FROM users` + `after`(두 열) |
 | sql | INSERT | `qrun` INSERT + `after`(새 줄 강조) |
 | sql | UPDATE | `qrun` `UPDATE … WHERE id = 2` + `after`(바뀐 칸 강조), cap "WHERE를 빼면 전부 바뀌어요" |
 | sql | DELETE | `qrun` `DELETE … WHERE id = 3` + `pick` + `del` |
 | sql | WHERE ▶ | 조건 셋 중 하나를 고르면 `pick`으로 결과가 바뀜 |
 | sql | ORDER BY | `qrun` `ORDER BY created_at DESC` + `after` |
-| sql | GROUP BY | `qrun` `SELECT category, COUNT(*) … GROUP BY category` + `after` |
-| sql | LIMIT | `qrun` `LIMIT 2` + `after`(앞 2줄) |
-| tip | Hard Delete | `vs`: 완전 삭제(줄이 사라짐) vs 소프트 삭제(deleted_at 표시), `dbtab` 두 개 |
+| sql | GROUP BY | `qrun` `SELECT category,` / `COUNT(*) AS 개수` / `FROM products` / `GROUP BY category` + `after` |
+| sql | LIMIT | `qrun` `SELECT title FROM posts` / `ORDER BY id LIMIT 2` + `after`(앞 2줄). x에 "ORDER BY 없이 LIMIT만 쓰면 어떤 줄이 나올지 정해지지 않아요"([PostgreSQL SELECT](https://www.postgresql.org/docs/current/sql-select.html)) |
+| tip | Hard Delete | `bkStack`: `dbtab` 두 개(tag "완전 삭제": 줄이 없어짐 / tag "소프트 삭제": deleted_at 표시) |
 | tip | Restore | `track`: 백업 파일(어제 03:00 예시) → 복원 → DB가 그 시점으로 |
 | tip | Data Integrity | `doc` 표: 지키는 규칙 셋(형식·빈 값·연결)과 막힌 예 |
-| tip | Unique Constraint | `qrun` 같은 이메일 INSERT + `err` "이미 있는 이메일" |
+| tip | Unique Constraint | `qrun` 같은 이메일 INSERT + `err` "이미 있는 이메일이에요" |
 | tip | NULL | `dbtab` 전화 열: NULL · 빈 글자 · `0` 세 줄, NULL 칸 강조, cap "0도 빈 글자도 아니에요" |
-| tip | Timestamp | `dbtab` created_at·updated_at 열 강조 |
-| tip | Spreadsheet vs DB | `vs`: 엑셀(한 사람이 파일을 열어 고침) vs DB(앱 여러 개가 동시에 쿼리) |
-| tip | Personal Data | `vs`: 필요한 열만(이름·이메일) vs 안 받아도 되는 열까지(주소 등, 값은 적지 않음) |
+| tip | Timestamp | `dbtab` created_at·updated_at 열 강조(값은 `10-01 09:00`처럼 10폭 안 예시) |
+| tip | Spreadsheet vs DB | `vs`: 엑셀(한 사람이 파일을 열어 고침) vs DB(앱 여러 개가 동시에 쿼리), 칸 안은 글만 |
+| tip | Personal Data | `bkStack`: `bkPills` "저장하는 열"(이름·이메일)과 "받지 않아도 되는 열"(주소 등), 값은 적지 않음 |
 
 공통 규칙(DESIGN.md):
 - 그림 글자는 11px 이상이다.
 - 그림 속 숫자·시각·건수는 예시로 표시한다. 접속 주소·비밀번호는 `****`로 가린다.
 - 실제 사람처럼 보이는 개인정보(전화번호 전체, 주소, 주민번호)를 쓰지 않는다. 전화는 `010-…`처럼 줄인다.
-- SQL은 표준 SQL로 쓰고, DB마다 다른 문법(예: `LIMIT`, 자동 번호)은 x에 "DB마다 달라요"를 쓴다. 오류 메시지 예는 PostgreSQL 것을 쓰고 "(PostgreSQL 예)"로 표시한다.
+- SQL은 표준 SQL로 쓰고, DB마다 다른 문법(예: `LIMIT`, 자동 번호)은 x에 "DB마다 달라요"를 쓴다. 그림 속 오류는 `qrun`의 `err`처럼 한국어 요약으로 쓰고, 실제 원문은 PostgreSQL 것을 cap·x에 "(PostgreSQL 예)"로 표시한다.
+- `seq`를 쓰는 행의 글은 back 한도(메시지 8개, 글 14폭, 세로줄 3개면 이름 8폭·4개면 6폭)를 지킨다. 표의 화살표(→)는 메시지 차례를 적은 것이고 그림 글에는 들어가지 않는다. 괄호 속 "(실패)"·"(기다림)"은 `err:1`·`wait:1`, "처리(…)"는 `from === to` 상자다.
 - 회사 로고·브랜드 이름을 새로 쓰지 않는다("DB 클라이언트", "로그인 서비스").
 - 320/375/1280 세 폭에서 넘침이 없어야 한다.
 - 상태를 색만으로 구분하지 않는다.
@@ -151,52 +157,52 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 
 ### 3.5 새 카드 그림
 
-새 43장은 `qrun`·`erd`·`dbtab`·`seq`와 기존 도우미(`vs`·`track`·`doc`·`term`·`stack`)로 그린다. 도우미가 못 그리는 장면만 전용 HTML로 그린다.
+새 43장은 `qrun`·`erd`·`dbtab`·`seq`와 기존 도우미(`vs`·`track`·`doc`·`term`·`fcss`)·back 조각(`bkStack`·`bkBox`·`bkRows`·`bkPills`)으로 그린다. 객체 v `{stack}`은 `dbobj`가 막으므로 쓰지 않는다. 도우미가 못 그리는 장면만 전용 HTML로 그린다.
 
 | 하위항목 | 카드 | 새 그림 |
 |---|---|---|
-| query | INNER JOIN | `qrun` users(민수·지영·준호)·orders 두 표 + `after`(짝이 있는 줄만, 준호 없음) |
-| query | LEFT JOIN | 같은 두 표 + `after`(준호 줄과 주문 NULL, 강조) |
-| query | Aggregate Function | `qrun` `SELECT COUNT(*), SUM(price), MAX(price)` + `after`(숫자 한 줄) |
-| query | COUNT | `qrun` `COUNT(*)`·`COUNT(phone)` + `after`(5 · 3), cap "NULL은 세지 않아요" |
-| query | HAVING | `qrun` `GROUP BY city HAVING COUNT(*) >= 2` + `after` |
-| query | DISTINCT | `qrun` `SELECT DISTINCT city` + `after` |
+| query | INNER JOIN | `qrun` posts(글 셋)·comments 두 표 + `after`(댓글 있는 글만). Join 직접 조작의 users·orders와 다른 표 |
+| query | LEFT JOIN | `qrun` products·reviews 두 표 + `after`(후기 없는 상품은 NULL, 강조) |
+| query | Aggregate Function | `qrun` `SELECT COUNT(*) AS 수,` / `SUM(price) AS 합,` / `MAX(price) AS 최고` / `FROM orders` + `after`(숫자 한 줄) |
+| query | COUNT | `qrun` `SELECT COUNT(*) AS 전체,` / `COUNT(phone) AS 전화` / `FROM users` + `after`(5 · 3), cap "NULL은 세지 않아요" |
+| query | HAVING | `qrun` `SELECT city, COUNT(*) AS 수` / `FROM users` / `GROUP BY city` / `HAVING COUNT(*) >= 2` + `after` |
+| query | DISTINCT | `qrun` `SELECT DISTINCT city` / `FROM users` + `after` |
 | query | LIKE | `qrun` `WHERE name LIKE '민%'` + `pick` |
-| query | IN | `qrun` `WHERE city IN ('서울', '부산')` + `pick` |
-| query | BETWEEN | `qrun` `WHERE price BETWEEN 1000 AND 5000` + `pick`, cap "양 끝 값도 들어가요" |
-| query | Subquery | `qrun` 두 표, `WHERE id IN (SELECT user_id …)` + `after` |
+| query | IN | `qrun` `SELECT * FROM users` / `WHERE city IN` / `('서울', '부산')` + `pick` |
+| query | BETWEEN | `qrun` `WHERE price` / `BETWEEN 1000 AND 5000` + `pick`, cap "양 끝 값도 들어가요" |
+| query | Subquery | `qrun` 두 표, `WHERE id IN (` / `SELECT user_id FROM orders)` + `after` |
 | query | Column Alias | `qrun` `SELECT name AS 이름` + `after`(열 이름만 바뀜) |
 | query | IS NULL | `qrun` `WHERE phone IS NULL` + `pick`, cap "`= NULL`로는 아무것도 안 나와요" |
-| model | NOT NULL | `qrun` 이름 없이 INSERT + `err` |
+| model | NOT NULL | `qrun` 이름 없이 INSERT + `err` "이름은 비울 수 없어요" |
 | model | Default Value | `qrun` status 없이 INSERT + `after`(status '대기', 강조) |
 | model | Auto Increment | `qrun` 이름만 INSERT + `after`(id 4가 저절로, 강조) |
-| model | Composite Key | `qrun` 수강 표(student_id·course_id 둘 다 PK)에 같은 짝 INSERT + `err` |
-| model | Surrogate Key | `vs`: 이메일을 키로(바뀌면 곤란) vs id를 키로, `dbtab` 두 개 |
-| model | Check Constraint | `qrun` price −500 INSERT + `err` "price >= 0 규칙" |
-| model | One-to-Many | `erd` users·orders 1:N, orders 강조 |
+| model | Composite Key | `qrun` enrollments 표(student_id·course_id 둘 다 PK)에 같은 짝 INSERT + `err` "같은 짝이 이미 있어요" |
+| model | Surrogate Key | `bkStack`: `dbtab` 두 개(tag "이메일이 키": 이메일을 바꾸면 곤란 / tag "id가 키") |
+| model | Check Constraint | `qrun` price `-500` INSERT(ASCII 빼기) + `err` "price는 0 이상이어야 해요" |
+| model | One-to-Many | `erd` users·orders 1:N, orders 강조 + 아래 `dbtab` orders(민수 주문 두 줄). Foreign Key 그림(열 강조)과 다르게 "하나에 여럿"을 줄로 보임 |
 | model | Many-to-Many | `erd` students·courses N:M "중간 표가 필요해요" |
 | model | Junction Table | `erd` students·enrollments·courses(1:N, N:1), enrollments 강조 |
-| model | Cascade Delete | `qrun` users·orders 두 표, `DELETE FROM users WHERE id = 1` + `after`(orders에 민수 주문이 없어짐) |
-| model | Denormalization | `vs`: JOIN으로 이름을 가져옴 vs orders에 이름을 복사해 둠(빠름, 고칠 곳이 늘어남) |
+| model | Cascade Delete | 위 `fcss` 상자에 FK 정의 `user_id … REFERENCES users` / `ON DELETE CASCADE`, 아래 `qrun` users·orders 두 표 `DELETE FROM users WHERE id = 1` + `after` 두 표(users에서 민수, orders에서 민수 주문이 함께 없어짐). x에 "기본값(NO ACTION)이면 이 DELETE는 막혀요" |
+| model | Denormalization | `bkStack`: `dbtab` orders(tag "복사해 둠", 회원 이름 열 강조) + 글 "읽기는 빨라지고, 이름을 고칠 곳이 늘어나요" |
 | tx | ACID | `doc` 표: 원자성 · 일관성 · 격리성 · 지속성, 한 줄 풀이 |
 | tx | Autocommit | `seq` 앱·DB: UPDATE → 처리(바로 확정) → UPDATE → 처리(바로 확정), cap "BEGIN이 없으면 한 문장씩 확정" |
-| tx | Savepoint | `seq` 앱·DB: BEGIN → 주문 저장 → SAVEPOINT a → 쿠폰 실패 → ROLLBACK TO a → COMMIT |
-| tx | Isolation Level | `doc` 표: 수준 · 막아 주는 것, READ COMMITTED에 "PostgreSQL 기본값" |
-| tx | Dirty Read | `seq` A·DB·B: A가 값 바꿈(확정 전) → B가 읽음 → A 롤백 → B는 사라진 값을 봄, cap "PostgreSQL은 이 일을 막아요" |
-| tx | Lost Update | `seq` A·DB·B: 둘 다 재고 10 읽음 → A가 9로 씀 → B도 9로 씀 → 하나가 사라짐 |
-| tx | Deadlock | `seq` A·DB·B: A가 1번 잠금 → B가 2번 잠금 → A가 2번 기다림 → B가 1번 기다림 → DB가 하나를 취소(실패) |
-| tx | Optimistic Locking | `seq` 앱·DB: `version = 3`이면 고침 → 0줄 바뀜(실패) → 다시 읽고 다시 시도 |
-| tx | Pessimistic Locking | `seq` A·DB·B: `FOR UPDATE`로 잠금 → B 기다림 → A COMMIT → B 진행 |
+| tx | Savepoint | `seq` 앱·DB: BEGIN → 주문 저장 → SAVEPOINT a → 쿠폰 적용(실패) → ROLLBACK TO a → COMMIT |
+| tx | Isolation Level | `doc` 표 **PostgreSQL 기준**: READ COMMITTED(기본값) · REPEATABLE READ · SERIALIZABLE과 막아 주는 일. "READ UNCOMMITTED는 READ COMMITTED처럼 동작", "표준 SQL 표와 조금 달라요"([PostgreSQL Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)) |
+| tx | Dirty Read | `seq` A·DB·B: 확정 전 수정 → 읽기 → 바뀐 값 → ROLLBACK → 처리(사라진 값 씀), cap "표준은 가장 낮은 수준에서 허용하지만 PostgreSQL은 막아요" |
+| tx | Lost Update | `seq` A·DB·B: 재고 10 읽음(둘 다) → 9로 씀(A) → 9로 씀(B), cap "둘이 하나씩 팔았는데 재고는 9" |
+| tx | Deadlock | `seq` A·DB·B: 1번 잠금 → 2번 잠금 → 2번 요청(기다림) → 1번 요청(기다림) → 취소(실패), cap "DB가 한쪽을 취소해요, 어느 쪽일지는 정할 수 없어요. 오류는 deadlock detected(PostgreSQL 예)" |
+| tx | Optimistic Locking | `seq` 앱·DB: UPDATE v=3 → 0줄 바뀜(실패) → 처리(다시 읽기) → UPDATE v=4 → 1줄 바뀜, cap "v는 고칠 때마다 1씩 느는 version 열" |
+| tx | Pessimistic Locking | `seq` A·DB·B: FOR UPDATE(A) → UPDATE(B, 기다림) → COMMIT(A) → 진행(DB가 B에), cap "그냥 SELECT는 막지 않아요" |
 | tx | Connection Pool | `track`: 미리 연 연결 칸 5개 → 요청이 하나 빌림 → 쿼리 → 돌려줌 |
 | ops | Query Plan | `term` `EXPLAIN …` 결과 두 경우: `Seq Scan`(인덱스 없음) · `Index Scan`(있음) |
-| ops | Full Table Scan | `dbtab` 5줄 모두 "읽음" 꼬리표(`mark`), 찾은 줄만 강조 |
-| ops | Composite Index | `doc` 표: 인덱스 (city, age)가 잘 쓰이는 조건과 잘 안 쓰이는 조건 |
-| ops | Read Replica | `seq` 서버·원본·복제: 쓰기는 원본 → 복사(기다림) → 읽기는 복제, cap "복사가 조금 늦을 수 있어요" |
+| ops | Full Table Scan | `track`: 1번째 줄 읽음 → 2번째 줄 → … → 마지막 줄(10만 번째, 예시), cap "같은 값이 더 있을 수 있어 끝까지 봐요". Index 직접 조작의 5줄 표와 다른 장면 |
+| ops | Composite Index | `doc` 표: 인덱스 (city, age)가 잘 쓰이는 조건(city만 · city와 age)과 덜 효율적인 조건(age만, PostgreSQL 18부터는 skip scan으로 쓰일 때도 있음, [Multicolumn Indexes](https://www.postgresql.org/docs/current/indexes-multicolumn.html)) |
+| ops | Read Replica | `seq` 서버·원본·복제: 글 쓰기 → 복사(기다림) → 글 읽기(서버가 복제에) → 아직 옛 글, cap "읽기를 나눠 맡기지만 복사가 조금 늦을 수 있어요". Replication(고장 대비)과 다른 장면 |
 | ops | Connection String | `doc`: `postgres://app:****@db.example.com:5432/shop` 한 줄과 부분 이름 표(사용자·비밀번호·호스트·포트·DB 이름) |
 | ops | Too Many Connections | `track`: 연결 칸이 가득 참 → 새 요청 거절(실패), "too many clients already(PostgreSQL 예)" |
 | ops | Query Timeout | `track`: 쿼리 시작 → 정한 시간 지남(예시 5초) → DB가 쿼리를 취소(실패) |
 | ops | Point-in-Time Recovery | `track` 시간 줄: 03:00 백업 · 14:05 실수로 삭제 · 14:04 시점으로 되살림(예시) |
-| ops | Database Dump | `term` `pg_dump shop > shop.sql` → 파일 첫 줄 `CREATE TABLE …`, `INSERT …` |
+| ops | Database Dump | `term` `pg_dump shop > shop.sql`와 파일 일부 `CREATE TABLE …`·`COPY … FROM stdin;`, cap "기본은 COPY 줄, --inserts를 주면 INSERT로 나와요"([pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)) |
 | ops | Database Client | 전용 HTML: 표 목록 칸 · 쿼리 창 · `dbtab` 결과(320px에서는 세로로 쌓음) |
 
 ### 3.6 직접 조작 4장
@@ -219,13 +225,16 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 - r은 이미 있는 같은 뜻·짝 카드에만 단다. 후보:
   - INNER JOIN↔Join·LEFT JOIN, LEFT JOIN↔Join·NULL, Aggregate Function↔COUNT·GROUP BY, COUNT↔Aggregate Function·NULL, HAVING↔GROUP BY·WHERE, DISTINCT↔SELECT, LIKE↔WHERE, IN↔WHERE·Subquery, BETWEEN↔WHERE, Subquery↔Query·IN, Column Alias↔SELECT, IS NULL↔NULL·WHERE
   - NOT NULL↔NULL·Data Integrity, Default Value↔INSERT, Auto Increment↔Primary Key·Surrogate Key, Composite Key↔Primary Key·Junction Table, Surrogate Key↔Primary Key·UUID, Check Constraint↔Data Integrity·Validation, One-to-Many↔Relation·Foreign Key, Many-to-Many↔Junction Table·Relation, Junction Table↔Many-to-Many·Foreign Key, Cascade Delete↔Foreign Key·Hard Delete, Denormalization↔Normalization·Join
-  - ACID↔Transaction, Autocommit↔Transaction, Savepoint↔Rollback·Transaction, Isolation Level↔Dirty Read·Transaction, Dirty Read↔Isolation Level, Lost Update↔Race Condition·Optimistic Locking, Deadlock↔Lock·Transaction, Optimistic Locking↔Lost Update·Pessimistic Locking, Pessimistic Locking↔Lock·Optimistic Locking, Connection Pool↔Too Many Connections
+  - ACID↔Transaction, Autocommit↔Transaction, Savepoint↔Rollback·Transaction, Isolation Level↔Dirty Read·Transaction, Dirty Read↔Isolation Level, Lost Update↔Race Condition·Concurrency·Optimistic Locking, Deadlock↔Lock·Transaction, Optimistic Locking↔Lost Update·Pessimistic Locking, Pessimistic Locking↔Lock·Optimistic Locking, Connection Pool↔Too Many Connections
   - Query Plan↔Index·Slow Query, Full Table Scan↔Index·Query Plan, Composite Index↔Index, Read Replica↔Replication, Connection String↔Environment Variable, Too Many Connections↔Connection Pool, Query Timeout↔Timeout·Slow Query, Point-in-Time Recovery↔Backup·Restore, Database Dump↔Backup·Restore, Database Client↔SQL
 - 뜻이 다른 짝은 r 없이 x 안에서만 구분한다(`DB_WRONG` 점검):
   - Column Alias vs terminal의 Alias(명령 별명)
   - Cascade Delete vs front의 Cascade(CSS 규칙 우선순위)
   - Isolation Level vs test의 Test Isolation(테스트끼리 안 섞임)
   - Optimistic Locking vs design의 Optimistic UI·back의 Optimistic Update(화면을 먼저 바꿈)
+  - Autocommit vs git의 Commit(코드 변경 기록)
+  - Check Constraint vs ai의 Constraint(AI에게 주는 제약)
+  - Database Client vs back의 Client(요청을 보내는 쪽 프로그램)
 - 점검 기대값:
   - `COUNT`에 `db/*` 10개(아래 5장 개수)
   - `EXPECT`에 새 카드 영문명
@@ -233,6 +242,9 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
   - 새 점검 `dbukey`: db 91장의 v가 `u-db-`로 시작하고 `D`에 있다(마칠 때 예외 없음. 진행 중에는 남은 옛 카드 목록 `DB_TODO`가 줄어 비워진다)
   - 새 점검 `dbcat`: db 하위항목 순서가 `basic,core,motion,adv,sql,query,model,tx,ops,tip`이다
   - 새 점검 `dbhelp`: `dbtab`·`qrun`·`erd`의 입력 검사와 `.sr` 문장, `after` 값 점검(back `bkhelp`와 같은 식)
+  - 새 점검 `dbwrong`: `DB_WRONG` 짝에 r이 없다(back `BK_WRONG`과 같은 식)
+  - 새 점검 `dbtext`·`dbxn`: db 카드 d·x 글 규칙(해요체, 기호, x 문장 수)을 back `bktext`·`bkxn`과 같은 식으로 본다. 걸린 옛 카드는 미루지 않고 글을 고친다(back 판정)
+  - 새 점검 `dbdmrun`: 직접 조작 4장의 init을 `board(h)` 가짜 판으로 돌려 결과 문장이 바뀌는지 본다(back `bkdmrun`과 같은 식)
 
 ## 5. 용어 목록 (새 43장)
 
@@ -280,9 +292,9 @@ x로 구분할 짝(뜻이 가까움):
 |---|---|---|
 | 데이터가 쌓일수록 목록이 느려져요 | 느림 | Full Table Scan, Index, Query Plan |
 | 목록 하나 여는데 쿼리가 수백 번 나가요 | 느림 | N+1 Problem, INNER JOIN |
-| JOIN했더니 같은 회원이 여러 줄 나와요 | 오류·안 됨 | One-to-Many, DISTINCT, INNER JOIN |
+| JOIN했더니 같은 회원이 여러 줄 나와요 | 오류·안 됨 | One-to-Many, GROUP BY, INNER JOIN |
 | 주문 없는 회원이 목록에서 빠져요 | 오류·안 됨 | LEFT JOIN, INNER JOIN |
-| 개수가 실제보다 적게 나와요 | 오류·안 됨 | COUNT, NULL |
+| 개수가 실제보다 적게 나와요 | 오류·안 됨 | COUNT, NULL, INNER JOIN |
 | = NULL로 찾으면 아무것도 안 나와요 | 오류·안 됨 | IS NULL, NULL |
 | DB 연결이 꽉 찼다는 오류가 떠요 | 오류·안 됨 | Too Many Connections, Connection Pool |
 | deadlock 오류가 떠요 | 오류·안 됨 | Deadlock, Transaction |
@@ -341,7 +353,8 @@ Critical·Important·Minor 모두 고친다(사용자 지시: 미룬 것도 다 
 - 직접 조작 4장을 키보드로 조작할 수 있다.
 
 그 밖:
-- 디자인 품질: break-ui(`dbtab` 3열 × 5행 × 8폭, `qrun` 표 2개 + SQL 4줄, `erd` 표 3개 × 열 4개 × 10폭)로 보고, better-ui·better-layout으로 그림을 다듬는다.
+- 디자인 품질: break-ui(`dbtab` 3열 × 5행 × 10폭, `qrun` 표 2개 + SQL 4줄 × 28폭 + 결과 표 2개, `erd` 표 3개 × 열 4개 × 10폭)로 보고, better-ui·better-layout으로 그림을 다듬는다.
+- 그림 표(3.4·3.5)에 적은 `seq` 글·열 이름·칸 값이 도우미 한도 안에 드는지 계획서에서 카드마다 `wlen`으로 다시 센다. 실제 입력은 도우미 입력 검사가 마지막으로 막는다.
 - 문구: x·d는 better-writing·ux-writing 기준(짧고, 차이 먼저, 해요체)으로 쓴다.
 - 직접 조작은 better-accessibility로 키보드·읽기 순서를 본다.
 - 정의·설명의 사실은 Task마다 PostgreSQL 공식 문서로 검색해 확인하고 출처를 원장에 남긴다. 설계 단계 확인(검색, 2026-11-03):
@@ -363,7 +376,7 @@ Critical·Important·Minor 모두 고친다(사용자 지시: 미룬 것도 다 
 | 작업량이 커서 컨텍스트가 압축됨 | 계획서 둘로 나눔, 원장(`.superpowers/sdd/…/progress.md`), 체크포인트 메모리, Task마다 커밋 |
 | SQL 문법이 DB마다 다름 | 표준 SQL로 쓰고, 다른 부분은 x에 "DB마다 달라요". 오류 문구는 "(PostgreSQL 예)" 표시 |
 | `after`로 적은 결과가 쿼리와 어긋남 | 줄만 거르는 쿼리는 `pick`으로 계산, `after`는 값 점검(3.2), 디렉터 검토에서 결과를 쿼리와 한 줄씩 대조 |
-| `qrun` 표 두 개·`dbtab` 3열이 320px에 안 들어감 | 세로로 쌓고, 계획서 ① Task 1에서 break-ui로 재서 칸 한도를 6폭으로 낮춤 |
+| `qrun` 표 두 개·`dbtab` 3열 × 10폭이 320px에 안 들어감 | 세로로 쌓고, 계획서 ① Task 1에서 break-ui로 재서 칸 안 줄바꿈·여백 조정으로 넘침 0을 지킴(폭 한도는 낮추지 않음) |
 | 예시 데이터가 실제 개인정보처럼 보임 | 민수·지영·준호와 `m@a.com` 같은 짧은 가짜만, 전화·주소는 줄임표 |
 | 트랜잭션·잠금 설명이 back(Lock·Concurrency)·bug(Race Condition)와 어긋남 | 그 카드 본문은 바꾸지 않고 r로만 잇고, x에서 차이를 씀 |
 | 같은 뜻 카드가 다른 이름으로 또 생김 | `dup` 정규화 비교, 계획서마다 다른 카테고리 d와 대조 |
