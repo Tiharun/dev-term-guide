@@ -2475,7 +2475,7 @@ T('front','motion',[
  {en:'Keyframes',ko:'키프레임',d:'애니메이션의 시작·중간·끝 모습을 단계별로 정해 두는 CSS 문법.',x:'transition은 값이 바뀔 때만 한 번 움직이고, keyframes 애니메이션은 스스로 시작하고 반복할 수도 있어요. @keyframes로 0%, 50%, 100% 같은 단계별 모습을 정하고, animation 속성에 그 이름과 시간을 적어 재생해요.',p:'0%에서 100%까지 위아래로 둥실 뜨는 keyframes를 만들어줘',r:['Transition','Animation Duration'],l:2,o:1,u:MDN('Web/CSS/@keyframes'),v:'keyframes'},
  {en:'Transform',ko:'트랜스폼 · 변형',d:'요소를 옮기기(translate)·키우기(scale)·돌리기(rotate). 주변 배치를 밀지 않아요.',x:'transform으로 움직이면 다른 요소의 자리를 밀지 않아서, margin이나 top을 바꾸는 것보다 부드럽게 움직이기 쉬워요. translateY(-4px) scale(1.05)처럼 여러 변형을 띄어 써서 함께 적을 수 있어요.',p:'hover하면 카드가 transform으로 4px 떠오르게 해줘',r:['Scale','Rotate','Hover Lift'],l:1,o:1,u:MDN('Web/CSS/transform'),v:'hoverlift'},
  {en:'Hover',ko:'호버 · 마우스 올림',d:'마우스를 요소 위에 올린 상태. 버튼 색 변화 등에 써요.',x:'휴대폰에는 hover가 없어서, 중요한 정보를 hover에만 숨기면 안 돼요. 키보드로 쓰는 사람을 위해 hover에 준 효과는 :focus-visible에도 같이 주는 게 좋아요.',p:'버튼에 hover하면 살짝 진해지게 해줘',r:['Hover Lift','Focus'],l:1,o:1,u:MDN('Web/CSS/:hover'),v:'hoverlift'},
- {en:'Focus',ko:'포커스',d:'키보드로 지금 선택된 요소. 보통 테두리(포커스 링)로 표시해요.',x:'hover는 마우스를 올린 상태이고, focus는 키보드 Tab이나 클릭으로 지금 고른 상태예요. :focus-visible을 쓰면 키보드로 움직일 때만 포커스 링을 보여 줄 수 있어요.',p:'포커스 링은 없애지 말고, 키보드로 이동할 때 잘 보이게 해줘',r:['Hover','Web Accessibility'],l:2,o:1,u:MDN('Web/CSS/:focus-visible'),v:'input'},
+ {en:'Focus',ko:'포커스',d:'Tab이나 클릭으로 지금 고른 요소예요. 보통 테두리(포커스 링)로 표시해요.',x:'hover는 마우스를 올린 상태이고, focus는 키보드 Tab이나 클릭으로 지금 고른 상태예요. :focus-visible을 쓰면 키보드로 움직일 때만 포커스 링을 보여 줄 수 있어요.',p:'포커스 링은 없애지 말고, 키보드로 이동할 때 잘 보이게 해줘',r:['Hover','Web Accessibility'],l:2,o:1,u:MDN('Web/CSS/:focus-visible'),v:'input'},
  {en:'Animation Duration',ko:'재생 시간 · 듀레이션',d:'애니메이션이 한 번 끝나는 데 걸리는 시간.',x:'transition에는 transition-duration, keyframes 애니메이션에는 animation-duration으로 시간을 적어요. 0.3s나 300ms처럼 초나 밀리초로 쓰고, 너무 길면 화면이 느리게 느껴져요.',p:'메뉴 열리는 시간을 0.3초로 줄여줘',r:['Easing','Delay'],l:1,o:1,u:MDN('Web/CSS/animation-duration'),v:'duration'},
  {en:'requestAnimationFrame',ko:'프레임 맞춤 실행',d:'화면이 다시 그려질 때마다 코드를 실행해 매끄러운 움직임을 만드는 JavaScript 기능.',x:'브라우저가 다음 화면을 그리기 직전에 함수를 한 번 불러 줘서, 화면을 새로 그리는 박자에 맞춰 움직임을 만들 수 있어요. setInterval과 달리 다른 탭으로 가면 대부분의 브라우저에서 멈춰서 쓸데없는 계산을 줄여요.',p:'스크롤 효과를 requestAnimationFrame으로 바꿔서 덜 끊기게 해줘',r:['Jank','FPS'],l:3,o:1,u:MDN('Web/API/Window/requestAnimationFrame'),v:'u-front-request-animation-frame'},
  {en:'Reduced Motion',ko:'움직임 줄이기 설정',d:'사용자가 운영체제에서 "동작 줄이기"를 켰을 때 애니메이션을 줄여 주는 배려.',x:'CSS에서는 @media (prefers-reduced-motion: reduce) 안에 움직임을 줄이거나 끄는 규칙을 적어요. 움직임 때문에 어지럼을 느끼는 사람을 위한 설정이라, 큰 이동이나 확대 같은 효과부터 줄여요.',p:'prefers-reduced-motion일 때는 애니메이션을 끄고 바로 보여줘',r:['Web Accessibility'],l:2,o:1,u:MDN('Web/CSS/@media/prefers-reduced-motion'),v:'u-front-reduced-motion'},
@@ -2548,7 +2548,7 @@ T('front','event',[
 T('front','react',[
  {en:'JSX',ko:'JSX · 자바스크립트 속 HTML',d:'자바스크립트 안에 HTML처럼 생긴 태그를 써서 화면 모양을 적는 문법이에요.',x:'JSX는 HTML과 닮았지만 class 대신 className을 쓰고, 중괄호 안에 자바스크립트 값을 넣어요. 브라우저는 JSX를 바로 읽지 못해서 빌드 도구가 자바스크립트로 바꿔 줘요.',p:'이 인사말을 JSX로 써서 이름이 {name} 자리에 들어가게 해줘',r:['React'],l:2,o:1,u:'https://react.dev/learn/writing-markup-with-jsx',v:'u-front-jsx'},
  {en:'useState',ko:'상태 훅',d:'컴포넌트가 값을 기억하게 하고, 그 값이 바뀌면 화면을 다시 그리게 하는 훅이에요.',x:'useState로 만든 값은 바뀌면 화면을 다시 그리고, Ref에 담은 값은 바꿔도 다시 그리지 않아요. 화면에 보이는 값은 useState에, 화면과 상관없는 값은 Ref에 둬요.',p:'버튼을 누를 때마다 숫자가 1씩 늘게 useState로 만들어줘',r:['Hook','State'],l:2,o:1,u:'https://react.dev/reference/react/useState',v:'u-front-usestate'},
- {en:'useEffect',ko:'효과 훅',d:'화면을 그린 뒤에 데이터 요청 같은 바깥 일을 하게 하는 훅이에요.',x:'useEffect는 화면을 그린 뒤 실행되고, 두 번째 인자 [id] 속 값이 바뀔 때만 다시 실행돼요. 효과 안에서 바꾼 상태가 다시 의존성을 바꾸면 끝없이 반복되니, 의존성에 무엇을 넣을지 살펴요. useEffect는 값이 바뀔 때마다 일을 시작하고 정리하는 곳이라, 컴포넌트가 생기고 사라지는 생명주기(Lifecycle)와는 따로 생각해요.',p:'id가 바뀔 때마다 글을 다시 불러오게 useEffect로 만들어줘',r:['Hook'],l:3,o:1,u:'https://react.dev/reference/react/useEffect',v:'u-front-useeffect'},
+ {en:'useEffect',ko:'효과 훅',d:'화면을 그린 뒤에 데이터 요청 같은 바깥 일을 하게 하는 훅이에요.',x:'useEffect는 화면을 그린 뒤 실행되고, 두 번째 인자 [id] 속 값이 바뀔 때만 다시 실행돼요(빈 배열 []이면 처음 한 번, 빼면 그릴 때마다). 효과 안에서 바꾼 상태가 다시 의존성을 바꾸면 끝없이 반복되니, 의존성에 무엇을 넣을지 살펴요. useEffect는 값이 바뀔 때마다 일을 시작하고 정리하는 곳이라, 컴포넌트가 생기고 사라지는 생명주기(Lifecycle)와는 따로 생각해요.',p:'id가 바뀔 때마다 글을 다시 불러오게 useEffect로 만들어줘',r:['Hook'],l:3,o:1,u:'https://react.dev/reference/react/useEffect',v:'u-front-useeffect'},
  {en:'Key',ko:'키 · 목록 항목 이름표',d:'목록의 항목마다 붙이는 고유한 이름표로, React가 어느 항목이 어느 것인지 알아보게 해요.',x:'여기의 key는 React가 목록 항목을 알아보는 이름표라, 개발 기본의 키-값(Key-Value)이나 백엔드의 API 키와는 다른 말이에요. key가 없으면 React가 줄 번호로 짝지어서, 맨 앞에 항목을 더하면 입력값이 엉뚱한 줄에 남을 수 있어요.',p:'목록 항목에 줄 번호 대신 id를 key로 붙여줘',r:['List Rendering'],l:3,o:1,u:'https://react.dev/learn/rendering-lists',v:'u-front-key'},
  {en:'Ref',ko:'참조 · 바꿔도 다시 안 그리는 값',d:'useRef로 만들어, 바꿔도 화면을 다시 그리지 않는 값이나 입력칸 같은 실제 요소를 담아 두는 상자예요.',x:'Ref는 값을 바꿔도 화면이 그대로이고, useState는 값이 바뀌면 화면을 다시 그려요. 그래서 Ref의 current는 화면을 그리는 중에는 읽지 않고, 클릭 처리기나 useEffect 안에서 써요.',p:'버튼을 누르면 입력칸에 커서가 가게 useRef로 만들어줘',r:['Hook'],l:3,o:1,u:'https://react.dev/reference/react/useRef',v:'u-front-ref'},
  {en:'Fragment',ko:'프래그먼트 · 빈 묶음',d:'여러 요소를 하나로 묶지만, 화면에는 상자를 하나 더 만들지 않는 빈 묶음 <>…</>이에요.',x:'wrapper처럼 div로 감싸면 화면에 상자가 하나 더 생기고, Fragment로 묶으면 상자는 생기지 않아요. Flexbox나 표처럼 상자 하나가 더 끼면 모양이 깨지는 곳에서 써요.',p:'감싸는 div를 빼고 Fragment로 묶어줘',r:['Component'],l:3,o:1,u:'https://react.dev/reference/react/Fragment',v:'u-front-fragment'},
@@ -3740,12 +3740,12 @@ SYM('오류·안 됨',[
  ['손님이 어디서 왔는지 모르겠어요',['UTM Parameter','Referrer']],
  ['로그인이 자꾸 풀려요',['Cookie','Session','Token Expiry']],
  ['다른 사이트에 넣은 내 페이지가 안 보여요',['iframe','Content Security Policy']],
- ['CSS를 고쳤는데 적용이 안 돼요',['Specificity','Cascade','Inspect Element']],
+ ['CSS가 다른 규칙에 밀려 적용이 안 돼요',['Specificity','Cascade','Inspect Element']],
  ['같은 요청이 끝없이 반복돼요',['useEffect','Re-render']],
  ['목록 순서를 바꾸면 입력값이 엉뚱한 줄에 남아요',['Key','List Rendering']],
  ['배열에 값을 넣었는데 화면이 그대로예요',['Immutability','State','useState']],
  ['props를 여러 단계로 계속 넘기고 있어요',['Props Drilling','Context API','State Management']],
- ['스크린 리더가 버튼을 이상하게 읽어요',['ARIA','Semantic HTML']],
+ ['화면 낭독기가 버튼을 이상하게 읽어요',['ARIA','Semantic HTML']],
  ['옛 브라우저에서 새 문법이 안 돼요',['Transpile','Babel','Polyfill']],
 ]);
 </script>
@@ -3779,7 +3779,7 @@ const byId = new Map(TERMS.map(t => [t.id, t]));
 CATS.forEach(c => { let i = 0; c.secs.forEach(s => {
   s.terms = TERMS.filter(t => t.c === c.id && t.s === s.id); s.terms.forEach(t => t.no = `${String(c.no).padStart(2,'0')}-${String(++i).padStart(2,'0')}`);
 }); c.count = i; });
-const find = name => byEn.get(String(name).toLowerCase());
+const find = (name, c) => (c && byId.get(c + '-' + slug(String(name)))) || byEn.get(String(name).toLowerCase());    // 관련 용어는 같은 카테고리 카드를 먼저
 
 /* ---------- store ---------- */
 const store = {
@@ -7605,7 +7605,7 @@ const plate = t => {
   const rows = [['정의', t.d], t.x && ['헷갈림', t.x], t.j && ['현업 은어', t.j], t.ps && ['Windows PowerShell', t.ps]].filter(Boolean)
     .map(([k, v]) => `<div class="row"><b>${k}</b><span>${fmt(v)}</span></div>`).join('');
   const says = [].concat(t.p || []).map(p => `<div class="say"><p><span class="say-lab">말하기 예문</span>${fmt(p)}</p><button class="copy" data-copy="${esc(p.replace(/`/g,''))}">${ic('copy')}복사</button></div>`).join('');
-  const rel = (t.r || []).map(n => { const r = find(n); return r ? `<a href="#/t/${r.id}">${esc(r.en)}</a>` : `<span>${esc(n)}</span>`; }).join('');
+  const rel = (t.r || []).map(n => { const r = find(n, t.c); return r ? `<a href="#/t/${r.id}">${esc(r.en)}</a>` : `<span>${esc(n)}</span>`; }).join('');
   const src = t.o ? (t.u ? `<a class="tag" href="${esc(t.u)}" target="_blank" rel="noopener">공식 문서 ${ic('ext')}</a>` : `<span class="tag">공식</span>`) : `<span class="tag prac">실무</span>`;
   return `<article class="plate${learned.has(t.id)?' learned':''}" id="${t.id}">
     <figure class="fig" data-id="${t.id}"><div class="stage"></div><figcaption class="figcap"><b>도판 ${t.no}</b> · ${esc(t.ko.split('·')[0].trim())}</figcaption></figure>

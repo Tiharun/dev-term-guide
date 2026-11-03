@@ -339,9 +339,9 @@ const SYM_BASICS = ['await를 썼는데 기다리지 않아요', '배열을 바�
 const SYM_WEB = ['검색해도 내 사이트가 안 나와요', '링크를 공유하면 미리보기가 이상해요', '검색 결과 제목·설명이 엉뚱하게 나와요', '같은 글이 주소 두 개로 검색돼요',
   'Safari에서만 화면이 깨져요', '버튼을 눌러도 새 창이 안 떠요', '방문은 많은데 구매가 없어요', '둘러보지 않고 바로 나가는 사람이 많아요',
   '손님이 어디서 왔는지 모르겠어요', '로그인이 자꾸 풀려요', '다른 사이트에 넣은 내 페이지가 안 보여요', '주소 끝에 utm_ 같은 글자가 붙어 있어요'];
-const SYM_FRONT = ['CSS를 고쳤는데 적용이 안 돼요', '안쪽 버튼을 눌렀는데 바깥 상자도 같이 반응해요', '버튼을 누르면 페이지가 새로고침돼요', '입력칸에 글자가 안 쳐져요',
+const SYM_FRONT = ['CSS가 다른 규칙에 밀려 적용이 안 돼요', '안쪽 버튼을 눌렀는데 바깥 상자도 같이 반응해요', '버튼을 누르면 페이지가 새로고침돼요', '입력칸에 글자가 안 쳐져요',
   '같은 요청이 끝없이 반복돼요', '목록 순서를 바꾸면 입력값이 엉뚱한 줄에 남아요', '배열에 값을 넣었는데 화면이 그대로예요', 'props를 여러 단계로 계속 넘기고 있어요',
-  '스크린 리더가 버튼을 이상하게 읽어요', '숨겼는데 빈자리가 그대로 남아요', '브라우저마다 기본 여백이 달라요', '옛 브라우저에서 새 문법이 안 돼요'];
+  '화면 낭독기가 버튼을 이상하게 읽어요', '숨겼는데 빈자리가 그대로 남아요', '브라우저마다 기본 여백이 달라요', '옛 브라우저에서 새 문법이 안 돼요'];
 check('symcount', () => g.SYMPTOMS.length !== 181 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
@@ -477,6 +477,13 @@ check('fdire', () => { const r = [], x = en => FC(en).x || '', D = g.D;    // �
   if ((FC('vw / vh').ko || '').includes('·')) r.push('vw/vh 캡션');
   if (!/\.mk-fmw\.n\{width:min\(100%,40px\)\}/.test(html)) r.push('Max Width 차이');
   if (/하나로 묶/.test(x('Vite'))) r.push('Vite 하나로');
+  return r.join(', '); });
+check('ffinal', () => { const r = [], x = en => FC(en).x || '';    // 최종 검토 지적: 런타임·사실 회귀를 잡게
+  if (!html.includes("e.style.left = `clamp(${h}px, ${e.style.left}, calc(100% - ${h}px))`")) r.push('꼬리표 clamp');
+  if (!/이벤트|클릭 처리기/.test(x('Error Boundary')) || !/잡지 못해/.test(x('Error Boundary'))) r.push('Error Boundary');
+  if (!/빈 배열 \[\]이면 처음 한 번/.test(x('useEffect')) || !/빼면 그릴 때마다/.test(x('useEffect'))) r.push('useEffect 의존성');
+  if (vm.runInContext("find('Component', 'front').id", ctx) !== 'front-component' || vm.runInContext("find('Component').id", ctx) === 'front-component') r.push('같은 카테고리 r');
+  if (/키보드로 지금 선택/.test(FC('Focus').d)) r.push('Focus d');
   return r.join(', '); });
 check('freact', () => [['Controlled Input', 'useState'], ['State', 'Immutability'], ['Vendor Prefix', 'PostCSS']].filter(([en, w]) => !(FC(en).r || []).includes(w)).map(([en]) => en).join(', '));
 check('fdirb', () => { const r = [], D = g.D;    // 디렉터 B 지적
