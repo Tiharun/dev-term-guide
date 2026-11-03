@@ -566,13 +566,15 @@ check('fwrong', () => Object.entries(FB_WRONG).filter(([en, w]) => { const t = g
 const BKS = () => g.TERMS.filter(t => t.c === 'back');
 check('bkcat', () => { const a = g.CATS.find(c => c.id === 'back').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,api,arch,data,job,auth,tip' ? '' : a; });
 const BK_TODO = [];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
-const BK_NOX = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Request Flow","Optimistic Update","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // x를 아직 안 쓴 옛 카드. 계획서 ②가 비운다
+const BK_NOX = [];    // x를 아직 안 쓴 옛 카드. 계획서 ②가 비운다
 const BK_SYM = [];    // 기호가 남은 옛 카드. Task 4가 비운다
 const bkdiff = (a, list) => [...a.filter(x => !list.includes(x)).map(x => '+' + x), ...list.filter(x => !a.includes(x)).map(x => '-' + x)].join(', ');
 check('bkukey', () => bkdiff(BKS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v])).map(t => t.en), BK_TODO));
 check('bkobj', () => BKS().filter(t => typeof t.v === 'object' && !BK_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
 check('bksym', () => bkdiff(BKS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en), BK_SYM));
 check('bkx', () => bkdiff(BKS().filter(t => !t.x).map(t => t.en), BK_NOX));
+const BKX_HAS = {'CORS': ['OPTIONS'], 'Authentication': ['401'], 'Authorization': ['403'], 'Idempotent': ['PUT']};    // x에 꼭 있어야 할 사실
+check('bkxhas', () => Object.entries(BKX_HAS).filter(([en, w]) => !w.every(x => (g.find(en).x || '').includes(x))).map(([en]) => en).join(', '));
 check('bkm', () => BKS().filter(t => { const p = typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v]; return p && !!p.m !== WA(p.h); }).map(t => t.en).join(', '));    // 재생 버튼(m)과 움직임(A)은 함께 있다
 check('bkou', () => BKS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
 check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => (h.match(re) || []).length;
