@@ -329,6 +329,7 @@ check('dbhelp', () => vm.runInContext(`(() => {
   has(dbtab({name:'users', cols:['email'], rows:[['a@a.com'], ['m@a.com']], mark:['', '읽음'], hl:{cell:[1, 0]}}), ['>읽음<', '1줄: a@a.com. 2줄: m@a.com (읽음). 강조: 2줄 email 칸.</p>'], 'dbtab mark');
   has(dbtab({name:'orders', tag:'나누기 전', cols:['id'], rows:[]}), ['<b class="mk-dbg">나누기 전</b>', '결과 없음(0줄)', '<p class="sr">나누기 전, orders 테이블, 열 1개(id), 행 0줄, 결과 없음.</p>'], 'dbtab 0줄');
   if (dbtab(U).includes('tabindex') || dbtab(U).includes('강조')) bad.push('dbtab 기본');
+  if (!dbtab({name:'t', cols:['a'], empty:'<i>x'}).includes('>&lt;i&gt;x</p>')) bad.push('empty esc');
   no(() => dbtab({...U, name:'a'.repeat(13)}), '이름 13폭'); no(() => dbtab({...U, tag:'a'.repeat(13)}), '이름표 13폭'); no(() => dbtab({...U, cols:[]}), '열 0개');
   no(() => dbtab({name:'t', cols:['a', 'b', 'c', 'd'], rows:[]}), '열 4개'); no(() => dbtab({name:'t', cols:['a'.repeat(11)], rows:[]}), '열 11폭'); no(() => dbtab({name:'t', cols:[{n:'a', key:'UK'}], rows:[]}), 'key');
   no(() => dbtab({name:'t', cols:[{n:'a', type:'글자'}], rows:[]}), 'dbtab type'); no(() => dbtab({name:'t', cols:['a'], rows:Array(6).fill(['1'])}), '행 6개');

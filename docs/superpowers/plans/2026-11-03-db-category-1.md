@@ -139,7 +139,7 @@
 
 **Interfaces:**
 - Produces:
-  - `dbtab({name, tag, cols, rows = [], hl = [], mark, label} = {}) → string`
+  - `dbtab({name, tag, cols, rows = [], hl = [], mark, label, empty = '결과 없음(0줄)'} = {}) → string`(`empty`는 qrun 안 표의 0줄 문구, 내부용)
     - 바깥: `<div class="mk-db">`. `label`이 있으면 `role="group" aria-label`(tabindex는 붙이지 않는다).
     - 머리띠: `<div class="mk-dbh" aria-hidden="true">` 안에 `tag`가 있으면 `<b class="mk-dbg">${tag}</b>`, 이어서 `${name} 테이블`.
     - 표: `<table class="mk-dbt" aria-hidden="true">`. 머리 칸 `<th>`에 열 이름, key가 있으면 `<b class="mk-dbk">PK</b>`(또는 FK).
@@ -157,7 +157,7 @@
     - 결과 머리띠 `<div class="mk-dqh" aria-hidden="true">`: `결과 ${n}줄`, del은 `지운 뒤 남은 줄 ${n}줄`, `after` 표 2개면 `결과 표 2개`.
     - 결과 행 k(1부터, 결과 표가 둘이면 이어서 셈)의 `<tr>`에 `mk-dqm${still ? '' : ` mk-cdz${k} A`}`.
     - `err`: 결과 자리에 `<p class="mk-dqm mk-dqf${still ? '' : ' mk-cdz1 A'}"><b class="mk-dbk">실패</b>${err}<span>표는 그대로예요</span></p>` 하나.
-    - 안쪽 `dbtab`의 sr은 빼고, 끝에 `<p class="sr">쿼리 ${sql을 ' '로} 실행. 실행 전 ${표 이름 n줄을 ', '로}. ${몸}.</p>` 하나. 몸: pick·after 표 하나 `결과 ${n}줄: ${줄}`(0줄이면 `결과 0줄`) / del `지운 뒤 남은 줄 ${n}줄: ${줄}` / 표 둘 `결과 ${이름} ${n}줄: ${줄}; ${이름} ${n}줄: ${줄}` / err `실패: ${err}, 표는 그대로예요`. `줄`은 줄마다 칸을 ' '로, 줄끼리 ', '로 잇는다. after에 hl이 있으면 몸 뒤에 `, 강조: …`(dbtab과 같은 이름).
+    - 안쪽 `dbtab`의 sr은 빼고, 끝에 `<p class="sr">쿼리 ${sql을 ' '로} 실행. 실행 전 ${표 이름 n줄을 ', '로}. ${몸}.</p>` 하나. 몸: pick·after 표 하나 `결과 ${n}줄(${열 이름을 ', '로}): ${줄}`(0줄이면 `결과 0줄(${열})`) / del `지운 줄 ${k}줄: ${줄}, 지운 뒤 남은 줄 ${n}줄(${열}): ${줄}` / 표 둘 `결과 ${이름} ${n}줄(${열}): ${줄}; ${이름} ${n}줄(${열}): ${줄}` / err `실패: ${err}, 표는 그대로예요`. `줄`은 줄마다 칸을 ' '로, 줄끼리 ', '로 잇는다. after에 hl이 있으면 몸 뒤에 `, 강조: …`(dbtab과 같은 이름).
     - 오류는 `'qrun: '`로 시작한다(표 모양 오류는 `dbtab: `가 그대로 올라와도 된다). 검사: sql 1~4줄·문자열·wlen 1~28, from 1~2개, pick·after·err 중 정확히 하나, pick이 함수 아님, show·del은 pick과만, show와 del 함께, show에 없는 열, hl은 after와만, after 표 1~2개, err wlen 1~28, 결과 줄 합 > 8, after 값 점검(칸 값이 실행 전 표 어딘가의 값·숫자 모양·`'NULL'`·hl이 덮는 칸 중 하나가 아님).
   - `erd({tables, links = [], hl = [], label} = {}) → string`
     - 바깥 `<div class="mk-er">`. 표 상자 `<div class="mk-erb">`(강조면 `mk-eron`)를 세로로 쌓는다. 상자 안: 이름, 열마다 `<li>` 이름 + key 꼬리표 + `type`이면 `<span class="mk-ert">${type}</span>`. 강조 열은 `mk-eron` + "강조" 꼬리표.

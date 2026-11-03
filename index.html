@@ -4163,7 +4163,7 @@ const httpmsg = ({ kind, start, head = [], body = [], hl = [], label } = {}) => 
 };
 /* DB 표: name·tag 12자, cols 1~3개(문자열 또는 {n, key:'PK'|'FK'}, 이름 10자, type은 erd에만), rows 0~5줄(칸은 글 10자, 'NULL'·'' 표시), hl {row}·{col}·{cell:[행, 열]} 하나 또는 배열, mark 줄마다 꼬리표 6자 */
 const dbhn = (C, h) => h.cell ? `${h.cell[0] + 1}줄 ${C[h.cell[1]].n} 칸` : 'row' in h ? `${h.row + 1}줄` : `${C[h.col].n} 열`;    // 강조 이름: dbtab·qrun의 sr이 같이 쓴다
-const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label, empty = '결과 없음(0줄)' } = {}) => {
+const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label, empty = '결과 없음(0줄)' } = {}) => {    // empty는 qrun 안 표의 0줄 문구(내부용, '' 이면 없음)
   const no = m => { throw new Error('dbtab: ' + m); }, w = (x, n, z = 1) => typeof x === 'string' && wlen(x) >= z && wlen(x) <= n;
   if (!w(name, 12) || (tag !== undefined && !w(tag, 12))) no('이름·이름표는 1~12자');
   if (!Array.isArray(cols) || cols.length < 1 || cols.length > 3) no('열은 1~3개');
@@ -4185,7 +4185,7 @@ const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label, empty = '결�
     + (rows.length ? `행 ${rows.length}줄.` + rows.map((r, i) => ` ${i + 1}줄: ${r.map(say).join(', ')}${mark && mark[i] ? ` (${mark[i]})` : ''}.`).join('') : '행 0줄, 결과 없음.')
     + (H.length ? ` 강조: ${H.map(h => dbhn(C, h)).join(', ')}.` : '');
   return `<div class="mk-db"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-dbh" aria-hidden="true">${tag ? `<b class="mk-dbg">${esc(tag)}</b>` : ''}${esc(name)} 테이블</div>`
-    + `<table class="mk-dbt" aria-hidden="true"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>${rows.length || !empty ? '' : `<p class="mk-dbe" aria-hidden="true">${empty}</p>`}<p class="sr">${esc(sum)}</p></div>`;
+    + `<table class="mk-dbt" aria-hidden="true"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>${rows.length || !empty ? '' : `<p class="mk-dbe" aria-hidden="true">${esc(empty)}</p>`}<p class="sr">${esc(sum)}</p></div>`;
 };
 /* 쿼리 실행: sql 1~4줄(28자), from 실행 전 표 1~2개, 결과는 pick(고르는 함수, show 남길 열·del 지움) | after 결과 표 1~2개(hl은 표 하나일 때) | err 실패 글 28자 중 하나. 결과는 8줄까지 */
 const qrun = ({ sql, from, pick, show, after, err, del, hl, still = false, label } = {}) => {
