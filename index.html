@@ -435,7 +435,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-bkg{display:grid;gap:6px;width:100%;align-self:start;text-align:left}.mk-bks{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;padding:5px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font-size:12px;color:var(--ink);text-align:left}.mk-bks>b:first-child{font-weight:800}
 .mk-bkr{list-style:none;margin:0;padding:0;display:grid;gap:4px;width:100%;align-self:start}.mk-bkr li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;padding:3px 8px;border:1.5px solid var(--rule);border-radius:4px;background:var(--plate);font:12px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-bkr code{font:inherit}
 .mk-bkp{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12px;color:var(--ink)}.mk-bkp>b:first-child{min-width:2.4em}.mk-bkp>span{padding:1px 7px;border:1.5px solid var(--ink);border-radius:4px;background:var(--plate);font-family:var(--mono)}
-.cmp>div>.mk-bkrl{align-self:start}.mk-bkmo{padding:8px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-bkg:has(>.mk-browser){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkg>.mk-browser{max-width:100%}.mk-bkh{display:grid;gap:6px;justify-items:center;width:100%}.mk-bkr li.mk-bkf{border-color:var(--mark-text)}.mk-bkr li.mk-bkf>span{font:11px/1.4 var(--sans);color:var(--muted)}.mk-bkrl{display:grid;gap:6px;width:min(100%,400px);font-size:12px;color:var(--ink);text-align:left}
+.cmp>div>.mk-bkrl{align-self:start}.mk-bkmo{padding:8px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-bkg:has(>.mk-browser){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkg>.mk-browser{max-width:100%}.mk-bkg:has(>.mk-term){grid-template-columns:minmax(0,1fr)}.mk-bkh{display:grid;gap:6px;justify-items:center;width:100%}.mk-bkr li.mk-bkf{border-color:var(--mark-text)}.mk-bkr li.mk-bkf>span{font:11px/1.4 var(--sans);color:var(--muted)}.mk-bkrl{display:grid;gap:6px;width:min(100%,400px);font-size:12px;color:var(--ink);text-align:left}
 .mk-sd{width:min(100%,440px);padding:4px;border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);font:12px/1.4 var(--sans);color:var(--ink);text-align:left}
 .mk-sdh{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}.mk-sdh span{margin:0 1px;padding:3px 0;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font:800 11px/1.3 var(--sans);text-align:center;word-break:keep-all;overflow-wrap:anywhere}
 .mk-sdl{margin:0;padding:2px 0 0;list-style:none}.mk-sdm{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px;padding:3px 6px 16px}.mk-sdm>span,.mk-sdm>b{position:relative;background:var(--plate)}
@@ -2977,36 +2977,36 @@ T('server','motion',[
  {en:'Graceful Shutdown',ko:'안전 종료',d:'하던 요청을 다 마치고 나서 서버를 끄는 것.',p:'서버를 끌 때 처리 중인 요청은 끝내고 끄게 해줘',r:['Restart'],l:3,o:0,v:'u-server-graceful-shutdown'},
 ]);
 T('server','adv',[
- {en:'Linux',ko:'리눅스',d:'서버 컴퓨터에서 가장 많이 쓰는 운영체제.',p:'리눅스 서버에 접속해서 확인할 명령어를 알려줘',r:['SSH'],l:2,o:0,v:{code:'$ ls\n$ cd /var/www'}},
- {en:'SSH',ko:'에스에스에이치 · 원격 접속',d:'멀리 있는 서버에 안전하게 접속해 명령을 내리는 방법.',p:'SSH로 서버에 접속하는 방법을 단계별로 알려줘',r:['Linux','Terminal'],l:3,o:0,v:{code:'$ ssh user@1.2.3.4'}},
- {en:'Docker',ko:'도커',d:'프로그램과 필요한 환경을 상자(컨테이너)에 담아 어디서나 똑같이 실행하게 하는 도구.',x:'Docker 컨테이너는 가상 머신과 달리 운영체제를 통째로 담지 않아서 가볍고 빨리 켜져요. 앱과 필요한 환경을 함께 담아 "내 컴퓨터에선 되는데" 문제를 줄여 줘요.',p:'이 앱을 Docker로 묶어서 어디서든 똑같이 돌게 해줘',r:['Container Image'],l:3,o:1,u:'https://docs.docker.com/get-started/',v:{stack:['내 앱','필요한 환경','도커 컨테이너'],hl:[2]}},
- {en:'Container Image',ko:'컨테이너 이미지',d:'도커 컨테이너를 찍어 내는 틀. 프로그램+환경의 스냅숏.',p:'이 앱의 도커 이미지를 만드는 Dockerfile을 써줘',r:['Docker'],l:3,o:0,v:{flow:['이미지','실행','컨테이너']}},
- {en:'Kubernetes',ko:'쿠버네티스 · k8s',d:'많은 컨테이너를 자동으로 배치·관리하는 도구.',p:'지금 규모에 쿠버네티스가 필요한지 솔직하게 알려줘',r:['Docker'],l:3,o:1,u:'https://kubernetes.io/docs/concepts/overview/',v:{flow:['컨테이너 ×N','쿠버네티스','자동 관리']}},
- {en:'AWS',ko:'에이더블유에스',d:'아마존의 클라우드 서비스. 서버·저장소·DB를 빌려요.',p:'AWS에서 이 사이트를 올리는 가장 단순한 구성을 알려줘',r:['Cloud'],l:2,o:1,u:'https://aws.amazon.com/what-is-aws/',v:{stack:['EC2 서버','S3 저장소','RDS DB']}},
- {en:'VPS',ko:'가상 서버 · VPS',d:'한 대의 큰 컴퓨터를 나눠 내 서버처럼 쓰는 것.',p:'VPS 한 대에 이 앱을 올리는 순서를 알려줘',r:['Cloud'],l:3,o:0,v:{stack:['내 서버','남 서버','남 서버'],hl:[0]}},
- {en:'Serverless',ko:'서버리스',d:'서버 관리를 클라우드에 맡기고 코드만 올리는 방식.',p:'서버 관리 없이 서버리스로 만들 수 있는지 알려줘',r:['Serverless Function','Cold Start'],l:3,o:0,v:{stack:['내 코드','(서버 관리는 클라우드)'],hl:[0]}},
+ {en:'Linux',ko:'리눅스',d:'서버 컴퓨터에서 가장 많이 쓰는 운영체제.',p:'리눅스 서버에 접속해서 확인할 명령어를 알려줘',r:['SSH'],l:2,o:0,v:'u-server-linux'},
+ {en:'SSH',ko:'에스에스에이치 · 원격 접속',d:'멀리 있는 서버에 안전하게 접속해 명령을 내리는 방법.',p:'SSH로 서버에 접속하는 방법을 단계별로 알려줘',r:['Linux','Terminal'],l:3,o:0,v:'u-server-ssh'},
+ {en:'Docker',ko:'도커',d:'프로그램과 필요한 환경을 상자(컨테이너)에 담아 어디서나 똑같이 실행하게 하는 도구.',x:'Docker 컨테이너는 가상 머신과 달리 운영체제를 통째로 담지 않아서 가볍고 빨리 켜져요. 앱과 필요한 환경을 함께 담아 "내 컴퓨터에선 되는데" 문제를 줄여 줘요.',p:'이 앱을 Docker로 묶어서 어디서든 똑같이 돌게 해줘',r:['Container Image'],l:3,o:1,u:'https://docs.docker.com/get-started/',v:'u-server-docker'},
+ {en:'Container Image',ko:'컨테이너 이미지',d:'도커 컨테이너를 찍어 내는 틀. 프로그램+환경의 스냅숏.',p:'이 앱의 도커 이미지를 만드는 Dockerfile을 써줘',r:['Docker'],l:3,o:0,v:'u-server-container-image'},
+ {en:'Kubernetes',ko:'쿠버네티스 · k8s',d:'많은 컨테이너를 자동으로 배치·관리하는 도구.',p:'지금 규모에 쿠버네티스가 필요한지 솔직하게 알려줘',r:['Docker'],l:3,o:1,u:'https://kubernetes.io/docs/concepts/overview/',v:'u-server-kubernetes'},
+ {en:'AWS',ko:'에이더블유에스',d:'아마존의 클라우드 서비스. 서버·저장소·DB를 빌려요.',p:'AWS에서 이 사이트를 올리는 가장 단순한 구성을 알려줘',r:['Cloud'],l:2,o:1,u:'https://aws.amazon.com/what-is-aws/',v:'u-server-aws'},
+ {en:'VPS',ko:'가상 서버 · VPS',d:'한 대의 큰 컴퓨터를 나눠 내 서버처럼 쓰는 것.',p:'VPS 한 대에 이 앱을 올리는 순서를 알려줘',r:['Cloud'],l:3,o:0,v:'u-server-vps'},
+ {en:'Serverless',ko:'서버리스',d:'서버 관리를 클라우드에 맡기고 코드만 올리는 방식.',p:'서버 관리 없이 서버리스로 만들 수 있는지 알려줘',r:['Serverless Function','Cold Start'],l:3,o:0,v:'u-server-serverless'},
 ]);
 T('server','status',[
- {en:'200 OK',ko:'200 · 성공',d:'요청이 잘 처리됐다는 응답 번호.',p:'저장에 성공하면 200과 저장된 데이터를 돌려줘',r:['HTTP Status Code'],l:1,o:1,u:MDN('Web/HTTP/Status/200'),v:{http:200,msg:'OK · 성공'}},
- {en:'301 Redirect',ko:'301 · 영구 이동',d:'주소가 영원히 바뀌었으니 새 주소로 가라는 응답.',p:'옛 주소로 오면 새 주소로 301 리다이렉트 해줘',r:['Redirect'],l:2,o:1,u:MDN('Web/HTTP/Status/301'),v:{http:301,msg:'Moved Permanently · 이사함'}},
- {en:'400 Bad Request',ko:'400 · 잘못된 요청',d:'보낸 값이 틀려서 처리할 수 없다는 응답.',p:'400 에러가 나. 보내는 값 형식을 확인해줘',r:['Validation'],l:2,o:1,u:MDN('Web/HTTP/Status/400'),v:{http:400,msg:'Bad Request · 요청이 이상해요'}},
- {en:'401 Unauthorized',ko:'401 · 로그인 필요',d:'로그인(인증)을 안 해서 거절됐다는 응답.',x:'401은 누구인지 확인이 안 됐다는 뜻이라 로그인하면 풀려요. 403은 누군지는 알지만 권한이 없다는 뜻이라 다시 로그인해도 그대로예요.',p:'401이 나와. 로그인 토큰이 제대로 가는지 확인해줘',r:['Authentication','403 Forbidden'],l:2,o:1,u:MDN('Web/HTTP/Status/401'),v:{http:401,msg:'Unauthorized · 로그인하세요'}},
- {en:'403 Forbidden',ko:'403 · 권한 없음',d:'누군지는 알지만 이 일을 할 권한이 없다는 응답.',p:'관리자인데 403이 나와. 권한 설정을 확인해줘',r:['Authorization','401 Unauthorized'],l:2,o:1,u:MDN('Web/HTTP/Status/403'),v:{http:403,msg:'Forbidden · 권한 없음'}},
- {en:'404 Not Found',ko:'404 · 없는 페이지',d:'요청한 주소에 아무것도 없다는 응답.',p:'404 페이지를 예쁘게 만들고 홈으로 가는 버튼을 넣어줘',r:['Routing'],l:1,o:1,u:MDN('Web/HTTP/Status/404'),v:{http:404,msg:'Not Found · 페이지가 없어요'}},
- {en:'429 Too Many Requests',ko:'429 · 요청 너무 많음',d:'짧은 시간에 요청을 너무 많이 보냈다는 응답.',p:'요청이 너무 많으면 429를 돌려주고 잠시 후 다시 하라고 안내해줘',r:['Rate Limit'],l:3,o:1,u:MDN('Web/HTTP/Status/429'),v:{http:429,msg:'Too Many Requests · 잠시 후 다시'}},
- {en:'500 Internal Server Error',ko:'500 · 서버 내부 오류',d:'서버 쪽 코드에서 문제가 생겼다는 응답. 서버 로그를 봐야 해요.',j:'"500 떴어요"',p:'500 에러가 나. 서버 로그를 보고 원인을 찾아줘',r:['Server Log'],l:2,o:1,u:MDN('Web/HTTP/Status/500'),v:{http:500,msg:'Internal Server Error · 서버 오류'}},
- {en:'502 Bad Gateway',ko:'502 · 중간 서버 오류',d:'앞 서버가 뒤 서버에게서 제대로 된 답을 못 받았다는 응답.',p:'502가 나. 뒤의 앱 서버가 살아 있는지 확인해줘',r:['Reverse Proxy'],l:3,o:1,u:MDN('Web/HTTP/Status/502'),v:{http:502,msg:'Bad Gateway · 뒤 서버 응답 이상'}},
- {en:'HTTP Status Code',ko:'HTTP 상태 코드',d:'응답 결과를 세 자리 숫자로 알려 주는 것. 2xx 성공, 3xx 이동, 4xx 요청 잘못, 5xx 서버 잘못.',p:'API가 상황에 맞는 상태 코드를 돌려주게 해줘',r:['200 OK','404 Not Found'],l:1,o:1,u:MDN('Web/HTTP/Status'),v:{tbl:[['번호','뜻'],['2xx','성공'],['3xx','이동'],['4xx','요청 잘못'],['5xx','서버 잘못']]}},
+ {en:'200 OK',ko:'200 · 성공',d:'요청이 잘 처리됐다는 응답 번호.',p:'저장에 성공하면 200과 저장된 데이터를 돌려줘',r:['HTTP Status Code'],l:1,o:1,u:MDN('Web/HTTP/Status/200'),v:'u-server-200-ok'},
+ {en:'301 Redirect',ko:'301 · 영구 이동',d:'주소가 영원히 바뀌었으니 새 주소로 가라는 응답.',p:'옛 주소로 오면 새 주소로 301 리다이렉트 해줘',r:['Redirect'],l:2,o:1,u:MDN('Web/HTTP/Status/301'),v:'u-server-301-redirect'},
+ {en:'400 Bad Request',ko:'400 · 잘못된 요청',d:'보낸 값이 틀려서 처리할 수 없다는 응답.',p:'400 에러가 나. 보내는 값 형식을 확인해줘',r:['Validation'],l:2,o:1,u:MDN('Web/HTTP/Status/400'),v:'u-server-400-bad-request'},
+ {en:'401 Unauthorized',ko:'401 · 로그인 필요',d:'로그인(인증)을 안 해서 거절됐다는 응답.',x:'401은 누구인지 확인이 안 됐다는 뜻이라 로그인하면 풀려요. 403은 누군지는 알지만 권한이 없다는 뜻이라 다시 로그인해도 그대로예요.',p:'401이 나와. 로그인 토큰이 제대로 가는지 확인해줘',r:['Authentication','403 Forbidden'],l:2,o:1,u:MDN('Web/HTTP/Status/401'),v:'u-server-401-unauthorized'},
+ {en:'403 Forbidden',ko:'403 · 권한 없음',d:'누군지는 알지만 이 일을 할 권한이 없다는 응답.',p:'관리자인데 403이 나와. 권한 설정을 확인해줘',r:['Authorization','401 Unauthorized'],l:2,o:1,u:MDN('Web/HTTP/Status/403'),v:'u-server-403-forbidden'},
+ {en:'404 Not Found',ko:'404 · 없는 페이지',d:'요청한 주소에 아무것도 없다는 응답.',p:'404 페이지를 예쁘게 만들고 홈으로 가는 버튼을 넣어줘',r:['Routing'],l:1,o:1,u:MDN('Web/HTTP/Status/404'),v:'u-server-404-not-found'},
+ {en:'429 Too Many Requests',ko:'429 · 요청 너무 많음',d:'짧은 시간에 요청을 너무 많이 보냈다는 응답.',p:'요청이 너무 많으면 429를 돌려주고 잠시 후 다시 하라고 안내해줘',r:['Rate Limit'],l:3,o:1,u:MDN('Web/HTTP/Status/429'),v:'u-server-429-too-many-requests'},
+ {en:'500 Internal Server Error',ko:'500 · 서버 내부 오류',d:'서버 쪽 코드에서 문제가 생겼다는 응답. 서버 로그를 봐야 해요.',j:'"500 떴어요"',p:'500 에러가 나. 서버 로그를 보고 원인을 찾아줘',r:['Server Log'],l:2,o:1,u:MDN('Web/HTTP/Status/500'),v:'u-server-500-internal-server-error'},
+ {en:'502 Bad Gateway',ko:'502 · 중간 서버 오류',d:'앞 서버가 뒤 서버에게서 제대로 된 답을 못 받았다는 응답.',p:'502가 나. 뒤의 앱 서버가 살아 있는지 확인해줘',r:['Reverse Proxy'],l:3,o:1,u:MDN('Web/HTTP/Status/502'),v:'u-server-502-bad-gateway'},
+ {en:'HTTP Status Code',ko:'HTTP 상태 코드',d:'응답 결과를 세 자리 숫자로 알려 주는 것. 2xx 성공, 3xx 이동, 4xx 요청 잘못, 5xx 서버 잘못.',p:'API가 상황에 맞는 상태 코드를 돌려주게 해줘',r:['200 OK','404 Not Found'],l:1,o:1,u:MDN('Web/HTTP/Status'),v:'u-server-http-status-code'},
 ]);
 T('server','tip',[
- {en:'Development Environment',ko:'개발 환경',d:'만들고 시험하는 내 컴퓨터 환경.',p:'내 컴퓨터 개발 환경을 처음부터 세팅하는 순서를 알려줘',r:['Staging','Production'],l:1,o:0,v:{flow:['개발','스테이징','프로덕션'],hl:[0]}},
- {en:'Staging',ko:'스테이징 · 리허설 서버',d:'운영과 똑같이 꾸민 시험 서버. 올리기 전에 마지막 확인.',p:'스테이징에 먼저 올려서 확인해줘',r:['Production'],l:2,o:0,v:{flow:['개발','스테이징','프로덕션'],hl:[1]}},
- {en:'Monitoring',ko:'모니터링 · 감시',d:'서버 상태와 오류를 계속 지켜보고 문제가 생기면 알려 주는 것.',p:'서버가 멈추면 알림이 오게 모니터링을 붙여줘',r:['Uptime','Logging'],l:2,o:0,v:'pulse'},
- {en:'Cron Job',ko:'크론 · 예약 작업',d:'정해진 시간마다 자동으로 실행되는 작업.',p:'매일 새벽 3시에 백업하는 크론 작업을 만들어줘',r:['Backup'],l:2,o:0,v:{code:'0 3 * * *  backup.sh\n# 매일 03:00'}},
- {en:'Redirect',ko:'리다이렉트 · 자동 이동',d:'한 주소로 오면 다른 주소로 자동으로 보내는 것.',p:'www 없는 주소로 오면 www 주소로 리다이렉트해줘',r:['301 Redirect'],l:2,o:1,u:MDN('Web/HTTP/Redirections'),v:{flow:['옛 주소','자동 이동','새 주소']}},
- {en:'Maintenance Page',ko:'점검 페이지',d:'서버 점검 중에 보여 주는 안내 화면.',p:'점검 중일 때 보여 줄 안내 페이지를 만들어줘',r:['Downtime'],l:1,o:0,v:'emptystate'},
- {en:'Works on My Machine',ko:'"내 컴퓨터에선 되는데"',d:'내 컴퓨터에선 되는데 서버에선 안 되는 흔한 상황. 환경 차이가 원인이에요.',j:'"제 로컬에선 되는데요"',p:'로컬에선 되는데 배포하면 안 돼. 환경 차이를 찾아줘',r:['Docker','Environment Variable'],l:1,o:0,jg:1,v:{cmp:['내 컴퓨터','<span class="btnx">✓ 됨</span>','서버','<span class="btnx o">✗ 안 됨</span>']}},
- {en:'Self-hosting',ko:'직접 호스팅',d:'남의 서비스 대신 내 서버에 직접 설치해 운영하는 것.',p:'이 도구를 직접 호스팅할 때 드는 관리 부담을 알려줘',r:['Hosting'],l:3,o:0,v:{flow:['내 서버','직접 설치','직접 관리']}},
+ {en:'Development Environment',ko:'개발 환경',d:'만들고 시험하는 내 컴퓨터 환경.',p:'내 컴퓨터 개발 환경을 처음부터 세팅하는 순서를 알려줘',r:['Staging','Production'],l:1,o:0,v:'u-server-development-environment'},
+ {en:'Staging',ko:'스테이징 · 리허설 서버',d:'운영과 똑같이 꾸민 시험 서버. 올리기 전에 마지막 확인.',p:'스테이징에 먼저 올려서 확인해줘',r:['Production'],l:2,o:0,v:'u-server-staging'},
+ {en:'Monitoring',ko:'모니터링 · 감시',d:'서버 상태와 오류를 계속 지켜보고 문제가 생기면 알려 주는 것.',p:'서버가 멈추면 알림이 오게 모니터링을 붙여줘',r:['Uptime','Logging'],l:2,o:0,v:'u-server-monitoring'},
+ {en:'Cron Job',ko:'크론 · 예약 작업',d:'정해진 시간마다 자동으로 실행되는 작업.',p:'매일 새벽 3시에 백업하는 크론 작업을 만들어줘',r:['Backup'],l:2,o:0,v:'u-server-cron-job'},
+ {en:'Redirect',ko:'리다이렉트 · 자동 이동',d:'한 주소로 오면 다른 주소로 자동으로 보내는 것.',p:'www 없는 주소로 오면 www 주소로 리다이렉트해줘',r:['301 Redirect'],l:2,o:1,u:MDN('Web/HTTP/Redirections'),v:'u-server-redirect'},
+ {en:'Maintenance Page',ko:'점검 페이지',d:'서버 점검 중에 보여 주는 안내 화면.',p:'점검 중일 때 보여 줄 안내 페이지를 만들어줘',r:['Downtime'],l:1,o:0,v:'u-server-maintenance-page'},
+ {en:'Works on My Machine',ko:'"내 컴퓨터에선 되는데"',d:'내 컴퓨터에선 되는데 서버에선 안 되는 흔한 상황. 환경 차이가 원인이에요.',j:'"제 로컬에선 되는데요"',p:'로컬에선 되는데 배포하면 안 돼. 환경 차이를 찾아줘',r:['Docker','Environment Variable'],l:1,o:0,jg:1,v:'u-server-works-on-my-machine'},
+ {en:'Self-hosting',ko:'직접 호스팅',d:'남의 서비스 대신 내 서버에 직접 설치해 운영하는 것.',p:'이 도구를 직접 호스팅할 때 드는 관리 부담을 알려줘',r:['Hosting'],l:3,o:0,v:'u-server-self-hosting'},
 ]);
 </script>
 <script>
@@ -8441,6 +8441,39 @@ Object.assign(D,{
     cap:'1분마다 센 요청 수(예시)'},
   'u-server-failover':{h:sfail(true)},
   'u-server-graceful-shutdown':{h:track([{t:'새 요청 받지 않음', s:'done'}, {t:'하던 요청 끝냄', s:'done'}, {t:'끔', s:'done'}]), m:1},
+});
+/* server: 다시 그리기 adv·status·tip — 출처 확인(2026-11): RFC 9110 15장(200·301 Location·400·401 WWW-Authenticate 필수·403·404·500·502 게이트웨이가 받은 잘못된 응답),
+   MDN 429(RFC 6585 §4, Retry-After 초)·각 상태 코드, crontab(5) 다섯 칸(분 시 일 월 요일), Docker 문서(이미지로 컨테이너를 만듦), Kubernetes Self-Healing(고장 난 Pod를 바꿈),
+   AWS 문서(EC2·S3·RDS). IP는 문서용 대역 203.0.113.0/24. 이름·숫자·시각·버전은 예시 */
+Object.assign(D,{
+  'u-server-linux':{h:term([{c:'uname -s'}, {o:'Linux'}, {c:'ls /var/www'}, {o:'html  logs'}]), m:1},
+  'u-server-ssh':{h:term([{c:'ssh ubuntu@203.0.113.10'}, {o:'Welcome to Ubuntu'}, {o:'ubuntu@web-1:~$'}], {prompt:'$'}), cap:'주소와 이름은 예시예요', m:1},
+  'u-server-docker':{h:bkStack(bkPills('컨테이너', ['앱', '라이브러리', '설정']), '<p class="mk-dgp">어느 서버에서나 같게 돌아가요</p>')},
+  'u-server-container-image':{h:track([{t:'Dockerfile', s:'done'}, {t:'docker build', s:'done'}, {t:'이미지', s:'done'}, {t:'docker run 3번', s:'done'}, {t:'컨테이너 3개', s:'done'}]), m:1},
+  'u-server-kubernetes':{h:srvmap({servers:[{n:'상자 1', got:2}, {n:'상자 2', st:'down'}, {n:'상자 3', got:2}, {n:'상자 4', st:'new', got:1}], note:'죽은 상자를 저절로 바꿔요'}), m:1},
+  'u-server-aws':{h:bkPills('서비스 예', ['EC2 서버', 'S3 파일', 'RDS DB'])},
+  'u-server-vps':{h:bkStack(bkBox('큰 컴퓨터 한 대', '칸 셋으로 나눔'), bkRows(['칸 1', ''], ['칸 2', '내 몫'], ['칸 3', '']))},
+  'u-server-serverless':{h:seq(['브라우저', '플랫폼', '함수'], [{from:0, to:1, t:'요청'}, {from:1, to:1, t:'함수 깨움'}, {from:1, to:2, t:'실행'}, {from:2, to:0, t:'응답'}]), cap:'쓴 만큼 내요', m:1},
+  'u-server-200-ok':{h:httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: text/html'], body:['<h1>안녕하세요</h1>'], hl:['b0']})},
+  'u-server-301-redirect':{h:httpmsg({kind:'응답', start:'301 Moved Permanently', head:['Location: /new'], hl:['h0']})},
+  'u-server-400-bad-request':{h:bkStack(httpmsg({kind:'요청', start:'POST /signup', head:['Content-Type: application/json'], body:['{"email": }'], hl:['b0']}), httpmsg({kind:'응답', start:'400 Bad Request'})),
+    cap:'보낸 쪽 형식이 깨졌어요'},
+  'u-server-401-unauthorized':{h:httpmsg({kind:'응답', start:'401 Unauthorized', head:['WWW-Authenticate: Bearer'], hl:['h0']}), cap:'로그인이 필요해요'},
+  'u-server-403-forbidden':{h:httpmsg({kind:'응답', start:'403 Forbidden', body:['권한 없음']}), cap:'로그인은 됐지만 허락이 없어요'},
+  'u-server-404-not-found':{h:bkStack(httpmsg({kind:'요청', start:'GET /posts/999'}), httpmsg({kind:'응답', start:'404 Not Found'}))},
+  'u-server-429-too-many-requests':{h:httpmsg({kind:'응답', start:'429 Too Many Requests', head:['Retry-After: 60'], hl:['h0']}), cap:'60초 뒤 다시 보내라는 뜻(예시)'},
+  'u-server-500-internal-server-error':{h:httpmsg({kind:'응답', start:'500 Internal Server Error', body:['서버 오류']}), cap:'자세한 원인은 서버 로그에'},
+  'u-server-502-bad-gateway':{h:httpmsg({kind:'응답', start:'502 Bad Gateway', head:['Server: nginx'], body:['앱이 이상한 답을 줌'], hl:['h0']}), cap:'Nginx는 예시예요'},
+  'u-server-http-status-code':{h:doc([{tb:[['범위', '뜻', '예'], ['2xx', '성공', '200'], ['3xx', '다른 곳으로', '301'], ['4xx', '요청 쪽 문제', '404'], ['5xx', '서버 쪽 문제', '500']]}]), m:1},
+  'u-server-development-environment':{h:senv(0, '마음껏 망가뜨려도 돼요')},
+  'u-server-staging':{h:senv(1, '운영과 같게 만든 연습장')},
+  'u-server-monitoring':{h:metric({lines:[{n:'CPU', pts:[30, 35, 40, 85, 60, 40]}, {n:'메모리', pts:[55, 56, 58, 62, 60, 58]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%', limit:{v:80, n:'알림 기준'}}),
+    cap:'숫자는 예시예요'},
+  'u-server-cron-job':{h:bkStack(term([{c:'crontab -l'}, {o:'0 3 * * * backup.sh'}]), '<p class="mk-dgp">매일 03:00에 실행돼요</p>'), m:1},
+  'u-server-redirect':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'GET /old'}, {from:1, to:0, t:'301 Location'}, {from:0, to:1, t:'GET /new'}, {from:1, to:0, t:'200 OK'}]), m:1},
+  'u-server-maintenance-page':{h:bkStack(browser('<p class="mk-dgp">점검 중이에요, 02:00까지</p>', {url:'example.com'})), cap:'시각은 예시예요'},
+  'u-server-works-on-my-machine':{h:bkStack(bkBox('내 컴퓨터', 'Node 22', '되는 중'), bkBox('서버', 'Node 18', '오류')), cap:'버전은 예시예요'},
+  'u-server-self-hosting':{h:bkStack(bkBox('직접 운영', '서버·업데이트·백업을 내가'), bkBox('서비스 이용', '회사가 맡음'))},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;

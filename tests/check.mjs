@@ -117,7 +117,7 @@ const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
   'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip', 'server/basic', 'server/core', 'server/motion', 'server/adv', 'server/status', 'server/conf', 'server/scale', 'server/res', 'server/infra', 'server/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'srvsym', 'redrawn:server/adv', 'redrawn:server/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -467,7 +467,8 @@ check('srvcss', () => [['figcap sv', /[,(]\.mk-sv[,)][^{]*\.figcap\{position:sta
   ['2열', /@media \(max-width:420px\)\{\.mk-svs\[style\*="--n:4"\]\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/], ['서버 가로선', /\.mk-svs\{[^}]*background:linear-gradient/], ['db 가로선', /\.mk-svdb\{[^}]*center bottom/],
   ['db 세로선', /\.mk-svl\{[^}]*flex:1/], ['2열 점 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svd\{display:none\}/],
   ['2열 테두리', /\.mk-svs\[style\*="--n:4"\]\{[^}]*border:1\.5px solid var\(--rule\)/], ['2열 칸 선 끔', /\.mk-svs\[style\*="--n:4"\] \.mk-svc::before,\.mk-svs\[style\*="--n:4"\] \.mk-svl\{display:none\}/],
-  ['2열 버튼 끔', /@media \(max-width:420px\)\{[^@]*\.fig:has\(\.mk-svs\[style\*="--n:4"\]\) \.play\{display:none\}/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));    // 서버 배치도의 선·점선·2열 규칙
+  ['2열 버튼 끔', /@media \(max-width:420px\)\{[^@]*\.fig:has\(\.mk-svs\[style\*="--n:4"\]\) \.play\{display:none\}/],
+  ['묶음 안 터미널 폭', /\.mk-bkg:has\(>\.mk-term\)\{grid-template-columns:minmax\(0,1fr\)\}/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));    // 서버 배치도의 선·점선·2열 규칙
 check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er', 'mk-sv', 'mk-mg'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
@@ -860,9 +861,7 @@ check('dbrevd', () => [...(['Atomicity', 'Consistency', 'Isolation', 'Durability
 check('dbreve', () => [['Hard Delete', 'COMMIT'], ['ERD', '1:N'], ['Timestamp', 'UTC로 바꿔 저장']].filter(([en, w]) => !(g.find(en)?.x || '').includes(w)).map(([en]) => en + ' x').join(', '));    // 검토 E: ROLLBACK 가능 시점, 그림의 1:N 표시, timestamptz는 시간대가 아니라 UTC 시각을 저장
 const SRVS = () => g.TERMS.filter(t => t.c === 'server');
 check('srvcat', () => { const a = g.CATS.find(c => c.id === 'server').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,status,conf,scale,res,infra,tip' ? '' : a; });
-const SRV_TODO = ["Linux","SSH","Docker","Container Image","Kubernetes","AWS","VPS","Serverless",
-  "200 OK","301 Redirect","400 Bad Request","401 Unauthorized","403 Forbidden","404 Not Found","429 Too Many Requests","500 Internal Server Error","502 Bad Gateway","HTTP Status Code",
-  "Development Environment","Staging","Monitoring","Cron Job","Redirect","Maintenance Page","Works on My Machine","Self-hosting"];    // 아직 u-server- 그림이 아닌 옛 서버 카드. 다시 그리면 여기서 뺀다
+const SRV_TODO = [];    // 아직 u-server- 그림이 아닌 옛 서버 카드. 다시 그리면 여기서 뺀다
 const SRV_NOX = ["Localhost","Dev Server","Production","Cloud","Uptime","HTTPS","SSL Certificate","Web Server","Reverse Proxy","Load Balancer","Scaling","Downtime","Server Log","Storage",
   "Request-Response Cycle","Cold Start","Restart","Traffic Spike","Failover","Graceful Shutdown","Linux","SSH","Container Image","Kubernetes","AWS","VPS","Serverless",
   "200 OK","301 Redirect","400 Bad Request","403 Forbidden","404 Not Found","429 Too Many Requests","500 Internal Server Error","502 Bad Gateway","HTTP Status Code",
