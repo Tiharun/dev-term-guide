@@ -2547,7 +2547,7 @@ T('front','event',[
 T('front','react',[
  {en:'JSX',ko:'JSX · 자바스크립트 속 HTML',d:'자바스크립트 안에 HTML처럼 생긴 태그를 써서 화면 모양을 적는 문법이에요.',x:'JSX는 HTML과 닮았지만 class 대신 className을 쓰고, 중괄호 안에 자바스크립트 값을 넣어요. 브라우저는 JSX를 바로 읽지 못해서 빌드 도구가 자바스크립트로 바꿔 줘요.',p:'이 인사말을 JSX로 써서 이름이 {name} 자리에 들어가게 해줘',r:['React'],l:2,o:1,u:'https://react.dev/learn/writing-markup-with-jsx',v:'u-front-jsx'},
  {en:'useState',ko:'상태 훅',d:'컴포넌트가 값을 기억하게 하고, 그 값이 바뀌면 화면을 다시 그리게 하는 훅이에요.',x:'useState로 만든 값은 바뀌면 화면을 다시 그리고, Ref에 담은 값은 바꿔도 다시 그리지 않아요. 화면에 보이는 값은 useState에, 화면과 상관없는 값은 Ref에 둬요.',p:'버튼을 누를 때마다 숫자가 1씩 늘게 useState로 만들어줘',r:['Hook','State'],l:2,o:1,u:'https://react.dev/reference/react/useState',v:'u-front-usestate'},
- {en:'useEffect',ko:'효과 훅',d:'화면을 그린 뒤에 데이터 요청 같은 바깥 일을 하게 하는 훅이에요.',x:'useEffect는 화면을 그린 뒤 실행되고, 두 번째 인자 [id] 속 값이 바뀔 때만 다시 실행돼요. useEffect는 값이 바뀔 때마다 일을 시작하고 정리하는 곳이라, 컴포넌트가 생기고 사라지는 생명주기(Lifecycle)와는 따로 생각해요.',p:'id가 바뀔 때마다 글을 다시 불러오게 useEffect로 만들어줘',r:['Hook'],l:3,o:1,u:'https://react.dev/reference/react/useEffect',v:'u-front-useeffect'},
+ {en:'useEffect',ko:'효과 훅',d:'화면을 그린 뒤에 데이터 요청 같은 바깥 일을 하게 하는 훅이에요.',x:'useEffect는 화면을 그린 뒤 실행되고, 두 번째 인자 [id] 속 값이 바뀔 때만 다시 실행돼요. 효과 안에서 바꾼 상태가 다시 의존성을 바꾸면 끝없이 반복되니, 의존성에 무엇을 넣을지 살펴요. useEffect는 값이 바뀔 때마다 일을 시작하고 정리하는 곳이라, 컴포넌트가 생기고 사라지는 생명주기(Lifecycle)와는 따로 생각해요.',p:'id가 바뀔 때마다 글을 다시 불러오게 useEffect로 만들어줘',r:['Hook'],l:3,o:1,u:'https://react.dev/reference/react/useEffect',v:'u-front-useeffect'},
  {en:'Key',ko:'키 · 목록 항목 이름표',d:'목록의 항목마다 붙이는 고유한 이름표로, React가 어느 항목이 어느 것인지 알아보게 해요.',x:'여기의 key는 React가 목록 항목을 알아보는 이름표라, 개발 기본의 키-값(Key-Value)이나 백엔드의 API 키와는 다른 말이에요. key가 없으면 React가 줄 번호로 짝지어서, 맨 앞에 항목을 더하면 입력값이 엉뚱한 줄에 남을 수 있어요.',p:'목록 항목에 줄 번호 대신 id를 key로 붙여줘',r:['List Rendering'],l:3,o:1,u:'https://react.dev/learn/rendering-lists',v:'u-front-key'},
  {en:'Ref',ko:'참조 · 바꿔도 다시 안 그리는 값',d:'useRef로 만들어, 바꿔도 화면을 다시 그리지 않는 값이나 입력칸 같은 실제 요소를 담아 두는 상자예요.',x:'Ref는 값을 바꿔도 화면이 그대로이고, useState는 값이 바뀌면 화면을 다시 그려요. 그래서 Ref의 current는 화면을 그리는 중에는 읽지 않고, 클릭 처리기나 useEffect 안에서 써요.',p:'버튼을 누르면 입력칸에 커서가 가게 useRef로 만들어줘',r:['Hook'],l:3,o:1,u:'https://react.dev/reference/react/useRef',v:'u-front-ref'},
  {en:'Fragment',ko:'프래그먼트 · 빈 묶음',d:'여러 요소를 하나로 묶지만, 화면에는 상자를 하나 더 만들지 않는 빈 묶음 <>…</>이에요.',x:'wrapper처럼 div로 감싸면 화면에 상자가 하나 더 생기고, Fragment로 묶으면 상자는 생기지 않아요. Flexbox나 표처럼 상자 하나가 더 끼면 모양이 깨지는 곳에서 써요.',p:'감싸는 div를 빼고 Fragment로 묶어줘',r:['Component'],l:3,o:1,u:'https://react.dev/reference/react/Fragment',v:'u-front-fragment'},
@@ -3742,7 +3742,7 @@ SYM('오류·안 됨',[
  ['CSS를 고쳤는데 적용이 안 돼요',['Specificity','Cascade','Inspect Element']],
  ['같은 요청이 끝없이 반복돼요',['useEffect','Re-render']],
  ['목록 순서를 바꾸면 입력값이 엉뚱한 줄에 남아요',['Key','List Rendering']],
- ['값을 바꿨는데 화면이 그대로예요',['Immutability','State','useState']],
+ ['배열에 값을 넣었는데 화면이 그대로예요',['Immutability','State','useState']],
  ['props를 여러 단계로 계속 넘기고 있어요',['Props Drilling','Context API','State Management']],
  ['스크린 리더가 버튼을 이상하게 읽어요',['ARIA','Semantic HTML']],
  ['옛 브라우저에서 새 문법이 안 돼요',['Transpile','Babel','Polyfill']],
@@ -7450,7 +7450,7 @@ const fkey = (useKey, added) => { const by = Object.fromEntries(FKEY0), ns = [..
   const rs = ns.map((n, i) => { const v = useKey ? by[n] ?? '' : FKEY0[i]?.[1] ?? ''; return [n, v, v && v !== (by[n] ?? '')]; });    // key가 없으면 값이 줄 번호에 남는다
   return `<div class="mk-fst"><ul class="mk-fky">${rs.map(([n, v, bad]) => `<li><b>${n}</b><input readonly tabindex="-1" value="${v}" aria-label="${n} 메모">${bad ? '<span class="mk-dtg">엉뚱한 줄</span>' : ''}</li>`).join('')}</ul>`
     + `<p class="mk-fsp"><code>key</code> ${useKey ? '있음: id로 짝지어요' : '없음: 줄 번호로 짝지어요'}</p></div>`; };
-const fkeySay = (useKey, added) => !added ? '처음 목록이에요. 사과 줄에 빨강을 써 두었어요'
+const fkeySay = (useKey, added, out) => !added ? (out ? '귤을 뺐어요. ' : '') + '처음 목록이에요. 사과 줄에 빨강을 써 두었어요'
   : useKey ? 'key가 있어서 빨강이 사과 줄을 따라가요' : 'key가 없으면 React가 줄 번호(index)로 짝지어요. 그래서 빨강이 맨 앞 귤 줄에 남았어요';
 const fbtn = t => `<div class="mk-card mk-f"><span class="mk-btn">${t}</span></div>`;
 Object.assign(D, {
@@ -7465,9 +7465,9 @@ Object.assign(D, {
       + `<div class="mk-tkeys"><button type="button" class="mk-tkey" aria-pressed="false">맨 앞에 추가</button></div><span class="mk-hint" aria-live="polite">${fkeySay(false, 0)}</span>`,
     cap:'key를 고르고 맨 앞에 귤을 더해 보며 빨강이 어느 줄에 남는지 보세요',
     init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], pk = ks.filter(x => x.dataset.k), ad = ks.find(x => !x.dataset.k);
-      let k = 'key 없음', added = 0;
-      const go = () => { const u = k === 'key 있음'; b.innerHTML = fkey(u, added); psay(h, fkeySay(u, added)); pk.forEach(y => y.setAttribute('aria-pressed', y.dataset.k === k)); ad.setAttribute('aria-pressed', !!added); };
-      pk.forEach(x => x.addEventListener('click', () => { k = x.dataset.k; go(); })); ad.addEventListener('click', () => { added = added ? 0 : 1; go(); }); }},
+      let k = 'key 없음', added = 0, out = false;
+      const go = () => { const u = k === 'key 있음'; b.innerHTML = fkey(u, added); psay(h, fkeySay(u, added, out)); pk.forEach(y => y.setAttribute('aria-pressed', y.dataset.k === k)); ad.setAttribute('aria-pressed', !!added); };
+      pk.forEach(x => x.addEventListener('click', () => { k = x.dataset.k; out = false; go(); })); ad.addEventListener('click', () => { out = !!added; added = added ? 0 : 1; go(); }); }},
   'u-front-ref':{h:ide(['const box = useRef(null);', '<input ref={box} />', '<button onClick={() =>', '  box.current.focus()}>', '  입력하기</button>'], [{l:4, out:[{t:'입력칸에 포커스', dim:1}]}], {title:'App.jsx', still:true}),
     cap:'버튼을 누르면 box가 가리키는 입력칸에 커서가 가요. 화면은 다시 그리지 않아요'},
   'u-front-fragment':{h:vs('div로 감쌈', domtree([[0, 'section'], [1, 'div', '하나 더 생김'], [2, 'h2'], [2, 'p']], {hl:[1], still:true}),
