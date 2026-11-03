@@ -435,7 +435,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-bkg{display:grid;gap:6px;width:100%;align-self:start;text-align:left}.mk-bks{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;padding:5px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font-size:12px;color:var(--ink);text-align:left}.mk-bks>b:first-child{font-weight:800}
 .mk-bkr{list-style:none;margin:0;padding:0;display:grid;gap:4px;width:100%;align-self:start}.mk-bkr li{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;padding:3px 8px;border:1.5px solid var(--rule);border-radius:4px;background:var(--plate);font:12px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-bkr code{font:inherit}
 .mk-bkp{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12px;color:var(--ink)}.mk-bkp>b:first-child{min-width:2.4em}.mk-bkp>span{padding:1px 7px;border:1.5px solid var(--ink);border-radius:4px;background:var(--plate);font-family:var(--mono)}
-.mk-bkg:has(>.mk-browser){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkg>.mk-browser{max-width:100%}.mk-bkh{display:grid;gap:6px;justify-items:center;width:100%}.mk-bkr li.mk-bkf{border-color:var(--mark-text)}.mk-bkr li.mk-bkf>span{font:11px/1.4 var(--sans);color:var(--muted)}.mk-bkrl{display:grid;gap:6px;width:min(100%,400px);font-size:12px;color:var(--ink);text-align:left}
+.mk-bkmo{padding:8px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-bkg:has(>.mk-browser){grid-template-columns:minmax(0,1fr);justify-items:center}.mk-bkg>.mk-browser{max-width:100%}.mk-bkh{display:grid;gap:6px;justify-items:center;width:100%}.mk-bkr li.mk-bkf{border-color:var(--mark-text)}.mk-bkr li.mk-bkf>span{font:11px/1.4 var(--sans);color:var(--muted)}.mk-bkrl{display:grid;gap:6px;width:min(100%,400px);font-size:12px;color:var(--ink);text-align:left}
 .mk-sd{width:min(100%,440px);padding:4px;border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);font:12px/1.4 var(--sans);color:var(--ink);text-align:left}
 .mk-sdh{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}.mk-sdh span{margin:0 1px;padding:3px 0;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate);font:800 11px/1.3 var(--sans);text-align:center;word-break:keep-all;overflow-wrap:anywhere}
 .mk-sdl{margin:0;padding:2px 0 0;list-style:none}.mk-sdm{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px;padding:3px 6px 16px}.mk-sdm>span,.mk-sdm>b{position:relative;background:var(--plate)}
@@ -2723,24 +2723,24 @@ T('back','motion',[
  {en:'Queue',ko:'큐 · 작업 대기열',d:'오래 걸리는 일을 줄 세워 차례로 처리하는 방식. 메일 발송 등.',p:'메일 발송은 큐에 넣어서 뒤에서 처리해줘',r:['Background Job'],l:3,o:0,v:'u-back-queue'},
 ]);
 T('back','adv',[
- {en:'GraphQL',ko:'그래프큐엘',d:'필요한 데이터 모양을 요청에서 직접 골라 받는 API 방식.',p:'REST와 GraphQL 중 이 프로젝트에 맞는 걸 추천해줘',r:['REST API'],l:3,o:1,u:'https://graphql.org/learn/',v:{code:'query {\n  user(id: 1) { name }\n}'}},
- {en:'JWT',ko:'제이더블유티 · 로그인 토큰',d:'로그인했다는 증명서를 글자로 만든 것. 요청마다 함께 보내요.',p:'로그인하면 JWT를 발급하고 요청 헤더로 보내게 해줘',r:['Authentication','Session'],l:3,o:1,u:'https://jwt.io/introduction',v:{big:'eyJhbGci...',sub:'헤더 · 내용 · 서명'}},
- {en:'OAuth',ko:'오어스 · 소셜 로그인',d:'구글·카카오 계정으로 로그인하게 하는 표준 방식.',p:'카카오 로그인을 OAuth로 붙여줘',r:['Authentication'],l:3,o:1,u:'https://oauth.net/2/',v:{flow:['내 사이트','카카오 로그인','허락','돌아옴']}},
- {en:'Microservices',ko:'마이크로서비스',d:'큰 프로그램을 작은 서비스 여러 개로 나눠 만드는 구조.',x:'마이크로서비스는 주문·회원처럼 기능마다 따로 배포하는 작은 서비스로 나눈 구조예요. 하나로 크게 만들어 한 번에 배포하면 모놀리스(Monolith)예요.',p:'지금 규모에 마이크로서비스가 필요한지, 하나로 충분한지 알려줘',r:['Monolith'],l:3,o:0,v:{flow:['회원','주문','결제'],hl:[0,1,2]}},
- {en:'Monolith',ko:'모놀리스 · 통짜 구조',d:'모든 기능을 하나의 프로그램에 담는 구조. 작게 시작하기에 좋아요.',p:'처음엔 모놀리스로 단순하게 만들어줘',r:['Microservices'],l:3,o:0,v:{stack:['회원 + 주문 + 결제 (하나)'],hl:[0]}},
- {en:'Cache',ko:'캐시',d:'자주 쓰는 결과를 가까운 곳에 저장해 두고 다시 빨리 꺼내 쓰는 것.',p:'자주 바뀌지 않는 목록은 캐시해서 빠르게 응답해줘',r:['CDN','Redis'],l:2,o:1,u:MDN('Web/HTTP/Caching'),v:{flow:['요청','캐시에 있음?','바로 응답'],hl:[1]}},
- {en:'ORM',ko:'오알엠',d:'SQL을 직접 쓰지 않고 코드 객체로 DB를 다루게 해 주는 도구. Prisma 등.',p:'DB 작업은 Prisma ORM으로 해줘',r:['SQL','Database'],l:3,o:0,v:{code:'await db.user.findMany()\n// = SELECT * FROM users'}},
- {en:'Serverless Function',ko:'서버리스 함수',d:'서버를 직접 관리하지 않고 함수만 올려 두면 요청이 올 때 실행되는 방식.',p:'문의 폼 전송은 서버리스 함수로 처리해줘',r:['Serverless'],l:3,o:0,v:{flow:['요청','함수 실행','응답 후 종료']}},
+ {en:'GraphQL',ko:'그래프큐엘',d:'필요한 데이터 모양을 요청에서 직접 골라 받는 API 방식.',p:'REST와 GraphQL 중 이 프로젝트에 맞는 걸 추천해줘',r:['REST API'],l:3,o:1,u:'https://graphql.org/learn/',v:'u-back-graphql'},
+ {en:'JWT',ko:'제이더블유티 · 로그인 토큰',d:'로그인했다는 증명서를 글자로 만든 것. 요청마다 함께 보내요.',p:'로그인하면 JWT를 발급하고 요청 헤더로 보내게 해줘',r:['Authentication','Session'],l:3,o:1,u:'https://jwt.io/introduction',v:'u-back-jwt'},
+ {en:'OAuth',ko:'오어스 · 소셜 로그인',d:'구글·카카오 계정으로 로그인하게 하는 표준 방식.',p:'카카오 로그인을 OAuth로 붙여줘',r:['Authentication'],l:3,o:1,u:'https://oauth.net/2/',v:'u-back-oauth'},
+ {en:'Microservices',ko:'마이크로서비스',d:'큰 프로그램을 작은 서비스 여러 개로 나눠 만드는 구조.',x:'마이크로서비스는 주문·회원처럼 기능마다 따로 배포하는 작은 서비스로 나눈 구조예요. 하나로 크게 만들어 한 번에 배포하면 모놀리스(Monolith)예요.',p:'지금 규모에 마이크로서비스가 필요한지, 하나로 충분한지 알려줘',r:['Monolith'],l:3,o:0,v:'u-back-microservices'},
+ {en:'Monolith',ko:'모놀리스 · 통짜 구조',d:'모든 기능을 하나의 프로그램에 담는 구조. 작게 시작하기에 좋아요.',p:'처음엔 모놀리스로 단순하게 만들어줘',r:['Microservices'],l:3,o:0,v:'u-back-monolith'},
+ {en:'Cache',ko:'캐시',d:'자주 쓰는 결과를 가까운 곳에 저장해 두고 다시 빨리 꺼내 쓰는 것.',p:'자주 바뀌지 않는 목록은 캐시해서 빠르게 응답해줘',r:['CDN','Redis'],l:2,o:1,u:MDN('Web/HTTP/Caching'),v:'u-back-cache'},
+ {en:'ORM',ko:'오알엠',d:'SQL을 직접 쓰지 않고 코드 객체로 DB를 다루게 해 주는 도구. Prisma 등.',p:'DB 작업은 Prisma ORM으로 해줘',r:['SQL','Database'],l:3,o:0,v:'u-back-orm'},
+ {en:'Serverless Function',ko:'서버리스 함수',d:'서버를 직접 관리하지 않고 함수만 올려 두면 요청이 올 때 실행되는 방식.',p:'문의 폼 전송은 서버리스 함수로 처리해줘',r:['Serverless'],l:3,o:0,v:'u-back-serverless-function'},
 ]);
 T('back','api',[
- {en:'Request Header',ko:'요청 헤더',d:'요청에 붙는 부가 정보. 로그인 토큰, 데이터 형식 등.',p:'요청 헤더에 Authorization 토큰을 넣어 보내줘',r:['Request Body'],l:2,o:1,u:MDN('Glossary/Request_header'),v:{code:'Authorization: Bearer eyJ...\nContent-Type: application/json'}},
- {en:'Request Body',ko:'요청 본문 · 바디',d:'요청과 함께 보내는 실제 데이터.',p:'회원가입 요청 바디에 이름·이메일·비밀번호를 담아줘',r:['Request Header','JSON'],l:2,o:0,v:{code:'{ "email": "a@b.com",\n  "name": "민수" }'}},
- {en:'Query Parameter',ko:'쿼리 파라미터',d:'주소 끝 ? 뒤에 붙는 조건 값. ?page=2&sort=new.',p:'검색어와 페이지를 쿼리 파라미터로 받게 해줘',r:['Path Parameter','URL'],l:2,o:0,v:{big:'/posts?page=2&sort=new',sub:'? 뒤가 쿼리 파라미터'}},
- {en:'Path Parameter',ko:'경로 파라미터',d:'주소 안에 들어가는 값. /posts/3의 3.',p:'/products/:id로 상품 하나를 보여주는 API를 만들어줘',r:['Query Parameter'],l:2,o:0,v:{big:'/posts/3',sub:'3 = 경로 파라미터'}},
- {en:'API Key',ko:'API 키',d:'API를 쓸 자격을 증명하는 비밀 글자. 남에게 보이면 안 돼요.',p:'API 키가 브라우저 코드에 드러나지 않게 서버에서만 쓰게 해줘',r:['Environment Variable'],l:2,o:0,v:{big:'sk-••••••••',sub:'비밀번호처럼 숨겨야 함'}},
- {en:'API Documentation',ko:'API 문서',d:'API 주소·보낼 값·받는 값을 적어 둔 설명서. Swagger 등.',p:'만든 API를 표로 정리해서 문서로 만들어줘',r:['Endpoint'],l:2,o:0,v:{tbl:[['주소','보낼 값','받는 값'],['POST /login','email, pw','token']]}},
- {en:'SDK',ko:'에스디케이',d:'어떤 서비스를 쉽게 쓰도록 만든 공식 도구 묶음.',p:'Stripe API를 직접 부르지 말고 공식 SDK로 연결해줘',r:['API','Library'],l:2,o:0,v:{stack:['내 코드','SDK','서비스 API'],hl:[1]}},
- {en:'CORS',ko:'코스 · 다른 출처 요청 허용',d:'다른 주소의 서버에 요청할 때 브라우저가 막는 보안 규칙. 서버가 허용해야 돼요.',j:'"CORS 에러 났어요"',p:'CORS 에러가 나. 서버에서 내 사이트 주소를 허용해줘',r:['Request Header'],l:3,o:1,u:MDN('Web/HTTP/Guides/CORS'),v:{flow:['내 사이트','다른 서버','허용 목록 확인'],hl:[2]}},
+ {en:'Request Header',ko:'요청 헤더',d:'요청에 붙는 부가 정보. 로그인 토큰, 데이터 형식 등.',p:'요청 헤더에 Authorization 토큰을 넣어 보내줘',r:['Request Body'],l:2,o:1,u:MDN('Glossary/Request_header'),v:'u-back-request-header'},
+ {en:'Request Body',ko:'요청 본문 · 바디',d:'요청과 함께 보내는 실제 데이터.',p:'회원가입 요청 바디에 이름·이메일·비밀번호를 담아줘',r:['Request Header','JSON'],l:2,o:0,v:'u-back-request-body'},
+ {en:'Query Parameter',ko:'쿼리 파라미터',d:'주소 끝 ? 뒤에 붙는 조건 값. ?page=2&sort=new.',p:'검색어와 페이지를 쿼리 파라미터로 받게 해줘',r:['Path Parameter','URL'],l:2,o:0,v:'u-back-query-parameter'},
+ {en:'Path Parameter',ko:'경로 파라미터',d:'주소 안에 들어가는 값. /posts/3의 3.',p:'/products/:id로 상품 하나를 보여주는 API를 만들어줘',r:['Query Parameter'],l:2,o:0,v:'u-back-path-parameter'},
+ {en:'API Key',ko:'API 키',d:'API를 쓸 자격을 증명하는 비밀 글자. 남에게 보이면 안 돼요.',p:'API 키가 브라우저 코드에 드러나지 않게 서버에서만 쓰게 해줘',r:['Environment Variable'],l:2,o:0,v:'u-back-api-key'},
+ {en:'API Documentation',ko:'API 문서',d:'API 주소·보낼 값·받는 값을 적어 둔 설명서. Swagger 등.',p:'만든 API를 표로 정리해서 문서로 만들어줘',r:['Endpoint'],l:2,o:0,v:'u-back-api-documentation'},
+ {en:'SDK',ko:'에스디케이',d:'어떤 서비스를 쉽게 쓰도록 만든 공식 도구 묶음.',p:'Stripe API를 직접 부르지 말고 공식 SDK로 연결해줘',r:['API','Library'],l:2,o:0,v:'u-back-sdk'},
+ {en:'CORS',ko:'코스 · 다른 출처 요청 허용',d:'다른 주소의 서버에 요청할 때 브라우저가 막는 보안 규칙. 서버가 허용해야 돼요.',j:'"CORS 에러 났어요"',p:'CORS 에러가 나. 서버에서 내 사이트 주소를 허용해줘',r:['Request Header'],l:3,o:1,u:MDN('Web/HTTP/Guides/CORS'),v:'u-back-cors'},
 ]);
 T('back','arch',[
  {en:'Node.js',ko:'노드제이에스 · 서버용 자바스크립트 실행기',d:'브라우저 밖, 주로 서버 컴퓨터에서 자바스크립트를 실행해 주는 실행기예요.',x:'Node.js는 서버 컴퓨터에서 자바스크립트를 돌리는 실행기(런타임)이고, 서버(Server)는 요청을 받아 응답하는 프로그램이나 컴퓨터 자체를 말해요. 백엔드는 그런 서버 쪽 일 전체를 가리키는 말이라, Node.js는 백엔드를 만드는 도구 중 하나예요.',p:'Node.js로 3000번 포트에서 기다리는 간단한 서버를 만들어줘',r:['Runtime','Server'],l:2,o:1,u:'https://nodejs.org/en/learn/getting-started/introduction-to-nodejs',v:'u-back-node-js'},
@@ -2770,14 +2770,14 @@ T('back','data',[
  {en:'Request ID',ko:'요청 아이디 · 요청 추적 번호',d:'요청마다 붙이는 고유 번호로, 로그에서 한 요청의 기록을 이어 찾게 해 줘요.',x:'요청 아이디는 로그 줄을 한 요청끼리 묶는 번호이고, 로깅(Logging)은 기록을 남기는 일 자체예요. 요청이 동시에 많아 로그가 섞여도 같은 번호만 찾으면 한 요청의 흐름이 보여요.',p:'요청마다 요청 아이디를 붙여 로그에 함께 남겨줘',r:['Logging'],l:3,o:1,u:'https://devcenter.heroku.com/articles/http-request-id',v:'u-back-request-id'},
 ]);
 T('back','tip',[
- {en:'Logging',ko:'로깅 · 기록 남기기',d:'서버에서 무슨 일이 있었는지 기록을 남기는 것. 문제 찾기의 기본.',p:'비밀번호는 빼고, 결제가 실패한 원인을 알 수 있게 로그를 남겨줘',r:['Monitoring'],l:2,o:0,v:'typing'},
- {en:'Error Handling',ko:'오류 처리',d:'실패했을 때 프로그램이 멈추지 않고 알맞게 대응하게 만드는 것.',p:'API가 실패하면 앱이 멈추지 말고 안내 문구를 보여주게 오류 처리해줘',r:['try-catch'],l:2,o:0,v:'shake'},
- {en:'try-catch',ko:'트라이 캐치',d:'"시도해 보고, 실패하면 이렇게 해"를 쓰는 문법.',p:'저장 부분을 try-catch로 감싸서 실패하면 알려줘',r:['Error Handling'],l:2,o:1,u:MDN('Web/JavaScript/Reference/Statements/try...catch'),v:{code:'try {\n  save();\n} catch (e) {\n  alert("저장 실패");\n}'}},
- {en:'Idempotent',ko:'멱등 · 여러 번 해도 같은 결과',d:'같은 요청을 여러 번 보내도 결과가 한 번 보낸 것과 같은 성질.',p:'결제 버튼을 두 번 눌러도 한 번만 결제되게 해줘',r:['HTTP Method'],l:3,o:1,u:MDN('Glossary/Idempotent'),v:{flow:['요청 ×3','같은 결과 1개']}},
- {en:'Background Job',ko:'백그라운드 작업',d:'사용자를 기다리게 하지 않고 뒤에서 처리하는 작업.',p:'이미지 변환은 백그라운드 작업으로 돌려줘',r:['Queue'],l:3,o:0,v:'spinner'},
- {en:'Mock Data',ko:'목 데이터 · 가짜 데이터',d:'실제 서버 없이 화면을 만들려고 쓰는 임시 데이터.',p:'백엔드 나오기 전까지 목 데이터로 화면을 먼저 만들어줘',r:['API'],l:1,o:0,v:{code:'const posts = [\n  { id: 1, title: "테스트 글" }\n];'}},
- {en:'Pagination API',ko:'나눠 받기 API',d:'데이터를 한 번에 다 주지 않고 쪽 단위로 나눠 주는 방식.',p:'목록 API를 20개씩 페이지로 나눠서 주게 해줘',r:['Pagination','Query Parameter'],l:2,o:0,v:'pagination'},
- {en:'Health Check',ko:'헬스 체크 · 생존 확인',d:'서버가 살아 있는지 확인하는 간단한 주소.',p:'/health 주소로 서버 상태를 확인할 수 있게 해줘',r:['Monitoring'],l:2,o:0,v:{http:200,msg:'OK · 서버 정상'}},
+ {en:'Logging',ko:'로깅 · 기록 남기기',d:'서버에서 무슨 일이 있었는지 기록을 남기는 것. 문제 찾기의 기본.',p:'비밀번호는 빼고, 결제가 실패한 원인을 알 수 있게 로그를 남겨줘',r:['Monitoring'],l:2,o:0,v:'u-back-logging'},
+ {en:'Error Handling',ko:'오류 처리',d:'실패했을 때 프로그램이 멈추지 않고 알맞게 대응하게 만드는 것.',p:'API가 실패하면 앱이 멈추지 말고 안내 문구를 보여주게 오류 처리해줘',r:['try-catch'],l:2,o:0,v:'u-back-error-handling'},
+ {en:'try-catch',ko:'트라이 캐치',d:'"시도해 보고, 실패하면 이렇게 해"를 쓰는 문법.',p:'저장 부분을 try-catch로 감싸서 실패하면 알려줘',r:['Error Handling'],l:2,o:1,u:MDN('Web/JavaScript/Reference/Statements/try...catch'),v:'u-back-try-catch'},
+ {en:'Idempotent',ko:'멱등 · 여러 번 해도 같은 결과',d:'같은 요청을 여러 번 보내도 결과가 한 번 보낸 것과 같은 성질.',p:'결제 버튼을 두 번 눌러도 한 번만 결제되게 해줘',r:['HTTP Method'],l:3,o:1,u:MDN('Glossary/Idempotent'),v:'u-back-idempotent'},
+ {en:'Background Job',ko:'백그라운드 작업',d:'사용자를 기다리게 하지 않고 뒤에서 처리하는 작업.',p:'이미지 변환은 백그라운드 작업으로 돌려줘',r:['Queue'],l:3,o:0,v:'u-back-background-job'},
+ {en:'Mock Data',ko:'목 데이터 · 가짜 데이터',d:'실제 서버 없이 화면을 만들려고 쓰는 임시 데이터.',p:'백엔드 나오기 전까지 목 데이터로 화면을 먼저 만들어줘',r:['API'],l:1,o:0,v:'u-back-mock-data'},
+ {en:'Pagination API',ko:'나눠 받기 API',d:'데이터를 한 번에 다 주지 않고 쪽 단위로 나눠 주는 방식.',p:'목록 API를 20개씩 페이지로 나눠서 주게 해줘',r:['Pagination','Query Parameter'],l:2,o:0,v:'u-back-pagination-api'},
+ {en:'Health Check',ko:'헬스 체크 · 생존 확인',d:'서버가 살아 있는지 확인하는 간단한 주소.',p:'/health 주소로 서버 상태를 확인할 수 있게 해줘',r:['Monitoring'],l:2,o:0,v:'u-back-health-check'},
 ]);
 </script>
 <script>
@@ -7662,6 +7662,55 @@ const bauthz = role => {
   return httpmsg({kind:'요청', start:'DELETE /posts/7', head:['Authorization: Bearer …']}) + httpmsg({kind:'응답', start:BAZ[role].st});
 };
 const bauthzSay = role => role === '관리자' ? '관리자라서 지울 수 있어요. 200이에요' : '로그인은 됐지만 권한이 없어요. 403이에요';
+/* back: 직접 조작 상태 함수 2(캐시·멱등). 값은 예시 */
+const BCK = {miss: 'DB까지 갔다 옴 · 느림(예시 300ms)', hit: '캐시에 있음 · 빠름(예시 5ms)'};
+const bcache = log => {
+  if (!Array.isArray(log) || log.some(x => !Object.hasOwn(BCK, x))) throw new Error('bcache: 기록은 miss·hit만');
+  const st = Math.max(0, log.length - 6), rows = log.slice(st).map((x, i) => `<li><code>${st + i + 1}번째 요청</code><span>${BCK[x]}</span></li>`);
+  return `<div class="mk-bkrl"><b>보낸 요청 ${log.length}번</b>${rows.length ? `<ul class="mk-bkr">${rows.join('')}</ul>` : ''}</div>`;
+};
+const bcacheSay = log => !log.length ? '아직 보낸 요청이 없어요' : log[log.length - 1] === 'miss' ? '캐시에 없어서 DB까지 갔다 왔어요' : '캐시에 있어서 바로 왔어요';
+const bidem = (method, times) => {
+  if (method !== 'POST' && method !== 'PUT') throw new Error('bidem: 메서드는 POST·PUT');
+  if (!Number.isInteger(times) || times < 0) throw new Error('bidem: 횟수는 0 이상의 정수');
+  const rows = method === 'POST' ? Array.from({length: times}, (_, i) => `<li><code>새 글 ${i + 1}번</code></li>`) : times ? ['<li><code>7번 글(같은 내용)</code></li>'] : [];
+  return `<div class="mk-bkrl"><b>${method} 요청을 ${times}번 보냄</b>${rows.length ? `<ul class="mk-bkr">${rows.join('')}</ul>` : ''}</div>`;
+};
+const bidemSay = (method, times) => !times ? '아직 보내지 않았어요' : method === 'POST' ? `POST를 ${times}번 보내서 글이 ${times}개예요` : `PUT을 ${times}번 보내도 글은 1개예요`;
+/* back: 다시 그리기 adv·api·tip — 출처: RFC 6749 §4.1(인가 코드), RFC 7519(JWT 세 칸), MDN CORS·HTTP Headers·Messages, RFC 9110 §15.3.3(202)·§9.2.2(멱등). 이름·숫자는 예시 */
+Object.assign(D, {
+  'u-back-graphql':{h:pair(fcss('query.graphql', '{ post { title } }'), fcss('응답(예시)', '{ "post": {', '"title": "첫 글" } }')), cap:'요청한 칸(title)만 응답에 와요'},
+  'u-back-jwt':{h:doc([{p:'헤더: eyJhbGci…(서명 방식)'}, {p:'내용: eyJzdWIi…(사용자 7번)'}, {p:'서명: 서버 키로 만든 값'}, {p:'내용은 누구나 풀어 읽을 수 있어요'}], {title:'JWT 세 칸(예시)', hl:3}), m:1,
+    cap:'서명으로 위조는 막지만, 내용에 비밀은 넣지 않아요'},
+  'u-back-oauth':{h:seq(['브라우저', '내 서버', '로그인'], [{from:0, to:2, t:'로그인 화면'}, {from:2, to:2, t:'사용자 동의'}, {from:2, to:0, t:'코드 들고 옴'}, {from:0, to:1, t:'코드 전달'}, {from:1, to:2, t:'토큰으로 교환'}, {from:2, to:1, t:'토큰'}]), m:1,
+    cap:'이 방식(인가 코드)에서는 토큰이 브라우저를 거치지 않아요'},
+  'u-back-microservices':{h:seq(['주문', '결제', '알림'], [{from:0, to:1, t:'결제 요청'}, {from:1, to:0, t:'완료'}, {from:0, to:2, t:'알림 보내기'}]), m:1, cap:'서비스마다 따로 만들고 따로 배포해요'},
+  'u-back-monolith':{h:bkStack(`<div class="mk-bkmo">${bkPills('앱 하나', ['회원', '주문', '결제'])}</div>`, whelp('하나만 고쳐도 한 번에 배포해요')), cap:'기능이 모두 한 프로그램 안에 있어요'},
+  'u-back-cache':{h:bcache(['miss', 'hit']), cap:'같은 요청이 다시 오면 캐시에서 바로 꺼내요'},
+  'u-back-orm':{h:pair(fcss('user.js', 'User.find({ id: 1 })'), fcss('보내는 SQL', 'SELECT * FROM users', 'WHERE id = 1')), cap:'ORM이 코드를 SQL로 바꿔 DB에 보내요(예시 문법)'},
+  'u-back-serverless-function':{h:track([{t:'요청 옴', s:'done', w:'POST /resize'}, {t:'함수 켜짐', s:'done', w:'필요할 때 켜져요'}, {t:'실행', s:'done', w:'사진 줄이기'}, {t:'꺼짐', s:'done', w:'다음 요청까지 쉬어요'}]), m:1},
+  'u-back-request-header':{h:httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json', 'Authorization: Bearer …'], body:['{', '  "title": "첫 글"', '}'], hl:['h0']}), cap:'헤더는 본문을 설명하는 꼬리표예요'},
+  'u-back-request-body':{h:httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json', 'Authorization: Bearer …'], body:['{', '  "title": "첫 글"', '}'], hl:['b1']}), cap:'본문에 실제로 보낼 내용이 담겨요'},
+  'u-back-query-parameter':{h:bkStack(browser(`<b>글 목록 2쪽</b>${lines(80, 60)}`, {url:'example.com/posts?page=2&sort=new', hl:true}), doc([{tb:[['이름', '값'], ['page', '2'], ['sort', 'new']]}], {title:'물음표 뒤의 값', still:true})),
+    cap:'주소 뒤에 이름=값을 붙여 조건을 보내요'},
+  'u-back-path-parameter':{h:pair(fcss('주소(예시)', '/users/42', 'id = 42'), wcard('42번 회원', whelp('주소의 42로 찾았어요'))), cap:'주소 안의 42가 회원 번호로 쓰여요'},
+  'u-back-api-key':{h:`<div class="mk-bkh"><b class="mk-dtw">내 서버가 보냄</b>${httpmsg({kind:'요청', start:'GET /v1/weather', head:['x-api-key: sk_test_…'], hl:['h0']})}${whelp('화면 코드에 두지 않아요')}</div>`,
+    cap:'키 값은 줄인 예시예요'},
+  'u-back-api-documentation':{h:doc([{h:'GET /posts/{id}'}, {p:'보낼 값: id(글 번호)'}, {h2:'예시 응답'}, {p:'{"id":7,"title":"첫 글"}'}], {title:'API 문서(예시)'}), m:1},
+  'u-back-sdk':{h:vs('직접 요청', fcss('app.js', 'fetch(url, {', "method: 'POST',", 'headers: {…},', 'body })'), 'SDK', fcss('app.js', 'pay.create(order)')), cap:'SDK가 요청 만들기를 대신해 줘요(예시 문법)'},
+  'u-back-cors':{h:seq(['브라우저', '외부'], [{from:0, to:1, t:'GET /data'}, {from:1, to:0, t:'응답'}, {from:0, to:0, t:'허용 헤더 확인'}, {from:0, to:0, t:'읽기 막음', err:1}]), m:1,
+    cap:'단순 요청 기준, 서버는 이미 처리했을 수 있어요'},
+  'u-back-logging':{h:term([{o:'10:02:11 GET /posts 200'}, {o:'10:02:14 POST /pay 201'}, {e:'10:02:20 POST /pay 500'}], {title:'서버 로그(예시)', end:false}), m:1, cap:'시각·요청·결과를 한 줄씩 남겨요'},
+  'u-back-error-handling':{h:vs('처리 없음', bkBox('화면', '하얗게 멈춤', '실패'), '처리함', bkBox('화면', '잠시 뒤 다시 시도해 주세요')), cap:'오류가 나도 사용자에게 다음 할 일을 알려요'},
+  'u-back-try-catch':{h:ide(['try {', '  await pay();', '} catch (e) {', '  log(e.message);', '}'], [{l:2, out:[{t:'결제 실패', dim:1}]}, {l:4, out:['오류 남김']}]), m:1},
+  'u-back-idempotent':{h:vs('POST', bidem('POST', 3), 'PUT', bidem('PUT', 3)), cap:'같은 요청을 여러 번 보내도 결과가 같으면 멱등이에요'},
+  'u-back-background-job':{h:seq(['브라우저', '서버', '워커'], [{from:0, to:1, t:'사진 올리기'}, {from:1, to:2, t:'변환 일감 넣기'}, {from:1, to:0, t:'202 접수됨'}, {from:2, to:2, t:'썸네일 만들기'}]), m:1,
+    cap:'접수만 하고 일은 워커가 나중에 해요'},
+  'u-back-mock-data':{h:pair(fcss('mock.json', '[{"name": "테스트1"},', '{"name": "테스트2"}]'), wcard('회원 목록', whelp('테스트1'), whelp('테스트2'), '<b class="mk-dtw">가짜 데이터</b>')),
+    cap:'진짜 서버가 없어도 화면을 먼저 만들어 볼 수 있어요'},
+  'u-back-pagination-api':{h:httpmsg({kind:'요청', start:'GET /posts?page=2&limit=10', head:['Host: example.com'], hl:['start']}), cap:'2쪽을, 한 쪽에 10개씩 달라는 뜻이에요'},
+  'u-back-health-check':{h:httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: application/json'], body:['{"status":"ok"}']}), cap:'정해 둔 주소에 답해서 살아 있음을 알려요'},
+});
 /* back: 다시 그리기 basic·core·motion — 출처: MDN HTTP Messages·Methods·Status(201·400·403·429·503), RFC 6585 §4(429). 이름·숫자는 예시 */
 Object.assign(D, {
   'u-back-server':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'회원 정보 줘'}, {from:1, to:1, t:'회원 찾기'}, {from:1, to:0, t:'민지 정보'}]), m:1, cap:'민지는 예시 이름이에요'},

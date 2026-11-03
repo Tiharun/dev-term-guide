@@ -108,7 +108,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'doccount', 'redrawn:back/adv', 'redrawn:back/api', 'redrawn:back/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -562,7 +562,7 @@ const FB_WRONG = {'Key': ['Key-Value', 'API Key'], 'Input Event': ['Event'], 'CS
 check('fwrong', () => Object.entries(FB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'front' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 const BKS = () => g.TERMS.filter(t => t.c === 'back');
 check('bkcat', () => { const a = g.CATS.find(c => c.id === 'back').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,api,arch,data,job,auth,tip' ? '' : a; });
-const BK_TODO = ["GraphQL","JWT","OAuth","Microservices","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
+const BK_TODO = [];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
 const BK_NOX = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Request Flow","Optimistic Update","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // x를 아직 안 쓴 옛 카드. 계획서 ②가 비운다
 const BK_SYM = [];    // 기호가 남은 옛 카드. Task 4가 비운다
 const bkdiff = (a, list) => [...a.filter(x => !list.includes(x)).map(x => '+' + x), ...list.filter(x => !a.includes(x)).map(x => '-' + x)].join(', ');
@@ -580,6 +580,11 @@ check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   const u = bauthz('일반 회원'), a = bauthz('관리자');
   if (!u.includes('403 Forbidden') || u.includes('200 OK') || !a.includes('200 OK') || a.includes('403') || !bauthzSay('일반 회원').includes('권한이 없어요')) bad.push('bauthz');
   [() => brate(-1), () => brate(1.5), () => bauthz('손님')].forEach((f, i) => { try { f(); bad.push('안 막음 ' + i); } catch (e) { if (!/^(brate|bauthz): /.test(e.message)) bad.push('메시지 ' + i); } });
+  if (!bcache(['miss', 'hit']).includes('느림') || !bcache(['miss', 'hit']).includes('빠름') || (bcache(Array(8).fill('hit')).match(/<li/g) || []).length !== 6) bad.push('bcache');
+  if (!bcacheSay([]).includes('없어요') || !bcacheSay(['miss']).includes('DB까지') || !bcacheSay(['miss', 'hit']).includes('바로')) bad.push('bcacheSay');
+  if ((bidem('POST', 3).match(/<li/g) || []).length !== 3 || (bidem('PUT', 3).match(/<li/g) || []).length !== 1 || (bidem('PUT', 0).match(/<li/g) || []).length !== 0) bad.push('bidem');
+  if (!bidemSay('POST', 3).includes('3개') || !bidemSay('PUT', 3).includes('1개') || !bidemSay('PUT', 3).startsWith('PUT을')) bad.push('bidemSay');
+  [() => bcache(['x']), () => bidem('GET', 1), () => bidem('POST', -1), () => bidem('PUT', 1.5)].forEach((f, i) => { try { f(); bad.push('안 막음 c' + i); } catch (e) { if (!/^(bcache|bidem): /.test(e.message)) bad.push('메시지 c' + i); } });
   return bad.join(', '); })()`, ctx));
 check('bktext', () => BKS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('bkxn', () => BKS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
