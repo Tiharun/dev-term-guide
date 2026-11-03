@@ -2853,24 +2853,24 @@ T('db','motion',[
  {en:'Sync',ko:'동기화 · 싱크',d:'두 곳의 데이터를 같게 맞추는 것.',p:'휴대폰과 PC의 메모가 동기화되게 해줘',r:['Replication'],l:2,o:0,v:'u-db-sync'},
 ]);
 T('db','adv',[
- {en:'Normalization',ko:'정규화',d:'같은 데이터가 여러 곳에 중복되지 않게 표를 나누는 설계 방법.',p:'중복 저장되는 주소 정보를 정규화해서 따로 빼줘',r:['Schema'],l:3,o:0,v:{cmp:['중복','<div class="codebox" style="font-size:11px">주문1 서울시...\n주문2 서울시...</div>','정규화','<div class="codebox" style="font-size:11px">주소 표: 1=서울시\n주문 → 주소 1</div>']}},
- {en:'N+1 Problem',ko:'N+1 문제',d:'목록 1번 + 항목마다 1번씩 DB에 물어서 요청이 폭증하는 성능 문제.',j:'"N+1 터졌다"',p:'목록이 느려. N+1 쿼리 문제인지 확인하고 JOIN으로 줄여줘',r:['Join','Slow Query'],l:3,o:0,jg:1,v:'stagger'},
- {en:'Slow Query',ko:'느린 쿼리',d:'실행이 오래 걸려 화면을 느리게 만드는 쿼리.',p:'느린 쿼리를 찾아서 인덱스로 고쳐줘',r:['Index','N+1 Problem'],l:3,o:0,v:'progress'},
- {en:'Redis',ko:'레디스',d:'메모리에 저장해 아주 빠른 DB. 캐시·세션에 자주 써요.',p:'인기 글 목록을 Redis에 캐시해줘',r:['Cache'],l:3,o:1,u:'https://redis.io/docs/latest/',v:{flow:['요청','Redis (메모리)','즉시 응답']}},
- {en:'ERD',ko:'이알디 · 관계도',d:'테이블과 그 관계를 상자와 선으로 그린 그림.',p:'지금 DB 구조를 ERD로 그려줘',r:['Schema','Relation'],l:2,o:0,v:{flow:['users','1 : N','posts','1 : N','comments']}},
- {en:'Soft Delete',ko:'소프트 삭제 · 숨김 삭제',d:'진짜 지우지 않고 "삭제됨" 표시만 해서 숨기는 방식. 복구가 쉬워요.',p:'글 삭제는 소프트 삭제로 해서 복구할 수 있게 해줘',r:['Hard Delete'],l:2,o:0,v:{tbl:[['글','deleted_at'],['글 1','—'],['글 2','2026-10-01']],hl:[1]}},
- {en:'Sharding',ko:'샤딩 · 나눠 저장',d:'데이터가 너무 많을 때 여러 DB에 나눠 저장하는 것.',p:'데이터가 얼마나 늘면 샤딩이 필요한지 알려줘',r:['Replication'],l:3,o:0,v:{flow:['A~M 회원','DB 1','N~Z 회원','DB 2']}},
- {en:'Supabase',ko:'수파베이스',d:'DB·로그인·파일 저장을 한 번에 주는 서비스. PostgreSQL 기반.',p:'로그인과 DB를 Supabase로 빠르게 붙여줘',r:[],l:2,o:1,u:'https://supabase.com/docs',v:{stack:['로그인','DB','파일 저장'],hl:[1]}},
+ {en:'Normalization',ko:'정규화',d:'같은 데이터가 여러 곳에 중복되지 않게 표를 나누는 설계 방법.',p:'중복 저장되는 주소 정보를 정규화해서 따로 빼줘',r:['Schema'],l:3,o:0,v:'u-db-normalization'},
+ {en:'N+1 Problem',ko:'N+1 문제',d:'목록 1번 + 항목마다 1번씩 DB에 물어서 요청이 폭증하는 성능 문제.',j:'"N+1 터졌다"',p:'목록이 느려. N+1 쿼리 문제인지 확인하고 JOIN으로 줄여줘',r:['Join','Slow Query'],l:3,o:0,jg:1,v:'u-db-n-1-problem'},
+ {en:'Slow Query',ko:'느린 쿼리',d:'실행이 오래 걸려 화면을 느리게 만드는 쿼리.',p:'느린 쿼리를 찾아서 인덱스로 고쳐줘',r:['Index','N+1 Problem'],l:3,o:0,v:'u-db-slow-query'},
+ {en:'Redis',ko:'레디스',d:'메모리에 저장해 아주 빠른 DB. 캐시·세션에 자주 써요.',p:'인기 글 목록을 Redis에 캐시해줘',r:['Cache'],l:3,o:1,u:'https://redis.io/docs/latest/',v:'u-db-redis'},
+ {en:'ERD',ko:'이알디 · 관계도',d:'테이블과 그 관계를 상자와 선으로 그린 그림.',p:'지금 DB 구조를 ERD로 그려줘',r:['Schema','Relation'],l:2,o:0,v:'u-db-erd'},
+ {en:'Soft Delete',ko:'소프트 삭제 · 숨김 삭제',d:'진짜 지우지 않고 "삭제됨" 표시만 해서 숨기는 방식. 복구가 쉬워요.',p:'글 삭제는 소프트 삭제로 해서 복구할 수 있게 해줘',r:['Hard Delete'],l:2,o:0,v:'u-db-soft-delete'},
+ {en:'Sharding',ko:'샤딩 · 나눠 저장',d:'데이터가 너무 많을 때 여러 DB에 나눠 저장하는 것.',p:'데이터가 얼마나 늘면 샤딩이 필요한지 알려줘',r:['Replication'],l:3,o:0,v:'u-db-sharding'},
+ {en:'Supabase',ko:'수파베이스',d:'DB·로그인·파일 저장을 한 번에 주는 서비스. PostgreSQL 기반.',p:'로그인과 DB를 Supabase로 빠르게 붙여줘',r:[],l:2,o:1,u:'https://supabase.com/docs',v:'u-db-supabase'},
 ]);
 T('db','sql',[
- {en:'SELECT',ko:'셀렉트 · 조회',d:'데이터를 가져오는 SQL 명령.',p:'users에서 이름과 이메일만 SELECT 해줘',r:['WHERE'],l:1,o:0,v:{code:'SELECT name, email FROM users;'}},
- {en:'INSERT',ko:'인서트 · 추가',d:'새 데이터를 넣는 SQL 명령.',p:'새 회원을 INSERT 하는 쿼리를 짜줘',r:['SELECT'],l:1,o:0,v:{code:"INSERT INTO users (name)\nVALUES ('민수');"}},
- {en:'UPDATE',ko:'업데이트 · 수정',d:'있는 데이터를 고치는 SQL 명령. WHERE를 빼면 전부 바뀌니 조심!',p:'3번 회원 이메일만 UPDATE 해줘. WHERE를 꼭 넣어 줘',r:['WHERE'],l:2,o:0,v:{code:"UPDATE users SET email='n@a.com'\nWHERE id = 3;"}},
- {en:'DELETE',ko:'딜리트 · 삭제',d:'데이터를 지우는 SQL 명령. WHERE를 빼면 전부 지워져요.',p:'탈퇴 회원만 DELETE 하는 쿼리를 짜줘. 실행 전에 보여줘',r:['Soft Delete','WHERE'],l:2,o:0,v:{code:'DELETE FROM users\nWHERE id = 3;'}},
- {en:'WHERE',ko:'웨어 · 조건',d:'"이 조건에 맞는 것만"을 정하는 SQL 문구.',p:'WHERE로 서울에 사는 회원만 골라줘',r:['SELECT'],l:1,o:0,v:{code:"SELECT * FROM users\nWHERE city = '서울';"}},
- {en:'ORDER BY',ko:'오더 바이 · 정렬',d:'결과의 순서를 정하는 SQL 문구.',p:'최신 글이 위로 오게 ORDER BY created_at DESC 해줘',r:['Sorting'],l:1,o:0,v:{code:'SELECT * FROM posts\nORDER BY created_at DESC;'}},
- {en:'GROUP BY',ko:'그룹 바이 · 묶어 세기',d:'같은 값끼리 묶어 개수·합계를 내는 SQL 문구.',p:'카테고리별 상품 개수를 GROUP BY로 세줘',r:['SELECT'],l:2,o:0,v:{tbl:[['카테고리','개수'],['의류','42'],['신발','17']]}},
- {en:'LIMIT',ko:'리밋 · 개수 제한',d:'결과를 몇 개만 가져올지 정하는 SQL 문구.',p:'최신 글 10개만 LIMIT 10으로 가져와줘',r:['Pagination API'],l:1,o:0,v:{code:'SELECT * FROM posts\nLIMIT 10;'}},
+ {en:'SELECT',ko:'셀렉트 · 조회',d:'데이터를 가져오는 SQL 명령.',p:'users에서 이름과 이메일만 SELECT 해줘',r:['WHERE'],l:1,o:0,v:'u-db-select'},
+ {en:'INSERT',ko:'인서트 · 추가',d:'새 데이터를 넣는 SQL 명령.',p:'새 회원을 INSERT 하는 쿼리를 짜줘',r:['SELECT'],l:1,o:0,v:'u-db-insert'},
+ {en:'UPDATE',ko:'업데이트 · 수정',d:'있는 데이터를 고치는 SQL 명령. WHERE를 빼면 전부 바뀌니 조심!',p:'3번 회원 이메일만 UPDATE 해줘. WHERE를 꼭 넣어 줘',r:['WHERE'],l:2,o:0,v:'u-db-update'},
+ {en:'DELETE',ko:'딜리트 · 삭제',d:'데이터를 지우는 SQL 명령. WHERE를 빼면 전부 지워져요.',p:'탈퇴 회원만 DELETE 하는 쿼리를 짜줘. 실행 전에 보여줘',r:['Soft Delete','WHERE'],l:2,o:0,v:'u-db-delete'},
+ {en:'WHERE',ko:'웨어 · 조건',d:'"이 조건에 맞는 것만"을 정하는 SQL 문구.',p:'WHERE로 서울에 사는 회원만 골라줘',r:['SELECT'],l:1,o:0,v:'u-db-where'},
+ {en:'ORDER BY',ko:'오더 바이 · 정렬',d:'결과의 순서를 정하는 SQL 문구.',p:'최신 글이 위로 오게 ORDER BY created_at DESC 해줘',r:['Sorting'],l:1,o:0,v:'u-db-order-by'},
+ {en:'GROUP BY',ko:'그룹 바이 · 묶어 세기',d:'같은 값끼리 묶어 개수·합계를 내는 SQL 문구.',p:'카테고리별 상품 개수를 GROUP BY로 세줘',r:['SELECT'],l:2,o:0,v:'u-db-group-by'},
+ {en:'LIMIT',ko:'리밋 · 개수 제한',d:'결과를 몇 개만 가져올지 정하는 SQL 문구.',p:'최신 글 10개만 LIMIT 10으로 가져와줘',r:['Pagination API'],l:1,o:0,v:'u-db-limit'},
 ]);
 T('db','query',[
  {en:'INNER JOIN',ko:'이너 조인 · 짝이 있는 줄만 합치기',d:'두 테이블에서 짝이 맞는 줄만 골라 한 줄로 합쳐요. 짝이 없는 줄은 결과에서 빠져요.',x:'그냥 JOIN이라고 쓰면 INNER JOIN이에요. 짝이 없는 줄까지 남기려면 LEFT JOIN을 써요. 조인(Join)은 표를 합치는 일 전체를 부르는 말이에요.',p:'글과 댓글을 INNER JOIN으로 합쳐서 댓글이 있는 글만 보여줘',r:['Join','LEFT JOIN'],l:2,o:1,u:'https://www.postgresql.org/docs/current/queries-table-expressions.html',v:'u-db-inner-join'},
@@ -2900,14 +2900,14 @@ T('db','model',[
  {en:'Denormalization',ko:'비정규화 · 일부러 복사해 두기',d:'조인을 줄이려고 다른 표에 있는 값을 일부러 복사해 두는 설계예요.',x:'정규화(Normalization)는 같은 값을 한 곳에만 두고, 비정규화는 읽기를 빠르게 하려고 일부러 겹쳐 둬요. 대신 이름이 바뀌면 복사해 둔 곳을 모두 고쳐야 해요.',p:'주문 목록을 자주 읽으니 주문 표에 회원 이름을 복사해 두는 비정규화를 해줘',r:['Normalization','Join'],l:3,o:0,v:'u-db-denormalization'},
 ]);
 T('db','tip',[
- {en:'Hard Delete',ko:'완전 삭제',d:'데이터를 DB에서 진짜로 지우는 것. 되돌릴 수 없어요.',p:'완전 삭제 전에는 꼭 확인 창을 띄워줘',r:['Soft Delete'],l:2,o:0,v:'shake'},
- {en:'Restore',ko:'복원',d:'백업해 둔 데이터를 다시 되살리는 것.',p:'어제 백업으로 복원하는 방법을 알려줘',r:['Backup'],l:2,o:0,v:{flow:['백업','복원','DB']}},
- {en:'Data Integrity',ko:'데이터 무결성',d:'데이터가 틀리거나 빠지지 않고 올바르게 유지되는 상태.',p:'없는 회원의 주문이 생기지 않게 무결성 제약을 걸어줘',r:['Foreign Key','Transaction'],l:3,o:0,v:{stack:['형식 맞음','빈 값 없음','연결 맞음']}},
- {en:'Unique Constraint',ko:'중복 금지 제약',d:'같은 값이 두 번 들어가지 못하게 막는 규칙. 이메일 중복 가입 방지.',p:'이메일 컬럼에 unique 제약을 걸어줘',r:['Primary Key'],l:2,o:0,v:{tbl:[['이메일',''],['m@a.com','✓'],['m@a.com','✗ 중복']],hl:[1]}},
- {en:'NULL',ko:'널 · 값 없음',d:'값이 아예 비어 있는 상태. 0이나 빈 글자와는 달라요.',p:'전화번호는 비어도 되게 NULL을 허용해줘',r:['Data Type'],l:2,o:0,v:{tbl:[['이름','전화'],['민수','010-…'],['지영','NULL']],hl:[1]}},
- {en:'Timestamp',ko:'타임스탬프 · 시각 기록',d:'데이터가 만들어진·바뀐 시각. created_at, updated_at.',p:'모든 테이블에 created_at, updated_at을 넣어줘',r:['Data Type'],l:1,o:0,v:{big:'2026-10-28 14:30',sub:'created_at'}},
- {en:'Spreadsheet vs DB',ko:'엑셀과 DB의 차이',d:'엑셀은 사람이 보는 표, DB는 프로그램이 동시에 안전하게 쓰는 저장소.',p:'지금 엑셀로 관리하는 고객 목록을 DB로 옮겨줘',r:['Database'],l:1,o:0,v:{cmp:['엑셀','<table class="tbl"><tr><th>이름</th></tr><tr><td>민수</td></tr></table>','DB','<div class="codebox" style="font-size:11px">users 테이블\n+ 동시 접속 · 검색</div>']}},
- {en:'Personal Data',ko:'개인정보',d:'이름·전화·주소처럼 사람을 알아볼 수 있는 정보. 꼭 필요한 것만 저장해요.',p:'꼭 필요한 개인정보만 저장하고 나머지는 받지 않게 해줘',r:['Encryption'],l:2,o:0,v:{stack:['이름','전화번호','주소'],hl:[1]}},
+ {en:'Hard Delete',ko:'완전 삭제',d:'데이터를 DB에서 진짜로 지우는 것. 되돌릴 수 없어요.',p:'완전 삭제 전에는 꼭 확인 창을 띄워줘',r:['Soft Delete'],l:2,o:0,v:'u-db-hard-delete'},
+ {en:'Restore',ko:'복원',d:'백업해 둔 데이터를 다시 되살리는 것.',p:'어제 백업으로 복원하는 방법을 알려줘',r:['Backup'],l:2,o:0,v:'u-db-restore'},
+ {en:'Data Integrity',ko:'데이터 무결성',d:'데이터가 틀리거나 빠지지 않고 올바르게 유지되는 상태.',p:'없는 회원의 주문이 생기지 않게 무결성 제약을 걸어줘',r:['Foreign Key','Transaction'],l:3,o:0,v:'u-db-data-integrity'},
+ {en:'Unique Constraint',ko:'중복 금지 제약',d:'같은 값이 두 번 들어가지 못하게 막는 규칙. 이메일 중복 가입 방지.',p:'이메일 컬럼에 unique 제약을 걸어줘',r:['Primary Key'],l:2,o:0,v:'u-db-unique-constraint'},
+ {en:'NULL',ko:'널 · 값 없음',d:'값이 아예 비어 있는 상태. 0이나 빈 글자와는 달라요.',p:'전화번호는 비어도 되게 NULL을 허용해줘',r:['Data Type'],l:2,o:0,v:'u-db-null'},
+ {en:'Timestamp',ko:'타임스탬프 · 시각 기록',d:'데이터가 만들어진·바뀐 시각. created_at, updated_at.',p:'모든 테이블에 created_at, updated_at을 넣어줘',r:['Data Type'],l:1,o:0,v:'u-db-timestamp'},
+ {en:'Spreadsheet vs DB',ko:'엑셀과 DB의 차이',d:'엑셀은 사람이 보는 표, DB는 프로그램이 동시에 안전하게 쓰는 저장소.',p:'지금 엑셀로 관리하는 고객 목록을 DB로 옮겨줘',r:['Database'],l:1,o:0,v:'u-db-spreadsheet-vs-db'},
+ {en:'Personal Data',ko:'개인정보',d:'이름·전화·주소처럼 사람을 알아볼 수 있는 정보. 꼭 필요한 것만 저장해요.',p:'꼭 필요한 개인정보만 저장하고 나머지는 받지 않게 해줘',r:['Encryption'],l:2,o:0,v:'u-db-personal-data'},
 ]);
 </script>
 <script>
@@ -8179,6 +8179,54 @@ Object.assign(D, {
   'u-db-replication':{h:seq(['서버', '원본 DB', '복제 DB'], [{from:0, to:1, t:'쓰기'}, {from:1, to:2, t:'복사'}, {from:1, to:1, t:'고장', err:1}, {from:2, to:2, t:'승격'}, {from:0, to:2, t:'쓰기·읽기'}]),
     cap:'복제는 평소 읽기만 받고, 원본이 고장 나면 승격해 이어받아요', m:1},
   'u-db-sync':{h:seq(['휴대폰', '서버'], [{from:0, to:0, t:'오프라인 수정'}, {from:0, to:1, t:'연결되면 보냄'}, {from:1, to:1, t:'같게 맞춤'}, {from:1, to:0, t:'최신 값 받음'}]), cap:'떨어져 있던 두 곳의 값을 같게 맞춰요', m:1},
+});
+/* db: 다시 그리기 adv·sql·tip — 출처 확인(2026-11): PostgreSQL 18 문서 SELECT(ORDER BY·LIMIT·GROUP BY)·INSERT·UPDATE·DELETE·log_min_duration_statement(기준 시간 넘은 쿼리를 로그에 남김)·
+   Unique Constraints(duplicate key value violates unique constraint)·NULL(0도 빈 글자도 아님), Supabase 문서(Postgres DB·Auth·Storage). 표의 이름·값·날짜는 예시. dwhere는 계획서 ②가 버튼을 붙일 상태 함수 */
+const DWH = [{k:"city = '서울'", f: r => r.city === '서울'}, {k:'age > 20', f: r => r.age > 20}, {k:'age > 30', f: r => r.age > 30}];
+const DWH_U = {name:'users', cols:['name', 'city', 'age'], rows:[['민수', '서울', '25'], ['지영', '부산', '31'], ['준호', '서울', '19']]};
+const dwk = i => { if (!Number.isInteger(i) || !DWH[i]) throw new Error('dwhere: 조건 번호는 0·1·2'); };
+const dwhere = i => { dwk(i); return qrun({still:true, sql:['SELECT * FROM users', `WHERE ${DWH[i].k}`], from:[DWH_U], pick:DWH[i].f}); };
+const dwhereSay = i => { dwk(i); const n = DWH_U.rows.filter(([name, city, age]) => DWH[i].f({name, city, age:+age})).length; return `3줄 중 ${n}줄이 조건에 맞아요`; };
+Object.assign(D, {
+  'u-db-normalization':{h:bkStack(dbtab({name:'orders', tag:'나누기 전', cols:['id', 'user_name', 'item'], rows:[['1', '민수', '책'], ['2', '민수', '펜'], ['3', '지영', '컵']], hl:{col:1}}),
+    erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, 'name']}, {name:'orders', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}, 'item']}], links:[{a:0, b:1, kind:'1:N', fk:'user_id'}]})),
+    cap:'회원 이름은 users에 한 번만 두고 id로 이어요'},
+  'u-db-n-1-problem':{h:seq(['서버', 'DB'], [{from:0, to:1, t:'글 목록 조회'}, {from:0, to:1, t:'작성자 조회'}, {from:0, to:1, t:'작성자 조회'}, {from:0, to:1, t:'작성자 조회'}]), cap:'글 100개면 101번, JOIN이면 1번', m:1},
+  'u-db-slow-query':{h:term([{o:'LOG: duration: 3200 ms'}, {o:'statement:'}, {o:'  SELECT * FROM orders'}], {title:'느린 쿼리 로그', end:false}), cap:'3200 ms는 예시, 기준 시간은 설정으로 정해요', m:1},
+  'u-db-redis':{h:seq(['서버', 'Redis', 'DB'], [{from:0, to:1, t:'조회'}, {from:1, to:0, t:'없음'}, {from:0, to:2, t:'조회'}, {from:2, to:0, t:'결과'}, {from:0, to:1, t:'저장'}, {from:0, to:1, t:'다시 조회'}, {from:1, to:0, t:'바로 응답'}]),
+    cap:'두 번째부터는 Redis가 바로 답해요', m:1},
+  'u-db-erd':{h:erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, 'name']}, {name:'posts', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}, 'title']}, {name:'comments', cols:[{n:'id', key:'PK'}, {n:'post_id', key:'FK'}, 'body']}],
+    links:[{a:0, b:1, kind:'1:N', fk:'user_id'}, {a:1, b:2, kind:'1:N', fk:'post_id'}]}), cap:'회원·글·댓글이 1:N으로 이어져요'},
+  'u-db-soft-delete':{h:qrun({sql:['UPDATE posts', "SET deleted_at = '11-03'", 'WHERE id = 2'], from:[{name:'posts', cols:['id', 'title', 'deleted_at'], rows:[['1', '공지', 'NULL'], ['2', '후기', 'NULL']]}],
+    after:{name:'posts', cols:['id', 'title', 'deleted_at'], rows:[['1', '공지', 'NULL'], ['2', '후기', '11-03']]}, hl:{cell:[1, 2]}}), cap:'줄은 남기고 지운 날짜만 적어요(날짜 예시)', m:1},
+  'u-db-sharding':{h:seq(['서버', 'DB 1', 'DB 2'], [{from:0, to:1, t:'7번 저장'}, {from:0, to:2, t:'1500번 저장'}]), cap:'나누는 기준은 예시: 1000번까지 DB 1', m:1},
+  'u-db-supabase':{h:bkStack(bkBox('DB', 'PostgreSQL', '핵심'), bkBox('로그인', '회원 가입과 로그인'), bkBox('파일 저장', '사진과 파일')), cap:'DB에 로그인과 파일 저장이 함께 붙어 있어요'},
+  'u-db-select':{h:qrun({sql:['SELECT name, email', 'FROM users'], from:[{name:'users', cols:['name', 'email', 'city'], rows:[['민수', 'm@a.com', '서울'], ['지영', 'j@a.com', '부산']]}],
+    after:{name:'결과', cols:['name', 'email'], rows:[['민수', 'm@a.com'], ['지영', 'j@a.com']]}}), cap:'고른 열 두 개만 받아요', m:1},
+  'u-db-insert':{h:qrun({sql:['INSERT INTO users', "VALUES (3, '준호')"], from:[{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영']]}],
+    after:{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]}, hl:{row:2}}), cap:'준호 줄이 새로 들어가요', m:1},
+  'u-db-update':{h:qrun({sql:['UPDATE users', "SET city = '부산'", 'WHERE id = 2'], from:[{name:'users', cols:['id', 'name', 'city'], rows:[['1', '민수', '서울'], ['2', '지영', '서울']]}],
+    after:{name:'users', cols:['id', 'name', 'city'], rows:[['1', '민수', '서울'], ['2', '지영', '부산']]}, hl:{cell:[1, 2]}}), cap:'WHERE를 빼면 모든 줄이 바뀌어요', m:1},
+  'u-db-delete':{h:qrun({sql:['DELETE FROM users', 'WHERE id = 3'], from:[{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]}], pick: r => r.id === 3, del:1}),
+    cap:'id가 3인 줄만 지워져요', m:1},
+  'u-db-where':{h:dwhere(0), cap:'조건에 맞는 줄만 남아요'},
+  'u-db-order-by':{h:qrun({sql:['SELECT title, created_at', 'FROM posts', 'ORDER BY created_at DESC'], from:[{name:'posts', cols:['id', 'title', 'created_at'], rows:[['1', '공지', '10-01'], ['2', '후기', '10-03'], ['3', '질문', '10-02']]}],
+    after:{name:'결과', cols:['title', 'created_at'], rows:[['후기', '10-03'], ['질문', '10-02'], ['공지', '10-01']]}}), cap:'최근 글이 맨 위로 와요', m:1},
+  'u-db-group-by':{h:qrun({sql:['SELECT category,', 'COUNT(*) AS 개수', 'FROM products', 'GROUP BY category'], from:[{name:'products', cols:['name', 'category'], rows:[['펜', '문구'], ['공책', '문구'], ['컵', '주방']]}],
+    after:{name:'결과', cols:['category', '개수'], rows:[['문구', '2'], ['주방', '1']]}}), cap:'같은 category끼리 묶어 개수를 세요', m:1},
+  'u-db-limit':{h:qrun({sql:['SELECT title FROM posts', 'ORDER BY id LIMIT 2'], from:[{name:'posts', cols:['id', 'title'], rows:[['1', '공지'], ['2', '후기'], ['3', '질문']]}],
+    after:{name:'결과', cols:['title'], rows:[['공지'], ['후기']]}}), cap:'앞에서 2줄만 받아요', m:1},
+  'u-db-hard-delete':{h:bkStack(dbtab({name:'users', tag:'완전 삭제', cols:['id', 'name'], rows:[['1', '민수']]}),
+    dbtab({name:'users', tag:'소프트 삭제', cols:['id', 'name', 'deleted_at'], rows:[['1', '민수', 'NULL'], ['2', '지영', '11-03']], hl:{cell:[1, 2]}})), cap:'완전 삭제는 줄이 없어지고, 소프트 삭제는 표시만 해요'},
+  'u-db-restore':{h:track([{t:'백업 파일', s:'done', w:'어제 03:00(예시)'}, {t:'복원', s:'done', w:'파일을 DB에 다시 씀'}, {t:'그 시점의 DB', s:'done', w:'03:00 상태'}]), cap:'백업한 그 시점으로 되돌아가요', m:1},
+  'u-db-data-integrity':{h:doc([{tb:[['규칙', '막는 예'], ['형식', 'price에 글자'], ['빈 값', '이름 없이 가입'], ['연결', '없는 회원 99의 주문']]}], {title:'지키는 규칙'}),
+    cap:'잘못된 값은 DB가 저장하기 전에 막아요', m:1},
+  'u-db-unique-constraint':{h:qrun({sql:['INSERT INTO users', "VALUES (2, 'm@a.com')"], from:[{name:'users', cols:['id', 'email'], rows:[['1', 'm@a.com']]}], err:'이미 있는 이메일이에요'}),
+    cap:'실제 오류: duplicate key value violates unique constraint(PostgreSQL 예)', m:1},
+  'u-db-null':{h:dbtab({name:'users', cols:['name', 'phone'], rows:[['민수', 'NULL'], ['지영', ''], ['준호', '0']], hl:{cell:[0, 1]}}), cap:'NULL은 0도 빈 글자도 아니에요'},
+  'u-db-timestamp':{h:dbtab({name:'posts', cols:['title', 'created_at', 'updated_at'], rows:[['공지', '10-01', '10-02'], ['후기', '10-03', '10-03']], hl:[{col:1}, {col:2}]}), cap:'만든 날짜와 고친 날짜를 DB가 적어요(날짜 예시)'},
+  'u-db-spreadsheet-vs-db':{h:vs('엑셀', '<p class="mk-dgp">한 사람이 파일을 열어 고쳐요</p>', 'DB', '<p class="mk-dgp">앱 여러 개가 동시에 쿼리해요</p>'), cap:'엑셀은 사람이 열고, DB는 앱이 물어봐요'},
+  'u-db-personal-data':{h:bkStack(bkPills('저장하는 열', ['name', 'email']), bkPills('받지 않아도 되는 열', ['address', 'birth'], '안 받음')), cap:'꼭 필요한 열만 받아요'},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
