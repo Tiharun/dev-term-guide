@@ -862,10 +862,7 @@ check('dbreve', () => [['Hard Delete', 'COMMIT'], ['ERD', '1:N'], ['Timestamp', 
 const SRVS = () => g.TERMS.filter(t => t.c === 'server');
 check('srvcat', () => { const a = g.CATS.find(c => c.id === 'server').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,status,conf,scale,res,infra,tip' ? '' : a; });
 const SRV_TODO = [];    // 아직 u-server- 그림이 아닌 옛 서버 카드. 다시 그리면 여기서 뺀다
-const SRV_NOX = ["Localhost","Dev Server","Production","Cloud","Uptime","HTTPS","SSL Certificate","Web Server","Reverse Proxy","Load Balancer","Scaling","Downtime","Server Log","Storage",
-  "Request-Response Cycle","Cold Start","Restart","Traffic Spike","Failover","Graceful Shutdown","Linux","SSH","Container Image","Kubernetes","AWS","VPS","Serverless",
-  "200 OK","301 Redirect","400 Bad Request","403 Forbidden","404 Not Found","429 Too Many Requests","500 Internal Server Error","502 Bad Gateway","HTTP Status Code",
-  "Development Environment","Staging","Monitoring","Cron Job","Redirect","Maintenance Page","Works on My Machine","Self-hosting"];    // x를 아직 안 쓴 옛 카드 44장(Docker·401은 Task 2에서 고쳐 씀). Task 5가 비운다
+const SRV_NOX = [];    // x를 아직 안 쓴 옛 카드 44장(Docker·401은 Task 2에서 고쳐 씀). Task 5가 비운다
 check('srvukey', () => bkdiff(SRVS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-server-') && g.D[t.v])).map(t => t.en), SRV_TODO));
 check('srvobj', () => SRVS().filter(t => typeof t.v === 'object' && !SRV_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
 check('srvsym', () => SRVS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
@@ -884,6 +881,10 @@ check('srvsafe', () => [...['10.0.0.5', '8.8.8.8', 'mysql://app:pw1@db'].filter(
   ...SRVS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && SRV_IP(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
 check('srvshare', () => ['scale', 'delay', 'rotate', 'fade', 'pulse', 'emptystate'].filter(k => !g.D[k]).join(', '));    // 옛 server 카드가 쓰던 공유 그림 키는 남긴다
 check('srvsameh', () => { const seen = {}; return SRVS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-server-') && g.D[t.v]).filter(t => { const h = g.D[t.v].h; if (seen[h]) return true; seen[h] = t.en; }).map(t => t.en + '=' + seen[g.D[t.v].h]).join(', '); });    // 서버 카드끼리 같은 그림 없음(직접 조작은 첫 장면 h)
+check('srvrel', () => [['Graceful Shutdown', 'Zero Downtime Deploy'], ['Maintenance Page', 'Status Page'], ['Downtime', 'Status Page'], ['Cloud', 'Hosting'], ['VPS', 'Hosting']]
+  .filter(([en, r]) => !(g.find(en)?.r || []).includes(r)).map(([en, r]) => en + '-' + r).join(', '));    // 스펙 4장: 기존 server 카드에 더하는 r
+const SRV_XHAS = {'502 Bad Gateway': ['504'], '401 Unauthorized': ['403'], 'Uptime': ['43분'], 'SSL Certificate': ['TLS'], 'Docker': ['운영체제']};    // x에 꼭 있어야 할 말(Review Focus 3). 계획서 ②가 더한다
+check('srvxhas', () => Object.entries(SRV_XHAS).filter(([en, w]) => { const t = g.find(en); return !t || !w.every(s => (t.x || '').includes(s)); }).map(([en]) => en).join(', '));
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
