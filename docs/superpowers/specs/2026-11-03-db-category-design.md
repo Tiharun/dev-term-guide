@@ -64,7 +64,7 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
   - `from`: 실행 전 표 1~2개(`dbtab` 입력과 같은 모양). 2개는 JOIN·Subquery·Cascade Delete처럼 두 표가 필요할 때만 쓴다.
   - 결과는 `pick`·`after`·`err` 중 **정확히 하나**로 정한다(둘 이상이거나 없으면 오류):
     - `pick: r => …` — 줄 고르기 함수. `from[0]`의 각 행을 `{열이름: 값}` 객체로 받아 참·거짓을 돌려준다. 값은 숫자 모양 글(`'25'`)이면 숫자, `'NULL'`이면 `null`, 그 밖은 글자로 바꿔 넘긴다. 고른 행은 실행 전 표에서도 강조되고, 결과 표가 된다. WHERE·LIKE·IN·BETWEEN·IS NULL처럼 줄만 거르는 쿼리에 쓴다. 결과를 손으로 적지 않으므로 쿼리와 어긋날 수 없다.
-    - `show: ['title']` — `pick`의 결과 표에 남길 열 이름 배열. SQL이 `SELECT title`처럼 일부 열만 가져올 때 쓰고, 없으면 모든 열(`SELECT *`)이다. 실행 전 표에 없는 열이면 오류. `pick`과만 함께 쓴다. 3.4·3.5 표에 WHERE 조각만 적은 `pick` 카드(LIKE·BETWEEN·IS NULL·Filtering 등)는 실제 `sql` 첫 줄을 `SELECT * FROM <표>`로 쓰고 `show`를 두지 않는다.
+    - `show: ['title']` — `pick`의 결과 표에 남길 열 이름 배열. SQL이 `SELECT title`처럼 일부 열만 가져올 때 쓰고, 없으면 모든 열(`SELECT *`)이다. 실행 전 표에 없는 열이면 오류. `pick`과만 함께 쓰고, `del`과 함께면 오류다(DELETE 결과는 남은 행 전체). 3.4·3.5 표에 WHERE 조각만 적은 `pick` 카드(LIKE·BETWEEN·IS NULL·Filtering 등)는 실제 `sql` 첫 줄을 `SELECT * FROM <표>`로 쓰고 `show`를 두지 않는다.
     - `del: 1` — DELETE. `pick`과만 함께 쓴다(`after`·`err`와 함께면 오류). 고른 행에 "지움" 꼬리표를 달고, 결과 표는 남은 행이다. 머리띠는 "지운 뒤 남은 줄"이다.
     - `after` — 결과 표를 직접 적는다. 표 하나 `{name, cols, rows}` 또는 표 1~2개 배열이다(Cascade Delete는 users·orders 두 표가 모두 바뀜). JOIN·GROUP BY·COUNT·ORDER BY·INSERT·UPDATE처럼 행을 합치거나 바꾸는 쿼리에 쓴다.
     - `err: '메시지'` — 막힌 쿼리. 결과 자리에 "실패" 글자와 **한국어 요약** 메시지(28폭까지, 예: "이미 있는 이메일이에요")를 쓰고, 실행 전 표는 그대로임을 "표는 그대로예요"로 쓴다. 실제 오류 원문(예: `duplicate key value violates unique constraint`)은 28폭을 넘으므로 cap이나 x에 "(PostgreSQL 예)"와 함께 쓴다. NOT NULL·Check Constraint·Unique Constraint·Composite Key가 쓴다.
@@ -80,13 +80,13 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 ### 3.3 `erd()` — 관계도 (새로)
 
 - `erd({tables, links, hl, label})`
-  - `tables`: 표 상자 2~3개, 항목 `{name, cols}`. 이름 12폭(`enrollments`가 11폭), 열 1~4개, 열 이름 10폭. 열은 `dbtab`처럼 문자열 또는 `{n, key, type}`이다. `type`은 열 이름 오른쪽 작은 칸에 쓰는 타입 글(예: `글자`·`정수`·`날짜`·`참거짓`), 6폭까지이고 열 이름 폭에 들어가지 않는다.
+  - `tables`: 표 상자 2~3개, 항목 `{name, cols}`. 이름 12폭(`enrollments`가 11폭), 열 1~4개, 열 이름 10폭. 열은 `dbtab`처럼 문자열 또는 `{n, key, type}`이다. `type`은 열 이름 오른쪽 작은 칸에 쓰는 타입 글(예: `글자`·`정수`·`날짜`·`참거짓`), 6폭까지이고 열 이름 폭에 들어가지 않는다. `type`은 `erd`에만 있고, `dbtab` 열에 `type`이 오면 입력 검사 오류다.
   - `links`: 이웃한 두 상자를 잇는 선 배열, 항목 `{a, b, kind, fk}`. `a`·`b`는 이웃한 표 번호(|a−b| = 1). `kind`는 `'1:1'`·`'1:N'`·`'N:1'`·`'N:M'` 중 하나이고 `a : b` 순서로 읽는다(`'1:N'`은 a 하나에 b 여럿).
   - `fk`는 FK 열 이름이고 놓이는 표가 정해져 있다: `'1:N'`이면 b 표, `'N:1'`이면 a 표, `'1:1'`이면 둘 중 하나에 `key:'FK'`로 있어야 한다. `N:M`은 `fk`가 없어야 하고, 선 옆에 "중간 표가 필요해요"를 쓴다.
   - `hl`: 강조할 표 이름 또는 `'표.열'` 배열.
 - 배치: 상자를 세로로 쌓고, 상자 사이 칸에 "1 : N" 꼬리표와 "orders.user_id로 이어져요" 글을 쓴다. 선 모양은 장식(`aria-hidden`)이고, 관계는 글로 전한다. 읽히는 글에 화살표 기호를 쓰지 않는다.
 - 입력 검사(넘으면 오류): 표 수, 이름·열·`type` 폭과 수, 이웃하지 않은 `a`·`b`, 잘못된 `kind`, FK가 아니거나 `kind`가 정한 표에 없는 `fk`, `N:M`에 `fk`, 없는 이름을 가리키는 `hl`.
-- `.sr` 문장: "관계도. users 표(id PK, 이름), orders 표(id PK, user_id FK). users 하나에 orders 여럿, orders.user_id로 이어져요."
+- `.sr` 문장: "관계도. users 표(id PK, 이름), orders 표(id PK, user_id FK). users 하나에 orders 여럿, orders.user_id로 이어져요." `type`이 있으면 "email 글자"처럼 열 이름 뒤에 이어 읽는다.
 - 대상: Foreign Key, Schema, ERD, Normalization, One-to-Many, Many-to-Many, Junction Table. 같은 users·orders 1:N 그림이 여러 장에 반복되지 않게 카드마다 표나 강조를 다르게 한다(3.4·3.5).
 
 ### 3.4 기존 48장 다시 그리기
@@ -129,8 +129,8 @@ Claude에게 DB가 들어간 기능을 만들어 달라고 하는 사람이 "JOI
 | adv | Supabase | `bkStack`·`bkBox`: DB(PostgreSQL) · 로그인 · 파일 저장, DB 칸 강조 |
 | sql | SELECT | `qrun` `SELECT name, email` / `FROM users` + `after`(두 열) |
 | sql | INSERT | `qrun` INSERT + `after`(새 줄 강조) |
-| sql | UPDATE | `qrun` `UPDATE … WHERE id = 2` + `after`(바뀐 칸 강조), cap "WHERE를 빼면 전부 바뀌어요" |
-| sql | DELETE | `qrun` `DELETE … WHERE id = 3` + `pick` + `del` |
+| sql | UPDATE | `qrun` `UPDATE users` / `SET city = '부산'` / `WHERE id = 2` + `after`(바뀐 칸 강조), cap "WHERE를 빼면 전부 바뀌어요" |
+| sql | DELETE | `qrun` `DELETE FROM users` / `WHERE id = 3` + `pick` + `del` |
 | sql | WHERE ▶ | 조건 셋 중 하나를 고르면 `pick`으로 결과가 바뀜 |
 | sql | ORDER BY | `qrun` `ORDER BY created_at DESC` + `after` |
 | sql | GROUP BY | `qrun` `SELECT category,` / `COUNT(*) AS 개수` / `FROM products` / `GROUP BY category` + `after` |
