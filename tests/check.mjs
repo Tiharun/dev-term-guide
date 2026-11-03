@@ -108,7 +108,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'doccount', 'redrawn:back/basic', 'redrawn:back/core', 'redrawn:back/motion', 'redrawn:back/adv', 'redrawn:back/api', 'redrawn:back/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount', 'redrawn:back/adv', 'redrawn:back/api', 'redrawn:back/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -562,9 +562,9 @@ const FB_WRONG = {'Key': ['Key-Value', 'API Key'], 'Input Event': ['Event'], 'CS
 check('fwrong', () => Object.entries(FB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'front' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 const BKS = () => g.TERMS.filter(t => t.c === 'back');
 check('bkcat', () => { const a = g.CATS.find(c => c.id === 'back').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,api,arch,data,job,auth,tip' ? '' : a; });
-const BK_TODO = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authentication","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Session","Request Flow","Optimistic Update","Polling","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Microservices","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
+const BK_TODO = ["GraphQL","JWT","OAuth","Microservices","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
 const BK_NOX = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Request Flow","Optimistic Update","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // x를 아직 안 쓴 옛 카드. 계획서 ②가 비운다
-const BK_SYM = ['Optimistic Update'];    // 기호가 남은 옛 카드. Task 4가 비운다
+const BK_SYM = [];    // 기호가 남은 옛 카드. Task 4가 비운다
 const bkdiff = (a, list) => [...a.filter(x => !list.includes(x)).map(x => '+' + x), ...list.filter(x => !a.includes(x)).map(x => '-' + x)].join(', ');
 check('bkukey', () => bkdiff(BKS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v])).map(t => t.en), BK_TODO));
 check('bkobj', () => BKS().filter(t => typeof t.v === 'object' && !BK_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
@@ -572,6 +572,15 @@ check('bksym', () => bkdiff(BKS().filter(t => { const p = typeof t.v === 'string
 check('bkx', () => bkdiff(BKS().filter(t => !t.x).map(t => t.en), BK_NOX));
 check('bkm', () => BKS().filter(t => { const p = typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v]; return p && !!p.m !== WA(p.h); }).map(t => t.en).join(', '));    // 재생 버튼(m)과 움직임(A)은 함께 있다
 check('bkou', () => BKS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => (h.match(re) || []).length;
+  if (n(brate(0), /<li/g) !== 0 || n(brate(4), /200 OK/g) !== 4 || brate(4).includes('429') || brate(4).includes('실패')) bad.push('brate 0·4');
+  if (n(brate(5), /429 Too Many Requests/g) !== 1 || n(brate(5), /200 OK/g) !== 4 || !brate(5).includes('실패')) bad.push('brate 5');
+  if (n(brate(9), /<li/g) !== 6) bad.push('brate 6행');
+  if (!brateSay(0).includes('없어요') || !brateSay(3).includes('1번 더') || !brateSay(4).includes('이제 더 보낼 수 없어요') || !brateSay(5).includes('429')) bad.push('brateSay');
+  const u = bauthz('일반 회원'), a = bauthz('관리자');
+  if (!u.includes('403 Forbidden') || u.includes('200 OK') || !a.includes('200 OK') || a.includes('403') || !bauthzSay('일반 회원').includes('권한이 없어요')) bad.push('bauthz');
+  [() => brate(-1), () => brate(1.5), () => bauthz('손님')].forEach((f, i) => { try { f(); bad.push('안 막음 ' + i); } catch (e) { if (!/^(brate|bauthz): /.test(e.message)) bad.push('메시지 ' + i); } });
+  return bad.join(', '); })()`, ctx));
 check('bktext', () => BKS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('bkxn', () => BKS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
