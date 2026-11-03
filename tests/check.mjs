@@ -286,15 +286,19 @@ check('bkhelp', () => vm.runInContext(`(() => {
   const st = seq(['a', 'b'], [{from:0, to:1, t:'x'}, {from:1, to:0, t:'y'}], {still:true});
   if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(st) || /\\(실패/.test(st)) bad.push('seq still·실패 0개');
   const L2 = ['a', 'b'], m1 = [{from:0, to:1, t:'x'}];
-  no(() => seq(['a'], m1), '세로줄 1개'); no(() => seq(['a', 'b', 'c', 'd', 'e'], m1), '세로줄 5개'); no(() => seq(['a', '가나다라a'], m1), '이름 9자'); no(() => seq(['앱', 'BFF', '글', '브라우저'], m1), '4줄 이름 7자'); seq(['앱', 'BFF', '글', '회원'], m1);    // 4줄은 320px에서 이름이 한 줄에 들도록 6자까지
+  has(sq, ['<i class="mk-sda" style="--a:0;--b:1">', '<i class="mk-sda l" style="--a:0;--b:1">', 'class="mk-sdm mk-sdf mk-cdz5 A"'], 'seq 화살표·실패 행');
+  has(seq(L2, [{from:0, to:1, t:'제목 길이 검사', err:1}, {from:1, to:0, t:'y', err:1}], {label:'로그인 순서'}), ['(실패 2개).', 'role="group" aria-label="로그인 순서"', '>제목 길이 검사<'], 'seq 실패 2개·label·14자');
+  if (seq(L2, m1, {label:'a'}).includes('tabindex') || httpmsg({kind:'요청', start:'GET /', label:'a'}).includes('tabindex')) bad.push('정적 그림에 tabindex');
+  no(() => seq(['a'], m1), '세로줄 1개'); no(() => seq(['a', 'b', 'c', 'd', 'e'], m1), '세로줄 5개'); no(() => seq(['a', '가나다라a'], m1), '이름 9자'); no(() => seq(['앱', 'BFF', '글', '저장소a'], m1), '4줄 이름 7자'); seq(['앱', 'BFF', '글', '저장소'], m1); no(() => seq(['', 'b'], m1), '빈 이름');    // 4줄은 320px에서 이름이 한 줄에 들도록 6자까지
   no(() => seq(L2, []), '메시지 0개'); no(() => seq(L2, Array(9).fill(m1[0])), '메시지 9개'); no(() => seq(L2, [{from:0, to:2, t:'x'}]), 'to 범위');
   no(() => seq(L2, [{from:-1, to:1, t:'x'}]), 'from 음수'); no(() => seq(L2, [{from:0.5, to:1, t:'x'}]), 'from 소수'); no(() => seq(L2, [{from:0, to:1, t:''}]), '빈 글');
   no(() => seq(L2, [{from:0, to:1, t:'가나다라마바사아'}]), '글 16자'); no(() => seq(L2, [{from:0, to:1, t:'x', err:1, wait:1}]), '실패+기다림');
   const hm = httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json', 'Authorization: Bearer …'], body:['{', '  "title": "첫 글"', '}'], hl:['h0', 'b1']});
-  has(hm, ['class="mk-hmt">HTTP 요청<span>(버전 줄임)</span>', 'class="mk-hmb" aria-hidden="true"', 'mk-hmgap', 'mk-hmon', '>강조<', '<code>  &quot;title&quot;: &quot;첫 글&quot;</code>',
-    '<p class="sr">HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄, 본문 2번째 줄</p>'], 'httpmsg');
-  has(httpmsg({kind:'요청', start:'GET /', head:['Accept: */*'], body:['a', 'b'], hl:['b1', 'h0']}), ['강조: Accept 줄, 본문 2번째 줄</p>'], 'httpmsg 강조 순서');
-  has(httpmsg({kind:'응답', start:'404 Not Found'}), ['>실패<', 'HTTP 응답, 404 Not Found, 헤더 0줄, 본문 0줄, 실패'], 'httpmsg 실패');
+  has(hm, ['class="mk-hmt" aria-hidden="true">HTTP 요청<span>(버전 줄임)</span>', 'class="mk-hmb" aria-hidden="true"', 'mk-hmgap', 'mk-hmon', '>강조<', '<code>  &quot;title&quot;: &quot;첫 글&quot;</code>',
+    '<p class="sr">HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄, 본문 2번째 줄 (버전 줄임)</p>'], 'httpmsg');
+  has(httpmsg({kind:'요청', start:'GET /', head:['Accept: */*'], body:['a', 'b'], hl:['b1', 'h0']}), ['강조: Accept 줄, 본문 2번째 줄 (버전 줄임)</p>'], 'httpmsg 강조 순서');
+  has(httpmsg({kind:'응답', start:'404 Not Found'}), ['>실패<', 'HTTP 응답, 404 Not Found, 헤더 0줄, 본문 0줄, 실패 (버전 줄임)'], 'httpmsg 실패');
+  has(httpmsg({kind:'응답', start:'400 Bad Request'}), ['>실패<'], 'httpmsg 400'); if (httpmsg({kind:'응답', start:'399 X'}).includes('실패')) bad.push('httpmsg 399 실패');
   const ok = httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: text/plain']});
   if (ok.includes('실패') || ok.includes('mk-hmgap')) bad.push('httpmsg 200·본문 없음');
   has(httpmsg({kind:'요청', start:'OPTIONS /api', hl:['start']}), ['강조: 첫 줄'], 'httpmsg OPTIONS');
@@ -305,6 +309,7 @@ check('bkhelp', () => vm.runInContext(`(() => {
   no(() => httpmsg({kind:'요청', start:'GET /', hl:['h0']}), '없는 헤더 강조'); no(() => httpmsg({kind:'요청', start:'GET /', body:['a'], hl:['b1']}), '없는 본문 강조');
   return bad.join(', ');
 })()`, ctx));
+check('bkpad', () => ['mk-sd', 'mk-hm'].filter(k => !new RegExp(`[,(]\.${k}[,)][^{]*\.stage\{padding-bottom:14px\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
     t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });

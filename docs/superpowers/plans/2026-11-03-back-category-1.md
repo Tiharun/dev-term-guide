@@ -68,7 +68,7 @@
 
 ## Review Focus
 
-1. **320px의 가장 큰 입력**: `seq` 세로줄 4개(이름 8자) + 메시지 8개(글 14자, 실패·기다림 꼬리표), `httpmsg` 30자 줄 + "강조"·"실패" 꼬리표 + 헤더 4줄·본문 4줄이 가로 넘침 없이 들어가야 한다. → Task 1 브라우저 확인(시험 그림 `u-back-test`를 임시로 띄우고 커밋 전에 지움). 안 들어가면 스펙 10장대로 한도를 낮추고 원장에 적는다.
+1. **320px의 가장 큰 입력**: `seq` 세로줄 4개(이름 6자)·3개(이름 8자) + 메시지 8개(글 14자, 실패·기다림 꼬리표), `httpmsg` 30자 줄 + "강조"·"실패" 꼬리표 + 헤더 4줄·본문 4줄이 가로 넘침 없이 들어가야 한다. → Task 1 브라우저 확인(시험 그림 `u-back-test`를 임시로 띄우고 커밋 전에 지움). 안 들어가면 스펙 10장대로 한도를 낮추고 원장에 적는다.
 2. **reduced-motion에서 순서도**: 움직임을 끄면 `seq`의 모든 행이 보여야 한다(빈 그림판으로 멈추면 안 됨). 멈춘 장면 `-8.8s`에서도 8행이 다 보인다. → Task 1 `cdframe` 확장, 브라우저 확인
 3. **조사와 읽는 순서**: `.sr`가 "저장소가", "로그인이", "API 관문이", "DB가"로 읽히고, 화살표 기호를 읽지 않는다. 처리 상자는 "서버가 처리: …"로 읽힌다. → Task 1 `bkhelp`
 4. **자주 틀리는 HTTP 사실**:
@@ -134,7 +134,7 @@
 **Interfaces:**
 - Produces:
   - `seq(lanes = [], msgs = [], {still = false, label} = {}) → string`
-    - 바깥: `<div class="mk-sd">`. `label`이 있으면 `role="group" tabindex="0" aria-label`.
+    - 바깥: `<div class="mk-sd">`. `label`이 있으면 `role="group" aria-label`(정적 그림이라 tabindex는 안 붙인다, 검토 A).
     - 머리: `<div class="mk-sdh" aria-hidden="true" style="--n:세로줄 수">`에 세로줄 이름 `<span>`.
     - 행 목록: `<ol class="mk-sdl" aria-hidden="true" style="--n:…">`. 세로줄 점선은 각 열 가운데에 그린다.
     - 행 k(1부터): `<li class="mk-sdm${still ? '' : ` mk-cdz${k} A`}">`
@@ -144,10 +144,10 @@
       - 처리: 화살표 대신 `<i class="mk-sdb" style="--a:번호">`(그 열 가운데 작은 상자)
     - 글 `t`는 행 전체 폭에 놓는다(스펙 3.1). 실패 행 글은 `var(--mark-text)`.
     - 끝 `<p class="sr">`: 메시지마다 `보낸이름+조사 받는이름에 t`(뒤에 ` 실패`·` 기다림`) 또는 `이름+조사 처리: t`를 `, `로 잇고 끝에 `.`. 실패가 1개 이상이면 그 마침표 앞에 ` (실패 n개)`를 넣는다.
-    - 오류 메시지는 `'seq: '`로 시작한다. 검사: lanes 2~4개, 이름 문자열·wlen 1~8, msgs 1~8개, from·to가 0 이상 lanes 수 미만의 정수, t가 빈 글이 아닌 문자열·wlen ≤ 14, err와 wait 동시 사용.
+    - 오류 메시지는 `'seq: '`로 시작한다. 검사: lanes 2~4개, 이름 문자열·wlen 1~8(4줄이면 1~6), msgs 1~8개, from·to가 0 이상 lanes 수 미만의 정수, t가 빈 글이 아닌 문자열·wlen ≤ 14, err와 wait 동시 사용.
   - `httpmsg({kind, start, head = [], body = [], hl = [], label} = {}) → string`
     - 바깥: `<div class="mk-hm">`(label이 있으면 seq와 같은 속성).
-    - 머리띠: `<div class="mk-hmt">HTTP ${kind}<span>(버전 줄임)</span></div>`
+    - 머리띠: `<div class="mk-hmt" aria-hidden="true">HTTP ${kind}<span>(버전 줄임)</span></div>`(sr과 두 번 읽히지 않게, 검토 A). sr 끝에 ` (버전 줄임)`을 붙인다.
     - 줄 목록 `<div class="mk-hmb" aria-hidden="true">`. 줄마다 `<div class="mk-hmr${강조 ? ' mk-hmon' : ''}"><code>${esc(글)}</code>꼬리표</div>`(줄은 `display:flex;flex-wrap:wrap`)
       - 순서: 첫 줄 → 헤더 → (본문이 있으면) 빈 줄 `<div class="mk-hmr mk-hmgap"></div>` → 본문
       - 꼬리표: 강조 줄은 `<b class="mk-hmk">강조</b>`, 응답 상태 400 이상이면 첫 줄에 `<b class="mk-hmk">실패</b>`
