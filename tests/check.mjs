@@ -597,7 +597,7 @@ check('bkxn', () => BKS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
   'Event-driven Architecture': ['Event'], 'Worker': ['Service Worker', 'Web Worker'], 'Lock': ['Lock File', 'Account Lockout'], 'Route Handler': ['Routing']};    // 이름만 비슷한 다른 뜻
 const BK_FIXD = [    // 검토 D: [카드, 들어가야 할 말, 빠져야 할 말]. 'v.'로 시작하면 그 카드 그림(h+cap)을 본다
-  ['Bearer Token', 'x', ['성질', 'AI'], ['보내는 방식이고']], ['Access Token', 'd', ['써도 되는지'], ['누구인지']], ['Access Token', 'x', ['유효 시간이 짧은'], ['쓰는 짧은']],
+  ['Bearer Token', 'x', ['성질', 'AI'], ['보내는 방식이고', '흔한 액세스']], ['Access Token', 'd', ['써도 되는지'], ['누구인지']], ['Access Token', 'x', ['유효 시간이 짧은', '유효 시간이 긴'], ['쓰는 짧은', '오래 쓰는']],
   ['Cookie vs Token', 'x', ['CSRF', 'SameSite'], []], ['Cookie vs Token', 'v.', ['빼 가기 어려워요'], ['더 안전해요']], ['Service Account', 'x', ['긴 문자열', '새어 나가기'], ['글자 하나', '새기 쉬워']],
   ['Event-driven Architecture', 'x', ['서버에서 일어난 일'], ['한 방법이고, 화면']], ['Streaming Response', 'u', ['Streams_API'], []], ['Streaming Response', 'x', ['모습'], ['비슷해 보여도']],
   ['Long Polling', 'x', ['빈 답'], []], ['Exponential Backoff', 'd', [], ['예시']], ['Exponential Backoff', 'v.', ['무작위'], []], ['Lock', 'v.', ['음수'], []],
