@@ -106,7 +106,7 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
   'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'basics/principle': 10, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
-  'server/basic': 5, 'server/motion': 6, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
+  'server/basic': 5, 'server/core': 9, 'server/motion': 6, 'server/adv': 8, 'server/status': 10, 'server/conf': 0, 'server/scale': 0, 'server/res': 0, 'server/infra': 0, 'server/tip': 8, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
@@ -116,8 +116,8 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
-  'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+  'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip', 'server/basic', 'server/core', 'server/motion', 'server/adv', 'server/status', 'server/conf', 'server/scale', 'server/res', 'server/infra', 'server/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const LATER = ['font', 'srvsym', 'redrawn:server/basic', 'redrawn:server/core', 'redrawn:server/motion', 'redrawn:server/adv', 'redrawn:server/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -844,6 +844,34 @@ check('dbshare', () => ['stagger', 'chip', 'spring', 'rotate', 'progress', 'shak
 check('dbrevd', () => [...(['Atomicity', 'Consistency', 'Isolation', 'Durability'].every(w => (g.find('ACID')?.d || '').includes(w)) ? [] : ['ACID d']),
   ...((g.find('Connection String')?.x || '').includes('PostgreSQL 주소 형식은') ? [] : ['Connection String x'])].join(', '));    // 검토 D: ACID는 영어 앞 글자, libpq는 키=값 형식도 받음
 check('dbreve', () => [['Hard Delete', 'COMMIT'], ['ERD', '1:N'], ['Timestamp', 'UTC로 바꿔 저장']].filter(([en, w]) => !(g.find(en)?.x || '').includes(w)).map(([en]) => en + ' x').join(', '));    // 검토 E: ROLLBACK 가능 시점, 그림의 1:N 표시, timestamptz는 시간대가 아니라 UTC 시각을 저장
+const SRVS = () => g.TERMS.filter(t => t.c === 'server');
+check('srvcat', () => { const a = g.CATS.find(c => c.id === 'server').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,status,conf,scale,res,infra,tip' ? '' : a; });
+const SRV_TODO = ["Localhost","Dev Server","Production","Cloud","Uptime","HTTPS","SSL Certificate","Web Server","Reverse Proxy","Load Balancer","Scaling","Downtime","Server Log","Storage",
+  "Request-Response Cycle","Cold Start","Restart","Traffic Spike","Failover","Graceful Shutdown","Linux","SSH","Docker","Container Image","Kubernetes","AWS","VPS","Serverless",
+  "200 OK","301 Redirect","400 Bad Request","401 Unauthorized","403 Forbidden","404 Not Found","429 Too Many Requests","500 Internal Server Error","502 Bad Gateway","HTTP Status Code",
+  "Development Environment","Staging","Monitoring","Cron Job","Redirect","Maintenance Page","Works on My Machine","Self-hosting"];    // 아직 u-server- 그림이 아닌 옛 서버 카드. 다시 그리면 여기서 뺀다
+const SRV_NOX = ["Localhost","Dev Server","Production","Cloud","Uptime","HTTPS","SSL Certificate","Web Server","Reverse Proxy","Load Balancer","Scaling","Downtime","Server Log","Storage",
+  "Request-Response Cycle","Cold Start","Restart","Traffic Spike","Failover","Graceful Shutdown","Linux","SSH","Container Image","Kubernetes","AWS","VPS","Serverless",
+  "200 OK","301 Redirect","400 Bad Request","403 Forbidden","404 Not Found","429 Too Many Requests","500 Internal Server Error","502 Bad Gateway","HTTP Status Code",
+  "Development Environment","Staging","Monitoring","Cron Job","Redirect","Maintenance Page","Works on My Machine","Self-hosting"];    // x를 아직 안 쓴 옛 카드 44장(Docker·401은 Task 2에서 고쳐 씀). Task 5가 비운다
+check('srvukey', () => bkdiff(SRVS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-server-') && g.D[t.v])).map(t => t.en), SRV_TODO));
+check('srvobj', () => SRVS().filter(t => typeof t.v === 'object' && !SRV_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
+check('srvsym', () => SRVS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
+check('srvx', () => bkdiff(SRVS().filter(t => !t.x).map(t => t.en), SRV_NOX));
+check('srvm', () => SRVS().filter(t => { const p = typeof t.v === 'string' && t.v.startsWith('u-server-') && g.D[t.v]; return p && !!p.m !== WA(p.h); }).map(t => t.en).join(', '));    // 재생 버튼(m)과 움직임(A)은 함께 있다
+check('srvou', () => SRVS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+const SRV_WRONG = {'Server Instance': ['Instance'], 'Sticky Session': ['Position Sticky', 'Sticky Header'], 'Log Level': ['Heading Levels'], 'Log Rotation': ['Key Rotation'],
+  'Virtual Host': ['Hosts File'], 'Object Storage': ['Local Storage'], 'Capacity Planning': ['Planning'], 'Auto Scaling': ['Scale'], 'Horizontal Scaling': ['Scale'], 'Vertical Scaling': ['Scale'],
+  'Alert': ['Security Alert'], 'Virtual Machine': ['Container'], 'Container Image': ['Container']};    // 이름만 비슷한 다른 뜻
+check('srvwrong', () => [...Object.values(SRV_WRONG).flat().filter(w => { const t = g.find(w); return !t || t.c === 'server'; }).map(w => '짝 없음 ' + w),
+  ...Object.entries(SRV_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'server' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en)].join(', '));
+check('srvtext', () => SRVS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('srvxn', () => SRVS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
+const SRV_IP = s => (s.match(/\b\d{1,3}(?:\.\d{1,3}){3}\b/g) || []).some(ip => !/^(?:192\.0\.2|198\.51\.100|203\.0\.113)\.\d{1,3}$/.test(ip) && ip !== '127.0.0.1' && ip !== '0.0.0.0') || DB_SECRET(s);    // 문서용 대역 밖 IP·가리지 않은 비밀번호·전화번호
+check('srvsafe', () => [...['10.0.0.5', '8.8.8.8', 'mysql://app:pw1@db'].filter(x => !SRV_IP(x)).map(x => '못 잡음 ' + x), ...(['203.0.113.10', '198.51.100.7', '192.0.2.1', '127.0.0.1'].some(SRV_IP) ? ['오탐'] : []),
+  ...SRVS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && SRV_IP(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
+check('srvshare', () => ['scale', 'delay', 'rotate', 'fade', 'pulse', 'emptystate'].filter(k => !g.D[k]).join(', '));    // 옛 server 카드가 쓰던 공유 그림 키는 남긴다
+check('srvsameh', () => { const seen = {}; return SRVS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-server-') && g.D[t.v]).filter(t => { const h = g.D[t.v].h; if (seen[h]) return true; seen[h] = t.en; }).map(t => t.en + '=' + seen[g.D[t.v].h]).join(', '); });    // 서버 카드끼리 같은 그림 없음(직접 조작은 첫 장면 h)
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
