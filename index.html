@@ -2997,6 +2997,23 @@ T('server','status',[
  {en:'500 Internal Server Error',ko:'500 · 서버 내부 오류',d:'서버 쪽 코드에서 문제가 생겼다는 응답. 서버 로그를 봐야 해요.',j:'"500 떴어요"',x:'500은 내 앱 안에서 오류가 났다는 뜻이에요. 502는 앞 서버가 뒤 앱에게서 이상한 답을 받았을 때, 503은 잠시 못 받을 때, 504는 뒤 앱이 시간 안에 답하지 않을 때예요.',p:'500 에러가 나. 서버 로그를 보고 원인을 찾아줘',r:['Server Log'],l:2,o:1,u:MDN('Web/HTTP/Status/500'),v:'u-server-500-internal-server-error'},
  {en:'502 Bad Gateway',ko:'502 · 중간 서버 오류',d:'앞 서버가 뒤 서버에게서 제대로 된 답을 못 받았다는 응답.',x:'502는 앞 서버(Nginx 등)가 뒤 앱에게서 이상한 답을 받았다는 뜻이고, 504는 답이 시간 안에 아예 오지 않았다는 뜻이에요. 뒤 앱이 꺼져 있거나 막 재시작 중일 때 자주 나요.',p:'502가 나. 뒤의 앱 서버가 살아 있는지 확인해줘',r:['Reverse Proxy'],l:3,o:1,u:MDN('Web/HTTP/Status/502'),v:'u-server-502-bad-gateway'},
  {en:'HTTP Status Code',ko:'HTTP 상태 코드',d:'응답 결과를 세 자리 숫자로 알려 주는 것. 2xx 성공, 3xx 이동, 4xx 요청 잘못, 5xx 서버 잘못.',x:'앞자리만 봐도 누구 쪽 문제인지 알 수 있어요. 4xx는 요청을 보낸 쪽, 5xx는 서버 쪽을 먼저 살펴봐요.',p:'API가 상황에 맞는 상태 코드를 돌려주게 해줘',r:['200 OK','404 Not Found'],l:1,o:1,u:MDN('Web/HTTP/Status'),v:'u-server-http-status-code'},
+ {en:'201 Created',ko:'생성됨 · 새로 만들었다는 응답',d:'요청대로 새 데이터를 만들었다는 응답.',x:'200은 잘 처리됐다는 뜻이고, 201은 새것을 만들었다는 뜻이에요. 새로 만든 것의 주소는 Location 헤더로 알려 줘요.',p:'글을 새로 만들면 201과 Location 헤더로 응답하게 해줘',r:['200 OK'],l:2,o:1,u:MDN('Web/HTTP/Status/201'),v:'u-server-201-created'},
+ {en:'204 No Content',ko:'내용 없음 · 성공했지만 돌려줄 본문이 없음',d:'성공했지만 돌려줄 본문이 없다는 응답.',x:'200은 결과를 본문에 담아 주고, 204는 성공했지만 응답 본문이 없어요. 삭제처럼 돌려줄 내용이 없는 요청에 자주 써요.',p:'삭제 API가 성공하면 204로 응답하게 해줘',r:['200 OK'],l:2,o:1,u:MDN('Web/HTTP/Status/204'),v:'u-server-204-no-content'},
+ {en:'304 Not Modified',ko:'바뀌지 않음 · 가진 것을 그대로 쓰라는 응답',d:'가진 파일이 바뀌지 않았으니 그대로 쓰라는 응답.',x:'301은 주소가 옮겨졌다는 뜻이고, 304는 가진 것을 그대로 쓰라는 뜻이에요. 브라우저가 가진 판의 ETag를 If-None-Match로 보내고, 같으면 본문 없이 304만 돌아와요.',p:'정적 파일에 ETag를 붙여서 바뀌지 않았으면 304가 오게 해줘',r:['Browser Cache'],l:3,o:1,u:MDN('Web/HTTP/Status/304'),v:'u-server-304-not-modified'},
+ {en:'503 Service Unavailable',ko:'서비스 이용 불가 · 잠시 요청을 받을 수 없음',d:'점검이나 과부하로 서버가 잠시 요청을 받을 수 없다는 응답.',x:'500은 앱 안에서 오류가 난 것이고, 503은 점검이나 과부하로 잠시 못 받는 것이에요. Retry-After로 언제 다시 올지 알려 줄 수 있어요.',p:'점검 중에는 503과 Retry-After를 보내게 해줘',r:['Maintenance Page','Downtime'],l:2,o:1,u:MDN('Web/HTTP/Status/503'),v:'u-server-503-service-unavailable'},
+ {en:'504 Gateway Timeout',ko:'게이트웨이 시간 초과 · 뒤 서버가 제때 답하지 않음',d:'앞 서버가 뒤 서버의 답을 기다리다 시간이 다 됐다는 응답.',x:'502는 뒤 서버가 이상한 답을 줬고, 504는 답이 시간 안에 오지 않았어요. 앱이 너무 오래 걸리면 Nginx 같은 프록시가 기다리다 504를 돌려줘요.',p:'504가 나. 느린 API를 찾고 프록시 시간 제한도 확인해줘',r:['502 Bad Gateway','Timeout'],l:3,o:1,u:MDN('Web/HTTP/Status/504'),v:'u-server-504-gateway-timeout'},
+]);
+T('server','conf',[
+ {en:'Nginx',ko:'엔진엑스 · 많이 쓰는 웹 서버 프로그램',d:'요청을 받아 파일을 주거나 앱으로 넘겨 주는 웹 서버 프로그램.',x:'Nginx와 Apache는 둘 다 웹 서버 프로그램이고, 설정 파일 모양이 달라요. Nginx는 중괄호 블록으로, Apache는 꺾쇠 태그로 설정을 적어요.',p:'Nginx로 정적 파일을 내보내고 /api는 앱으로 넘기게 설정해줘',r:['Web Server','Apache'],l:2,o:1,u:'https://nginx.org/en/docs/',v:'u-server-nginx'},
+ {en:'Apache',ko:'아파치 · 오래 쓰여 온 웹 서버 프로그램',d:'오래전부터 널리 쓰여 온 웹 서버 프로그램. 정식 이름은 Apache HTTP Server.',x:'Apache와 Nginx는 하는 일이 비슷한 웹 서버 프로그램이에요. Apache는 VirtualHost 같은 꺾쇠 태그로, Nginx는 중괄호 블록으로 설정을 적어요.',p:'Apache 가상 호스트로 example.com 사이트를 설정해줘',r:['Web Server','Nginx'],l:2,o:1,u:'https://httpd.apache.org/docs/2.4/',v:'u-server-apache'},
+ {en:'Virtual Host',ko:'가상 호스트 · 서버 한 대로 여러 사이트',d:'서버 한 대에서 주소(도메인)마다 다른 사이트를 내보내는 설정.',x:'Virtual Host는 서버 한 대로 여러 사이트를 나눠 띄우는 설정이고, Virtual Machine은 컴퓨터 한 대를 여러 칸으로 나누는 것이에요. 요청에 적힌 주소를 보고 어느 폴더의 사이트를 줄지 골라요.',p:'a.example.com과 b.example.com을 가상 호스트로 나눠 띄워줘',r:['Web Server','DNS'],l:3,o:1,u:'https://httpd.apache.org/docs/2.4/vhosts/',v:'u-server-virtual-host'},
+ {en:'Static File Serving',ko:'정적 파일 제공 · 그림·CSS를 바로 내줌',d:'HTML·그림·CSS처럼 미리 만들어 둔 파일을 그대로 내주는 일.',x:'Web Server는 그 일을 하는 프로그램이고, Static File Serving은 그중 파일을 그대로 내주는 일이에요. 파일은 Nginx가 바로 주고 API만 앱으로 넘기면 앱이 덜 바빠요.',p:'그림·CSS는 Nginx가 바로 내주고 /api만 앱으로 넘겨줘',r:['Web Server','CDN'],l:2,o:1,u:'https://nginx.org/en/docs/beginners_guide.html',v:'u-server-static-file-serving'},
+ {en:'Proxy Pass',ko:'프록시 패스 · 받은 요청을 앱으로 넘기는 설정',d:'받은 요청을 뒤의 앱 서버로 넘기라는 Nginx 설정 한 줄.',x:'Reverse Proxy는 요청을 대신 받아 넘기는 역할이고, Proxy Pass는 어디로 넘길지 적는 설정 한 줄이에요. 넘길 곳이 서버 여러 대면 Upstream으로 묶고 그 이름을 적어요.',p:'/api/로 오는 요청을 앱 서버로 proxy_pass 해줘',r:['Reverse Proxy','Upstream'],l:3,o:1,u:'https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass',v:'u-server-proxy-pass'},
+ {en:'Upstream',ko:'업스트림 · 요청을 넘길 서버 묶음',d:'요청을 넘겨받을 뒤 서버들을 묶어 이름 붙인 것.',x:'Proxy Pass는 넘기라는 설정이고, Upstream은 넘겨받을 서버 묶음이에요. 묶음 안 서버들에는 Load Balancer처럼 요청이 차례대로 나눠 가요.',p:'app1과 app2를 upstream으로 묶어서 나눠 받게 해줘',r:['Load Balancer','Proxy Pass'],l:3,o:1,u:'https://nginx.org/en/docs/http/ngx_http_upstream_module.html',v:'u-server-upstream'},
+ {en:'Keep-Alive',ko:'연결 유지 · 연결 하나로 여러 번 주고받기',d:'연결 하나를 끊지 않고 여러 요청에 다시 쓰는 것.',x:'Request-Response Cycle은 요청 하나와 응답 하나가 오가는 한 바퀴이고, Keep-Alive는 그 바퀴를 같은 연결로 여러 번 도는 것이에요. 요청마다 새로 연결하지 않고 연결 하나를 다시 써서 빨라요.',p:'서버의 Keep-Alive 시간을 알맞게 설정해줘',r:['Request-Response Cycle'],l:3,o:1,u:MDN('Web/HTTP/Reference/Headers/Keep-Alive'),v:'u-server-keep-alive'},
+ {en:'Config Reload',ko:'설정 다시 읽기 · 끊지 않고 새 설정 적용',d:'서버를 끄지 않고 바뀐 설정만 다시 읽어 들이는 것.',x:'Restart는 끄고 다시 켜는 것이고, Config Reload는 연결을 끊지 않고 설정만 다시 읽는 것이에요. nginx -t로 먼저 검사하고, 틀린 설정이면 Nginx가 옛 설정으로 계속 돌아요.',p:'nginx -t로 검사하고 문제없으면 설정을 reload 해줘',r:['Restart','Zero Downtime Deploy'],l:3,o:1,u:'https://nginx.org/en/docs/control.html',v:'u-server-config-reload'},
+ {en:'Certificate Renewal',ko:'인증서 갱신 · 만료 전에 새로 받기',d:'인증서가 만료되기 전에 새 인증서로 바꿔 받는 것.',x:'SSL Certificate는 인증서 자체이고, Certificate Renewal은 만료 전에 새로 받는 일이에요. 손으로 하면 잊기 쉬워 자동으로 갱신하고, 갱신이 실패하면 만료돼요.',p:'인증서가 자동으로 갱신되게 설정하고 실패하면 알려줘',r:['SSL Certificate','HTTPS'],l:2,o:1,u:'https://letsencrypt.org/docs/cert-lifetimes/',v:'u-server-certificate-renewal'},
+ {en:'Client Body Size Limit',ko:'업로드 크기 제한 · 보낼 수 있는 본문 최대 크기',d:'한 번에 보낼 수 있는 요청 본문(업로드)의 최대 크기.',x:'Storage는 파일을 두는 곳이고, Client Body Size Limit은 한 번에 보낼 수 있는 크기 한도예요. Nginx는 client_max_body_size(기본 1m)를 넘으면 413을 돌려줘요. RFC 9110 이름은 Content Too Large이고, Nginx 문서에는 Request Entity Too Large로 적혀 있어요.',p:'사진 업로드가 413으로 실패해. client_max_body_size를 늘려줘',r:['Storage'],l:3,o:1,u:'https://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size',v:'u-server-client-body-size-limit'},
 ]);
 T('server','tip',[
  {en:'Development Environment',ko:'개발 환경',d:'만들고 시험하는 내 컴퓨터 환경.',x:'개발 환경은 개발·스테이징·운영 중에서 마음껏 망가뜨려도 되는 곳이에요. 내 컴퓨터에서 돌리고, 실제 사용자 데이터는 쓰지 않아요.',p:'내 컴퓨터 개발 환경을 처음부터 세팅하는 순서를 알려줘',r:['Staging','Production'],l:1,o:0,v:'u-server-development-environment'},
@@ -8474,6 +8491,26 @@ Object.assign(D,{
   'u-server-maintenance-page':{h:bkStack(browser('<p class="mk-dgp">점검 중이에요, 02:00까지</p>', {url:'example.com'})), cap:'시각은 예시예요'},
   'u-server-works-on-my-machine':{h:bkStack(bkBox('내 컴퓨터', 'Node 22', '잘 됨'), bkBox('서버', 'Node 18', '오류')), cap:'버전은 예시예요'},
   'u-server-self-hosting':{h:bkStack(bkBox('직접 운영', '서버·업데이트·백업을 내가'), bkBox('서비스 이용', '회사가 맡음'))},
+});
+/* server: 새 카드 status·conf — 출처 확인(2026-11): MDN 201(Location)·204(본문 없음)·304(If-None-Match, 200이었다면 보냈을 ETag)·503(Retry-After)·504(위 서버가 제때 답하지 않음)·413 Content Too Large,
+   nginx.org(ngx_http_core_module client_max_body_size 기본 1m·413, ngx_http_proxy_module proxy_pass, ngx_http_upstream_module, Controlling nginx -t·-s reload 실패 시 옛 설정 유지, Beginner's Guide 정적 파일),
+   Apache httpd 2.4 vhosts(서버 한 대에 여러 사이트), Let's Encrypt 인증서 수명(기본 90일, 줄어드는 중). IP는 문서용 대역. 이름·숫자·시각은 예시 */
+Object.assign(D,{
+  'u-server-201-created':{h:httpmsg({kind:'응답', start:'201 Created', head:['Location: /posts/7'], hl:['h0']}), cap:'새로 만들어졌어요'},
+  'u-server-204-no-content':{h:httpmsg({kind:'응답', start:'204 No Content'}), cap:'지우기 성공, 돌려줄 본문은 없어요'},
+  'u-server-304-not-modified':{h:bkStack(httpmsg({kind:'요청', start:'GET /style.css', head:['If-None-Match: "a1"'], hl:['h0']}), httpmsg({kind:'응답', start:'304 Not Modified', head:['ETag: "a1"']})), cap:'가진 것을 그대로 쓰세요'},
+  'u-server-503-service-unavailable':{h:httpmsg({kind:'응답', start:'503 Service Unavailable', head:['Retry-After: 120'], hl:['h0']}), cap:'잠시 받을 수 없어요(120초는 예시)'},
+  'u-server-504-gateway-timeout':{h:seq(['브라우저', '프록시', '앱'], [{from:0, to:1, t:'GET /api'}, {from:1, to:2, t:'넘김'}, {from:2, to:2, t:'처리 중', wait:1}, {from:1, to:0, t:'504 시간 초과', err:1}]), cap:'502는 이상한 답, 504는 답이 없음', m:1},
+  'u-server-nginx':{h:fcss('nginx.conf', 'server {', '  listen 80;', '  server_name example.com;', '  root /var/www;', '}')},
+  'u-server-apache':{h:fcss('httpd.conf', '<VirtualHost *:80>', 'ServerName example.com', 'DocumentRoot /var/www', '</VirtualHost>')},
+  'u-server-virtual-host':{h:bkStack(bkBox('서버 한 대', '203.0.113.10'), bkRows(['a.example.com', '폴더 a'], ['b.example.com', '폴더 b'])), cap:'주소는 예시예요'},
+  'u-server-static-file-serving':{h:seq(['브라우저', 'Nginx', '앱'], [{from:0, to:1, t:'GET /logo.png'}, {from:1, to:1, t:'파일 바로'}, {from:1, to:0, t:'파일'}, {from:0, to:1, t:'GET /api'}, {from:1, to:2, t:'넘김'}, {from:2, to:1, t:'JSON'}, {from:1, to:0, t:'JSON'}]), cap:'파일은 Nginx가, API는 앱이 답해요', m:1},
+  'u-server-proxy-pass':{h:fcss('nginx.conf', 'location /api/ {', '  proxy_pass http://app;', '}'), cap:'app은 Upstream에 적은 서버 묶음'},
+  'u-server-upstream':{h:fcss('nginx.conf', 'upstream app {', '  server app1:3000;', '  server app2:3000;', '}'), cap:'서버 이름은 예시예요'},
+  'u-server-keep-alive':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'연결'}, {from:0, to:1, t:'요청 1'}, {from:1, to:0, t:'응답 1'}, {from:0, to:1, t:'요청 2'}, {from:1, to:0, t:'응답 2'}]), cap:'연결 하나로 여러 번', m:1},
+  'u-server-config-reload':{h:bkStack(term([{c:'nginx -t'}, {o:'nginx: … syntax is ok'}, {o:'nginx: … test is successful'}, {c:'nginx -s reload'}]), '<p class="mk-dgp">끊지 않고 새 설정을 읽어요</p>'), cap:'출력은 줄였어요(Nginx 예). 서버에서는 보통 sudo를 붙여요', m:1},
+  'u-server-certificate-renewal':{h:track([{t:'인증서 발급', s:'done', w:'1일째'}, {t:'자동 갱신', s:'done', w:'약 60일째'}, {t:'새 만료일', s:'done', w:'다시 90일'}]), cap:'90일 인증서 예시예요. 수명은 줄어드는 중이에요', m:1},
+  'u-server-client-body-size-limit':{h:seq(['브라우저', 'Nginx', '앱'], [{from:0, to:1, t:'20MB 업로드'}, {from:1, to:0, t:'413 너무 큼', err:1}]), cap:'앱까지 가지도 않아요, 한도는 예시 10MB', m:1},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;

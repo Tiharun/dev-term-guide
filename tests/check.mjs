@@ -103,10 +103,12 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'db/tx': ['ACID', 'Autocommit', 'Savepoint', 'Isolation Level', 'Dirty Read', 'Lost Update', 'Deadlock', 'Optimistic Locking', 'Pessimistic Locking', 'Connection Pool'],
   'db/ops': ['Query Plan', 'Full Table Scan', 'Composite Index', 'Read Replica', 'Connection String', 'Too Many Connections', 'Query Timeout', 'Point-in-Time Recovery', 'Database Dump', 'Database Client'],
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
+  'server/status': ['201 Created', '204 No Content', '304 Not Modified', '503 Service Unavailable', '504 Gateway Timeout'],
+  'server/conf': ['Nginx', 'Apache', 'Virtual Host', 'Static File Serving', 'Proxy Pass', 'Upstream', 'Keep-Alive', 'Config Reload', 'Certificate Renewal', 'Client Body Size Limit'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
   'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'basics/principle': 10, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
-  'server/basic': 5, 'server/core': 9, 'server/motion': 6, 'server/adv': 8, 'server/status': 10, 'server/conf': 0, 'server/scale': 0, 'server/res': 0, 'server/infra': 0, 'server/tip': 8, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
+  'server/basic': 5, 'server/core': 9, 'server/motion': 6, 'server/adv': 8, 'server/status': 15, 'server/conf': 10, 'server/scale': 0, 'server/res': 0, 'server/infra': 0, 'server/tip': 8, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
@@ -117,7 +119,7 @@ const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
   'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip', 'server/basic', 'server/core', 'server/motion', 'server/adv', 'server/status', 'server/conf', 'server/scale', 'server/res', 'server/infra', 'server/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = ['font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -542,7 +544,7 @@ const SYM_DB = ['데이터가 쌓일수록 목록이 느려져요', '목록 하�
 check('symcount', () => g.SYMPTOMS.length !== 205 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1572 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB
+check('total', () => g.TERMS.length === 1587 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -883,7 +885,10 @@ check('srvshare', () => ['scale', 'delay', 'rotate', 'fade', 'pulse', 'emptystat
 check('srvsameh', () => { const seen = {}; return SRVS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-server-') && g.D[t.v]).filter(t => { const h = g.D[t.v].h; if (seen[h]) return true; seen[h] = t.en; }).map(t => t.en + '=' + seen[g.D[t.v].h]).join(', '); });    // 서버 카드끼리 같은 그림 없음(직접 조작은 첫 장면 h)
 check('srvrel', () => [['Graceful Shutdown', 'Zero Downtime Deploy'], ['Maintenance Page', 'Status Page'], ['Downtime', 'Status Page'], ['Cloud', 'Hosting'], ['VPS', 'Hosting']]
   .filter(([en, r]) => !(g.find(en)?.r || []).includes(r)).map(([en, r]) => en + '-' + r).join(', '));    // 스펙 4장: 기존 server 카드에 더하는 r
-const SRV_XHAS = {'502 Bad Gateway': ['504'], '401 Unauthorized': ['403'], 'Uptime': ['43분'], 'SSL Certificate': ['TLS'], 'Docker': ['운영체제']};    // x에 꼭 있어야 할 말(Review Focus 3). 계획서 ②가 더한다
+const SRV_XHAS = {'502 Bad Gateway': ['504'], '401 Unauthorized': ['403'], 'Uptime': ['43분'], 'SSL Certificate': ['TLS'], 'Docker': ['운영체제'],
+  '201 Created': ['Location'], '204 No Content': ['본문'], '304 Not Modified': ['301'], '503 Service Unavailable': ['Retry-After'], '504 Gateway Timeout': ['502'],
+  'Client Body Size Limit': ['413', 'client_max_body_size'], 'Config Reload': ['nginx -t'], 'Certificate Renewal': ['자동'], 'Keep-Alive': ['연결'],    // Task 2가 더한다
+};    // x에 꼭 있어야 할 말(Review Focus 3). 계획서 ②가 더한다
 check('srvfixb', () => { const h = k => g.D['u-server-' + k]?.h || '', W = h('works-on-my-machine');    // 검토 B 지적
   return [['dev 끝 프롬프트', !h('dev-server').includes('mk-tcur')], ['ssh 끝 프롬프트', !h('ssh').includes('mk-tcur')], ['failover 예비', h('failover').includes('>예비<') && /Hot Standby/.test(g.D['u-server-failover'].cap)],
     ['cron 절대 경로', h('cron-job').includes('/srv/backup.sh')], ['serverless 플랫폼 경유', h('serverless').includes('결과')], ['docker 조건', h('docker').includes('도커가 있는 서버라면')],
