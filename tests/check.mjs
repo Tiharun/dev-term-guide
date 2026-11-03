@@ -825,6 +825,31 @@ check('dbdmrun', () => { const bad = [], st = ctx.setTimeout; ctx.setTimeout = f
       pk(t, 0).click(); if (pk(t, 0).attrs['aria-pressed'] !== 'false') bad.push('tx 실패 끔'); }
   } finally { ctx.setTimeout = st; }
   return bad.join(', '); });
+const SRVDM = {'Load Balancer': ['Round Robin', 'Least Connections', 'aria-pressed', 'aria-live'], 'Failover': ['서버 2 정상', '서버 2 고장', 'aria-pressed', 'aria-live'],
+  'Auto Scaling': ['새벽', '평소', '이벤트', 'aria-pressed', 'aria-live'], 'Out of Memory': ['한도 512MB', '한도 1024MB', '고친 뒤', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
+const SRVP = en => { const t = g.TERMS.find(x => x.c === 'server' && x.en === en); return t && g.D[t.v]; };
+check('srvdm', () => Object.entries(SRVDM).filter(([en, w]) => { const p = SRVP(en); return !p || !p.init || !String(p.init).includes('psay') || ![...w, 'class="mk-mobox"', 'class="mk-hint"'].every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('srvdmrun', () => { const bad = [], st = ctx.setTimeout; ctx.setTimeout = f => f();
+  try { const V = k => vm.runInContext(k, ctx), first = {'Load Balancer': V("slbSay('rr')"), 'Failover': V('sfailSay(false)'), 'Auto Scaling': V("sautoSay('dawn')"), 'Out of Memory': V("soomSay('small')")};
+    const pic = {'Load Balancer': V("slb('rr')"), 'Failover': V('sfail(false)'), 'Auto Scaling': V("sauto('dawn')"), 'Out of Memory': V("soom('small')")};
+    const run = en => { const p = SRVP(en); if (!p || !p.init) { bad.push(en + ' init'); return null; } const s = board(p.h); if (s.hint.textContent !== first[en]) bad.push(en + ' 첫 문장'); if (s.box.innerHTML !== pic[en]) bad.push(en + ' 첫 그림'); p.init(s); return s; };
+    const pk = (s, i) => s.keys.filter(b => b.dataset.k)[i], on = s => s.keys.filter(b => b.dataset.k).map(b => b.attrs['aria-pressed']).join(), cnt = (h, w) => h.split(w).length - 1;
+    const lb = run('Load Balancer');
+    if (lb) { pk(lb, 1).click(); if (lb.box.innerHTML !== V("slb('lc')") || lb.hint.textContent !== V("slbSay('lc')") || on(lb) !== 'false,true') bad.push('lb lc');
+      pk(lb, 0).click(); if (lb.box.innerHTML !== V("slb('rr')")) bad.push('lb rr'); }
+    const fo = run('Failover');
+    if (fo) { pk(fo, 1).click(); if (fo.box.innerHTML !== V('sfail(true)') || fo.hint.textContent !== V('sfailSay(true)')) bad.push('failover 고장');
+      pk(fo, 1).click(); if (fo.box.innerHTML !== V('sfail(true)')) bad.push('failover 다시');
+      pk(fo, 0).click(); if (fo.box.innerHTML !== V('sfail(false)')) bad.push('failover 정상'); }
+    const au = run('Auto Scaling');
+    if (au) { pk(au, 2).click(); if (au.box.innerHTML !== V("sauto('event')") || on(au) !== 'false,false,true' || cnt(au.box.innerHTML, 'mk-sv-new') !== 2) bad.push('auto 이벤트');
+      pk(au, 1).click(); if (au.hint.textContent !== V("sautoSay('day')")) bad.push('auto 평소'); }
+    const om = run('Out of Memory');
+    if (om) { pk(om, 1).click(); if (om.box.innerHTML !== V("soom('big')") || !om.hint.textContent.includes('늦게')) bad.push('oom big');
+      pk(om, 2).click(); if (!om.hint.textContent.includes('평평') || om.box.innerHTML.includes('강제 종료')) bad.push('oom fixed');
+      pk(om, 0).click(); if (!om.hint.textContent.includes('137')) bad.push('oom small'); }
+  } finally { ctx.setTimeout = st; }
+  return bad.join(', '); });
 check('bktext', () => BKS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('bkxn', () => BKS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],

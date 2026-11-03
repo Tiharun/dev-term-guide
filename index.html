@@ -8482,7 +8482,10 @@ Object.assign(D,{
   'u-server-ssl-certificate':{h:bkRows(['대상 example.com', ''], ['발급 기관 Let\'s Encrypt', '예'], ['만료일 11-30', '예시'])},
   'u-server-web-server':{h:seq(['브라우저', '웹 서버'], [{from:0, to:1, t:'GET /logo.png'}, {from:1, to:1, t:'파일 찾기'}, {from:1, to:0, t:'200 그림 파일'}]), m:1},
   'u-server-reverse-proxy':{h:srvmap({front:'프록시', servers:[{n:'앱 1', got:3}, {n:'앱 2', got:3}], note:'사용자는 프록시만 알아요'}), m:1},
-  'u-server-load-balancer':{h:slb('rr')},
+  'u-server-load-balancer':{h:`<div class="mk-mobox">${slb('rr')}</div><div role="group" aria-label="나누는 방식 고르기">${tpick(['Round Robin', 'Least Connections'], 'Round Robin')}</div><span class="mk-hint" aria-live="polite">${slbSay('rr')}</span>`,
+    cap:'두 방식을 바꿔 서버 2가 받는 요청 수를 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), pk = [...s.querySelectorAll('.mk-tkey')].filter(x => x.dataset.k);
+      pk.forEach((x, i) => x.addEventListener('click', () => { const k = ['rr', 'lc'][i]; b.innerHTML = slb(k); psay(h, slbSay(k)); pk.forEach((y, n) => y.setAttribute('aria-pressed', n === i)); })); }},
   'u-server-scaling':{h:bkStack(bkBox('위로 키우기', '서버 한 대를 크게'), bkPills('옆으로 늘리기', ['서버 1', '서버 2', '서버 3']))},
   'u-server-downtime':{h:track([{t:'정상', s:'done', w:'14:00'}, {t:'멈춤', s:'fail', w:'14:10'}, {t:'복구', s:'done', w:'14:35'}]), cap:'시각은 예시예요', m:1},
   'u-server-server-log':{h:term([{c:'tail -f app.log'}, {o:'14:02 GET /api/posts 200'}, {o:'14:03 GET /api/posts 200'}, {e:'14:04 ERROR DB 연결 실패'}], {end:false}), cap:'시각은 예시예요', m:1},
@@ -8493,7 +8496,10 @@ Object.assign(D,{
   'u-server-restart':{h:track([{t:'실행 중', s:'done'}, {t:'끔', s:'done'}, {t:'다시 켬', s:'done'}, {t:'실행 중', s:'done', w:'메모리 깨끗'}]), m:1},
   'u-server-traffic-spike':{h:metric({lines:[{n:'요청 수', pts:[120, 110, 130, 900, 640, 300, 150]}], x:['20:00', '20:01', '20:02', '20:03', '20:04', '20:05', '20:06'], max:1000, unit:'건', mark:{i:3, n:'이벤트'}}),
     cap:'1분마다 센 요청 수(예시)'},
-  'u-server-failover':{h:sfail(true), cap:'예비를 미리 켜 두는 방식(Hot Standby)도 있어요'},
+  'u-server-failover':{h:`<div class="mk-mobox">${sfail(false)}</div><div role="group" aria-label="서버 2 상태 고르기">${tpick(['서버 2 정상', '서버 2 고장'], '서버 2 정상')}</div><span class="mk-hint" aria-live="polite">${sfailSay(false)}</span>`,
+    cap:'서버 2를 고장 내고 요청이 어디로 가는지 보세요. 예비를 미리 켜 두는 방식(Hot Standby)도 있어요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), pk = [...s.querySelectorAll('.mk-tkey')].filter(x => x.dataset.k);
+      pk.forEach((x, i) => x.addEventListener('click', () => { const k = [false, true][i]; b.innerHTML = sfail(k); psay(h, sfailSay(k)); pk.forEach((y, n) => y.setAttribute('aria-pressed', n === i)); })); }},
   'u-server-graceful-shutdown':{h:track([{t:'새 요청 받지 않음', s:'done'}, {t:'하던 요청 끝냄', s:'done'}, {t:'끔', s:'done'}]), m:1},
 });
 /* server: 다시 그리기 adv·status·tip — 출처 확인(2026-11): RFC 9110 15장(200·301 Location·400·401 WWW-Authenticate 필수·403·404·500·502 게이트웨이가 받은 잘못된 응답),
@@ -8573,7 +8579,10 @@ const slayer = n => { if (!Number.isInteger(n) || n < 0 || n > 3) throw new Erro
    ALB deregistration delay 기본 300초), NIST SP 800-145(IaaS·PaaS·SaaS), Docker resource constraints(OOM)·exit code 137(128+9), man7 top·free·df·logrotate(8), ArchWiki Swap(디스크는 느림),
    RFC 5424(심각도 8단계), PM2 restart strategies, AWS S3 object keys, Kubernetes autoscaling(수평·수직). 이름·숫자·시각은 예시, IP는 문서용 대역 */
 Object.assign(D,{
-  'u-server-auto-scaling':{h:sauto('event')},
+  'u-server-auto-scaling':{h:`<div class="mk-mobox">${sauto('dawn')}</div><div role="group" aria-label="시간대 고르기">${tpick(['새벽', '평소', '이벤트'], '새벽')}</div><span class="mk-hint" aria-live="polite">${sautoSay('dawn')}</span>`,
+    cap:'시간대를 바꿔 서버 수와 CPU를 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), pk = [...s.querySelectorAll('.mk-tkey')].filter(x => x.dataset.k);
+      pk.forEach((x, i) => x.addEventListener('click', () => { const k = ['dawn', 'day', 'event'][i]; b.innerHTML = sauto(k); psay(h, sautoSay(k)); pk.forEach((y, n) => y.setAttribute('aria-pressed', n === i)); })); }},
   'u-server-horizontal-scaling':{h:srvmap({front:'LB', servers:[{n:'서버 1', got:2}, {n:'서버 2', got:2}, {n:'서버 3', got:2}, {n:'서버 4', st:'new', got:1}], note:'같은 서버를 한 대 더'}), m:1},
   'u-server-vertical-scaling':{h:bkStack(bkBox('지금', 'CPU 2 · 메모리 4GB', '예시'), bkBox('키운 뒤', 'CPU 8 · 메모리 16GB', '예시'))},
   'u-server-round-robin':{h:bkRows(['요청 1', '서버 1'], ['요청 2', '서버 2'], ['요청 3', '서버 3'], ['요청 4', '서버 1']), cap:'차례대로 돌아가며 줘요'},
@@ -8585,7 +8594,10 @@ Object.assign(D,{
   'u-server-capacity-planning':{h:metric({lines:[{n:'CPU', pts:[35, 42, 50, 58, 66, 74]}], x:['1월', '2월', '3월', '4월', '5월', '6월'], unit:'%', limit:{v:80, n:'늘릴 때'}}), cap:'달마다 평균(예시)'},
   'u-server-cpu-usage':{h:metric({lines:[{n:'CPU', pts:[20, 25, 30, 95, 40, 25]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%', mark:{i:3, n:'치솟음'}}), cap:'숫자는 예시예요'},
   'u-server-memory-usage':{h:metric({lines:[{n:'메모리', pts:[58, 60, 61, 59, 60, 61]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%'}), cap:'꾸준하면 정상이에요'},
-  'u-server-out-of-memory':{h:soom('small')},
+  'u-server-out-of-memory':{h:`<div class="mk-mobox">${soom('small')}</div><div role="group" aria-label="메모리 상황 고르기">${tpick(['한도 512MB', '한도 1024MB', '고친 뒤'], '한도 512MB')}</div><span class="mk-hint" aria-live="polite">${soomSay('small')}</span>`,
+    cap:'한도를 바꿔 보고, 고친 뒤와 비교해 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), pk = [...s.querySelectorAll('.mk-tkey')].filter(x => x.dataset.k);
+      pk.forEach((x, i) => x.addEventListener('click', () => { const k = ['small', 'big', 'fixed'][i]; b.innerHTML = soom(k); psay(h, soomSay(k)); pk.forEach((y, n) => y.setAttribute('aria-pressed', n === i)); })); }},
   'u-server-disk-full':{h:bkRows(['디스크 사용 100%', '가득'], ['No space left on device', '예'])},
   'u-server-access-log':{h:bkRows(['203.0.113.5 GET /api 200', ''], ['203.0.113.5 GET /login 302', ''], ['203.0.113.5 GET /x 404', '']), cap:'주소는 예시예요'},
   'u-server-error-log':{h:bkRows(['14:04 ERROR DB 연결 실패', ''], ['14:09 ERROR 파일 없음', '']), cap:'시각은 예시예요'},
