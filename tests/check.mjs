@@ -105,10 +105,13 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
   'server/status': ['201 Created', '204 No Content', '304 Not Modified', '503 Service Unavailable', '504 Gateway Timeout'],
   'server/conf': ['Nginx', 'Apache', 'Virtual Host', 'Static File Serving', 'Proxy Pass', 'Upstream', 'Keep-Alive', 'Config Reload', 'Certificate Renewal', 'Client Body Size Limit'],
+  'server/scale': ['Auto Scaling', 'Horizontal Scaling', 'Vertical Scaling', 'Round Robin', 'Least Connections', 'Sticky Session', 'Single Point of Failure', 'Redundancy', 'Connection Draining', 'Capacity Planning'],
+  'server/res': ['CPU Usage', 'Memory Usage', 'Out of Memory', 'Disk Full', 'Access Log', 'Error Log', 'Log Level', 'Log Rotation', 'Alert', 'Process Manager', 'Swap Memory'],
+  'server/infra': ['Virtual Machine', 'Server Instance', 'Region', 'Availability Zone', 'Object Storage', 'IaaS', 'PaaS', 'SaaS', 'On-Premise', 'Managed Service'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
   'basics/basic': 12, 'basics/core': 13, 'basics/motion': 15, 'basics/code': 26, 'basics/adv': 19, 'basics/principle': 10, 'terminal/basic': 13, 'terminal/core': 15, 'terminal/motion': 9, 'terminal/adv': 15, 'terminal/cmd': 20, 'terminal/tip': 9,
-  'server/basic': 5, 'server/core': 9, 'server/motion': 6, 'server/adv': 8, 'server/status': 15, 'server/conf': 10, 'server/scale': 0, 'server/res': 0, 'server/infra': 0, 'server/tip': 8, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
+  'server/basic': 5, 'server/core': 9, 'server/motion': 6, 'server/adv': 8, 'server/status': 15, 'server/conf': 10, 'server/scale': 10, 'server/res': 11, 'server/infra': 10, 'server/tip': 8, 'net/basic': 12, 'net/core': 15, 'net/motion': 9, 'net/adv': 13, 'net/proto': 10, 'net/tip': 9,
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
@@ -464,6 +467,14 @@ check('srvstill', () => vm.runInContext(`(() => { const bad = [], n = (h, s) => 
   if (n(ok, '요청 3<') !== 2 || ok.includes('고장') || !ok.includes('>예비<') || !ok.includes('>꺼짐<') || !dn.includes('>고장<') || !dn.includes('>빠짐<') || !dn.includes('>새로 켬<') || n(dn, '요청 3<') !== 2 || dn.includes('요청 0') || WA(ok + dn)) bad.push('sfail');
   if (sfailSay(false) !== '서버 1·2가 나눠 받고 예비는 꺼져 있어요' || sfailSay(true) !== 'Health Check가 서버 2를 빼고 예비 서버가 대신 받아요') bad.push('sfailSay');    // 검토 B: 카드 d처럼 예비가 대신 받는다
   [() => senv(3, 'a'), () => senv(0, ''), () => slb('ip'), () => slbSay('x'), () => sfail('y'), () => sfailSay(1)].forEach((f, k) => { try { f(); bad.push('안 막음 ' + k); } catch (e) { if (!/^(senv|slb|sfail): /.test(e.message)) bad.push('메시지 ' + k); } });
+  const da = sauto('dawn'), dy = sauto('day'), ev = sauto('event');
+  if (!da.includes('style="--n:1"') || !dy.includes('style="--n:2"') || !ev.includes('style="--n:4"') || n(ev, '>새로 켬<') !== 2 || !ev.includes('2대 더 켬') || !da.includes('늘림 기준 70%') || WA(da + dy + ev)) bad.push('sauto');
+  if (sautoSay('event') !== 'CPU가 70%를 넘어 2대를 더 켰어요' || sautoSay('dawn') !== '손님이 적어 1대로 충분해요') bad.push('sautoSay');
+  const sm = soom('small'), bg = soom('big'), fx = soom('fixed');
+  if (!sm.includes('최대 512MB') || !sm.includes('강제 종료(137)') || !bg.includes('최대 1024MB') || fx.includes('강제 종료') || !fx.includes('계속 실행 중') || WA(sm + bg + fx)) bad.push('soom');
+  if (!soomSay('small').includes('137') || !soomSay('big').includes('늦게') || !soomSay('fixed').includes('평평')) bad.push('soomSay');
+  if (n(slayer(3), '내가') !== 3 || n(slayer(3), '회사가') !== 1 || n(slayer(1), '내가') !== 1 || n(slayer(0), '회사가') !== 4) bad.push('slayer');
+  [() => sauto('noon'), () => sautoSay(1), () => soom('huge'), () => soomSay(''), () => slayer(4), () => slayer(1.5)].forEach((f, k) => { try { f(); bad.push('안 막음 s' + k); } catch (e) { if (!/^(sauto|soom|slayer): /.test(e.message)) bad.push('메시지 s' + k); } });
   return bad.join(', '); })()`, ctx));
 check('srvcss', () => [['figcap sv', /[,(]\.mk-sv[,)][^{]*\.figcap\{position:static/], ['figcap mg', /[,(]\.mk-mg[,)][^{]*\.figcap\{position:static/], ['고장 점선', /\.mk-sv-down\{border-style:dashed\}/],
   ['2열', /@media \(max-width:420px\)\{\.mk-svs\[style\*="--n:4"\]\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/], ['서버 가로선', /\.mk-svs\{[^}]*background:linear-gradient/], ['db 가로선', /\.mk-svdb\{[^}]*center bottom/],
@@ -544,7 +555,7 @@ const SYM_DB = ['데이터가 쌓일수록 목록이 느려져요', '목록 하�
 check('symcount', () => g.SYMPTOMS.length !== 205 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1587 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
+check('total', () => g.TERMS.length === 1618 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -887,7 +898,9 @@ check('srvrel', () => [['Graceful Shutdown', 'Zero Downtime Deploy'], ['Maintena
   .filter(([en, r]) => !(g.find(en)?.r || []).includes(r)).map(([en, r]) => en + '-' + r).join(', '));    // 스펙 4장: 기존 server 카드에 더하는 r
 const SRV_XHAS = {'502 Bad Gateway': ['504'], '401 Unauthorized': ['403'], 'Uptime': ['43분'], 'SSL Certificate': ['TLS'], 'Docker': ['운영체제'],
   '201 Created': ['Location'], '204 No Content': ['본문'], '304 Not Modified': ['301'], '503 Service Unavailable': ['Retry-After'], '504 Gateway Timeout': ['502'],
-  'Client Body Size Limit': ['413', 'client_max_body_size'], 'Config Reload': ['nginx -t'], 'Certificate Renewal': ['자동'], 'Keep-Alive': ['연결'],    // Task 2가 더한다
+  'Client Body Size Limit': ['413', 'client_max_body_size'], 'Config Reload': ['nginx -t'], 'Certificate Renewal': ['자동'], 'Keep-Alive': ['연결'],
+  'Sticky Session': ['Session Store'], 'Out of Memory': ['137'], 'Availability Zone': ['Region'], 'Region': ['Availability Zone'], 'Swap Memory': ['느려'], 'Log Level': ['INFO'],
+  'IaaS': ['PaaS'], 'PaaS': ['IaaS'], 'SaaS': ['PaaS'], 'Round Robin': ['Least Connections'], 'Horizontal Scaling': ['Vertical'],
 };    // x에 꼭 있어야 할 말(Review Focus 3). 계획서 ②가 더한다
 check('srvfixb', () => { const h = k => g.D['u-server-' + k]?.h || '', W = h('works-on-my-machine');    // 검토 B 지적
   return [['dev 끝 프롬프트', !h('dev-server').includes('mk-tcur')], ['ssh 끝 프롬프트', !h('ssh').includes('mk-tcur')], ['failover 예비', h('failover').includes('>예비<') && /Hot Standby/.test(g.D['u-server-failover'].cap)],

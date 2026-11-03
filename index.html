@@ -3015,6 +3015,43 @@ T('server','conf',[
  {en:'Certificate Renewal',ko:'인증서 갱신 · 만료 전에 새로 받기',d:'인증서가 만료되기 전에 새 인증서로 바꿔 받는 것.',x:'SSL Certificate는 인증서 자체이고, Certificate Renewal은 만료 전에 새로 받는 일이에요. 손으로 하면 잊기 쉬워 자동으로 갱신하고, 갱신이 실패하면 만료돼요.',p:'인증서가 자동으로 갱신되게 설정하고 실패하면 알려줘',r:['SSL Certificate','HTTPS'],l:2,o:1,u:'https://letsencrypt.org/docs/cert-lifetimes/',v:'u-server-certificate-renewal'},
  {en:'Client Body Size Limit',ko:'업로드 크기 제한 · 보낼 수 있는 본문 최대 크기',d:'한 번에 보낼 수 있는 요청 본문(업로드)의 최대 크기.',x:'Storage는 파일을 두는 곳이고, Client Body Size Limit은 한 번에 보낼 수 있는 크기 한도예요. Nginx는 client_max_body_size(기본 1m, 곧 1MB)를 넘으면 413을 돌려줘요. RFC 9110 이름은 Content Too Large이고, Nginx 문서에는 Request Entity Too Large로 적혀 있어요.',p:'사진 업로드가 413으로 실패해. client_max_body_size를 늘려줘',r:['Storage'],l:3,o:1,u:'https://nginx.org/en/docs/http/ngx_http_core_module.html#client_max_body_size',v:'u-server-client-body-size-limit'},
 ]);
+T('server','scale',[
+ {en:'Auto Scaling',ko:'자동 확장 · 몰리면 서버를 저절로 늘림',d:'정해 둔 기준을 넘으면 서버 수를 저절로 늘리고 줄이는 것.',x:'Horizontal Scaling은 서버를 더 두는 방식이고, Auto Scaling은 그 일을 기준에 따라 저절로 해요. 손님이 몰리면 늘리고 한가해지면 다시 줄여서 비용도 아껴요. 디자인의 Scale은 크기 단계라 다른 말이에요.',p:'CPU가 70%를 넘으면 서버를 자동으로 늘리게 설정해줘',r:['Scaling','Traffic Spike'],l:2,o:1,u:'https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html',v:'u-server-auto-scaling'},
+ {en:'Horizontal Scaling',ko:'수평 확장 · 같은 서버를 더 늘림',d:'같은 서버를 여러 대로 늘려 일을 나눠 받는 것.',x:'Vertical Scaling은 한 대를 키우고, Horizontal Scaling은 같은 서버의 대수를 늘려요. 한 대가 멈춰도 나머지가 받아 주지만, 앞에서 나눠 줄 Load Balancer가 있어야 해요.',p:'서버를 한 대 더 늘려서 요청을 나눠 받게 해줘',r:['Scaling','Vertical Scaling'],l:2,o:1,u:'https://kubernetes.io/docs/concepts/workloads/autoscaling/',v:'u-server-horizontal-scaling'},
+ {en:'Vertical Scaling',ko:'수직 확장 · 서버 한 대를 더 크게',d:'서버 한 대의 CPU와 메모리를 더 크게 바꾸는 것.',x:'Horizontal Scaling은 대수를 늘리고, Vertical Scaling은 한 대의 CPU와 메모리를 키워요. 코드를 고칠 일이 적어 쉽지만, 한 대에 담을 수 있는 크기에는 끝이 있어요.',p:'서버 메모리가 모자라. 더 큰 사양으로 올리는 방법을 알려줘',r:['Scaling','Horizontal Scaling'],l:2,o:1,u:'https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/',v:'u-server-vertical-scaling'},
+ {en:'Round Robin',ko:'라운드 로빈 · 차례대로 나눠 주기',d:'요청을 서버마다 돌아가며 하나씩 나눠 주는 방식.',x:'Round Robin은 Least Connections와 달리 바쁜지는 보지 않고 차례대로 줘요. 서버 성능이 비슷하고 요청이 고르면 간단하고 잘 맞아요. Nginx는 따로 정하지 않으면 이 방식을 써요.',p:'로드 밸런서가 서버 3대에 차례대로 나눠 주게 설정해줘',r:['Load Balancer','Least Connections'],l:2,o:1,u:'https://nginx.org/en/docs/http/load_balancing.html',v:'u-server-round-robin'},
+ {en:'Least Connections',ko:'최소 연결 · 가장 한가한 서버에 주기',d:'지금 처리 중인 연결이 가장 적은 서버에 새 요청을 주는 방식.',x:'Round Robin은 차례대로 주고, Least Connections는 지금 덜 바쁜 서버를 골라서 줘요. 오래 걸리는 요청이 섞여 있을 때 한 서버에만 몰리지 않게 해요.',p:'오래 걸리는 요청이 많아. 한가한 서버로 보내게 least_conn으로 바꿔줘',r:['Load Balancer','Round Robin'],l:3,o:1,u:'https://nginx.org/en/docs/http/ngx_http_upstream_module.html#least_conn',v:'u-server-least-connections'},
+ {en:'Sticky Session',ko:'고정 세션 · 같은 사용자를 같은 서버로',d:'한 사용자의 요청을 계속 같은 서버로 보내는 방식.',x:'Sticky Session은 같은 사용자를 늘 같은 서버로 보내고, 백엔드의 Session Store는 세션을 한곳에 모아 어느 서버든 읽게 해요. 묶인 서버가 멈추면 로그인이 풀릴 수 있어요. 프론트엔드의 Position Sticky는 화면에 붙는 위치라 다른 말이에요.',p:'로그인이 자꾸 풀려. 서버가 여러 대일 때 세션을 어떻게 지킬지 알려줘',r:['Session','Session Store'],l:3,o:1,u:'https://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash',v:'u-server-sticky-session'},
+ {en:'Single Point of Failure',ko:'단일 장애점 · 하나만 멈춰도 전체가 멈추는 곳',d:'그 하나가 멈추면 서비스 전체가 멈추는 부분.',x:'Single Point of Failure는 하나뿐이라 약한 곳이고, Redundancy는 그곳을 두 겹으로 만들어 없애는 방법이에요. 서버를 여러 대 두어도 DB가 한 대뿐이면 거기가 단일 장애점이에요.',p:'우리 서비스에서 하나만 멈춰도 전체가 멈추는 곳을 찾아줘',r:['Redundancy','Failover'],l:2,o:1,u:'https://docs.aws.amazon.com/prescriptive-guidance/latest/resilience-analysis-framework/mitigation-strategies.html',v:'u-server-single-point-of-failure'},
+ {en:'Redundancy',ko:'이중화 · 같은 것을 둘 이상 둠',d:'하나가 멈춰도 버티도록 같은 것을 둘 이상 두는 것.',x:'Redundancy는 미리 여분을 두는 것이고, Failover는 멈췄을 때 그 여분으로 바꾸는 일이에요. 서버만이 아니라 DB, 전원, 지역까지 두 겹으로 둘 수 있어요.',p:'DB가 한 대뿐이야. 복제본을 두어 이중화해줘',r:['Failover','Single Point of Failure'],l:2,o:1,u:'https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html',v:'u-server-redundancy'},
+ {en:'Connection Draining',ko:'연결 정리 · 새 요청은 막고 하던 일만 끝냄',d:'서버를 빼기 전에 새 요청은 막고 하던 요청만 끝내게 하는 것.',x:'Graceful Shutdown은 앱이 하던 일을 마치고 꺼지는 것이고, Connection Draining은 로드 밸런서가 그 서버로 새 요청을 보내지 않는 일이에요. AWS 로드 밸런서는 기본으로 300초를 기다려 줘요. 배포의 Zero Downtime Deploy가 이 둘을 함께 써요.',p:'서버를 뺄 때 처리 중인 요청이 끊기지 않게 연결 정리를 설정해줘',r:['Graceful Shutdown','Load Balancer','Zero Downtime Deploy'],l:3,o:1,u:'https://docs.aws.amazon.com/elasticloadbalancing/latest/application/edit-target-group-attributes.html',v:'u-server-connection-draining'},
+ {en:'Capacity Planning',ko:'용량 계획 · 언제 얼마나 늘릴지 미리 계산',d:'늘어날 사용량을 내다보고 서버를 언제 얼마나 늘릴지 정하는 것.',x:'Monitoring은 지금 상태를 보고, Capacity Planning은 그 기록으로 앞으로 모자랄 때를 내다봐요. 지금 추세라면 몇 달 뒤 한도에 닿는지 계산해 미리 늘려요. 기획의 Planning과는 다른 말이에요.',p:'지난 6개월 CPU 기록을 보고 언제 서버를 늘려야 할지 계산해줘',r:['Monitoring','Scaling'],l:3,o:1,u:'https://sre.google/sre-book/introduction/',v:'u-server-capacity-planning'},
+]);
+T('server','res',[
+ {en:'CPU Usage',ko:'CPU 사용률 · 계산 장치가 얼마나 바쁜지',d:'CPU가 일하는 시간이 몇 퍼센트인지 나타낸 값.',x:'CPU Usage는 계산이 얼마나 바쁜지이고, Memory Usage는 작업 공간을 얼마나 차지했는지예요. 잠깐 치솟는 건 흔하지만 오래 높게 머물면 서버를 늘리거나 무거운 코드를 찾아야 해요.',p:'CPU 사용률이 계속 90%야. 무엇이 CPU를 쓰는지 찾아줘',r:['Monitoring'],l:1,o:1,u:'https://man7.org/linux/man-pages/man1/top.1.html',v:'u-server-cpu-usage'},
+ {en:'Memory Usage',ko:'메모리 사용량 · 작업 공간을 얼마나 쓰는지',d:'서버의 메모리(작업 공간)를 얼마나 쓰고 있는지 나타낸 값.',x:'Memory Usage는 지금 쓰는 양이고, 성능의 Memory Leak은 쓰고 돌려주지 않아 계속 늘어나는 문제예요. 꾸준히 평평하면 정상이고, 오르기만 하면 새는 곳을 의심해요.',p:'서버 메모리 사용량이 계속 늘어. 새는 곳이 있는지 확인해줘',r:['Monitoring','Memory Leak'],l:1,o:1,u:'https://man7.org/linux/man-pages/man1/free.1.html',v:'u-server-memory-usage'},
+ {en:'Out of Memory',ko:'메모리 부족 · 한도를 넘어 강제로 꺼짐',d:'메모리를 한도보다 더 쓰려다 프로그램이 강제로 꺼지는 것.',x:'Memory Usage는 쓰는 양이고, Out of Memory는 그 양이 한도를 넘어 꺼진 사건이에요. 한도를 넘으면 강제로 꺼지고, Docker 컨테이너면 exit code 137로 보여요. 한도만 늘리면 늦게 꺼질 뿐이라 버그의 Memory Leak Bug부터 찾아요.',p:'컨테이너가 exit code 137로 꺼져. 메모리 부족인지 확인해줘',r:['Memory Usage','Memory Leak','Memory Leak Bug'],l:3,o:1,u:'https://docs.docker.com/engine/containers/resource_constraints/',v:'u-server-out-of-memory'},
+ {en:'Disk Full',ko:'디스크 가득 참 · 저장 공간이 바닥남',d:'저장 공간이 꽉 차서 더는 파일을 쓸 수 없는 상태.',x:'Disk Full은 저장 공간이 바닥난 상태이고, Log Rotation은 옛 로그를 묶고 지워 그렇게 되지 않게 막는 일이에요. 가득 차면 No space left on device 오류가 나고 로그도 업로드도 저장되지 않아요.',p:'No space left on device 오류가 나. 무엇이 디스크를 채웠는지 찾아줘',r:['Log Rotation'],l:2,o:1,u:'https://man7.org/linux/man-pages/man1/df.1.html',v:'u-server-disk-full'},
+ {en:'Access Log',ko:'접근 로그 · 누가 무엇을 요청했는지',d:'서버에 들어온 요청을 한 줄씩 적어 둔 기록.',x:'Access Log는 들어온 요청을 모두 적고, Error Log는 고장 난 일만 적어요. 둘 다 Server Log의 한 종류이고, 어디서 무엇을 요청해 몇 번 응답을 받았는지가 한 줄에 남아요.',p:'접근 로그에서 404가 많이 난 주소를 찾아줘',r:['Server Log','Error Log'],l:2,o:1,u:'https://nginx.org/en/docs/http/ngx_http_log_module.html',v:'u-server-access-log'},
+ {en:'Error Log',ko:'오류 로그 · 무엇이 고장 났는지',d:'서버에서 생긴 오류와 경고를 적어 둔 기록.',x:'Error Log는 고장 난 일만 적고, Access Log는 모든 요청을 적어요. 500 오류가 나면 같은 시각의 오류 로그부터 보면 원인이 보여요.',p:'500 에러가 난 시각의 오류 로그를 보고 원인을 찾아줘',r:['Server Log','Access Log'],l:2,o:1,u:'https://nginx.org/en/docs/ngx_core_module.html#error_log',v:'u-server-error-log'},
+ {en:'Log Level',ko:'로그 레벨 · 기록의 중요도 단계',d:'로그 한 줄마다 붙이는 중요도 단계(DEBUG, INFO, WARN, ERROR 등).',x:'Log Level은 기록 한 줄의 중요도이고, 백엔드의 Logging은 기록을 남기는 일 자체예요. 운영에서는 보통 INFO 이상만 남겨요(예). 디자인의 Heading Levels와는 다른 말이에요.',p:'운영 서버는 INFO 이상만 남기고 개발에서는 DEBUG도 보이게 해줘',r:['Server Log','Logging'],l:2,o:1,u:'https://www.rfc-editor.org/rfc/rfc5424',v:'u-server-log-level'},
+ {en:'Log Rotation',ko:'로그 교체 · 옛 로그를 묶고 지우기',d:'로그 파일을 날짜나 크기마다 새로 바꾸고 옛것은 묶거나 지우는 것.',x:'Disk Full은 공간이 바닥난 상태이고, Log Rotation은 옛 로그를 압축하고 오래된 것을 지워 그걸 막는 일이에요. 리눅스에서는 logrotate가 이 일을 해요. 보안의 Key Rotation은 열쇠를 바꾸는 일이라 다른 말이에요.',p:'로그가 디스크를 채워. 7일치만 남기고 압축하게 logrotate를 설정해줘',r:['Server Log','Disk Full'],l:2,o:1,u:'https://man7.org/linux/man-pages/man8/logrotate.8.html',v:'u-server-log-rotation'},
+ {en:'Alert',ko:'알림 · 기준을 넘으면 사람에게 알림',d:'정해 둔 기준을 넘으면 사람에게 메시지를 보내는 것.',x:'Monitoring은 숫자를 계속 지켜보고, Alert는 기준을 넘었을 때 사람을 불러요. 배포의 Uptime Monitor는 켜져 있는지만 보고, 배포의 Status Page는 사용자에게 상태를 알려요. 보안의 Security Alert는 침입 같은 보안 경고라 다른 말이에요.',p:'CPU가 5분 넘게 90%를 넘으면 메신저로 알림이 오게 해줘',r:['Monitoring','Status Page'],l:2,o:1,u:'https://prometheus.io/docs/alerting/latest/overview/',v:'u-server-alert'},
+ {en:'Process Manager',ko:'프로세스 관리자 · 앱이 죽으면 다시 켜 줌',d:'앱을 켜 두고, 죽으면 저절로 다시 켜 주는 프로그램.',x:'Restart는 다시 켜는 일 자체이고, Process Manager는 앱이 죽은 걸 알아채고 그 일을 저절로 해 줘요. Cron Job은 정해진 시각에 일을 돌리는 것이라 달라요. 터미널의 Process는 실행 중인 프로그램 하나를 말해요.',p:'Node 앱이 죽으면 저절로 다시 켜지게 PM2로 설정해줘',r:['Restart','Process'],l:2,o:1,u:'https://pm2.keymetrics.io/docs/usage/restart-strategies/',v:'u-server-process-manager'},
+ {en:'Swap Memory',ko:'스왑 메모리 · 디스크를 메모리처럼 씀',d:'메모리가 모자랄 때 디스크 일부를 메모리처럼 빌려 쓰는 공간.',x:'Memory Usage는 진짜 메모리를 쓰는 양이고, Swap Memory는 모자랄 때 디스크를 빌려 쓰는 거예요. 디스크는 메모리보다 훨씬 느려서 스왑을 많이 쓰면 서버가 느려져요. 스왑까지 다 차면 Out of Memory가 나요.',p:'서버가 갑자기 느려졌어. 스왑을 쓰고 있는지 확인해줘',r:['Memory Usage','Out of Memory'],l:3,o:1,u:'https://wiki.archlinux.org/title/Swap',v:'u-server-swap-memory'},
+]);
+T('server','infra',[
+ {en:'Virtual Machine',ko:'가상 머신 · 컴퓨터 안의 또 다른 컴퓨터',d:'실제 컴퓨터 한 대를 나눠 여러 대처럼 쓰는 가상의 컴퓨터.',x:'Virtual Machine은 운영체제까지 통째로 나눠 쓰고, Docker 컨테이너는 운영체제를 같이 쓰며 앱만 나눠요. VPS는 이런 가상 머신 한 대를 빌려 주는 상품이에요. 프론트엔드의 Container는 화면을 감싸는 상자라 다른 말이에요.',p:'가상 머신과 Docker 컨테이너 중 무엇이 맞는지 비교해줘',r:['VPS','Docker'],l:2,o:1,u:'https://aws.amazon.com/what-is/virtual-machine/',v:'u-server-virtual-machine'},
+ {en:'Server Instance',ko:'서버 인스턴스 · 빌린 서버 한 대',d:'클라우드에서 빌려 켠 서버 한 대.',x:'Cloud는 남의 컴퓨터를 빌려 쓰는 방식이고, Server Instance는 그렇게 빌려 켠 서버 한 대예요. 보통 Virtual Machine이라 켜고 끄고 크기를 바꾸기 쉬워요. 디자인의 Instance는 컴포넌트를 찍어 쓴 복사본이라 다른 말이에요.',p:'서버 인스턴스를 하나 더 만들고 같은 설정으로 띄워줘',r:['Cloud','Virtual Machine'],l:2,o:1,u:'https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html',v:'u-server-server-instance'},
+ {en:'Region',ko:'리전 · 데이터센터가 모인 지역',d:'클라우드 회사가 데이터센터를 모아 둔 지역(서울, 도쿄 등).',x:'Region은 서로 멀리 떨어진 지역이고, Availability Zone은 한 Region 안에서 전원과 네트워크를 따로 쓰는 데이터센터 묶음이에요. 사용자와 가까운 Region을 고르면 응답이 빨라요.',p:'한국 사용자가 많아. 서울 리전에 서버를 두게 바꿔줘',r:['Availability Zone'],l:2,o:1,u:'https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html',v:'u-server-region'},
+ {en:'Availability Zone',ko:'가용 영역 · 지역 안의 따로 떨어진 데이터센터',d:'한 지역 안에서 전원과 네트워크를 따로 쓰는 데이터센터 묶음.',x:'Region은 떨어진 지역이고, Availability Zone은 그 안에서 전원과 네트워크를 따로 쓰는 데이터센터 묶음이에요. 서버를 여러 구역에 나눠 두면 한 구역이 멈춰도 다른 구역이 받아요.',p:'서버를 가용 영역 두 곳에 나눠 두게 설정해줘',r:['Region','Redundancy'],l:3,o:1,u:'https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html',v:'u-server-availability-zone'},
+ {en:'Object Storage',ko:'오브젝트 스토리지 · 파일을 키로 담는 저장소',d:'파일을 폴더 대신 이름(키)으로 담고 꺼내는 클라우드 저장소.',x:'Storage는 데이터를 두는 곳 전체이고, Object Storage는 파일 하나하나를 키로 담는 방식이에요. 사진이나 백업처럼 큰 파일을 싸게 많이 둘 때 써요. 웹사이트의 Local Storage는 브라우저 안의 작은 저장 공간이라 다른 말이에요.',p:'업로드한 사진을 서버 디스크 대신 오브젝트 스토리지에 저장해줘',r:['Storage'],l:2,o:1,u:'https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html',v:'u-server-object-storage'},
+ {en:'IaaS',ko:'서비스형 인프라 · 서버만 빌림',d:'서버와 네트워크 같은 바탕만 빌리고 나머지는 직접 관리하는 클라우드.',x:'IaaS는 서버만 빌리고 운영체제부터 직접 관리하고, PaaS는 앱만 올리면 나머지를 회사가 맡아요. 어디까지 내가 관리하느냐로 나눠요(NIST SP 800-145).',p:'IaaS와 PaaS 중 우리 서비스에 맞는 것을 비교해줘',r:['PaaS','SaaS','Cloud'],l:2,o:1,u:'https://csrc.nist.gov/pubs/sp/800/145/final',v:'u-server-iaas'},
+ {en:'PaaS',ko:'서비스형 플랫폼 · 앱만 올림',d:'앱만 올리면 서버와 운영체제는 회사가 관리해 주는 클라우드.',x:'IaaS는 운영체제까지 내가 관리하고, PaaS는 앱만 내가 맡고 나머지는 회사가 맡아요. Serverless는 여기서 더 나아가 서버를 켜 두지도 않고 요청이 올 때만 돌아가요.',p:'앱을 PaaS에 올려서 서버 관리 없이 배포해줘',r:['IaaS','SaaS','Serverless'],l:2,o:1,u:'https://csrc.nist.gov/pubs/sp/800/145/final',v:'u-server-paas'},
+ {en:'SaaS',ko:'서비스형 소프트웨어 · 다 된 프로그램을 씀',d:'다 만들어진 프로그램을 빌려 쓰기만 하는 클라우드(메일, 문서 도구 등).',x:'PaaS는 내 앱을 올리는 곳이고, SaaS는 남이 다 만든 프로그램을 쓰기만 하는 거예요. 백엔드의 BaaS는 로그인이나 DB 같은 백엔드 기능을 빌리는 것이라 그 중간이에요.',p:'직접 만들지 말고 쓸 만한 SaaS가 있는지 찾아줘',r:['IaaS','PaaS'],l:1,o:1,u:'https://csrc.nist.gov/pubs/sp/800/145/final',v:'u-server-saas'},
+ {en:'On-Premise',ko:'온프레미스 · 우리 건물에 둔 서버',d:'서버를 직접 사서 우리 건물 안에 두고 관리하는 방식.',x:'Cloud는 남의 서버를 빌리고, On-Premise는 서버를 직접 사서 우리 건물에 둬요. Self-hosting은 프로그램을 직접 운영한다는 뜻이라 클라우드 위에서도 할 수 있어요. 웹사이트의 Hosting은 사이트를 올려 둘 자리를 빌리는 일이에요.',p:'온프레미스 서버와 클라우드의 비용 차이를 비교해줘',r:['Cloud','Self-hosting','Hosting'],l:2,o:1,u:'https://aws.amazon.com/what-is/cloud-vs-on-premises/',v:'u-server-on-premise'},
+ {en:'Managed Service',ko:'관리형 서비스 · 운영을 회사가 맡음',d:'백업, 업데이트, 장애 복구 같은 운영을 클라우드 회사가 맡아 주는 서비스.',x:'Self-hosting은 운영을 내가 다 하고, Managed Service는 백업과 업데이트, 장애 복구를 회사가 맡아요. 대신 쿼리와 데이터는 여전히 내 책임이에요.',p:'DB를 직접 운영하지 말고 관리형 서비스로 옮기는 방법을 알려줘',r:['Self-hosting','PaaS'],l:2,o:1,u:'https://aws.amazon.com/compliance/shared-responsibility-model/',v:'u-server-managed-service'},
+]);
 T('server','tip',[
  {en:'Development Environment',ko:'개발 환경',d:'만들고 시험하는 내 컴퓨터 환경.',x:'개발 환경은 개발·스테이징·운영 중에서 마음껏 망가뜨려도 되는 곳이에요. 내 컴퓨터에서 돌리고, 실제 사용자 데이터는 쓰지 않아요.',p:'내 컴퓨터 개발 환경을 처음부터 세팅하는 순서를 알려줘',r:['Staging','Production'],l:1,o:0,v:'u-server-development-environment'},
  {en:'Staging',ko:'스테이징 · 리허설 서버',d:'운영과 똑같이 꾸민 시험 서버. 올리기 전에 마지막 확인.',x:'스테이징은 운영과 같게 만든 연습장이라 개발 환경에서 못 잡은 설정·버전 문제를 찾아요. 개발 환경은 내 컴퓨터, 스테이징은 운영과 똑같이 꾸민 서버라는 점이 달라요.',p:'스테이징에 먼저 올려서 확인해줘',r:['Production'],l:2,o:0,v:'u-server-staging'},
@@ -8511,6 +8548,62 @@ Object.assign(D,{
   'u-server-config-reload':{h:bkStack(term([{c:'nginx -t'}, {o:'nginx: … syntax is ok'}, {o:'nginx: … test is successful'}, {c:'nginx -s reload'}]), '<p class="mk-dgp">끊지 않고 새 설정을 읽어요</p>'), cap:'출력은 줄였어요(Nginx 예). 서버에서는 보통 sudo를 붙여요', m:1},
   'u-server-certificate-renewal':{h:track([{t:'인증서 발급', s:'done', w:'1일째'}, {t:'자동 갱신', s:'done', w:'약 60일째'}, {t:'새 만료일', s:'done', w:'다시 90일'}]), cap:'90일 인증서 예시예요. 수명은 줄어드는 중이에요', m:1},
   'u-server-client-body-size-limit':{h:seq(['브라우저', 'Nginx', '앱'], [{from:0, to:1, t:'20MB 업로드'}, {from:1, to:0, t:'413 너무 큼', err:1}]), cap:'앱까지 가지도 않아요, 한도는 예시 10MB', m:1},
+});
+/* 상태 그림: 확장·메모리 부족·책임 층. 키·n이 틀리면 오류를 던진다(Task 3 버튼이 쓴다) */
+const SAUTO = {dawn: {n: 1, got: [1], cpu: [15, 12, 10, 12, 14, 15], say: '손님이 적어 1대로 충분해요'}, day: {n: 2, got: [3, 3], cpu: [40, 45, 50, 48, 45, 42], say: '2대가 나눠 받아 CPU가 70% 밑이에요'},
+  event: {n: 4, got: [3, 3, 2, 2], cpu: [45, 60, 85, 90, 65, 55], mark: {i: 2, n: '2대 더 켬'}, say: 'CPU가 70%를 넘어 2대를 더 켰어요'}};
+const sautoK = k => { if (!Object.hasOwn(SAUTO, k)) throw new Error('sauto: 없는 상태 ' + k); return SAUTO[k]; };
+const sauto = k => { const {n, got, cpu, mark} = sautoK(k);
+  return bkStack(srvmap({front:'LB', servers:Array.from({length:n}, (_, i) => ({n:'서버 ' + (i + 1), got:got[i], st:k === 'event' && i >= 2 ? 'new' : 'ok'})), still:true}),
+    metric({lines:[{n:'CPU', pts:cpu}], x:['0분', '10분', '20분', '30분', '40분', '50분'], unit:'%', limit:{v:70, n:'늘림 기준'}, mark})); };
+const sautoSay = k => sautoK(k).say;
+const SOOM = {small: {limit: 512, pts: [200, 300, 400, 512, 200, 300], mark: {i: 3, n: '강제 종료'}, say: '한도에 닿아 강제 종료됐어요(exit code 137, 예)'},
+  big: {limit: 1024, pts: [200, 350, 500, 650, 800, 1024], mark: {i: 5, n: '강제 종료'}, say: '한도만 늘리면 늦게 죽을 뿐이에요'},
+  fixed: {limit: 512, pts: [200, 220, 210, 220, 215, 220], say: '새는 곳을 고쳐 평평해요'}};
+const soomK = k => { if (!Object.hasOwn(SOOM, k)) throw new Error('soom: 없는 상태 ' + k); return SOOM[k]; };
+const soom = k => { const {limit, pts, mark} = soomK(k);
+  const steps = k === 'fixed' ? [{t:'메모리 일정', s:'done'}, {t:'계속 실행 중', s:'now'}]
+    : [{t:'메모리 차오름', s:'done'}, {t:'한도에 닿음', s:'fail'}, {t:'강제 종료(137)', s:'fail'}, {t:'다시 켬', s:'done'}];
+  return bkStack(metric({lines:[{n:'메모리', pts}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], max:1200, unit:'MB', limit:{v:limit, n:'최대'}, mark}), track(steps, {still:true})); };
+const soomSay = k => soomK(k).say;
+const SLAYER = ['앱', '런타임', '운영체제', '서버'];
+const slayer = n => { if (!Number.isInteger(n) || n < 0 || n > 3) throw new Error('slayer: n은 0~3 정수 ' + n);
+  return bkRows(...SLAYER.map((t, i) => [t, i < n ? '내가' : '회사가'])); };
+/* server: 새 카드 scale·res·infra — 출처 확인(2026-11): nginx.org load balancing(round-robin 기본·least_conn·ip_hash), AWS(Regions and AZs 전원·네트워크 따로, EC2 Auto Scaling,
+   ALB deregistration delay 기본 300초), NIST SP 800-145(IaaS·PaaS·SaaS), Docker resource constraints(OOM)·exit code 137(128+9), man7 top·free·df·logrotate(8), ArchWiki Swap(디스크는 느림),
+   RFC 5424(심각도 8단계), PM2 restart strategies, AWS S3 object keys, Kubernetes autoscaling(수평·수직). 이름·숫자·시각은 예시, IP는 문서용 대역 */
+Object.assign(D,{
+  'u-server-auto-scaling':{h:sauto('event')},
+  'u-server-horizontal-scaling':{h:srvmap({front:'LB', servers:[{n:'서버 1', got:2}, {n:'서버 2', got:2}, {n:'서버 3', got:2}, {n:'서버 4', st:'new', got:1}], note:'같은 서버를 한 대 더'}), m:1},
+  'u-server-vertical-scaling':{h:bkStack(bkBox('지금', 'CPU 2 · 메모리 4GB', '예시'), bkBox('키운 뒤', 'CPU 8 · 메모리 16GB', '예시'))},
+  'u-server-round-robin':{h:bkRows(['요청 1', '서버 1'], ['요청 2', '서버 2'], ['요청 3', '서버 3'], ['요청 4', '서버 1']), cap:'차례대로 돌아가며 줘요'},
+  'u-server-least-connections':{h:bkRows(['서버 1 처리 중 5', ''], ['서버 2 처리 중 1', '다음 요청'], ['서버 3 처리 중 4', '']), cap:'숫자는 예시예요'},
+  'u-server-sticky-session':{h:srvmap({user:'민수', front:'LB', servers:[{n:'서버 1', got:1}, {n:'서버 2', got:3, tag:'민수'}, {n:'서버 3', got:1}], note:'민수 요청은 늘 서버 2로'}), m:1},
+  'u-server-single-point-of-failure':{h:srvmap({front:'LB', servers:[{n:'서버 1', got:1}, {n:'서버 2', got:1}, {n:'서버 3', got:1}], db:{n:'DB', st:'down'}, note:'DB 하나가 멈추면 전부 멈춰요'}), m:1},
+  'u-server-redundancy':{h:bkPills('두 겹으로 두기', ['서버', 'DB 복제', '전원', '지역'])},
+  'u-server-connection-draining':{h:srvmap({front:'LB', servers:[{n:'서버 1', got:3}, {n:'서버 2', st:'drain', got:2}, {n:'서버 3', got:3}], note:'새 요청은 안 받고 하던 것만'}), m:1},
+  'u-server-capacity-planning':{h:metric({lines:[{n:'CPU', pts:[35, 42, 50, 58, 66, 74]}], x:['1월', '2월', '3월', '4월', '5월', '6월'], unit:'%', limit:{v:80, n:'늘릴 때'}}), cap:'달마다 평균(예시)'},
+  'u-server-cpu-usage':{h:metric({lines:[{n:'CPU', pts:[20, 25, 30, 95, 40, 25]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%', mark:{i:3, n:'치솟음'}}), cap:'숫자는 예시예요'},
+  'u-server-memory-usage':{h:metric({lines:[{n:'메모리', pts:[58, 60, 61, 59, 60, 61]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%'}), cap:'꾸준하면 정상이에요'},
+  'u-server-out-of-memory':{h:soom('small')},
+  'u-server-disk-full':{h:bkRows(['디스크 사용 100%', '가득'], ['No space left on device', '예'])},
+  'u-server-access-log':{h:bkRows(['203.0.113.5 GET /api 200', ''], ['203.0.113.5 GET /login 302', ''], ['203.0.113.5 GET /x 404', '']), cap:'주소는 예시예요'},
+  'u-server-error-log':{h:bkRows(['14:04 ERROR DB 연결 실패', ''], ['14:09 ERROR 파일 없음', '']), cap:'시각은 예시예요'},
+  'u-server-log-level':{h:bkRows(['DEBUG', '개발용'], ['INFO', '보통'], ['WARN', '주의'], ['ERROR', '고장']), cap:'운영에서는 보통 INFO부터 남겨요(예)'},
+  'u-server-log-rotation':{h:bkRows(['app.log', '오늘'], ['app.log.1.gz', '어제'], ['app.log.7.gz', '다음에 지움'])},
+  'u-server-alert':{h:bkBox('알림', 'CPU 90% 넘음, 5분째(예시)', '메신저로 보냄')},
+  'u-server-process-manager':{h:track([{t:'앱 실행', s:'done'}, {t:'앱 죽음', s:'fail'}, {t:'관리자가 알아챔', s:'done'}, {t:'다시 켬', s:'done'}]), m:1},
+  'u-server-swap-memory':{h:metric({lines:[{n:'메모리', pts:[70, 85, 98, 99, 99, 99]}, {n:'스왑', pts:[0, 0, 10, 35, 60, 80]}], x:['14:00', '14:10', '14:20', '14:30', '14:40', '14:50'], unit:'%'}), cap:'디스크를 메모리처럼 써서 느려요'},
+  'u-server-virtual-machine':{h:bkStack(bkPills('가상 머신 1', ['앱', '운영체제']), bkPills('가상 머신 2', ['앱', '운영체제']), bkBox('실제 컴퓨터', '한 대를 나눠 씀'))},
+  'u-server-server-instance':{h:bkRows(['web-1', '실행 중'], ['web-2', '실행 중'], ['web-3', '꺼짐']), cap:'이름은 예시예요'},
+  'u-server-region':{h:bkPills('지역 예', ['서울', '도쿄', '버지니아']), cap:'사용자와 가까운 곳을 고르면 빨라요'},
+  'u-server-availability-zone':{h:srvmap({servers:[{n:'서버 1', got:3, tag:'구역 a'}, {n:'서버 2', st:'down', tag:'구역 b'}, {n:'서버 3', got:3, tag:'구역 c'}], note:'구역 b가 멈춰도 a·c가 받아요'}), m:1},
+  'u-server-object-storage':{h:bkRows(['photos/1.jpg', '2MB'], ['photos/2.jpg', '3MB'], ['backup.zip', '1GB']), cap:'키와 크기는 예시예요'},
+  'u-server-iaas':{h:slayer(3)},
+  'u-server-paas':{h:slayer(1)},
+  'u-server-saas':{h:bkStack(slayer(0), '<p class="mk-dgp">나는 쓰기만 해요</p>')},
+  'u-server-on-premise':{h:bkStack(bkBox('우리 건물 서버', '직접 사고 관리'), bkBox('클라우드', '빌려 씀'))},
+  'u-server-managed-service':{h:bkRows(['백업', '회사가'], ['업데이트', '회사가'], ['장애 복구', '회사가'], ['쿼리·데이터', '내가'])},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
