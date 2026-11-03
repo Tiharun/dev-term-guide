@@ -95,6 +95,9 @@ const EXPECT = {   // sec: [영문명…]  → 그 하위항목에 있어야 할
   'front/build': ['Vite', 'Webpack', 'Babel', 'Transpile', 'ES Module', 'Sass', 'PostCSS', 'CSS Modules', 'CSS-in-JS', 'Storybook'],
   'back/arch': ['Node.js', 'Backend Framework', 'Route Handler', 'Controller', 'Service Layer', 'Repository Pattern', 'MVC', 'Stateless vs Stateful', 'API Gateway', 'BFF', 'BaaS'],
   'back/data': ['Payload', 'Content-Type', 'Serialization', 'DTO', 'Error Response', 'Schema Validation', 'Multipart Form Data', 'UUID', 'Cursor vs Offset Pagination', 'API Versioning', 'OpenAPI', 'Request ID'],
+  'back/api': ['Response Header', 'Response Body'],
+  'back/job': ['Worker', 'Pub/Sub', 'Event-driven Architecture', 'Concurrency', 'Lock', 'Batch Processing', 'Dead Letter Queue', 'Exponential Backoff', 'Server-Sent Events', 'Long Polling', 'Streaming Response', 'Circuit Breaker'],
+  'back/auth': ['Access Token', 'Bearer Token', 'OAuth Scope', 'RBAC', 'Cookie vs Token', 'Session Store', 'Redirect URI', 'Webhook Signature', 'Service Account'],
   'plan/tip': ['TL;DR', 'Action Item', '5 Whys', 'Out of Scope', 'Decision Log', 'Write for the Reader', 'Keep Docs Updated', 'Show with Example'],
 };
 const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 18, device: 16, media: 21, basic: 15, core: 14, motion: 31, adv: 19, app: 19, tool: 23, font: 27, color: 24, tip: 16,
@@ -104,7 +107,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
   'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 15, 'front/build': 10, 'front/tip': 9,
-  'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 8, 'back/arch': 11, 'back/data': 12, 'back/job': 0, 'back/auth': 0, 'back/tip': 8 };    // sec: 카드 수
+  'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 10, 'back/arch': 11, 'back/data': 12, 'back/job': 12, 'back/auth': 9, 'back/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
   'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
@@ -384,7 +387,7 @@ const SYM_FRONT = ['CSS가 다른 규칙에 밀려 적용이 안 돼요', '안�
 check('symcount', () => g.SYMPTOMS.length !== 181 ? 'length ' + g.SYMPTOMS.length
   : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1506 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
+check('total', () => g.TERMS.length === 1529 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
