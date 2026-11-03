@@ -7674,6 +7674,7 @@ const bkRows = (...xs) => `<ul class="mk-bkr">${xs.map(([t, k]) => `<li><code>${
 const bkPills = (n, xs, k) => `<div class="mk-bkp"><b>${esc(n)}</b>${xs.map(x => `<span>${esc(x)}</span>`).join('')}${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
 /* back: 직접 조작 상태 함수(계획서 ②가 버튼을 붙인다). 값은 예시 */
 const BRL = {max: 5, win: '1분'};
+const BRL_RESET = `시간이 지나 횟수를 비웠어요. 다시 ${BRL.max}번 보낼 수 있어요`;
 const brateOk = sent => { if (!Number.isInteger(sent) || sent < 0) throw new Error('brate: 보낸 수는 0 이상의 정수'); };
 const brate = sent => {
   brateOk(sent);
@@ -7693,6 +7694,7 @@ const bauthz = role => {
 const bauthzSay = role => (bauthzOk(role), role === '관리자') ? '관리자라서 지울 수 있어요. 200이에요' : '로그인은 됐지만 권한이 없어요. 403이에요';
 /* back: 직접 조작 상태 함수 2(캐시·멱등). 값은 예시 */
 const BCK = {miss: 'DB까지 갔다 옴 · 느림(예시 300ms)', hit: '캐시에 있음 · 빠름(예시 5ms)'};
+const BCK_CLEAR = '캐시를 비웠어요. 다음 요청은 DB까지 가요';
 const bcacheOk = log => { if (!Array.isArray(log) || log.some(x => !Object.hasOwn(BCK, x))) throw new Error('bcache: 기록은 miss·hit만'); };
 const bcache = log => {
   bcacheOk(log);
@@ -7719,7 +7721,12 @@ Object.assign(D, {
     cap:'이 방식(인가 코드)에서는 토큰이 브라우저를 거치지 않아요'},
   'u-back-microservices':{h:seq(['주문', '결제', '알림'], [{from:0, to:1, t:'결제 요청'}, {from:1, to:0, t:'완료'}, {from:0, to:2, t:'알림 보내기'}]), m:1, cap:'서비스마다 따로 만들고 따로 배포해요'},
   'u-back-monolith':{h:bkStack(`<div class="mk-bkmo">${bkPills('앱 하나', ['회원', '주문', '결제'])}</div>`, whelp('하나만 고쳐도 한 번에 배포해요')), cap:'기능이 모두 한 프로그램 안에 있어요'},
-  'u-back-cache':{h:bcache(['miss', 'hit']), cap:'같은 요청이 다시 오면 캐시에서 바로 꺼내요'},
+  'u-back-cache':{h:`<div class="mk-mobox">${bcache([])}</div><div class="mk-tkeys"><button type="button" class="mk-tkey">요청 보내기</button><button type="button" class="mk-tkey">캐시 비우기</button></div><span class="mk-hint" aria-live="polite">${bcacheSay([])}</span>`,
+    cap:'두 번 보내 보고, 캐시를 비운 뒤 다시 보내 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], by = t => ks.find(x => x.textContent === t);
+      const log = []; let has = false;
+      by('요청 보내기').addEventListener('click', () => { log.push(has ? 'hit' : 'miss'); has = true; b.innerHTML = bcache(log); psay(h, bcacheSay(log)); });
+      by('캐시 비우기').addEventListener('click', () => { has = false; psay(h, BCK_CLEAR); }); }},
   'u-back-orm':{h:pair(fcss('user.js', 'User.find({ id: 1 })'), fcss('보내는 SQL', 'SELECT * FROM users', 'WHERE id = 1')), cap:'ORM이 코드를 SQL로 바꿔 DB에 보내요(예시 문법)'},
   'u-back-serverless-function':{h:track([{t:'요청 옴', s:'done', w:'POST /resize'}, {t:'함수 켜짐', s:'done', w:'필요할 때 켜져요'}, {t:'실행', s:'done', w:'사진 줄이기'}, {t:'꺼짐', s:'done', w:'다음 요청까지 쉬어요'}]), m:1},
   'u-back-request-header':{h:httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json', 'Authorization: Bearer …'], body:['{', '  "title": "첫 글"', '}'], hl:['h0', 'h1']}), cap:'요청에 붙는 부가 정보(형식·로그인 토큰 등)예요'},
@@ -7736,7 +7743,13 @@ Object.assign(D, {
   'u-back-logging':{h:term([{o:'10:02:11 GET /posts 200'}, {o:'10:02:14 POST /pay 201'}, {e:'10:02:20 POST /pay 500'}], {title:'서버 로그(예시)', end:false}), m:1, cap:'시각·요청·결과를 한 줄씩 남겨요'},
   'u-back-error-handling':{h:vs('처리 없음', bkBox('화면', '하얗게 멈춤', '실패'), '처리함', bkBox('화면', '잠시 뒤 다시 시도해 주세요')), cap:'오류가 나도 사용자에게 다음 할 일을 알려요'},
   'u-back-try-catch':{h:ide(['try {', '  await pay();', '} catch (e) {', '  log(e.message);', '}'], [{l:2, out:[{t:'결제 실패', dim:1}]}, {l:4, out:['오류 남김']}]), m:1},
-  'u-back-idempotent':{h:vs('POST /posts', bidem('POST', 3), 'PUT /posts/7', bidem('PUT', 3)), cap:'같은 요청을 여러 번 보내도 결과가 같으면 멱등이에요'},
+  'u-back-idempotent':{h:`<div class="mk-mobox">${bidem('POST', 0)}</div><div role="group" aria-label="메서드 고르기">${tpick(['POST', 'PUT'], 'POST')}</div><div class="mk-tkeys"><button type="button" class="mk-tkey">다시 보내기</button><button type="button" class="mk-tkey">처음으로</button></div><span class="mk-hint" aria-live="polite">${bidemSay('POST', 0)}</span>`,
+    cap:'POST와 PUT을 골라 여러 번 보내 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], pk = ks.filter(x => x.dataset.k), by = t => ks.find(x => !x.dataset.k && x.textContent === t);
+      let m = 'POST', n = 0;
+      const go = () => { b.innerHTML = bidem(m, n); psay(h, bidemSay(m, n)); pk.forEach(y => y.setAttribute('aria-pressed', y.dataset.k === m)); };
+      pk.forEach(x => x.addEventListener('click', () => { m = x.dataset.k; n = 0; go(); }));
+      by('다시 보내기').addEventListener('click', () => { n += 1; go(); }); by('처음으로').addEventListener('click', () => { n = 0; go(); }); }},
   'u-back-background-job':{h:seq(['브라우저', '서버', '워커'], [{from:0, to:1, t:'사진 올리기'}, {from:1, to:2, t:'변환 일감 넣기'}, {from:1, to:0, t:'202 접수됨'}, {from:2, to:2, t:'썸네일 만들기'}]), m:1,
     cap:'접수만 하고 일은 워커가 나중에 해요'},
   'u-back-mock-data':{h:pair(fcss('mock.json', '[{"name": "테스트1"},', '{"name": "테스트2"}]'), wcard('회원 목록', whelp('테스트1'), whelp('테스트2'), '<b class="mk-dtw">가짜 데이터</b>')),
@@ -7761,12 +7774,22 @@ Object.assign(D, {
   'u-back-rest-api':{h:doc([{tb:[['요청', '하는 일'], ['GET /posts', '글 목록'], ['POST /posts', '새 글'], ['GET /posts/7', '7번 글'], ['DELETE /posts/7', '7번 글 지우기']]}, {p:'주소는 대상(글), 메서드는 할 일이에요'}], {title:'API 주소(예시)'}), m:1},
   'u-back-crud':{h:track([{t:'Create', s:'done', w:'POST 만들기'}, {t:'Read', s:'done', w:'GET 읽기'}, {t:'Update', s:'done', w:'PATCH 고치기'}, {t:'Delete', s:'done', w:'DELETE 지우기'}]), m:1},
   'u-back-authentication':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'로그인 정보'}, {from:1, to:1, t:'비밀번호 확인'}, {from:1, to:0, t:'로그인됨'}]), m:1},
-  'u-back-authorization':{h:`<div class="mk-bkh"><b class="mk-dtw">역할: 일반 회원(예시)</b>${bauthz('일반 회원')}</div>`, cap:'로그인은 됐어도 역할에 따라 결과가 달라요'},
+  'u-back-authorization':{h:`<div class="mk-mobox">${whelp('역할을 고르고 글 삭제를 눌러 보세요')}</div><div role="group" aria-label="역할 고르기">${tpick(['일반 회원', '관리자'], '일반 회원')}</div><div class="mk-tkeys"><button type="button" class="mk-tkey">글 삭제</button></div><span class="mk-hint" aria-live="polite">아직 보내지 않았어요</span>`,
+    cap:'역할을 바꿔 가며 글 삭제를 보내 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], pk = ks.filter(x => x.dataset.k), del = ks.find(x => !x.dataset.k);
+      let role = '일반 회원', sent = false;
+      const go = () => { b.innerHTML = sent ? bauthz(role) : whelp('역할을 고르고 글 삭제를 눌러 보세요'); psay(h, sent ? bauthzSay(role) : '아직 보내지 않았어요'); pk.forEach(y => y.setAttribute('aria-pressed', y.dataset.k === role)); };
+      pk.forEach(x => x.addEventListener('click', () => { role = x.dataset.k; sent = false; go(); })); del.addEventListener('click', () => { sent = true; go(); }); }},
   'u-back-middleware':{h:seq(['브라우저', '미들웨어', '라우트'], [{from:0, to:1, t:'GET /mypage'}, {from:1, to:1, t:'로그인 검사'}, {from:1, to:2, t:'통과'}, {from:2, to:2, t:'내 정보 만들기'}, {from:2, to:0, t:'200 OK'}]), m:1},
   'u-back-environment-variable':{h:pair(fcss('.env', 'API_KEY=sk_test_…'), fcss('server.js', 'process.env.API_KEY')), cap:'키 값은 줄인 예시예요. .env 파일은 저장소에 올리지 않아요'},
   'u-back-validation':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'이메일 abc'}, {from:1, to:1, t:'형식 검사'}, {from:1, to:0, t:'400', err:1}]), m:1},
   'u-back-webhook':{h:seq(['결제사', '내 서버'], [{from:0, to:1, t:'결제 완료 POST'}, {from:1, to:1, t:'서명 확인'}, {from:1, to:0, t:'200 받음'}]), m:1, cap:'결제가 끝나면 결제사가 먼저 내 서버에 알려요'},
-  'u-back-rate-limit':{h:brate(6), cap:'정한 횟수를 넘으면 잠시 막아요'},
+  'u-back-rate-limit':{h:`<div class="mk-mobox">${brate(0)}</div><div class="mk-tkeys"><button type="button" class="mk-tkey">요청 보내기</button><button type="button" class="mk-tkey">시간 지나기</button></div><span class="mk-hint" aria-live="polite">${brateSay(0)}</span>`,
+    cap:'요청을 6번 보내 보고, 시간 지나기로 다시 열어 보세요',
+    init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], by = t => ks.find(x => x.textContent === t);
+      let sent = 0;
+      by('요청 보내기').addEventListener('click', () => { sent += 1; b.innerHTML = brate(sent); psay(h, brateSay(sent)); });
+      by('시간 지나기').addEventListener('click', () => { sent = 0; b.innerHTML = brate(sent); psay(h, BRL_RESET); }); }},
   'u-back-session':{h:seq(['브라우저', '서버', '보관소'], [{from:0, to:1, t:'로그인'}, {from:1, to:2, t:'세션 만들기'}, {from:1, to:0, t:'쿠키 sid=…'}, {from:0, to:1, t:'다음 요청+쿠키'}, {from:1, to:2, t:'sid 찾기'}]), m:1, cap:'보관소는 서버가 세션을 모아 두는 곳이에요'},
   'u-back-request-flow':{h:seq(['브라우저', '서버', 'DB'], [{from:0, to:1, t:'글 목록 요청'}, {from:1, to:2, t:'조회'}, {from:2, to:1, t:'결과'}, {from:1, to:0, t:'응답'}, {from:0, to:0, t:'화면 갱신'}]), m:1},
   'u-back-optimistic-update':{h:track([{t:'좋아요 누름', s:'done', w:'눌렀어요'}, {t:'화면 먼저', s:'done', w:'하트가 바로 켜져요'}, {t:'서버 응답', s:'wait', w:'답을 기다려요'}, {t:'실패면 되돌림', s:'fail', w:'하트를 다시 꺼요'}]), m:1,
