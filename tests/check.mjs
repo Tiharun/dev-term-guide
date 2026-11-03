@@ -339,8 +339,11 @@ const SYM_BASICS = ['await를 썼는데 기다리지 않아요', '배열을 바�
 const SYM_WEB = ['검색해도 내 사이트가 안 나와요', '링크를 공유하면 미리보기가 이상해요', '검색 결과 제목·설명이 엉뚱하게 나와요', '같은 글이 주소 두 개로 검색돼요',
   'Safari에서만 화면이 깨져요', '버튼을 눌러도 새 창이 안 떠요', '방문은 많은데 구매가 없어요', '둘러보지 않고 바로 나가는 사람이 많아요',
   '손님이 어디서 왔는지 모르겠어요', '로그인이 자꾸 풀려요', '다른 사이트에 넣은 내 페이지가 안 보여요', '주소 끝에 utm_ 같은 글자가 붙어 있어요'];
-check('symcount', () => g.SYMPTOMS.length !== 169 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_FRONT = ['CSS를 고쳤는데 적용이 안 돼요', '안쪽 버튼을 눌렀는데 바깥 상자도 같이 반응해요', '버튼을 누르면 페이지가 새로고침돼요', '입력칸에 글자가 안 쳐져요',
+  '같은 요청이 끝없이 반복돼요', '목록 순서를 바꾸면 입력값이 엉뚱한 줄에 남아요', '값을 바꿨는데 화면이 그대로예요', 'props를 여러 단계로 계속 넘기고 있어요',
+  '스크린 리더가 버튼을 이상하게 읽어요', '숨겼는데 빈자리가 그대로 남아요', '브라우저마다 기본 여백이 달라요', '옛 브라우저에서 새 문법이 안 돼요'];
+check('symcount', () => g.SYMPTOMS.length !== 181 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
 check('total', () => g.TERMS.length === 1483 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
