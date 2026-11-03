@@ -4123,7 +4123,7 @@ const seq = (lanes = [], msgs = [], { still = false, label } = {}) => {
     if (typeof t !== 'string' || !t || wlen(t) > 14) no('글은 1~14자');
     if (err && wait) no('실패와 기다림은 함께 쓰지 않는다');
   });
-  const ga = x => { const c = x.charCodeAt(x.length - 1) - 0xAC00; return x + (c >= 0 && c < 11172 && c % 28 ? '이' : '가'); };    // 받침이 있으면 '이'. 한글이 아닌 끝 글자(DB·BFF)는 늘 '가'
+  const ga = x => { const e = x.slice(-1), c = e.charCodeAt(0) - 0xAC00; return x + ((/\d/.test(e) ? '013678'.includes(e) : c >= 0 && c < 11172 && c % 28) ? '이' : '가'); };    // 받침이 있으면 '이'. 끝 숫자는 읽는 소리로(일·삼은 '이', 이·사는 '가'), 영문(DB·BFF)은 늘 '가'
   const tag = m => m.err ? '실패' : m.wait ? '기다림' : '', who = m => m.from === m.to ? ga(lanes[m.from]) + ' 처리:' : ga(lanes[m.from]) + ' ' + lanes[m.to] + '에';
   const lines = lanes.map((_, i) => `repeating-linear-gradient(var(--rule) 0 4px,transparent 4px 8px) ${+((i + .5) * 100 / n).toFixed(3)}% 0/1.5px 100% no-repeat`).join(',');
   const lis = msgs.map((m, i) => { const { from: a, to: b } = m, k = tag(m);
@@ -7730,7 +7730,7 @@ Object.assign(D, {
   'u-back-graphql':{h:pair(fcss('query.graphql', '{ post { title } }'), fcss('응답(예시)', '{ "data": {', '"post": {', '"title": "첫 글" } } }')), cap:'요청한 칸(title)만 응답에 와요'},
   'u-back-jwt':{h:doc([{p:'헤더: eyJhbGci…(서명 방식)'}, {p:'내용: eyJzdWIi…(사용자 7번)'}, {p:'서명: 서버 키로 만든 값'}, {p:'내용은 누구나 풀어 읽을 수 있어요'}], {title:'JWT 세 칸(예시)', hl:3}), m:1,
     cap:'서명으로 위조는 막지만, 내용에 비밀은 넣지 않아요'},
-  'u-back-oauth':{h:seq(['브라우저', '내 서버', '로그인'], [{from:0, to:2, t:'로그인 화면'}, {from:2, to:2, t:'사용자 동의'}, {from:2, to:0, t:'코드 들고 옴'}, {from:0, to:1, t:'코드 전달'}, {from:1, to:2, t:'토큰으로 교환'}, {from:2, to:1, t:'토큰'}]), m:1,
+  'u-back-oauth':{h:seq(['브라우저', '내 서버', '로그인'], [{from:0, to:2, t:'동의 화면 요청'}, {from:2, to:2, t:'사용자 동의'}, {from:2, to:0, t:'코드 들고 옴'}, {from:0, to:1, t:'코드 전달'}, {from:1, to:2, t:'토큰으로 교환'}, {from:2, to:1, t:'토큰'}]), m:1,
     cap:'이 방식(인가 코드)에서는 토큰이 브라우저를 거치지 않아요'},
   'u-back-microservices':{h:seq(['주문', '결제', '알림'], [{from:0, to:1, t:'결제 요청'}, {from:1, to:0, t:'완료'}, {from:0, to:2, t:'알림 보내기'}]), m:1, cap:'서비스마다 따로 만들고 따로 배포해요'},
   'u-back-monolith':{h:bkStack(`<div class="mk-bkmo">${bkPills('앱 하나', ['회원', '주문', '결제'])}</div>`, whelp('하나만 고쳐도 한 번에 배포해요')), cap:'기능이 모두 한 프로그램 안에 있어요'},
@@ -7796,7 +7796,7 @@ Object.assign(D, {
   'u-back-middleware':{h:seq(['브라우저', '미들웨어', '라우트'], [{from:0, to:1, t:'GET /mypage'}, {from:1, to:1, t:'로그인 검사'}, {from:1, to:2, t:'통과'}, {from:2, to:2, t:'내 정보 만들기'}, {from:2, to:0, t:'200 OK'}]), m:1},
   'u-back-environment-variable':{h:pair(fcss('.env', 'API_KEY=sk_test_…'), fcss('server.js', 'process.env.API_KEY')), cap:'키 값은 줄인 예시예요. .env 파일은 저장소에 올리지 않아요'},
   'u-back-validation':{h:seq(['브라우저', '서버'], [{from:0, to:1, t:'이메일 abc'}, {from:1, to:1, t:'형식 검사'}, {from:1, to:0, t:'400', err:1}]), m:1},
-  'u-back-webhook':{h:seq(['결제사', '내 서버'], [{from:0, to:1, t:'결제 완료 POST'}, {from:1, to:1, t:'서명 확인'}, {from:1, to:0, t:'200 받음'}]), m:1, cap:'결제가 끝나면 결제사가 먼저 내 서버에 알려요'},
+  'u-back-webhook':{h:seq(['결제사', '내 서버'], [{from:0, to:1, t:'결제 완료 POST'}, {from:1, to:1, t:'서명 확인'}, {from:1, to:0, t:'200 응답'}]), m:1, cap:'결제가 끝나면 결제사가 먼저 내 서버에 알려요'},
   'u-back-rate-limit':{h:`<div class="mk-mobox">${brate(0)}</div><div class="mk-tkeys"><button type="button" class="mk-tkey">요청 보내기</button><button type="button" class="mk-tkey">시간 지나기</button></div><span class="mk-hint" aria-live="polite">${brateSay(0)}</span>`,
     cap:`요청을 ${BRL.max + 1}번 보내 보고, 시간 지나기로 다시 열어 보세요`,
     init: s => { const b = s.querySelector('.mk-mobox'), h = s.querySelector('.mk-hint'), ks = [...s.querySelectorAll('.mk-tkey')], by = t => ks.find(x => x.textContent === t);
@@ -7884,7 +7884,7 @@ Object.assign(D, {
   'u-back-event-driven-architecture':{h:vs('직접 부르기', doc([{ul:['주문이 결제를 부름', '주문이 메일을 부름', '주문이 재고를 부름']}], {title:'주문 코드', still:true}),
     '이벤트로 알림', doc([{ul:['"주문됨" 알림 1번', '받는 곳이 알아서 처리']}], {title:'주문 코드', still:true})),
     cap:'새 기능을 더해도 주문 코드는 그대로예요'},
-  'u-back-concurrency':{h:seq(['손님 A', '서버', '손님 B'], [{from:0, to:1, t:'책 1권 주문'}, {from:2, to:1, t:'책 1권 주문'}, {from:1, to:1, t:'A 확인: 재고 1'}, {from:1, to:1, t:'B 확인: 재고 1'},
+  'u-back-concurrency':{h:seq(['손님 A', '서버', '손님 B'], [{from:0, to:1, t:'책 1권 주문'}, {from:2, to:1, t:'책 1권 주문'}, {from:1, to:1, t:'A가 본 재고 1'}, {from:1, to:1, t:'B가 본 재고 1'},
     {from:1, to:0, t:'주문 완료'}, {from:1, to:2, t:'주문 완료'}, {from:1, to:1, t:'재고 -1이 됨', err:1}]), m:1,
     cap:'둘이 동시에 재고 1을 보고 둘 다 팔았어요'},
   'u-back-lock':{h:seq(['손님 A', '재고', '손님 B'], [{from:0, to:1, t:'잠금 얻음'}, {from:2, to:1, t:'잠금 요청', wait:1}, {from:0, to:1, t:'1권 빼고 풀기'}, {from:1, to:2, t:'B 차례예요'}, {from:1, to:2, t:'재고 0, 품절', err:1}]), m:1,

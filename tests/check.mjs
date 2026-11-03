@@ -290,6 +290,7 @@ check('bkhelp', () => vm.runInContext(`(() => {
     '<p class="sr">브라우저가 서버에 POST /login, 서버가 처리: 비밀번호 확인, 서버가 저장소에 세션 저장, 저장소가 서버에 저장됨 기다림, 서버가 브라우저에 401 실패 (실패 1개).</p>'], 'seq');
   has(seq(['로그인', 'DB'], [{from:0, to:1, t:'a'}]), ['로그인이 DB에 a.'], '조사 받침');
   has(seq(['API 관문', 'BFF'], [{from:1, to:0, t:'a'}]), ['BFF가 API 관문에 a.'], '조사 영문');
+  has(seq(['서버 1', '서버 2'], [{from:0, to:1, t:'a'}, {from:1, to:0, t:'b'}]), ['서버 1이 서버 2에 a, 서버 2가 서버 1에 b.'], '조사 숫자');
   const st = seq(['a', 'b'], [{from:0, to:1, t:'x'}, {from:1, to:0, t:'y'}], {still:true});
   if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(st) || /\\(실패/.test(st)) bad.push('seq still·실패 0개');
   const L2 = ['a', 'b'], m1 = [{from:0, to:1, t:'x'}];
