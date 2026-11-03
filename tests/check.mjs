@@ -101,10 +101,12 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'bug/core': 8, 'bug/adv': 7, 'test/basic': 11, 'test/core': 15, 'test/motion': 9, 'test/adv': 12, 'test/kind': 14, 'test/tip': 10, 'mobile/basic': 11, 'mobile/core': 14, 'mobile/motion': 9, 'mobile/adv': 11, 'mobile/store': 16, 'mobile/tip': 10, 'deploy/tip': 7, 'plan/basic': 11, 'plan/core': 14, 'plan/motion': 12, 'plan/adv': 12, 'plan/docs': 14, 'plan/tip': 8,
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
-  'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 15, 'front/build': 10, 'front/tip': 9 };    // sec: 카드 수
+  'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 15, 'front/build': 10, 'front/tip': 9,
+  'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 8, 'back/arch': 0, 'back/data': 0, 'back/job': 0, 'back/auth': 0, 'back/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
-  'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+  'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
+  'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const LATER = ['font', 'doccount', 'redrawn:back/basic', 'redrawn:back/core', 'redrawn:back/motion', 'redrawn:back/adv', 'redrawn:back/api', 'redrawn:back/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -309,7 +311,7 @@ check('bkhelp', () => vm.runInContext(`(() => {
   no(() => httpmsg({kind:'요청', start:'GET /', hl:['h0']}), '없는 헤더 강조'); no(() => httpmsg({kind:'요청', start:'GET /', body:['a'], hl:['b1']}), '없는 본문 강조');
   return bad.join(', ');
 })()`, ctx));
-check('bkpad', () => ['mk-sd', 'mk-hm'].filter(k => !new RegExp(`[,(]\.${k}[,)][^{]*\.stage\{padding-bottom:14px\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
+check('bkpad', () => ['mk-sd', 'mk-hm'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
     t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });
@@ -556,6 +558,25 @@ check('fm', () => FS().filter(t => typeof t.v === 'string' && t.v.startsWith('u-
 check('fou', () => FS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
 const FB_WRONG = {'Key': ['Key-Value', 'API Key'], 'Input Event': ['Event'], 'CSS Inheritance': ['Inheritance'], 'Context API': ['Context'], 'Lifecycle': ['App Lifecycle']};    // 이름만 비슷한 다른 뜻
 check('fwrong', () => Object.entries(FB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'front' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
+const BKS = () => g.TERMS.filter(t => t.c === 'back');
+check('bkcat', () => { const a = g.CATS.find(c => c.id === 'back').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,api,arch,data,job,auth,tip' ? '' : a; });
+const BK_TODO = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authentication","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Session","Request Flow","Optimistic Update","Polling","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Microservices","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // 아직 u-back- 그림이 아닌 옛 백엔드 카드. 다시 그리면 여기서 뺀다
+const BK_NOX = ["Server","Client","Request","Response","API","Endpoint","JSON","Database","HTTP","HTTP Method","REST API","CRUD","Authorization","Middleware","Environment Variable","Validation","Webhook","Rate Limit","Request Flow","Optimistic Update","WebSocket","Timeout","Retry","Queue","GraphQL","JWT","OAuth","Monolith","Cache","ORM","Serverless Function","Request Header","Request Body","Query Parameter","Path Parameter","API Key","API Documentation","SDK","CORS","Logging","Error Handling","try-catch","Idempotent","Background Job","Mock Data","Pagination API","Health Check"];    // x를 아직 안 쓴 옛 카드. 계획서 ②가 비운다
+const BK_SYM = ['Optimistic Update'];    // 기호가 남은 옛 카드. Task 4가 비운다
+const bkdiff = (a, list) => [...a.filter(x => !list.includes(x)).map(x => '+' + x), ...list.filter(x => !a.includes(x)).map(x => '-' + x)].join(', ');
+check('bkukey', () => bkdiff(BKS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v])).map(t => t.en), BK_TODO));
+check('bkobj', () => BKS().filter(t => typeof t.v === 'object' && !BK_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
+check('bksym', () => bkdiff(BKS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en), BK_SYM));
+check('bkx', () => bkdiff(BKS().filter(t => !t.x).map(t => t.en), BK_NOX));
+check('bkm', () => BKS().filter(t => { const p = typeof t.v === 'string' && t.v.startsWith('u-back-') && g.D[t.v]; return p && !!p.m !== WA(p.h); }).map(t => t.en).join(', '));    // 재생 버튼(m)과 움직임(A)은 함께 있다
+check('bkou', () => BKS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
+  'Event-driven Architecture': ['Event'], 'Worker': ['Service Worker', 'Web Worker'], 'Lock': ['Lock File', 'Account Lockout'], 'Route Handler': ['Routing']};    // 이름만 비슷한 다른 뜻
+check('bkwrong', () => Object.entries(BK_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'back' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
+const BK_SECRET = s => (s.match(/[A-Za-z0-9_-]{24,}/g) || []).some(w => /\d/.test(w) && /[A-Za-z]/.test(w)) || /\bat\b[^\n]{0,40}\.(?:m?js|ts):\d+/.test(s) || /localStorage\.setItem\([^)]*(?:token|jwt|session)/i.test(s);    // 긴 영숫자 키·스택 추적·토큰 저장 모습
+check('bksafe', () => [...['ab12'.repeat(7), 'at run (/app/server.js:12:5)', "localStorage.setItem('JWT', t)"].filter(x => !BK_SECRET(x)).map(x => '못 잡음 ' + x), ...(BK_SECRET('Access-Control-Allow-Origin') ? ['헤더 이름 오탐'] : []),
+  ...BKS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && BK_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
+check('bkshare', () => ['input', 'progress', 'scale', 'pulse', 'spinner', 'stagger', 'typing', 'shake', 'pagination'].filter(k => !g.D[k]).join(', '));    // 옛 back 카드가 쓰던 공유 그림 키는 남긴다
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로
