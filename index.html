@@ -85,7 +85,7 @@ svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-widt
 .chip.term{background:var(--mark);border-color:var(--mark);color:#fff;font-weight:700;text-decoration:none}
 .chip.term:hover{background:#c8551d}
 .steps .col{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1 1 320px}
-.steps .col.done{flex:0 0 auto}
+.steps .col.done{flex:0 0 auto;max-width:100%}
 .steps .arr{align-self:flex-end;color:var(--mark);font-weight:800;padding-bottom:7px}
 .chip .redo{margin-left:8px;font-size:12px;font-weight:400;color:var(--muted);text-decoration:underline}
 
@@ -3871,6 +3871,8 @@ SYM('느림',[
  ['오래 걸리는 작업 때문에 응답이 늦어요',['Background Job','Worker','Queue']],
  ['데이터가 쌓일수록 목록이 느려져요',['Full Table Scan','Index','Query Plan']],
  ['목록 하나 여는데 쿼리가 수백 번 나가요',['N+1 Problem','INNER JOIN']],
+ ['처음 요청만 유난히 느려요',['Cold Start','Serverless']],
+ ['사람이 몰리면 사이트가 느려져요',['Traffic Spike','Auto Scaling','Load Balancer']],
 ]);
 SYM('오류·안 됨',[
  ['하얀 화면만 나와요',['White Screen','Console']],
@@ -3972,6 +3974,16 @@ SYM('오류·안 됨',[
  ['같은 이메일로 두 번 가입돼요',['Unique Constraint','Data Integrity']],
  ['실수로 지운 데이터를 되살리고 싶어요',['Point-in-Time Recovery','Backup','Soft Delete']],
  ['둘이 동시에 고치면 한 사람 것이 사라져요',['Lost Update','Optimistic Locking']],
+ ['502 Bad Gateway가 떠요',['502 Bad Gateway','Upstream','Proxy Pass']],
+ ['504 Gateway Timeout이 떠요',['504 Gateway Timeout','Upstream','Timeout']],
+ ['503이 뜨고 접속이 안 돼요',['503 Service Unavailable','Maintenance Page','Auto Scaling']],
+ ['서버가 혼자 꺼졌다 켜져요',['Out of Memory','Process Manager','Memory Usage']],
+ ['디스크가 꽉 찼다는 오류가 떠요',['Disk Full','Log Rotation']],
+ ['인증서가 만료됐다고 떠요',['Certificate Renewal','SSL Certificate']],
+ ['큰 파일을 올리면 413이 떠요',['Client Body Size Limit']],
+ ['설정을 바꿨는데 그대로예요',['Config Reload','Restart']],
+ ['서버를 늘렸더니 로그인이 자꾸 풀려요',['Sticky Session','Session Store']],
+ ['클라우드 한 곳이 멈추자 우리 서비스도 멈췄어요',['Availability Zone','Redundancy','Single Point of Failure']],
 ]);
 </script>
 <!-- DATA:END -->
