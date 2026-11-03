@@ -28,7 +28,7 @@
 - **글꼴**: Task 1~4에서 새 글자가 서브셋에 없으면 `LATER font` 줄이 나올 수 있다. Task 5에서 서브셋을 다시 만든다. 스크립트는 `C:/Users/HELLOW~1/AppData/Local/Temp/claude/C--Users-HelloWorld-Documents-Claude-Project-Programing-Guide/af217e6a-1338-434d-ad6c-2e7d9f6e9d35/scratchpad/font_subset.py`와 같은 폴더의 `fontsrc/Hahmlet.ttf`다(측정, back 때 쓴 것). 이 계획의 scratchpad로 복사해 쓴다.
 - **사실 확인 출발점**(검색 2026-11-03, Task마다 PostgreSQL 공식 문서로 다시 연다):
   - `statement_timeout`을 넘으면 "canceling statement due to statement timeout"으로 취소된다([pulse.support](https://pulse.support/kb/postgresql-statement-timeout), [pgsql-general](https://www.postgresql.org/message-id/CAJNY3itfdY5vRf60OhXM5Kdbki3%2BG2%2BLXxJZ5Q32t2pt4R_FEQ%40mail.gmail.com)).
-  - PostgreSQL 18 B-tree skip scan으로 앞 열이 없는 조건에도 여러 열 인덱스가 쓰일 수 있다. 앞 열 값 종류가 적을 때 효과가 크다([Neon](https://neon.com/postgresql/postgresql-18/skip-scan-btree), [pgEdge](https://www.pgedge.com/blog/postgres-18-skip-scan-breaking-free-from-the-left-most-index-limitation)).
+  - 여러 열 인덱스는 열의 어느 조합에도 쓰일 수 있지만 왼쪽 열 조건이 있을 때 가장 효율적이다([Multicolumn Indexes](https://www.postgresql.org/docs/current/indexes-multicolumn.html)). PostgreSQL 18 B-tree skip scan은 앞 열 값 종류가 적을 때 앞 열 조건 없이도 효율을 높인다([Neon](https://neon.com/postgresql/postgresql-18/skip-scan-btree), [pgEdge](https://www.pgedge.com/blog/postgres-18-skip-scan-breaking-free-from-the-left-most-index-limitation)).
   - pg_dump 기본(plain) 출력은 데이터를 COPY로 쓰고, `--inserts`면 INSERT로 쓴다([pg_dump 문서](https://postgresql.org/docs/8/app-pgdump.html), 최신 판은 Task 1에서 연다).
 
 ## Global Constraints
@@ -133,7 +133,7 @@ check('dbxhas', () => Object.entries(DB_XHAS).filter(([en, w]) => { const t = g.
 | tx | ACID | 에이시드 · 트랜잭션이 지키는 네 약속 | `doc([{tb:[['약속','뜻'],['원자성','다 되거나 다 안 돼요'],['일관성','규칙을 지킨 상태로 끝나요'],['격리성','동시에 해도 섞이지 않아요'],['지속성','확정하면 꺼져도 남아요']]}], {title:'ACID'})` | Transaction |
 | tx | Autocommit | 자동 커밋 · 한 문장마다 바로 확정 | `seq(['앱','DB'], [{0→1 'UPDATE 재고'}, {1→1 '바로 확정'}, {0→1 'UPDATE 주문'}, {1→1 '바로 확정'}])`. cap "BEGIN이 없으면 한 문장씩 바로 확정돼요" | Transaction |
 | tx | Savepoint | 세이브포인트 · 트랜잭션 안의 되돌릴 지점 | `seq(['앱','DB'], [{0→1 'BEGIN'}, {0→1 '주문 저장'}, {0→1 'SAVEPOINT a'}, {0→1 '쿠폰 적용', err:1}, {0→1 'ROLLBACK TO a'}, {0→1 'COMMIT'}])`. cap "쿠폰만 취소하고 주문은 남겨요" | Rollback, Transaction |
-| tx | Isolation Level | 격리 수준 · 동시에 고칠 때 얼마나 떼어 놓을지 | `doc([{tb:[['수준(PostgreSQL)','막아 주는 일'],['READ COMMITTED','확정 전 값 읽기(기본값)'],['REPEATABLE READ','다시 읽으면 바뀌는 일'],['SERIALIZABLE','하나씩 한 것과 다른 결과']]}], {title:'격리 수준'})`. cap "READ UNCOMMITTED는 READ COMMITTED처럼 동작해요. 표준 SQL 표와 조금 달라요" | Dirty Read, Transaction |
+| tx | Isolation Level | 격리 수준 · 동시에 고칠 때 얼마나 떼어 놓을지 | `doc([{tb:[['수준(PostgreSQL)','막아 주는 일'],['READ COMMITTED (기본값)','확정 전 값 읽기'],['REPEATABLE READ','다시 읽으면 바뀌는 일'],['SERIALIZABLE','하나씩 한 것과 다른 결과']]}], {title:'격리 수준'})`. cap "READ UNCOMMITTED는 READ COMMITTED처럼 동작해요. 표준 SQL 표와 조금 달라요" | Dirty Read, Transaction |
 | tx | Dirty Read | 더티 리드 · 확정 전 값을 읽음 | `seq(['A','DB','B'], [{0→1 '확정 전 수정'}, {2→1 '읽기'}, {1→2 '바뀐 값'}, {0→1 'ROLLBACK'}, {2→2 '사라진 값 씀', err:1}])`. cap "표준은 가장 낮은 수준에서 허용하지만 PostgreSQL은 막아요" | Isolation Level |
 | tx | Lost Update | 갱신 손실 · 나중 저장이 앞 저장을 덮음 | `seq(['A','DB','B'], [{0→1 '재고 읽기'}, {1→0 '10'}, {2→1 '재고 읽기'}, {1→2 '10'}, {0→1 '9로 씀'}, {2→1 '9로 씀'}])`. cap "둘이 하나씩 팔았는데 재고는 9예요(8이어야 해요)" | Race Condition, Concurrency, Optimistic Locking |
 | tx | Deadlock | 교착 상태 · 서로 기다리다 멈춤 | `seq(['A','DB','B'], [{0→1 '1번 줄 잠금'}, {2→1 '2번 줄 잠금'}, {0→1 '2번 줄 요청', wait:1}, {2→1 '1번 줄 요청', wait:1}, {1→2 '취소', err:1}])`. cap "DB가 한쪽을 취소해요. 어느 쪽일지는 정할 수 없어요" | Lock, Transaction |
@@ -142,13 +142,13 @@ check('dbxhas', () => Object.entries(DB_XHAS).filter(([en, w]) => { const t = g.
 | tx | Connection Pool | 연결 풀 · 미리 열어 둔 DB 연결 | `track([{t:'미리 연 연결 5개', s:'done', w:'(예시)'}, {t:'요청이 하나 빌림', s:'done', w:'남은 연결 4개'}, {t:'쿼리 실행', s:'now'}, {t:'돌려줌', s:'done', w:'다시 5개'}])` | Too Many Connections |
 | ops | Query Plan | 쿼리 계획 · DB가 정한 찾는 방법 | `term([{c:'EXPLAIN SELECT …'}, {o:'Seq Scan on users'}, {c:'CREATE INDEX …'}, {c:'EXPLAIN SELECT …'}, {o:'Index Scan using users_email_idx'}], {title:'psql', prompt:'shop=#'})`. cap "Seq Scan은 표 전체를, Index Scan은 인덱스로 찾아요" | Index, Slow Query |
 | ops | Full Table Scan | 전체 테이블 스캔 · 처음부터 끝까지 다 읽기 | `track([{t:'1번째 줄 읽음', s:'done'}, {t:'2번째 줄 읽음', s:'done'}, {t:'3번째 줄 읽음', s:'now'}, {t:'마지막 줄까지', s:'wait', w:'10만 번째(예시)'}])`. cap "같은 값이 더 있을 수 있어 끝까지 봐요" | Index, Query Plan |
-| ops | Composite Index | 복합 인덱스 · 열 여럿을 묶은 색인 | `doc([{p:'인덱스 (city, age)'}, {tb:[['조건','쓰임'],["city = '서울'",'잘 쓰여요'],['city와 age 둘 다','잘 쓰여요'],['age만','덜 효율적이에요']]}], {title:'복합 인덱스'})`. cap "왼쪽 열부터 쓰여요(PostgreSQL 18부터는 age만이어도 쓰일 때가 있어요)" | Index |
+| ops | Composite Index | 복합 인덱스 · 열 여럿을 묶은 색인 | `doc([{p:'인덱스 (city, age)'}, {tb:[['조건','쓰임'],["city = '서울'",'잘 쓰여요'],['city와 age 둘 다','잘 쓰여요'],['age만','덜 효율적이에요']]}], {title:'복합 인덱스'})`. cap "왼쪽 열 조건이 있을 때 가장 잘 쓰여요(PostgreSQL 18부터는 city 값 종류가 적으면 age만으로도 효율적일 때가 있어요)" | Index |
 | ops | Read Replica | 읽기 복제본 · 읽기만 나눠 받는 DB | `seq(['서버','원본 DB','복제 DB'], [{0→1 '글 쓰기'}, {1→2 '복사', wait:1}, {0→2 '글 읽기'}, {2→0 '아직 옛 글'}])`. cap "읽기를 나눠 맡기지만 복사가 조금 늦을 수 있어요" | Replication |
 | ops | Connection String | 연결 문자열 · DB 접속 주소 한 줄 | `doc([{p:'postgres://app:****@db.example.com:5432/shop'}, {tb:[['부분','뜻'],['app','사용자'],['****','비밀번호(가림)'],['db.example.com','호스트'],['5432','포트'],['shop','DB 이름']]}], {title:'.env 예시'})` | Environment Variable |
 | ops | Too Many Connections | 연결 초과 · DB 연결 칸이 꽉 참 | `track([{t:'연결 칸 가득 참', s:'wait', w:'100개 중 100개(예시)'}, {t:'새 요청', s:'fail', w:'연결 거절'}])`. cap "오류 원문: too many clients already(PostgreSQL 예)" | Connection Pool |
 | ops | Query Timeout | 쿼리 시간 초과 · 정한 시간을 넘으면 취소 | `track([{t:'쿼리 시작', s:'done'}, {t:'5초 지남', s:'wait', w:'정한 시간(예시)'}, {t:'DB가 쿼리 취소', s:'fail'}])`. cap "오류 원문: canceling statement due to statement timeout(PostgreSQL 예)" | Timeout, Slow Query |
 | ops | Point-in-Time Recovery | 시점 복구 · 원하는 시각으로 되살림 | `track([{t:'03:00 백업', s:'done'}, {t:'14:05 실수로 삭제', s:'fail'}, {t:'14:04 시점으로', s:'done', w:'백업 + 변경 기록'}])`. cap "시각은 예시예요. 변경 기록(WAL)을 백업 뒤에 이어 붙여요" | Backup, Restore |
-| ops | Database Dump | DB 덤프 · DB를 SQL 파일로 뽑기 | `term([{c:'pg_dump shop > shop.sql'}, {c:'head shop.sql'}, {o:'CREATE TABLE public.users ('}, {o:'COPY public.users (id, name) FROM stdin;'}])`. cap "기본은 COPY 줄, --inserts를 주면 INSERT로 나와요" | Backup, Restore |
+| ops | Database Dump | DB 덤프 · DB를 SQL 파일로 뽑기 | `term([{c:'pg_dump shop > shop.sql'}, {o:'(shop.sql 일부)'}, {o:'CREATE TABLE public.users ('}, {o:'COPY public.users (id, name) FROM stdin;'}])`. cap "기본은 COPY 줄, --inserts를 주면 INSERT로 나와요"(파일 앞에는 주석·SET 줄이 있어 `head`로는 이 두 줄이 바로 보이지 않으므로 "일부"로 보인다) | Backup, Restore |
 | ops | Database Client | DB 클라이언트 · DB를 보는 프로그램 | 전용 HTML(`mk-dg`): 왼쪽 표 목록(`users`·`orders`·`posts`, users 강조) · 오른쪽 위 쿼리 창(`<code>SELECT * FROM users</code>`) · 아래 `dbtab` 결과(users 3줄). 320px에서는 세로로 쌓는다. 끝에 `<p class="sr">` 한 문장 | SQL |
 
 - `m:1`은 `doc`·`seq`·`track`·`term` 카드에 단다(still 아님). Database Client(전용 HTML, `A` 없음)는 없다. `dbm`이 양쪽을 본다.
@@ -263,7 +263,7 @@ x에 꼭 넣을 사실(`DB_XHAS`가 본다):
 
 - 그림판 h는 `<div class="mk-mobox">…</div>` + 고르기 그룹(`<div role="group" aria-label="…">${tpick(…)}</div>`) + (있으면) 한 번 누르는 버튼 줄 `.mk-tkeys` + `<span class="mk-hint" aria-live="polite">`이다(`u-back-idempotent`, index.html:7759 형식).
 - 처음 h는 스펙 보충의 "직접 조작 처음 그림"이고, 처음 문장은 그 상태의 `…Say`다(Index `'찾기를 눌러 보세요'`, Transaction `'실행을 눌러 보세요'`).
-- 그림 안의 `qrun`·`dbtab`은 `label`을 넘기지 않는다(`board`가 mobox 끝을 `</div><div role="group"`으로 찾기 때문, check.mjs:605).
+- 그림 안의 `qrun`·`dbtab`은 `label`을 넘기지 않는다. label을 주면 그림 안에 `role="group"`이 하나 더 생겨, 화면 읽기 프로그램이 고르기 그룹과 헷갈릴 수 있다. 그림 설명은 sr 문장이 맡는다.
 - `cap`은 할 일을 말한다.
   - WHERE: "조건을 바꿔 가며 어떤 줄이 남는지 보세요"
   - Join: "INNER와 LEFT를 바꿔 준호 줄을 보세요"

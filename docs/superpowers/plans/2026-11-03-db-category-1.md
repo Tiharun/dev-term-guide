@@ -34,12 +34,13 @@
 - **row 강조 표시**: 행 강조는 그 행 첫 칸 뒤에 `강조` 꼬리표, 열 강조는 머리 칸에, 칸 강조는 그 칸에 붙인다. 모두 배경 `var(--mark-bg)`와 함께다.
 - **측정값 보정**: 스펙 2장은 객체 v 41장·공유 그림 7장이라 했지만, 다시 재니 객체 v 40장·공유 그림 문자열 8장(Hard Delete `shake` 포함)이다. 합 48장은 같다. 원장에 `Ruling:`으로 적는다.
 - **스펙 표에서 바꾼 예시**(원장 `Ruling:`):
+  - Migration: 스펙은 `ls` 결과에 적용됨·대기를 붙였지만 `ls`는 상태를 출력하지 않는다. 파일 이름만 보이고 상태는 cap에 쓴다(Task 4).
   - LIKE: users 대신 products(민트차·녹차·민트캔디)로 한다. 사람 이름이 셋뿐이라 `'민%'`이 1줄만 걸려 "여러 줄 중 일부"가 안 보이기 때문이다. 스펙 3.4의 이름 규칙은 지킨다.
   - Auto Increment: 있던 줄을 2줄(민수·지영)로 두고 준호를 넣어 id 3이 생긴다(스펙은 "id 4"). 새 사람 이름을 만들지 않기 위해서다.
 - **점검 이름**: `db` 접두사로 쓴다: `DBS`·`dbcat`·`dbobj`·`dbukey`·`dbsym`·`dbx`·`dbm`·`dbou`·`dbwrong`·`dbtext`·`dbxn`·`dbsafe`·`dbshare`·`dbhelp`·`dbstill`. 측정: `check('db`는 0건이다. 차이 함수는 back의 `bkdiff`를 그대로 쓴다.
 - **남은 옛 카드 목록**(back `BK_TODO` 방식, 목록과 실제가 다르면 `+이름`·`-이름`으로 실패):
   - `DB_TODO`: 아직 `u-db-` 그림이 아닌 옛 카드. Task 2에 48장, Task 4에서 basic·core·motion 24장을 빼고, Task 5에서 비운다. `dbukey`가 본다. `dbobj`는 객체 v 카드가 이 목록 밖에 있으면 실패한다.
-  - `DB_NOX`: x가 없는 옛 카드 48장. 계획서 ②가 비운다. `dbx`가 본다.
+  - `DB_NOX`: x가 없는 옛 카드 48장. `DB_TODO`를 복사하지 않고 이름을 직접 적는다(`DB_TODO`가 줄어도 그대로). 계획서 ②가 비운다. `dbx`가 본다.
   - 기호가 남은 옛 카드는 0장이다(측정). `dbsym`은 목록 없이 0장을 본다.
 - **옛 p 두 장**: `dbtext`(p는 `~줘`로 끝남)에 지금 걸리는 카드는 UPDATE(`…WHERE 꼭 넣어`)·Personal Data(`…받지 마`) 2장이다(측정). 스펙 4장대로 미루지 않고 Task 2에서 고친다.
 - **LATER 사용**: `redrawn:db/basic·core·motion`은 Task 4, `redrawn:db/adv·tip`은 Task 5에서 뺀다(sql은 flow·big·stack이 없어 처음부터 통과, 측정). `font`·`doccount`는 계획서 ②에서 뺀다. `doccount`는 Task 3에서 1552장이 되면 실패하므로 Task 2부터 둔다.
@@ -150,7 +151,8 @@
   - `qrun({sql, from, pick, show, after, err, del, hl, still = false, label} = {}) → string`
     - 바깥 `<div class="mk-dq">`(label은 dbtab과 같음). 위에서 아래로: 실행 전 표(`dbtab`, 2개면 위아래) → `<div class="mk-dqr" aria-hidden="true"><b>실행</b><code>SQL 줄마다</code></div>` → 결과.
     - `pick`: `from[0]` 행을 `{열 이름: 값}`으로 바꿔(`/^-?\d+(\.\d+)?$/`는 숫자, `'NULL'`은 `null`) 넘긴다. 고른 행은 실행 전 표에서 `{row}` 강조, 결과 표는 고른 행(`show`가 있으면 그 열만, 순서는 `show` 순서).
-    - `del`: 고른 행은 실행 전 표에서 `mark` "지움", 결과 표는 남은 행 전체.
+    - `del`: 고른 행은 실행 전 표에서 `mark` "지움"만 붙이고 `{row}` 강조는 하지 않는다. 결과 표는 남은 행 전체.
+    - `after`+`hl`: 결과 `<tr>`의 class는 dbtab이 준 `mk-dbon` 뒤에 붙인다(`class="mk-dbon mk-dqm mk-cdz1 A"`). `after` 표가 2개면 `hl`은 `[표0 hl, 표1 hl]` 길이 2 배열이다(강조 없는 표는 `null`). 길이가 2가 아니면 오류.
     - 결과 머리띠 `<div class="mk-dqh" aria-hidden="true">`: `결과 ${n}줄`, del은 `지운 뒤 남은 줄 ${n}줄`, `after` 표 2개면 `결과 표 2개`.
     - 결과 행 k(1부터, 결과 표가 둘이면 이어서 셈)의 `<tr>`에 `mk-dqm${still ? '' : ` mk-cdz${k} A`}`.
     - `err`: 결과 자리에 `<p class="mk-dqm mk-dqf${still ? '' : ' mk-cdz1 A'}"><b class="mk-dbk">실패</b>${err}<span>표는 그대로예요</span></p>` 하나.
@@ -205,6 +207,7 @@ check('dbhelp', () => vm.runInContext(`(() => {
   no(() => qrun({sql:['a'], from:[U2], after:A1, show:['id']}), 'show 홀로'); no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['id'], del:1}), 'show+del');
   no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['age']}), 'show 없는 열'); no(() => qrun({sql:['a'], from:[U2], after:A1, del:1}), 'del+after');
   no(() => qrun({sql:['a'], from:[U2], pick: () => true, hl:{row:0}}), 'hl+pick'); no(() => qrun({sql:['a'], from:[U2], err:'a'.repeat(29)}), 'err 29폭');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, err:'a'}), 'pick+err'); no(() => qrun({sql:['a'], from:[U2], err:'a', del:1}), 'err+del'); no(() => qrun({sql:['a'], from:[U2, U2], after:[A1, A1], hl:{row:0}}), '표 2개 hl 모양');
   no(() => qrun({sql:['a'], from:[U2], after:[A1, A1, A1]}), 'after 3개'); no(() => qrun({sql:['a'], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '하늘']]}}), '결과 값 밖');
   const F5 = {name:'t', cols:['a'], rows:Array(5).fill(['1'])}; no(() => qrun({sql:['a'], from:[U2], after:[F5, F5]}), '결과 10줄');
   const e = erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, {n:'email', type:'글자'}]}, {name:'orders', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}]}], links:[{a:0, b:1, kind:'1:N', fk:'user_id'}], hl:['orders.user_id']});
@@ -280,7 +283,8 @@ const DBS = () => g.TERMS.filter(t => t.c === 'db');
 check('dbcat', () => { const a = g.CATS.find(c => c.id === 'db').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,sql,query,model,tx,ops,tip' ? '' : a; });
 const DB_TODO = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
   "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // 아직 u-db- 그림이 아닌 옛 DB 카드. 다시 그리면 여기서 뺀다
-const DB_NOX = [...DB_TODO];    // x를 아직 안 쓴 옛 카드(지금은 48장 모두). 계획서 ②가 비운다
+const DB_NOX = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
+  "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // x를 아직 안 쓴 옛 카드 48장. DB_TODO와 같은 이름이지만 따로 적는다(DB_TODO는 Task 4·5에서 줄어듦). 계획서 ②가 비운다
 check('dbukey', () => bkdiff(DBS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-db-') && g.D[t.v])).map(t => t.en), DB_TODO));
 check('dbobj', () => DBS().filter(t => typeof t.v === 'object' && !DB_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
 check('dbsym', () => DBS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
@@ -316,7 +320,7 @@ Expected: `FAIL dbcat: basic,core,motion,adv,sql,tip`, `FAIL count:db/query: no 
 Run: `node tests/check.mjs`
 Expected: `FAIL` 없이 `OK <수>`. `LATER` 줄은 `redrawn:db/` 5개이고, `font`·`doccount`는 아직 통과해서 줄이 안 나온다. 빈 하위항목 4개는 화면에서 "카드 없음"으로 보이고, Task 3·계획서 ②까지 이 상태다.
 
-- [ ] **Step 4b: 돌연변이 확인**: `DB_TODO`에서 `"Table"`을 잠깐 빼면 `FAIL dbukey: +Table`, `DB_NOX`를 `DB_TODO.slice(1)`로 바꾸면 `FAIL dbx: +Table`이 나오는지 보고 되돌린다(`git diff tests/check.mjs`로 원래대로인지 확인).
+- [ ] **Step 4b: 돌연변이 확인**: `DB_TODO`에서 `"Table"`을 잠깐 빼면 `FAIL dbukey: +Table`, `DB_NOX`에서 `"Table"`을 잠깐 빼면 `FAIL dbx: +Table`이 나오는지 보고 되돌린다(`git diff tests/check.mjs`로 원래대로인지 확인).
 
 - [ ] **Step 5: 커밋**
 
@@ -357,19 +361,19 @@ git commit -m "feat: 데이터베이스 하위항목 4개와 점검 기대값"
 | query | HAVING | 해빙 · 묶은 뒤 거르기 | `qrun` from users(id, name, city): 1 민수 서울; 2 지영 부산; 3 준호 서울. SQL `SELECT city, COUNT(*) AS 수`(27) / `FROM users` / `GROUP BY city`(13) / `HAVING COUNT(*) >= 2`(20). after (city, 수): 서울 2 | GROUP BY, WHERE |
 | query | DISTINCT | 디스팅트 · 겹치는 값 한 번만 | `qrun` from users(id, name, city) 위와 같음. SQL `SELECT DISTINCT city`(20) / `FROM users`. after (city): 서울; 부산 | SELECT |
 | query | LIKE | 라이크 · 글자 모양으로 찾기 | `qrun` from products(id, name): 1 민트차; 2 녹차; 3 민트캔디. SQL `SELECT * FROM products`(22) / `WHERE name LIKE '민%'`(20) + `pick`(이름이 `민`으로 시작). cap "%는 아무 글자나 몇 글자든" | WHERE |
-| query | IN | 인 · 목록 중 하나와 같음 | `qrun` from users(id, name, city): 1 민수 서울; 2 지영 부산; 3 준호 대구. SQL `SELECT * FROM users`(19) / `WHERE city IN`(13) / `('서울', '부산')`(16) + `pick` | WHERE |
+| query | IN | 인 · 목록 중 하나와 같음 | `qrun` from users(id, name, city): 1 민수 서울; 2 지영 부산; 3 준호 대구. SQL `SELECT * FROM users`(19) / `WHERE city IN`(13) / `('서울', '부산')`(16) + `pick` | WHERE, Subquery |
 | query | BETWEEN | 비트윈 · 두 값 사이 | `qrun` from products(name, price): 펜 1000; 공책 3000; 컵 5000; 책 12000. SQL `SELECT * FROM products` / `WHERE price`(11) / `BETWEEN 1000 AND 5000`(21) + `pick`(1000 이상 5000 이하). cap "양 끝 값 1000·5000도 들어가요" | WHERE |
 | query | Subquery | 서브쿼리 · 쿼리 안의 쿼리 | `qrun` from users(id, name): 1 민수; 2 지영; 3 준호 / orders(id, user_id): 1 1; 2 3. SQL `SELECT name FROM users`(21) / `WHERE id IN (`(13) / `SELECT user_id FROM orders)`(27). after (name): 민수; 준호. cap "안쪽 쿼리 결과(1, 3)로 바깥을 걸러요" | Query, IN |
 | query | Column Alias | 열 별칭 · 결과 열에 붙인 이름 | `qrun` from users(id, name, city) HAVING과 같음. SQL `SELECT name AS 이름,`(20) / `city AS 도시`(12) / `FROM users`. after (이름, 도시): 민수 서울; 지영 부산; 준호 서울. cap "표는 그대로고, 결과 열 이름만 바뀌어요" | SELECT |
 | query | IS NULL | 이즈 널 · 값이 없는 줄 찾기 | `qrun` from users(name, phone): 민수 010-…; 지영 NULL; 준호 010-…. SQL `SELECT * FROM users` / `WHERE phone IS NULL`(19) + `pick`(phone이 null). cap "= NULL로는 아무 줄도 안 나와요" | NULL, WHERE |
 | model | NOT NULL | 낫 널 · 꼭 있어야 하는 칸 | `qrun` from users(id, name, email): 1 민수 m@a.com. SQL `INSERT INTO users`(17) / `(id, email)`(11) / `VALUES (2, 'j@a.com')`(21). err "이름은 비울 수 없어요"(21). cap "실제 오류: null value in column … violates not-null constraint(PostgreSQL 예)" | NULL, Data Integrity |
-| model | Default Value | 기본값 · 안 적으면 들어가는 값 | `qrun` from orders(id, item, status): 1 책 완료. SQL `INSERT INTO orders`(18) / `(id, item)`(10) / `VALUES (2, '펜')`(16). after (id, item, status): 1 책 완료; 2 펜 대기, hl `{cell:[1,2]}`. cap "status 기본값을 '대기'로 정해 둔 표(예시)" | INSERT |
-| model | Auto Increment | 자동 번호 · id를 저절로 매김 | `qrun` from users(id PK, name): 1 민수; 2 지영. SQL `INSERT INTO users (name)`(24) / `VALUES ('준호')`(15). after (id, name): 1 민수; 2 지영; 3 준호, hl `{cell:[2,0]}`. cap "id를 적지 않아도 DB가 다음 번호를 넣어요" | Primary Key |
-| model | Composite Key | 복합 키 · 열 둘을 합친 키 | `qrun` from enrollments(student_id PK, course_id PK): 1 10; 1 11; 2 10. SQL `INSERT INTO enrollments`(23) / `VALUES (1, 10)`(14). err "같은 짝이 이미 있어요"(21). cap "한 열씩은 겹쳐도 되지만 짝은 하나만" | Primary Key |
+| model | Default Value | 기본값 · 안 적으면 들어가는 값 | `qrun` from orders(id, item, status): 1 책 완료. SQL `INSERT INTO orders`(18) / `(id, item)`(10) / `VALUES (2, '펜')`(16). after (id, item, status): 1 책 완료; 2 펜 대기, hl `{row:1}`(새 줄의 `펜`·`대기`는 실행 전 표에 없어 줄 전체를 강조해야 after 값 점검을 지난다). cap "status 기본값을 '대기'로 정해 둔 표(예시)" | INSERT |
+| model | Auto Increment | 자동 번호 · id를 저절로 매김 | `qrun` from users(id PK, name): 1 민수; 2 지영. SQL `INSERT INTO users (name)`(24) / `VALUES ('준호')`(15). after (id, name): 1 민수; 2 지영; 3 준호, hl `{row:2}`(`준호`가 실행 전 표에 없음). cap "id를 적지 않아도 DB가 다음 번호를 넣어요" | Primary Key, Surrogate Key |
+| model | Composite Key | 복합 키 · 열 둘을 합친 키 | `qrun` from enrollments(student_id PK, course_id PK): 1 10; 1 11; 2 10. SQL `INSERT INTO enrollments`(23) / `VALUES (1, 10)`(14). err "같은 짝이 이미 있어요"(21). cap "한 열씩은 겹쳐도 되지만 짝은 하나만" | Primary Key, Junction Table |
 | model | Surrogate Key | 대리 키 · 뜻 없는 번호 키 | `bkStack`: `dbtab` users(tag "이메일이 키", email PK, name): m@a.com 민수; j@a.com 지영 + `whelp('이메일을 바꾸면 이어진 표도 다 고쳐야 해요')` / `dbtab` users(tag "id가 키", id PK, email, name): 1 m@a.com 민수; 2 j@a.com 지영 | Primary Key, UUID |
 | model | Check Constraint | 체크 제약 · 값 범위 규칙 | `qrun` from products(id, name, price): 1 책 12000. SQL `INSERT INTO products`(20) / `VALUES (2, '펜', -500)`(22, 빼기는 ASCII `-`). err "price는 0 이상이어야 해요"(25). cap "규칙: CHECK (price >= 0)" | Data Integrity, Validation |
 | model | One-to-Many | 일대다 · 하나에 여럿 | `bkStack`: `erd` users(id PK, name)·orders(id PK, user_id FK, item) 1:N fk user_id, hl `['orders']` / `dbtab` orders(id, user_id, item): 1 1 책; 2 1 펜; 3 2 컵, hl `[{row:0},{row:1}]`. cap "민수(1번)의 주문이 두 줄이에요" | Relation, Foreign Key |
-| model | Many-to-Many | 다대다 · 여럿에 여럿 | `erd` students(id PK, name)·courses(id PK, title) N:M. cap "학생은 강의를 여럿 듣고, 강의엔 학생이 여럿" | Relation |
+| model | Many-to-Many | 다대다 · 여럿에 여럿 | `erd` students(id PK, name)·courses(id PK, title) N:M. cap "학생은 강의를 여럿 듣고, 강의엔 학생이 여럿" | Relation, Junction Table |
 | model | Junction Table | 연결 테이블 · 다대다를 잇는 표 | `erd` students(id PK, name)·enrollments(student_id FK, course_id FK)·courses(id PK, title), links `{a:0,b:1,kind:'1:N',fk:'student_id'}`·`{a:1,b:2,kind:'N:1',fk:'course_id'}`, hl `['enrollments']` | Many-to-Many, Foreign Key |
 | model | Cascade Delete | 연쇄 삭제 · 지우면 이어진 줄도 지움 | `bkStack`: `fcss('orders 정의', 'user_id INT REFERENCES users', '  ON DELETE CASCADE')` / `qrun` from users(id, name): 1 민수; 2 지영 / orders(id, user_id, item): 1 1 책; 2 2 펜; 3 1 컵. SQL `DELETE FROM users`(17) / `WHERE id = 1`(12). after users(id, name): 2 지영 / orders(id, user_id, item): 2 2 펜 | Foreign Key, Hard Delete |
 | model | Denormalization | 비정규화 · 일부러 복사해 두기 | `bkStack`: `dbtab` orders(tag "복사해 둠", id, user_name, item): 1 민수 책; 2 민수 펜; 3 지영 컵, hl `{col:1}` + `whelp('읽기는 빨라지고, 이름을 고칠 곳이 늘어나요')` | Normalization, Join |
@@ -377,7 +381,6 @@ git commit -m "feat: 데이터베이스 하위항목 4개와 점검 기대값"
 - `whelp`는 이미 있는 흐린 설명 줄 도우미다([index.html](../../../index.html)에서 `const whelp`로 찾는다). 없거나 꼴이 다르면 `mk-dg` 문단으로 쓰고 원장에 적는다.
 - qrun·`bkStack`+qrun 카드는 `m:1`, erd·dbtab·`bkStack`(dbtab·erd만) 카드는 `m`이 없다.
 - 결과 대조(공통 절차 3): Aggregate Function은 12000+1000+5000 = 18000, COUNT는 phone이 NULL 아닌 줄 3개, HAVING은 서울 2·부산 1에서 서울만, Subquery는 orders.user_id {1, 3}, LEFT JOIN은 펜(2번)에 후기가 없음을 원장에 적는다.
-- 스펙 4장 r 후보 중 Auto Increment↔Surrogate Key, Composite Key↔Junction Table은 같은 Task 카드라 위 표와 함께 단다(Auto Increment: Primary Key, Surrogate Key / Composite Key: Primary Key, Junction Table). Many-to-Many↔Junction Table도 단다.
 
 x 짝(스펙 5장, 이 Task 카드):
 - Join vs INNER JOIN vs LEFT JOIN(그냥 `JOIN`은 INNER JOIN이에요), Join vs Subquery
@@ -408,7 +411,7 @@ x 짝(스펙 5장, 이 Task 카드):
 - Consumes: `dbtab`·`qrun`·`erd`(Task 1), `seq`, `track`·`doc`·`term`·`vs`·`fcss`, `bkStack`·`bkRows`·`bkPills`
 - Produces(계획서 ②가 버튼을 붙일 상태 함수, 값은 예시):
   - `DIX = ['a@a.com', 'j@a.com', 'm@a.com', 'h@a.com', 's@a.com']`(찾는 값 `m@a.com`은 3번째)
-  - `dindex(has: boolean, ran: boolean) → string`: 위 `<p class="mk-dgp">`에 `인덱스 있음 · email = m@a.com 찾기`(없음이면 `인덱스 없음`), 아래 `dbtab` users(id, email) 5줄. `ran`이면 `mark`: 없음은 5줄 모두 `읽음`, 있음은 3번째만 `읽음`(나머지 `''`). `ran`이 거짓이면 `mark` 없음.
+  - `dindex(has: boolean, ran: boolean) → string`: 위 `<p class="mk-dgp">`에 `인덱스 있음 · email = m@a.com 찾기`(없음이면 `인덱스 없음`), 아래 `dbtab` users(id, email) 5줄(id는 `'1'`~`'5'`, email은 `DIX` 순서). `ran`이면 `mark`: 없음은 5줄 모두 `읽음`, 있음은 3번째만 `읽음`(나머지 `''`). `ran`이 거짓이면 `mark` 없음.
   - `dindexSay(has, ran) → string`: 안 했으면 `'찾기를 눌러 보세요'`, 없음 `'5줄을 다 읽었어요'`, 있음 `'색인으로 1줄만 읽었어요'`
   - `DTX = {from: '민수', to: '지영', amt: 10000, start: [50000, 10000]}`
   - `dtx(fail: boolean, ran: boolean) → string`: `ran`이면 `<ol class="mk-dgs">` 단계 `<li>` 네 줄 `BEGIN` · `민수 잔액 1만 원 빼기` · (`fail`이면 `지영에게 더하기` + `<b class="mk-dbk">실패</b>`, 아니면 `지영 잔액 1만 원 더하기`) · (`ROLLBACK: 둘 다 처음 값` 또는 `COMMIT: 둘 다 반영`). 아래 `dbtab` accounts(name, balance): 성공이면 40000·20000(balance 열 강조), 그 밖은 50000·10000. 안 했으면 단계 없이 표만.
@@ -455,7 +458,7 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   - NoSQL: `bkStack`: `dbtab` users(tag "표로 저장", id, name, city): 1 민수 서울 / `fcss('문서로 저장', '{ "id": 1, "name": "민수",', '  "tags": ["책", "펜"] }')`
   - Relation: `doc` 표 `[['관계','예'],['1:1','회원과 프로필'],['1:N','회원과 주문'],['N:M','학생과 강의']]`
   - Index ▶: 멈춘 그림은 `dindex(false, true)`
-  - Migration: `term`: `{c:'ls migrations'}` · `{o:'001_users.sql  적용됨'}` · `{o:'002_phone.sql  적용됨'}` · `{o:'003_avatar.sql  대기'}` · `{c:'npm run migrate'}` · `{o:'003 적용함(예시)'}`
+  - Migration: `term`: `{c:'ls migrations'}` · `{o:'001_users.sql'}` · `{o:'002_phone.sql'}` · `{o:'003_avatar.sql'}` · `{c:'npm run migrate'}` · `{o:'003_avatar.sql 적용함(예시)'}`, cap "001·002는 이미 적용됐고 003이 새로 적용돼요"(ls는 적용 상태를 출력하지 않으므로 스펙의 "(적용됨)·(대기)"를 cap으로 옮김)
   - Transaction ▶: 멈춘 그림은 `dtx(true, true)`
   - Backup: `track`: `{t:'DB', s:'done', w:'shop'}` · `{t:'매일 밤 복사', s:'done', w:'03:00(예시)'}` · `{t:'백업 파일 보관', s:'done', w:'다른 곳에 둠'}`
   - Data Flow: `seq(['브라우저','서버','DB'], [{0→1 '저장 요청'}, {1→2 'INSERT …'}, {2→1 '저장됨'}, {1→2 '목록 조회'}, {2→1 '목록'}, {1→0 '새 목록'}, {0→0 '화면 표시'}])`
@@ -524,7 +527,7 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   - Restore: `track`: `{t:'백업 파일', s:'done', w:'어제 03:00(예시)'}` · `{t:'복원', s:'done', w:'파일을 DB에 다시 씀'}` · `{t:'그 시점의 DB', s:'done', w:'03:00 상태'}`
   - Data Integrity: `doc` 표 `[['규칙','막는 일','예'],['형식','타입이 다른 값','price에 글자'],['빈 값','꼭 있어야 할 칸','이름 없이 가입'],['연결','없는 회원의 주문','user_id 99']]`
   - Unique Constraint: `qrun` from users(id, email): 1 m@a.com. SQL `INSERT INTO users`(17) / `VALUES (2, 'm@a.com')`(21). err "이미 있는 이메일이에요"(22), cap "실제 오류: duplicate key value violates unique constraint(PostgreSQL 예)"
-  - NULL: `dbtab` users(name, phone): 민수 NULL; 지영 `''`; 준호 0, hl `{cell:[0,1]}`, cap "NULL은 0도 빈 글자도 아니에요"
+  - NULL: `dbtab` users(name, phone): 민수 NULL; 지영 `''`; 준호 `'0'`(문자열, dbtab은 문자열만 받음), hl `{cell:[0,1]}`, cap "NULL은 0도 빈 글자도 아니에요"
   - Timestamp: `dbtab` posts(title, created_at, updated_at): 공지 10-01 10-02; 후기 10-03 10-03, hl `[{col:1},{col:2}]`, cap "만든 날짜와 고친 날짜를 DB가 적어요(날짜 예시)"
   - Spreadsheet vs DB: `vs('엑셀', '<p class="mk-dgp">한 사람이 파일을 열어 고쳐요</p>', 'DB', '<p class="mk-dgp">앱 여러 개가 동시에 쿼리해요</p>')`
   - Personal Data: `bkStack(bkPills('저장하는 열', ['name', 'email']), bkPills('받지 않아도 되는 열', ['address', 'birth'], '안 받음'))`, 값은 적지 않음
