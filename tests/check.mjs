@@ -440,7 +440,8 @@ check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t
 check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'responsive', 'contrast', 'aspect', 'fontsize', 'transition', 'shadow'].filter(k => !g.D[k]).join(', '));    // 공유 그림 키는 남긴다
 const FC = en => g.TERMS.find(t => t.c === 'front' && t.en === en) || {};
 const FDM = {'Specificity': ['h2', '.title', '#main', 'aria-pressed', 'aria-live'], 'Event Bubbling': ['button', 'li', 'stopPropagation', 'aria-pressed', 'aria-live'],
-  'Visibility': ['display:none', 'visibility:hidden', 'opacity:0', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
+  'Visibility': ['display:none', 'visibility:hidden', 'opacity:0', 'aria-pressed', 'aria-live'],
+  'Key': ['key 있음', 'key 없음', '맨 앞에 추가', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
 check('fdm', () => Object.entries(FDM).filter(([en, w]) => { const t = g.find(en), p = t && g.D[t.v]; return !p || !p.init || !String(p.init).includes('psay') || !w.every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));    // 결과 문장은 psay로 다시 읽힌다
 check('fdmrun', () => vm.runInContext(`(() => { const bad = [], s = new Set(['h2', '#main']);
   if (!fspecSay(new Set()).includes('규칙 없음')) bad.push('모두 끔');
