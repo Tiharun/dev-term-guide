@@ -8439,7 +8439,7 @@ Object.assign(D,{
   'u-server-restart':{h:track([{t:'실행 중', s:'done'}, {t:'끔', s:'done'}, {t:'다시 켬', s:'done'}, {t:'실행 중', s:'done', w:'메모리 깨끗'}]), m:1},
   'u-server-traffic-spike':{h:metric({lines:[{n:'요청 수', pts:[120, 110, 130, 900, 640, 300, 150]}], x:['20:00', '20:01', '20:02', '20:03', '20:04', '20:05', '20:06'], max:1000, unit:'건', mark:{i:3, n:'이벤트'}}),
     cap:'1분마다 센 요청 수(예시)'},
-  'u-server-failover':{h:sfail(true)},
+  'u-server-failover':{h:sfail(true), cap:'예비를 미리 켜 두는 방식(Hot Standby)도 있어요'},
   'u-server-graceful-shutdown':{h:track([{t:'새 요청 받지 않음', s:'done'}, {t:'하던 요청 끝냄', s:'done'}, {t:'끔', s:'done'}]), m:1},
 });
 /* server: 다시 그리기 adv·status·tip — 출처 확인(2026-11): RFC 9110 15장(200·301 Location·400·401 WWW-Authenticate 필수·403·404·500·502 게이트웨이가 받은 잘못된 응답),

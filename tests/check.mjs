@@ -885,7 +885,7 @@ check('srvrel', () => [['Graceful Shutdown', 'Zero Downtime Deploy'], ['Maintena
   .filter(([en, r]) => !(g.find(en)?.r || []).includes(r)).map(([en, r]) => en + '-' + r).join(', '));    // 스펙 4장: 기존 server 카드에 더하는 r
 const SRV_XHAS = {'502 Bad Gateway': ['504'], '401 Unauthorized': ['403'], 'Uptime': ['43분'], 'SSL Certificate': ['TLS'], 'Docker': ['운영체제']};    // x에 꼭 있어야 할 말(Review Focus 3). 계획서 ②가 더한다
 check('srvfixb', () => { const h = k => g.D['u-server-' + k]?.h || '', W = h('works-on-my-machine');    // 검토 B 지적
-  return [['dev 끝 프롬프트', !h('dev-server').includes('mk-tcur')], ['ssh 끝 프롬프트', !h('ssh').includes('mk-tcur')], ['failover 예비', h('failover').includes('>예비<')],
+  return [['dev 끝 프롬프트', !h('dev-server').includes('mk-tcur')], ['ssh 끝 프롬프트', !h('ssh').includes('mk-tcur')], ['failover 예비', h('failover').includes('>예비<') && /Hot Standby/.test(g.D['u-server-failover'].cap)],
     ['cron 절대 경로', h('cron-job').includes('/srv/backup.sh')], ['serverless 플랫폼 경유', h('serverless').includes('결과')], ['docker 조건', h('docker').includes('도커가 있는 서버라면')],
     ['womm 잘 됨', W.includes('잘 됨') && !W.includes('되는 중')]].filter(([, ok]) => !ok).map(([n]) => n).join(', '); });
 check('srvxhas', () => Object.entries(SRV_XHAS).filter(([en, w]) => { const t = g.find(en); return !t || !w.every(s => (t.x || '').includes(s)); }).map(([en]) => en).join(', '));
