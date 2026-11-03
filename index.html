@@ -4163,7 +4163,7 @@ const httpmsg = ({ kind, start, head = [], body = [], hl = [], label } = {}) => 
 };
 /* DB 표: name·tag 12자, cols 1~3개(문자열 또는 {n, key:'PK'|'FK'}, 이름 10자, type은 erd에만), rows 0~5줄(칸은 글 10자, 'NULL'·'' 표시), hl {row}·{col}·{cell:[행, 열]} 하나 또는 배열, mark 줄마다 꼬리표 6자 */
 const dbhn = (C, h) => h.cell ? `${h.cell[0] + 1}줄 ${C[h.cell[1]].n} 칸` : 'row' in h ? `${h.row + 1}줄` : `${C[h.col].n} 열`;    // 강조 이름: dbtab·qrun의 sr이 같이 쓴다
-const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label } = {}) => {
+const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label, empty = '결과 없음(0줄)' } = {}) => {
   const no = m => { throw new Error('dbtab: ' + m); }, w = (x, n, z = 1) => typeof x === 'string' && wlen(x) >= z && wlen(x) <= n;
   if (!w(name, 12) || (tag !== undefined && !w(tag, 12))) no('이름·이름표는 1~12자');
   if (!Array.isArray(cols) || cols.length < 1 || cols.length > 3) no('열은 1~3개');
@@ -4172,46 +4172,50 @@ const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label } = {}) => {
   if (!Array.isArray(rows) || rows.length > 5) no('행은 0~5줄');
   rows.forEach(r => { if (!Array.isArray(r) || r.length !== C.length || r.some(x => !w(x, 10, 0))) no('줄마다 칸 수는 열 수, 칸은 글 10자까지'); });
   const H = Array.isArray(hl) ? hl : [hl], inR = i => Number.isInteger(i) && i >= 0 && i < rows.length, inC = j => Number.isInteger(j) && j >= 0 && j < C.length;
-  if (H.some(h => !(h.cell ? inR(h.cell[0]) && inC(h.cell[1]) : 'row' in h ? inR(h.row) : inC(h.col)))) no('없는 행·열·칸은 강조할 수 없다');
+  const one = h => h !== null && typeof h === 'object' && !Array.isArray(h) && Object.keys(h).length === 1;    // 강조 하나는 row·col·cell 중 정확히 하나
+  if (H.some(h => !one(h) || !('cell' in h ? Array.isArray(h.cell) && h.cell.length === 2 && inR(h.cell[0]) && inC(h.cell[1]) : 'row' in h ? inR(h.row) : 'col' in h && inC(h.col)))) no('강조는 row·col·cell 중 하나, 있는 행·열·칸만');
   if (mark !== undefined && (!Array.isArray(mark) || mark.length !== rows.length || mark.some(x => !w(x, 6, 0)))) no('mark는 줄마다 하나, 6자까지');
   const onR = i => H.some(h => h.row === i), onC = j => H.some(h => !h.cell && h.col === j), onX = (i, j) => H.some(h => h.cell && h.cell[0] === i && h.cell[1] === j);
   const k = t => `<b class="mk-dbk">${t}</b>`, say = x => x === 'NULL' ? 'NULL' : x === '' ? '빈 글자' : x;
   const ths = C.map((c, j) => `<th${onC(j) ? ' class="mk-dbon"' : ''}>${esc(c.n)}${c.key ? k(c.key) : ''}${onC(j) ? k('강조') : ''}</th>`).join('');
-  const trs = rows.map((r, i) => `<tr${onR(i) ? ' class="mk-dbon"' : ''}>` + r.map((x, j) => `<td${onX(i, j) ? ' class="mk-dbon"' : ''}>`
+  const trs = rows.map((r, i) => `<tr${onR(i) ? ' class="mk-dbon"' : ''}>` + r.map((x, j) => `<td${onX(i, j) || onC(j) ? ' class="mk-dbon"' : ''}>`
     + (x === 'NULL' ? '<i class="mk-dbn">NULL</i>' : x === '' ? k('빈 글자') : esc(x)) + (!j && onR(i) ? k('강조') : '') + (onX(i, j) ? k('강조') : '')
     + (j === C.length - 1 && mark && mark[i] ? k(esc(mark[i])) : '') + '</td>').join('') + '</tr>').join('');
   const sum = `${tag ? tag + ', ' : ''}${name} 테이블, 열 ${C.length}개(${C.map(c => c.n + (c.key ? ' ' + c.key : '')).join(', ')}), `
     + (rows.length ? `행 ${rows.length}줄.` + rows.map((r, i) => ` ${i + 1}줄: ${r.map(say).join(', ')}${mark && mark[i] ? ` (${mark[i]})` : ''}.`).join('') : '행 0줄, 결과 없음.')
     + (H.length ? ` 강조: ${H.map(h => dbhn(C, h)).join(', ')}.` : '');
   return `<div class="mk-db"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-dbh" aria-hidden="true">${tag ? `<b class="mk-dbg">${esc(tag)}</b>` : ''}${esc(name)} 테이블</div>`
-    + `<table class="mk-dbt" aria-hidden="true"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>${rows.length ? '' : '<p class="mk-dbe" aria-hidden="true">결과 없음(0줄)</p>'}<p class="sr">${esc(sum)}</p></div>`;
+    + `<table class="mk-dbt" aria-hidden="true"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>${rows.length || !empty ? '' : `<p class="mk-dbe" aria-hidden="true">${empty}</p>`}<p class="sr">${esc(sum)}</p></div>`;
 };
 /* 쿼리 실행: sql 1~4줄(28자), from 실행 전 표 1~2개, 결과는 pick(고르는 함수, show 남길 열·del 지움) | after 결과 표 1~2개(hl은 표 하나일 때) | err 실패 글 28자 중 하나. 결과는 8줄까지 */
 const qrun = ({ sql, from, pick, show, after, err, del, hl, still = false, label } = {}) => {
   const no = m => { throw new Error('qrun: ' + m); }, num = x => /^-?\d+(\.\d+)?$/.test(x);
   if (!Array.isArray(sql) || sql.length < 1 || sql.length > 4 || sql.some(x => typeof x !== 'string' || wlen(x) < 1 || wlen(x) > 28)) no('SQL은 1~4줄, 줄마다 1~28자');
   if (!Array.isArray(from) || from.length < 1 || from.length > 2) no('실행 전 표는 1~2개');
+  const rw = t => ({ ...t, rows: t?.rows ?? [] }), box = t => cut(dbtab({ ...t, label: undefined, empty: '빈 표' })), cut = h => h.replace(/<p class="sr">[^<]*<\/p>/, '');
+  from = from.map(rw); from.forEach(box);    // 표 모양은 pick보다 먼저 dbtab이 막는다
   if ([pick, after, err].filter(x => x !== undefined).length !== 1) no('pick·after·err 중 정확히 하나');
   if (pick !== undefined && typeof pick !== 'function') no('pick은 함수');
   if ((show !== undefined || del) && pick === undefined) no('show·del은 pick과만');
   if (show !== undefined && del) no('show와 del은 함께 쓰지 않는다');
   if (hl !== undefined && after === undefined) no('hl은 after와만');
   if (err !== undefined && (typeof err !== 'string' || wlen(err) < 1 || wlen(err) > 28)) no('실패 글은 1~28자');
-  const A = after === undefined ? [] : Array.isArray(after) ? after : [after];
+  const A = (after === undefined ? [] : Array.isArray(after) ? after : [after]).map(rw);
   if (after !== undefined && (A.length < 1 || A.length > 2)) no('결과 표는 1~2개');
   if (A.length === 2 && hl !== undefined) no('결과 표가 둘이면 hl을 쓸 수 없다');
-  const F = from[0], C0 = (F.cols || []).map(c => typeof c === 'string' ? c : c.n), cut = h => h.replace(/<p class="sr">[^<]*<\/p>/, '');
-  let before = from, res = A.map((t, i) => i || hl === undefined ? t : { ...t, hl });
+  const F = from[0], C0 = F.cols.map(c => typeof c === 'string' ? c : c.n);
+  let before = from, sel = [], res = A.map((t, i) => i || hl === undefined ? t : { ...t, hl });
   if (pick) {
-    if (show !== undefined && (!Array.isArray(show) || !show.length || show.some(n => !C0.includes(n)))) no('show에 없는 열');
-    const sel = (F.rows || []).flatMap((r, i) => pick(Object.fromEntries(r.map((x, j) => [C0[j], num(x) ? +x : x === 'NULL' ? null : x]))) ? [i] : []);
+    if (new Set(C0).size !== C0.length) no('pick 표의 열 이름이 겹친다');
+    if (show !== undefined && (!Array.isArray(show) || !show.length || show.some(n => !C0.includes(n)) || new Set(show).size !== show.length)) no('show는 겹치지 않는 있는 열');
+    sel = F.rows.flatMap((r, i) => pick(Object.fromEntries(r.map((x, j) => [C0[j], num(x) ? +x : x === 'NULL' ? null : x]))) ? [i] : []);
     before = [del ? { ...F, mark: F.rows.map((_, i) => sel.includes(i) ? '지움' : '') } : { ...F, hl: [...(Array.isArray(F.hl) ? F.hl : F.hl ? [F.hl] : []), ...sel.map(row => ({ row }))] }, ...from.slice(1)];
     const keep = del ? F.rows.filter((_, i) => !sel.includes(i)) : sel.map(i => F.rows[i]), js = show ? show.map(n => C0.indexOf(n)) : C0.map((_, j) => j);
     res = [{ name: F.name, cols: js.map(j => F.cols[j]), rows: keep.map(r => js.map(j => r[j])) }];
   }
-  const tabs = before.map(t => cut(dbtab({ ...t, label: undefined })));    // 표 모양 오류는 dbtab이 먼저 막는다
+  const tabs = before.map(box);
   let k = 0;
-  const out = res.map(t => { const h = cut(dbtab({ ...t, label: undefined })), at = h.indexOf('<tbody>');
+  const out = res.map(t => { const h = box(t), at = h.indexOf('<tbody>');
     return h.slice(0, at) + h.slice(at).replace(/<tr(?: class="([^"]*)")?>/g, (_, c) => `<tr class="${c ? c + ' ' : ''}mk-dqm${still ? '' : ` mk-cdz${++k} A`}">`); }).join('');
   if (res.reduce((s, t) => s + t.rows.length, 0) > 8) no('결과는 8줄까지');
   if (A.length) {
@@ -4219,9 +4223,9 @@ const qrun = ({ sql, from, pick, show, after, err, del, hl, still = false, label
     const cover = (i, j) => H.some(h => h.cell ? h.cell[0] === i && h.cell[1] === j : 'row' in h ? h.row === i : h.col === j);
     A.forEach((t, a) => t.rows.forEach((r, i) => r.forEach((x, j) => { if (!seen.has(x) && !num(x) && x !== 'NULL' && !(a === 0 && cover(i, j))) no('결과 값은 실행 전 표에 있거나 숫자·NULL·강조 칸'); })));
   }
-  const n = res.reduce((s, t) => s + t.rows.length, 0), line = t => t.rows.map(r => r.map(x => x === '' ? '빈 글자' : x).join(' ')).join(', ');
-  const part = (pre, t) => `${pre} ${t.rows.length}줄${t.rows.length ? ': ' + line(t) : ''}`;
-  const body = err !== undefined ? `실패: ${err}, 표는 그대로예요` : res.length === 2 ? `결과 ${part(res[0].name, res[0])}; ${part(res[1].name, res[1])}` : part(del ? '지운 뒤 남은 줄' : '결과', res[0])
+  const n = res.reduce((s, t) => s + t.rows.length, 0), line = rs => rs.map(r => r.map(x => x === '' ? '빈 글자' : x).join(' ')).join(', ');
+  const part = (pre, t) => `${pre} ${t.rows.length}줄(${t.cols.map(c => typeof c === 'string' ? c : c.n).join(', ')})${t.rows.length ? ': ' + line(t.rows) : ''}`;    // 결과 열 이름도 읽는다
+  const body = err !== undefined ? `실패: ${err}, 표는 그대로예요` : res.length === 2 ? `결과 ${part(res[0].name, res[0])}; ${part(res[1].name, res[1])}` : (del ? `지운 줄 ${sel.length}줄${sel.length ? ': ' + line(sel.map(i => F.rows[i])) : ''}, ` : '') + part(del ? '지운 뒤 남은 줄' : '결과', res[0])
     + (hl === undefined ? '' : ', 강조: ' + (Array.isArray(hl) ? hl : [hl]).map(h => dbhn(res[0].cols.map(c => typeof c === 'string' ? { n: c } : c), h)).join(', '));
   const head = err !== undefined ? `<p class="mk-dqm mk-dqf${still ? '' : ' mk-cdz1 A'}"><b class="mk-dbk">실패</b>${esc(err)}<span>표는 그대로예요</span></p>`
     : `<div class="mk-dqh" aria-hidden="true">${res.length === 2 ? '결과 표 2개' : del ? `지운 뒤 남은 줄 ${n}줄` : `결과 ${n}줄`}</div>${out}`;
@@ -4232,9 +4236,11 @@ const qrun = ({ sql, from, pick, show, after, err, del, hl, still = false, label
 const erd = ({ tables, links = [], hl = [], label } = {}) => {
   const no = m => { throw new Error('erd: ' + m); }, w = (x, n) => typeof x === 'string' && wlen(x) >= 1 && wlen(x) <= n;
   if (!Array.isArray(tables) || tables.length < 2 || tables.length > 3) no('표는 2~3개');
+  if (!Array.isArray(links) || !Array.isArray(hl)) no('links·hl은 배열');
   const T = tables.map(t => { if (!w(t.name, 12)) no('표 이름은 1~12자'); if (!Array.isArray(t.cols) || t.cols.length < 1 || t.cols.length > 4) no('열은 1~4개');
     return { name: t.name, cols: t.cols.map(c => { const o = typeof c === 'string' ? { n: c } : c;
       if (!w(o.n, 10)) no('열 이름은 1~10자'); if (o.key !== undefined && o.key !== 'PK' && o.key !== 'FK') no('key는 PK·FK'); if (o.type !== undefined && !w(o.type, 6)) no('type은 1~6자'); return o; }) }; });
+  if (new Set(T.map(t => t.name)).size !== T.length) no('표 이름이 겹친다');
   const fkIn = (i, f) => T[i].cols.some(c => c.n === f && c.key === 'FK'), ok = i => Number.isInteger(i) && i >= 0 && i < T.length;
   const L = links.map(({ a, b, kind, fk }) => {
     if (!ok(a) || !ok(b) || Math.abs(a - b) !== 1) no('link는 이웃한 두 표');
@@ -4242,6 +4248,7 @@ const erd = ({ tables, links = [], hl = [], label } = {}) => {
     if (kind === 'N:M' ? fk !== undefined : !fkIn(kind === '1:N' ? b : kind === 'N:1' ? a : fkIn(b, fk) ? b : a, fk)) no(kind === 'N:M' ? 'N:M에는 fk가 없다' : 'fk는 FK 열이어야 한다');
     return { a, b, kind, fk, ft: kind === '1:N' ? b : kind === 'N:1' ? a : fkIn(b, fk) ? b : a };
   });
+  if (new Set(L.map(l => Math.min(l.a, l.b))).size !== L.length) no('같은 두 표에 link는 하나');
   if (hl.some(s => { const [t, c, x] = String(s).split('.'), tb = T.find(y => y.name === t); return !tb || x !== undefined || (c !== undefined && !tb.cols.some(y => y.n === c)); })) no('없는 표·열은 강조할 수 없다');
   const k = t => `<b class="mk-dbk">${t}</b>`, flip = { '1:N': 'N:1', 'N:1': '1:N', '1:1': '1:1', 'N:M': 'N:M' };
   const box = t => `<div class="mk-erb${hl.includes(t.name) ? ' mk-eron' : ''}" aria-hidden="true"><b class="mk-ern">${esc(t.name)}${hl.includes(t.name) ? k('강조') : ''}</b><ul>`

@@ -334,21 +334,23 @@ check('dbhelp', () => vm.runInContext(`(() => {
   no(() => dbtab({name:'t', cols:[{n:'a', type:'글자'}], rows:[]}), 'dbtab type'); no(() => dbtab({name:'t', cols:['a'], rows:Array(6).fill(['1'])}), '행 6개');
   no(() => dbtab({name:'t', cols:['a'], rows:[['a'.repeat(11)]]}), '칸 11폭'); no(() => dbtab({name:'t', cols:['a', 'b'], rows:[['1']]}), '칸 수'); no(() => dbtab({name:'t', cols:['a'], rows:[[1]]}), '칸 숫자');
   no(() => dbtab({...U, hl:{row:3}}), '없는 행'); no(() => dbtab({...U, hl:{col:3}}), '없는 열'); no(() => dbtab({...U, hl:{cell:[0, 5]}}), '없는 칸');
+  const cH = dbtab({...U, hl:{col:2}}); if ((cH.match(/<td class="mk-dbon"/g) || []).length !== 3 || (cH.match(/>강조</g) || []).length !== 1) bad.push('열 강조 칸');
+  no(() => dbtab({...U, hl:[1]}), 'hl 숫자'); no(() => dbtab({...U, hl:null}), 'hl null'); no(() => dbtab({...U, hl:{row:0, col:1}}), 'hl 둘'); no(() => dbtab({...U, hl:{}}), 'hl 빈 객체'); no(() => dbtab({...U, tag:''}), '이름표 빈 글');
   no(() => dbtab({...U, mark:['읽음']}), 'mark 수'); no(() => dbtab({...U, mark:['abcdefg', '', '']}), '꼬리표 7폭');
   const P = {name:'posts', cols:['id', 'title', 'likes'], rows:[['1', '공지', '3'], ['2', '후기', '25'], ['3', '질문', '12']]};
   const q = qrun({sql:['SELECT title FROM posts', 'WHERE likes > 10'], from:[P], pick: r => r.likes > 10, show:['title']});
   has(q, ['class="mk-dq"', 'class="mk-dqr" aria-hidden="true"', '<b>실행</b>', 'class="mk-dqh" aria-hidden="true">결과 2줄', 'mk-dqm mk-cdz1 A', 'mk-dqm mk-cdz2 A',
-    '<p class="sr">쿼리 SELECT title FROM posts WHERE likes &gt; 10 실행. 실행 전 posts 3줄. 결과 2줄: 후기, 질문.</p>'], 'qrun pick');
+    '<p class="sr">쿼리 SELECT title FROM posts WHERE likes &gt; 10 실행. 실행 전 posts 3줄. 결과 2줄(title): 후기, 질문.</p>'], 'qrun pick');
   if ((q.match(/class="sr"/g) || []).length !== 1 || q.includes('mk-cdz3')) bad.push('qrun sr 하나·결과 2줄');
   if (!qrun({sql:['a'], from:[P], pick: r => r.likes === 25}).includes('결과 1줄')) bad.push('숫자로 바꿈');
-  if (!qrun({sql:['a'], from:[U], pick: r => r.phone === null}).includes('결과 1줄: 2 지영 NULL.')) bad.push('NULL은 null');
-  has(qrun({sql:['DELETE FROM users', 'WHERE id = 3'], from:[U], pick: r => r.id === 3, del:1}), ['>지움<', '지운 뒤 남은 줄 2줄', '지운 뒤 남은 줄 2줄: 1 민수 010-…, 2 지영 NULL.</p>'], 'qrun del');
+  if (!qrun({sql:['a'], from:[U], pick: r => r.phone === null}).includes('결과 1줄(id, name, phone): 2 지영 NULL.')) bad.push('NULL은 null');
+  has(qrun({sql:['DELETE FROM users', 'WHERE id = 3'], from:[U], pick: r => r.id === 3, del:1}), ['>지움<', '지운 뒤 남은 줄 2줄', '지운 줄 1줄: 3 준호 빈 글자, 지운 뒤 남은 줄 2줄(id, name, phone): 1 민수 010-…, 2 지영 NULL.</p>'], 'qrun del');
   const e1 = qrun({sql:['INSERT INTO users', "VALUES (4, 'x')"], from:[U], err:'이미 있는 이메일이에요'});
   has(e1, ['>실패<', '이미 있는 이메일이에요', '표는 그대로예요', 'mk-cdz1 A', '실패: 이미 있는 이메일이에요, 표는 그대로예요.</p>'], 'qrun err'); if (e1.includes('mk-cdz2')) bad.push('qrun err 한 줄');
   const U2 = {name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영']]}, O = {name:'orders', cols:['id', 'user_id'], rows:[['1', '1'], ['2', '2']]};
   has(qrun({sql:['DELETE FROM users', 'WHERE id = 1'], from:[U2, O], after:[{name:'users', cols:['id', 'name'], rows:[['2', '지영']]}, {name:'orders', cols:['id', 'user_id'], rows:[['2', '2']]}]}),
-    ['결과 표 2개', 'mk-cdz2 A', '실행 전 users 2줄, orders 2줄. 결과 users 1줄: 2 지영; orders 1줄: 2 2.</p>'], 'qrun 표 둘');
-  has(qrun({sql:['INSERT INTO users', "VALUES (3, '준호')"], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]}, hl:{row:2}}), ['결과 3줄: 1 민수, 2 지영, 3 준호, 강조: 3줄.</p>'], 'qrun after hl');
+    ['결과 표 2개', 'mk-cdz2 A', '실행 전 users 2줄, orders 2줄. 결과 users 1줄(id, name): 2 지영; orders 1줄(id, user_id): 2 2.</p>'], 'qrun 표 둘');
+  has(qrun({sql:['INSERT INTO users', "VALUES (3, '준호')"], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]}, hl:{row:2}}), ['결과 3줄(id, name): 1 민수, 2 지영, 3 준호, 강조: 3줄.</p>'], 'qrun after hl');
   if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(qrun({sql:['a'], from:[P], pick: () => true, still:true}))) bad.push('qrun still');
   const A1 = {name:'users', cols:['id', 'name'], rows:[['1', '민수']]};
   no(() => qrun({sql:[], from:[U2], after:A1}), 'SQL 0줄'); no(() => qrun({sql:Array(5).fill('a'), from:[U2], after:A1}), 'SQL 5줄'); no(() => qrun({sql:['a'.repeat(29)], from:[U2], after:A1}), 'SQL 29폭');
@@ -359,6 +361,11 @@ check('dbhelp', () => vm.runInContext(`(() => {
   no(() => qrun({sql:['a'], from:[U2], pick: () => true, hl:{row:0}}), 'hl+pick'); no(() => qrun({sql:['a'], from:[U2], err:'a'.repeat(29)}), 'err 29폭');
   no(() => qrun({sql:['a'], from:[U2], pick: () => true, err:'a'}), 'pick+err'); no(() => qrun({sql:['a'], from:[U2], err:'a', del:1}), 'err+del'); no(() => qrun({sql:['a'], from:[U2, U2], after:[A1, A1], hl:{row:0}}), '표 2개 hl');
   no(() => qrun({sql:['a'], from:[U2], after:[A1, A1, A1]}), 'after 3개'); no(() => qrun({sql:['a'], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '하늘']]}}), '결과 값 밖');
+  const ok = (f, a, w) => { try { has(f(), a, w); } catch (e) { bad.push(w + ' ' + e.message); } };
+  ok(() => qrun({sql:['a'], from:[{name:'t', cols:['a']}], pick: () => true}), ['결과 0줄(a).</p>'], 'from rows 없음'); ok(() => qrun({sql:['a'], from:[U2], after:{name:'users', cols:['id']}}), ['결과 0줄(id).</p>'], 'after rows 없음');
+  no(() => qrun({sql:['a'], from:[{name:'t', cols:'x'}], pick: () => true}), 'pick 전 표 검사'); no(() => qrun({sql:['a'], from:[{name:'t', cols:['a', 'a'], rows:[['1', '2']]}], pick: () => true}), '같은 열 이름');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['id', 'id']}), 'show 겹침');
+  const z = qrun({sql:['a'], from:[{name:'t', cols:['a'], rows:[]}, P], after:[{name:'t', cols:['a'], rows:[]}, P]}); if (z.includes('결과 없음') || (z.match(/>빈 표</g) || []).length !== 2) bad.push('qrun 빈 표 문구');
   const F5 = {name:'t', cols:['a'], rows:Array(5).fill(['1'])}; no(() => qrun({sql:['a'], from:[U2], after:[F5, F5]}), '결과 10줄');
   const e = erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, {n:'email', type:'글자'}]}, {name:'orders', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}]}], links:[{a:0, b:1, kind:'1:N', fk:'user_id'}], hl:['orders.user_id']});
   has(e, ['class="mk-er"', 'class="mk-erl" aria-hidden="true"', '>1 : N<', 'orders.user_id로 이어져요', '<span class="mk-ert">글자</span>', 'mk-eron',
@@ -374,6 +381,8 @@ check('dbhelp', () => vm.runInContext(`(() => {
   no(() => erd({tables:T3, links:[{a:0, b:2, kind:'1:N', fk:'course_id'}]}), '이웃 아님'); no(() => erd({tables:T2, links:[{a:0, b:1, kind:'2:1'}]}), 'kind');
   no(() => erd({tables:[EN, C], links:[{a:0, b:1, kind:'1:N', fk:'course_id'}]}), '1:N fk 자리'); no(() => erd({tables:[{name:'a', cols:['x']}, {name:'b', cols:['x']}], links:[{a:0, b:1, kind:'1:N', fk:'x'}]}), 'fk 아닌 열');
   no(() => erd({tables:T2, links:[{a:0, b:1, kind:'N:M', fk:'id'}]}), 'N:M fk'); no(() => erd({tables:T2, hl:['posts']}), '없는 표 강조'); no(() => erd({tables:T2, hl:['students.age']}), '없는 열 강조');
+  no(() => erd({tables:T2, links:[{a:0, b:1, kind:'N:M'}, {a:1, b:0, kind:'N:M'}]}), '같은 쌍 link 둘'); no(() => erd({tables:[S, S]}), '같은 표 이름');
+  no(() => erd({tables:T2, links:{}}), 'links 배열 아님'); no(() => erd({tables:T2, hl:'students'}), 'hl 배열 아님');
   return bad.join(', ');
 })()`, ctx));
 check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다

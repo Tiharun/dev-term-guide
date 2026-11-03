@@ -146,9 +146,9 @@
     - 칸: `'NULL'`은 `<i class="mk-dbn">NULL</i>`, `''`은 `<b class="mk-dbk">빈 글자</b>`, 그 밖은 `esc(값)`.
     - 강조: 그 칸·행·열 요소에 `mk-dbon` 클래스, 꼬리표 `<b class="mk-dbk">강조</b>`(행은 첫 칸 뒤, 열은 머리 칸, 칸은 그 칸).
     - `mark`: 줄마다 꼬리표 `<b class="mk-dbk">${mark[i]}</b>`를 마지막 칸 뒤에 붙인다(`''`이면 없음).
-    - 행 0개면 표 아래 `<p class="mk-dbe" aria-hidden="true">결과 없음(0줄)</p>`.
+    - 행 0개면 표 아래 `<p class="mk-dbe" aria-hidden="true">결과 없음(0줄)</p>`(`qrun` 안의 표는 `빈 표`).
     - 끝 `<p class="sr">`: `[tag, ]${name} 테이블, 열 ${c}개(${열 이름[ PK|FK]를 ', '로}), 행 ${n}줄.` 뒤에 줄마다 ` ${i}줄: ${칸을 ', '로}[ (${mark})].`(NULL은 `NULL`, 빈 글은 `빈 글자`). 행 0개면 `행 0줄, 결과 없음.`. 강조가 있으면 ` 강조: ${hl 순서대로 '2줄'·'phone 열'·'2줄 phone 칸'을 ', '로}.`
-    - 오류는 `'dbtab: '`로 시작한다. 검사: name·tag 문자열·wlen ≤ 12(name은 빈 글 금지), cols 1~3개, 열 이름 wlen 1~10, key가 PK·FK 외, 열에 `type`, rows 0~5개, 줄마다 칸 수 = 열 수, 칸이 문자열이 아님·wlen > 10, hl이 없는 행·열·칸, mark 길이 ≠ 행 수, 꼬리표 wlen > 6.
+    - 오류는 `'dbtab: '`로 시작한다. 검사: name·tag 문자열·wlen ≤ 12(name·tag 모두 빈 글 금지), cols 1~3개, 열 이름 wlen 1~10, key가 PK·FK 외, 열에 `type`, rows 0~5개, 줄마다 칸 수 = 열 수, 칸이 문자열이 아님·wlen > 10, hl이 없는 행·열·칸, mark 길이 ≠ 행 수, 꼬리표 wlen > 6.
   - `qrun({sql, from, pick, show, after, err, del, hl, still = false, label} = {}) → string`
     - 바깥 `<div class="mk-dq">`(label은 dbtab과 같음). 위에서 아래로: 실행 전 표(`dbtab`, 2개면 위아래) → `<div class="mk-dqr" aria-hidden="true"><b>실행</b><code>SQL 줄마다</code></div>` → 결과.
     - `pick`: `from[0]` 행을 `{열 이름: 값}`으로 바꿔(`/^-?\d+(\.\d+)?$/`는 숫자, `'NULL'`은 `null`) 넘긴다. 고른 행은 실행 전 표에서 `{row}` 강조, 결과 표는 고른 행(`show`가 있으면 그 열만, 순서는 `show` 순서).
@@ -435,7 +435,7 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   if (n(ok, /<li/g) !== 4 || !ok.includes('40000') || !ok.includes('COMMIT') || ok.includes('실패') || !ng.includes('50000') || ng.includes('40000') || !ng.includes('ROLLBACK') || !ng.includes('>실패<') || n(dtx(false, false), /<li/g) !== 0) bad.push('dtx');
   if (!dtxSay(false, true).startsWith('COMMIT') || !dtxSay(true, true).startsWith('ROLLBACK') || !dtxSay(true, false).includes('실행')) bad.push('dtxSay');
   const i = djoin('INNER'), l = djoin('LEFT');
-  if (!i.includes('결과 2줄') || i.includes('준호 NULL') || !l.includes('결과 3줄: 민수 책, 지영 펜, 준호 NULL') || /class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(i + l)) bad.push('djoin');
+  if (!i.includes('결과 2줄') || i.includes('준호 NULL') || !l.includes('결과 3줄(name, item): 민수 책, 지영 펜, 준호 NULL') || /class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(i + l)) bad.push('djoin');
   if (!djoinSay('INNER').includes('빠졌어요') || !djoinSay('LEFT').includes('NULL')) bad.push('djoinSay');
   [() => dindex('y', true), () => dtx(1, true), () => djoin('RIGHT'), () => dindexSay(true, 'n'), () => dtxSay('x', true), () => djoinSay('FULL')].forEach((f, k) => { try { f(); bad.push('안 막음 ' + k); } catch (e) { if (!/^(dindex|dtx|djoin): /.test(e.message)) bad.push('메시지 ' + k); } });
   return bad.join(', '); })()`, ctx));
@@ -498,7 +498,7 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   - `dbstill`의 `return` 앞에 더한다:
 
 ```js
-  if (!dwhere(0).includes('결과 2줄: 민수 서울 25, 준호 서울 19') || !dwhere(1).includes('결과 2줄: 민수 서울 25, 지영 부산 31') || !dwhere(2).includes('결과 1줄: 지영 부산 31')) bad.push('dwhere');
+  if (!dwhere(0).includes('결과 2줄(name, city, age): 민수 서울 25, 준호 서울 19') || !dwhere(1).includes('결과 2줄(name, city, age): 민수 서울 25, 지영 부산 31') || !dwhere(2).includes('결과 1줄(name, city, age): 지영 부산 31')) bad.push('dwhere');
   if (dwhereSay(0) !== '3줄 중 2줄이 조건에 맞아요' || dwhereSay(2) !== '3줄 중 1줄이 조건에 맞아요') bad.push('dwhereSay');
   [() => dwhere(3), () => dwhere(0.5), () => dwhereSay(-1)].forEach((f, k) => { try { f(); bad.push('안 막음 w' + k); } catch (e) { if (!/^dwhere: /.test(e.message)) bad.push('메시지 w' + k); } });
 ```
