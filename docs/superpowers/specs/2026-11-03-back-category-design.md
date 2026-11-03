@@ -5,6 +5,7 @@
 - ③은 남은 12개 카테고리를 사이트 순서(basics → web → front → back → db → server → git → deploy → security → perf → bug → ai)로 하나씩 보강한다. 이 문서는 네 번째(back, 화면 이름 "백엔드")다.
 - 진행 방식은 front와 같다. 구현은 메인 세션이 하고, 설계서·계획서·구현 묶음 검토는 디렉터 에이전트(Opus 5.5, effort high)가 한다. 판단은 메인이 하고 원장에 남긴다.
 - 사용자 지시(2026-11-03): 초보자가 가장 이해하기 좋은 도구·도우미가 있으면 최대한 다 쓴다.
+- 디렉터 설계서 검토(1차, Critical 2·Important 8·Minor 4)를 반영한 판이다.
 
 ## 1. 목적과 성공 기준
 
@@ -32,12 +33,12 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 
 제외:
 - 다른 카테고리에 이미 있는 같은 뜻의 말(측정, 2026-11-03):
-  - basics: Asynchronous·Async/Await·Promise·Callback·Thread·Runtime·Dependency Injection
+  - basics: Asynchronous·Async/Await·Promise·Callback·Thread·Runtime / test: Dependency Injection·Mock
   - server: HTTP Status Code·200~502 상태 번호 카드·Serverless·Cron Job·Load Balancer·Reverse Proxy·Server Log·Cold Start
   - security: Refresh Token·Token Expiry·HttpOnly Cookie·Password Hashing·CSRF·SQL Injection
   - db: Redis·Transaction·Migration·Supabase
   - net: Socket·Proxy / design: File Upload / front: Fetch / bug: Race Condition / terminal: curl
-- 이름만 같고 뜻이 다른 기존 카드(ai Token = AI 글 단위, ai Streaming = AI 답이 흘러나옴, plan Scope = 작업 범위)는 제외 사유가 아니다. 새 카드 Access Token·Streaming Response·OAuth Scope가 x로 구분한다. 그래서 새 카드 이름은 `Scope`가 아니라 `OAuth Scope`다(정규화 이름 중복 방지).
+- 이름만 같고 뜻이 다른 기존 카드(ai Token = AI 글 단위, ai Streaming = AI 답이 흘러나옴, ai Scope = 작업 범위, ai/core)는 제외 사유가 아니다. 새 카드 Access Token·Streaming Response·OAuth Scope가 x로 구분한다. 그래서 새 카드 이름은 `Scope`가 아니라 `OAuth Scope`다(정규화 이름 중복 방지).
 - 증상 "오류·안 됨" 칩 재검토. ③ 마지막 AI 이후 한 번에 한다.
 - 헷갈림 칸 이름 변경, 기존 카드 이동, 다른 카테고리 카드 수정. r 연결만 예외다.
 
@@ -50,11 +51,12 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
   - `msgs`: 메시지 배열 1~8개, 항목은 `{from, to, t, err, wait}`.
     - `from`·`to`는 lanes 번호(0부터). `from === to`이면 화살표 대신 그 줄 안의 "처리" 상자로 그린다(예: 서버가 비밀번호 확인).
     - `t`는 14자까지. 코드 모양 글(`POST /login`)도 쓸 수 있다.
-    - `err:1`이면 "실패" 글자를, `wait:1`이면 "기다림" 글자를 붙인다. 색만으로 구분하지 않는다.
-- 움직임: k번째 메시지는 기존 키프레임 `mk-cdz{k}`(1~8, [index.html:493](../../../index.html))로 차례로 나타난다(`A` 클래스). `still`이면 모두 보이는 마지막 장면이다.
-- 화살표 머리·선은 `aria-hidden`이다. 방향은 "브라우저 → 서버" 기호가 아니라 줄 위치와 `.sr` 문장으로 전한다.
-- 좁은 그림판(320px)에서도 세로줄 4개 + 14자 글이 가로 스크롤 없이 들어가야 한다. 계획서에서 break-ui로 다시 잰다. 들어가지 않으면 한도를 줄인다.
-- 입력 검사(넘으면 오류): lanes 수·이름 길이, msgs 수, 범위 밖 from·to, t 길이.
+    - `err:1`이면 "실패" 글자를, `wait:1`이면 "기다림" 글자를 붙인다. 색만으로 구분하지 않는다. 둘을 함께 쓰면 오류다.
+- 배치: 메시지 한 개가 한 행이다. 글 `t`는 화살표 길이와 상관없이 **행 전체 폭**에 놓고(이웃 세로줄 사이 약 60px에 14자가 들어가지 않기 때문, 320px 그림판 안쪽 약 244px 기준·추측), 그 아래에 출발 줄에서 도착 줄까지 화살표 선을 긋는다. 행 앞에는 "브라우저가 서버에" 같은 보낸 쪽·받는 쪽 이름을 작은 글자로 쓴다.
+- 움직임: k번째 메시지는 기존 키프레임 `mk-cdz{k}`(1~8, [index.html:493](../../../index.html))로 차례로 나타난다(`A` 클래스). `mk-cdz`에 재생 시간·지연을 주는 규칙은 지금 `.mk-cds.A`·`.mk-mrs.A`에만 있으므로([index.html:491](../../../index.html)), 새 클래스(`.mk-sqm.A`)에 같은 규칙(10s, -8.8s, infinite, linear, opacity 0)을 더한다. `still`이면 모두 보이는 마지막 장면이다.
+- 화살표 머리·선은 `aria-hidden`이다. 방향은 "브라우저 → 서버" 기호가 아니라 행 앞 이름과 `.sr` 문장으로 전한다.
+- 좁은 그림판(320px)에서도 세로줄 4개 + 14자 글이 가로 스크롤 없이 들어가야 한다. 계획서 첫 Task에서 break-ui로 다시 잰다. 들어가지 않으면 한도를 줄인다.
+- 입력 검사(넘으면 오류): lanes 수·이름 길이, msgs 수, 정수가 아니거나 범위 밖인 from·to, 빈 t·t 길이, err와 wait 동시 사용.
 - `.sr` 문장: "브라우저가 서버에 POST /login, 서버가 처리: 비밀번호 확인, 서버가 브라우저에 200 OK(실패 0개)" 식으로 기호 없이 읽는다.
 - 대상(예): Server, Request Flow, Middleware, Webhook, OAuth, Polling, WebSocket, Retry, CORS, Background Job, Pub/Sub, Long Polling, Server-Sent Events, Circuit Breaker, Redirect URI
 
@@ -62,12 +64,13 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 
 - `httpmsg({kind, start, head, body, hl, label})`
   - `kind`: `'요청'`·`'응답'` 중 하나. 위 머리띠에 "HTTP 요청"·"HTTP 응답"을 글자로 쓴다.
-  - `start`: 첫 줄. 요청은 `메서드 경로`(예: `POST /api/posts`), 응답은 `상태 번호 이름`(예: `201 Created`).
+  - `start`: 첫 줄. 요청은 `메서드 경로`(예: `POST /api/posts`), 응답은 `상태 번호 이름`(예: `201 Created`). 실제 HTTP/1.1 첫 줄에 붙는 버전(`HTTP/1.1`)은 28자 한도 때문에 뺀다. 머리띠 옆에 "(버전 줄임)"을 작은 글자로 쓴다([MDN Messages](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages)).
   - `head`: 헤더 줄 배열 0~4줄(예: `Content-Type: application/json`). 너무 길면 값 일부를 `…`으로 줄인 예시를 쓴다.
-  - `body`: 본문 줄 배열 0~4줄. 헤더와 본문 사이에는 빈 줄 칸을 그린다(실제 HTTP 형식).
+  - `body`: 본문 줄 배열 0~4줄. 헤더와 본문 사이에는 빈 줄 칸을 그린다(HTTP 형식과 같음).
   - `hl`: 강조할 줄 이름 배열(`'start'`, `'h0'`~`'h3'`, `'b0'`~`'b3'`). 강조는 배경색과 "강조" 글자로 한다.
 - 응답 상태 번호가 400 이상이면 첫 줄에 "실패" 글자를 붙인다.
-- 한도(넘으면 오류): 모든 줄 28자(ide와 같음, DESIGN.md:256). 없는 줄을 `hl`로 가리켜도 오류다. 응답의 start가 세 자리 숫자로 시작하지 않거나 요청의 start가 메서드(GET·POST·PUT·PATCH·DELETE)로 시작하지 않으면 오류다.
+- 한도(넘으면 오류): 모든 줄 28자(ide와 같음, DESIGN.md:256), 헤더·본문 각 5줄 이상, kind가 요청·응답이 아님, 없는 줄을 가리키는 `hl`. 응답의 start가 100~599 상태 번호로 시작하지 않거나 요청의 start가 메서드(GET·HEAD·POST·PUT·PATCH·DELETE·OPTIONS)로 시작하지 않아도 오류다. OPTIONS는 CORS 사전 요청 때문에 넣는다.
+- 좁은 칸에 넣지 않는다: `pair` 왼쪽 칸은 110px(코드 칸 `fcss`도 최대 190px, [index.html:346](../../../index.html)·[464](../../../index.html))라 28자 줄이 넘친다. `httpmsg`는 그림판 전체 폭에 단독으로 두거나 두 개를 세로로 쌓는다.
 - 이름 `httpmsg`는 기존 `{http:200}` 그림 형식(server 상태 번호 카드, [index.html:278](../../../index.html))과 헷갈리지 않게 정했다.
 - `.sr` 문장: "HTTP 요청, POST /api/posts, 헤더 2줄, 본문 3줄, 강조: Content-Type 줄".
 - 대상(예): Request, Response, Request Header, Request Body, Response Header, Response Body, Content-Type, Payload, Bearer Token, API Key, Error Response, Health Check, Pagination API
@@ -86,8 +89,8 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 | basic | Endpoint | `doc` 표: 주소 · 메서드 · 하는 일 세 줄 |
 | basic | JSON | `pair`: JSON 글 → 화면 카드(이름·나이) |
 | basic | Database | `seq` 서버·DB: 저장 → 저장됨 → 조회 → 결과 |
-| core | HTTP | `pair`: `httpmsg` 요청 → `httpmsg` 응답 |
-| core | HTTP Method | `doc` 표: GET 가져오기 · POST 만들기 · PATCH 고치기 · DELETE 지우기 |
+| core | HTTP | `httpmsg` 요청과 `httpmsg` 응답을 세로로 쌓고 사이에 "주고받는 약속" 이름표 |
+| core | HTTP Method | `doc` 표: GET 가져오기 · POST 만들기 · PUT 통째로 바꾸기 · PATCH 일부 고치기 · DELETE 지우기 |
 | core | REST API | `doc` 표: 같은 주소 `/posts` 하나에 메서드마다 다른 일 |
 | core | CRUD | `track`: Create → Read → Update → Delete, 칸마다 짝 메서드 |
 | core | Authentication | `seq` 브라우저·서버: 아이디·비번 → 처리(확인) → 로그인됨 |
@@ -95,19 +98,19 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 | core | Middleware | `seq` 브라우저·미들웨어·라우트: 요청 → 로그인 검사 → 통과 → 처리 |
 | core | Environment Variable | `pair`: `.env`의 `API_KEY=…`(예시) → 코드 `process.env.API_KEY` |
 | core | Validation | `seq` 브라우저·서버: 이메일 "abc" 보냄 → 처리(형식 검사) → 400 실패 |
-| core | Webhook | `seq` 결제 서비스·내 서버: 결제 완료 알림 POST → 200 받음 |
+| core | Webhook | `seq` 결제 서비스·내 서버: 결제 완료 알림 POST → 처리(서명 확인) → 200 받음 |
 | core | Rate Limit ▶ | 버튼을 빠르게 누르면 정한 횟수 다음부터 `429`와 "잠시 뒤 다시" |
 | core | Session | `seq` 브라우저·서버·세션 저장소: 로그인 → 세션 만들기 → 쿠키 sid → 다음 요청에 쿠키 |
 | motion | Request Flow | `seq` 브라우저·서버·DB: 클릭 요청 → 조회 → 결과 → 응답 → 처리(화면 갱신) |
 | motion | Optimistic Update | `track`: 누름 → 화면 먼저 바뀜 → 서버 응답 → 실패면 되돌림 |
 | motion | Polling | `seq` 브라우저·서버: "새 글?" "없음"을 되풀이하다 "있음" |
-| motion | WebSocket | `seq` 브라우저·서버: 연결 한 번 → 서버가 먼저 보냄 두 번 |
+| motion | WebSocket | `seq` 브라우저·서버: 연결 한 번 → 서버가 먼저 보냄 → 브라우저도 보냄(채팅 글) → 서버가 또 보냄. 양방향임을 보여 SSE(한 방향)와 구분 |
 | motion | Timeout | `track`: 요청 → 기다림(5초, 예시) → 응답 없음 → 시간 초과 |
 | motion | Retry | `seq` 브라우저·서버: 요청 실패 → 다시 요청 → 200 |
 | motion | Queue | `track`: 대기열 칸 셋 → 워커가 앞에서부터 하나씩 꺼냄 |
 | adv | GraphQL | `pair`: 쿼리 `{ post { title } }` → 응답에 title만 |
 | adv | JWT | `doc`: 헤더 · 내용 · 서명 세 칸, "내용은 누구나 읽을 수 있어요" |
-| adv | OAuth | `seq` 내 사이트·사용자·로그인 서비스: 로그인 요청 → 동의 → 코드 → 토큰 교환 |
+| adv | OAuth | `seq` 브라우저·내 서버·로그인 서비스: 로그인 서비스로 이동 → 처리(동의) → 코드를 들고 내 서버로 돌아옴(리다이렉트) → 내 서버가 로그인 서비스와 직접 코드를 토큰으로 바꿈. 토큰 교환은 서버끼리 그린다([RFC 6749 §4.1](https://www.rfc-editor.org/rfc/rfc6749#section-4.1)) |
 | adv | Microservices | `seq` 주문 서비스·결제 서비스·알림 서비스: 결제 요청 → 완료 → 알림 보내기 |
 | adv | Monolith | 전용 HTML: 한 상자 안에 회원·주문·결제 칸, 아래 "고쳐도 한 번에 배포" |
 | adv | Cache ▶ | 첫 요청은 "DB까지 다녀옴 · 느림", 두 번째는 "캐시에 있음 · 빠름", "캐시 비우기" 버튼 |
@@ -117,10 +120,10 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 | api | Request Body | `httpmsg` 요청, 본문 줄 강조 |
 | api | Query Parameter | `browser` 주소 `example.com/posts?page=2&sort=new` 강조 + `doc` 표 이름·값 |
 | api | Path Parameter | `pair`: `/users/42`의 42 강조 → "42번 회원" 화면 |
-| api | API Key | `httpmsg` 요청, `x-api-key` 헤더 강조, "화면 코드에 두지 않아요" |
+| api | API Key | `httpmsg` 요청, 머리띠에 "내 서버가 보냄", `x-api-key` 헤더 강조, "화면 코드에 두지 않아요" |
 | api | API Documentation | `doc`: 주소 · 보낼 값 · 예시 응답 블록 |
 | api | SDK | `vs`: 직접 요청 코드 여러 줄 vs SDK 한 줄 |
-| api | CORS | `seq` 브라우저·다른 서버: 요청 → 응답(허용 헤더 없음) → 처리(브라우저가 막음) 실패 |
+| api | CORS | `seq` 브라우저·다른 서버: 요청 → 응답(허용 헤더 없음) → 처리(브라우저가 막음) 실패. 그림에 "단순 요청 기준"을 쓰고, Authorization 헤더 등을 쓰면 OPTIONS 사전 요청이 먼저 간다는 내용은 x로 보충([MDN CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)) |
 | tip | Logging | `term` 서버 로그 세 줄(시각·요청·결과, 예시) |
 | tip | Error Handling | `vs`: 처리 없음(하얀 화면) vs 처리함("잠시 뒤 다시 시도해 주세요") |
 | tip | try-catch | `ide`: try 안에서 실패 → catch에서 메시지 남김 |
@@ -133,6 +136,8 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 공통 규칙(DESIGN.md):
 - 그림 글자는 11px 이상이다.
 - 그림 속 숫자·키 값은 예시로 표시한다. 실제 키처럼 보이는 값은 쓰지 않는다(`sk_test_…`처럼 줄임표).
+- 코드가 들어가는 `pair` 왼쪽 칸(API·ORM·Environment Variable·GraphQL·JSON·Mock Data 등)은 front처럼 `fcss`([index.html:7261](../../../index.html))로 쓴다. 190px에 안 들어가면 `vs`나 세로 쌓기로 바꾼다.
+- 보안 습관: 토큰을 localStorage에 두는 모습을 그리지 않는다(Cookie vs Token은 HttpOnly 쿠키 쪽을 권장으로 그림), 키를 보내는 쪽은 "내 서버"로 표시한다, Error Response 본문에 스택 추적·내부 경로를 넣지 않는다.
 - 회사 로고·브랜드 이름을 쓰지 않는다("로그인 서비스", "결제 서비스").
 - 320/375/1280 세 폭에서 넘침이 없어야 한다.
 - 상태를 색만으로 구분하지 않는다.
@@ -167,13 +172,14 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 - r은 이미 있는 같은 뜻·짝 카드에만 단다. 후보:
   - Node.js↔Runtime·Server, Backend Framework↔Framework·Route Handler, Route Handler↔Endpoint, Controller↔Route Handler·Service Layer, Service Layer↔Controller·Repository Pattern, Repository Pattern↔ORM·Database, MVC↔Separation of Concerns·Controller, Stateless vs Stateful↔Session·JWT, API Gateway↔Microservices·Reverse Proxy, BFF↔API Gateway, BaaS↔Supabase·Serverless
   - Payload↔Request Body, Content-Type↔Request Header·JSON, Serialization↔JSON, DTO↔Validation·Schema Validation, Error Response↔HTTP Status Code·Error Handling, Schema Validation↔Validation, Multipart Form Data↔File Upload·Content-Type, UUID↔Primary Key, Cursor vs Offset Pagination↔Pagination API, API Versioning↔Semantic Versioning, OpenAPI↔API Documentation, Request ID↔Logging
-  - Worker↔Background Job·Queue, Pub/Sub↔Queue·Event-driven Architecture, Event-driven Architecture↔Webhook·Event, Concurrency↔Race Condition·Lock, Lock↔Concurrency·Transaction, Batch Processing↔Cron Job, Dead Letter Queue↔Queue·Retry, Exponential Backoff↔Retry·Rate Limit, Server-Sent Events↔WebSocket·Polling, Long Polling↔Polling, Streaming Response↔Response, Circuit Breaker↔Timeout·Retry
+  - Worker↔Background Job·Queue, Pub/Sub↔Queue·Event-driven Architecture, Event-driven Architecture↔Webhook·Pub/Sub, Concurrency↔Race Condition·Lock, Lock↔Concurrency·Transaction, Batch Processing↔Cron Job, Dead Letter Queue↔Queue·Retry, Exponential Backoff↔Retry·Rate Limit, Server-Sent Events↔WebSocket·Polling, Long Polling↔Polling, Streaming Response↔Response, Circuit Breaker↔Timeout·Retry
   - Access Token↔JWT·Refresh Token, Bearer Token↔Access Token·Request Header, OAuth Scope↔OAuth·Principle of Least Privilege, RBAC↔Authorization·Permission, Cookie vs Token↔Cookie·Session·JWT, Session Store↔Session·Redis, Redirect URI↔OAuth, Webhook Signature↔Webhook·Secret, Service Account↔API Key
   - Response Header↔Request Header, Response Body↔Request Body·Response
 - 뜻이 다른 짝은 r 없이 x 안에서만 구분한다(`BK_WRONG` 점검):
   - Access Token·Bearer Token vs ai의 Token(AI 글 단위)
   - Streaming Response vs ai의 Streaming(AI 답 방식). terminal Streaming Output은 r 후보가 아니다
-  - OAuth Scope vs plan의 Scope(작업 범위)
+  - OAuth Scope vs ai의 Scope(작업 범위)
+  - Event-driven Architecture vs basics의 Event(화면에서 일어나는 일)
   - Worker vs front·perf의 Service Worker·Web Worker(브라우저 안 일꾼)
   - Lock vs deploy의 Lock File·security의 Account Lockout
   - Route Handler vs web의 Routing(화면 주소에 맞는 화면을 고르는 라우터)
@@ -186,7 +192,7 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 
 ## 5. 용어 목록 (새 46장)
 
-`▶`는 직접 조작이다. 측정: 아래 영문명은 기존 카드 1,483장과 정규화 이름(`norm`, 소문자·공백·`/`·`-`·`.` 제거)으로 같지 않다(2026-11-03 대조). `Scope`는 plan 카드와 같아 `OAuth Scope`로 바꿨다.
+`▶`는 직접 조작이다. 측정: 아래 영문명은 기존 카드 1,483장과 정규화 이름(`norm`, 소문자·공백·`/`·`-`·`.` 제거)으로 같지 않다(2026-11-03 대조). `Scope`는 ai/core 카드([index.html:3456](../../../index.html))와 같아 `OAuth Scope`로 바꿨다.
 
 | 하위항목 | 새 카드 |
 |---|---|
@@ -201,7 +207,8 @@ Claude에게 서버 기능을 만들어 달라고 하는 사람이 "401이 떠�
 x로 구분할 짝(뜻이 가까움):
 - Server vs Backend(basics) vs Node.js
 - Request Header vs Request Body, Response Header vs Response Body, Payload vs Request Body
-- Authentication vs Authorization(401·403), RBAC vs OAuth Scope
+- Authentication vs Authorization(401·403), RBAC vs OAuth Scope, OAuth vs OpenID Connect(OAuth는 권한 위임 틀이고 로그인 정보는 OIDC가 더한다)
+- 기존 비슷한 카드(측정): Optimistic Update vs Optimistic UI(design), Request Flow vs Request-Response Cycle(server), Mock Data vs Mock(test), Logging vs Server Log(server), Cache vs Browser Cache(perf), Serverless Function vs Serverless(server)
 - Session vs JWT vs Cookie vs Token, Access Token vs Refresh Token(security) vs Bearer Token
 - Route Handler vs Controller vs Service Layer vs Repository Pattern, MVC vs Separation of Concerns(basics)
 - Middleware vs API Gateway vs BFF vs Reverse Proxy(server)
@@ -223,13 +230,14 @@ x로 구분할 짝(뜻이 가까움):
 
 ## 6. 증상 색인 (12개)
 
-기존 181개와 대조했다. 이미 있어 뺀 것: "두 번 눌러서 두 번 저장돼요", "CORS 에러가 나요", "로그인이 자꾸 풀려요", "가끔만 요청이 실패해요", "같은 요청이 끝없이 반복돼요", "내 컴퓨터에선 되는데 서버에선 안 돼요", "업로드만 유난히 느려요". 계획서에서 문구를 다시 대조한다.
+기존 181개와 대조했다. 이미 있어 뺀 것: "두 번 눌러서 두 번 저장돼요", "CORS 에러가 나요", "로그인이 자꾸 풀려요", "가끔만 요청이 실패해요", "같은 요청이 끝없이 반복돼요", "내 컴퓨터에선 되는데 서버에선 안 돼요", "업로드만 유난히 느려요". 계획서에서 문구를 다시 대조한다. "외부 API가 멈추면 우리 서버도 멈춰요"는 기존 "외부 API가 멈추면 테스트도 실패해요"와 비슷하지만 대상(운영 서버)과 연결 카드가 달라 넣는다.
+- "오류·안 됨" 그룹은 지금 79/181개다(측정). 이번에 10개를 더하면 89/193개가 된다. 칩 재검토(③ 마지막) 메모인 PLAN.md 57줄에 이 수치를 남긴다.
 
 | 증상 | 그룹 | 연결 카드 |
 |---|---|---|
-| 429가 떠요 | 오류·안 됨 | Rate Limit, Exponential Backoff |
-| 로그인했는데 401이 떠요 | 오류·안 됨 | Bearer Token, Access Token |
-| 로그인은 되는데 403이 떠요 | 오류·안 됨 | Authorization, RBAC, OAuth Scope |
+| 429가 떠요 | 오류·안 됨 | 429 Too Many Requests, Rate Limit, Exponential Backoff |
+| 로그인했는데 401이 떠요 | 오류·안 됨 | 401 Unauthorized, Bearer Token, Access Token, Token Expiry |
+| 로그인은 되는데 403이 떠요 | 오류·안 됨 | 403 Forbidden, Authorization, RBAC, OAuth Scope |
 | 서버가 보낸 데이터를 못 읽어요 | 오류·안 됨 | Content-Type, Serialization |
 | 웹훅이 같은 알림을 여러 번 보내요 | 오류·안 됨 | Webhook, Idempotent, Webhook Signature |
 | 업로드한 파일이 서버에서 비어 있어요 | 오류·안 됨 | Multipart Form Data |
