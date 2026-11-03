@@ -719,6 +719,33 @@ check('bkdmrun', () => { const bad = [], st = ctx.setTimeout; ctx.setTimeout = f
     a.key('글 삭제').click(); if (!a.box.innerHTML.includes('200 OK')) bad.push('authz 관리자');
   } finally { ctx.setTimeout = st; }
   return bad.join(', '); });
+const DBDM = {'WHERE': ["city = '서울'", 'age &gt; 20', 'age &gt; 30', 'aria-pressed', 'aria-live'], 'Join': ['INNER', 'LEFT', 'aria-pressed', 'aria-live'],
+  'Index': ['인덱스 없음', '인덱스 있음', '찾기', 'aria-pressed', 'aria-live'], 'Transaction': ['중간에 실패', '실행', '처음으로', 'aria-pressed', 'aria-live']};    // 직접 조작 그림: 영문명 → h에 있어야 할 글
+const DBP = en => { const t = g.TERMS.find(x => x.c === 'db' && x.en === en); return t && g.D[t.v]; };
+check('dbdm', () => Object.entries(DBDM).filter(([en, w]) => { const p = DBP(en); return !p || !p.init || !String(p.init).includes('psay') || ![...w, 'class="mk-mobox"', 'class="mk-hint"'].every(x => p.h.includes(x)); }).map(([en]) => en).join(', '));
+check('dbdmrun', () => { const bad = [], st = ctx.setTimeout; ctx.setTimeout = f => f();
+  try { const V = k => vm.runInContext(k, ctx), first = {'WHERE': V('dwhereSay(0)'), 'Join': V("djoinSay('INNER')"), 'Index': V('dindexSay(false, false)'), 'Transaction': V('dtxSay(false, false)')};
+    const pic = {'WHERE': V('dwhere(0)'), 'Join': V("djoin('INNER')"), 'Index': V('dindex(false, false)'), 'Transaction': V('dtx(false, false)')};
+    const run = en => { const p = DBP(en); if (!p || !p.init) { bad.push(en + ' init'); return null; } const s = board(p.h); if (s.hint.textContent !== first[en]) bad.push(en + ' 첫 문장'); if (s.box.innerHTML !== pic[en]) bad.push(en + ' 첫 그림'); p.init(s); return s; };
+    const pk = (s, i) => s.keys.filter(b => b.dataset.k)[i], on = s => s.keys.filter(b => b.dataset.k).map(b => b.attrs['aria-pressed']).join();
+    const w = run('WHERE');
+    if (w) { pk(w, 1).click(); if (w.box.innerHTML !== V('dwhere(1)') || w.hint.textContent !== V('dwhereSay(1)') || on(w) !== 'false,true,false') bad.push('where 2번');
+      pk(w, 2).click(); if (!w.hint.textContent.includes('1줄')) bad.push('where 3번'); }
+    const j = run('Join');
+    if (j) { pk(j, 1).click(); if (j.box.innerHTML !== V("djoin('LEFT')") || !j.hint.textContent.includes('NULL') || on(j) !== 'false,true') bad.push('join LEFT');
+      pk(j, 0).click(); if (!j.hint.textContent.includes('빠졌어요')) bad.push('join INNER'); }
+    const x = run('Index'), rd = s => (s.box.innerHTML.match(/>읽음</g) || []).length;
+    if (x) { x.key('찾기').click(); if (x.hint.textContent !== '5줄을 다 읽었어요' || rd(x) !== 5) bad.push('index 없음 찾기');
+      pk(x, 1).click(); if (!x.hint.textContent.includes('찾기') || x.box.innerHTML.includes('읽음')) bad.push('index 있음 고르기');
+      x.key('찾기').click(); if (x.hint.textContent !== '색인으로 1줄만 읽었어요') bad.push('index 있음 찾기'); }
+    const t = run('Transaction');
+    if (t) { t.key('실행').click(); if (!t.hint.textContent.startsWith('COMMIT') || !t.box.innerHTML.includes('40000')) bad.push('tx 실행');
+      t.key('처음으로').click(); if (t.hint.textContent !== '실행을 눌러 보세요' || t.box.innerHTML.includes('40000')) bad.push('tx 처음');
+      pk(t, 0).click(); if (pk(t, 0).attrs['aria-pressed'] !== 'true') bad.push('tx 실패 켬');
+      t.key('실행').click(); if (!t.hint.textContent.startsWith('ROLLBACK') || !t.box.innerHTML.includes('>실패<') || !t.box.innerHTML.includes('50000')) bad.push('tx 실패 실행');
+      pk(t, 0).click(); if (pk(t, 0).attrs['aria-pressed'] !== 'false') bad.push('tx 실패 끔'); }
+  } finally { ctx.setTimeout = st; }
+  return bad.join(', '); });
 check('bktext', () => BKS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
 check('bkxn', () => BKS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
