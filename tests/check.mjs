@@ -738,8 +738,7 @@ check('bkshare', () => ['input', 'progress', 'scale', 'pulse', 'spinner', 'stagg
 const DBS = () => g.TERMS.filter(t => t.c === 'db');
 check('dbcat', () => { const a = g.CATS.find(c => c.id === 'db').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,sql,query,model,tx,ops,tip' ? '' : a; });
 const DB_TODO = [];    // 아직 u-db- 그림이 아닌 옛 DB 카드. 다시 그리면 여기서 뺀다
-const DB_NOX = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
-  "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // x를 아직 안 쓴 옛 카드 48장. DB_TODO와 같은 이름이지만 따로 적는다(DB_TODO는 Task 4·5에서 줄어듦). 계획서 ②가 비운다
+const DB_NOX = [];    // x를 아직 안 쓴 옛 카드 48장. DB_TODO와 같은 이름이지만 따로 적는다(DB_TODO는 Task 4·5에서 줄어듦). 계획서 ②가 비운다
 check('dbukey', () => bkdiff(DBS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-db-') && g.D[t.v])).map(t => t.en), DB_TODO));
 check('dbobj', () => DBS().filter(t => typeof t.v === 'object' && !DB_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
 check('dbsym', () => DBS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
@@ -757,7 +756,8 @@ check('dbtext', () => DBS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(
 check('dbxn', () => DBS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 const DB_XHAS = {'Isolation Level': ['READ COMMITTED'], 'Dirty Read': ['PostgreSQL'], 'Deadlock': ['deadlock detected'], 'Pessimistic Locking': ['SELECT'],
   'Too Many Connections': ['too many clients already', 'Too many connections'], 'Query Timeout': ['statement timeout'], 'Composite Index': ['왼쪽'],
-  'Autocommit': ['BEGIN'], 'Optimistic Locking': ['version']};    // x에 꼭 있어야 할 말(Review Focus 3·4). Task 2가 옛 카드를 더한다
+  'Autocommit': ['BEGIN'], 'Optimistic Locking': ['version'],
+  'NULL': ['IS NULL'], 'LIMIT': ['ORDER BY'], 'UPDATE': ['WHERE'], 'DELETE': ['WHERE'], 'Foreign Key': ['NO ACTION'], 'Index': ['쓰기'], 'Primary Key': ['NULL'], 'Soft Delete': ['WHERE'], 'Sharding': ['Replication']};    // x에 꼭 있어야 할 말(Review Focus 3·4). Task 2가 옛 카드를 더한다
 check('dbxhas', () => Object.entries(DB_XHAS).filter(([en, w]) => { const t = g.find(en); return !t || !w.every(s => (t.x || '').includes(s)); }).map(([en]) => en).join(', '));
 const DB_SECRET = s => /\b01\d-\d{3,4}-\d{4}\b/.test(s) || /:\/\/[^:\s/]+:(?!\*{4}@)[^@\s]+@/.test(s);    // 전화번호 전체·가리지 않은 접속 비밀번호
 check('dbsafe', () => [...['010-1234-5678', 'postgres://app:pw1@db'].filter(x => !DB_SECRET(x)).map(x => '못 잡음 ' + x), ...(DB_SECRET('postgres://app:****@db') || DB_SECRET('010-…') ? ['오탐'] : []),
