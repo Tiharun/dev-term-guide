@@ -462,12 +462,12 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-erb li{display:flex;flex-wrap:wrap;align-items:center;gap:0 4px;padding:1px 10px;font:12px/1.5 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-erb li .mk-dbk{margin:0}.mk-erb li.mk-eron{background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}.mk-ert{margin-left:auto;font:11px/1.4 var(--sans);color:var(--muted)}
 .mk-erl{position:relative;padding:6px 10px 6px 30px;font:11.5px/1.4 var(--sans);color:var(--ink);overflow-wrap:anywhere}.mk-erl::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--ink)}.mk-erl .mk-dbk{margin:0 6px 0 0;color:var(--ink);font-family:var(--mono)}
 .mk-sv{width:min(100%,440px);font:12px/1.4 var(--sans);color:var(--ink);text-align:center}.mk-svp{display:grid;justify-items:center}.mk-svr{position:relative;display:flex;justify-content:center;max-width:100%;padding-top:1.2em}.mk-svr:first-child{padding-top:0}.mk-svr:not(:first-child)::before{content:"";position:absolute;top:0;left:50%;width:1.5px;height:1.2em;margin-left:-.75px;background:var(--rule)}
-.mk-svs{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px;width:100%}.mk-svc{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;padding-top:2em}.mk-svc::before{content:"";position:absolute;top:0;left:50%;width:1.5px;height:2em;margin-left:-.75px;background:var(--rule)}
+.mk-svs{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px;width:100%;margin-top:1em;background:linear-gradient(var(--rule),var(--rule)) center top/calc(100% - (100% - (var(--n) - 1) * 8px) / var(--n)) 1.5px no-repeat}.mk-svs::before{content:"";position:absolute;top:-1em;left:50%;width:1.5px;height:1em;margin-left:-.75px;background:var(--rule)}.mk-svdb{background:linear-gradient(var(--rule),var(--rule)) center top/calc(100% - (100% - (var(--n) - 1) * 8px) / var(--n)) 1.5px no-repeat,linear-gradient(var(--rule),var(--rule)) center bottom/calc(100% - (100% - (var(--n) - 1) * 8px) / var(--n)) 1.5px no-repeat}.mk-svl{flex:1 0 1.2em;width:1.5px;background:var(--rule)}.mk-svc{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;padding-top:2em}.mk-svc::before{content:"";position:absolute;top:0;left:50%;width:1.5px;height:2em;margin-left:-.75px;background:var(--rule)}
 .mk-svd{position:absolute;top:-.6em;left:50%;width:.6em;height:.6em;margin-left:-.3em;border-radius:50%;background:var(--mark-text)}
 .mk-svb{display:flex;flex-direction:column;align-items:center;gap:1px;box-sizing:border-box;max-width:100%;padding:5px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);font:800 12px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-svc .mk-svb{width:100%;padding:5px 4px}
 .mk-svk{font:800 11px/1.3 var(--sans);color:var(--mark-text);white-space:nowrap}.mk-svq{font:11px/1.3 var(--sans);color:var(--muted);white-space:nowrap}.mk-svt{max-width:100%;font:11px/1.3 var(--mono);color:var(--muted);overflow-wrap:anywhere}
 .mk-sv-down{border-style:dashed}.mk-sv-off{border-color:var(--rule);color:var(--muted)}.mk-sv-busy{border-width:3px}.mk-sv-new{background:var(--mark-bg)}.mk-sv-drain{border-width:3px;border-style:double}
-.mk-svn{margin:10px 0 0;font:11.5px/1.4 var(--sans);color:var(--muted);overflow-wrap:anywhere}@media (max-width:420px){.mk-svs[style*="--n:4"]{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mk-svn{margin:10px 0 0;font:11.5px/1.4 var(--sans);color:var(--muted);overflow-wrap:anywhere}@media (max-width:420px){.mk-svs[style*="--n:4"]{grid-template-columns:repeat(2,minmax(0,1fr));box-sizing:border-box;padding:8px;border:1.5px solid var(--rule);border-radius:10px;background:none}.mk-svs[style*="--n:4"] .mk-svc{padding-top:0}.mk-svs[style*="--n:4"] .mk-svc::before,.mk-svs[style*="--n:4"] .mk-svl{display:none}.mk-svs[style*="--n:4"] .mk-svd{display:none}}
 .mk-mg{width:min(100%,420px);font:11px/1.4 var(--mono);color:var(--ink);text-align:left}.mk-mgl{display:flex;flex-wrap:wrap;gap:2px 14px;margin:0 0 8px;padding:0;list-style:none;font:12px/1.5 var(--sans)}.mk-mgl li{display:flex;align-items:center;gap:6px;white-space:nowrap}
 .mk-mgs{display:inline-block;width:20px;height:0;border-top:2.5px solid var(--ink)}.mk-mgs2{border-top:2px dashed var(--mark-text)}.mk-mgs3{border-top:2px dotted var(--muted)}.mk-mgsh{height:3px;border-top:1px solid var(--mark-text);border-bottom:1px solid var(--mark-text)}.mk-mgkl{color:var(--mark-text);font-weight:800}
 .mk-mgb{position:relative;height:140px;margin:6px 4px 0 calc(var(--yw) * 1ch + 8px);border-left:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}.mk-mgy{position:absolute;right:calc(100% + 6px);color:var(--muted);white-space:nowrap}.mk-mgy:first-child{top:-.7em}.mk-mgy+.mk-mgy{bottom:-.7em}
@@ -4350,7 +4350,7 @@ const srvmap = ({ user = '사용자', front, servers, db, note, still = false, l
   if (!Array.isArray(servers) || servers.length < 1 || servers.length > 4) no('서버는 1~4대');
   const U = node(user, 'user'), F = front === undefined ? null : node(front, 'front'), B = db === undefined ? null : node(db, 'db');
   if (note !== undefined && !w(note, 28)) no('note는 1~28자');
-  const S = servers.map(v => { const o = { n: v?.n, st: v?.st ?? 'ok', got: v?.got ?? 0, tag: v?.tag };
+  const S = Array.from(servers, v => { const o = { n: v?.n, st: v?.st ?? 'ok', got: v?.got ?? 0, tag: v?.tag };
     if (!w(o.n, 6)) no('서버 이름은 1~6자'); st(o.st); if (o.tag !== undefined && !w(o.tag, 6)) no('tag는 1~6자');
     if (!Number.isInteger(o.got) || o.got < 0 || o.got > 99) no('got은 0~99 정수');
     if ((o.st === 'down' || o.st === 'off') && o.got > 0) no('고장·꺼진 서버는 요청을 받지 않는다'); return o; });
@@ -4359,11 +4359,11 @@ const srvmap = ({ user = '사용자', front, servers, db, note, still = false, l
   const box = (o, q = '') => `<div class="mk-svb mk-sv-${o.st}">${esc(o.n)}${o.st !== 'ok' ? `<b class="mk-svk">${SRVL[o.st]}</b>` : ''}${q}</div>`;
   const row = o => `<div class="mk-svr">${box(o)}</div>`;
   const cell = (o, k) => `<div class="mk-svc">${!still && o.got > 0 && o.st !== 'drain' ? `<i class="mk-svd mk-srv${k} A"></i>` : ''}`
-    + box(o, take(o) ? `<span class="mk-svq">요청 ${o.got}</span>` : '') + (o.tag ? `<span class="mk-svt">${esc(o.tag)}</span>` : '') + '</div>';
+    + box(o, take(o) ? `<span class="mk-svq">요청 ${o.got}</span>` : '') + (o.tag ? `<span class="mk-svt">${esc(o.tag)}</span>` : '') + (B ? '<i class="mk-svl"></i>' : '') + '</div>';
   const sum = `배치도. ${U.n}${lab(U.st)}, ${F ? `${F.n}${lab(F.st)}, ` : ''}서버 ${S.length}대: ${S.map(o => `${o.n}${lab(o.st)}${take(o) ? ` 요청 ${o.got}` : ''}${o.tag ? `(${o.tag})` : ''}`).join(', ')}.`
     + (B ? ` ${B.n}${lab(B.st)}.` : '') + (note ? ` ${note}.` : '');
   return `<div class="mk-sv"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-svp" aria-hidden="true">${row(U)}${F ? row(F) : ''}`
-    + `<div class="mk-svs" style="--n:${S.length}">${S.map((o, i) => cell(o, i + 1)).join('')}</div>${B ? row(B) : ''}${note ? `<p class="mk-svn">${esc(note)}</p>` : ''}</div><p class="sr">${esc(sum)}</p></div>`;
+    + `<div class="mk-svs${B ? ' mk-svdb' : ''}" style="--n:${S.length}">${S.map((o, i) => cell(o, i + 1)).join('')}</div>${B ? row(B) : ''}${note ? `<p class="mk-svn">${esc(note)}</p>` : ''}</div><p class="sr">${esc(sum)}</p></div>`;
 };
 /* 그래프: lines 1~3개 {n 10자, pts 4~12개 0~max}, x 이름표 5자(점 수만큼), unit 4자, limit {v, n 10자} 가는 이중선(이름표는 범례), mark {i 점 번호, n 10자}. 글자는 모두 SVG 밖 */
 const metric = ({ lines, x, max = 100, unit, limit, mark, label } = {}) => {
@@ -4373,9 +4373,9 @@ const metric = ({ lines, x, max = 100, unit, limit, mark, label } = {}) => {
   if (!w(unit, 4)) no('unit은 1~4자');
   if (!Array.isArray(lines) || lines.length < 1 || lines.length > 3) no('선은 1~3개');
   const len = lines[0]?.pts?.length;
-  lines.forEach(l => { if (!w(l?.n, 10)) no('선 이름은 1~10자'); if (!Array.isArray(l.pts) || l.pts.length < 4 || l.pts.length > 12) no('점은 4~12개');
-    if (l.pts.length !== len) no('선마다 점 수가 같아야 한다'); if (!l.pts.every(inR)) no('값은 0~max 사이 수'); });
-  if (!Array.isArray(x) || x.length !== len || !x.every(v => w(v, 5))) no('x는 점 수만큼, 1~5자');
+  Array.from(lines).forEach(l => { if (!w(l?.n, 10)) no('선 이름은 1~10자'); if (!Array.isArray(l.pts) || l.pts.length < 4 || l.pts.length > 12) no('점은 4~12개');
+    if (l.pts.length !== len) no('선마다 점 수가 같아야 한다'); if (!Array.from(l.pts).every(inR)) no('값은 0~max 사이 수'); });
+  if (!Array.isArray(x) || x.length !== len || !Array.from(x).every(v => w(v, 5))) no('x는 점 수만큼, 1~5자');
   if (limit !== undefined && (!inR(limit?.v) || !w(limit.n, 10))) no('limit은 {v 0~max, n 1~10자}');
   if (mark !== undefined && (!Number.isInteger(mark?.i) || mark.i < 0 || mark.i >= len || !w(mark.n, 10))) no('mark는 {i 점 번호, n 1~10자}');
   const X = i => i / (len - 1) * 100, Y = v => 50 - v / max * 50, P = v => v / max * 100, f = v => +v.toFixed(2);
@@ -4386,13 +4386,13 @@ const metric = ({ lines, x, max = 100, unit, limit, mark, label } = {}) => {
     const hx = mx <= 25 ? `left:${f(mx)}%` : mx >= 75 ? `right:${f(100 - mx)}%` : `left:${f(mx)}%;transform:translateX(-50%)`;
     mk = `<i class="mk-mgm" style="left:${f(mx)}%;bottom:${f(mb)}%"></i><span class="mk-mgk" style="${hx};${mb > 75 ? `top:calc(${f(100 - mb)}% + 9px)` : `bottom:calc(${f(mb)}% + 9px)`}">${esc(mark.n)}</span>`;
   }
-  const mid = Math.floor((len - 1) / 2), xs = x.map((v, i) => len < 7 || i === 0 || i === mid || i === len - 1
+  const mid = Math.floor((len - 1) / 2), xs = x.map((v, i) => len < 5 || i === 0 || i === mid || i === len - 1
     ? `<span style="${i === 0 ? 'left:0' : i === len - 1 ? 'right:0' : `left:${f(X(i))}%;transform:translateX(-50%)`}">${esc(v)}</span>` : '<span></span>').join('');
-  const say = l => { const hi = Math.max(...l.pts); return `${l.n} 처음 ${l.pts[0]}${unit}, 가장 높음 ${hi}${unit}(${x[l.pts.indexOf(hi)]}), 끝 ${l.pts.at(-1)}${unit}`; };
-  const sum = `그래프, ${x[0]}부터 ${x.at(-1)}까지. ${lines.map(say).join('. ')}.` + (limit ? ` 한도 ${limit.n} ${limit.v}${unit}.` : '') + (mark ? ` 표시: ${x[mark.i]} ${mark.n}.` : '');
-  return `<div class="mk-mg"${label ? ` role="group" aria-label="${esc(label)}"` : ''} style="--yw:${wlen(String(max) + unit)}">`
-    + `<ul class="mk-mgl" aria-hidden="true">${lines.map((l, i) => `<li><i class="mk-mgs mk-mgs${i + 1}"></i>${esc(l.n)}</li>`).join('')}${limit ? `<li class="mk-mgkl"><i class="mk-mgs mk-mgsh"></i>${esc(`${limit.n} ${limit.v}${unit}`)}</li>` : ''}</ul>`
-    + `<div class="mk-mgb" aria-hidden="true"><span class="mk-mgy">${esc(max + unit)}</span><span class="mk-mgy">0</span><svg class="mk-mgv" viewBox="0 0 100 50" preserveAspectRatio="none">`
+  const say = l => { const hi = Math.max(...l.pts); return `${l.n} 처음 ${f(l.pts[0])}${unit}, 가장 높음 ${f(hi)}${unit}(${x[l.pts.indexOf(hi)]}), 끝 ${f(l.pts.at(-1))}${unit}`; };
+  const sum = `그래프, ${x[0]}부터 ${x.at(-1)}까지. ${lines.map(say).join('. ')}.` + (limit ? ` 한도 ${limit.n} ${f(limit.v)}${unit}.` : '') + (mark ? ` 표시: ${x[mark.i]} ${mark.n}.` : '');
+  return `<div class="mk-mg"${label ? ` role="group" aria-label="${esc(label)}"` : ''} style="--yw:${wlen(f(max) + unit)}">`
+    + `<ul class="mk-mgl" aria-hidden="true">${lines.map((l, i) => `<li><i class="mk-mgs mk-mgs${i + 1}"></i>${esc(l.n)}</li>`).join('')}${limit ? `<li class="mk-mgkl"><i class="mk-mgs mk-mgsh"></i>${esc(`${limit.n} ${f(limit.v)}${unit}`)}</li>` : ''}</ul>`
+    + `<div class="mk-mgb" aria-hidden="true"><span class="mk-mgy">${esc(f(max) + unit)}</span><span class="mk-mgy">0</span><svg class="mk-mgv" viewBox="0 0 100 50" preserveAspectRatio="none">`
     + lines.map((l, i) => `<polyline class="mk-mgp${i + 1}" vector-effect="non-scaling-stroke" points="${l.pts.map((v, j) => f(X(j)) + ',' + f(Y(v))).join(' ')}"/>`).join('')
     + (limit ? `<g class="mk-mgh">${ln(Y(limit.v) - 0.7)}${ln(Y(limit.v) + 0.7)}</g>` : '') + `</svg>${mk}</div>`
     + `<div class="mk-mgx" aria-hidden="true">${xs}</div><p class="sr">${esc(sum)}</p></div>`;
