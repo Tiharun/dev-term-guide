@@ -596,6 +596,13 @@ check('bktext', () => BKS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(
 check('bkxn', () => BKS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
 const BK_WRONG = {'Access Token': ['Token'], 'Bearer Token': ['Token'], 'Streaming Response': ['Streaming', 'Streaming Output'], 'OAuth Scope': ['Scope'],
   'Event-driven Architecture': ['Event'], 'Worker': ['Service Worker', 'Web Worker'], 'Lock': ['Lock File', 'Account Lockout'], 'Route Handler': ['Routing']};    // 이름만 비슷한 다른 뜻
+const BK_FIXD = [    // 검토 D: [카드, 들어가야 할 말, 빠져야 할 말]. 'v.'로 시작하면 그 카드 그림(h+cap)을 본다
+  ['Bearer Token', 'x', ['성질', 'AI'], ['보내는 방식이고']], ['Access Token', 'd', ['써도 되는지'], ['누구인지']], ['Access Token', 'x', ['유효 시간이 짧은'], ['쓰는 짧은']],
+  ['Cookie vs Token', 'x', ['CSRF', 'SameSite'], []], ['Cookie vs Token', 'v.', ['빼 가기 어려워요'], ['더 안전해요']], ['Service Account', 'x', ['긴 문자열', '새어 나가기'], ['글자 하나', '새기 쉬워']],
+  ['Event-driven Architecture', 'x', ['서버에서 일어난 일'], ['한 방법이고, 화면']], ['Streaming Response', 'u', ['Streams_API'], []], ['Streaming Response', 'x', ['모습'], ['비슷해 보여도']],
+  ['Long Polling', 'x', ['빈 답'], []], ['Exponential Backoff', 'd', [], ['예시']], ['Exponential Backoff', 'v.', ['무작위'], []], ['Lock', 'v.', ['음수'], []],
+  ['Session Store', 'v.', ['저장소'], ['보관소']], ['Batch Processing', 'v.', ['시각·건수는 예시'], []], ['Response Header', 'x', ['브라우저나 앱'], []]];
+check('bkfixd', () => BK_FIXD.filter(([en, k, yes, no]) => { const t = g.find(en), s = k === 'v.' ? g.D[t.v].h + g.D[t.v].cap : t[k] || ''; return !yes.every(w => s.includes(w)) || no.some(w => s.includes(w)); }).map(([en, k]) => en + ' ' + k).join(', '));
 check('bkwrong', () => Object.entries(BK_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'back' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
 const BK_SECRET = s => (s.match(/[A-Za-z0-9_-]{24,}/g) || []).some(w => /\d/.test(w) && /[A-Za-z]/.test(w)) || /\bat\b[^\n]{0,40}\.(?:m?js|ts):\d+/.test(s) || /localStorage\.setItem\([^)]*(?:token|jwt|session)/i.test(s);    // 긴 영숫자 키·스택 추적·토큰 저장 모습
 check('bksafe', () => [...['ab12'.repeat(7), 'at run (/app/server.js:12:5)', "localStorage.setItem('JWT', t)"].filter(x => !BK_SECRET(x)).map(x => '못 잡음 ' + x), ...(BK_SECRET('Access-Control-Allow-Origin') ? ['헤더 이름 오탐'] : []),
