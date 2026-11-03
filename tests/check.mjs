@@ -888,6 +888,7 @@ check('srvfixb', () => { const h = k => g.D['u-server-' + k]?.h || '', W = h('wo
   return [['dev 끝 프롬프트', !h('dev-server').includes('mk-tcur')], ['ssh 끝 프롬프트', !h('ssh').includes('mk-tcur')], ['failover 예비', h('failover').includes('>예비<') && /Hot Standby/.test(g.D['u-server-failover'].cap)],
     ['cron 절대 경로', h('cron-job').includes('/srv/backup.sh')], ['serverless 플랫폼 경유', h('serverless').includes('결과')], ['docker 조건', h('docker').includes('도커가 있는 서버라면')],
     ['womm 잘 됨', W.includes('잘 됨') && !W.includes('되는 중')]].filter(([, ok]) => !ok).map(([n]) => n).join(', '); });
+check('srvxcat', () => SRVS().filter(t => /\((?:basics|web|front|back|db|server|git|deploy|security|perf|bug|ai)\)|(?:front|back|deploy)의/.test(t.x || '')).map(t => t.en).join(', '));    // 검토 C: 다른 카테고리는 화면 이름으로(백엔드의 Logging)
 check('srvxhas', () => Object.entries(SRV_XHAS).filter(([en, w]) => { const t = g.find(en); return !t || !w.every(s => (t.x || '').includes(s)); }).map(([en]) => en).join(', '));
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
