@@ -31,7 +31,7 @@
 - **실패 수**: `seq`의 `.sr` 끝 "(실패 n개)"는 실패가 1개 이상일 때만 붙인다. 스펙 3.1 예시의 "(실패 0개)"는 형식 예시로 보고, 0개를 읽어 주지 않는다.
 - **멈춘 직접 조작 그림**: Task 4·5에서 상태 함수(`brate`·`bauthz`·`bcache`·`bidem`)를 만들어 멈춘 그림을 그린다. 계획서 ②가 같은 함수에 버튼과 `init`을 붙인다.
 - **COUNT 키**: 접두사 없는 키는 design 카테고리다. back은 `back/<sec>`로 쓴다.
-- **점검 이름**: basics가 이미 `BS`·`bcat`·`bobj`·`bx`·`bm`·`bou`·`bko`를 쓴다(측정: check.mjs:370~379). back 점검은 `bk` 접두사로 쓴다: `BKS`·`bkcat`·`bkobj`·`bkukey`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`·`bkhelp`·`bkstill`. 측정: `check('bk`는 0건이다. 스펙 8장도 이 이름으로 고쳤다.
+- **점검 이름**: basics가 이미 `BS`·`bcat`·`bobj`·`bx`·`bm`·`bou`·`bko`를 쓴다(측정: check.mjs:370~379). back 점검은 `bk` 접두사로 쓴다: `BKS`·`bkcat`·`bkobj`·`bkukey`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`·`bkhelp`·`bkstill`·`bktext`·`bkxn`(검토 B에서 더함). 측정: `check('bk`는 0건이다. 스펙 8장도 이 이름으로 고쳤다.
 - **남은 옛 카드 목록**: 새 카드가 처음부터 점검되도록 `LATER` 대신 목록을 쓴다(basics `BOBJ` 방식). 목록과 실제가 다르면 `+이름`(목록에 없는데 아직 안 됨)·`-이름`(목록에 있는데 이미 됨)으로 실패한다.
   - `BK_TODO`: 아직 `u-back-` 그림이 아닌 옛 카드. Task 2에 51장, Task 4에서 basic·core·motion 27장(Server~Queue)을 빼고, Task 5에서 비운다. `bkukey`가 본다. `bkobj`는 객체 v 카드가 이 목록 밖에 있으면 실패한다.
   - `BK_NOX`: x가 없는 옛 카드 47장. 계획서 ②가 비운다. `bkx`가 본다.
@@ -232,7 +232,7 @@ git commit -m "feat: 백엔드 그림 도우미 seq·httpmsg"
 - Modify: `tests/check.mjs`(COUNT·REDRAWN·LATER, 새 back 점검 묶음)
 
 **Interfaces:**
-- Produces: 점검 이름 `bkcat`·`bkobj`·`bkukey`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`, 목록 `BK_TODO`·`BK_NOX`·`BK_SYM`·`BK_WRONG`, 함수 `BKS()`·`bkdiff()`·`BK_SECRET()`. Task 3~5와 계획서 ②는 목록과 기대값만 고친다.
+- Produces: 점검 이름 `bkcat`·`bkobj`·`bkukey`·`bksym`·`bkx`·`bkm`·`bkou`·`bkwrong`·`bksafe`·`bkshare`(검토 B에서 `bktext`·`bkxn`을 더함), 목록 `BK_TODO`·`BK_NOX`·`BK_SYM`·`BK_WRONG`, 함수 `BKS()`·`bkdiff()`·`BK_SECRET()`. Task 3~5와 계획서 ②는 목록과 기대값만 고친다.
 
 - [ ] **Step 1: 실패하는 점검 쓰기**
   - `COUNT`에 넣는다(측정값): `'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 8, 'back/arch': 0, 'back/data': 0, 'back/job': 0, 'back/auth': 0, 'back/tip': 8`
@@ -395,7 +395,7 @@ check('bkstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   - `FAIL bkukey: +Server, +Client, …`(27장), `FAIL bkobj`(그중 객체 v 카드), `FAIL bksym: +Optimistic Update`
   - `FAIL redrawn:back/basic`·`core`·`motion`(flow·stack 그림 카드들)
   - `FAIL bkstill: brate is not defined`
-- [ ] **Step 3: 그림**: 스펙 3.3 표의 basic·core·motion 27장대로 그린다. 정해 둔 것:
+- [ ] **Step 3: 그림**: 스펙 3.3 표의 basic·core·motion 27장대로 그린다. 그림(v)만 바꾸고, 검토 B에서 고친 d·x·p(Request Flow·Authentication·Session·Polling 등)는 그대로 둔다. 정해 둔 것:
   - Server: `seq(['브라우저','서버'], [{0→1 '회원 정보 줘'}, {1→1 '회원 찾기'}, {1→0 '민지 정보'}])`
   - Database: `seq(['서버','DB'], [{0→1 '글 저장'}, {1→0 '저장됨'}, {0→1 '글 목록 조회'}, {1→0 '글 3개'}])`
   - Request: `httpmsg({kind:'요청', start:'POST /api/posts', head:['Content-Type: application/json'], body:['{"title":"첫 글"}'], hl:['b0']})`
