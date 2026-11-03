@@ -422,9 +422,9 @@ check('dupre', () => norm('Async/Await') !== norm('async / await') || norm('Dark
 const FS = () => g.TERMS.filter(t => t.c === 'front');
 check('fcat', () => { const a = g.CATS.find(c => c.id === 'front').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,layout,unit,css,event,react,build,tip' ? '' : a; });
 check('fobj', () => FS().filter(t => typeof t.v === 'object').map(t => t.en).join(', '));    // 옛 형식 그림 0장
-const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid', 'Gap', 'Align Items', 'Justify Content', 'Position Sticky', 'Z-index', 'Overflow',
+const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid', 'Gap', 'Position Sticky', 'Z-index', 'Overflow',
   'Component', 'Media Query', 'Border Radius', 'Box Shadow', 'Transition', 'Keyframes', 'Transform', 'Hover', 'Focus', 'Animation Duration', 'Intersection Observer',
-  'Rotate', 'State', 'Max Width', 'Column', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 34장(측정)
+  'Rotate', 'State', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 30장(측정)
 check('fukey', () => FS().filter(t => !FKEEP.includes(t.en) && !(typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v])).map(t => t.en).join(', '));
 check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
 check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'responsive', 'contrast', 'aspect', 'fontsize', 'transition', 'shadow'].filter(k => !g.D[k]).join(', '));    // 공유 그림 키는 남긴다
