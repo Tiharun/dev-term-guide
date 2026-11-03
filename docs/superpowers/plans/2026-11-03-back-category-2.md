@@ -86,7 +86,7 @@
 계획서 ①의 공통 절차·브라우저 확인 절차를 따른다(86~108줄). 다른 점:
 - **서버**: 이미 떠 있는 `scratchpad/web`의 8765 서버(작업 bilyacma1)를 쓴다. 매번 `index.html`을 복사해 넣는다(`cp index.html "$SP/web/index.html"`).
   - 주소: `http://localhost:8765/?v=<시각>#/c/back/<sec>`
-  - 서버가 없으면 `$SP/web`에서 `python -m http.server 8765`를 백그라운드로 띄운다.
+  - 서버가 없으면 `$SP/web`에서 `python -E -m http.server 8765 --bind 127.0.0.1`을 백그라운드로 띄운다.
 - **그림 띄우기**: 그림은 스크롤해야 그려진다. `page.mouse.wheel(0, 700)`을 30번 하고 잰다.
 - **폭·움직임**: 1280/375/320 × reducedMotion `no-preference`/`reduce`. 넘침·11px 미만·가로 스크롤·콘솔 오류(favicon 404 제외)가 0이어야 한다.
 - **긴 점검**: `node tests/check.mjs > <작업 폴더>/run.txt 2>&1` 뒤 `grep -E '^(FAIL|OK|LATER)'`로 본다. Bash timeout은 200000이다.
@@ -138,35 +138,39 @@
 
 | sec | en | ko | 그림 | r |
 |---|---|---|---|---|
-| api | Response Header | 응답 헤더 · 응답에 붙는 부가 정보 | `httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: application/json','Cache-Control: max-age=60','Set-Cookie: sid=…; HttpOnly'], body:['{"id":7}'], hl:['h1','h2']})`. cap "본문을 어떻게 다룰지 알려 줘요(값은 예시)" | Request Header |
+| api | Response Header | 응답 헤더 · 응답에 붙는 부가 정보 | `httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: application/json','Cache-Control: max-age=60','Set-Cookie: sid=…; HttpOnly'], body:['{"id":7}'], hl:['h0','h1','h2']})`. cap "본문 형식·캐시 시간·쿠키 저장을 알려 줘요(값은 예시)" | Request Header |
 | api | Response Body | 응답 본문 · 돌려받는 실제 내용 | `httpmsg({kind:'응답', start:'200 OK', head:['Content-Type: application/json'], body:['{','  "id": 7,','  "title": "첫 글"','}'], hl:['b1','b2']})` | Request Body, Response |
-| job | Worker | 워커 · 뒤에서 일을 하는 프로그램 | `seq(['큐','워커','DB'], [{0→1 '일감 1개 꺼냄'}, {1→1 '이메일 보내기'}, {1→2 '보냄 기록'}, {0→1 '다음 일감'}])`. cap "웹 서버와 따로 돌며 큐의 일을 하나씩 해요" | Background Job, Queue |
+| job | Worker | 워커 · 뒤에서 일을 하는 프로그램 | `seq(['큐','워커','DB'], [{0→1 '일감 1개 전달'}, {1→1 '이메일 보내기'}, {1→2 '보냄 기록'}, {0→1 '다음 일감'}])`. cap "웹 서버와 따로 돌며 큐의 일을 하나씩 해요" | Background Job, Queue |
 | job | Pub/Sub | 발행·구독 · 한 번 보내면 구독자가 모두 받음 | `seq(['주문','채널','메일','재고'], [{0→1 '주문됨 발행'}, {1→2 '주문됨'}, {1→3 '주문됨'}, {2→2 '확인 메일'}, {3→3 '재고 빼기'}])`. cap "보내는 쪽은 누가 받는지 몰라도 돼요" | Queue, Event-driven Architecture |
-| job | Event-driven Architecture | 이벤트 기반 구조 · 일어난 일을 알려서 잇기 | `vs('직접 부르기', bkRows(['주문이 결제 부름'],['주문이 메일 부름'],['주문이 재고 부름']), '이벤트로 알림', bkRows(['주문됨 알림 1번'],['받는 곳이 알아서 처리']))`. cap "새 기능을 더해도 주문 코드는 그대로예요" | Webhook, Pub/Sub |
-| job | Concurrency | 동시성 · 여러 일이 겹쳐 일어남 | `seq(['손님 A','서버','손님 B'], [{0→1 '책 1권 주문'}, {2→1 '책 1권 주문'}, {1→1 '재고 1 확인'}, {1→1 '둘 다 통과'}, {1→0 '주문 완료'}, {1→2 '주문 완료', err:1}])`. cap "재고는 1권인데 두 건이 다 팔렸어요" | Race Condition, Lock |
-| job | Lock | 잠금 · 한 번에 하나만 고치게 막기 | `seq(['손님 A','재고','손님 B'], [{0→1 '잠금 얻음'}, {2→1 '잠금 요청', wait:1}, {0→1 '1권 빼고 풀기'}, {1→2 '잠금 얻음'}, {1→2 '재고 0, 품절', err:1}])`. cap "B는 A가 끝날 때까지 기다려요" | Concurrency, Transaction |
+| job | Event-driven Architecture | 이벤트 기반 구조 · 일어난 일을 알려서 잇기 | `vs('직접 부르기', doc([{ul:['주문이 결제를 부름','주문이 메일을 부름','주문이 재고를 부름']}], {title:'주문 코드', still:true}), '이벤트로 알림', doc([{ul:['"주문됨" 알림 1번','받는 곳이 알아서 처리']}], {title:'주문 코드', still:true}))`. cap "새 기능을 더해도 주문 코드는 그대로예요" | Webhook, Pub/Sub |
+| job | Concurrency | 동시성 · 여러 일이 겹쳐 일어남 | `seq(['손님 A','서버','손님 B'], [{0→1 '책 1권 주문'}, {2→1 '책 1권 주문'}, {1→1 'A 확인: 재고 1'}, {1→1 'B 확인: 재고 1'}, {1→0 '주문 완료'}, {1→2 '주문 완료'}, {1→1 '재고 -1이 됨', err:1}])`. cap "둘이 동시에 재고 1을 보고 둘 다 팔았어요" | Race Condition, Lock |
+| job | Lock | 잠금 · 한 번에 하나만 고치게 막기 | `seq(['손님 A','재고','손님 B'], [{0→1 '잠금 얻음'}, {2→1 '잠금 요청', wait:1}, {0→1 '1권 빼고 풀기'}, {1→2 'B 차례예요'}, {1→2 '재고 0, 품절', err:1}])`. cap "B는 A가 끝날 때까지 기다려요" | Concurrency, Transaction |
 | job | Batch Processing | 일괄 처리 · 모아서 한 번에 처리 | `track([{t:'하루 동안 모음', s:'done', w:'주문 1,240건(예시)'}, {t:'새벽 2시 시작', s:'done', w:'한 번에 계산'}, {t:'정산 끝', s:'done', w:'보고서 1개'}])` | Cron Job |
 | job | Dead Letter Queue | 실패 보관함 · 계속 실패한 일감을 따로 둠 | `track([{t:'1번째 시도', s:'fail', w:'메일 서버 응답 없음'}, {t:'2번째 시도', s:'fail'}, {t:'3번째 시도', s:'fail'}, {t:'보관함으로', s:'wait', w:'사람이 나중에 확인'}])` | Queue, Retry |
 | job | Exponential Backoff | 지수 백오프 · 점점 길게 기다렸다 다시 | `track([{t:'실패', s:'fail'}, {t:'1초 뒤 다시', s:'fail'}, {t:'2초 뒤 다시', s:'fail'}, {t:'4초 뒤 다시', s:'done', w:'성공'}])`. cap "기다리는 시간이 두 배씩 늘어요(예시 숫자)" | Retry, Rate Limit |
 | job | Server-Sent Events | 서버 보낸 이벤트 · 서버가 한쪽으로 계속 보냄 | `seq(['브라우저','서버'], [{0→1 '연결 열기'}, {1→0 '새 댓글 1'}, {1→0 '새 댓글 2'}, {1→0 '새 댓글 3'}])`. cap "연결 하나로 서버만 보내요. 응답 형식은 text/event-stream이에요" | WebSocket, Polling |
-| job | Long Polling | 롱 폴링 · 새 소식이 올 때까지 기다리는 요청 | `seq(['브라우저','서버'], [{0→1 '새 소식 있나요'}, {1→1 '올 때까지 대기', wait:1}, {1→0 '새 댓글'}, {0→1 '바로 다시 물음'}])` | Polling |
-| job | Streaming Response | 스트리밍 응답 · 다 만들기 전에 조금씩 보냄 | `vs('한 번에 보냄', bkRows(['다 만들 때까지','기다림'],['전체가 한 번에 옴']), '스트리밍', bkRows(['1쪽 조각 먼저'],['2쪽 조각'],['마지막 조각']))`. cap "받은 만큼 먼저 보여 줄 수 있어요" | Response |
-| job | Circuit Breaker | 회로 차단기 · 고장 난 곳을 잠시 부르지 않음 | `track([{t:'닫힘', s:'done', w:'평소처럼 부름'}, {t:'실패가 쌓임', s:'fail', w:'5번 연속(예시)'}, {t:'열림', s:'wait', w:'부르지 않고 바로 실패'}, {t:'반쯤 열림', s:'now', w:'몇 번만 시험'}, {t:'다시 닫힘', s:'done', w:'회복 확인'}])` | Timeout, Retry |
+| job | Long Polling | 롱 폴링 · 새 소식이 올 때까지 기다리는 요청 | `seq(['브라우저','서버'], [{0→1 '새 소식 있나요'}, {1→1 '소식 올 때까지', wait:1}, {1→0 '새 댓글'}, {0→1 '바로 다시 물음'}])` | Polling |
+| job | Streaming Response | 스트리밍 응답 · 다 만들기 전에 조금씩 보냄 | `vs('한 번에 보냄', doc([{ul:['다 만들 때까지 기다림','전체가 한 번에 옴']}], {title:'응답', still:true}), '스트리밍', doc([{ul:['1쪽 조각 먼저 옴','2쪽 조각','마지막 조각']}], {title:'응답', still:true}))`. cap "받은 만큼 먼저 보여 줄 수 있어요" | Response |
+| job | Circuit Breaker | 회로 차단기 · 고장 난 곳을 잠시 부르지 않음 | `track([{t:'닫힘', s:'done', w:'평소처럼 부름'}, {t:'실패가 쌓임', s:'fail', w:'5번 연속(예시)'}, {t:'열림', s:'wait', w:'잠시 바로 실패'}, {t:'반쯤 열림', s:'now', w:'잠시 뒤 몇 번 시험'}, {t:'다시 닫힘', s:'done', w:'회복 확인'}])` | Timeout, Retry |
 | auth | Access Token | 액세스 토큰 · API를 쓰는 출입증 | `track([{t:'로그인', s:'done'}, {t:'토큰 받음', s:'done', w:'15분짜리(예시)'}, {t:'요청에 붙임', s:'done', w:'Authorization 헤더'}, {t:'만료', s:'fail', w:'401이 와요'}, {t:'새로 받기', s:'done', w:'Refresh Token으로'}])` | JWT, Refresh Token |
 | auth | Bearer Token | 베어러 토큰 · 가진 사람이면 쓸 수 있는 토큰 | `httpmsg({kind:'요청', start:'GET /api/me', head:['Host: example.com','Authorization: Bearer eyJ…'], hl:['h1']})`. cap "Bearer 뒤에 한 칸 띄우고 토큰을 써요" | Access Token, Request Header |
 | auth | OAuth Scope | OAuth 범위 · 토큰으로 할 수 있는 일 | `bkStack(browser('<b>예시 앱의 요청</b>' + whelp('프로필 보기, 일정 읽기'), {url:'login.example.com/authorize'}), doc([{tb:[['scope','허락하는 일'],['profile','프로필 보기'],['calendar.read','일정 읽기만']]}], {title:'요청한 scope', still:true}))`. cap "일정 지우기는 허락받지 않아서 이 토큰으로는 못 해요" | OAuth, Principle of Least Privilege |
-| auth | RBAC | 역할 기반 권한 · 역할마다 할 수 있는 일 | `doc([{tb:[['역할','읽기','쓰기','삭제'],['손님','가능','안 됨','안 됨'],['회원','가능','가능','안 됨'],['관리자','가능','가능','가능']]}], {title:'글 권한(예시)'})` | Authorization, Permission |
-| auth | Cookie vs Token | 쿠키와 토큰 · 로그인 정보를 싣는 두 방법 | `bkStack('<b class="mk-dtw">쿠키: 브라우저가 알아서 붙여요</b>', httpmsg({kind:'요청', start:'GET /me', head:['Cookie: sid=…'], hl:['h0']}), '<b class="mk-dtw">토큰: 코드가 직접 붙여요</b>', httpmsg({kind:'요청', start:'GET /me', head:['Authorization: Bearer …'], hl:['h0']}))` | Cookie, Session, JWT |
-| auth | Session Store | 세션 저장소 · 세션을 모아 두는 곳 | `seq(['서버 1','보관소','서버 2'], [{0→1 '세션 저장'}, {2→1 'sid=… 누구?'}, {1→2 '민지예요'}])`. cap "서버가 여러 대여도 같은 보관소를 봐요(예: Redis)" | Session, Redis |
-| auth | Redirect URI | 리다이렉트 URI · 로그인 뒤 돌아올 주소 | `vs('등록한 주소와 같음', bkRows(['/callback'],['코드 받음']), '한 글자라도 다름', bkRows(['/callback/','실패'],['오류 화면']))`. cap "로그인 서비스는 등록한 주소와 글자 그대로 비교해요" | OAuth |
+| auth | RBAC | 역할 기반 권한 · 역할마다 할 수 있는 일 | `doc([{tb:[['역할','읽기','쓰기','삭제'],['손님','가능','안 됨','안 됨'],['일반 회원','가능','가능','안 됨'],['관리자','가능','가능','가능']]}], {title:'글 권한(예시)', still:true})` | Authorization, Permission |
+| auth | Cookie vs Token | 쿠키와 토큰 · 로그인 정보를 싣는 두 방법 | `bkStack('<b class="mk-dtw">쿠키: 브라우저가 알아서 붙여요(HttpOnly 권장)</b>', httpmsg({kind:'요청', start:'GET /me', head:['Cookie: sid=…'], hl:['h0']}), '<b class="mk-dtw">토큰: 코드가 직접 붙여요</b>', httpmsg({kind:'요청', start:'GET /me', head:['Authorization: Bearer …'], hl:['h0']}))`. cap "HttpOnly 쿠키는 화면 코드가 못 읽어서 더 안전해요" | Cookie, Session, JWT |
+| auth | Session Store | 세션 저장소 · 세션을 모아 두는 곳 | `seq(['서버 1','보관소','서버 2'], [{0→1 '세션 저장'}, {2→1 'sid=… 누구?'}, {1→2 '민지예요'}])`. cap "서버가 여러 대여도 같은 보관소를 봐요" | Session, Redis |
+| auth | Redirect URI | 리다이렉트 URI · 로그인 뒤 돌아올 주소 | `vs('등록한 주소와 같음', bkStack(bkRows(['/callback']), whelp('코드 받음')), '한 글자라도 다름', bkStack(bkRows(['/callback/', '실패']), whelp('오류 화면')))`. cap "로그인 서비스는 등록한 주소와 글자 그대로 비교해요" | OAuth |
 | auth | Webhook Signature | 웹훅 서명 · 진짜 보낸 곳인지 확인 | `seq(['결제사','내 서버'], [{0→1 '알림 + 서명'}, {1→1 '서명 계산'}, {1→1 '두 서명 비교'}, {1→1 '같을 때만 처리'}])`. cap "서명은 둘만 아는 비밀 키(예: whsec_…)로 만들어요" | Webhook, Secret |
-| auth | Service Account | 서비스 계정 · 프로그램이 쓰는 계정 | `vs('사람 계정', bkPills('민지', ['로그인 화면', '비밀번호']), '서비스 계정', bkPills('정산 프로그램', ['키 파일', '필요한 권한만']))` | API Key |
+| auth | Service Account | 서비스 계정 · 프로그램이 쓰는 계정 | `vs('사람 계정', doc([{ul:['로그인 화면에서 로그인','비밀번호']}], {title:'민지', still:true}), '서비스 계정', doc([{ul:['자동으로 받는 토큰','필요한 권한만']}], {title:'정산 프로그램', still:true}))` | API Key |
 
-- `m:1`은 Global Constraints 규칙을 따른다. 표에서 `seq`·`track`과 still이 아닌 `doc`(RBAC)을 쓴 카드에만 단다. `vs`·`httpmsg`·`bkStack`만 쓴 카드에는 달지 않는다. OAuth Scope의 doc은 still이다. `bkm`이 양쪽을 본다.
-- `vs` 안의 `bkRows`·`bkPills` 글은 12자 이하로 쓴다(계획서 ① Ruling). 320px에서 넘치면 칸을 세로로 쌓고 원장에 적는다.
+- `m:1`은 Global Constraints 규칙을 따른다. 표에서 `seq`·`track`을 쓴 카드에만 단다. `vs`·`httpmsg`·`bkStack`과 still `doc`만 쓴 카드(RBAC·OAuth Scope 등)에는 달지 않는다. `bkm`이 양쪽을 본다.
+- `bkRows`·`bkPills`는 `<code>`·`--mono`로 그려진다(index.html:436·437). 그래서 코드 값(`/callback`)에만 쓴다. 한글 문장은 `doc([{ul:[…]}], {still:true})`이나 `whelp`로 쓴다.
+- `vs` 안의 글 길이(계획서 ① 339줄의 "12자"를 이렇게 정함):
+  - `bkRows` 코드 값은 wlen 12 이하다.
+  - `doc` ul 줄은 줄바꿈되므로 wlen 24 이하다.
+  - 320px에서 넘치면 칸을 세로로 쌓고 원장에 적는다.
 - 측정(node, index.html:3966 `wlen`):
   - 표의 seq 세로줄 이름은 모두 한도 안이다.
-  - seq 메시지 29개는 모두 14 이하다. 14인 것은 `'바로 다시 물음'`·`'올 때까지 대기'`·`'새 소식 있나요'`·`'같을 때만 처리'`다.
+  - seq 메시지는 모두 14 이하다. 14인 것은 `'바로 다시 물음'`·`'소식 올 때까지'`·`'새 소식 있나요'`·`'같을 때만 처리'`·`'A 확인: 재고 1'`·`'B 확인: 재고 1'`이다.
   - httpmsg 줄은 30 이하다. 30인 것은 `Content-Type: application/json`이다.
   - 한도를 넘으면 도우미가 오류를 던져 Step 5에서 잡힌다.
 
@@ -182,6 +186,12 @@ x 짝(스펙 5장). 아래 짝은 x에서 차이를 먼저 쓴다.
 - Access Token vs Refresh Token vs Bearer Token
 - RBAC vs OAuth Scope, Redirect URI vs Redirect
 - Webhook Signature vs API Key, Service Account vs API Key
+
+x에 꼭 넣을 사실(디렉터 검토 지적):
+- Circuit Breaker: 시험이 실패하면 다시 열림으로 가요.
+- Exponential Backoff: 무작위 시간(지터)을 더하고 최대 횟수를 정해요.
+- Webhook Signature: 받은 본문 그대로 계산하고, 서명이 다르면 거부해요.
+- Service Account: 키 파일은 새기 쉬워서 가능하면 피해요.
 
 뜻이 다른 짝(Review Focus 4)은 x 안에서만 구분하고 r에 넣지 않는다.
 
@@ -210,9 +220,12 @@ x 짝(스펙 5장). 아래 짝은 x에서 차이를 먼저 쓴다.
 - Consumes: `BK_NOX`(check.mjs:566, 47장), `bkx` 점검(572줄)
 - Produces: back 97장 전부 x 있음
 
-- [ ] **Step 1: 실패하는 점검**: `BK_NOX = []`로 바꾼다.
-- [ ] **Step 2: 실패 확인**: `FAIL bkx: +Server, +Client, …`(47개)
-- [ ] **Step 3: x 쓰기**: 47장에 x를 넣는다.
+- [ ] **Step 1: 실패하는 점검**
+  - `BK_NOX = []`로 바꾼다.
+  - `BKX_HAS = {'CORS': ['OPTIONS'], 'Authentication': ['401'], 'Authorization': ['403'], 'Idempotent': ['PUT']}`와 점검 `bkxhas`를 더한다. 그 카드의 x에 목록 글이 모두 있어야 한다.
+- [ ] **Step 2: 실패 확인**: `FAIL bkx: +Server, +Client, …`(47개), `FAIL bkxhas: CORS, Authentication, Authorization, Idempotent`
+- [ ] **Step 3: 사실 확인**: 공통 절차 3이다. 카드마다 1차 출처(MDN·RFC 9110·6749·OpenID Connect Core)를 열고, 원장에 `Task 2 출처: <en> — <URL>`을 적는다.
+- [ ] **Step 4: x 쓰기**: 47장에 x를 넣는다.
   - 2~3문장, 해요체로 쓴다. 짝이 있으면 차이를 먼저 쓴다.
   - 짝은 스펙 5장 목록이다. 특히:
     - Server vs Backend vs Node.js
@@ -225,11 +238,12 @@ x 짝(스펙 5장). 아래 짝은 x에서 차이를 먼저 쓴다.
     - Cache vs Browser Cache, Serverless Function vs Serverless
     - Monolith vs Microservices, Query Parameter vs Path Parameter
     - Idempotent vs POST·PUT
+    - CORS: Authorization 헤더 등을 쓰면 OPTIONS 사전 요청이 먼저 가요(스펙 3.3 CORS 행)
   - Task 1에서 생긴 새 카드와의 차이도 쓸 수 있다(예: Session vs Session Store).
   - 다른 카테고리 카드 본문은 고치지 않는다.
-- [ ] **Step 4: 통과**: `bkx`·`bktext`·`bkxn`·`wsym`이 통과한다. 다른 `FAIL`은 없다.
-- [ ] **Step 5: 브라우저 확인**: x는 카드를 펼쳐야 보인다. `#/c/back/basic`·`core`·`motion`·`adv`·`api`·`tip`에서 카드 하나씩 펼쳐 320px 넘침이 없는지 본다.
-- [ ] **Step 6: 커밋**: `feat: 백엔드 기존 카드 47장 쉬운 설명`
+- [ ] **Step 5: 통과**: `bkx`·`bkxhas`·`bktext`·`bkxn`·`wsym`이 통과한다. 다른 `FAIL`은 없다.
+- [ ] **Step 6: 브라우저 확인**: x는 카드를 펼쳐야 보인다. `#/c/back/basic`·`core`·`motion`·`adv`·`api`·`tip`에서 카드 하나씩 펼쳐 320px 넘침이 없는지 본다.
+- [ ] **Step 7: 커밋**: `feat: 백엔드 기존 카드 47장 쉬운 설명`
 
 ---
 
@@ -254,11 +268,15 @@ x 짝(스펙 5장). 아래 짝은 x에서 차이를 먼저 쓴다.
 
 | 카드 | 처음 상태 | 버튼 | 누르면 |
 |---|---|---|---|
-| Rate Limit | `sent = 0` | "요청 보내기", "시간 지나기" | 보내기: `sent += 1`. 시간 지나기: `sent = 0`. 그림 `brate(sent)`, 문장 `brateSay(sent)` |
+| Rate Limit | `sent = 0` | "요청 보내기", "시간 지나기" | 보내기: `sent += 1`, 문장 `brateSay(sent)`. 시간 지나기: `sent = 0`, 문장 `BRL_RESET`. 그림 `brate(sent)` |
 | Idempotent | `m = 'POST'`, `n = 0` | `tpick(['POST', 'PUT'], 'POST')`, "다시 보내기", "처음으로" | 고르기: `m` 바꾸고 `n = 0`. 다시 보내기: `n += 1`. 처음으로: `n = 0`. 그림 `bidem(m, n)`, 문장 `bidemSay(m, n)` |
-| Cache | `log = []`, `has = false` | "요청 보내기", "캐시 비우기" | 보내기: `log.push(has ? 'hit' : 'miss')`, `has = true`. 비우기: `has = false`(log는 남김). 그림 `bcache(log)`, 문장 `bcacheSay(log)`. 비운 직후 문장 "캐시를 비웠어요. 다음 요청은 DB까지 가요" |
+| Cache | `log = []`, `has = false` | "요청 보내기", "캐시 비우기" | 보내기: `log.push(has ? 'hit' : 'miss')`, `has = true`. 비우기: `has = false`(log는 남김). 그림 `bcache(log)`, 문장 `bcacheSay(log)`. 비운 직후 문장은 `BCK_CLEAR` |
 | Authorization | `role = '일반 회원'`, `sent = false` | `tpick(['일반 회원', '관리자'], '일반 회원')`, "글 삭제" | 고르기: `role` 바꾸고 `sent = false`. 글 삭제: `sent = true`. 그림은 `sent`면 `bauthz(role)`, 아니면 `whelp('역할을 고르고 글 삭제를 눌러 보세요')`. 문장은 `sent`면 `bauthzSay(role)`, 아니면 "아직 보내지 않았어요" |
 
+- 두 문장은 상태 함수 옆에 상수로 둔다.
+  - `BRL_RESET = '시간이 지나 횟수를 비웠어요. 다시 5번 보낼 수 있어요'`
+  - `BCK_CLEAR = '캐시를 비웠어요. 다음 요청은 DB까지 가요'`
+- 고르는 버튼 줄은 `<div role="group" aria-label="메서드 고르기">${tpick(…)}</div>`로 감싼다. Authorization은 `aria-label="역할 고르기"`다.
 - 그림판 h는 `<div class="mk-mobox">…</div>` + 버튼 줄(`.mk-tkeys`) + `<span class="mk-hint" aria-live="polite">`이다(`u-front-key`, index.html:7544 형식). Idempotent의 고르는 버튼과 한 번 누르는 버튼은 같은 `.mk-tkeys` 줄에 두거나 두 줄로 둔다.
 - `cap`은 할 일을 말한다.
   - Rate Limit: "요청을 6번 보내 보고, 시간 지나기로 다시 열어 보세요"
@@ -274,11 +292,15 @@ x 짝(스펙 5장). 아래 짝은 x에서 차이를 먼저 쓴다.
   ```
   - `bkdm`: `fdm`(check.mjs:488)과 같은 방식이다. `init`이 있고, `String(init)`에 `psay`가 있고, h에 목록 글이 모두 있어야 한다.
   - `bkdmrun`은 vm 안에서 각 그림의 `init`을 가짜 그림판으로 돌린다.
-    - 가짜 그림판: `querySelector`·`querySelectorAll`·`addEventListener`·`setAttribute`·`dataset`·`innerHTML`·`textContent`만 있는 작은 객체. `setTimeout`은 즉시 실행으로 바꾼다.
+    - 가짜 그림판: `querySelector`·`querySelectorAll`·`addEventListener`·`setAttribute`·`dataset`·`innerHTML`·`textContent`만 있는 작은 객체다(`u-front-key` init이 쓰는 API).
+      - 버튼은 그림 h를 정규식으로 읽어 만든다. `textContent`는 버튼 글, `dataset.k`는 `data-k` 값이다.
+      - `setAttribute`는 값을 `String()`으로 저장한다(`aria-pressed`에 불리언이 들어감).
+      - `psay`가 전역 `setTimeout`을 쓰므로, 시작할 때 `ctx.setTimeout = f => f()`로 바꾸고 끝나면 되돌린다.
+      - front `fdmrun`은 순수 함수만 보았다. init을 직접 돌리는 것은 이번이 처음이다.
     - 단언(버튼은 글자로 찾는다):
-      - Rate Limit: 보내기 6번 → 그림에 `429`, 문장에 `429`. 시간 지나기 → 보내기 1번 → 그림에 `429` 없음, 문장 `1번째 요청은 통과`
+      - Rate Limit: 보내기 6번 → 그림에 `429`, 문장에 `429`. 시간 지나기 → 문장 `BRL_RESET` → 보내기 1번 → 그림에 `429` 없음, 문장 `1번째 요청은 통과`
       - Idempotent: POST 다시 보내기 3번 → 문장 `3개`. PUT 고르기 → 문장 `아직 보내지 않았어요`, POST의 `aria-pressed="false"`, PUT의 `"true"`. 다시 보내기 3번 → `1개`. 처음으로 → `아직`
-      - Cache: 보내기 2번 → 문장 `바로`. 비우기 → 보내기 → 문장 `DB까지`
+      - Cache: 보내기 2번 → 문장 `바로`. 비우기 → 문장 `BCK_CLEAR` → 보내기 → 문장 `DB까지`
       - Authorization: 글 삭제 → 문장 `로그인은 됐지만 권한이 없어요`, 그림 `403`. 관리자 고르기 → 문장 `아직`. 글 삭제 → 그림 `200 OK`
   - 가짜 그림판을 만들기 어려우면 `bkdmrun`은 상태 전이만 순수 함수로 확인한다(`bkdmstep(card, state, button) → state`를 그림 옆에 두고 init이 그것을 쓰게 함). 이때 원장에 `Ruling:`을 적고, 키보드 동작은 Step 5 브라우저에서 확인한다.
 - [ ] **Step 2: 실패 확인**: `FAIL bkdm: Rate Limit, Idempotent, Cache, Authorization`·`FAIL bkdmrun`
@@ -289,6 +311,7 @@ x 짝(스펙 5장). 아래 짝은 x에서 차이를 먼저 쓴다.
   - 결과 문장 글이 바뀐다(psay 150ms 뒤 확인).
   - 고르는 버튼의 `aria-pressed="true"`가 하나뿐이다.
   - Rate Limit 보내기 20번, Idempotent POST 20번 뒤 320px에서 넘침이 0이다.
+  - `.mk-hint`는 absolute(top 8px)다. 그래서 가장 긴 문장일 때 320px에서 `hint.getBoundingClientRect().bottom <= mobox.getBoundingClientRect().top`인지 잰다. 넘침 측정으로는 겹침이 잡히지 않는다. 겹치면 위 여백을 늘리고 원장에 적는다.
   - reduce 모드에서도 버튼이 동작한다.
 - [ ] **Step 6: 커밋**: `feat: 백엔드 직접 조작 4장`
 
