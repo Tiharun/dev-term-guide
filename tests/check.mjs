@@ -473,8 +473,9 @@ const SYM_FRONT = ['CSS가 다른 규칙에 밀려 적용이 안 돼요', '안�
   '같은 요청이 끝없이 반복돼요', '목록 순서를 바꾸면 입력값이 엉뚱한 줄에 남아요', '배열에 값을 넣었는데 화면이 그대로예요', 'props를 여러 단계로 계속 넘기고 있어요',
   '화면 낭독기가 버튼을 이상하게 읽어요', '숨겼는데 빈자리가 그대로 남아요', '브라우저마다 기본 여백이 달라요', '옛 브라우저에서 새 문법이 안 돼요'];
 const SYM_BACK = ['429가 떠요', '로그인했는데 401이 떠요', '로그인은 되는데 403이 떠요', '서버가 보낸 데이터를 못 읽어요', '웹훅이 같은 알림을 여러 번 보내요', '업로드한 파일이 서버에서 비어 있어요', '로그인 뒤 redirect_uri 오류가 나요', '동시에 사면 재고가 마이너스가 돼요', '다음 페이지에 같은 글이 또 나와요', '오류가 난 요청을 로그에서 못 찾겠어요', '외부 API가 멈추면 우리 서버도 멈춰요', '오래 걸리는 작업 때문에 응답이 늦어요'];    // 백엔드 계획서 ② Task 4 표
-check('symcount', () => g.SYMPTOMS.length !== 193 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_DB = ['데이터가 쌓일수록 목록이 느려져요', '목록 하나 여는데 쿼리가 수백 번 나가요', 'JOIN했더니 같은 회원이 여러 줄 나와요', '주문 없는 회원이 목록에서 빠져요', '개수가 실제보다 적게 나와요', '= NULL로 찾으면 아무것도 안 나와요', 'DB 연결이 꽉 찼다는 오류가 떠요', 'deadlock 오류가 떠요', '회원을 지웠더니 주문이 같이 사라졌어요', '같은 이메일로 두 번 가입돼요', '실수로 지운 데이터를 되살리고 싶어요', '둘이 동시에 고치면 한 사람 것이 사라져요'];
+check('symcount', () => g.SYMPTOMS.length !== 205 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
 check('total', () => g.TERMS.length === 1572 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
