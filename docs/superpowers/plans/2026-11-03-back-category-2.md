@@ -213,7 +213,9 @@ x에 꼭 넣을 사실(디렉터 검토 지적):
 쓸 스킬: design-skills:ux-writing·interfaces:better-writing
 
 **Files:**
-- Modify: `index.html`: `BK_NOX`에 있는 카드에 `x`를 더한다(`o`·`u` 뒤, `v` 앞).
+- Modify: `index.html`
+  - `BK_NOX`에 있는 카드에 `x`를 더한다(`o`·`u` 뒤, `v` 앞).
+  - Authentication은 이미 x가 있다. 기존 x에 401을 넣어 고치고, `bkxn`의 2~3문장은 지킨다.
 - Modify: `tests/check.mjs:566`: `BK_NOX`
 
 **Interfaces:**
@@ -225,7 +227,7 @@ x에 꼭 넣을 사실(디렉터 검토 지적):
   - `BKX_HAS = {'CORS': ['OPTIONS'], 'Authentication': ['401'], 'Authorization': ['403'], 'Idempotent': ['PUT']}`와 점검 `bkxhas`를 더한다. 그 카드의 x에 목록 글이 모두 있어야 한다.
 - [ ] **Step 2: 실패 확인**: `FAIL bkx: +Server, +Client, …`(47개), `FAIL bkxhas: CORS, Authentication, Authorization, Idempotent`
 - [ ] **Step 3: 사실 확인**: 공통 절차 3이다. 카드마다 1차 출처(MDN·RFC 9110·6749·OpenID Connect Core)를 열고, 원장에 `Task 2 출처: <en> — <URL>`을 적는다.
-- [ ] **Step 4: x 쓰기**: 47장에 x를 넣는다.
+- [ ] **Step 4: x 쓰기**: 47장에 x를 넣는다. Authentication의 기존 x는 401을 넣어 고친다.
   - 2~3문장, 해요체로 쓴다. 짝이 있으면 차이를 먼저 쓴다.
   - 짝은 스펙 5장 목록이다. 특히:
     - Server vs Backend vs Node.js
@@ -274,10 +276,10 @@ x에 꼭 넣을 사실(디렉터 검토 지적):
 | Authorization | `role = '일반 회원'`, `sent = false` | `tpick(['일반 회원', '관리자'], '일반 회원')`, "글 삭제" | 고르기: `role` 바꾸고 `sent = false`. 글 삭제: `sent = true`. 그림은 `sent`면 `bauthz(role)`, 아니면 `whelp('역할을 고르고 글 삭제를 눌러 보세요')`. 문장은 `sent`면 `bauthzSay(role)`, 아니면 "아직 보내지 않았어요" |
 
 - 두 문장은 상태 함수 옆에 상수로 둔다.
-  - `BRL_RESET = '시간이 지나 횟수를 비웠어요. 다시 5번 보낼 수 있어요'`
+  - ``BRL_RESET = `시간이 지나 횟수를 비웠어요. 다시 ${BRL.max}번 보낼 수 있어요` ``(숫자는 `BRL`에서 가져온다)
   - `BCK_CLEAR = '캐시를 비웠어요. 다음 요청은 DB까지 가요'`
 - 고르는 버튼 줄은 `<div role="group" aria-label="메서드 고르기">${tpick(…)}</div>`로 감싼다. Authorization은 `aria-label="역할 고르기"`다.
-- 그림판 h는 `<div class="mk-mobox">…</div>` + 버튼 줄(`.mk-tkeys`) + `<span class="mk-hint" aria-live="polite">`이다(`u-front-key`, index.html:7544 형식). Idempotent의 고르는 버튼과 한 번 누르는 버튼은 같은 `.mk-tkeys` 줄에 두거나 두 줄로 둔다.
+- 그림판 h는 `<div class="mk-mobox">…</div>` + 버튼 줄(`.mk-tkeys`) + `<span class="mk-hint" aria-live="polite">`이다(`u-front-key`, index.html:7544 형식). Idempotent·Authorization은 버튼을 두 줄로 둔다. 위 줄은 고르기 그룹(`role="group"`), 아래 줄은 한 번 누르는 버튼의 `.mk-tkeys`다.
 - `cap`은 할 일을 말한다.
   - Rate Limit: "요청을 6번 보내 보고, 시간 지나기로 다시 열어 보세요"
   - Idempotent: "POST와 PUT을 골라 여러 번 보내 보세요"
