@@ -317,7 +317,64 @@ check('bkhelp', () => vm.runInContext(`(() => {
   no(() => httpmsg({kind:'요청', start:'GET /', hl:['h0']}), '없는 헤더 강조'); no(() => httpmsg({kind:'요청', start:'GET /', body:['a'], hl:['b1']}), '없는 본문 강조');
   return bad.join(', ');
 })()`, ctx));
-check('bkpad', () => ['mk-sd', 'mk-hm'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
+check('dbhelp', () => vm.runInContext(`(() => {
+  const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(dbtab|qrun|erd): /.test(e.message)) bad.push(w + ' 메시지'); } };
+  const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); });
+  const U = {name:'users', cols:[{n:'id', key:'PK'}, 'name', 'phone'], rows:[['1', '민수', '010-…'], ['2', '지영', 'NULL'], ['3', '준호', '']]};
+  has(dbtab({...U, hl:[{row:1}, {col:2}], label:'회원 표'}), ['class="mk-db" role="group" aria-label="회원 표"', 'class="mk-dbh" aria-hidden="true"', 'users 테이블', 'class="mk-dbt" aria-hidden="true"', '<b class="mk-dbk">PK</b>',
+    '<i class="mk-dbn">NULL</i>', '<b class="mk-dbk">빈 글자</b>', 'mk-dbon', '>강조<',
+    '<p class="sr">users 테이블, 열 3개(id PK, name, phone), 행 3줄. 1줄: 1, 민수, 010-…. 2줄: 2, 지영, NULL. 3줄: 3, 준호, 빈 글자. 강조: 2줄, phone 열.</p>'], 'dbtab');
+  has(dbtab({name:'users', cols:['email'], rows:[['a@a.com'], ['m@a.com']], mark:['', '읽음'], hl:{cell:[1, 0]}}), ['>읽음<', '1줄: a@a.com. 2줄: m@a.com (읽음). 강조: 2줄 email 칸.</p>'], 'dbtab mark');
+  has(dbtab({name:'orders', tag:'나누기 전', cols:['id'], rows:[]}), ['<b class="mk-dbg">나누기 전</b>', '결과 없음(0줄)', '<p class="sr">나누기 전, orders 테이블, 열 1개(id), 행 0줄, 결과 없음.</p>'], 'dbtab 0줄');
+  if (dbtab(U).includes('tabindex') || dbtab(U).includes('강조')) bad.push('dbtab 기본');
+  no(() => dbtab({...U, name:'a'.repeat(13)}), '이름 13폭'); no(() => dbtab({...U, tag:'a'.repeat(13)}), '이름표 13폭'); no(() => dbtab({...U, cols:[]}), '열 0개');
+  no(() => dbtab({name:'t', cols:['a', 'b', 'c', 'd'], rows:[]}), '열 4개'); no(() => dbtab({name:'t', cols:['a'.repeat(11)], rows:[]}), '열 11폭'); no(() => dbtab({name:'t', cols:[{n:'a', key:'UK'}], rows:[]}), 'key');
+  no(() => dbtab({name:'t', cols:[{n:'a', type:'글자'}], rows:[]}), 'dbtab type'); no(() => dbtab({name:'t', cols:['a'], rows:Array(6).fill(['1'])}), '행 6개');
+  no(() => dbtab({name:'t', cols:['a'], rows:[['a'.repeat(11)]]}), '칸 11폭'); no(() => dbtab({name:'t', cols:['a', 'b'], rows:[['1']]}), '칸 수'); no(() => dbtab({name:'t', cols:['a'], rows:[[1]]}), '칸 숫자');
+  no(() => dbtab({...U, hl:{row:3}}), '없는 행'); no(() => dbtab({...U, hl:{col:3}}), '없는 열'); no(() => dbtab({...U, hl:{cell:[0, 5]}}), '없는 칸');
+  no(() => dbtab({...U, mark:['읽음']}), 'mark 수'); no(() => dbtab({...U, mark:['abcdefg', '', '']}), '꼬리표 7폭');
+  const P = {name:'posts', cols:['id', 'title', 'likes'], rows:[['1', '공지', '3'], ['2', '후기', '25'], ['3', '질문', '12']]};
+  const q = qrun({sql:['SELECT title FROM posts', 'WHERE likes > 10'], from:[P], pick: r => r.likes > 10, show:['title']});
+  has(q, ['class="mk-dq"', 'class="mk-dqr" aria-hidden="true"', '<b>실행</b>', 'class="mk-dqh" aria-hidden="true">결과 2줄', 'mk-dqm mk-cdz1 A', 'mk-dqm mk-cdz2 A',
+    '<p class="sr">쿼리 SELECT title FROM posts WHERE likes &gt; 10 실행. 실행 전 posts 3줄. 결과 2줄: 후기, 질문.</p>'], 'qrun pick');
+  if ((q.match(/class="sr"/g) || []).length !== 1 || q.includes('mk-cdz3')) bad.push('qrun sr 하나·결과 2줄');
+  if (!qrun({sql:['a'], from:[P], pick: r => r.likes === 25}).includes('결과 1줄')) bad.push('숫자로 바꿈');
+  if (!qrun({sql:['a'], from:[U], pick: r => r.phone === null}).includes('결과 1줄: 2 지영 NULL.')) bad.push('NULL은 null');
+  has(qrun({sql:['DELETE FROM users', 'WHERE id = 3'], from:[U], pick: r => r.id === 3, del:1}), ['>지움<', '지운 뒤 남은 줄 2줄', '지운 뒤 남은 줄 2줄: 1 민수 010-…, 2 지영 NULL.</p>'], 'qrun del');
+  const e1 = qrun({sql:['INSERT INTO users', "VALUES (4, 'x')"], from:[U], err:'이미 있는 이메일이에요'});
+  has(e1, ['>실패<', '이미 있는 이메일이에요', '표는 그대로예요', 'mk-cdz1 A', '실패: 이미 있는 이메일이에요, 표는 그대로예요.</p>'], 'qrun err'); if (e1.includes('mk-cdz2')) bad.push('qrun err 한 줄');
+  const U2 = {name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영']]}, O = {name:'orders', cols:['id', 'user_id'], rows:[['1', '1'], ['2', '2']]};
+  has(qrun({sql:['DELETE FROM users', 'WHERE id = 1'], from:[U2, O], after:[{name:'users', cols:['id', 'name'], rows:[['2', '지영']]}, {name:'orders', cols:['id', 'user_id'], rows:[['2', '2']]}]}),
+    ['결과 표 2개', 'mk-cdz2 A', '실행 전 users 2줄, orders 2줄. 결과 users 1줄: 2 지영; orders 1줄: 2 2.</p>'], 'qrun 표 둘');
+  has(qrun({sql:['INSERT INTO users', "VALUES (3, '준호')"], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '민수'], ['2', '지영'], ['3', '준호']]}, hl:{row:2}}), ['결과 3줄: 1 민수, 2 지영, 3 준호, 강조: 3줄.</p>'], 'qrun after hl');
+  if (/class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(qrun({sql:['a'], from:[P], pick: () => true, still:true}))) bad.push('qrun still');
+  const A1 = {name:'users', cols:['id', 'name'], rows:[['1', '민수']]};
+  no(() => qrun({sql:[], from:[U2], after:A1}), 'SQL 0줄'); no(() => qrun({sql:Array(5).fill('a'), from:[U2], after:A1}), 'SQL 5줄'); no(() => qrun({sql:['a'.repeat(29)], from:[U2], after:A1}), 'SQL 29폭');
+  no(() => qrun({sql:['a'], from:[], after:A1}), '표 0개'); no(() => qrun({sql:['a'], from:[U2, U2, U2], after:A1}), '표 3개'); no(() => qrun({sql:['a'], from:[U2]}), '결과 없음');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, after:A1}), 'pick+after'); no(() => qrun({sql:['a'], from:[U2], pick:'x'}), 'pick 함수 아님');
+  no(() => qrun({sql:['a'], from:[U2], after:A1, show:['id']}), 'show 홀로'); no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['id'], del:1}), 'show+del');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, show:['age']}), 'show 없는 열'); no(() => qrun({sql:['a'], from:[U2], after:A1, del:1}), 'del+after');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, hl:{row:0}}), 'hl+pick'); no(() => qrun({sql:['a'], from:[U2], err:'a'.repeat(29)}), 'err 29폭');
+  no(() => qrun({sql:['a'], from:[U2], pick: () => true, err:'a'}), 'pick+err'); no(() => qrun({sql:['a'], from:[U2], err:'a', del:1}), 'err+del'); no(() => qrun({sql:['a'], from:[U2, U2], after:[A1, A1], hl:{row:0}}), '표 2개 hl');
+  no(() => qrun({sql:['a'], from:[U2], after:[A1, A1, A1]}), 'after 3개'); no(() => qrun({sql:['a'], from:[U2], after:{name:'users', cols:['id', 'name'], rows:[['1', '하늘']]}}), '결과 값 밖');
+  const F5 = {name:'t', cols:['a'], rows:Array(5).fill(['1'])}; no(() => qrun({sql:['a'], from:[U2], after:[F5, F5]}), '결과 10줄');
+  const e = erd({tables:[{name:'users', cols:[{n:'id', key:'PK'}, {n:'email', type:'글자'}]}, {name:'orders', cols:[{n:'id', key:'PK'}, {n:'user_id', key:'FK'}]}], links:[{a:0, b:1, kind:'1:N', fk:'user_id'}], hl:['orders.user_id']});
+  has(e, ['class="mk-er"', 'class="mk-erl" aria-hidden="true"', '>1 : N<', 'orders.user_id로 이어져요', '<span class="mk-ert">글자</span>', 'mk-eron',
+    '<p class="sr">관계도. users 표(id PK, email 글자), orders 표(id PK, user_id FK). users 하나에 orders 여럿, orders.user_id로 이어져요. 강조: orders.user_id.</p>'], 'erd');
+  const S = {name:'students', cols:[{n:'id', key:'PK'}]}, C = {name:'courses', cols:[{n:'id', key:'PK'}]}, EN = {name:'enrollments', cols:[{n:'course_id', key:'FK'}]};
+  has(erd({tables:[S, C], links:[{a:0, b:1, kind:'N:M'}]}), ['>N : M<', '중간 표가 필요해요', 'students 여럿과 courses 여럿, 중간 표가 필요해요.'], 'erd N:M');
+  has(erd({tables:[EN, C], links:[{a:0, b:1, kind:'N:1', fk:'course_id'}]}), ['enrollments 여럿에 courses 하나, enrollments.course_id로 이어져요.'], 'erd N:1');
+  has(erd({tables:[{name:'users', cols:['id']}, {name:'profiles', cols:[{n:'user_id', key:'FK'}]}], links:[{a:0, b:1, kind:'1:1', fk:'user_id'}]}), ['users 하나에 profiles 하나, profiles.user_id로 이어져요.'], 'erd 1:1');
+  const T2 = [S, C], T3 = [S, EN, C];
+  no(() => erd({tables:[S]}), '표 1개'); no(() => erd({tables:[S, C, S, C]}), '표 4개'); no(() => erd({tables:[{name:'a'.repeat(13), cols:['id']}, C]}), '이름 13폭');
+  no(() => erd({tables:[{name:'t', cols:[]}, C]}), '열 0개'); no(() => erd({tables:[{name:'t', cols:['a', 'b', 'c', 'd', 'e']}, C]}), '열 5개'); no(() => erd({tables:[{name:'t', cols:['a'.repeat(11)]}, C]}), '열 11폭');
+  no(() => erd({tables:[{name:'t', cols:[{n:'a', type:'가나다라'}]}, C]}), 'type 8폭'); no(() => erd({tables:[{name:'t', cols:[{n:'a', key:'UK'}]}, C]}), 'erd key');
+  no(() => erd({tables:T3, links:[{a:0, b:2, kind:'1:N', fk:'course_id'}]}), '이웃 아님'); no(() => erd({tables:T2, links:[{a:0, b:1, kind:'2:1'}]}), 'kind');
+  no(() => erd({tables:[EN, C], links:[{a:0, b:1, kind:'1:N', fk:'course_id'}]}), '1:N fk 자리'); no(() => erd({tables:[{name:'a', cols:['x']}, {name:'b', cols:['x']}], links:[{a:0, b:1, kind:'1:N', fk:'x'}]}), 'fk 아닌 열');
+  no(() => erd({tables:T2, links:[{a:0, b:1, kind:'N:M', fk:'id'}]}), 'N:M fk'); no(() => erd({tables:T2, hl:['posts']}), '없는 표 강조'); no(() => erd({tables:T2, hl:['students.age']}), '없는 열 강조');
+  return bad.join(', ');
+})()`, ctx));
+check('bkpad', () => ['mk-sd', 'mk-hm', 'mk-db', 'mk-dq', 'mk-er'].filter(k => !new RegExp(`[,(]\\.${k}[,)][^{]*\\.stage\\{padding-bottom:14px\\}`).test(html)).join(', '));    // 설명이 아래로 내려간 그림은 그림판 아래 여백도 줄인다
 check('tframe', () => { const P = 10 * +html.match(/\.mk-tr\.A,\.mk-tc\.A\{animation-duration:10s;animation-delay:-([\d.]+)s/)[1];    // 멈춘 장면(%)은 줄·글자가 다 나온 뒤
   return [1, 2, 3, 4, 5, 6, 7, 8].filter(k => { const l = html.match(new RegExp(`@keyframes mk-tl${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%,([\\d.]+)%`)),
     t = html.match(new RegExp(`@keyframes mk-tt${k}\\{0%,[\\d.]+%\\{[^}]*\\}([\\d.]+)%,100%`)); return !l || !t || +l[1] > P || +l[2] < P || +t[1] > P; }).join(', '); });
@@ -662,7 +719,8 @@ check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation
   const at = [1, 2, 3, 4, 5, 6, 7, 8].flatMap(k => ['y', 'z'].filter(t => { const m = html.match(new RegExp(`@keyframes mk-cd${t}${k}\\{0%,[\\d.]+%\\{opacity:0\\}([\\d.]+)%`)); return m ? +m[1] !== 10 * k : !(t === 'y' && k === 8); }).map(t => 'at ' + t + k));    // 단계 k는 10k%에 나타난다
   const dw = html.match(/\.mk-dtw\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 전파 경로 칩도 마지막 단계에서 멈춘다
   const sd = html.match(/\.mk-sdm\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 순서도 행도 마지막 단계에서 멈춘다
-  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : []), ...(!sd || 10 * +sd[1] !== P ? ['sdm'] : [])].join(', '); });
+  const dq = html.match(/\.mk-dqm\.A\{[^}]*animation-delay:-([\d.]+)s/);    // 쿼리 결과 행도 마지막 단계에서 멈춘다
+  return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : []), ...(!sd || 10 * +sd[1] !== P ? ['sdm'] : []), ...(!dq || 10 * +dq[1] !== P ? ['dqm'] : [])].join(', '); });
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });

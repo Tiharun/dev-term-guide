@@ -447,6 +447,18 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-hmt{padding:4px 10px;border-bottom:1.5px solid var(--rule);background:var(--fig);font:800 11.5px/1.4 var(--sans);color:var(--ink)}.mk-hmt span{margin-left:6px;font-weight:400;color:var(--muted)}
 .mk-hmb{padding:5px 0}.mk-hmr{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;padding:1px 10px;font:12px/1.5 var(--mono)}.mk-hmr code{font:inherit;color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
 .mk-hmgap{height:8px;padding:0}.mk-hmon{background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}.mk-hmk{font:800 11px/1.3 var(--sans);color:var(--mark-text);white-space:nowrap}
+.mk-db{width:min(100%,400px);border:1.5px solid var(--rule);border-radius:8px;background:var(--plate);overflow:hidden;text-align:left}.mk-db+.mk-db{margin-top:8px}
+.mk-dbh{padding:4px 10px;border-bottom:1.5px solid var(--rule);background:var(--fig);font:800 11.5px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-dbg{margin-right:6px;padding:0 5px;border:1.5px solid var(--ink);border-radius:4px;font:800 11px/1.4 var(--sans)}
+.mk-dbt{table-layout:fixed;width:100%;border-collapse:collapse;font:12px/1.4 var(--mono);color:var(--ink)}.mk-dbt th,.mk-dbt td{padding:3px 4px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top;overflow-wrap:anywhere}.mk-dbt th{font-weight:800}.mk-dbt tbody tr:last-child td{border-bottom:0}
+.mk-dbk{margin-left:4px;font:800 11px/1.3 var(--sans);color:var(--mark-text);white-space:nowrap}.mk-dbn{font-style:italic;color:var(--muted)}.mk-dbon{background:var(--mark-bg)}.mk-dbt tr.mk-dbon>td:first-child{box-shadow:inset 3px 0 0 var(--mark)}
+.mk-dbe{margin:0;padding:5px 10px;font:12px/1.4 var(--sans);color:var(--muted)}
+.mk-dq{display:grid;gap:8px;width:min(100%,400px);text-align:left}.mk-dq>.mk-db{width:100%}.mk-dq>.mk-db+.mk-db{margin-top:0}
+.mk-dqr{display:grid;gap:1px;padding:5px 10px;border:1.5px solid var(--ink);border-radius:8px;background:var(--plate)}.mk-dqr b{font:800 11px/1.4 var(--sans);color:var(--muted)}.mk-dqr code{font:700 12px/1.5 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere}
+.mk-dqh{font:800 11.5px/1.4 var(--sans);color:var(--ink)}.mk-dqf{margin:0;padding:6px 10px;border:1.5px solid var(--mark-text);border-radius:8px;background:var(--plate);font:12px/1.5 var(--sans);color:var(--ink)}.mk-dqf .mk-dbk{margin:0 6px 0 0}.mk-dqf span{display:block;font-size:11px;color:var(--muted)}
+.mk-er{display:grid;width:min(100%,360px);text-align:left}.mk-erb{border:1.5px solid var(--ink);border-radius:8px;background:var(--plate);overflow:hidden}.mk-erb.mk-eron{box-shadow:0 0 0 3px var(--mark-bg)}
+.mk-ern{display:block;padding:4px 10px;border-bottom:1.5px solid var(--rule);background:var(--fig);font:800 12px/1.4 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-erb ul{margin:0;padding:3px 0;list-style:none}
+.mk-erb li{display:flex;flex-wrap:wrap;align-items:center;gap:0 4px;padding:1px 10px;font:12px/1.5 var(--mono);color:var(--ink);overflow-wrap:anywhere}.mk-erb li .mk-dbk{margin:0}.mk-erb li.mk-eron{background:var(--mark-bg);box-shadow:inset 3px 0 0 var(--mark)}.mk-ert{margin-left:auto;font:11px/1.4 var(--sans);color:var(--muted)}
+.mk-erl{position:relative;padding:6px 10px 6px 30px;font:11.5px/1.4 var(--sans);color:var(--ink);overflow-wrap:anywhere}.mk-erl::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--ink)}.mk-erl .mk-dbk{margin:0 6px 0 0;color:var(--ink);font-family:var(--mono)}
 .mk-fvt{border-collapse:collapse;width:min(100%,380px);font:12px/1.4 var(--sans);color:var(--ink)}.mk-fvt th,.mk-fvt td{border:1px solid var(--rule);padding:4px 6px;text-align:left}.mk-fvt th{font-weight:800}.mk-fvt code{font:600 11.5px/1.4 var(--mono)}
 .cmp>div:has(>.mk-fpd){min-width:0;grid-template-columns:minmax(0,1fr)}.mk-fpd{width:100%;display:flex;justify-content:center}.mk-fpd .mk-browser{max-width:100%}
 .fig:has(.mk-fdp,.mk-fpx,.mk-fem,.mk-ffr,.mk-fvt,.mk-fwp,.mk-fpc,.mk-fof,.mk-fcl) .figcap{position:static;margin:0 96px 11px 14px}
@@ -503,7 +515,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-wraw{align-self:flex-start;padding:1px 6px;border:1px solid var(--steel);border-radius:2px;background:var(--fig);color:var(--text);font:13px var(--serif)}.mk-wlink{align-self:flex-start;color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 .mk-wqr{display:grid;grid-template-columns:repeat(7,10px);padding:8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--plate)}.mk-wqr i{width:10px;height:10px}.mk-wqr i.b{background:var(--ink)}
 .mk-wpg{display:block;flex:none;height:4px;margin:-12px -12px 4px;background:var(--mark);transform-origin:left;transform:scaleX(.88)}.mk-wpg.A{animation:mk-wpg 10s linear -8.8s infinite}@keyframes mk-wpg{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.mk-cds.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-mrs.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-sdm.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
+.mk-cds.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-mrs.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-dqm.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}.mk-sdm.A{opacity:0;animation-duration:10s;animation-delay:-8.8s;animation-iteration-count:infinite;animation-timing-function:linear}
 .mk-cdy1{animation-name:mk-cdy1}.mk-cdz1{animation-name:mk-cdz1}.mk-cdy2{animation-name:mk-cdy2}.mk-cdz2{animation-name:mk-cdz2}.mk-cdy3{animation-name:mk-cdy3}.mk-cdz3{animation-name:mk-cdz3}.mk-cdy4{animation-name:mk-cdy4}.mk-cdz4{animation-name:mk-cdz4}.mk-cdy5{animation-name:mk-cdy5}.mk-cdz5{animation-name:mk-cdz5}.mk-cdy6{animation-name:mk-cdy6}.mk-cdz6{animation-name:mk-cdz6}.mk-cdy7{animation-name:mk-cdy7}.mk-cdz7{animation-name:mk-cdz7}.mk-cdy8{animation-name:mk-cdy8}.mk-cdz8{animation-name:mk-cdz8}
 @keyframes mk-cdy1{0%,9.9%{opacity:0}10%,19.9%{opacity:1}20%,100%{opacity:0}}@keyframes mk-cdy2{0%,19.9%{opacity:0}20%,29.9%{opacity:1}30%,100%{opacity:0}}@keyframes mk-cdy3{0%,29.9%{opacity:0}30%,39.9%{opacity:1}40%,100%{opacity:0}}@keyframes mk-cdy4{0%,39.9%{opacity:0}40%,49.9%{opacity:1}50%,100%{opacity:0}}@keyframes mk-cdy5{0%,49.9%{opacity:0}50%,59.9%{opacity:1}60%,100%{opacity:0}}@keyframes mk-cdy6{0%,59.9%{opacity:0}60%,69.9%{opacity:1}70%,100%{opacity:0}}@keyframes mk-cdy7{0%,69.9%{opacity:0}70%,79.9%{opacity:1}80%,100%{opacity:0}}@keyframes mk-cdy8{0%,79.9%{opacity:0}80%,89.9%{opacity:1}90%,100%{opacity:0}}@keyframes mk-cdz1{0%,9.9%{opacity:0}10%,100%{opacity:1}}@keyframes mk-cdz2{0%,19.9%{opacity:0}20%,100%{opacity:1}}@keyframes mk-cdz3{0%,29.9%{opacity:0}30%,100%{opacity:1}}@keyframes mk-cdz4{0%,39.9%{opacity:0}40%,100%{opacity:1}}@keyframes mk-cdz5{0%,49.9%{opacity:0}50%,100%{opacity:1}}@keyframes mk-cdz6{0%,59.9%{opacity:0}60%,100%{opacity:1}}@keyframes mk-cdz7{0%,69.9%{opacity:0}70%,100%{opacity:1}}@keyframes mk-cdz8{0%,79.9%{opacity:0}80%,100%{opacity:1}}
 .mk-mobox{width:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:12px}.mk-mobox>.mk-fst{width:100%}.stage:has(>.mk-mobox){padding-top:50px;padding-bottom:22px}
@@ -565,7 +577,7 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-sd,.mk-hm) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-fky,.mk-sd,.mk-hm) .figcap{position:static;margin:0 96px 11px 14px}
+.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-sd,.mk-hm,.mk-db,.mk-dq,.mk-er) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-fky,.mk-sd,.mk-hm,.mk-db,.mk-dq,.mk-er) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -4148,6 +4160,100 @@ const httpmsg = ({ kind, start, head = [], body = [], hl = [], label } = {}) => 
   const nm = id => id === 'start' ? '첫 줄' : id[0] === 'h' ? head[+id.slice(1)].split(':')[0] + ' 줄' : `본문 ${+id.slice(1) + 1}번째 줄`, on = ids.filter(x => hl.includes(x)).map(nm);
   const sum = `HTTP ${kind}, ${start}, 헤더 ${head.length}줄, 본문 ${body.length}줄` + (on.length ? ', 강조: ' + on.join(', ') : '') + (fail ? ', 실패' : '') + ' (버전 줄임)';
   return `<div class="mk-hm"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-hmt" aria-hidden="true">HTTP ${kind}<span>(버전 줄임)</span></div><div class="mk-hmb" aria-hidden="true">${rows}</div><p class="sr">${esc(sum)}</p></div>`;
+};
+/* DB 표: name·tag 12자, cols 1~3개(문자열 또는 {n, key:'PK'|'FK'}, 이름 10자, type은 erd에만), rows 0~5줄(칸은 글 10자, 'NULL'·'' 표시), hl {row}·{col}·{cell:[행, 열]} 하나 또는 배열, mark 줄마다 꼬리표 6자 */
+const dbhn = (C, h) => h.cell ? `${h.cell[0] + 1}줄 ${C[h.cell[1]].n} 칸` : 'row' in h ? `${h.row + 1}줄` : `${C[h.col].n} 열`;    // 강조 이름: dbtab·qrun의 sr이 같이 쓴다
+const dbtab = ({ name, tag, cols, rows = [], hl = [], mark, label } = {}) => {
+  const no = m => { throw new Error('dbtab: ' + m); }, w = (x, n, z = 1) => typeof x === 'string' && wlen(x) >= z && wlen(x) <= n;
+  if (!w(name, 12) || (tag !== undefined && !w(tag, 12))) no('이름·이름표는 1~12자');
+  if (!Array.isArray(cols) || cols.length < 1 || cols.length > 3) no('열은 1~3개');
+  const C = cols.map(c => typeof c === 'string' ? { n: c } : c);
+  C.forEach(c => { if (!w(c.n, 10)) no('열 이름은 1~10자'); if (c.key !== undefined && c.key !== 'PK' && c.key !== 'FK') no('key는 PK·FK'); if ('type' in c) no('type은 erd에만'); });
+  if (!Array.isArray(rows) || rows.length > 5) no('행은 0~5줄');
+  rows.forEach(r => { if (!Array.isArray(r) || r.length !== C.length || r.some(x => !w(x, 10, 0))) no('줄마다 칸 수는 열 수, 칸은 글 10자까지'); });
+  const H = Array.isArray(hl) ? hl : [hl], inR = i => Number.isInteger(i) && i >= 0 && i < rows.length, inC = j => Number.isInteger(j) && j >= 0 && j < C.length;
+  if (H.some(h => !(h.cell ? inR(h.cell[0]) && inC(h.cell[1]) : 'row' in h ? inR(h.row) : inC(h.col)))) no('없는 행·열·칸은 강조할 수 없다');
+  if (mark !== undefined && (!Array.isArray(mark) || mark.length !== rows.length || mark.some(x => !w(x, 6, 0)))) no('mark는 줄마다 하나, 6자까지');
+  const onR = i => H.some(h => h.row === i), onC = j => H.some(h => !h.cell && h.col === j), onX = (i, j) => H.some(h => h.cell && h.cell[0] === i && h.cell[1] === j);
+  const k = t => `<b class="mk-dbk">${t}</b>`, say = x => x === 'NULL' ? 'NULL' : x === '' ? '빈 글자' : x;
+  const ths = C.map((c, j) => `<th${onC(j) ? ' class="mk-dbon"' : ''}>${esc(c.n)}${c.key ? k(c.key) : ''}${onC(j) ? k('강조') : ''}</th>`).join('');
+  const trs = rows.map((r, i) => `<tr${onR(i) ? ' class="mk-dbon"' : ''}>` + r.map((x, j) => `<td${onX(i, j) ? ' class="mk-dbon"' : ''}>`
+    + (x === 'NULL' ? '<i class="mk-dbn">NULL</i>' : x === '' ? k('빈 글자') : esc(x)) + (!j && onR(i) ? k('강조') : '') + (onX(i, j) ? k('강조') : '')
+    + (j === C.length - 1 && mark && mark[i] ? k(esc(mark[i])) : '') + '</td>').join('') + '</tr>').join('');
+  const sum = `${tag ? tag + ', ' : ''}${name} 테이블, 열 ${C.length}개(${C.map(c => c.n + (c.key ? ' ' + c.key : '')).join(', ')}), `
+    + (rows.length ? `행 ${rows.length}줄.` + rows.map((r, i) => ` ${i + 1}줄: ${r.map(say).join(', ')}${mark && mark[i] ? ` (${mark[i]})` : ''}.`).join('') : '행 0줄, 결과 없음.')
+    + (H.length ? ` 강조: ${H.map(h => dbhn(C, h)).join(', ')}.` : '');
+  return `<div class="mk-db"${label ? ` role="group" aria-label="${esc(label)}"` : ''}><div class="mk-dbh" aria-hidden="true">${tag ? `<b class="mk-dbg">${esc(tag)}</b>` : ''}${esc(name)} 테이블</div>`
+    + `<table class="mk-dbt" aria-hidden="true"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>${rows.length ? '' : '<p class="mk-dbe" aria-hidden="true">결과 없음(0줄)</p>'}<p class="sr">${esc(sum)}</p></div>`;
+};
+/* 쿼리 실행: sql 1~4줄(28자), from 실행 전 표 1~2개, 결과는 pick(고르는 함수, show 남길 열·del 지움) | after 결과 표 1~2개(hl은 표 하나일 때) | err 실패 글 28자 중 하나. 결과는 8줄까지 */
+const qrun = ({ sql, from, pick, show, after, err, del, hl, still = false, label } = {}) => {
+  const no = m => { throw new Error('qrun: ' + m); }, num = x => /^-?\d+(\.\d+)?$/.test(x);
+  if (!Array.isArray(sql) || sql.length < 1 || sql.length > 4 || sql.some(x => typeof x !== 'string' || wlen(x) < 1 || wlen(x) > 28)) no('SQL은 1~4줄, 줄마다 1~28자');
+  if (!Array.isArray(from) || from.length < 1 || from.length > 2) no('실행 전 표는 1~2개');
+  if ([pick, after, err].filter(x => x !== undefined).length !== 1) no('pick·after·err 중 정확히 하나');
+  if (pick !== undefined && typeof pick !== 'function') no('pick은 함수');
+  if ((show !== undefined || del) && pick === undefined) no('show·del은 pick과만');
+  if (show !== undefined && del) no('show와 del은 함께 쓰지 않는다');
+  if (hl !== undefined && after === undefined) no('hl은 after와만');
+  if (err !== undefined && (typeof err !== 'string' || wlen(err) < 1 || wlen(err) > 28)) no('실패 글은 1~28자');
+  const A = after === undefined ? [] : Array.isArray(after) ? after : [after];
+  if (after !== undefined && (A.length < 1 || A.length > 2)) no('결과 표는 1~2개');
+  if (A.length === 2 && hl !== undefined) no('결과 표가 둘이면 hl을 쓸 수 없다');
+  const F = from[0], C0 = (F.cols || []).map(c => typeof c === 'string' ? c : c.n), cut = h => h.replace(/<p class="sr">[^<]*<\/p>/, '');
+  let before = from, res = A.map((t, i) => i || hl === undefined ? t : { ...t, hl });
+  if (pick) {
+    if (show !== undefined && (!Array.isArray(show) || !show.length || show.some(n => !C0.includes(n)))) no('show에 없는 열');
+    const sel = (F.rows || []).flatMap((r, i) => pick(Object.fromEntries(r.map((x, j) => [C0[j], num(x) ? +x : x === 'NULL' ? null : x]))) ? [i] : []);
+    before = [del ? { ...F, mark: F.rows.map((_, i) => sel.includes(i) ? '지움' : '') } : { ...F, hl: [...(Array.isArray(F.hl) ? F.hl : F.hl ? [F.hl] : []), ...sel.map(row => ({ row }))] }, ...from.slice(1)];
+    const keep = del ? F.rows.filter((_, i) => !sel.includes(i)) : sel.map(i => F.rows[i]), js = show ? show.map(n => C0.indexOf(n)) : C0.map((_, j) => j);
+    res = [{ name: F.name, cols: js.map(j => F.cols[j]), rows: keep.map(r => js.map(j => r[j])) }];
+  }
+  const tabs = before.map(t => cut(dbtab({ ...t, label: undefined })));    // 표 모양 오류는 dbtab이 먼저 막는다
+  let k = 0;
+  const out = res.map(t => { const h = cut(dbtab({ ...t, label: undefined })), at = h.indexOf('<tbody>');
+    return h.slice(0, at) + h.slice(at).replace(/<tr(?: class="([^"]*)")?>/g, (_, c) => `<tr class="${c ? c + ' ' : ''}mk-dqm${still ? '' : ` mk-cdz${++k} A`}">`); }).join('');
+  if (res.reduce((s, t) => s + t.rows.length, 0) > 8) no('결과는 8줄까지');
+  if (A.length) {
+    const seen = new Set(from.flatMap(t => t.rows.flat())), H = hl === undefined ? [] : Array.isArray(hl) ? hl : [hl];
+    const cover = (i, j) => H.some(h => h.cell ? h.cell[0] === i && h.cell[1] === j : 'row' in h ? h.row === i : h.col === j);
+    A.forEach((t, a) => t.rows.forEach((r, i) => r.forEach((x, j) => { if (!seen.has(x) && !num(x) && x !== 'NULL' && !(a === 0 && cover(i, j))) no('결과 값은 실행 전 표에 있거나 숫자·NULL·강조 칸'); })));
+  }
+  const n = res.reduce((s, t) => s + t.rows.length, 0), line = t => t.rows.map(r => r.map(x => x === '' ? '빈 글자' : x).join(' ')).join(', ');
+  const part = (pre, t) => `${pre} ${t.rows.length}줄${t.rows.length ? ': ' + line(t) : ''}`;
+  const body = err !== undefined ? `실패: ${err}, 표는 그대로예요` : res.length === 2 ? `결과 ${part(res[0].name, res[0])}; ${part(res[1].name, res[1])}` : part(del ? '지운 뒤 남은 줄' : '결과', res[0])
+    + (hl === undefined ? '' : ', 강조: ' + (Array.isArray(hl) ? hl : [hl]).map(h => dbhn(res[0].cols.map(c => typeof c === 'string' ? { n: c } : c), h)).join(', '));
+  const head = err !== undefined ? `<p class="mk-dqm mk-dqf${still ? '' : ' mk-cdz1 A'}"><b class="mk-dbk">실패</b>${esc(err)}<span>표는 그대로예요</span></p>`
+    : `<div class="mk-dqh" aria-hidden="true">${res.length === 2 ? '결과 표 2개' : del ? `지운 뒤 남은 줄 ${n}줄` : `결과 ${n}줄`}</div>${out}`;
+  const sum = `쿼리 ${sql.join(' ')} 실행. 실행 전 ${from.map(t => `${t.name} ${t.rows.length}줄`).join(', ')}. ${body}.`;
+  return `<div class="mk-dq"${label ? ` role="group" aria-label="${esc(label)}"` : ''}>${tabs.join('')}<div class="mk-dqr" aria-hidden="true"><b>실행</b>${sql.map(x => `<code>${esc(x)}</code>`).join('')}</div>${head}<p class="sr">${esc(sum)}</p></div>`;
+};
+/* 관계도: tables 2~3개(이름 12자, 열 1~4개 {n, key, type 6자}), links 이웃한 두 표 {a, b, kind:'1:N'|'N:1'|'1:1'|'N:M', fk 이어 주는 FK 열}, hl '표'·'표.열' */
+const erd = ({ tables, links = [], hl = [], label } = {}) => {
+  const no = m => { throw new Error('erd: ' + m); }, w = (x, n) => typeof x === 'string' && wlen(x) >= 1 && wlen(x) <= n;
+  if (!Array.isArray(tables) || tables.length < 2 || tables.length > 3) no('표는 2~3개');
+  const T = tables.map(t => { if (!w(t.name, 12)) no('표 이름은 1~12자'); if (!Array.isArray(t.cols) || t.cols.length < 1 || t.cols.length > 4) no('열은 1~4개');
+    return { name: t.name, cols: t.cols.map(c => { const o = typeof c === 'string' ? { n: c } : c;
+      if (!w(o.n, 10)) no('열 이름은 1~10자'); if (o.key !== undefined && o.key !== 'PK' && o.key !== 'FK') no('key는 PK·FK'); if (o.type !== undefined && !w(o.type, 6)) no('type은 1~6자'); return o; }) }; });
+  const fkIn = (i, f) => T[i].cols.some(c => c.n === f && c.key === 'FK'), ok = i => Number.isInteger(i) && i >= 0 && i < T.length;
+  const L = links.map(({ a, b, kind, fk }) => {
+    if (!ok(a) || !ok(b) || Math.abs(a - b) !== 1) no('link는 이웃한 두 표');
+    if (!['1:N', 'N:1', '1:1', 'N:M'].includes(kind)) no('kind는 1:N·N:1·1:1·N:M');
+    if (kind === 'N:M' ? fk !== undefined : !fkIn(kind === '1:N' ? b : kind === 'N:1' ? a : fkIn(b, fk) ? b : a, fk)) no(kind === 'N:M' ? 'N:M에는 fk가 없다' : 'fk는 FK 열이어야 한다');
+    return { a, b, kind, fk, ft: kind === '1:N' ? b : kind === 'N:1' ? a : fkIn(b, fk) ? b : a };
+  });
+  if (hl.some(s => { const [t, c, x] = String(s).split('.'), tb = T.find(y => y.name === t); return !tb || x !== undefined || (c !== undefined && !tb.cols.some(y => y.n === c)); })) no('없는 표·열은 강조할 수 없다');
+  const k = t => `<b class="mk-dbk">${t}</b>`, flip = { '1:N': 'N:1', 'N:1': '1:N', '1:1': '1:1', 'N:M': 'N:M' };
+  const box = t => `<div class="mk-erb${hl.includes(t.name) ? ' mk-eron' : ''}" aria-hidden="true"><b class="mk-ern">${esc(t.name)}${hl.includes(t.name) ? k('강조') : ''}</b><ul>`
+    + t.cols.map(c => { const on = hl.includes(t.name + '.' + c.n);
+      return `<li${on ? ' class="mk-eron"' : ''}>${esc(c.n)}${c.key ? k(c.key) : ''}${on ? k('강조') : ''}${c.type ? `<span class="mk-ert">${esc(c.type)}</span>` : ''}</li>`; }).join('') + '</ul></div>';
+  const bar = i => L.filter(l => Math.min(l.a, l.b) === i).map(l => { const kd = l.a < l.b ? l.kind : flip[l.kind];    // 위 표 : 아래 표 순서로 적는다
+    return `<div class="mk-erl" aria-hidden="true">${k(kd.replace(':', ' : '))}${l.kind === 'N:M' ? '중간 표가 필요해요' : esc(`${T[l.ft].name}.${l.fk}로 이어져요`)}</div>`; }).join('');
+  const say = ({ a, b, kind, fk, ft }) => { const x = T[a].name, y = T[b].name;
+    return kind === 'N:M' ? `${x} 여럿과 ${y} 여럿, 중간 표가 필요해요` : `${x} ${kind[0] === '1' ? '하나' : '여럿'}에 ${y} ${kind[2] === '1' ? '하나' : '여럿'}, ${T[ft].name}.${fk}로 이어져요`; };
+  const sum = `관계도. ${T.map(t => `${t.name} 표(${t.cols.map(c => [c.n, c.key, c.type].filter(Boolean).join(' ')).join(', ')})`).join(', ')}.`
+    + (L.length ? ' ' + L.map(say).join('. ') + '.' : '') + (hl.length ? ` 강조: ${hl.join(', ')}.` : '');
+  return `<div class="mk-er"${label ? ` role="group" aria-label="${esc(label)}"` : ''}>${T.map((t, i) => box(t) + bar(i)).join('')}<p class="sr">${esc(sum)}</p></div>`;
 };
 /* 직접 조작 도우미: stage 안 요소에만 붙인다. grab은 끌기(포인터 캡처, 취소되면 c=true), keys는 키 → 값 */
 const grab = (el, h) => { let o = null;
