@@ -425,6 +425,16 @@ check('fobj', () => FS().filter(t => typeof t.v === 'object').map(t => t.en).joi
 const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid', 'Gap', 'Position Sticky', 'Z-index', 'Overflow',
   'Component', 'Media Query', 'Border Radius', 'Box Shadow', 'Transition', 'Keyframes', 'Transform', 'Hover', 'Focus', 'Animation Duration', 'Intersection Observer',
   'Rotate', 'State', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 30장(측정)
+check('fpre', () => /\.mk-fcd \.mk-dcb p\{[^}]*white-space:pre-wrap/.test(html) ? '' : 'fcss 줄 앞 공백이 사라짐');    // 디렉터 D
+check('fdfix', () => { const f = en => g.TERMS.find(t => t.c === 'front' && t.en === en), bad = [];    // 디렉터 D 지적: 사실·그림 고침이 되돌아가지 않게
+  if (/붙여요/.test(f('Lifecycle').x) || /흐름에 할 일을 붙이는/.test(f('useEffect').x)) bad.push('Lifecycle·useEffect');
+  if (!/보통/.test(f('Webpack').x)) bad.push('Webpack'); if (!/CSS도/.test(f('Sass').x)) bad.push('Sass');
+  if (FS().some(t => /styled-components/.test(t.p + t.x))) bad.push('CSS-in-JS');
+  if (!f('Transpile').r.includes('Babel') || !f('Context API').r.includes('Props Drilling')) bad.push('r');
+  const src = k => html.slice(html.indexOf(`'${k}':{h:`), html.indexOf('cap:', html.indexOf(`'${k}':{h:`)));
+  if (/n => n \+ 1\);'|function \(n\) \{'/.test(src('u-front-babel').replace(/'  (n =>|function)/g, '')) || !/'  n => n \+ 1\);'/.test(src('u-front-babel'))) bad.push('babel');
+  if (/http:\/\//.test(src('u-front-vite'))) bad.push('vite'); if (!/'Modal'/.test(src('u-front-portal'))) bad.push('portal');
+  return bad.join(', '); });
 check('fukey', () => FS().filter(t => !FKEEP.includes(t.en) && !(typeof t.v === 'string' && t.v.startsWith('u-front-') && g.D[t.v])).map(t => t.en).join(', '));
 check('fsym', () => FS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
 check('fshare', () => ['boxmodel', 'zindex', 'jank', 'fade', 'flicker', 'responsive', 'contrast', 'aspect', 'fontsize', 'transition', 'shadow'].filter(k => !g.D[k]).join(', '));    // 공유 그림 키는 남긴다
