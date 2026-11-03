@@ -104,7 +104,7 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 15, 'front/build': 10, 'front/tip': 9 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = ['font', 'doccount'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -429,6 +429,7 @@ const FKEEP = ['Box Model', 'Margin', 'Padding', 'Border', 'Flexbox', 'CSS Grid'
   'Component', 'Media Query', 'Border Radius', 'Box Shadow', 'Transition', 'Keyframes', 'Transform', 'Hover', 'Focus', 'Animation Duration', 'Intersection Observer',
   'Rotate', 'State', 'Row', 'Center Alignment', 'Flex Wrap', 'Aspect Ratio', 'Breakpoint', 'Viewport', 'vw / vh'];    // 그대로 두는 그림 30장(측정)
 check('fpre', () => /\.mk-fcd \.mk-dcb p\{[^}]*white-space:pre-wrap/.test(html) ? '' : 'fcss 줄 앞 공백이 사라짐');    // 디렉터 D
+check('fdvw', () => /\.mk-mobox>\.mk-fst\{width:100%\}/.test(html) ? '' : '직접 조작 안 개발자 도구 칸이 내용 폭으로 줄어듦');    // 320px에서 .mk-dv(container:inline-size)가 111px로 좁아지던 문제
 check('fdfix', () => { const f = en => g.TERMS.find(t => t.c === 'front' && t.en === en), bad = [];    // 디렉터 D 지적: 사실·그림 고침이 되돌아가지 않게
   if (/붙여요/.test(f('Lifecycle').x) || /흐름에 할 일을 붙이는/.test(f('useEffect').x)) bad.push('Lifecycle·useEffect');
   if (!/보통/.test(f('Webpack').x)) bad.push('Webpack'); if (!/CSS도/.test(f('Sass').x)) bad.push('Sass');
