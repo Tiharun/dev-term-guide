@@ -107,11 +107,13 @@ const COUNT = { form: 28, feedback: 23, nav: 20, data: 21, style: 21, gesture: 1
   'web/basic': 11, 'web/core': 13, 'web/motion': 7, 'web/adv': 12, 'web/parts': 14, 'web/tip': 10, 'web/search': 12, 'web/browser': 11, 'web/traffic': 9,
   'front/basic': 11, 'front/core': 14, 'front/motion': 10, 'front/adv': 13, 'front/layout': 13,
   'front/unit': 8, 'front/css': 12, 'front/event': 10, 'front/react': 15, 'front/build': 10, 'front/tip': 9,
-  'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 10, 'back/arch': 11, 'back/data': 12, 'back/job': 12, 'back/auth': 9, 'back/tip': 8 };    // sec: 카드 수
+  'back/basic': 8, 'back/core': 12, 'back/motion': 7, 'back/adv': 8, 'back/api': 10, 'back/arch': 11, 'back/data': 12, 'back/job': 12, 'back/auth': 9, 'back/tip': 8,
+  'db/basic': 8, 'db/core': 8, 'db/motion': 8, 'db/adv': 8, 'db/sql': 8, 'db/query': 0, 'db/model': 0, 'db/tx': 0, 'db/ops': 0, 'db/tip': 8 };    // sec: 카드 수
 const REDRAWN = ['basic', 'core', 'adv', 'tool', 'font', 'color', 'tip', 'basics/basic', 'basics/core', 'basics/motion', 'basics/adv', 'basics/code', 'basics/principle', 'basics/tip', 'web/basic', 'web/core', 'web/motion', 'web/adv', 'web/parts', 'web/search', 'web/browser', 'web/traffic', 'web/tip',
   'front/basic', 'front/core', 'front/motion', 'front/adv', 'front/layout', 'front/unit', 'front/css', 'front/event', 'front/react', 'front/build', 'front/tip',
-  'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
-const LATER = [];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
+  'back/basic', 'back/core', 'back/motion', 'back/adv', 'back/api', 'back/arch', 'back/data', 'back/job', 'back/auth', 'back/tip',
+  'db/basic', 'db/core', 'db/motion', 'db/adv', 'db/sql', 'db/query', 'db/model', 'db/tx', 'db/ops', 'db/tip'];  // 글자 상자형 그림(flow·big·stack)이 없어야 할 sec
+const LATER = ['font', 'doccount', 'redrawn:db/basic', 'redrawn:db/core', 'redrawn:db/motion', 'redrawn:db/adv', 'redrawn:db/tip'];    // 실패해도 exit에 영향 없이 'LATER 이름:'으로만 알리는 점검(마무리 작업에서 비운다)
 const ALLOW_DUP = ['component', 'dark mode', 'row', 'column', 'tag'];
 const norm = s => s.toLowerCase().replace(/[\s/.\-]/g, '');    // 띄어쓰기·/·.·-만 다른 이름도 같은 이름으로 본다
 
@@ -705,6 +707,27 @@ const BK_SECRET = s => (s.match(/[A-Za-z0-9_-]{24,}/g) || []).some(w => /\d/.tes
 check('bksafe', () => [...['ab12'.repeat(7), 'at run (/app/server.js:12:5)', "localStorage.setItem('JWT', t)"].filter(x => !BK_SECRET(x)).map(x => '못 잡음 ' + x), ...(BK_SECRET('Access-Control-Allow-Origin') ? ['헤더 이름 오탐'] : []),
   ...BKS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && BK_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
 check('bkshare', () => ['input', 'progress', 'scale', 'pulse', 'spinner', 'stagger', 'typing', 'shake', 'pagination'].filter(k => !g.D[k]).join(', '));    // 옛 back 카드가 쓰던 공유 그림 키는 남긴다
+const DBS = () => g.TERMS.filter(t => t.c === 'db');
+check('dbcat', () => { const a = g.CATS.find(c => c.id === 'db').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,sql,query,model,tx,ops,tip' ? '' : a; });
+const DB_TODO = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
+  "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // 아직 u-db- 그림이 아닌 옛 DB 카드. 다시 그리면 여기서 뺀다
+const DB_NOX = ["Table","Row","Column","Primary Key","Foreign Key","Data Type","Query","Schema","SQL","RDBMS","NoSQL","Relation","Index","Migration","Transaction","Backup","Data Flow","Join","Sorting","Filtering","Seed Data","Rollback","Replication","Sync",
+  "Normalization","N+1 Problem","Slow Query","Redis","ERD","Soft Delete","Sharding","Supabase","SELECT","INSERT","UPDATE","DELETE","WHERE","ORDER BY","GROUP BY","LIMIT","Hard Delete","Restore","Data Integrity","Unique Constraint","NULL","Timestamp","Spreadsheet vs DB","Personal Data"];    // x를 아직 안 쓴 옛 카드 48장. DB_TODO와 같은 이름이지만 따로 적는다(DB_TODO는 Task 4·5에서 줄어듦). 계획서 ②가 비운다
+check('dbukey', () => bkdiff(DBS().filter(t => !(typeof t.v === 'string' && t.v.startsWith('u-db-') && g.D[t.v])).map(t => t.en), DB_TODO));
+check('dbobj', () => DBS().filter(t => typeof t.v === 'object' && !DB_TODO.includes(t.en)).map(t => t.en).join(', '));    // 옛 형식 그림은 남은 목록 안에만
+check('dbsym', () => DBS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : {h:g.visual(t.v)}; return p && WSYM(p.h + (p.cap || '')); }).map(t => t.en).join(', '));
+check('dbx', () => bkdiff(DBS().filter(t => !t.x).map(t => t.en), DB_NOX));
+check('dbm', () => DBS().filter(t => { const p = typeof t.v === 'string' && t.v.startsWith('u-db-') && g.D[t.v]; return p && !!p.m !== WA(p.h); }).map(t => t.en).join(', '));    // 재생 버튼(m)과 움직임(A)은 함께 있다
+check('dbou', () => DBS().filter(t => t.o === 1 && !t.u).map(t => t.en).join(', '));
+const DB_WRONG = {'Column Alias': ['Alias'], 'Cascade Delete': ['Cascade'], 'Isolation Level': ['Test Isolation'], 'Optimistic Locking': ['Optimistic UI', 'Optimistic Update'],
+  'Autocommit': ['Commit'], 'Check Constraint': ['Constraint'], 'Database Client': ['Client']};    // 이름만 비슷한 다른 뜻
+check('dbwrong', () => Object.entries(DB_WRONG).filter(([en, w]) => { const t = g.find(en); return t && t.c === 'db' && (t.r || []).some(r => w.includes(r)); }).map(([en]) => en).join(', '));
+check('dbtext', () => DBS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('dbxn', () => DBS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return t.x && (n < 2 || n > 3); }).map(t => t.en).join(', '));    // x는 2~3문장
+const DB_SECRET = s => /\b01\d-\d{3,4}-\d{4}\b/.test(s) || /:\/\/[^:\s/]+:(?!\*{4}@)[^@\s]+@/.test(s);    // 전화번호 전체·가리지 않은 접속 비밀번호
+check('dbsafe', () => [...['010-1234-5678', 'postgres://app:pw1@db'].filter(x => !DB_SECRET(x)).map(x => '못 잡음 ' + x), ...(DB_SECRET('postgres://app:****@db') || DB_SECRET('010-…') ? ['오탐'] : []),
+  ...DBS().filter(t => { const p = typeof t.v === 'string' && g.D[t.v]; return p && DB_SECRET(p.h.replace(/<[^>]+>/g, ' ') + ' ' + (p.cap || '')); }).map(t => t.en)].join(', '));
+check('dbshare', () => ['stagger', 'chip', 'spring', 'rotate', 'progress', 'shake'].filter(k => !g.D[k]).join(', '));    // 옛 db 카드가 쓰던 공유 그림 키는 남긴다
 check('falsy', () => { const t = g.find('Truthy·Falsy'), h = g.D['u-truthy-falsy'].h;    // MDN Glossary/Falsy 목록과 맞춘다
   return ['-0', '0n'].filter(v => !t.x.includes(v + ',') || !h.includes(`<code>${v}</code>`)).join(', '); });
 check('cmpc', () => /\.cmp\.mk-cmpc\{grid-template-columns:minmax\(0,1fr\)\}/.test(html) && /\.mk-cmpc code\{font:12px\/1\.6 var\(--mono\)\}/.test(html) ? '' : '비교 그림 코드가 16px·두 칸이라 넘쳐요');    // BCMP는 위아래로, 코드 칸 글꼴로

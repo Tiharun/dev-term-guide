@@ -1741,7 +1741,7 @@ CAT('design','디자인 · UI/UX','화면에 보이는 모든 것의 이름. 웹
 CAT('front','프론트엔드','사용자가 보는 화면을 만드는 기술의 말', [['layout','레이아웃 (Flex·Grid)','요소를 배치하는 방법'],['unit','CSS 단위','크기와 거리를 나타내는 단위'],['css','CSS 규칙','어떤 스타일이 이기고 어떻게 숨기는지 정하는 규칙'],['event','이벤트·데이터','누르고 입력한 것을 받고 데이터를 가져오는 말'],['react','React 더 보기','React로 화면을 만들 때 자주 듣는 말'],['build','도구·빌드','코드를 브라우저가 읽는 파일로 바꾸는 도구']]);
 CAT('mobile','모바일 앱','휴대폰 앱을 만들고 스토어에 내보내는 말', [['store','앱 스토어·출시','앱을 스토어에 올리고 사용자에게 내보내는 과정의 말']]);
 CAT('back','백엔드','화면 뒤에서 데이터를 처리하는 기술의 말', [['api','API·HTTP','프로그램끼리 대화하는 방법'],['arch','서버 구조','요청이 서버 안에서 어떤 층을 지나는지'],['data','데이터 주고받기','요청과 응답에 담기는 데이터의 모양과 약속'],['job','작업 처리','오래 걸리거나 동시에 일어나는 일을 다루는 법'],['auth','인증 더 보기','토큰과 권한으로 누가 무엇을 할 수 있는지 정하는 말']]);
-CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령']]);
+CAT('db','데이터베이스','데이터를 저장하고 꺼내는 기술의 말', [['sql','SQL 기본 문법','데이터베이스에 내리는 명령'],['query','쿼리 더 보기','표를 합치고 세고 거르는 쿼리'],['model','테이블 설계','표와 열을 어떻게 나누고 이을지 정하는 말'],['tx','트랜잭션·동시성','여럿이 동시에 고칠 때 데이터를 지키는 법'],['ops','운영·성능','DB를 빠르고 안전하게 돌리는 말']]);
 CAT('server','서버','웹사이트를 돌리는 컴퓨터와 그 운영에 관한 말', [['status','HTTP 상태코드','서버가 돌려주는 숫자의 뜻']]);
 CAT('net','네트워크','컴퓨터끼리 데이터를 주고받는 길과 그 말', [['proto','프로토콜·포트','데이터를 주고받는 약속과 번호']]);
 CAT('git','Git · 협업','코드 기록을 남기고 함께 일하는 방법의 말', [['cmd','자주 쓰는 명령어','매일 쓰는 Git 명령']]);
@@ -2864,7 +2864,7 @@ T('db','adv',[
 T('db','sql',[
  {en:'SELECT',ko:'셀렉트 · 조회',d:'데이터를 가져오는 SQL 명령.',p:'users에서 이름과 이메일만 SELECT 해줘',r:['WHERE'],l:1,o:0,v:{code:'SELECT name, email FROM users;'}},
  {en:'INSERT',ko:'인서트 · 추가',d:'새 데이터를 넣는 SQL 명령.',p:'새 회원을 INSERT 하는 쿼리를 짜줘',r:['SELECT'],l:1,o:0,v:{code:"INSERT INTO users (name)\nVALUES ('민수');"}},
- {en:'UPDATE',ko:'업데이트 · 수정',d:'있는 데이터를 고치는 SQL 명령. WHERE를 빼면 전부 바뀌니 조심!',p:'3번 회원 이메일만 UPDATE 해줘. WHERE 꼭 넣어',r:['WHERE'],l:2,o:0,v:{code:"UPDATE users SET email='n@a.com'\nWHERE id = 3;"}},
+ {en:'UPDATE',ko:'업데이트 · 수정',d:'있는 데이터를 고치는 SQL 명령. WHERE를 빼면 전부 바뀌니 조심!',p:'3번 회원 이메일만 UPDATE 해줘. WHERE를 꼭 넣어 줘',r:['WHERE'],l:2,o:0,v:{code:"UPDATE users SET email='n@a.com'\nWHERE id = 3;"}},
  {en:'DELETE',ko:'딜리트 · 삭제',d:'데이터를 지우는 SQL 명령. WHERE를 빼면 전부 지워져요.',p:'탈퇴 회원만 DELETE 하는 쿼리를 짜줘. 실행 전에 보여줘',r:['Soft Delete','WHERE'],l:2,o:0,v:{code:'DELETE FROM users\nWHERE id = 3;'}},
  {en:'WHERE',ko:'웨어 · 조건',d:'"이 조건에 맞는 것만"을 정하는 SQL 문구.',p:'WHERE로 서울에 사는 회원만 골라줘',r:['SELECT'],l:1,o:0,v:{code:"SELECT * FROM users\nWHERE city = '서울';"}},
  {en:'ORDER BY',ko:'오더 바이 · 정렬',d:'결과의 순서를 정하는 SQL 문구.',p:'최신 글이 위로 오게 ORDER BY created_at DESC 해줘',r:['Sorting'],l:1,o:0,v:{code:'SELECT * FROM posts\nORDER BY created_at DESC;'}},
@@ -2879,7 +2879,7 @@ T('db','tip',[
  {en:'NULL',ko:'널 · 값 없음',d:'값이 아예 비어 있는 상태. 0이나 빈 글자와는 달라요.',p:'전화번호는 비어도 되게 NULL을 허용해줘',r:['Data Type'],l:2,o:0,v:{tbl:[['이름','전화'],['민수','010-…'],['지영','NULL']],hl:[1]}},
  {en:'Timestamp',ko:'타임스탬프 · 시각 기록',d:'데이터가 만들어진·바뀐 시각. created_at, updated_at.',p:'모든 테이블에 created_at, updated_at을 넣어줘',r:['Data Type'],l:1,o:0,v:{big:'2026-10-28 14:30',sub:'created_at'}},
  {en:'Spreadsheet vs DB',ko:'엑셀과 DB의 차이',d:'엑셀은 사람이 보는 표, DB는 프로그램이 동시에 안전하게 쓰는 저장소.',p:'지금 엑셀로 관리하는 고객 목록을 DB로 옮겨줘',r:['Database'],l:1,o:0,v:{cmp:['엑셀','<table class="tbl"><tr><th>이름</th></tr><tr><td>민수</td></tr></table>','DB','<div class="codebox" style="font-size:11px">users 테이블\n+ 동시 접속 · 검색</div>']}},
- {en:'Personal Data',ko:'개인정보',d:'이름·전화·주소처럼 사람을 알아볼 수 있는 정보. 꼭 필요한 것만 저장해요.',p:'꼭 필요한 개인정보만 저장하고 나머지는 받지 마',r:['Encryption'],l:2,o:0,v:{stack:['이름','전화번호','주소'],hl:[1]}},
+ {en:'Personal Data',ko:'개인정보',d:'이름·전화·주소처럼 사람을 알아볼 수 있는 정보. 꼭 필요한 것만 저장해요.',p:'꼭 필요한 개인정보만 저장하고 나머지는 받지 않게 해줘',r:['Encryption'],l:2,o:0,v:{stack:['이름','전화번호','주소'],hl:[1]}},
 ]);
 </script>
 <script>
