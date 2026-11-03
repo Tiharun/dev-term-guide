@@ -2703,19 +2703,19 @@ T('back','core',[
  {en:'HTTP Method',ko:'HTTP 메서드',d:'요청의 종류. GET(보기), POST(만들기), PUT/PATCH(고치기), DELETE(지우기).',p:'글 수정은 PATCH, 삭제는 DELETE 메서드로 만들어줘',r:['REST API','CRUD'],l:2,o:1,u:MDN('Web/HTTP/Methods'),v:{tbl:[['메서드','뜻'],['GET','가져오기'],['POST','만들기'],['PATCH','고치기'],['DELETE','지우기']]}},
  {en:'REST API',ko:'레스트 API',d:'주소는 대상, 메서드는 행동으로 정리한 API 설계 방식.',p:'게시판 기능을 REST API 규칙으로 설계해줘',r:['HTTP Method','Endpoint'],l:2,o:0,v:{code:'GET    /posts      # 목록\nGET    /posts/3    # 3번 글\nDELETE /posts/3    # 3번 삭제'}},
  {en:'CRUD',ko:'크러드 · 만들고 읽고 고치고 지우기',d:'Create·Read·Update·Delete. 대부분 기능의 기본 네 가지 동작.',p:'메모 기능을 CRUD 전부 되게 만들어줘',r:['HTTP Method'],l:1,o:0,v:{stack:['Create 만들기','Read 읽기','Update 고치기','Delete 지우기']}},
- {en:'Authentication',ko:'인증 · 로그인 확인',d:'"당신이 누구인지" 확인하는 것. 로그인.',x:'인증=누구인지, 인가=무엇을 해도 되는지.',p:'이메일과 비밀번호로 인증하는 로그인을 만들어줘',r:['Authorization','JWT'],l:2,o:1,u:MDN('Glossary/Authentication'),v:{flow:['아이디·비번','확인','로그인 성공']}},
+ {en:'Authentication',ko:'인증 · 로그인 확인',d:'"당신이 누구인지" 확인하는 것. 로그인.',x:'인증은 "누구인지" 확인하는 일이고, 인가(Authorization)는 "무엇을 해도 되는지" 정하는 일이에요. 로그인이 인증이고, 관리자만 글을 지우게 막는 것이 인가예요.',p:'이메일과 비밀번호로 인증하는 로그인을 만들어줘',r:['Authorization','JWT'],l:2,o:1,u:MDN('Glossary/Authentication'),v:{flow:['아이디·비번','확인','로그인 성공']}},
  {en:'Authorization',ko:'인가 · 권한 확인',d:'로그인한 사람이 "이 일을 해도 되는지" 확인하는 것.',p:'관리자만 글을 지울 수 있게 권한 확인을 넣어줘',r:['Authentication'],l:2,o:0,v:{tbl:[['역할','글 삭제'],['관리자','가능'],['일반 회원','불가']]}},
  {en:'Middleware',ko:'미들웨어 · 중간 처리',d:'요청이 본 처리에 닿기 전에 로그인 확인·기록 등을 하는 중간 단계.',p:'모든 /admin 요청에 로그인 확인 미들웨어를 걸어줘',r:['Authentication'],l:3,o:0,v:{flow:['요청','미들웨어','본 처리'],hl:[1]}},
  {en:'Environment Variable',ko:'환경 변수 · .env',d:'비밀번호·API 키처럼 코드에 직접 쓰면 안 되는 값을 따로 보관하는 설정.',p:'API 키는 코드에 넣지 말고 .env 환경 변수로 빼줘',r:['API Key','Hardcoding'],l:2,o:0,v:{code:'# .env\nDATABASE_URL=...\nAPI_KEY=...'}},
  {en:'Validation',ko:'유효성 검사 · 입력 검증',d:'들어온 값이 올바른지(이메일 형식인지, 비었는지) 확인하는 것.',p:'서버에서도 이메일 형식과 빈 값을 유효성 검사해줘',r:['Form','SQL Injection'],l:2,o:0,v:'input'},
  {en:'Webhook',ko:'웹훅',d:'어떤 일이 생기면 다른 서비스가 내 서버로 자동으로 알려 주는 방식.',p:'결제가 완료되면 웹훅으로 알림을 받아 주문 상태를 바꿔줘',r:['API'],l:3,o:0,v:{flow:['결제 서비스','자동 알림','내 서버']}},
  {en:'Rate Limit',ko:'요청 횟수 제한',d:'짧은 시간에 너무 많은 요청을 못 보내게 막는 것.',p:'로그인 시도를 1분에 5번으로 rate limit 걸어줘',r:['Brute Force'],l:3,o:0,v:'progress'},
- {en:'Session',ko:'세션',d:'로그인한 사용자를 서버가 기억하는 방식.',x:'세션은 서버가 기억, 토큰(JWT)은 사용자가 증명서를 들고 다님.',p:'로그인 유지를 세션 방식으로 할지 JWT로 할지 장단점을 알려줘',r:['Cookie','JWT'],l:3,o:0,v:{flow:['로그인','서버가 기억','다음 요청 확인']}},
+ {en:'Session',ko:'세션',d:'로그인한 사용자를 서버가 기억하는 방식.',x:'세션은 서버가 로그인 정보를 기억하고, 브라우저는 쿠키에 번호표만 담아 보내요. 토큰(JWT)은 서버가 기억하지 않고, 사용자가 서명된 증명서를 요청마다 직접 보내요.',p:'로그인 유지를 세션 방식으로 할지 JWT로 할지 장단점을 알려줘',r:['Cookie','JWT'],l:3,o:0,v:{flow:['로그인','서버가 기억','다음 요청 확인']}},
 ]);
 T('back','motion',[
- {en:'Request Flow',ko:'요청 흐름',d:'버튼 클릭 → 서버 → DB → 응답 → 화면 표시까지의 길.',p:'저장 버튼을 누르고 화면에 반영되기까지 요청 흐름을 그림으로 설명해줘',r:['Request','Response'],l:1,o:0,v:{flow:['클릭','서버','DB','응답','화면'],hl:[2]}},
+ {en:'Request Flow',ko:'요청 흐름',d:'버튼을 누른 뒤 요청이 서버와 DB를 거쳐 응답으로 돌아와 화면에 보이기까지의 길이에요.',p:'저장 버튼을 누르고 화면에 반영되기까지 요청 흐름을 그림으로 설명해줘',r:['Request','Response'],l:1,o:0,v:{flow:['클릭','서버','DB','응답','화면'],hl:[2]}},
  {en:'Optimistic Update',ko:'낙관적 업데이트',d:'서버 응답을 기다리지 않고 성공했다고 보고 화면부터 바꾸는 방식. 실패하면 되돌려요.',p:'좋아요는 낙관적 업데이트로 바로 바뀌게 하고 실패하면 되돌려줘',r:['Loading State'],l:3,o:0,v:'scale'},
- {en:'Polling',ko:'폴링 · 주기적으로 묻기',d:'몇 초마다 서버에 "바뀐 거 있어?"라고 계속 묻는 방식.',x:'계속 물어보면 폴링, 서버가 알아서 알려 주면 웹소켓·푸시.',p:'주문 상태를 5초마다 폴링해서 화면을 갱신해줘',r:['WebSocket'],l:2,o:0,v:'pulse'},
+ {en:'Polling',ko:'폴링 · 주기적으로 묻기',d:'몇 초마다 서버에 "바뀐 거 있어?"라고 계속 묻는 방식.',x:'폴링은 브라우저가 정해진 간격마다 먼저 물어보는 방식이에요. 웹소켓(WebSocket)은 연결을 열어 두고, 새 소식이 생기면 서버가 바로 보내 줘요.',p:'주문 상태를 5초마다 폴링해서 화면을 갱신해줘',r:['WebSocket'],l:2,o:0,v:'pulse'},
  {en:'WebSocket',ko:'웹소켓 · 실시간 연결',d:'서버와 연결을 열어 두고 양쪽이 실시간으로 메시지를 주고받는 방식. 채팅에 써요.',p:'채팅 메시지는 WebSocket으로 실시간 전달해줘',r:['Polling'],l:3,o:1,u:MDN('Web/API/WebSockets_API'),v:{flow:['브라우저','⇄ 계속 연결','서버']}},
  {en:'Timeout',ko:'타임아웃 · 시간 초과',d:'정해진 시간 안에 응답이 없으면 포기하는 것.',p:'10초 안에 응답이 없으면 타임아웃 처리하고 다시 시도 버튼을 보여줘',r:['Retry'],l:2,o:0,v:'progress'},
  {en:'Retry',ko:'재시도',d:'실패한 요청을 다시 보내는 것.',p:'네트워크 오류면 최대 3번까지 재시도해줘',r:['Timeout'],l:2,o:0,v:'spinner'},
@@ -2725,7 +2725,7 @@ T('back','adv',[
  {en:'GraphQL',ko:'그래프큐엘',d:'필요한 데이터 모양을 요청에서 직접 골라 받는 API 방식.',p:'REST와 GraphQL 중 이 프로젝트에 맞는 걸 추천해줘',r:['REST API'],l:3,o:1,u:'https://graphql.org/learn/',v:{code:'query {\n  user(id: 1) { name }\n}'}},
  {en:'JWT',ko:'제이더블유티 · 로그인 토큰',d:'로그인했다는 증명서를 글자로 만든 것. 요청마다 함께 보내요.',p:'로그인하면 JWT를 발급하고 요청 헤더로 보내게 해줘',r:['Authentication','Session'],l:3,o:1,u:'https://jwt.io/introduction',v:{big:'eyJhbGci...',sub:'헤더 · 내용 · 서명'}},
  {en:'OAuth',ko:'오어스 · 소셜 로그인',d:'구글·카카오 계정으로 로그인하게 하는 표준 방식.',p:'카카오 로그인을 OAuth로 붙여줘',r:['Authentication'],l:3,o:1,u:'https://oauth.net/2/',v:{flow:['내 사이트','카카오 로그인','허락','돌아옴']}},
- {en:'Microservices',ko:'마이크로서비스',d:'큰 프로그램을 작은 서비스 여러 개로 나눠 만드는 구조.',x:'하나로 크게 만들면 모놀리스.',p:'지금 규모에 마이크로서비스가 필요한지, 하나로 충분한지 알려줘',r:['Monolith'],l:3,o:0,v:{flow:['회원','주문','결제'],hl:[0,1,2]}},
+ {en:'Microservices',ko:'마이크로서비스',d:'큰 프로그램을 작은 서비스 여러 개로 나눠 만드는 구조.',x:'마이크로서비스는 주문·회원처럼 기능마다 따로 배포하는 작은 서비스로 나눈 구조예요. 하나로 크게 만들어 한 번에 배포하면 모놀리스(Monolith)예요.',p:'지금 규모에 마이크로서비스가 필요한지, 하나로 충분한지 알려줘',r:['Monolith'],l:3,o:0,v:{flow:['회원','주문','결제'],hl:[0,1,2]}},
  {en:'Monolith',ko:'모놀리스 · 통짜 구조',d:'모든 기능을 하나의 프로그램에 담는 구조. 작게 시작하기에 좋아요.',p:'처음엔 모놀리스로 단순하게 만들어줘',r:['Microservices'],l:3,o:0,v:{stack:['회원 + 주문 + 결제 (하나)'],hl:[0]}},
  {en:'Cache',ko:'캐시',d:'자주 쓰는 결과를 가까운 곳에 저장해 두고 다시 빨리 꺼내 쓰는 것.',p:'자주 바뀌지 않는 목록은 캐시해서 빠르게 응답해줘',r:['CDN','Redis'],l:2,o:1,u:MDN('Web/HTTP/Caching'),v:{flow:['요청','캐시에 있음?','바로 응답'],hl:[1]}},
  {en:'ORM',ko:'오알엠',d:'SQL을 직접 쓰지 않고 코드 객체로 DB를 다루게 해 주는 도구. Prisma 등.',p:'DB 작업은 Prisma ORM으로 해줘',r:['SQL','Database'],l:3,o:0,v:{code:'await db.user.findMany()\n// = SELECT * FROM users'}},
@@ -2744,12 +2744,12 @@ T('back','api',[
 T('back','arch',[
  {en:'Node.js',ko:'노드제이에스 · 서버용 자바스크립트 실행기',d:'브라우저 밖, 주로 서버 컴퓨터에서 자바스크립트를 실행해 주는 실행기예요.',x:'Node.js는 서버 컴퓨터에서 자바스크립트를 돌리는 실행기(런타임)이고, 서버(Server)는 요청을 받아 응답하는 프로그램이나 컴퓨터 자체를 말해요. 백엔드는 그런 서버 쪽 일 전체를 가리키는 말이라, Node.js는 백엔드를 만드는 도구 중 하나예요.',p:'Node.js로 3000번 포트에서 기다리는 간단한 서버를 만들어줘',r:['Runtime','Server'],l:2,o:1,u:'https://nodejs.org/en/learn/getting-started/introduction-to-nodejs',v:'u-back-node-js'},
  {en:'Backend Framework',ko:'백엔드 프레임워크 · 서버 뼈대',d:'주소별 처리, 요청 읽기, 응답 보내기 같은 서버의 반복 일을 미리 만들어 둔 뼈대예요.',x:'백엔드 프레임워크는 서버를 만들 때 쓰는 프레임워크이고, 프레임워크(Framework)는 화면이든 서버든 정해진 틀에 내 코드를 끼워 넣게 하는 도구 전체를 말해요. 주소와 처리 함수를 짝지어 등록해 두면, 요청이 올 때 프레임워크가 알맞은 함수를 불러 줘요.',p:'글 목록을 주는 GET /posts 주소를 백엔드 프레임워크로 만들어줘',r:['Framework','Route Handler'],l:2,o:1,u:'https://expressjs.com/en/starter/hello-world.html',v:'u-back-backend-framework'},
- {en:'Route Handler',ko:'라우트 핸들러 · 주소별 처리 함수',d:'특정 주소와 메서드(POST /posts 등)로 온 요청을 맡아 처리하는 함수예요.',x:'라우트 핸들러는 서버에서 주소 하나를 맡는 함수이고, 웹의 라우팅(Routing)은 주소마다 어떤 화면을 보여 줄지 고르는 일이라 뜻이 달라요. 핸들러가 커지면 요청 받기는 컨트롤러(Controller), 업무 규칙은 서비스 층(Service Layer)으로 나눠요.',p:'POST /posts 라우트 핸들러가 글을 저장하고 201을 돌려주게 해줘',r:['Endpoint'],l:2,o:1,u:'https://www.rfc-editor.org/rfc/rfc9110.html#section-15.3.2',v:'u-back-route-handler'},
+ {en:'Route Handler',ko:'라우트 핸들러 · 주소별 처리 함수',d:'특정 주소와 메서드(POST /posts 등)로 온 요청을 맡아 처리하는 함수예요.',x:'라우트 핸들러는 서버에서 주소 하나를 맡는 함수이고, 웹의 라우팅(Routing)은 주소마다 어떤 화면을 보여 줄지 고르는 일이라 뜻이 달라요. 핸들러가 커지면 요청 받기는 컨트롤러(Controller), 업무 규칙은 서비스 층(Service Layer)으로 나눠요.',p:'POST /posts 라우트 핸들러가 글을 저장하고 201을 돌려주게 해줘',r:['Endpoint'],l:2,o:1,u:'https://expressjs.com/en/guide/routing.html',v:'u-back-route-handler'},
  {en:'Controller',ko:'컨트롤러 · 요청을 받는 층',d:'요청에서 필요한 값을 꺼내 일을 서비스에 맡기고, 결과를 응답으로 돌려주는 층이에요.',x:'컨트롤러는 요청과 응답을 다루는 입구이고, 서비스 층(Service Layer)은 실제 업무 규칙을, 저장소(Repository)는 DB 읽고 쓰기를 맡아요. 라우트 핸들러(Route Handler)가 이런 컨트롤러 함수를 부르는 경우가 많아요.',p:'글 컨트롤러는 요청만 받고 저장 규칙은 서비스로 옮겨줘',r:['Route Handler','Service Layer'],l:3,o:1,u:MDN('Glossary/MVC'),v:'u-back-controller'},
  {en:'Service Layer',ko:'서비스 층 · 업무 규칙 층',d:'제목 길이 검사, 재고 확인처럼 앱의 업무 규칙을 한곳에 모아 두는 층이에요.',x:'서비스 층은 무엇을 해도 되는지 규칙을 정하고, 컨트롤러(Controller)는 요청을 받고, 저장소(Repository)는 DB에 쓰는 일만 해요. 규칙이 한곳에 모여 있어서 웹 요청이든 예약 작업이든 같은 규칙을 다시 쓸 수 있어요.',p:'글 만들기 규칙을 서비스 층 함수 하나로 모아줘',r:['Controller','Repository Pattern'],l:3,o:1,u:'https://martinfowler.com/eaaCatalog/serviceLayer.html',v:'u-back-service-layer'},
  {en:'Repository Pattern',ko:'저장소 패턴 · DB 일을 맡는 층',d:'DB에 저장하고 찾는 코드를 한 층에 모아, 다른 코드는 SQL을 몰라도 되게 하는 방식이에요.',x:'저장소 패턴은 저장해 줘, 찾아 줘 같은 함수 뒤에 DB 일을 숨기는 층이고, ORM은 그 안에서 객체와 테이블을 이어 주는 도구예요. 저장소만 바꾸면 DB를 바꾸거나 테스트용 가짜 저장소를 끼우기 쉬워요.',p:'글 DB 코드를 저장소 하나로 모으고 서비스는 그 함수만 쓰게 해줘',r:['ORM','Database'],l:3,o:1,u:'https://martinfowler.com/eaaCatalog/repository.html',v:'u-back-repository-pattern'},
  {en:'MVC',ko:'MVC · 모델·뷰·컨트롤러',d:'앱을 데이터(Model), 화면(View), 둘을 이어 주는 부분(Controller) 셋으로 나누는 구조예요.',x:'관심사 분리(Separation of Concerns)는 하는 일별로 나누자는 원칙이고, MVC는 그 나눔을 모델·뷰·컨트롤러 세 칸으로 정해 둔 구조예요. 요청이 오면 컨트롤러가 모델에서 데이터를 받아 뷰에 넘겨요.',p:'이 서버 코드를 모델·뷰·컨트롤러 폴더로 나눠줘',r:['Separation of Concerns','Controller'],l:3,o:1,u:MDN('Glossary/MVC'),v:'u-back-mvc'},
- {en:'Stateless vs Stateful',ko:'무상태와 상태 유지',d:'서버가 앞선 요청을 기억해 두면 상태 유지, 요청마다 필요한 정보를 다 받으면 무상태예요.',x:'상태 유지 서버는 로그인 같은 정보를 자기 안에 기억해서, 서버가 여러 대면 다른 서버는 그 사용자를 몰라요. 무상태 서버는 요청마다 토큰처럼 필요한 정보를 받아서 어느 서버가 받아도 같은 답을 줘요. HTTP 자체는 무상태이고, 세션(Session)은 쿠키로 상태를 이어 붙이는 방법이에요.',p:'서버를 여러 대로 늘려도 로그인이 풀리지 않게 무상태로 바꿔줘',r:['Session','JWT'],l:3,o:1,u:MDN('Web/HTTP/Guides/Overview'),v:'u-back-stateless-vs-stateful'},
+ {en:'Stateless vs Stateful',ko:'무상태와 상태 유지',d:'서버가 앞선 요청을 기억해 두면 상태 유지, 요청마다 필요한 정보를 다 받으면 무상태예요.',x:'상태 유지 서버가 로그인 정보를 자기 메모리에만 두면, 서버가 여러 대일 때 다른 서버는 그 사용자를 몰라요. 무상태 서버는 요청마다 토큰처럼 필요한 정보를 받아서 어느 서버가 받아도 같은 답을 줘요. HTTP 자체는 무상태이고, 세션(Session)은 쿠키로 상태를 이어 붙이는 방법이에요.',p:'서버를 여러 대로 늘려도 로그인이 풀리지 않게 무상태로 바꿔줘',r:['Session','JWT'],l:3,o:1,u:MDN('Web/HTTP/Guides/Overview'),v:'u-back-stateless-vs-stateful'},
  {en:'API Gateway',ko:'API 게이트웨이 · 서비스들의 앞문',d:'여러 서비스 앞에서 모든 요청을 먼저 받아 확인하고, 알맞은 서비스로 넘겨 주는 앞문이에요.',x:'API 게이트웨이는 토큰 확인 같은 API 일을 하며 요청을 서비스에 나눠 주고, 리버스 프록시(Reverse Proxy)는 요청을 뒤 서버로 넘기는 일 자체에 가까워요. 미들웨어(Middleware)는 서버 하나 안에서 요청이 지나가는 함수이고, BFF는 화면 하나만을 위한 앞문이에요.',p:'주문·회원 서비스 앞에 API 게이트웨이를 두고 토큰 확인을 거기서 해줘',r:['Microservices','Reverse Proxy'],l:3,o:1,u:'https://microservices.io/patterns/apigateway.html',v:'u-back-api-gateway'},
  {en:'BFF',ko:'BFF · 화면 전용 백엔드',d:'앱 화면 하나만을 위해 만든 백엔드로, 여러 서비스의 결과를 그 화면에 맞게 묶어 줘요.',x:'BFF는 화면(앱, 웹)마다 따로 두는 앞단 백엔드이고, API 게이트웨이(API Gateway)는 모든 화면이 함께 쓰는 하나의 앞문이에요. 화면이 요청을 여러 번 보내는 대신 BFF가 한 번에 모아 줘서 앱 코드가 단순해져요.',p:'앱 홈 화면용 BFF를 만들어 글과 회원 정보를 한 번에 주게 해줘',r:['API Gateway'],l:3,o:1,u:'https://samnewman.io/patterns/architectural/bff/',v:'u-back-bff'},
  {en:'BaaS',ko:'백엔드 서비스 · 만들어 둔 백엔드',d:'로그인·DB·파일 저장 같은 백엔드 기능을 미리 만들어 두고 빌려 쓰게 해 주는 서비스예요.',x:'BaaS는 로그인·DB 같은 백엔드 기능 묶음을 통째로 빌려 쓰는 것이고, 서버리스 함수(Serverless Function)는 내가 쓴 함수 하나를 요청이 올 때만 실행해 주는 것이에요. BaaS로 시작하면 서버 코드를 거의 쓰지 않고 앱을 만들 수 있어요.',p:'로그인과 DB는 BaaS로 켜고 앱 화면부터 만들어줘',r:['Supabase','Serverless'],l:2,o:0,v:'u-back-baas'},
@@ -2769,7 +2769,7 @@ T('back','data',[
  {en:'Request ID',ko:'요청 아이디 · 요청 추적 번호',d:'요청마다 붙이는 고유 번호로, 로그에서 한 요청의 기록을 이어 찾게 해 줘요.',x:'요청 아이디는 로그 줄을 한 요청끼리 묶는 번호이고, 로깅(Logging)은 기록을 남기는 일 자체예요. 요청이 동시에 많아 로그가 섞여도 같은 번호만 찾으면 한 요청의 흐름이 보여요.',p:'요청마다 요청 아이디를 붙여 로그에 함께 남겨줘',r:['Logging'],l:3,o:1,u:'https://devcenter.heroku.com/articles/http-request-id',v:'u-back-request-id'},
 ]);
 T('back','tip',[
- {en:'Logging',ko:'로깅 · 기록 남기기',d:'서버에서 무슨 일이 있었는지 기록을 남기는 것. 문제 찾기의 기본.',p:'결제 실패 시 원인을 알 수 있게 로그를 남겨줘. 비밀번호는 빼고',r:['Monitoring'],l:2,o:0,v:'typing'},
+ {en:'Logging',ko:'로깅 · 기록 남기기',d:'서버에서 무슨 일이 있었는지 기록을 남기는 것. 문제 찾기의 기본.',p:'비밀번호는 빼고, 결제가 실패한 원인을 알 수 있게 로그를 남겨줘',r:['Monitoring'],l:2,o:0,v:'typing'},
  {en:'Error Handling',ko:'오류 처리',d:'실패했을 때 프로그램이 멈추지 않고 알맞게 대응하게 만드는 것.',p:'API가 실패하면 앱이 멈추지 말고 안내 문구를 보여주게 오류 처리해줘',r:['try-catch'],l:2,o:0,v:'shake'},
  {en:'try-catch',ko:'트라이 캐치',d:'"시도해 보고, 실패하면 이렇게 해"를 쓰는 문법.',p:'저장 부분을 try-catch로 감싸서 실패하면 알려줘',r:['Error Handling'],l:2,o:1,u:MDN('Web/JavaScript/Reference/Statements/try...catch'),v:{code:'try {\n  save();\n} catch (e) {\n  alert("저장 실패");\n}'}},
  {en:'Idempotent',ko:'멱등 · 여러 번 해도 같은 결과',d:'같은 요청을 여러 번 보내도 결과가 한 번 보낸 것과 같은 성질.',p:'결제 버튼을 두 번 눌러도 한 번만 결제되게 해줘',r:['HTTP Method'],l:3,o:1,u:MDN('Glossary/Idempotent'),v:{flow:['요청 ×3','같은 결과 1개']}},
@@ -7645,9 +7645,9 @@ Object.assign(D, {
    martinfowler.com Service Layer·Repository·Data Transfer Object, MDN Glossary MVC·Payload body·Serialization, MDN HTTP Overview(무상태)·Content-Type, microservices.io API gateway,
    samnewman.io BFF, OWASP Error Handling Cheat Sheet, json-schema.org, RFC 7578 §4.1·§4.2·MDN POST(멀티파트), RFC 9562(128비트), slack.engineering 페이지 나누기, google.aip.dev/185,
    spec.openapis.org, devcenter.heroku.com HTTP Request IDs. BaaS는 1차 출처를 못 찾아 o:0. 포트 3000·민지·req-7f3a·120ms·책 2권·3f2a는 예시, 코드는 예시 문법 */
-const BKS2 = (...xs) => `<div class="mk-bkg">${xs.join('')}</div>`, BKSV = (n, t, k) => `<div class="mk-bks"><b>${esc(n)}</b><span>${esc(t)}</span>${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
-const BKR = (...xs) => `<ul class="mk-bkr">${xs.map(([t, k]) => `<li><code>${esc(t)}</code>${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</li>`).join('')}</ul>`;
-const BKP = (n, xs, k) => `<div class="mk-bkp"><b>${esc(n)}</b>${xs.map(x => `<span>${esc(x)}</span>`).join('')}${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
+const bkStack = (...xs) => `<div class="mk-bkg">${xs.join('')}</div>`, bkBox = (n, t, k) => `<div class="mk-bks"><b>${esc(n)}</b><span>${esc(t)}</span>${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
+const bkRows = (...xs) => `<ul class="mk-bkr">${xs.map(([t, k]) => `<li><code>${esc(t)}</code>${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</li>`).join('')}</ul>`;
+const bkPills = (n, xs, k) => `<div class="mk-bkp"><b>${esc(n)}</b>${xs.map(x => `<span>${esc(x)}</span>`).join('')}${k ? `<b class="mk-dtw">${esc(k)}</b>` : ''}</div>`;
 Object.assign(D, {
   'u-back-node-js':{h:term([{c:'node server.js'}, {o:'3000번에서 기다려요(예시)'}], {end:false}), m:1,
     cap:'서버가 켜져 요청을 기다려요. 출력 글은 풀어 쓴 말이에요'},
@@ -7663,8 +7663,8 @@ Object.assign(D, {
     cap:'서비스는 SQL을 몰라도 돼요'},
   'u-back-mvc':{h:doc([{tb:[['칸', '하는 일', '예'], ['Model', '데이터와 규칙', '글'], ['View', '보여 줄 화면', '글 목록'], ['Controller', '요청을 받아 둘을 이음', '글 요청 처리']]}], {title:'글 게시판(예시)'}), m:1,
     cap:'세 칸이 각자 자기 일만 해요'},
-  'u-back-stateless-vs-stateful':{h:vs('상태 유지', BKS2(BKSV('1번 서버', '민지 로그인 기억'), BKSV('2번 서버', '누구세요?', '실패')) + whelp('다음 요청이 2번 서버로 가면 몰라요'),
-      '무상태', BKS2(BKSV('1번 서버', '토큰 보고 민지 확인'), BKSV('2번 서버', '토큰 보고 민지 확인')) + whelp('요청마다 토큰을 들고 와요')),
+  'u-back-stateless-vs-stateful':{h:vs('상태 유지', bkStack(bkBox('1번 서버', '민지 로그인 기억'), bkBox('2번 서버', '누구세요?', '실패')) + whelp('다음 요청이 2번 서버로 가면 몰라요'),
+      '무상태', bkStack(bkBox('1번 서버', '토큰 보고 민지 확인'), bkBox('2번 서버', '토큰 보고 민지 확인')) + whelp('요청마다 토큰을 들고 와요')),
     cap:'무상태면 서버를 늘려도 누구인지 알 수 있어요. 민지는 예시예요'},
   'u-back-api-gateway':{h:seq(['앱', 'API 관문', '주문'], [{from:0, to:1, t:'GET /orders'}, {from:1, to:1, t:'토큰 확인'}, {from:1, to:2, t:'주문 목록'}, {from:2, to:1, t:'목록'}, {from:1, to:0, t:'200 OK'}]), m:1,
     cap:'모든 요청이 앞문을 먼저 지나요'},
@@ -7679,7 +7679,7 @@ Object.assign(D, {
     cap:'본문이 JSON이라고 알려 줘요'},
   'u-back-serialization':{h:track([{t:'객체', s:'done', w:'메모리 속 값'}, {t:'JSON.stringify', s:'done', w:'글로 바꿈'}, {t:'전송', s:'done', w:'글이 오감'}, {t:'JSON.parse', s:'done', w:'다시 객체'}]), m:1,
     cap:'보낼 때는 글로 바꾸고, 받으면 다시 객체로 되돌려요'},
-  'u-back-dto':{h:vs('DB 행 그대로', BKR(['id'], ['email'], ['passwordHash', '내보내면 안 됨'], ['createdAt']), 'DTO', BKR(['id'], ['email'])),
+  'u-back-dto':{h:vs('DB 행 그대로', bkRows(['id'], ['email'], ['passwordHash', '내보내면 안 됨'], ['createdAt']), 'DTO', bkRows(['id'], ['email'])),
     cap:'필요한 칸만 골라 담아 보내요'},
   'u-back-error-response':{h:httpmsg({kind:'응답', start:'400 Bad Request', head:['Content-Type: application/json'], body:['{', '  "error": "invalid_email",', '  "message": "형식 오류"', '}'], hl:['b1']}),
     cap:'오류 이름과 짧은 설명만 담고, 스택 추적은 넣지 않아요. 값은 예시예요'},
@@ -7689,8 +7689,8 @@ Object.assign(D, {
     cap:'Content-Type 값과 칸 머리 줄(Content-Disposition)을 줄였어요'},
   'u-back-uuid':{h:doc([{tb:[['방식', '예', '특징'], ['순번', '1, 2, 3', '다음 번호를 짐작할 수 있어요'], ['UUID', '3f2a…-…(예시)', '겹칠 걱정이 거의 없어요']]}], {title:'아이디 만들기'}), m:1,
     cap:'UUID는 아주 길어서 따로 맞춰 보지 않아도 돼요'},
-  'u-back-cursor-vs-offset-pagination':{h:vs('오프셋 ?page=2', BKS2(BKP('1쪽', ['A', 'B', 'C']), whelp('새 글 N이 맨 앞에 낌'), BKP('2쪽', ['C', 'D', 'E'], 'C 또 나옴')),
-      '커서 ?after=C', BKS2(BKP('1쪽', ['A', 'B', 'C']), whelp('새 글 N이 맨 앞에 낌'), BKP('다음', ['D', 'E', 'F']))),
+  'u-back-cursor-vs-offset-pagination':{h:vs('오프셋 ?page=2', bkStack(bkPills('1쪽', ['A', 'B', 'C']), whelp('새 글 N이 맨 앞에 낌'), bkPills('2쪽', ['C', 'D', 'E'], 'C 또 나옴')),
+      '커서 ?after=C', bkStack(bkPills('1쪽', ['A', 'B', 'C']), whelp('새 글 N이 맨 앞에 낌'), bkPills('다음', ['D', 'E', 'F']))),
     cap:'새 글이 끼어도 커서는 C 다음부터 가져와요'},
   'u-back-api-versioning':{h:doc([{tb:[['주소', '이름 칸'], ['/v1/users', 'name'], ['/v2/users', 'firstName, lastName']]}, {p:'옛 앱은 v1을 계속 써요'}], {title:'API 주소(예시)'}), m:1,
     cap:'이름 칸이 바뀌어도 v1 주소는 그대로예요'},
