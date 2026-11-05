@@ -409,6 +409,28 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   if (dwhereSay(0) !== '3줄 중 2줄이 조건에 맞아요' || dwhereSay(2) !== '3줄 중 1줄이 조건에 맞아요') bad.push('dwhereSay');
   [() => dwhere(3), () => dwhere(0.5), () => dwhereSay(-1)].forEach((f, k) => { try { f(); bad.push('안 막음 w' + k); } catch (e) { if (!/^dwhere: /.test(e.message)) bad.push('메시지 w' + k); } });
   return bad.join(', '); })()`, ctx));
+check('gghelp', () => vm.runInContext(`(() => {
+  const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^gitg: /.test(e.message)) bad.push(w + ' 메시지'); } };
+  const G = gitg({t:'전', rows:['내 컴퓨터', 'GitHub'], n:{A:[0,0], B:[1,0,'new'], C:[1,1,'gone','A'], D:[2,1,'copy',"D'"], E:[3,1,'stop','?']}, e:['A-B', 'A~C', 'B>C', 'C-D', 'D~E'], tag:[['main','B'], ['HEAD','B','h'], ['옛','C','b']], say:'설명 글'});
+  ['class="mk-gg"', 'class="mk-ggc"', 'aria-hidden="true"', 'width="192"', 'class="mk-ggh">전<', 'class="mk-ggs">설명 글<', 'mk-gg-new', 'mk-gg-gone', 'mk-gg-copy', 'mk-gg-stop', 'mk-gge mk-gg-d', 'mk-ggt mk-gg-h', ">D'<", '>내 컴퓨터<', '<polygon',
+    '<p class="sr">커밋 그래프. 전. 내 컴퓨터 줄: A, B 새 커밋. GitHub 줄: A 사라진 커밋, D' + String.fromCharCode(39) + ' 복사한 커밋, ? 아직 못 합침. 선: A-B, A-A, B-A, A-D' + String.fromCharCode(39) + ', D' + String.fromCharCode(39) + '-?. 이름표 main: B, HEAD: B, 옛: A.</p>'].forEach(x => { if (!G.includes(x)) bad.push('없음: ' + x); });
+  const S = gitg({n:{A:[0,0], B:[1,0]}, e:['A-B']});
+  if (!S.includes('<p class="sr">커밋 그래프. A, B.</p>')) bad.push('한 줄 요약');
+  if (S.includes('mk-ggh') || S.includes('mk-ggs') || S.includes('<polygon')) bad.push('없는 칸을 그림');
+  if (!(S.match(/height="([0-9]+)"/) && +S.match(/height="([0-9]+)"/)[1] < 40)) bad.push('이름표 없는 장면 높이');
+  const T2 = gitg({t:'전', n:{A:[0,0]}}, {t:'후', n:{A:[0,0]}});
+  if (T2.split('class="mk-ggc"').length !== 3) bad.push('장면 둘');
+  no(() => gitg(), '장면 없음'); no(() => gitg({n:{A:[0,0]}},{n:{A:[0,0]}},{n:{A:[0,0]}},{n:{A:[0,0]}}), '장면 넷');
+  no(() => gitg({n:{}}), '노드 없음'); no(() => gitg({n:{A:[5,0]}}), '열 넘침'); no(() => gitg({n:{A:[0,3]}}), '줄 넘침');
+  no(() => gitg({n:{A:[0,0,'zz']}}), '없는 상태'); no(() => gitg({n:{A:[0,0], B:[0,0]}}), '같은 자리');
+  no(() => gitg({n:{A:[0,0]}, e:['A-Z']}), '없는 선'); no(() => gitg({n:{A:[0,0]}, e:['A']}), '선 형식');
+  no(() => gitg({n:{A:[0,0]}, tag:[['x','Z']]}), '없는 노드 이름표'); no(() => gitg({n:{A:[0,0]}, tag:[['가나다라마바','A']]}), '긴 이름표');
+  no(() => gitg({n:{A:[0,0], B:[1,0]}, tag:[['feature','A'], ['feature','B']]}), '이름표 겹침');
+  no(() => gitg({n:{A:[0,0]}, rows:['가나다라마바사아']}), '긴 줄 이름'); no(() => gitg({t:'가'.repeat(17), n:{A:[0,0]}}), '긴 제목'); no(() => gitg({say:'가'.repeat(41), n:{A:[0,0]}}), '긴 설명');
+  no(() => gitg({n:{A:[0,0,'ok','가나다']}}), '긴 글자');
+  return bad.join(', ');
+})()`, ctx));
+check('ggcss', () => [['figcap', /[,(]\.mk-gg[,)][^{]*\.figcap\{position:static/], ['고정 폭', /\.mk-ggc\{[^}]*width:192px/], ['점선', /\.mk-gg-gone circle\{[^}]*stroke-dasharray/], ['글자 12', /\.mk-gg text\{[^}]*font-size:12px/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));
 check('srvhelp', () => vm.runInContext(`(() => {
   const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(srvmap|metric): /.test(e.message)) bad.push(w + ' 메시지'); } };
   const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); }), WA = h => /class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(h);
@@ -553,10 +575,11 @@ const SYM_FRONT = ['CSS가 다른 규칙에 밀려 적용이 안 돼요', '안�
 const SYM_BACK = ['429가 떠요', '로그인했는데 401이 떠요', '로그인은 되는데 403이 떠요', '서버가 보낸 데이터를 못 읽어요', '웹훅이 같은 알림을 여러 번 보내요', '업로드한 파일이 서버에서 비어 있어요', '로그인 뒤 redirect_uri 오류가 나요', '동시에 사면 재고가 마이너스가 돼요', '다음 페이지에 같은 글이 또 나와요', '오류가 난 요청을 로그에서 못 찾겠어요', '외부 API가 멈추면 우리 서버도 멈춰요', '오래 걸리는 작업 때문에 응답이 늦어요'];    // 백엔드 계획서 ② Task 4 표
 const SYM_DB = ['데이터가 쌓일수록 목록이 느려져요', '목록 하나 여는데 쿼리가 수백 번 나가요', 'JOIN했더니 같은 회원이 여러 줄 나와요', '주문 없는 회원이 목록에서 빠져요', '개수가 실제보다 적게 나와요', '= NULL로 찾으면 아무것도 안 나와요', 'DB 연결이 꽉 찼다는 오류가 떠요', 'deadlock 오류가 떠요', '회원을 지웠더니 주문이 같이 사라졌어요', '같은 이메일로 두 번 가입돼요', '실수로 지운 데이터를 되살리고 싶어요', '둘이 동시에 고치면 한 사람 것이 사라져요'];
 const SYM_SRV = ['처음 요청만 유난히 느려요', '사람이 몰리면 사이트가 느려져요', '502 Bad Gateway가 떠요', '504 Gateway Timeout이 떠요', '503이 뜨고 접속이 안 돼요', '서버가 혼자 꺼졌다 켜져요', '디스크가 꽉 찼다는 오류가 떠요', '인증서가 만료됐다고 떠요', '큰 파일을 올리면 413이 떠요', '설정을 바꿨는데 그대로예요', '서버를 늘렸더니 로그인이 자꾸 풀려요', '클라우드 한 곳이 멈추자 우리 서비스도 멈췄어요'];
-check('symcount', () => g.SYMPTOMS.length !== 217 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_GIT = ['올리려는데 거절당했어요', '커밋을 잘못했어요', '합치다가 충돌이 났어요', '올리면 안 될 파일을 올렸어요', '예전 상태로 돌아가고 싶어요', '작업이 사라진 것 같아요', '고친 걸 버리고 싶어요', '하던 걸 잠깐 치워 두고 싶어요', 'HEAD가 분리됐다고 나와요', '커밋 기록을 깔끔히 하고 싶어요'];
+check('symcount', () => g.SYMPTOMS.length !== 227 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1618 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
+check('total', () => g.TERMS.length === 1648 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -958,6 +981,38 @@ check('cdframe', () => { const P = 10 * +html.match(/\.mk-cds\.A\{[^}]*animation
     if (!a || +a[1] !== 10 * k) return ['at srv' + k];
     if (!m || !e || +e[1] > P) return ['srv' + k]; return [...m[1].matchAll(/([a-z-]+):/g)].some(x => !['opacity', 'transform'].includes(x[1])) ? ['srv' + k + ' 속성'] : []; });
   return [...z, ...y, ...ln, ...at, ...(!mr || 10 * +mr[1] !== P ? ['mrs'] : []), ...(!dw || 10 * +dw[1] !== P ? ['dtw'] : []), ...(!sd || 10 * +sd[1] !== P ? ['sdm'] : []), ...(!dq || 10 * +dq[1] !== P ? ['dqm'] : []), ...(!sv || 10 * +sv[1] !== P ? ['svd'] : []), ...srv].join(', '); });
+const GITS = () => g.TERMS.filter(t => t.c === 'git');
+const GIT_NEW = {cmd: ['git clone', 'git diff', 'git branch', 'git merge', 'git fetch', 'git restore'], undo: ['Amend', 'Reflog', 'Unstage', 'Discard Changes', 'Undo Last Commit', 'Restore Deleted Branch'],
+  team: ['Origin', 'Upstream Branch', 'Feature Branch', 'Trunk-Based Development', 'Protected Branch', 'Draft Pull Request', 'Squash and Merge', 'Merge Queue', 'CODEOWNERS'],
+  inside: ['Commit Hash', 'Fast-forward', 'Merge Commit', 'Merge Base', 'Interactive Rebase', 'Git Hook', 'Git LFS', 'Submodule', 'Personal Access Token']};
+check('gitcat', () => { const a = g.CATS.find(c => c.id === 'git').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,cmd,undo,team,inside,tip' ? '' : a; });
+check('gitnew', () => Object.entries(GIT_NEW).flatMap(([s, l]) => l.filter(en => !GITS().some(t => t.en === en && t.s === s))).join(', '));
+check('gitcount', () => GITS().length === 80 ? '' : 'git ' + GITS().length);
+check('gitx', () => GITS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return n < 2 || n > 3; }).map(t => t.en).join(', '));    // x는 모두 2~3문장
+check('gittext', () => GITS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('gitxcat', () => GITS().filter(t => /\((?:basics|web|front|back|db|server|git|deploy|security|perf|bug|ai)\)|(?:front|back|deploy)의/.test(t.x || '')).map(t => t.en).join(', '));
+check('gitou', () => GITS().filter(t => (t.o === 1 && !t.u) || (t.o !== 1 && t.u) || /wikipedia|namu\.wiki|velog|tistory|medium\.com/.test(t.u || '')).map(t => t.en).join(', '));    // 공식 표시는 공식 문서와 짝
+check('gitfig', () => { const seen = new Map(), bad = []; GITS().forEach(t => { const h = typeof t.v === 'string' ? g.D[t.v]?.h : g.visual(t.v); if (!h) return bad.push('그림 없음 ' + t.en); if (seen.has(h)) bad.push(t.en + '=' + seen.get(h)); seen.set(h, t.en); }); return bad.join(', '); });    // 같은 그림을 두 카드에 쓰지 않는다
+check('gitsym', () => GITS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null; return p && WSYM(p.h.replace(/<p class="sr">[^<]*<\/p>/, '') + (p.cap || '')); }).map(t => t.en).join(', '));
+check('gitsafe', () => GITS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null, s = (p ? p.h.replace(/<[^>]+>/g, ' ') : JSON.stringify(t.v)) + ' ' + (t.x || '') + ' ' + t.p; return SRV_IP(s) || /gh[pousr]_[A-Za-z0-9]{6,}|github_pat_/.test(s); }).map(t => t.en).join(', '));    // 진짜처럼 보이는 토큰·주소 금지
+check('gitflow', () => GITS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
+check('gitcode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return GITS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
+check('gitfact', () => { const c = en => g.TERMS.find(t => t.c === 'git' && t.en === en), fig = k => { const i = html.indexOf(`'${k}':{h:`); return html.slice(i, html.indexOf('\n', i)); }, sym = q => g.SYMPTOMS.find(s => s.q === q)?.terms?.[0] ?? g.SYMPTOMS.find(s => s.q === q)?.t?.[0];    // 디렉터 지적: 사실·그림이 다시 틀어지지 않게
+  return [
+    [/fetch/.test(c('Force Push').x), 'lease는 fetch 뒤에 못 막는다'],
+    [!/저장 안 한/.test(c('Checkout').x), '저장해도 커밋 전이면 사라진다'],
+    [/대기석/.test(c('Discard Changes').d) && /새 파일/.test(c('Discard Changes').x) && !/원래대로/.test(c('Discard Changes').v.code), 'restore .는 대기석 내용으로 돌린다'],
+    [/B-C/.test(fig('u-git-merge')) && /C-M/.test(fig('u-git-merge')), 'main이 안 나아가면 합침 커밋이 안 생긴다'],
+    [/\['feature','E','b'\]\],say:'main에는 S/.test(fig('u-git-squash-and-merge')) && !/'gone'/.test(fig('u-git-squash-and-merge')), 'Squash and Merge 뒤 C D E는 feature에 남는다'],
+    [/공개 저장소/.test(c('Protected Branch').x), '무료 요금제의 비공개 저장소 조건'],
+    [!c('Personal Access Token').r.includes('Token'), 'Token 카드는 AI 글자 단위 뜻이다'],
+    [/--cached/.test(c('.gitignore').x), '이미 기록 중인 파일을 빼는 법'],
+    [sym('올리면 안 될 파일을 올렸어요') === 'Secret Leak', '유출 대응이 먼저다'],
+    [/'copy','A'/.test(fig('u-git-clone')) && /'copy','A'/.test(fig('u-git-fork')) && !/'new'/.test(fig('u-git-clone') + fig('u-git-fork')), '사본은 새 커밋이 아니다'],
+    [!/'main'/.test(fig('u-git-interactive-rebase') + fig('u-git-squash')) && /'feature'/.test(fig('u-git-interactive-rebase')) && /'feature'/.test(fig('u-git-squash')), '기록 고치기는 main에서 하지 않는다'],
+    [!/'stop'/.test(fig('u-ai-commit-before-big-change')), '큰 변경은 못 합친 커밋이 아니다'],
+  ].filter(([ok]) => !ok).map(([, m]) => m).join(' / '); });
+check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
     ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
