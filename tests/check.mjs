@@ -997,6 +997,21 @@ check('gitsym', () => GITS().filter(t => { const p = typeof t.v === 'string' ? g
 check('gitsafe', () => GITS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null, s = (p ? p.h.replace(/<[^>]+>/g, ' ') : JSON.stringify(t.v)) + ' ' + (t.x || '') + ' ' + t.p; return SRV_IP(s) || /gh[pousr]_[A-Za-z0-9]{6,}|github_pat_/.test(s); }).map(t => t.en).join(', '));    // 진짜처럼 보이는 토큰·주소 금지
 check('gitflow', () => GITS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
 check('gitcode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return GITS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
+check('gitfact', () => { const c = en => g.TERMS.find(t => t.c === 'git' && t.en === en), fig = k => { const i = html.indexOf(`'${k}':{h:`); return html.slice(i, html.indexOf('\n', i)); }, sym = q => g.SYMPTOMS.find(s => s.q === q)?.terms?.[0] ?? g.SYMPTOMS.find(s => s.q === q)?.t?.[0];    // 디렉터 지적: 사실·그림이 다시 틀어지지 않게
+  return [
+    [/fetch/.test(c('Force Push').x), 'lease는 fetch 뒤에 못 막는다'],
+    [!/저장 안 한/.test(c('Checkout').x), '저장해도 커밋 전이면 사라진다'],
+    [/대기석/.test(c('Discard Changes').d) && /새 파일/.test(c('Discard Changes').x) && !/원래대로/.test(c('Discard Changes').v.code), 'restore .는 대기석 내용으로 돌린다'],
+    [/B-C/.test(fig('u-git-merge')) && /C-M/.test(fig('u-git-merge')), 'main이 안 나아가면 합침 커밋이 안 생긴다'],
+    [/\['feature','E','b'\]\],say:'main에는 S/.test(fig('u-git-squash-and-merge')) && !/'gone'/.test(fig('u-git-squash-and-merge')), 'Squash and Merge 뒤 C D E는 feature에 남는다'],
+    [/공개 저장소/.test(c('Protected Branch').x), '무료 요금제의 비공개 저장소 조건'],
+    [!c('Personal Access Token').r.includes('Token'), 'Token 카드는 AI 글자 단위 뜻이다'],
+    [/--cached/.test(c('.gitignore').x), '이미 기록 중인 파일을 빼는 법'],
+    [sym('올리면 안 될 파일을 올렸어요') === 'Secret Leak', '유출 대응이 먼저다'],
+    [/'copy','A'/.test(fig('u-git-clone')) && /'copy','A'/.test(fig('u-git-fork')) && !/'new'/.test(fig('u-git-clone') + fig('u-git-fork')), '사본은 새 커밋이 아니다'],
+    [!/'main'/.test(fig('u-git-interactive-rebase') + fig('u-git-squash')) && /'feature'/.test(fig('u-git-interactive-rebase')) && /'feature'/.test(fig('u-git-squash')), '기록 고치기는 main에서 하지 않는다'],
+    [!/'stop'/.test(fig('u-ai-commit-before-big-change')), '큰 변경은 못 합친 커밋이 아니다'],
+  ].filter(([ok]) => !ok).map(([, m]) => m).join(' / '); });
 check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
