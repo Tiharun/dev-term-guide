@@ -576,10 +576,11 @@ const SYM_BACK = ['429가 떠요', '로그인했는데 401이 떠요', '로그�
 const SYM_DB = ['데이터가 쌓일수록 목록이 느려져요', '목록 하나 여는데 쿼리가 수백 번 나가요', 'JOIN했더니 같은 회원이 여러 줄 나와요', '주문 없는 회원이 목록에서 빠져요', '개수가 실제보다 적게 나와요', '= NULL로 찾으면 아무것도 안 나와요', 'DB 연결이 꽉 찼다는 오류가 떠요', 'deadlock 오류가 떠요', '회원을 지웠더니 주문이 같이 사라졌어요', '같은 이메일로 두 번 가입돼요', '실수로 지운 데이터를 되살리고 싶어요', '둘이 동시에 고치면 한 사람 것이 사라져요'];
 const SYM_SRV = ['처음 요청만 유난히 느려요', '사람이 몰리면 사이트가 느려져요', '502 Bad Gateway가 떠요', '504 Gateway Timeout이 떠요', '503이 뜨고 접속이 안 돼요', '서버가 혼자 꺼졌다 켜져요', '디스크가 꽉 찼다는 오류가 떠요', '인증서가 만료됐다고 떠요', '큰 파일을 올리면 413이 떠요', '설정을 바꿨는데 그대로예요', '서버를 늘렸더니 로그인이 자꾸 풀려요', '클라우드 한 곳이 멈추자 우리 서비스도 멈췄어요'];
 const SYM_GIT = ['올리려는데 거절당했어요', '커밋을 잘못했어요', '합치다가 충돌이 났어요', '올리면 안 될 파일을 올렸어요', '예전 상태로 돌아가고 싶어요', '작업이 사라진 것 같아요', '고친 걸 버리고 싶어요', '하던 걸 잠깐 치워 두고 싶어요', 'HEAD가 분리됐다고 나와요', '커밋 기록을 깔끔히 하고 싶어요'];
-check('symcount', () => g.SYMPTOMS.length !== 227 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_DEPLOY = ['배포가 실패했대요', '내 컴퓨터에선 빌드되는데 배포하면 실패해요', '배포했는데 사이트가 그대로예요', '새로고침하면 404가 떠요', '배포하니까 그림·CSS가 안 나와요', '배포한 사이트에서만 API 키가 없대요', '도메인을 연결했는데 안 열려요', '한참 안 쓰다 들어가면 첫 화면이 오래 걸려요', '오래 걸리는 작업이 중간에 끊겨요', 'push해도 자동 배포가 안 돌아요', 'main에 합치는 버튼이 막혀 있어요', '방금 배포한 뒤로 고장 났어요'];
+check('symcount', () => g.SYMPTOMS.length !== 239 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT, ...SYM_DEPLOY].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1648 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
+check('total', () => g.TERMS.length === 1688 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -1032,6 +1033,23 @@ check('gitminor', () => { const c = en => g.TERMS.find(t => t.c === 'git' && t.e
 check('figcapnarrow', () => { const i = html.indexOf('@media (max-width:860px){'), m = html.slice(i, html.indexOf('@media (prefers-reduced-motion:reduce){\n  html', i) < 0 ? i + 2000 : html.indexOf('@media (prefers-reduced-motion:reduce){\n  html', i)); return /\.figcap\{position:static/.test(m) && /\.fig:has\(\.play\) \.figcap\{/.test(m) ? '' : '좁은 화면 캡션이 그림 위에 겹친다'; });
 check('figfit', () => { return [/\.stage>\.mk-hint:first-child\{position:static/.test(html) ? '' : '안내 글이 그림에 겹친다', /function fitStage\(st\)/.test(html) && /fitStage\(st\);\n\}/.test(html) ? '' : '넘치는 그림을 줄이는 fitStage가 없다'].filter(Boolean).join(' / '); });
 check('figfold', () => [/\.stage:has\(>\.mk-fold\)\{overflow:hidden\}/.test(html) ? '' : '뷰포트 그림의 페이지가 캡션을 덮는다', /\.mk-ch\{max-width:100%;height:auto\}/.test(html) ? '' : '차트 SVG가 좁은 틀에서 잘린다'].filter(Boolean).join(' / '));
+const DEPS = () => g.TERMS.filter(t => t.c === 'deploy');
+const DEP_NEW = {host: ['Cloudflare Pages', 'Render', 'Railway', 'Fly.io', 'Edge Function', 'Function Timeout', 'Build Log', 'Runtime Log', 'Spin Down', 'Build Minutes'],
+  domain: ['Custom Domain', 'Apex Domain', 'A Record', 'CNAME Record', 'TXT Record', 'Nameserver', 'TTL', 'SPA Fallback', 'Base Path', 'Rewrite Rule'],
+  auto: ['Workflow', 'Workflow Trigger', 'Job', 'Runner', 'Repository Secret', 'Status Check', 'Production Branch', 'Deploy Hook', 'Dependabot', 'Scheduled Workflow'],
+  ops: ['Rolling Update', 'Error Budget', 'Dockerfile', 'Docker Compose', 'Cache Purge', 'Maintenance Mode', 'Code Freeze', 'On-Call', 'SLO', 'MTTR']};
+check('depcat', () => { const a = g.CATS.find(c => c.id === 'deploy').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,env,host,domain,auto,ops,tip' ? '' : a; });
+check('depnew', () => Object.entries(DEP_NEW).flatMap(([s, l]) => l.filter(en => !DEPS().some(t => t.en === en && t.s === s))).join(', '));
+check('depcount', () => DEPS().length === 87 ? '' : 'deploy ' + DEPS().length);
+check('depx', () => DEPS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return n < 2 || n > 3; }).map(t => t.en).join(', '));    // x는 모두 2~3문장
+check('deptext', () => DEPS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('depxcat', () => DEPS().filter(t => /\((?:basics|web|front|back|db|server|git|deploy|security|perf|bug|ai)\)|(?:front|back|deploy)의/.test(t.x || '')).map(t => t.en).join(', '));
+check('depou', () => DEPS().filter(t => (t.o === 1 && !t.u) || (t.o !== 1 && t.u) || /wikipedia|namu\.wiki|velog|tistory|medium\.com/.test(t.u || '')).map(t => t.en).join(', '));    // 공식 표시는 공식 문서와 짝
+check('depfig', () => { const seen = new Map(), bad = []; DEPS().forEach(t => { const h = typeof t.v === 'string' ? g.D[t.v]?.h : g.visual(t.v); if (!h) return bad.push('그림 없음 ' + t.en); if (seen.has(h)) bad.push(t.en + '=' + seen.get(h)); seen.set(h, t.en); }); return bad.join(', '); });    // 같은 그림을 두 카드에 쓰지 않는다
+check('depsym', () => DEPS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null; return p && WSYM(p.h.replace(/<p class="sr">[^<]*<\/p>/, '') + (p.cap || '')); }).map(t => t.en).join(', '));
+check('depsafe', () => DEPS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null, s = (p ? p.h.replace(/<[^>]+>/g, ' ') : JSON.stringify(t.v)) + ' ' + (t.x || '') + ' ' + t.p; return SRV_IP(s) || /gh[pousr]_[A-Za-z0-9]{6,}|github_pat_/.test(s); }).map(t => t.en).join(', '));    // 진짜처럼 보이는 토큰·주소 금지
+check('depflow', () => DEPS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
+check('depcode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return DEPS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
 check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
