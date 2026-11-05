@@ -279,10 +279,6 @@ a.tag:hover{background:var(--ink);color:#fff}
 .http b{display:block;font-family:var(--serif);font-size:64px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
 .http span{display:inline-block;margin-top:10px;font-size:14px;font-weight:700;padding:3px 12px;border-radius:999px;background:var(--plate);border:1px solid var(--ink)}
 .http.e2 b{color:var(--moss)}.http.e4 b,.http.e5 b{color:var(--mark-text)}
-.gitg{width:min(400px,96%)}
-.gitg circle{stroke:var(--ink);stroke-width:2}
-.gitg path{fill:none;stroke-width:3}
-.gitg text{font-size:11px;fill:var(--muted);font-weight:700}
 .swatch{display:flex;gap:6px}.swatch i{width:44px;height:64px;border-radius:7px;display:block}
 .typ{display:flex;flex-direction:column;gap:6px;align-items:flex-start;width:min(380px,94%)}
 /* ---------- 화면 모형 (mk-) : 그림 속 글자는 11px 이상 ---------- */
@@ -592,7 +588,11 @@ a.tag:hover{background:var(--ink);color:#fff}
 .mk-card{background:var(--plate);border:1px solid var(--rule);border-radius:10px;padding:10px}
 .mk-hint{position:absolute;top:8px;left:14px;right:14px;font-size:12px;font-weight:700;color:var(--muted);text-align:left;z-index:1}
 .fig .lab{pointer-events:none}
-.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-sd,.mk-hm,.mk-db,.mk-dq,.mk-er,.mk-sv,.mk-mg) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-fky,.mk-sd,.mk-hm,.mk-db,.mk-dq,.mk-er,.mk-sv,.mk-mg) .figcap{position:static;margin:0 96px 11px 14px}
+.mk-gg{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 28px;width:100%}.mk-ggc{width:192px;max-width:100%}.mk-ggc svg{display:block;overflow:visible}.mk-ggh{margin:0 0 6px;font:800 13px/1.35 var(--sans);color:var(--text)}.mk-ggs{margin:6px 0 0;font:500 12.5px/1.45 var(--sans);color:var(--text)}
+.mk-gg text{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--text);text-anchor:middle}.mk-gg .mk-ggr{fill:var(--muted);text-anchor:start}.mk-gge{fill:none;stroke:var(--ink);stroke-width:2}.mk-gge.mk-gg-d{stroke:var(--muted);stroke-dasharray:4 3}.mk-gga{fill:var(--muted)}
+.mk-ggn circle{fill:var(--plate);stroke:var(--ink);stroke-width:2}.mk-gg-new circle{fill:var(--mark-bg);stroke:var(--mark-text);stroke-width:3}.mk-gg .mk-gg-new text{fill:var(--mark-text)}.mk-gg-gone circle{fill:var(--fig);stroke:var(--muted);stroke-dasharray:3 3}.mk-gg .mk-gg-gone text{fill:var(--muted)}.mk-gg-copy circle{fill:var(--moss-bg);stroke:var(--moss);stroke-width:3}.mk-gg .mk-gg-copy text{fill:var(--moss)}.mk-gg-stop circle{fill:var(--mark-bg);stroke:var(--mark-text);stroke-width:2.5;stroke-dasharray:3 3}.mk-gg .mk-gg-stop text{fill:var(--mark-text)}
+.mk-ggt rect{fill:var(--plate);stroke:var(--rule)}.mk-gg-h rect{fill:var(--ink);stroke:var(--ink)}.mk-gg .mk-gg-h text{fill:var(--plate)}
+.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-sd,.mk-hm,.mk-db,.mk-dq,.mk-er,.mk-sv,.mk-mg) .stage{padding-bottom:14px}.fig:has(.mk-scr,.mk-dv,.mk-dt,.mk-term,.mk-nw,.mk-nwa,.mk-nwl,.mk-nwp,.mk-ru,.mk-pair,.mk-two,.mk-even,.mk-jcr,.mk-jfm,.mk-jgs,.mk-jtl,.mk-wvw,.mk-xcm,.mk-xkt,.mk-xfl,.mk-xsg,.mk-nfr,.mk-nse,.mk-nsm,.mk-nsl,.mk-nrv,.mk-ntl,.mk-nct,.mk-ods,.mk-oad,.mk-oft,.mk-ohk,.mk-oia,.mk-ous,.mk-ohe,.mk-oms,.mk-apsp,.mk-apon,.mk-apab,.mk-apst,.mk-apsl,.mk-apcp,.mk-apsb,.mk-apsk,.mk-apwc,.mk-aptr,.mk-apin,.mk-fgmc,.mk-fgin,.mk-fgva,.mk-fgst,.mk-fgpl,.mk-fgsa,.mk-fgbo,.mk-fgex,.mk-fgtl,.mk-fgcp,.mk-fghf,.mk-fglg,.mk-fgvh,.mk-tffa,.mk-tfit,.mk-tfhl,.mk-tfbt,.mk-tffl,.mk-tcsl,.mk-tcwh,.mk-tcmn,.mk-tccb,.mk-tcrg,.mk-tcok,.mk-tpdv,.mk-tpas,.mk-tpdr,.mk-tpdd,.mk-tpli,.mk-tpbm,.mk-tpcf,.mk-rupl,.mk-rupy,.mk-rbar,.mk-mo,.mk-mt,.mk-mocf,.mk-dc,.mk-cd,.mk-mr,.mk-sp,.mk-dcdod,.mk-dcmd,.mk-fw,.mk-pl,.mk-cmpc,.mk-fky,.mk-sd,.mk-hm,.mk-db,.mk-dq,.mk-er,.mk-sv,.mk-mg,.mk-gg) .figcap{position:static;margin:0 96px 11px 14px}
 .mk-scr>b:first-child{font-size:13px}
 .mk-hl{outline:2px dashed var(--mark);outline-offset:3px;border-radius:6px}.mk-l.mk-hl,.mk-req.mk-hl{align-self:flex-start;padding:0 4px}
 .mk-row{display:flex;align-items:center;gap:8px}.mk-l.mk-row{justify-content:space-between}
@@ -3150,44 +3150,44 @@ T('net','tip',[
 <script>
 /* ===== 08 Git · 협업 ===== */
 T('git','basic',[
- {en:'Git',ko:'깃',d:'파일이 바뀐 기록을 저장해 언제든 예전으로 돌아갈 수 있게 하는 도구.',p:'이 폴더를 Git으로 관리하게 시작해줘',r:['Repository','Commit'],l:1,o:1,u:'https://git-scm.com/book/ko/v2',v:{git:'commit'}},
+ {en:'Git',ko:'깃',d:'파일이 바뀐 기록을 저장해 언제든 예전으로 돌아갈 수 있게 하는 도구.',p:'이 폴더를 Git으로 관리하게 시작해줘',r:['Repository','Commit'],l:1,o:1,u:'https://git-scm.com/book/ko/v2',v:'u-git-git'},
  {en:'GitHub',ko:'깃허브',d:'Git 저장소를 인터넷에 올려 두고 함께 작업하는 서비스.',x:'Git은 도구, GitHub는 그 기록을 올려 두는 사이트.',p:'이 프로젝트를 GitHub에 올리는 방법을 알려줘',r:['Git','Remote'],l:1,o:1,u:'https://docs.github.com/ko/get-started',v:{flow:['내 컴퓨터 Git','push','GitHub']}},
  {en:'Repository',ko:'저장소 · 레포',d:'Git이 관리하는 프로젝트 폴더 하나.',j:'"레포", "리포"',p:'새 레포를 만들고 첫 커밋을 해줘',r:['Git'],l:1,o:0,v:{tree:['my-site/ (레포)','├ .git/','├ index.html','└ style.css'],hl:[1]}},
- {en:'Commit',ko:'커밋 · 저장 기록',d:'지금 상태를 메시지와 함께 한 칸 저장하는 것. 게임의 세이브 포인트.',p:'지금까지 바꾼 걸 "헤더 디자인 수정"으로 커밋해줘',r:['Commit Message','Push'],l:1,o:0,v:{git:'commit'}},
+ {en:'Commit',ko:'커밋 · 저장 기록',d:'지금 상태를 메시지와 함께 한 칸 저장하는 것. 게임의 세이브 포인트.',p:'지금까지 바꾼 걸 "헤더 디자인 수정"으로 커밋해줘',r:['Commit Message','Push'],l:1,o:0,v:'u-git-commit'},
  {en:'Commit Message',ko:'커밋 메시지',d:'커밋할 때 무엇을 바꿨는지 적는 한 줄 설명.',p:'커밋 메시지는 무엇을 왜 바꿨는지 한글로 짧게 써줘',r:['Commit'],l:1,o:0,v:{code:'fix: 모바일에서 메뉴가 안 열리는 문제 수정'}},
- {en:'Branch',ko:'브랜치 · 갈래',d:'원본은 두고 따로 갈라져 나와 작업하는 길.',p:'새 기능은 feature/login 브랜치를 만들어서 작업해줘',r:['Merge','main Branch'],l:1,o:0,v:{git:'branch'}},
- {en:'main Branch',ko:'메인 브랜치',d:'완성본이 있는 기본 갈래. 예전엔 master라고 불렀어요.',p:'main에 바로 커밋하지 말고 브랜치를 따줘',r:['Branch'],l:1,o:0,v:{git:'branch'}},
+ {en:'Branch',ko:'브랜치 · 갈래',d:'원본은 두고 따로 갈라져 나와 작업하는 길.',p:'새 기능은 feature/login 브랜치를 만들어서 작업해줘',r:['Merge','main Branch'],l:1,o:0,v:'u-git-branch'},
+ {en:'main Branch',ko:'메인 브랜치',d:'완성본이 있는 기본 갈래. 예전엔 master라고 불렀어요.',p:'main에 바로 커밋하지 말고 브랜치를 따줘',r:['Branch'],l:1,o:0,v:'u-git-main-branch'},
  {en:'Clone',ko:'클론 · 복제',d:'인터넷에 있는 저장소를 내 컴퓨터로 통째로 내려받는 것.',p:'이 GitHub 레포를 클론해서 실행해줘',r:['Repository'],l:1,o:0,v:{flow:['GitHub','clone','내 컴퓨터']}},
 ]);
 T('git','core',[
- {en:'Push',ko:'푸시 · 올리기',d:'내 컴퓨터의 커밋을 GitHub 같은 원격 저장소에 올리는 것.',p:'커밋한 걸 GitHub에 푸시해줘',r:['Pull','Commit'],l:1,o:0,v:{git:'push'}},
- {en:'Pull',ko:'풀 · 받아오기',d:'원격 저장소의 새 커밋을 내 컴퓨터로 받아오는 것.',p:'작업 전에 최신 내용을 pull 받아줘',r:['Push'],l:1,o:0,v:{git:'pull'}},
- {en:'Merge',ko:'머지 · 합치기',d:'갈라진 브랜치의 작업을 다시 하나로 합치는 것.',p:'로그인 브랜치를 main에 머지해줘',r:['Branch','Merge Conflict'],l:2,o:0,v:{git:'merge'}},
- {en:'Merge Conflict',ko:'충돌 · 컨플릭트',d:'두 사람이 같은 곳을 다르게 고쳐서 Git이 자동으로 못 합치는 상황.',j:'"컨플릭트 났어요"',p:'머지 충돌이 났어. 두 쪽 내용을 보여주고 어떻게 합칠지 물어봐줘',r:['Merge'],l:2,o:0,v:{git:'conflict'}},
+ {en:'Push',ko:'푸시 · 올리기',d:'내 컴퓨터의 커밋을 GitHub 같은 원격 저장소에 올리는 것.',p:'커밋한 걸 GitHub에 푸시해줘',r:['Pull','Commit'],l:1,o:0,v:'u-git-push'},
+ {en:'Pull',ko:'풀 · 받아오기',d:'원격 저장소의 새 커밋을 내 컴퓨터로 받아오는 것.',p:'작업 전에 최신 내용을 pull 받아줘',r:['Push'],l:1,o:0,v:'u-git-pull'},
+ {en:'Merge',ko:'머지 · 합치기',d:'갈라진 브랜치의 작업을 다시 하나로 합치는 것.',p:'로그인 브랜치를 main에 머지해줘',r:['Branch','Merge Conflict'],l:2,o:0,v:'u-git-merge'},
+ {en:'Merge Conflict',ko:'충돌 · 컨플릭트',d:'두 사람이 같은 곳을 다르게 고쳐서 Git이 자동으로 못 합치는 상황.',j:'"컨플릭트 났어요"',p:'머지 충돌이 났어. 두 쪽 내용을 보여주고 어떻게 합칠지 물어봐줘',r:['Merge'],l:2,o:0,v:'u-git-merge-conflict'},
  {en:'Pull Request',ko:'풀 리퀘스트 · PR',d:'"내 작업을 합쳐 주세요"라고 요청하고 검토받는 GitHub 기능.',j:'"PR 올려 주세요"',p:'작업 끝나면 PR을 올리고 바뀐 점을 정리해줘',r:['Code Review','Merge'],l:2,o:0,v:{flow:['내 브랜치','PR 검토','main에 합침'],hl:[1]}},
  {en:'Code Review',ko:'코드 리뷰',d:'다른 사람이 코드를 읽고 문제나 개선점을 짚어 주는 것.',p:'이 변경을 코드 리뷰해줘. 버그 가능성 위주로',r:['Pull Request'],l:2,o:0,v:{code:'+ const total = price * qty;\n// 리뷰: qty가 0이면?'}},
  {en:'Staging Area',ko:'스테이지 · 커밋 대기석',d:'커밋할 파일을 골라 올려 두는 대기석. git add로 올려요.',p:'index.html만 add해서 커밋해줘',r:['Commit'],l:2,o:0,v:{flow:['수정한 파일','git add','커밋 대기','commit']}},
  {en:'Diff',ko:'디프 · 바뀐 부분',d:'이전과 지금 사이에 바뀐 줄을 보여 주는 것. +는 추가, −는 삭제.',p:'바꾼 부분 diff를 보여줘',r:['Commit'],l:1,o:0,v:{code:'- color: red;\n+ color: blue;'}},
  {en:'.gitignore',ko:'깃이그노어 · 제외 목록',d:'Git에 올리지 않을 파일 목록. 비밀번호 파일, node_modules 등.',p:'.env와 node_modules는 .gitignore에 넣어줘',r:['Environment Variable'],l:2,o:0,v:{code:'node_modules/\n.env'}},
- {en:'Remote',ko:'원격 저장소 · 리모트',d:'인터넷에 있는 저장소. 보통 origin이라는 이름이 붙어요.',p:'',r:['Push','GitHub'],l:2,o:0,v:{flow:['로컬','↔','origin (원격)']}},
+ {en:'Remote',ko:'원격 저장소 · 리모트',d:'인터넷에 있는 저장소. 보통 origin이라는 이름이 붙어요.',p:'',r:['Push','GitHub'],l:2,o:0,v:'u-git-remote'},
 ]);
 T('git','motion',[
- {en:'Commit History',ko:'커밋 기록 · 히스토리',d:'커밋이 시간순으로 이어진 줄.',p:'최근 커밋 기록을 보여주고 어디서 문제가 생겼는지 찾아줘',r:['Commit','git log'],l:1,o:0,v:{git:'commit'}},
- {en:'Rebase',ko:'리베이스',d:'내 브랜치의 출발점을 최신 main 끝으로 옮겨 기록을 한 줄로 정리하는 것.',x:'merge는 합친 흔적을 남기고, rebase는 한 줄로 다시 쌓아요.',p:'',r:['Merge'],l:3,o:0,v:{git:'rebase'}},
- {en:'Revert',ko:'리버트 · 되돌리기 커밋',d:'특정 커밋을 취소하는 새 커밋을 만드는 것. 기록이 남아 안전해요.',x:'reset은 기록 자체를 지우고, revert는 취소 기록을 더해요.',p:'어제 커밋이 문제야. revert로 안전하게 되돌려줘',r:['Reset'],l:2,o:0,v:{git:'commit'}},
- {en:'Reset',ko:'리셋 · 기록 되감기',d:'커밋 기록을 예전 지점으로 되감는 것. --hard는 작업 내용까지 지워서 위험해요.',p:'reset --hard 하지 말고 다른 안전한 방법을 알려줘',r:['Revert'],l:3,o:0,v:{git:'commit'}},
+ {en:'Commit History',ko:'커밋 기록 · 히스토리',d:'커밋이 시간순으로 이어진 줄.',p:'최근 커밋 기록을 보여주고 어디서 문제가 생겼는지 찾아줘',r:['Commit','git log'],l:1,o:0,v:{stack:['a1b2c3d 로그인 수정','9f8e7d6 헤더 변경','3c4d5e6 첫 커밋'],hl:[0]}},
+ {en:'Rebase',ko:'리베이스',d:'내 브랜치의 출발점을 최신 main 끝으로 옮겨 기록을 한 줄로 정리하는 것.',x:'merge는 합친 흔적을 남기고, rebase는 한 줄로 다시 쌓아요.',p:'',r:['Merge'],l:3,o:0,v:'u-git-rebase'},
+ {en:'Revert',ko:'리버트 · 되돌리기 커밋',d:'특정 커밋을 취소하는 새 커밋을 만드는 것. 기록이 남아 안전해요.',x:'reset은 기록 자체를 지우고, revert는 취소 기록을 더해요.',p:'어제 커밋이 문제야. revert로 안전하게 되돌려줘',r:['Reset'],l:2,o:0,v:'u-git-revert'},
+ {en:'Reset',ko:'리셋 · 기록 되감기',d:'커밋 기록을 예전 지점으로 되감는 것. --hard는 작업 내용까지 지워서 위험해요.',p:'reset --hard 하지 말고 다른 안전한 방법을 알려줘',r:['Revert'],l:3,o:0,v:'u-git-reset'},
  {en:'Stash',ko:'스태시 · 임시 보관',d:'커밋하기 애매한 작업을 잠깐 서랍에 넣어 두는 것.',p:'지금 작업을 stash 해두고 main으로 가줘',r:['Branch'],l:2,o:0,v:{flow:['작업 중','서랍에 보관','나중에 꺼냄']}},
- {en:'Checkout',ko:'체크아웃 · 갈아타기',d:'다른 브랜치나 예전 커밋으로 옮겨 가는 것. 요즘은 git switch도 써요.',p:'어제 커밋 상태로 잠깐 옮겨서 확인만 하게 해줘',r:['Branch'],l:2,o:0,v:{git:'branch'}},
- {en:'Cherry-pick',ko:'체리픽 · 골라 가져오기',d:'다른 브랜치의 커밋 하나만 골라 내 브랜치에 가져오는 것.',p:'버그 수정 커밋 하나만 main으로 cherry-pick 해줘',r:['Commit'],l:3,o:0,v:{git:'branch'}},
+ {en:'Checkout',ko:'체크아웃 · 갈아타기',d:'다른 브랜치나 예전 커밋으로 옮겨 가는 것. 요즘은 git switch도 써요.',p:'어제 커밋 상태로 잠깐 옮겨서 확인만 하게 해줘',r:['Branch'],l:2,o:0,v:'u-git-checkout'},
+ {en:'Cherry-pick',ko:'체리픽 · 골라 가져오기',d:'다른 브랜치의 커밋 하나만 골라 내 브랜치에 가져오는 것.',p:'버그 수정 커밋 하나만 main으로 cherry-pick 해줘',r:['Commit'],l:3,o:0,v:'u-git-cherry-pick'},
  {en:'Fork',ko:'포크',d:'남의 GitHub 저장소를 내 계정으로 통째로 복사해 오는 것.',p:'이 오픈 소스를 fork해서 내 계정에서 고치는 방법을 알려줘',r:['Clone'],l:2,o:0,v:{flow:['남의 레포','fork','내 계정 사본']}},
 ]);
 T('git','adv',[
  {en:'Git Flow',ko:'깃 플로',d:'main·develop·feature처럼 브랜치 역할을 정해 쓰는 작업 방식.',p:'',r:['Branch'],l:3,o:0,v:{tree:['main','└ develop','   ├ feature/login','   └ feature/cart']}},
- {en:'Tag',ko:'태그 · 버전 표시',d:'특정 커밋에 v1.0 같은 이름표를 붙이는 것.',x:'HTML의 태그와는 다른 뜻이에요.',p:'지금 커밋에 v1.0.0 태그를 붙여줘',r:['Semantic Versioning'],l:2,o:0,v:{big:'v1.2.0',sub:'이 커밋 = 1.2.0 버전'}},
- {en:'Squash',ko:'스쿼시 · 커밋 합치기',d:'잘게 나뉜 커밋 여러 개를 하나로 합치는 것.',p:'잘게 나눈 커밋들을 하나로 squash 해서 정리해줘',r:['Commit'],l:3,o:0,v:{flow:['커밋 5개','squash','커밋 1개']}},
- {en:'HEAD',ko:'헤드 · 현재 위치',d:'지금 내가 보고 있는 커밋을 가리키는 표시.',p:'지금 HEAD가 어느 커밋을 가리키는지 알려줘',r:['Checkout'],l:3,o:0,v:{git:'commit'}},
- {en:'Detached HEAD',ko:'분리된 헤드',d:'브랜치가 아닌 예전 커밋 위에 서 있는 상태. 여기서 작업하면 잃기 쉬워요.',p:'detached HEAD라고 나와. 작업을 잃지 않게 정리해줘',r:['HEAD'],l:3,o:0,v:{git:'commit'}},
- {en:'Force Push',ko:'강제 푸시',d:'원격 기록을 내 기록으로 덮어쓰는 위험한 푸시.',p:'force push는 하지 말고 다른 방법으로 해결해줘',r:['Push'],l:3,o:0,v:{git:'push'}},
+ {en:'Tag',ko:'태그 · 버전 표시',d:'특정 커밋에 v1.0 같은 이름표를 붙이는 것.',x:'HTML의 태그와는 다른 뜻이에요.',p:'지금 커밋에 v1.0.0 태그를 붙여줘',r:['Semantic Versioning'],l:2,o:0,v:'u-git-tag'},
+ {en:'Squash',ko:'스쿼시 · 커밋 합치기',d:'잘게 나뉜 커밋 여러 개를 하나로 합치는 것.',p:'잘게 나눈 커밋들을 하나로 squash 해서 정리해줘',r:['Commit'],l:3,o:0,v:'u-git-squash'},
+ {en:'HEAD',ko:'헤드 · 현재 위치',d:'지금 내가 보고 있는 커밋을 가리키는 표시.',p:'지금 HEAD가 어느 커밋을 가리키는지 알려줘',r:['Checkout'],l:3,o:0,v:'u-git-head'},
+ {en:'Detached HEAD',ko:'분리된 헤드',d:'브랜치가 아닌 예전 커밋 위에 서 있는 상태. 여기서 작업하면 잃기 쉬워요.',p:'detached HEAD라고 나와. 작업을 잃지 않게 정리해줘',r:['HEAD'],l:3,o:0,v:'u-git-detached-head'},
+ {en:'Force Push',ko:'강제 푸시',d:'원격 기록을 내 기록으로 덮어쓰는 위험한 푸시.',p:'force push는 하지 말고 다른 방법으로 해결해줘',r:['Push'],l:3,o:0,v:'u-git-force-push'},
  {en:'Monorepo',ko:'모노레포',d:'여러 프로젝트를 저장소 하나에 함께 두는 방식.',p:'웹과 앱을 모노레포로 함께 관리할지 장단점을 알려줘',r:['Repository'],l:3,o:0,v:{tree:['repo/','├ web/','├ app/','└ shared/']}},
  {en:'Blame',ko:'블레임 · 줄별 작성 기록',d:'파일의 줄마다 누가 언제 고쳤는지 보는 기능.',p:'이 줄을 누가 언제 왜 바꿨는지 blame으로 찾아줘',r:['Commit History'],l:2,o:0,v:{tbl:[['줄','누가','언제'],['12','민수','10/01'],['13','지영','10/20']]}},
 ]);
@@ -3209,7 +3209,7 @@ T('git','tip',[
  {en:'Worktree',ko:'워크트리',d:'한 저장소에서 여러 브랜치를 각각 다른 폴더로 동시에 펼쳐 쓰는 기능.',p:'다른 브랜치를 worktree로 따로 열어서 동시에 작업하게 해줘',r:['Branch'],l:3,o:1,u:'https://git-scm.com/docs/git-worktree',v:{tree:['project/ (main)','project-login/ (feature)']}},
  {en:'Changelog',ko:'변경 기록 · 체인지로그',d:'버전마다 무엇이 바뀌었는지 정리한 문서.',p:'이번 버전 변경 사항을 CHANGELOG에 정리해줘',r:['Tag'],l:2,o:0,v:{tree:['v1.2.0','├ 다크 모드 추가','└ 검색 오류 수정']}},
  {en:'LGTM',ko:'엘지티엠 · 좋아 보여요',d:'"Looks Good To Me". 코드 리뷰에서 승인한다는 뜻의 줄임말.',j:'"LGTM", "어프루브"',p:'리뷰해 보고 문제없으면 LGTM, 있으면 고칠 점을 적어줘',r:['Code Review'],l:1,o:0,jg:1,v:{big:'LGTM ✓',sub:'승인합니다'}},
- {en:'Pair Programming',ko:'짝 프로그래밍',d:'두 사람이 한 화면을 보며 같이 코드를 쓰는 방식.',p:'한 줄씩 설명하면서 같이 짜듯이 진행해줘',r:['Code Review'],l:2,o:0,v:{flow:['쓰는 사람','같이 보며','검토하는 사람']}},
+ {en:'Pair Programming',ko:'짝 프로그래밍',d:'두 사람이 한 화면을 보며 같이 코드를 쓰는 방식.',p:'한 줄씩 설명하면서 같이 짜듯이 진행해줘',r:['Code Review'],l:2,o:0,v:{tbl:[['역할','하는 일'],['드라이버','직접 코드를 써요'],['내비게이터','옆에서 보며 방향을 잡아요']]}},
 ]);
 </script>
 <script>
@@ -3437,7 +3437,7 @@ T('bug','adv',[
  {en:'Heisenbug',ko:'하이젠버그',d:'확인하려고 들여다보면 사라지는 버그. 타이밍 문제가 많아요.',j:'"하이젠버그"',p:'확인하려고 하면 사라지는 버그야. 타이밍 문제인지 봐줘',r:['Race Condition'],l:3,o:0,jg:1,v:'flicker'},
  {en:'Memory Leak Bug',ko:'점점 느려지는 버그',d:'오래 쓸수록 느려지거나 멈추는 현상. 메모리 누수가 원인일 때가 많아요.',p:'오래 켜 두면 느려져. 원인을 찾아줘',r:['Memory Leak'],l:3,o:0,v:'scale'},
  {en:'Edge-only Bug',ko:'특정 환경 버그',d:'특정 브라우저·기기에서만 생기는 버그.',p:'iPhone Safari에서만 생기는 버그야. 그 환경 기준으로 확인해줘',r:['Cross-browser'],l:2,o:0,v:{flow:['Chrome ✓','Safari ✗','Edge ✓'],hl:[1]}},
- {en:'Git Bisect',ko:'깃 바이섹트 · 범인 커밋 찾기',d:'언제부터 고장 났는지 커밋을 반씩 좁혀 가며 찾는 방법.',p:'언제부터 고장 났는지 git bisect로 찾아줘',r:['Regression','Commit History'],l:3,o:1,u:'https://git-scm.com/docs/git-bisect',v:{git:'commit'}},
+ {en:'Git Bisect',ko:'깃 바이섹트 · 범인 커밋 찾기',d:'언제부터 고장 났는지 커밋을 반씩 좁혀 가며 찾는 방법.',p:'언제부터 고장 났는지 git bisect로 찾아줘',r:['Regression','Commit History'],l:3,o:1,u:'https://git-scm.com/docs/git-bisect',v:'u-bug-git-bisect'},
  {en:'Source Map',ko:'소스맵',d:'압축된 코드의 오류 위치를 원래 코드 위치로 알려 주는 지도.',p:'배포본 오류 위치를 원래 코드 줄로 볼 수 있게 소스맵을 켜줘',r:['Minify','Stack Trace'],l:3,o:0,v:{flow:['압축 코드 1줄','소스맵','원래 42번째 줄']}},
  {en:'Error Tracking',ko:'오류 수집',d:'사용자 화면에서 난 오류를 자동으로 모아 보는 도구. Sentry 등.',p:'',r:['Monitoring'],l:3,o:0,v:'toast'},
  {en:'Off-by-one Error',ko:'하나 차이 오류',d:'반복을 한 번 더 하거나 덜 해서 생기는 흔한 버그.',p:'마지막 항목이 안 보여. 하나 차이 오류인지 확인해줘',r:['Loop','Array'],l:2,o:0,v:{tbl:[['0','1','2','(3?)']]}},
@@ -3697,7 +3697,7 @@ T('ai','tip',[
  {en:'One Task per Request',ko:'한 번에 한 가지',d:'요청 하나에 일 하나씩. 섞으면 실수가 늘어요.',p:'',r:['Scope'],l:1,o:0,v:{stack:['요청 1: 메뉴','요청 2: 색']}},
  {en:'Paste the Error',ko:'오류 그대로 붙이기',d:'오류 문구를 요약하지 말고 전부 붙이기.',p:'',r:['Clear Error Text'],l:1,o:0,v:{code:'Error: ... (전체 붙여넣기)'}},
  {en:'Attach Screenshot',ko:'스크린숏 붙이기',d:'화면 문제는 말보다 그림 한 장이 정확해요.',p:'',r:['Screenshot'],l:1,o:0,v:{page:'mn'}},
- {en:'Commit Before Big Change',ko:'큰 변경 전 저장',d:'큰 수정을 맡기기 전에 커밋해 두면 언제든 되돌릴 수 있어요.',p:'큰 수정 전에 지금 상태를 커밋해줘',r:['Commit'],l:1,o:0,v:{git:'commit'}},
+ {en:'Commit Before Big Change',ko:'큰 변경 전 저장',d:'큰 수정을 맡기기 전에 커밋해 두면 언제든 되돌릴 수 있어요.',p:'큰 수정 전에 지금 상태를 커밋해줘',r:['Commit'],l:1,o:0,v:'u-ai-commit-before-big-change'},
  {en:'Verify Claims',ko:'주장 확인하기',d:'AI가 "됐다"고 해도 직접 눌러 보거나 확인 방법을 물어보세요.',p:'됐다고 하기 전에 어떻게 확인했는지 알려줘',r:['Verification'],l:1,o:0,v:'checkbox'},
  {en:'Glossary Habit',ko:'용어 습관',d:'모르는 화면 현상은 이 설정집에서 이름을 찾고 예문을 복사해 쓰세요.',p:'',r:['Name the term'],l:1,o:0,v:'typing'},
  {en:'Reasonable Defaults',ko:'"적당히 알아서"의 함정',d:'"알아서 해줘"는 AI의 추측에 맡기는 것. 중요한 건 직접 정하세요.',p:'',r:['Specific Request'],l:1,o:0,v:{cmp:['맡김','<span class="btnx o">알아서</span>','정함','<span class="btnx">16px · 남색</span>']}},
@@ -4482,6 +4482,51 @@ const SVG = {
   eye:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
   eyeOff:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg>',
   doc:'<svg viewBox="0 0 28 34" aria-hidden="true"><path d="M2 2h16l8 8v22H2z" fill="var(--plate)" stroke="var(--ink)" stroke-width="2"/><path d="M18 2v8h8" fill="none" stroke="var(--ink)" stroke-width="2"/><rect x="6" y="20" width="16" height="6" rx="1" fill="var(--mark)"/></svg>'
+};
+/* 커밋 그래프: 장면 1~3개 {t 제목 24폭, rows 줄 이름 14폭(''은 이름 없음), n {키:[열 0~4, 줄 0~2, 상태 ok|new|gone|copy|stop, 글자 3폭]}, e ['A-B' 실선, 'A~B' 점선, 'A>B' 점선 화살표], tag [[글자 10폭, 노드 키, 'h' 강조·'b' 아래]], say 64폭}. 320px에서도 글자가 12px이도록 폭 192로 고정한다 */
+const GGL = { new: '새 커밋', gone: '사라진 커밋', copy: '복사한 커밋', stop: '아직 못 합침' };
+const gitg = (...scenes) => {
+  const no = m => { throw new Error('gitg: ' + m); }, w = (v, n) => typeof v === 'string' && wlen(v) >= 1 && wlen(v) <= n;
+  if (scenes.length < 1 || scenes.length > 3) no('장면은 1~3개');
+  const W = 192, R = 12, TH = 17, X = c => 20 + c * 38, tw = v => wlen(v) * 6.6 + 10, f = v => +v.toFixed(1);
+  const scene = ({ t, rows = [], n = {}, e = [], tag = [], say } = {}) => {
+    if (t !== undefined && !w(t, 24)) no('t는 1~24자');
+    if (say !== undefined && !w(say, 64)) no('say는 1~64자');
+    rows.forEach(v => { if (v !== '' && !w(v, 14)) no('줄 이름은 14자까지'); });
+    const keys = Object.keys(n); if (!keys.length) no('노드가 하나는 있어야 한다');
+    const N = {}, seat = new Set();
+    keys.forEach(k => { const [c, r, st = 'ok', show = k] = n[k];
+      if (!/^[A-Z][0-9]?$/.test(k)) no('노드 키는 A나 A2'); if (!Number.isInteger(c) || c < 0 || c > 4) no('열은 0~4'); if (!Number.isInteger(r) || r < 0 || r > 2) no('줄은 0~2');
+      if (st !== 'ok' && !Object.hasOwn(GGL, st)) no('없는 상태: ' + st); if (!w(show, 3)) no('노드 글자는 3자까지');
+      if (seat.has(c + '/' + r)) no('같은 자리에 노드 둘'); seat.add(c + '/' + r); N[k] = { c, r, st, show, x: X(c), up: 0, dn: 0 }; });
+    const nr = Math.max(...keys.map(k => N[k].r)) + 1;
+    const T = tag.map(([v, k, m = '']) => { if (!w(v, 10)) no('이름표는 10자까지'); if (!N[k]) no('없는 노드의 이름표: ' + k);
+      const b = m.includes('b'), o = N[k], lv = b ? o.dn++ : o.up++, hw = tw(v) / 2; return { v, k, h: m.includes('h'), b, lv, r: o.r, x: Math.min(W - 1 - hw, Math.max(1 + hw, o.x)), hw }; });
+    T.forEach((a, i) => T.slice(i + 1).forEach(z => { if (a.r === z.r && a.b === z.b && a.lv === z.lv && Math.abs(a.x - z.x) < a.hw + z.hw + 2) no('이름표가 겹침: ' + a.v + ', ' + z.v); }));
+    const cy = []; let y = 0;
+    for (let r = 0; r < nr; r++) { const on = keys.map(k => N[k]).filter(o => o.r === r);
+      if (rows[r]) y += 16; y += Math.max(0, ...on.map(o => o.up)) * TH + 2 + R; cy[r] = y; y += R + 2 + Math.max(0, ...on.map(o => o.dn)) * TH + (r < nr - 1 ? 8 : 0); }
+    const H = y;
+    keys.forEach(k => { N[k].y = cy[N[k].r]; });
+    let lines = ''; const said = [];
+    e.forEach(v => { const m = /^([A-Z][0-9]?)([-~>])([A-Z][0-9]?)$/.exec(v); if (!m) no('선은 A-B 꼴: ' + v); const [, a, kd, b] = m;
+      if (!N[a] || !N[b] || a === b) no('없는 선: ' + v); const A = N[a], B = N[b], d = kd === '-' ? '' : ' mk-gg-d'; said.push(A.show + '-' + B.show);
+      if (kd === '>') { const L = Math.hypot(B.x - A.x, B.y - A.y), ux = (B.x - A.x) / L, uy = (B.y - A.y) / L, tx = B.x - ux * (R + 3), ty = B.y - uy * (R + 3), bx = tx - ux * 7, by = ty - uy * 7;
+        lines += `<path class="mk-gge${d}" d="M${f(A.x + ux * R)} ${f(A.y + uy * R)}L${f(bx)} ${f(by)}"/><polygon class="mk-gga" points="${f(tx)},${f(ty)} ${f(bx - uy * 4)},${f(by + ux * 4)} ${f(bx + uy * 4)},${f(by - ux * 4)}"/>`; }
+      else if (A.y === B.y || A.x === B.x) lines += `<path class="mk-gge${d}" d="M${A.x} ${A.y}L${B.x} ${B.y}"/>`;
+      else { const mx = f((A.x + B.x) / 2); lines += `<path class="mk-gge${d}" d="M${A.x} ${A.y}C${mx} ${A.y} ${mx} ${B.y} ${B.x} ${B.y}"/>`; } });
+    const dots = keys.map(k => { const o = N[k]; return `<g class="mk-ggn${o.st === 'ok' ? '' : ' mk-gg-' + o.st}"><circle cx="${o.x}" cy="${o.y}" r="${R}"/><text x="${o.x}" y="${o.y + 4}">${esc(o.show)}</text></g>`; }).join('');
+    const tags = T.map(a => { const c = cy[a.r], top = a.b ? c + R + 3 + a.lv * TH : c - R - 3 - (a.lv + 1) * TH + 2;
+      return `<g class="mk-ggt${a.h ? ' mk-gg-h' : ''}"><rect x="${f(a.x - a.hw)}" y="${top}" width="${f(a.hw * 2)}" height="15" rx="4"/><text x="${f(a.x)}" y="${top + 12}">${esc(a.v)}</text></g>`; }).join('');
+    const names = rows.map((v, r) => { if (!v) return ''; const on = keys.map(k => N[k]).filter(o => o.r === r); return `<text class="mk-ggr" x="1" y="${cy[r] - R - 2 - Math.max(0, ...on.map(o => o.up)) * TH - 3}">${esc(v)}</text>`; }).join('');
+    const one = o => o.show + (o.st === 'ok' ? '' : ' ' + GGL[o.st]);
+    const body = Array.from({ length: nr }, (_, r) => { const list = keys.map(k => N[k]).filter(o => o.r === r).sort((a, z) => a.c - z.c).map(one).join(', ');
+      return nr === 1 && !rows[r] ? list + '.' : `${rows[r] || (r + 1) + '번째'} 줄: ${list}.`; }).join(' ');
+    const sum = (t ? t + '. ' : '') + body + (nr > 1 && said.length ? ` 선: ${said.join(', ')}.` : '') + (T.length ? ` 이름표 ${T.map(a => a.v + ': ' + N[a.k].show).join(', ')}.` : '');
+    return { sum, h: `<div class="mk-ggc">${t ? `<p class="mk-ggh">${esc(t)}</p>` : ''}<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true">${names}${lines}${dots}${tags}</svg>${say ? `<p class="mk-ggs">${esc(say)}</p>` : ''}</div>` };
+  };
+  const S = Array.from(scenes, scene);
+  return `<div class="mk-gg">${S.map(o => o.h).join('')}<p class="sr">${esc('커밋 그래프. ' + S.map(o => o.sum).join(' '))}</p></div>`;
 };
 const D = {
   boxmodel:{h:`<div class="cv"><div style="left:8%;top:10%;width:56%;height:74%;border:2px dashed var(--mark);border-radius:6px"></div>
@@ -8628,6 +8673,27 @@ Object.assign(D,{
   'u-server-saas':{h:bkStack(slayer(0), '<p class="mk-dgp">나는 쓰기만 해요</p>')},
   'u-server-on-premise':{h:bkStack(bkBox('우리 건물 서버', '직접 사고 관리'), bkBox('클라우드', '빌려 씀'))},
   'u-server-managed-service':{h:bkRows(['백업', '회사가'], ['업데이트', '회사가'], ['장애 복구', '회사가'], ['쿼리·데이터', '내가'])},
+  'u-git-git':{h:gitg({n:{A:[0,0],B:[2,0],C:[4,0,'new']},e:['A-B','B-C'],tag:[['월요일','A'],['화요일','B'],['오늘','C']],say:'저장해 둔 때로 언제든 돌아갈 수 있어요'})},
+  'u-git-commit':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0,'new']},e:['A-B','B-C','C-D'],tag:[['main','D']],say:'커밋 하나가 세이브 한 칸이에요'})},
+  'u-git-branch':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[2,1],E:[3,1]},e:['A-B','B-C','B-D','D-E'],tag:[['main','C'],['feature','E','b']],say:'원본은 그대로 두고 따로 작업해요'})},
+  'u-git-main-branch':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0],E:[2,1]},e:['A-B','B-C','C-D','B-E'],tag:[['main','D','h'],['feature','E','b']],say:'완성본이 있는 기본 갈래예요'})},
+  'u-git-push':{h:gitg({rows:['내 컴퓨터','GitHub'],n:{A:[0,0],B:[1,0],C:[2,0],A2:[0,1,'ok','A'],B2:[1,1,'ok','B'],C2:[2,1,'new','C']},e:['A-B','B-C','A2-B2','B2-C2','C>C2'],say:'내 커밋 C가 GitHub로 올라가요'})},
+  'u-git-remote':{h:gitg({rows:['내 컴퓨터','origin (원격)'],n:{A:[0,0],B:[1,0],C:[2,0],A2:[0,1,'ok','A'],B2:[1,1,'ok','B'],C2:[2,1,'ok','C']},e:['A-B','B-C','A2-B2','B2-C2'],say:'같은 기록을 인터넷에도 한 벌 더 둬요'})},
+  'u-git-pull':{h:gitg({rows:['GitHub','내 컴퓨터'],n:{A:[0,0],B:[1,0],C:[2,0],A2:[0,1,'ok','A'],B2:[1,1,'ok','B'],C2:[2,1,'new','C']},e:['A-B','B-C','A2-B2','B2-C2','C>C2'],say:'새 커밋 C를 내 컴퓨터로 받아 와요'})},
+  'u-git-merge':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,1],D:[3,1],M:[4,0,'new']},e:['A-B','B-M','B-C','C-D','D-M'],tag:[['main','M'],['feature','D','b']],say:'두 갈래를 합쳐 합침 커밋 M을 만들어요'})},
+  'u-git-merge-conflict':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[2,1],M:[4,0,'stop','?']},e:['A-B','B-C','B-D','C~M','D~M'],tag:[['3번 줄','C'],['3번 줄','D','b'],['충돌','M','h']],say:'둘 다 3번 줄을 고치면 Git이 멈추고 물어봐요'})},
+  'u-git-rebase':{h:gitg({t:'rebase 전',n:{A:[0,0],B:[1,0],C:[2,0],D:[2,1],E:[3,1]},e:['A-B','B-C','B-D','D-E'],tag:[['main','C'],['feature','E','b']]},{t:'rebase 후',n:{A:[0,0],B:[1,0],C:[2,0],D:[3,1,'copy',"D'"],E:[4,1,'copy',"E'"]},e:['A-B','B-C','C-D','D-E'],tag:[['main','C'],['feature','E','b']],say:'D, E를 C 뒤에 새 커밋으로 다시 붙여요'})},
+  'u-git-revert':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0,'new']},e:['A-B','B-C','C-D'],tag:[['잘못','B'],['B 취소','D']],say:'B는 남겨 두고 되돌리는 커밋 D를 더해요'})},
+  'u-git-reset':{h:gitg({t:'reset 전',n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0]},e:['A-B','B-C','C-D'],tag:[['main','D']]},{t:'reset 후',n:{A:[0,0],B:[1,0],C:[2,0,'gone'],D:[3,0,'gone']},e:['A-B','B~C','C~D'],tag:[['main','B']],say:'main이 B로 돌아가고 C, D는 기록에서 빠져요'})},
+  'u-git-checkout':{h:gitg({t:'전',n:{A:[0,0],B:[1,0],C:[2,0],D:[3,1]},e:['A-B','B-C','B-D'],tag:[['main','C'],['HEAD','C','h'],['feature','D','b']]},{t:'git checkout feature 후',n:{A:[0,0],B:[1,0],C:[2,0],D:[3,1]},e:['A-B','B-C','B-D'],tag:[['main','C'],['feature','D','b'],['HEAD','D','h']],say:'HEAD가 옮겨 가고 파일도 feature 상태로 바뀌어요'})},
+  'u-git-cherry-pick':{h:gitg({n:{D:[2,0],E:[3,0],A:[0,1],B:[1,1],C:[2,1],F:[3,1,'copy',"E'"]},e:['A-B','B-C','C-F','B-D','D-E','E>F'],tag:[['feature','E'],['main','F','b']],say:'E만 복사해 main에 붙여요. 원래 E도 그대로예요'})},
+  'u-git-head':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0]},e:['A-B','B-C'],tag:[['main','C'],['HEAD','C','h']],say:'지금 보는 자리예요. 보통 브랜치를 따라가요'})},
+  'u-git-detached-head':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0]},e:['A-B','B-C','C-D'],tag:[['HEAD','B','h'],['main','D']],say:'HEAD가 브랜치 없이 옛 커밋을 바로 가리켜요'})},
+  'u-git-force-push':{h:gitg({rows:['내 컴퓨터','GitHub',''],n:{A:[0,0],B:[1,0],X:[2,0],A2:[0,1,'ok','A'],B2:[1,1,'ok','B'],X2:[2,1,'new','X'],C:[2,2,'gone'],D:[3,2,'gone']},e:['A-B','B-X','A2-B2','B2-X2','X>X2','B2~C','C~D'],say:'내 X로 덮어써서 남의 C, D가 GitHub에서 사라져요'})},
+  'u-git-squash':{h:gitg({t:'squash 전',n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0],E:[4,0]},e:['A-B','B-C','C-D','D-E'],tag:[['main','E']]},{t:'squash 후',n:{A:[0,0],S:[1,0,'new']},e:['A-S'],tag:[['main','S']],say:'B, C, D, E를 커밋 S 하나로 합쳐요'})},
+  'u-git-tag':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0]},e:['A-B','B-C','C-D'],tag:[['v1.0','B','h'],['main','D']],say:'v1.0은 B에 머물고 main만 앞으로 가요'})},
+  'u-bug-git-bisect':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0],D:[3,0],E:[4,0]},e:['A-B','B-C','C-D','D-E'],tag:[['정상','A'],['여기 시험','C','h'],['고장','E']],say:'C를 시험해 범인이 앞쪽인지 뒤쪽인지 좁혀요'})},
+  'u-ai-commit-before-big-change':{h:gitg({n:{A:[0,0],B:[1,0],C:[2,0,'new'],D:[3,0,'stop','?']},e:['A-B','B-C','C~D'],tag:[['안전 지점','C','h'],['큰 변경','D','b']],say:'망가져도 C로 바로 돌아올 수 있어요'})},
 });
 const visual = t => {
   const v = t.v; let h = '', lab = [], m = 0, cap = '', init;
@@ -8642,28 +8708,12 @@ const visual = t => {
   else if (v && v.page) h = `<div class="page">${[['hd','헤더'],['nv','내비게이션'],['hr','히어로'],['mn','본문'],['sd','사이드바'],['ft','푸터']].map(([a,n]) => `<div style="grid-area:${a}" class="${v.page===a?'hl':''}">${n}</div>`).join('')}</div>`;
   else if (v && v.win) h = `<div class="win">${[['tt','타이틀 바'],['mb','메뉴 바'],['tb','툴바'],['sb','사이드 패널'],['ct','작업 영역'],['st','상태 표시줄']].map(([a,n]) => `<div style="grid-area:${a}" class="${v.win===a?'hl':''}">${n}</div>`).join('')}</div>`;
   else if (v && v.http) h = `<div class="http e${String(v.http)[0]}"><b>${esc(v.http)}</b><span>${esc(v.msg||'')}</span></div>`;
-  else if (v && v.git) h = gitSvg(v.git);
   else if (v && v.cmp) h = `<div class="cmp"><div class="bad" data-l="${esc(v.cmp[0])}">${v.cmp[1]}</div><div class="good" data-l="${esc(v.cmp[2])}">${v.cmp[3]}</div></div>`;
   else if (v && v.big) h = `<div class="term-big">${esc(v.big)}<small>${esc(v.sub||'')}</small></div>`;
   else h = `<div class="term-big">${esc(t.en)}<small>${esc(t.ko)}</small></div>`;
   if (v && v.cap) cap = v.cap;
   return {h, lab, m, cap, init};
 };
-function gitSvg(kind){
-  const c = (x,y,f='#fff') => `<circle cx="${x}" cy="${y}" r="8" fill="${f}"/>`;
-  const main = '<path d="M20 90H380" stroke="var(--ink)"/>';
-  const k = {
-    commit:`${main}${[40,110,180,250].map((x,i)=>c(x,90,i==3?'var(--mark)':'#fff')).join('')}<text x="232" y="118">새 커밋</text><text x="20" y="72">main</text>`,
-    branch:`${main}<path d="M110 90C150 90 150 40 190 40H330" stroke="var(--moss)"/>${c(40,90)}${c(110,90)}${c(180,90)}${c(200,40)}${c(270,40)}<text x="20" y="72">main</text><text x="210" y="24">feature 브랜치</text>`,
-    merge:`${main}<path d="M80 90C120 90 120 40 160 40H250C290 40 290 90 330 90" stroke="var(--moss)"/>${c(40,90)}${c(140,90)}${c(180,40)}${c(240,40)}${c(330,90,'var(--mark)')}<text x="300" y="118">합치기(merge)</text>`,
-    conflict:`${main}<path d="M80 90C120 90 120 40 160 40H250C290 40 290 90 330 90" stroke="var(--mark)"/>${c(40,90)}${c(200,90)}${c(200,40)}${c(330,90,'var(--mark)')}<text x="150" y="122">같은 줄을 둘 다 고침</text><text x="282" y="72">충돌!</text>`,
-    rebase:`${main}<path d="M250 90C280 90 280 40 310 40H380" stroke="var(--moss)" stroke-dasharray="5 5"/>${c(40,90)}${c(110,90)}${c(180,90)}${c(250,90)}${c(320,40)}${c(370,40)}<text x="250" y="24">맨 끝으로 옮겨 붙임</text>`,
-    push:`<rect x="20" y="50" width="120" height="60" rx="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><rect x="260" y="50" width="120" height="60" rx="8" fill="var(--ink)"/><path d="M145 80H250" stroke="var(--mark)"/><text x="48" y="84">내 컴퓨터</text><text x="285" y="84" fill="#fff" style="fill:#fff">GitHub</text><text x="170" y="70">push ↑</text>`,
-    pull:`<rect x="20" y="50" width="120" height="60" rx="8" fill="#fff" stroke="var(--ink)" stroke-width="2"/><rect x="260" y="50" width="120" height="60" rx="8" fill="var(--ink)"/><path d="M255 80H150" stroke="var(--moss)"/><text x="48" y="84">내 컴퓨터</text><text x="285" y="84" style="fill:#fff">GitHub</text><text x="170" y="70">pull ↓</text>`
-  }[kind] || main;
-  return `<svg class="gitg" viewBox="0 0 400 140" role="img" aria-label="Git 그림">${k}</svg>`;
-}
-
 /* ---------- render pieces ---------- */
 const lvl = n => `<span class="lvl" aria-label="난이도 ${['쉬움','보통','어려움'][n-1]}">${[1,2,3].map(i => `<i class="${i<=n?'on':''}"></i>`).join('')}</span> ${['쉬움','보통','어려움'][n-1]}`;
 const plate = t => {

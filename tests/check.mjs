@@ -409,6 +409,28 @@ check('dbstill', () => vm.runInContext(`(() => { const bad = [], n = (h, re) => 
   if (dwhereSay(0) !== '3줄 중 2줄이 조건에 맞아요' || dwhereSay(2) !== '3줄 중 1줄이 조건에 맞아요') bad.push('dwhereSay');
   [() => dwhere(3), () => dwhere(0.5), () => dwhereSay(-1)].forEach((f, k) => { try { f(); bad.push('안 막음 w' + k); } catch (e) { if (!/^dwhere: /.test(e.message)) bad.push('메시지 w' + k); } });
   return bad.join(', '); })()`, ctx));
+check('gghelp', () => vm.runInContext(`(() => {
+  const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^gitg: /.test(e.message)) bad.push(w + ' 메시지'); } };
+  const G = gitg({t:'전', rows:['내 컴퓨터', 'GitHub'], n:{A:[0,0], B:[1,0,'new'], C:[1,1,'gone','A'], D:[2,1,'copy',"D'"], E:[3,1,'stop','?']}, e:['A-B', 'A~C', 'B>C', 'C-D', 'D~E'], tag:[['main','B'], ['HEAD','B','h'], ['옛','C','b']], say:'설명 글'});
+  ['class="mk-gg"', 'class="mk-ggc"', 'aria-hidden="true"', 'width="192"', 'class="mk-ggh">전<', 'class="mk-ggs">설명 글<', 'mk-gg-new', 'mk-gg-gone', 'mk-gg-copy', 'mk-gg-stop', 'mk-gge mk-gg-d', 'mk-ggt mk-gg-h', ">D'<", '>내 컴퓨터<', '<polygon',
+    '<p class="sr">커밋 그래프. 전. 내 컴퓨터 줄: A, B 새 커밋. GitHub 줄: A 사라진 커밋, D' + String.fromCharCode(39) + ' 복사한 커밋, ? 아직 못 합침. 선: A-B, A-A, B-A, A-D' + String.fromCharCode(39) + ', D' + String.fromCharCode(39) + '-?. 이름표 main: B, HEAD: B, 옛: A.</p>'].forEach(x => { if (!G.includes(x)) bad.push('없음: ' + x); });
+  const S = gitg({n:{A:[0,0], B:[1,0]}, e:['A-B']});
+  if (!S.includes('<p class="sr">커밋 그래프. A, B.</p>')) bad.push('한 줄 요약');
+  if (S.includes('mk-ggh') || S.includes('mk-ggs') || S.includes('<polygon')) bad.push('없는 칸을 그림');
+  if (!(S.match(/height="([0-9]+)"/) && +S.match(/height="([0-9]+)"/)[1] < 40)) bad.push('이름표 없는 장면 높이');
+  const T2 = gitg({t:'전', n:{A:[0,0]}}, {t:'후', n:{A:[0,0]}});
+  if (T2.split('class="mk-ggc"').length !== 3) bad.push('장면 둘');
+  no(() => gitg(), '장면 없음'); no(() => gitg({n:{A:[0,0]}},{n:{A:[0,0]}},{n:{A:[0,0]}},{n:{A:[0,0]}}), '장면 넷');
+  no(() => gitg({n:{}}), '노드 없음'); no(() => gitg({n:{A:[5,0]}}), '열 넘침'); no(() => gitg({n:{A:[0,3]}}), '줄 넘침');
+  no(() => gitg({n:{A:[0,0,'zz']}}), '없는 상태'); no(() => gitg({n:{A:[0,0], B:[0,0]}}), '같은 자리');
+  no(() => gitg({n:{A:[0,0]}, e:['A-Z']}), '없는 선'); no(() => gitg({n:{A:[0,0]}, e:['A']}), '선 형식');
+  no(() => gitg({n:{A:[0,0]}, tag:[['x','Z']]}), '없는 노드 이름표'); no(() => gitg({n:{A:[0,0]}, tag:[['가나다라마바','A']]}), '긴 이름표');
+  no(() => gitg({n:{A:[0,0], B:[1,0]}, tag:[['feature','A'], ['feature','B']]}), '이름표 겹침');
+  no(() => gitg({n:{A:[0,0]}, rows:['가나다라마바사아']}), '긴 줄 이름'); no(() => gitg({t:'가'.repeat(17), n:{A:[0,0]}}), '긴 제목'); no(() => gitg({say:'가'.repeat(41), n:{A:[0,0]}}), '긴 설명');
+  no(() => gitg({n:{A:[0,0,'ok','가나다']}}), '긴 글자');
+  return bad.join(', ');
+})()`, ctx));
+check('ggcss', () => [['figcap', /[,(]\.mk-gg[,)][^{]*\.figcap\{position:static/], ['고정 폭', /\.mk-ggc\{[^}]*width:192px/], ['점선', /\.mk-gg-gone circle\{[^}]*stroke-dasharray/], ['글자 12', /\.mk-gg text\{[^}]*font-size:12px/]].filter(([, re]) => !re.test(html)).map(([k]) => k).join(', '));
 check('srvhelp', () => vm.runInContext(`(() => {
   const bad = [], no = (f, w) => { try { f(); bad.push('안 막음 ' + w); } catch (e) { if (!/^(srvmap|metric): /.test(e.message)) bad.push(w + ' 메시지'); } };
   const has = (h, a, w) => a.forEach(x => { if (!h.includes(x)) bad.push(w + ' 없음: ' + x); }), WA = h => /class="(?:[^"]*\\s)?A(?:\\s[^"]*)?"/.test(h);
