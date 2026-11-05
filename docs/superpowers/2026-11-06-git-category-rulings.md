@@ -23,7 +23,7 @@
 - Interactive Rebase·Squash 그림의 이름표를 `main`에서 `feature`로. main 기록을 고쳐도 되는 것처럼 보였다.
 - Commit Before Big Change의 `stop`을 `ok`로. "아직 못 합침"으로 읽혔다.
 
-## 미룬 Minor
+## 미룬 Minor(2026-11-06 배포 전에 모두 고침, 검사 gitminor)
 
 1. Restore Deleted Branch: 지운 브랜치는 reflog에 없을 수 있어요. 터미널의 `was` 번호를 먼저 안내하면 더 정확합니다.
 2. Issue: PR에 번호만 적어서는 연결되지 않아요. `Closes #번호` 형식이 필요합니다.

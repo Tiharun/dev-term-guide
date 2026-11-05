@@ -1012,6 +1012,26 @@ check('gitfact', () => { const c = en => g.TERMS.find(t => t.c === 'git' && t.en
     [!/'main'/.test(fig('u-git-interactive-rebase') + fig('u-git-squash')) && /'feature'/.test(fig('u-git-interactive-rebase')) && /'feature'/.test(fig('u-git-squash')), '기록 고치기는 main에서 하지 않는다'],
     [!/'stop'/.test(fig('u-ai-commit-before-big-change')), '큰 변경은 못 합친 커밋이 아니다'],
   ].filter(([ok]) => !ok).map(([, m]) => m).join(' / '); });
+check('gitminor', () => { const c = en => g.TERMS.find(t => t.c === 'git' && t.en === en), sym = q => g.SYMPTOMS.find(s => s.q === q).t;    // 미룬 Minor 8묶음이 다시 틀어지지 않게
+  return [
+    [/was 뒤 번호/.test(c('Restore Deleted Branch').x), '지운 직후 번호'],
+    [/작업했다가 지운/.test(c('Reflog').x), 'reflog에 없는 브랜치'],
+    [/Closes #12/.test(c('Issue').x), 'Issue 연결 형식'],
+    [/git add/.test(c('Merge Conflict').x), '충돌 뒤 add'],
+    [/git init/.test(c('main Branch').x), '기본 이름 master'],
+    [!/두 번 합쳐질/.test(c('Cherry-pick').x), 'Cherry-pick 문구'],
+    [/도구로 Changelog/.test(c('Conventional Commits').x), 'Changelog 도구'],
+    [!sym('올리려는데 거절당했어요').includes('Force Push') && sym('올리려는데 거절당했어요').includes('Protected Branch'), '거절 증상'],
+    [sym('예전 상태로 돌아가고 싶어요')[0] === 'Revert', '되돌리기 순서'],
+    [sym('합치다가 충돌이 났어요').includes('git merge') && !sym('합치다가 충돌이 났어요').includes('Rebase'), '충돌 증상'],
+    [!/공식 문서는 없어요/.test(c('Trunk-Based Development').x), 'Trunk 내부 메모'],
+    [/^git reset --hard/.test(c('Reset').x), 'Reset 명령 표기'],
+    [/바로 앞 커밋/.test(c('Merge Commit').x), '부모 풀이'],
+    [/담당 경로의 파일/.test(c('CODEOWNERS').x), 'CODEOWNERS 문구'],
+  ].filter(([ok]) => !ok).map(([, m]) => m).join(' / '); });
+check('figcapnarrow', () => { const i = html.indexOf('@media (max-width:860px){'), m = html.slice(i, html.indexOf('@media (prefers-reduced-motion:reduce){\n  html', i) < 0 ? i + 2000 : html.indexOf('@media (prefers-reduced-motion:reduce){\n  html', i)); return /\.figcap\{position:static/.test(m) && /\.fig:has\(\.play\) \.figcap\{/.test(m) ? '' : '좁은 화면 캡션이 그림 위에 겹친다'; });
+check('figfit', () => { return [/\.stage>\.mk-hint:first-child\{position:static/.test(html) ? '' : '안내 글이 그림에 겹친다', /function fitStage\(st\)/.test(html) && /fitStage\(st\);\n\}/.test(html) ? '' : '넘치는 그림을 줄이는 fitStage가 없다'].filter(Boolean).join(' / '); });
+check('figfold', () => [/\.stage:has\(>\.mk-fold\)\{overflow:hidden\}/.test(html) ? '' : '뷰포트 그림의 페이지가 캡션을 덮는다', /\.mk-ch\{max-width:100%;height:auto\}/.test(html) ? '' : '차트 SVG가 좁은 틀에서 잘린다'].filter(Boolean).join(' / '));
 check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
