@@ -577,10 +577,11 @@ const SYM_DB = ['데이터가 쌓일수록 목록이 느려져요', '목록 하�
 const SYM_SRV = ['처음 요청만 유난히 느려요', '사람이 몰리면 사이트가 느려져요', '502 Bad Gateway가 떠요', '504 Gateway Timeout이 떠요', '503이 뜨고 접속이 안 돼요', '서버가 혼자 꺼졌다 켜져요', '디스크가 꽉 찼다는 오류가 떠요', '인증서가 만료됐다고 떠요', '큰 파일을 올리면 413이 떠요', '설정을 바꿨는데 그대로예요', '서버를 늘렸더니 로그인이 자꾸 풀려요', '클라우드 한 곳이 멈추자 우리 서비스도 멈췄어요'];
 const SYM_GIT = ['올리려는데 거절당했어요', '커밋을 잘못했어요', '합치다가 충돌이 났어요', '올리면 안 될 파일을 올렸어요', '예전 상태로 돌아가고 싶어요', '작업이 사라진 것 같아요', '고친 걸 버리고 싶어요', '하던 걸 잠깐 치워 두고 싶어요', 'HEAD가 분리됐다고 나와요', '커밋 기록을 깔끔히 하고 싶어요'];
 const SYM_DEPLOY = ['배포가 실패했대요', '내 컴퓨터에선 빌드되는데 배포하면 실패해요', '배포했는데 사이트가 그대로예요', '새로고침하면 404가 떠요', '배포하니까 그림·CSS가 안 나와요', '배포한 사이트에서만 API 키가 없대요', '도메인을 연결했는데 안 열려요', '한참 안 쓰다 들어가면 첫 화면이 오래 걸려요', '오래 걸리는 작업이 중간에 끊겨요', 'push해도 자동 배포가 안 돌아요', 'main에 합치는 버튼이 막혀 있어요', '방금 배포한 뒤로 고장 났어요'];
-check('symcount', () => g.SYMPTOMS.length !== 239 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT, ...SYM_DEPLOY].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_SEC = ['GitHub에 API 키를 올려 버렸어요', '주소의 숫자만 바꿨더니 남의 정보가 보여요', '일반 회원이 관리자 화면에 들어가져요', '브라우저에 안전하지 않다고 떠요', '콘솔에 CSP 때문에 막혔다고 떠요', '로그인 실패가 갑자기 엄청 늘었어요', 'npm audit에 경고가 많이 떠요', 'AI가 알려 준 패키지가 진짜인지 모르겠어요', 'AI 기능이 시키지 않은 행동을 해요', '오류 화면에 서버 내부 정보가 그대로 나와요', '휴대폰을 잃어버려 2단계 인증을 못 해요', '댓글에 넣은 글이 코드처럼 실행돼요'];
+check('symcount', () => g.SYMPTOMS.length !== 251 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT, ...SYM_DEPLOY, ...SYM_SEC].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1688 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
+check('total', () => g.TERMS.length === 1728 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -1050,6 +1051,23 @@ check('depsym', () => DEPS().filter(t => { const p = typeof t.v === 'string' ? g
 check('depsafe', () => DEPS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null, s = (p ? p.h.replace(/<[^>]+>/g, ' ') : JSON.stringify(t.v)) + ' ' + (t.x || '') + ' ' + t.p; return SRV_IP(s) || /gh[pousr]_[A-Za-z0-9]{6,}|github_pat_/.test(s); }).map(t => t.en).join(', '));    // 진짜처럼 보이는 토큰·주소 금지
 check('depflow', () => DEPS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
 check('depcode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return DEPS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
+const SECS = () => g.TERMS.filter(t => t.c === 'security');
+const SEC_NEW = {vuln: ['Broken Access Control', 'IDOR', 'Mass Assignment', 'SSRF', 'Path Traversal', 'Open Redirect', 'Command Injection', 'Security Misconfiguration', 'Verbose Error', 'Prompt Injection'],
+  account: ['Passkey', 'Authenticator App', 'Recovery Code', 'Magic Link', 'Single Sign-On', 'Password Manager', 'Password Policy', 'Breached Password Check', 'Account Enumeration', 'Session Revocation'],
+  crypto: ['TLS', 'HSTS', 'Mixed Content', 'Same-Origin Policy', 'Subresource Integrity', 'Encryption in Transit', 'Encryption at Rest', 'Symmetric Encryption', 'Digital Signature', 'Key Management'],
+  supply: ['Supply Chain Attack', 'Typosquatting', 'CVE', 'Zero Day', 'SBOM', 'Secret Scanning', 'Secret Manager', 'WAF', 'Threat Model', 'SAST']};
+check('seccat', () => { const a = g.CATS.find(c => c.id === 'security').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,attack,vuln,account,crypto,supply,tip' ? '' : a; });
+check('secnew', () => Object.entries(SEC_NEW).flatMap(([s, l]) => l.filter(en => !SECS().some(t => t.en === en && t.s === s))).join(', '));
+check('seccount', () => SECS().length === 88 ? '' : 'security ' + SECS().length);
+check('secx', () => SECS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return n < 2 || n > 3; }).map(t => t.en).join(', '));    // x는 모두 2~3문장
+check('sectext', () => SECS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('secxcat', () => SECS().filter(t => /\((?:basics|web|front|back|db|server|git|deploy|security|perf|bug|ai)\)|(?:front|back|deploy)의/.test(t.x || '')).map(t => t.en).join(', '));
+check('secou', () => SECS().filter(t => (t.o === 1 && !t.u) || (t.o !== 1 && t.u) || /wikipedia|namu\.wiki|velog|tistory|medium\.com/.test(t.u || '')).map(t => t.en).join(', '));    // 공식 표시는 공식 문서와 짝
+check('secfig', () => { const seen = new Map(), bad = []; SECS().forEach(t => { const h = typeof t.v === 'string' ? g.D[t.v]?.h : g.visual(t.v); if (!h) return bad.push('그림 없음 ' + t.en); if (seen.has(h)) bad.push(t.en + '=' + seen.get(h)); seen.set(h, t.en); }); return bad.join(', '); });    // 같은 그림을 두 카드에 쓰지 않는다
+check('secsym', () => SECS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null; return p && WSYM(p.h.replace(/<p class="sr">[^<]*<\/p>/, '') + (p.cap || '')); }).map(t => t.en).join(', '));
+check('secsafe', () => SECS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null, s = (p ? p.h.replace(/<[^>]+>/g, ' ') : JSON.stringify(t.v)) + ' ' + (t.x || '') + ' ' + t.p; return SRV_IP(s) || /gh[pousr]_[A-Za-z0-9]{6,}|github_pat_|sk[-_]live|sk_[a-z0-9]{4,}|OR 1=1|<script|\.\.\/|169\.254\./.test(s); }).map(t => t.en).join(', '));    // 진짜처럼 보이는 키·공격 문자열 금지
+check('secflow', () => SECS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
+check('seccode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return SECS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
 check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
