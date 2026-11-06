@@ -1,4 +1,9 @@
 # 브레인스토밍 시안(로컬 임시)
 .superpowers/
 .playwright-mcp/
-.impeccable/hook.cache.json
+.impeccable/
+docs/
+tests/
+DESIGN.md
+GLOSSARY.md
+PRODUCT.md
