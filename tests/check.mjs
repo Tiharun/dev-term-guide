@@ -552,7 +552,7 @@ check('pl', () => { const p = g.D['u-gantt-chart']; return p && p.h.includes('<s
 check('ps', () => g.TERMS.filter(t => 'ps' in t && (typeof t.ps !== 'string' || !t.ps.trim())).map(t => t.en).join(', '));
 const PS_CMD = ['ls', 'pwd', 'touch', 'grep', 'find', 'which', 'curl', 'tail', 'ps', 'kill', '--help'];    // Windows PowerShell 5.1에서 쳐 보니 그림의 bash 결과와 달랐던 명령(Task 6 측정)
 check('pscmd', () => { const a = g.TERMS.filter(t => t.c === 'terminal' && t.s === 'cmd' && 'ps' in t).map(t => t.en).join(); return a === PS_CMD.join() ? '' : 'ps ' + a; });
-check('sym', () => g.SYMPTOM_GROUPS.length !== 8 ? 'groups ' + g.SYMPTOM_GROUPS.length
+check('sym', () => g.SYMPTOM_GROUPS.length !== 9 ? 'groups ' + g.SYMPTOM_GROUPS.length
   : g.SYMPTOMS.filter(s => !g.SYMPTOM_GROUPS.includes(s.g)).map(s => s.q).join(', '));
 const SYM_NEW = ['아이폰에서 위·아래 내용이 가려져요', '휴대폰을 가로로 돌리면 화면이 깨져요', '키보드가 올라오면 입력칸이 가려져요', '표가 휴대폰에서 옆으로 삐져나가요',
   '글자 크기 설정을 키우면 화면이 깨져요', '고해상도 화면에서 이미지가 흐릿해요', '입력하자마자 빨간 오류 글씨가 떠요', '끌어서 놓기가 안 돼요', '버튼을 눌러도 눌린 느낌이 없어요',
@@ -580,10 +580,11 @@ const SYM_DEPLOY = ['배포가 실패했대요', '내 컴퓨터에선 빌드되�
 const SYM_SEC = ['GitHub에 API 키를 올려 버렸어요', '주소의 숫자만 바꿨더니 남의 정보가 보여요', '일반 회원이 관리자 화면에 들어가져요', '브라우저에 안전하지 않다고 떠요', '콘솔에 CSP 때문에 막혔다고 떠요', '로그인 실패가 갑자기 엄청 늘었어요', 'npm audit에 경고가 많이 떠요', 'AI가 알려 준 패키지가 진짜인지 모르겠어요', 'AI 기능이 시키지 않은 행동을 해요', '오류 화면에 서버 내부 정보가 그대로 나와요', '휴대폰을 잃어버려 2단계 인증을 못 해요', '댓글에 넣은 글이 코드처럼 실행돼요'];
 const SYM_PERF = ['로딩 중에 화면이 덜컹 밀려요', '버튼을 눌러도 화면이 늦게 바뀌어요', '스크롤할 때 버벅여요', '애니메이션이 뚝뚝 끊겨요', 'Lighthouse 점수가 낮아요', '내 컴퓨터에선 빠른데 사용자는 느리대요', '글꼴이 늦게 떠서 글자가 안 보여요', 'JS 파일이 너무 커요', '다시 들어와도 파일을 전부 새로 받아요', '어디가 느린지 모르겠어요', '외부 위젯을 넣었더니 느려졌어요', '평균은 빠른데 일부 사용자만 느리대요'];
 const SYM_BUG = ['웹페이지 글자가 이상한 기호로 깨져 보여요', '날짜가 하루씩 밀려 보여요', '금액 합계 끝자리가 조금 안 맞아요', '버튼이 예전 값으로 동작해요', '저장됐다는데 실제로는 저장이 안 돼 있어요', '가끔만 버그가 나고 다시 하면 멀쩡해요', 'is not defined 오류가 나요', 'Unexpected token 오류가 나요', '콘솔에 Uncaught (in promise)가 떠요', 'Maximum call stack 오류가 나요', '콘솔에 Hydration 오류가 떠요', '오류도 안 뜨는데 동작을 안 해요'];
-check('symcount', () => g.SYMPTOMS.length !== 275 ? 'length ' + g.SYMPTOMS.length
-  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT, ...SYM_DEPLOY, ...SYM_SEC, ...SYM_PERF, ...SYM_BUG].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
+const SYM_AI = ['없는 함수를 지어내요', '답이 중간에 끊겨요', '시키지 않은 곳까지 고쳐요', '다 됐다는데 실제로는 안 돼요', '대화가 길어지니 앞에서 한 말을 잊어요', '매번 같은 규칙을 다시 말해야 해요', '내 말에 무조건 맞다고 해요', '같은 요청인데 결과가 매번 달라요', '토큰이 너무 빨리 줄어요', '옛날 방법만 알려줘요', 'AI가 고친 걸 되돌리고 싶어요', '명령마다 허락을 물어봐요'];
+check('symcount', () => g.SYMPTOMS.length !== 287 ? 'length ' + g.SYMPTOMS.length
+  : [...SYM_NEW, ...SYM_TERM, ...SYM_NET, ...SYM_TEST, ...SYM_MOBILE, ...SYM_PLAN, ...SYM_BASICS, ...SYM_WEB, ...SYM_FRONT, ...SYM_BACK, ...SYM_DB, ...SYM_SRV, ...SYM_GIT, ...SYM_DEPLOY, ...SYM_SEC, ...SYM_PERF, ...SYM_BUG, ...SYM_AI].filter(q => !g.SYMPTOMS.some(s => s.q === q)).join(', '));
 
-check('total', () => g.TERMS.length === 1808 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
+check('total', () => g.TERMS.length === 1848 ? '' : 'TERMS ' + g.TERMS.length);    // 737 + 새 용어 241(Fitts's Law는 기존 카드 보강) + 터미널 + 네트워크 + 테스트 + 모바일 + 기획 + DB + 서버
 check('webparts', () => { const n = g.TERMS.filter(t => t.c === 'web' && t.s === 'parts').length; return n === 14 ? '' : 'parts ' + n; });
 check('mac', () => { const t = g.byId.get('net-mac-address'), s = t.x + g.D[t.v].cap; return /그대로/.test(s) || !/와이파이마다/.test(s) ? s : ''; });    // 요즘 기기는 와이파이마다 다른 MAC을 쓰기도 한다(Apple 102509·Android 10+ 기본값)
 check('planfix', () => ['plan-wbs', 'plan-gantt-chart'].map(id => g.byId.get(id)).filter(t => t.r.includes('Dependency')).map(t => t.en)
@@ -1102,6 +1103,22 @@ check('bugfig', () => { const seen = new Map(), bad = []; BUGS().forEach(t => { 
 check('bugsym', () => BUGS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null; return p && WSYM(p.h.replace(/<p class="sr">[^<]*<\/p>/, '') + (p.cap || '')); }).map(t => t.en).join(', '));
 check('bugflow', () => BUGS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
 check('bugcode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return BUGS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
+const AIS = () => g.TERMS.filter(t => t.c === 'ai');
+const AI_NEW = {model: ['Model Selection', 'Temperature', 'Max Tokens', 'Knowledge Cutoff', 'Multimodal', 'Embedding', 'RAG', 'Prompt Caching', 'Extended Thinking', 'Fine-tuning'],
+  technique: ['Prompt Engineering', 'Few-shot Prompting', 'Role Prompting', 'Chain of Thought', 'Structured Output', 'XML Tags', 'Prompt Template', 'Prompt Chaining', 'Output Format', 'Context Engineering'],
+  feature: ['Slash Command', 'Plan Mode', 'Permission Mode', 'Checkpoint', 'Non-interactive Mode', 'Auto Memory', 'Auto-compact', 'Background Subagent', 'Auto Mode', 'Resume Session'],
+  risk: ['Sycophancy', 'Overconfidence', 'Guardrail', 'Eval', 'Human in the Loop', 'Sensitive Data', 'Slopsquatting', 'Vibe Coding', 'AI Code Review', 'Context Rot']};
+check('aicat', () => { const a = g.CATS.find(c => c.id === 'ai').secs.map(s => s.id).join(); return a === 'basic,core,motion,adv,phrase,model,technique,feature,risk,tip' ? '' : a; });
+check('ainew', () => Object.entries(AI_NEW).flatMap(([s, l]) => l.filter(en => !AIS().some(t => t.en === en && t.s === s))).join(', '));
+check('aicount', () => AIS().length === 89 ? '' : 'ai ' + AIS().length);
+check('aix', () => AIS().filter(t => { const n = (t.x || '').match(/[.?!](?=\s|$)/g)?.length || 0; return n < 2 || n > 3; }).map(t => t.en).join(', '));    // x는 모두 2~3문장
+check('aitext', () => AIS().filter(t => WSYM(t.d + (t.x || '')) || !/줘$/.test(t.p)).map(t => t.en).join(', '));    // d·x에 기호 없음, p는 ~줘
+check('aixcat', () => AIS().filter(t => /\((?:basics|web|front|back|db|server|git|deploy|security|perf|bug|ai)\)|(?:front|back|deploy)의/.test(t.x || '')).map(t => t.en).join(', '));
+check('aiou', () => AIS().filter(t => (t.o === 1 && !t.u) || (t.o !== 1 && t.u) || /wikipedia|namu\.wiki|velog|tistory|medium\.com/.test(t.u || '')).map(t => t.en).join(', '));    // 공식 표시는 공식 문서와 짝
+check('aifig', () => { const seen = new Map(), bad = []; AIS().forEach(t => { const h = typeof t.v === 'string' ? g.D[t.v]?.h : g.visual(t.v); if (!h) return bad.push('그림 없음 ' + t.en); if (seen.has(h)) bad.push(t.en + '=' + seen.get(h)); seen.set(h, t.en); }); return bad.join(', '); });    // 같은 그림을 두 카드에 쓰지 않는다
+check('aisym', () => AIS().filter(t => { const p = typeof t.v === 'string' ? g.D[t.v] : null; return p && WSYM(p.h.replace(/<p class="sr">[^<]*<\/p>/, '') + (p.cap || '')); }).map(t => t.en).join(', '));
+check('aiflow', () => AIS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
+check('aicode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return AIS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
 check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
 check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
   return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
