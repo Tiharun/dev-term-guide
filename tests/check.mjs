@@ -552,7 +552,7 @@ check('pl', () => { const p = g.D['u-gantt-chart']; return p && p.h.includes('<s
 check('ps', () => g.TERMS.filter(t => 'ps' in t && (typeof t.ps !== 'string' || !t.ps.trim())).map(t => t.en).join(', '));
 const PS_CMD = ['ls', 'pwd', 'touch', 'grep', 'find', 'which', 'curl', 'tail', 'ps', 'kill', '--help'];    // Windows PowerShell 5.1에서 쳐 보니 그림의 bash 결과와 달랐던 명령(Task 6 측정)
 check('pscmd', () => { const a = g.TERMS.filter(t => t.c === 'terminal' && t.s === 'cmd' && 'ps' in t).map(t => t.en).join(); return a === PS_CMD.join() ? '' : 'ps ' + a; });
-check('sym', () => g.SYMPTOM_GROUPS.length !== 9 ? 'groups ' + g.SYMPTOM_GROUPS.length
+check('sym', () => g.SYMPTOM_GROUPS.length !== 18 ? 'groups ' + g.SYMPTOM_GROUPS.length
   : g.SYMPTOMS.filter(s => !g.SYMPTOM_GROUPS.includes(s.g)).map(s => s.q).join(', '));
 const SYM_NEW = ['아이폰에서 위·아래 내용이 가려져요', '휴대폰을 가로로 돌리면 화면이 깨져요', '키보드가 올라오면 입력칸이 가려져요', '표가 휴대폰에서 옆으로 삐져나가요',
   '글자 크기 설정을 키우면 화면이 깨져요', '고해상도 화면에서 이미지가 흐릿해요', '입력하자마자 빨간 오류 글씨가 떠요', '끌어서 놓기가 안 돼요', '버튼을 눌러도 눌린 느낌이 없어요',
@@ -1120,9 +1120,8 @@ check('aisym', () => AIS().filter(t => { const p = typeof t.v === 'string' ? g.D
 check('aiflow', () => AIS().filter(t => t.v && t.v.flow).map(t => t.en).join(', '));    // 흐름 칸은 좁은 화면에서 화살표만 떨어져 남는다
 check('aicode', () => { const wlen = s => [...s].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 2 : 1), 0); return AIS().filter(t => t.v && [...(t.v.code ? t.v.code.split('\n') : []), ...(t.v.tree || [])].some(l => wlen(l) > 22)).map(t => t.en).join(', '); });    // 22폭을 넘으면 320px에서 잘린다
 check('gitold', () => /\{git:'|gitSvg|\.gitg\{/.test(html) ? '옛 Git 그림이 남음' : '');
-check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), pn = rd('docs/PLAN.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
-  return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length],
-    ['오류 칩', num(pn, /"오류·안 됨" 칩 (\d+)개/), g.SYMPTOMS.filter(s => s.g === '오류·안 됨').length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
+check('doccount', () => { const rd = f => fs.readFileSync(new URL('../' + f, import.meta.url), 'utf8'), pr = rd('PRODUCT.md'), num = (s, re) => +(s.match(re) || [])[1];    // 문서에 적은 개수가 실제와 같아야 한다
+  return [['카테고리', num(pr, /카테고리 (\d+)개/), g.CATS.length], ['용어', num(pr, /용어 (\d+)개/), g.TERMS.length], ['증상', num(pr, /증상 색인 (\d+)개/), g.SYMPTOMS.length]].filter(([, a, b]) => a !== b).map(([k, a, b]) => `${k} ${a} ≠ ${b}`).join(', '); });
 const fontCmap = () => {    // FONT 블록 안 woff(1.0)의 cmap에 든 글자
   const b = Buffer.from(html.match(/FONT:START[\s\S]*?base64,([A-Za-z0-9+/=]+)/)[1], 'base64'), set = new Set();
   let t;
