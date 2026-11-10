@@ -9459,11 +9459,12 @@ function viewList(title, lead, list, emptyMsg){
     <div class="plates">${list.length ? list.map(plate).join('') : `<div class="empty">${emptyMsg}</div>`}</div>`;
 }
 const norm = s => String(s || '').toLowerCase().replace(/\s+/g, '');
+const searchCache = new WeakMap();    // 카드별 정규화한 글. 카드 내용은 실행 중 바뀌지 않는다
 function search(q){
   const n = norm(q); if (!n) return [];
-  const toks = String(q).trim().split(/\s+/).map(norm).filter(Boolean);
+  const raw = String(q).trim().split(/\s+/).map(norm).filter(Boolean), multi = raw.length > 1, toks = [...new Set(raw)];    // 같은 단어는 한 번만 잰다
   const symOf = s => new Set(SYMPTOMS.filter(x => norm(x.q).includes(s)).flatMap(x => x.t.map(y => find(y)).filter(Boolean)));
-  const sets = [n, ...toks].map(symOf);    // 증상 카드 묶음은 전체·단어마다 한 번만 만든다
+  const sets = [n, ...(multi ? toks : [])].map(symOf);    // 증상 카드 묶음은 전체·단어마다 한 번만 만든다
   // 단계: 0 정확 · 1 앞 일치/한글 포함 · 2 영문 포함 · 3 증상 · 4 은어·동의어 · 5 정의·설명·예문 · 9 없음
   const tier = (f, s, sym) => {
     if (f.en === s || f.ko.split('·').some(k => k === s)) return 0;
@@ -9472,8 +9473,10 @@ function search(q){
     if (sym.has(f.t)) return 3;
     if (f.j.includes(s)) return 4;
     if (f.txt.includes(s)) return 5; return 9; };
-  const score = t => { const f = {t, en: norm(t.en), ko: norm(t.ko), j: norm(t.j) + '\n' + norm((t.sy||[]).join()), txt: norm(t.d) + '\n' + norm(t.x) + '\n' + norm([].concat(t.p||[]).join())};
-    const whole = tier(f, n, sets[0]), words = toks.length > 1 ? Math.max(...toks.map((w, i) => Math.max(1, tier(f, w, sets[i + 1])))) : 9;
+  const score = t => { let f = searchCache.get(t);
+    if (!f) searchCache.set(t, f = {t, en: norm(t.en), ko: norm(t.ko), j: norm(t.j) + '\n' + norm((t.sy||[]).join()), txt: norm(t.d) + '\n' + norm(t.x) + '\n' + norm([].concat(t.p||[]).join())});
+    const whole = tier(f, n, sets[0]); let words = multi ? 1 : 9;
+    for (let i = 0; multi && i < toks.length && words < 9; i++) words = Math.max(words, tier(f, toks[i], sets[i + 1]));    // 한 단어라도 9면 멈춘다
     return Math.min(whole, words); };    // 9면 결과에서 뺀다
   return TERMS.map(t => [score(t), t]).filter(([s]) => s < 9).sort((a, b) => a[0] - b[0]).map(([, t]) => t).slice(0, 60);
 }
