@@ -9552,9 +9552,11 @@ function showSearch(q){
 function observe(){ document.querySelectorAll('#view .fig').forEach(f => io.observe(f)); }
 
 let qt;    // 검색 입력 지연 타이머
+const viewPins = () => viewList('핀 꽂은 용어', '핀을 꽂아 둔 용어만 모아 봤어요. 자주 쓰는 말을 여기 두세요.', TERMS.filter(t => pins.has(t.id)), '<b>아직 핀이 없어요</b>도판 오른쪽 위 핀 버튼을 누르면 여기 모여요.', `<button class="act rec-open" data-rec="open" title="${REC_TEXT.iconLabel}" aria-label="${REC_TEXT.iconLabel}">${ic('swap')}</button>`);
+const hashParts = () => location.hash.slice(2).split('/').map(s => { try { return decodeURIComponent(s); } catch { return s; } });    // 나눈 뒤 풀어야 검색어 속 '/'가 살아남고, 잘못된 주소(%)에도 오류가 없다
 function route(){
   clearTimeout(qt);    // 입력 직후 다른 화면으로 가면 남은 검색 타이머가 그 이동을 덮지 않게 한다
-  const h = location.hash.slice(2).split('/').map(s => { try { return decodeURIComponent(s); } catch { return s; } });    // 나눈 뒤 풀어야 검색어 속 '/'가 살아남는다
+  const h = hashParts();
   if (h[0] === 't' && MOVED[h[1]]) { location.replace('#/t/' + MOVED[h[1]]); return; }
   let cur = {}, html = '';
   if (h[0] === 'c' && catById.has(h[1])) {
@@ -9562,7 +9564,7 @@ function route(){
   } else if (h[0] === 't' && byId.has(h[1])) {
     const t = byId.get(h[1]), c = catById.get(t.c); cur = {c: c.id, s: t.s, t: t.id}; html = viewSection(c, c.secs.find(x => x.id === t.s), t);
   } else if (h[0] === 'pins') {
-    cur = {pins: 1}; html = viewList('핀 꽂은 용어', '핀을 꽂아 둔 용어만 모아 봤어요. 자주 쓰는 말을 여기 두세요.', TERMS.filter(t => pins.has(t.id)), '<b>아직 핀이 없어요</b>도판 오른쪽 위 핀 버튼을 누르면 여기 모여요.', `<button class="act rec-open" data-rec="open" title="${REC_TEXT.iconLabel}" aria-label="${REC_TEXT.iconLabel}">${ic('swap')}</button>`);
+    cur = {pins: 1}; html = viewPins();
   } else if (h[0] === 's' && h[1]) {
     renderNav({}); $('#q').value = h[1]; showSearch(h[1]); return;
   } else html = viewHome();
@@ -9585,7 +9587,7 @@ const closeNav = () => $('#nav').classList.remove('open');
 
 /* ---------- 기록 옮기기 창 ---------- */
 const recEl = $('#rec'), motionOff = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-let recOpener = null, recDown = null;
+let recOpener = null, recDown = false;
 function recHome(){
   $('#rec-title').textContent = REC_TEXT.title; $('#rec-msg').textContent = ''; $('#rec-sr').textContent = '';
   $('.rec-x', recEl).textContent = REC_TEXT.close;
@@ -9595,21 +9597,26 @@ function recHome(){
 function openRec(opener){ if (recEl.open) return; recOpener = opener; recEl.classList.remove('closing'); recHome(); recEl.showModal(); }
 function closeRec(){ if (!recEl.open || recEl.classList.contains('closing')) return; recEl.classList.add('closing');
   clearTimeout(closeRec.h); closeRec.h = setTimeout(() => recEl.close(), 150); }    // 닫힘 움직임(줄임 모드는 투명도만)을 보인 뒤 닫는다
-function recMsg(text, ms = 2000){ const m = $('#rec-msg'); m.textContent = text; clearTimeout(recMsg.h); recMsg.h = setTimeout(() => { m.textContent = ''; }, ms); }
+function recMsg(text, ms = 2000){ const m = $('#rec-msg'); m.textContent = ''; clearTimeout(recMsg.h);    // 같은 안내도 화면 읽기 프로그램이 다시 읽도록 비운 뒤 다음 프레임에 쓴다
+  requestAnimationFrame(() => { if (!recEl.open) return; m.textContent = text; recMsg.h = setTimeout(() => { m.textContent = ''; }, ms); }); }
 function recShake(){ const b = $('.rec-box', recEl); b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); }
 function bumpPins(){ const a = $('.navlinks a[href="#/pins"]'); if (!a || motionOff()) return; a.classList.remove('bump'); void a.offsetWidth; a.classList.add('bump'); }
 function recExport(b){
+  if (b.classList.contains('ok')) return;    // "저장했습니다" 동안 다시 눌러도 같은 파일을 또 받지 않는다
   if (!pins.size && !learned.size) return recMsg(REC_TEXT.exportEmpty);
   const f = recFile(pins, learned, new Date()), u = URL.createObjectURL(new Blob([f.text], {type: 'application/json'}));
-  const a = Object.assign(document.createElement('a'), {href: u, download: f.name}); document.body.append(a); a.click(); a.remove();
+  const a = Object.assign(document.createElement('a'), {href: u, download: f.name}); recEl.append(a); a.click(); a.remove();    // 창이 열려 있는 동안 창 밖은 inert라 링크를 창 안에 둔다
   setTimeout(() => URL.revokeObjectURL(u), 1000);
   b.classList.add('ok'); b.innerHTML = `${ic('check')}${esc(REC_TEXT.exportDone)}`; $('#rec-sr').textContent = REC_TEXT.exportDone;
   clearTimeout(recExport.h); recExport.h = setTimeout(() => { b.classList.remove('ok'); b.textContent = REC_TEXT.export; $('#rec-sr').textContent = ''; }, 1500);
 }
 recEl.addEventListener('cancel', e => { e.preventDefault(); closeRec(); });    // Esc도 닫힘 움직임을 거친다
-recEl.addEventListener('close', () => { clearTimeout(closeRec.h); recEl.classList.remove('closing'); if (recOpener && recOpener.isConnected) recOpener.focus(); recOpener = null; });
-recEl.addEventListener('pointerdown', e => { recDown = e.target; });
-recEl.addEventListener('click', e => { if (e.target === recEl && recDown === recEl) closeRec(); });    // 바깥(배경)에서 눌러 바깥에서 뗄 때만 닫는다
+recEl.addEventListener('close', () => { [closeRec.h, recMsg.h, recExport.h].forEach(clearTimeout); recEl.classList.remove('closing');
+  if (recOpener && recOpener.isConnected) recOpener.focus(); else ($('[data-rec="open"]') || $('#main')).focus({preventScroll: true});    // 다시 그려 아이콘이 바뀌었거나 다른 화면으로 갔을 때 초점을 잃지 않게
+  recOpener = null; });
+const recOut = e => { const r = recEl.getBoundingClientRect(); return e.clientX < r.left || e.clientX >= r.right || e.clientY < r.top || e.clientY >= r.bottom; };
+recEl.addEventListener('pointerdown', e => { recDown = e.target === recEl && recOut(e); });
+recEl.addEventListener('click', e => { if (recDown && e.target === recEl && recOut(e)) closeRec(); recDown = false; });    // 바깥(배경)에서 눌러 바깥에서 뗄 때만 닫는다(테두리·스크롤 막대는 창 안)
 recEl.addEventListener('animationend', e => { if (e.animationName === 'rec-shake') e.target.classList.remove('shake'); });
 document.addEventListener('animationend', e => { if (e.animationName === 'rec-bump') e.target.classList.remove('bump'); });
 addEventListener('storage', e => {    // 다른 탭에서 바꾼 핀·외움을 이 탭에도 맞춘다(오래된 기록으로 덮어쓰거나 내보내지 않게)
@@ -9618,7 +9625,8 @@ addEventListener('storage', e => {    // 다른 탭에서 바꾼 핀·외움을 
   keys.forEach(([k, set]) => { const n = store.get(k); set.clear(); n.forEach(x => set.add(x)); });
   document.querySelectorAll('[data-pin]').forEach(b => b.setAttribute('aria-pressed', pins.has(b.dataset.pin)));
   document.querySelectorAll('[data-learn]').forEach(b => { const on = learned.has(b.dataset.learn); b.setAttribute('aria-pressed', on); b.closest('.plate')?.classList.toggle('learned', on); });
-  if (location.hash === '#/pins' && !recEl.open) route(); else renderNavKeep();
+  if (hashParts()[0] === 'pins') { const y = scrollY; $('#view').innerHTML = viewPins(); observe(); scrollTo(0, y); }    // 목록만 다시 그려 스크롤·목차를 그대로 둔다(창이 열려 있으면 닫힐 때 초점은 새 아이콘으로)
+  renderNavKeep();
 });
 
 document.addEventListener('click', e => {
@@ -9634,7 +9642,7 @@ document.addEventListener('click', e => {
   else if (b.dataset.q) { keyState.q = keyState.q === +b.dataset.q ? null : +b.dataset.q; renderKey(); }
   else if (b.classList.contains('menu-btn')) $('#nav').classList.toggle('open');
 });
-function renderNavKeep(){ const h = decodeURIComponent(location.hash.slice(2)).split('/'); const t = h[0]==='t' && byId.get(h[1]);
+function renderNavKeep(){ const h = hashParts(); const t = h[0]==='t' && byId.get(h[1]);
   renderNav(h[0]==='c' ? {c:h[1], s:h[2] || (catById.get(h[1])||{secs:[{}]}).secs[0].id} : t ? {c:t.c, s:t.s} : h[0]==='pins' ? {pins:1} : {}); }
 function renderKey(){ const q = $('#q') ? $('#q').value : ''; $('#keyband').innerHTML = keyBand(); $('#q').value = q; }
 document.addEventListener('input', e => {
