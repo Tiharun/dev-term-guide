@@ -9461,13 +9461,20 @@ function viewList(title, lead, list, emptyMsg){
 const norm = s => String(s || '').toLowerCase().replace(/\s+/g, '');
 function search(q){
   const n = norm(q); if (!n) return [];
-  const symHits = new Set(SYMPTOMS.filter(s => norm(s.q).includes(n)).flatMap(s => s.t.map(x => find(x)).filter(Boolean)));
-  const score = t => { const en = norm(t.en), ko = norm(t.ko);
-    if (en === n || ko.split('·').some(k => k === n)) return 0;
-    if (en.startsWith(n) || ko.includes(n)) return 1;
-    if (symHits.has(t)) return 2;
-    if (norm(t.j).includes(n) || norm((t.sy||[]).join()).includes(n)) return 3;
-    if (norm(t.d).includes(n) || norm(t.x).includes(n) || norm([].concat(t.p||[]).join()).includes(n)) return 4; return 9; };
+  const toks = String(q).trim().split(/\s+/).map(norm).filter(Boolean);
+  const symOf = s => new Set(SYMPTOMS.filter(x => norm(x.q).includes(s)).flatMap(x => x.t.map(y => find(y)).filter(Boolean)));
+  const sets = [n, ...toks].map(symOf);    // 증상 카드 묶음은 전체·단어마다 한 번만 만든다
+  // 단계: 0 정확 · 1 앞 일치/한글 포함 · 2 영문 포함 · 3 증상 · 4 은어·동의어 · 5 정의·설명·예문 · 9 없음
+  const tier = (f, s, sym) => {
+    if (f.en === s || f.ko.split('·').some(k => k === s)) return 0;
+    if (f.en.startsWith(s) || f.ko.includes(s)) return 1;
+    if (f.en.includes(s)) return 2;
+    if (sym.has(f.t)) return 3;
+    if (f.j.includes(s)) return 4;
+    if (f.txt.includes(s)) return 5; return 9; };
+  const score = t => { const f = {t, en: norm(t.en), ko: norm(t.ko), j: norm(t.j) + '\n' + norm((t.sy||[]).join()), txt: norm(t.d) + '\n' + norm(t.x) + '\n' + norm([].concat(t.p||[]).join())};
+    const whole = tier(f, n, sets[0]), words = toks.length > 1 ? Math.max(...toks.map((w, i) => Math.max(1, tier(f, w, sets[i + 1])))) : 9;
+    return Math.min(whole, words); };    // 9면 결과에서 뺀다
   return TERMS.map(t => [score(t), t]).filter(([s]) => s < 9).sort((a, b) => a[0] - b[0]).map(([, t]) => t).slice(0, 60);
 }
 function showSearch(q){
