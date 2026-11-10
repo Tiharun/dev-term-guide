@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>개발 용어 설정집</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d2b4f'/%3E%3Crect x='7' y='8' width='13' height='3' rx='1.5' fill='%23fff'/%3E%3Crect x='7' y='14.5' width='18' height='3' rx='1.5' fill='%23fff' opacity='.55'/%3E%3Crect x='7' y='21' width='9' height='3' rx='1.5' fill='%23fff' opacity='.55'/%3E%3Ccircle cx='23.5' cy='22.5' r='3.5' fill='%23e0662b'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB+UlEQVR4nMyXPSwEQRiG39ndU4gcIghxFFwIl5CotKIhOIWEhkpC6FVKlVZI/BSoCAUhNEKpIhL/QeE/iEQUCuuM/TDiLruT27u9W091M98m7zvzzeTm1fCH/PLGQo0pfZyxBnCUGlMeOIMOhhPG+eo7/xi5PVy5FAUmfhRUBLuMwaiDopZmONB7fbA0SQP1j/iEGCcY1dBq9uaU3bw8nuww2naVqWdI/Moj0UM8VKJQz10QJzykrXwdOJcgbe3ntLvkAKUa3Nl+gUeTVQcHutHZXo9omZldw8DgGOzAfBVBblW83F+EXQoDLba+V2RFWpEd7H5PSHcgGShwGdcNSG9BXm4W/MU+xMPp+RXu7p8Qk4HWYC3SvWmIh8qAH8Pj85b1/92ChaUNR1oQswHqnax/TqAhATTlvqAt/xlFqW+4eE3B3G0Glu+9SIoBEu8vefgdkwkxNjMhNVBfV4PqqjLL+vbuMdbWt8LmaOVm0LyZAektkIlb1WnFZljNSw3QCu3WqedmWM07/mcUeQYEQ2c5lmdAh4OvIiES5S3QmS8Q3DPeZgG4AcO+QnEJLkHaCmU1fLch2eikrVBQpKyGJEOapP2VBSmjUVYzMhs9gROdDymc9oSFU2EiLds/rTJmRGmWbkxlwjkzFM+PGPhUiH903Bwub4rCJwAAAP//MFr5bAAAAAZJREFUAwD4C7tx2daMHgAAAABJRU5ErkJggg==">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
 <style>
 /* FONT:START */
 /* Hahmlet (SIL OFL 1.1, github.com/hyper-type/hahmlet) — 이 파일에 쓰인 글자만 남긴 서브셋 */
@@ -9474,7 +9477,7 @@ function search(q){
     if (f.j.includes(s)) return 4;
     if (f.txt.includes(s)) return 5; return 9; };
   const score = t => { let f = searchCache.get(t);
-    if (!f) searchCache.set(t, f = {t, en: norm(t.en), ko: norm(t.ko), j: norm(t.j) + '\n' + norm((t.sy||[]).join()), txt: norm(t.d) + '\n' + norm(t.x) + '\n' + norm([].concat(t.p||[]).join())});
+    if (!f) searchCache.set(t, f = {t, en: norm(t.en), ko: norm(t.ko), j: [t.j, ...(t.sy||[])].map(norm).join('\n'), txt: [t.d, t.x, ...[].concat(t.p||[])].map(norm).join('\n')});    // 항목 경계를 넘는 일치 막기
     const whole = tier(f, n, sets[0]); let words = multi ? 1 : 9;
     for (let i = 0; multi && i < toks.length && words < 9; i++) words = Math.max(words, tier(f, toks[i], sets[i + 1]));    // 한 단어라도 9면 멈춘다
     return Math.min(whole, words); };    // 9면 결과에서 뺀다
@@ -9488,8 +9491,10 @@ function showSearch(q){
 }
 function observe(){ document.querySelectorAll('#view .fig').forEach(f => io.observe(f)); }
 
+let qt;    // 검색 입력 지연 타이머
 function route(){
-  const h = decodeURIComponent(location.hash.slice(2)).split('/');
+  clearTimeout(qt);    // 입력 직후 다른 화면으로 가면 남은 검색 타이머가 그 이동을 덮지 않게 한다
+  const h = location.hash.slice(2).split('/').map(s => { try { return decodeURIComponent(s); } catch { return s; } });    // 나눈 뒤 풀어야 검색어 속 '/'가 살아남는다
   if (h[0] === 't' && MOVED[h[1]]) { location.replace('#/t/' + MOVED[h[1]]); return; }
   let cur = {}, html = '';
   if (h[0] === 'c' && catById.has(h[1])) {
@@ -9501,6 +9506,7 @@ function route(){
   } else if (h[0] === 's' && h[1]) {
     renderNav({}); $('#q').value = h[1]; showSearch(h[1]); return;
   } else html = viewHome();
+  $('#q').value = '';    // 검색 결과가 아닌 화면에는 지난 검색어를 남기지 않는다(뒤로 가기로 검색 결과에 오면 주소에서 다시 채운다)
   renderNav(cur);
   $('#view').innerHTML = html; observe();
   closeNav();
@@ -9531,11 +9537,10 @@ document.addEventListener('click', e => {
 function renderNavKeep(){ const h = decodeURIComponent(location.hash.slice(2)).split('/'); const t = h[0]==='t' && byId.get(h[1]);
   renderNav(h[0]==='c' ? {c:h[1], s:h[2] || (catById.get(h[1])||{secs:[{}]}).secs[0].id} : t ? {c:t.c, s:t.s} : h[0]==='pins' ? {pins:1} : {}); }
 function renderKey(){ const q = $('#q') ? $('#q').value : ''; $('#keyband').innerHTML = keyBand(); $('#q').value = q; }
-let qt;
 document.addEventListener('input', e => {
   if (e.target.id !== 'q') return; clearTimeout(qt);
   qt = setTimeout(() => { const q = e.target.value.trim();
-    if (q) { history.replaceState(null, '', '#/s/' + encodeURIComponent(q)); showSearch(q); } else { history.replaceState(null, '', '#/'); route(); } }, 180);
+    if (q) { history[location.hash.startsWith('#/s/') ? 'replaceState' : 'pushState'](null, '', '#/s/' + encodeURIComponent(q)); showSearch(q); } else if (!e.target.value) { history.replaceState(null, '', '#/'); route(); } }, 180);    // 처음 입력만 기록을 쌓아 뒤로 가기로 원래 화면에 돌아간다. 공백만 있으면 화면을 그대로 둔다
 });
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); }
