@@ -4458,6 +4458,17 @@ const recFile = (pins, learned, now) => {    // 파일 이름 날짜는 UTC가 �
   const obj = {app: SITE.storeKey, version: REC_VER, exportedAt: now.toISOString(), pins: [...pins], learned: [...learned]};
   return {name: `${SITE.storeKey}-기록-${d}.json`, text: JSON.stringify(obj, null, 2)};
 };
+const readRec = text => {    // 설계서 §3 순서: JSON → app → version → 두 목록이 배열 → id 정리(문자열만, 옛 id→새 id, 중복 제거, 없는 카드 빼기)
+  let o; try { o = JSON.parse(text); } catch(e){ return {ok: false}; }
+  if (!o || typeof o !== 'object' || o.app !== SITE.storeKey || o.version !== REC_VER || !Array.isArray(o.pins) || !Array.isArray(o.learned)) return {ok: false};
+  let dropped = 0;
+  const ids = a => [...new Set(a.filter(x => typeof x === 'string').map(x => MOVED[x] || x))].filter(x => byId.has(x) || (dropped++, false));
+  return {ok: true, pins: ids(o.pins), learned: ids(o.learned), dropped};
+};
+const applyRec = (set, ids, mode) => {    // 합치기는 새로 더한 수, 바꾸기는 바꾼 뒤 크기
+  if (mode === 'replace') { set.clear(); ids.forEach(x => set.add(x)); return set.size; }
+  const n = set.size; ids.forEach(x => set.add(x)); return set.size - n;
+};
 const pins = store.get('pins'), learned = store.get('learned');
 const migrateIds = (set, map) => { let ch = false; [...set].forEach(id => { if (map[id]) { set.delete(id); set.add(map[id]); ch = true; } }); return ch; };
 [['pins', pins], ['learned', learned]].forEach(([k, set]) => { if (migrateIds(set, MOVED)) store.set(k, set); });
