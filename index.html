@@ -9704,7 +9704,7 @@ function recShake(){    // 글이 아니라 창 자체를 좌우로 흔든다(�
 function bumpPins(){ const a = $('.navlinks a[href="#/pins"]'); if (!a || motionOff()) return; a.classList.remove('bump'); void a.offsetWidth; a.classList.add('bump'); }
 function recExport(b){
   if (b.classList.contains('ok')) return;    // "저장했습니다" 동안 다시 눌러도 같은 파일을 또 받지 않는다
-  if (!pins.size && !learned.size) return recMsg(REC_TEXT.exportEmpty);
+  if (!pins.size && !learned.size) { recShake(); return recMsg(REC_TEXT.exportEmpty); }    // 내보낼 기록이 없으면 불러오기 실패처럼 창을 흔든다(2026-11-10 사용자 요청)
   const f = recFile(pins, learned, new Date()), u = URL.createObjectURL(new Blob([f.text], {type: 'application/json'}));
   const a = Object.assign(document.createElement('a'), {href: u, download: f.name}); recEl.append(a); a.click(); a.remove();    // 창이 열려 있는 동안 창 밖은 inert라 링크를 창 안에 둔다
   setTimeout(() => URL.revokeObjectURL(u), 1000);
