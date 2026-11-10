@@ -4397,7 +4397,28 @@ const find = (name, c) => (c && byId.get(c + '-' + slug(String(name)))) || byEn.
 /* ---------- store ---------- */
 const store = {
   get(k){ try { return new Set(JSON.parse(localStorage.getItem(SITE.storeKey + '.' + k)) || []); } catch(e){ return new Set(); } },
-  set(k, v){ try { localStorage.setItem(SITE.storeKey + '.' + k, JSON.stringify([...v])); } catch(e){} }
+  set(k, v){ try { localStorage.setItem(SITE.storeKey + '.' + k, JSON.stringify([...v])); return true; } catch(e){ return false; } }    // 저장이 막힌 브라우저면 false
+};
+/* 기록 옮기기: 창 안 문구는 합니다체(설계서 §5 원본 그대로) */
+const REC_MAX = 1048576, REC_VER = 1;
+const REC_TEXT = {
+  iconLabel: 'Pin·외움 불러오기/내보내기', title: '기록 옮기기',
+  note1: '기록은 이 브라우저에만 저장됩니다.', note2: '다른 PC나 새 브라우저에서는 내보낸 파일을 불러오세요.', note3: '브라우저 기록을 지우면 핀과 외움도 사라집니다.',
+  export: '내보내기', import: '불러오기', close: '닫기',
+  exportEmpty: '저장할 Pin이나 외움이 없습니다.', exportDone: '저장했습니다',
+  tooBig: '1MB가 넘는 파일은 불러올 수 없습니다.', badFile: '이 사전에서 내보낸 기록 파일이 아닙니다.',
+  confirmHead: (p, l) => `파일에 핀 ${p}개, 외움 ${l}개가 있습니다.`, confirmDropped: d => `지금 사전에 없는 카드 ${d}개는 빼고 불러옵니다.`, confirmEmpty: '불러올 기록이 없습니다.',
+  merge: '합치기', replace: '바꾸기', cancel: '취소',
+  replaceNote: (x, y) => `지금 기록 핀 ${x}개·외움 ${y}개가 지워집니다.`,
+  mergeDone: (a, b) => `핀 ${a}개·외움 ${b}개를 더했습니다.`, replaceDone: (p, l) => `핀 ${p}개·외움 ${l}개로 바꿨습니다.`, droppedTail: d => `없는 카드 ${d}개는 뺐습니다.`,
+  storeBlocked: '이 브라우저는 저장이 막혀 있어 새로고침하면 사라집니다.',
+  resetHead: '기록 지우기', resetPins: 'Pin 초기화', resetLearned: '외움 초기화',
+  resetAsk: (what, n) => `${what} ${n}개를 모두 지울까요? 되돌릴 수 없습니다.`, resetYes: '지우기', resetNo: '취소', resetDone: what => `${what}을 모두 지웠습니다.`
+};
+const recFile = (pins, learned, now) => {    // 파일 이름 날짜는 UTC가 아니라 로컬 날짜
+  const d = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
+  const obj = {app: SITE.storeKey, version: REC_VER, exportedAt: now.toISOString(), pins: [...pins], learned: [...learned]};
+  return {name: `${SITE.storeKey}-기록-${d}.json`, text: JSON.stringify(obj, null, 2)};
 };
 const pins = store.get('pins'), learned = store.get('learned');
 const migrateIds = (set, map) => { let ch = false; [...set].forEach(id => { if (map[id]) { set.delete(id); set.add(map[id]); ch = true; } }); return ch; };
@@ -9515,7 +9536,7 @@ function route(){
 }
 
 /* ---------- events ---------- */
-const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 1600); };
+const toast = (msg, ms = 1600) => { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), ms); };
 async function copy(text){
   try { await navigator.clipboard.writeText(text); }
   catch(e){ const a = document.createElement('textarea'); a.value = text; document.body.append(a); a.select(); document.execCommand('copy'); a.remove(); }
