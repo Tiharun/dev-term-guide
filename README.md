@@ -13,6 +13,6 @@
 
 ## 사용법
 
-[사이트](https://tiharun.github.io/dev-term-guide/)에서 바로 쓸 수 있어요. 기록은 브라우저에 저장되고, 다른 PC나 새 브라우저로는 핀 화면의 Pin·외움 목록으로 옮길 수 있어요.
+[사이트](https://tiharun.github.io/dev-term-guide/)에서 바로 쓸 수 있어요. 기록을 다른 PC나 새 브라우저로 옮기려면 핀 화면 제목 오른쪽의 ⇅ 버튼(Pin·외움 목록)에서 내보내고 불러오면 돼요.
 
-[`index.html`](index.html)을 내려받아 브라우저로 열면 돼요. 설치할 것이 없고 인터넷 없이도 동작해요.
+인터넷 없이 쓰려면 저장소 첫 화면의 **Code → Download ZIP**으로 받아 압축을 푼 뒤 `index.html`을 브라우저로 열면 돼요. 설치할 것이 없어요.
