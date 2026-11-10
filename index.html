@@ -1723,6 +1723,43 @@ a.tag:hover{background:var(--ink);color:#fff}
   .leaders line,.lab,.leaders circle,.stamp,.nav{transition:none}
   .stage [class*="mk-"]{transition:none!important}
 }
+/* 기록 옮기기 창(설계서 §6) */
+.title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:34px}
+.title-row .act{flex:none}
+.rec{width:min(440px, 100% - 32px);max-width:none;margin:auto;max-height:calc(100% - 32px);padding:0;border:1px solid var(--rule);border-radius:var(--r);background:var(--plate);color:var(--ink);box-shadow:var(--shadow);overflow:auto}
+.rec-box{padding:18px 20px 16px}
+.rec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.rec-head h2{font-family:var(--serif);font-size:21px;font-weight:700;letter-spacing:-.02em;margin:0}
+.rec-x{min-height:36px;padding:0 10px;border:1px solid transparent;border-radius:8px;font-size:14px;color:var(--ink)}
+.rec-x:hover{border-color:var(--rule)}
+.rec-notes{margin:0 0 16px;padding-left:18px;font-size:14.5px;line-height:1.6}
+.rec-notes li+li{margin-top:4px}
+.rec-acts{display:flex;flex-wrap:wrap;gap:8px}
+.rec-btn{flex:1 1 120px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 14px;border:1px solid var(--ink);border-radius:8px;background:var(--plate);color:var(--ink);font-size:15px;font-weight:700}
+.rec-btn svg.i{width:18px;height:18px}
+.rec-btn.ok{background:var(--ink);color:#fff}
+.rec-msg{min-height:1.5em;margin:12px 0 0;font-size:13.5px;color:var(--mark-text)}
+.rec button{transition:scale .1s var(--ease)}
+.rec button:active{scale:.97}
+.rec[open]{animation:rec-in .2s var(--ease)}
+.rec.closing{animation:rec-out .15s var(--ease) forwards}
+.rec::backdrop{background:rgba(29,43,79,.4);animation:rec-fade-in .2s var(--ease)}    /* --ink 값. 옛 브라우저의 ::backdrop은 변수를 못 읽는다 */
+.rec.closing::backdrop{animation:rec-fade-out .15s forwards}
+.rec-box.shake{animation:rec-shake .3s var(--ease)}
+.navlinks a.bump{animation:rec-bump .4s var(--ease)}
+@keyframes rec-in{from{opacity:0;scale:.96}}
+@keyframes rec-out{to{opacity:0;scale:.96}}
+@keyframes rec-fade-in{from{opacity:0}}
+@keyframes rec-fade-out{to{opacity:0}}
+@keyframes rec-shake{0%,100%{translate:0}20%{translate:-6px}40%{translate:6px}60%{translate:-4px}80%{translate:4px}}
+@keyframes rec-bump{50%{scale:1.12}}
+@media (prefers-reduced-motion:reduce){
+  .rec[open]{animation-name:rec-fade-in}
+  .rec.closing{animation-name:rec-fade-out}
+  .rec-box.shake,.navlinks a.bump{animation:none}
+  .rec button{transition:none}
+  .rec button:active{scale:none}
+}
 </style>
 </head>
 <body>
@@ -1731,6 +1768,7 @@ a.tag:hover{background:var(--ink);color:#fff}
   <main class="main" id="main" tabindex="-1"></main>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="rec" class="rec" aria-labelledby="rec-title"><div class="rec-box"><div class="rec-head"><h2 id="rec-title"></h2><button type="button" class="rec-x" data-rec="close"></button></div><div id="rec-body"></div><p id="rec-msg" class="rec-msg" role="status" aria-live="polite"></p><p id="rec-sr" class="sr" aria-live="polite"></p><input type="file" id="rec-file" accept=".json,application/json" hidden></div></dialog>
 
 <!-- 사이트 설정: 이름·문구는 여기서만 바꾸면 된다 -->
 <script>
@@ -4375,7 +4413,7 @@ const ICON = {
   copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/>',
   play:'<path d="M7 5l12 7-12 7z"/>', pause:'<path d="M8 5v14M16 5v14"/>', replay:'<path d="M4 12a8 8 0 1 0 3-6.3"/><path d="M4 4v5h5"/>',
   home:'<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>', key:'<path d="M4 6h16M4 12h10M4 18h6"/><path d="M17 15l3 3-3 3"/>',
-  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>', ext:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/>'
+  menu:'<path d="M4 7h16M4 12h16M4 17h16"/>', swap:'<path d="M8 20V4M4 8l4-4 4 4"/><path d="M16 4v16M12 16l4 4 4-4"/>', check:'<path d="M5 12l5 5L20 7"/>', ext:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v6H4V6h6"/>'
 };
 const ic = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${ICON[n]}</svg>`;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4397,7 +4435,28 @@ const find = (name, c) => (c && byId.get(c + '-' + slug(String(name)))) || byEn.
 /* ---------- store ---------- */
 const store = {
   get(k){ try { return new Set(JSON.parse(localStorage.getItem(SITE.storeKey + '.' + k)) || []); } catch(e){ return new Set(); } },
-  set(k, v){ try { localStorage.setItem(SITE.storeKey + '.' + k, JSON.stringify([...v])); } catch(e){} }
+  set(k, v){ try { localStorage.setItem(SITE.storeKey + '.' + k, JSON.stringify([...v])); return true; } catch(e){ return false; } }    // 저장이 막힌 브라우저면 false
+};
+/* 기록 옮기기: 창 안 문구는 합니다체(설계서 §5 원본 그대로) */
+const REC_MAX = 1048576, REC_VER = 1;
+const REC_TEXT = {
+  iconLabel: 'Pin·외움 불러오기/내보내기', title: '기록 옮기기',
+  note1: '기록은 이 브라우저에만 저장됩니다.', note2: '다른 PC나 새 브라우저에서는 내보낸 파일을 불러오세요.', note3: '브라우저 기록을 지우면 핀과 외움도 사라집니다.',
+  export: '내보내기', import: '불러오기', close: '닫기',
+  exportEmpty: '저장할 Pin이나 외움이 없습니다.', exportDone: '저장했습니다',
+  tooBig: '1MB가 넘는 파일은 불러올 수 없습니다.', badFile: '이 사전에서 내보낸 기록 파일이 아닙니다.',
+  confirmHead: (p, l) => `파일에 핀 ${p}개, 외움 ${l}개가 있습니다.`, confirmDropped: d => `지금 사전에 없는 카드 ${d}개는 빼고 불러옵니다.`, confirmEmpty: '불러올 기록이 없습니다.',
+  merge: '합치기', replace: '바꾸기', cancel: '취소',
+  replaceNote: (x, y) => `지금 기록 핀 ${x}개·외움 ${y}개가 지워집니다.`,
+  mergeDone: (a, b) => `핀 ${a}개·외움 ${b}개를 더했습니다.`, replaceDone: (p, l) => `핀 ${p}개·외움 ${l}개로 바꿨습니다.`, droppedTail: d => `없는 카드 ${d}개는 뺐습니다.`,
+  storeBlocked: '이 브라우저는 저장이 막혀 있어 새로고침하면 사라집니다.',
+  resetHead: '기록 지우기', resetPins: 'Pin 초기화', resetLearned: '외움 초기화',
+  resetAsk: (what, n) => `${what} ${n}개를 모두 지울까요? 되돌릴 수 없습니다.`, resetYes: '지우기', resetNo: '취소', resetDone: what => `${what}을 모두 지웠습니다.`
+};
+const recFile = (pins, learned, now) => {    // 파일 이름 날짜는 UTC가 아니라 로컬 날짜
+  const d = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
+  const obj = {app: SITE.storeKey, version: REC_VER, exportedAt: now.toISOString(), pins: [...pins], learned: [...learned]};
+  return {name: `${SITE.storeKey}-기록-${d}.json`, text: JSON.stringify(obj, null, 2)};
 };
 const pins = store.get('pins'), learned = store.get('learned');
 const migrateIds = (set, map) => { let ch = false; [...set].forEach(id => { if (map[id]) { set.delete(id); set.add(map[id]); ch = true; } }); return ch; };
@@ -9457,8 +9516,9 @@ function viewSection(c, s, t){
     <h2 class="sec-intro"><span class="sr">${esc(s.name)} — </span>${esc(s.desc)}</h2>
     <div class="plates">${s.terms.length ? s.terms.map(plate).join('') : '<div class="empty"><b>아직 용어가 없어요</b>곧 채워질 예정이에요.</div>'}</div>`;
 }
-function viewList(title, lead, list, emptyMsg){
-  return `<h1 class="title" style="margin-top:34px">${esc(title)}</h1><p class="lead">${lead}</p>
+function viewList(title, lead, list, emptyMsg, tool = ''){    // tool: 제목 줄 오른쪽 끝에 붙는 버튼
+  const h1 = `<h1 class="title"${tool ? '' : ' style="margin-top:34px"'}>${esc(title)}</h1>`;
+  return `${tool ? `<div class="title-row">${h1}${tool}</div>` : h1}<p class="lead">${lead}</p>
     <div class="plates">${list.length ? list.map(plate).join('') : `<div class="empty">${emptyMsg}</div>`}</div>`;
 }
 const norm = s => String(s || '').toLowerCase().replace(/\s+/g, '');
@@ -9492,9 +9552,11 @@ function showSearch(q){
 function observe(){ document.querySelectorAll('#view .fig').forEach(f => io.observe(f)); }
 
 let qt;    // 검색 입력 지연 타이머
+const viewPins = () => viewList('핀 꽂은 용어', '핀을 꽂아 둔 용어만 모아 봤어요. 자주 쓰는 말을 여기 두세요.', TERMS.filter(t => pins.has(t.id)), '<b>아직 핀이 없어요</b>도판 오른쪽 위 핀 버튼을 누르면 여기 모여요.', `<button class="act rec-open" data-rec="open" title="${REC_TEXT.iconLabel}" aria-label="${REC_TEXT.iconLabel}">${ic('swap')}</button>`);
+const hashParts = () => location.hash.slice(2).split('/').map(s => { try { return decodeURIComponent(s); } catch { return s; } });    // 나눈 뒤 풀어야 검색어 속 '/'가 살아남고, 잘못된 주소(%)에도 오류가 없다
 function route(){
   clearTimeout(qt);    // 입력 직후 다른 화면으로 가면 남은 검색 타이머가 그 이동을 덮지 않게 한다
-  const h = location.hash.slice(2).split('/').map(s => { try { return decodeURIComponent(s); } catch { return s; } });    // 나눈 뒤 풀어야 검색어 속 '/'가 살아남는다
+  const h = hashParts();
   if (h[0] === 't' && MOVED[h[1]]) { location.replace('#/t/' + MOVED[h[1]]); return; }
   let cur = {}, html = '';
   if (h[0] === 'c' && catById.has(h[1])) {
@@ -9502,7 +9564,7 @@ function route(){
   } else if (h[0] === 't' && byId.has(h[1])) {
     const t = byId.get(h[1]), c = catById.get(t.c); cur = {c: c.id, s: t.s, t: t.id}; html = viewSection(c, c.secs.find(x => x.id === t.s), t);
   } else if (h[0] === 'pins') {
-    cur = {pins: 1}; html = viewList('핀 꽂은 용어', '핀을 꽂아 둔 용어만 모아 봤어요. 자주 쓰는 말을 여기 두세요.', TERMS.filter(t => pins.has(t.id)), '<b>아직 핀이 없어요</b>도판 오른쪽 위 핀 버튼을 누르면 여기 모여요.');
+    cur = {pins: 1}; html = viewPins();
   } else if (h[0] === 's' && h[1]) {
     renderNav({}); $('#q').value = h[1]; showSearch(h[1]); return;
   } else html = viewHome();
@@ -9515,16 +9577,62 @@ function route(){
 }
 
 /* ---------- events ---------- */
-const toast = msg => { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 1600); };
+const toast = (msg, ms = 1600) => { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), ms); };
 async function copy(text){
   try { await navigator.clipboard.writeText(text); }
   catch(e){ const a = document.createElement('textarea'); a.value = text; document.body.append(a); a.select(); document.execCommand('copy'); a.remove(); }
   toast('예문을 복사했어요');
 }
 const closeNav = () => $('#nav').classList.remove('open');
+
+/* ---------- 기록 옮기기 창 ---------- */
+const recEl = $('#rec'), motionOff = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+let recOpener = null, recDown = false;
+function recHome(){
+  $('#rec-title').textContent = REC_TEXT.title; $('#rec-msg').textContent = ''; $('#rec-sr').textContent = '';
+  $('.rec-x', recEl).textContent = REC_TEXT.close;
+  $('#rec-body').innerHTML = `<ul class="rec-notes">${['note1', 'note2', 'note3'].map(k => `<li>${esc(REC_TEXT[k])}</li>`).join('')}</ul>
+    <div class="rec-acts"><button type="button" class="rec-btn" data-rec="export" autofocus>${esc(REC_TEXT.export)}</button></div>`;
+}
+function openRec(opener){ if (recEl.open) return; recOpener = opener; recEl.classList.remove('closing'); recHome(); recEl.showModal(); }
+function closeRec(){ if (!recEl.open || recEl.classList.contains('closing')) return; recEl.classList.add('closing');
+  clearTimeout(closeRec.h); closeRec.h = setTimeout(() => recEl.close(), 150); }    // 닫힘 움직임(줄임 모드는 투명도만)을 보인 뒤 닫는다
+function recMsg(text, ms = 2000){ const m = $('#rec-msg'); m.textContent = ''; clearTimeout(recMsg.h);    // 같은 안내도 화면 읽기 프로그램이 다시 읽도록 비운 뒤 다음 프레임에 쓴다
+  requestAnimationFrame(() => { if (!recEl.open) return; m.textContent = text; recMsg.h = setTimeout(() => { m.textContent = ''; }, ms); }); }
+function recShake(){ const b = $('.rec-box', recEl); b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); }
+function bumpPins(){ const a = $('.navlinks a[href="#/pins"]'); if (!a || motionOff()) return; a.classList.remove('bump'); void a.offsetWidth; a.classList.add('bump'); }
+function recExport(b){
+  if (b.classList.contains('ok')) return;    // "저장했습니다" 동안 다시 눌러도 같은 파일을 또 받지 않는다
+  if (!pins.size && !learned.size) return recMsg(REC_TEXT.exportEmpty);
+  const f = recFile(pins, learned, new Date()), u = URL.createObjectURL(new Blob([f.text], {type: 'application/json'}));
+  const a = Object.assign(document.createElement('a'), {href: u, download: f.name}); recEl.append(a); a.click(); a.remove();    // 창이 열려 있는 동안 창 밖은 inert라 링크를 창 안에 둔다
+  setTimeout(() => URL.revokeObjectURL(u), 1000);
+  b.classList.add('ok'); b.innerHTML = `${ic('check')}${esc(REC_TEXT.exportDone)}`; $('#rec-sr').textContent = REC_TEXT.exportDone;
+  clearTimeout(recExport.h); recExport.h = setTimeout(() => { b.classList.remove('ok'); b.textContent = REC_TEXT.export; $('#rec-sr').textContent = ''; }, 1500);
+}
+recEl.addEventListener('cancel', e => { e.preventDefault(); closeRec(); });    // Esc도 닫힘 움직임을 거친다
+recEl.addEventListener('close', () => { [closeRec.h, recMsg.h, recExport.h].forEach(clearTimeout); recEl.classList.remove('closing');
+  if (recOpener && recOpener.isConnected) recOpener.focus(); else ($('[data-rec="open"]') || $('#main')).focus({preventScroll: true});    // 다시 그려 아이콘이 바뀌었거나 다른 화면으로 갔을 때 초점을 잃지 않게
+  recOpener = null; });
+const recOut = e => { const r = recEl.getBoundingClientRect(); return e.clientX < r.left || e.clientX >= r.right || e.clientY < r.top || e.clientY >= r.bottom; };
+recEl.addEventListener('pointerdown', e => { recDown = e.target === recEl && recOut(e); });
+recEl.addEventListener('click', e => { if (recDown && e.target === recEl && recOut(e)) closeRec(); recDown = false; });    // 바깥(배경)에서 눌러 바깥에서 뗄 때만 닫는다(테두리·스크롤 막대는 창 안)
+recEl.addEventListener('animationend', e => { if (e.animationName === 'rec-shake') e.target.classList.remove('shake'); });
+document.addEventListener('animationend', e => { if (e.animationName === 'rec-bump') e.target.classList.remove('bump'); });
+addEventListener('storage', e => {    // 다른 탭에서 바꾼 핀·외움을 이 탭에도 맞춘다(오래된 기록으로 덮어쓰거나 내보내지 않게)
+  if (e.storageArea !== localStorage) return;
+  const keys = [['pins', pins], ['learned', learned]].filter(([k]) => e.key === null || e.key === SITE.storeKey + '.' + k); if (!keys.length) return;
+  keys.forEach(([k, set]) => { const n = store.get(k); set.clear(); n.forEach(x => set.add(x)); });
+  document.querySelectorAll('[data-pin]').forEach(b => b.setAttribute('aria-pressed', pins.has(b.dataset.pin)));
+  document.querySelectorAll('[data-learn]').forEach(b => { const on = learned.has(b.dataset.learn); b.setAttribute('aria-pressed', on); b.closest('.plate')?.classList.toggle('learned', on); });
+  if (hashParts()[0] === 'pins') { const y = scrollY; $('#view').innerHTML = viewPins(); observe(); scrollTo(0, y); }    // 목록만 다시 그려 스크롤·목차를 그대로 둔다(창이 열려 있으면 닫힐 때 초점은 새 아이콘으로)
+  renderNavKeep();
+});
+
 document.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.copy) copy(b.dataset.copy);
+  if (b.dataset.rec) { const r = b.dataset.rec; if (r === 'open') openRec(b); else if (r === 'close') closeRec(); else if (r === 'export') recExport(b); }
+  else if (b.dataset.copy) copy(b.dataset.copy);
   else if ('play' in b.dataset) playToggle(b);
   else if (b.dataset.pin) { const id = b.dataset.pin, on = !pins.has(id); on ? pins.add(id) : pins.delete(id); store.set('pins', pins);
     document.querySelectorAll(`[data-pin="${id}"]`).forEach(x => x.setAttribute('aria-pressed', on)); renderNavKeep(); toast(on ? '핀을 꽂았어요' : '핀을 뺐어요'); }
@@ -9534,7 +9642,7 @@ document.addEventListener('click', e => {
   else if (b.dataset.q) { keyState.q = keyState.q === +b.dataset.q ? null : +b.dataset.q; renderKey(); }
   else if (b.classList.contains('menu-btn')) $('#nav').classList.toggle('open');
 });
-function renderNavKeep(){ const h = decodeURIComponent(location.hash.slice(2)).split('/'); const t = h[0]==='t' && byId.get(h[1]);
+function renderNavKeep(){ const h = hashParts(); const t = h[0]==='t' && byId.get(h[1]);
   renderNav(h[0]==='c' ? {c:h[1], s:h[2] || (catById.get(h[1])||{secs:[{}]}).secs[0].id} : t ? {c:t.c, s:t.s} : h[0]==='pins' ? {pins:1} : {}); }
 function renderKey(){ const q = $('#q') ? $('#q').value : ''; $('#keyband').innerHTML = keyBand(); $('#q').value = q; }
 document.addEventListener('input', e => {
@@ -9550,6 +9658,7 @@ document.addEventListener('keydown', e => {
 $('#main').innerHTML = `<div class="inner"><button class="menu-btn" aria-label="목차 열기">${ic('menu')}목차</button><div id="keyband"></div><div id="view"></div></div>`;
 renderKey();
 addEventListener('hashchange', route);
+addEventListener('hashchange', closeRec);    // 주소가 바뀌면(뒤로 가기 등) 창을 닫는다
 route();
 })();
 </script>
