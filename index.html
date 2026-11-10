@@ -1739,8 +1739,17 @@ a.tag:hover{background:var(--ink);color:#fff}
 .rec-btn svg.i{width:18px;height:18px}
 .rec-btn.ok{background:var(--ink);color:#fff}
 .rec-msg{min-height:1.5em;margin:12px 0 0;font-size:13.5px;color:var(--mark-text)}
+.rec-row{animation:rec-up .3s var(--ease) both;animation-delay:calc(var(--i) * 60ms)}
+.rec-line{margin:0 0 8px;font-size:15px;line-height:1.55}
+.rec-line+.rec-acts{margin-top:16px}
+.rec-stack{flex-direction:column}
+.rec-stack .rec-btn{flex:none}
+.rec-warn{margin:-2px 0 6px;font-size:13.5px;line-height:1.5;color:var(--mark-text)}
+.rec-btn.danger{color:var(--mark-text);border-color:var(--mark-text)}
+.rec-btn.danger:active{background:var(--mark-bg)}
+.rec-btn:disabled{opacity:.45;cursor:not-allowed}
 .rec button{transition:scale .1s var(--ease)}
-.rec button:active{scale:.97}
+.rec button:active:not(:disabled){scale:.97}
 .rec[open]{animation:rec-in .2s var(--ease)}
 .rec.closing{animation:rec-out .15s var(--ease) forwards}
 .rec::backdrop{background:rgba(29,43,79,.4);animation:rec-fade-in .2s var(--ease)}    /* --ink 값. 옛 브라우저의 ::backdrop은 변수를 못 읽는다 */
@@ -1753,8 +1762,9 @@ a.tag:hover{background:var(--ink);color:#fff}
 @keyframes rec-fade-out{to{opacity:0}}
 @keyframes rec-shake{0%,100%{translate:0}20%{translate:-6px}40%{translate:6px}60%{translate:-4px}80%{translate:4px}}
 @keyframes rec-bump{50%{scale:1.12}}
+@keyframes rec-up{from{opacity:0;translate:0 6px}}
 @media (prefers-reduced-motion:reduce){
-  .rec[open]{animation-name:rec-fade-in}
+  .rec[open],.rec-row{animation-name:rec-fade-in}
   .rec.closing{animation-name:rec-fade-out}
   .rec-box.shake,.navlinks a.bump{animation:none}
   .rec button{transition:none}
@@ -9598,12 +9608,40 @@ const closeNav = () => $('#nav').classList.remove('open');
 
 /* ---------- 기록 옮기기 창 ---------- */
 const recEl = $('#rec'), motionOff = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-let recOpener = null, recDown = false;
+let recOpener = null, recDown = false, recPending = null, recGen = 0, recAfter = '';
 function recHome(){
-  $('#rec-title').textContent = REC_TEXT.title; $('#rec-msg').textContent = ''; $('#rec-sr').textContent = '';
+  recPending = null; $('#rec-title').textContent = REC_TEXT.title; $('#rec-msg').textContent = ''; $('#rec-sr').textContent = '';
   $('.rec-x', recEl).textContent = REC_TEXT.close;
   $('#rec-body').innerHTML = `<ul class="rec-notes">${['note1', 'note2', 'note3'].map(k => `<li>${esc(REC_TEXT[k])}</li>`).join('')}</ul>
-    <div class="rec-acts"><button type="button" class="rec-btn" data-rec="export" autofocus>${esc(REC_TEXT.export)}</button></div>`;
+    <div class="rec-acts"><button type="button" class="rec-btn" data-rec="export" autofocus>${esc(REC_TEXT.export)}</button><button type="button" class="rec-btn" data-rec="import">${esc(REC_TEXT.import)}</button></div>`;
+}
+function recConfirm(r){    // 설계서 §4.3 확인 단계. 줄은 --i 순번만큼 늦게 나타난다
+  recPending = r; $('#rec-msg').textContent = '';
+  const empty = !r.pins.length && !r.learned.length, lines = [REC_TEXT.confirmHead(r.pins.length, r.learned.length)];
+  if (r.dropped) lines.push(REC_TEXT.confirmDropped(r.dropped)); if (empty) lines.push(REC_TEXT.confirmEmpty);
+  $('#rec-body').innerHTML = lines.map((t, i) => `<p class="rec-row rec-line" style="--i:${i}">${esc(t)}</p>`).join('')
+    + `<div class="rec-row rec-acts rec-stack" style="--i:${lines.length}"><button type="button" class="rec-btn" data-rec="merge"${empty ? ' disabled' : ''}>${esc(REC_TEXT.merge)}</button><button type="button" class="rec-btn danger" data-rec="replace" aria-describedby="rec-rep-note">${esc(REC_TEXT.replace)}</button>`
+    + `<p class="rec-warn" id="rec-rep-note">${esc(REC_TEXT.replaceNote(pins.size, learned.size))}</p><button type="button" class="rec-btn" data-rec="cancel">${esc(REC_TEXT.cancel)}</button></div>`;    // 세로로 두어 어느 폭에서도 안내가 [바꾸기] 바로 밑에 붙는다
+  $(empty ? '[data-rec="cancel"]' : '[data-rec="merge"]', recEl).focus();
+  $('#rec-sr').textContent = lines.join(' ');    // 초점은 버튼으로 가므로 파일 내용은 따로 읽어 준다
+}
+async function recImport(input){
+  const f = input.files[0], g = recGen; input.value = '';    // 같은 파일을 다시 골라도 change가 일어나게
+  if (!f || !recEl.open) return;
+  if (f.size > REC_MAX) { recShake(); return recMsg(REC_TEXT.tooBig); }
+  let text = ''; try { text = await f.text(); } catch(e){}
+  if (g !== recGen || !recEl.open) return;    // 읽는 동안 창을 닫았으면 버린다
+  const r = readRec(text); if (!r.ok) { recShake(); return recMsg(REC_TEXT.badFile); }
+  recConfirm(r);
+}
+function recApply(mode){
+  const r = recPending; if (!r) return; recPending = null;    // 첫 클릭만 적용한다
+  recEl.querySelectorAll('#rec-body button').forEach(b => { b.disabled = true; });
+  const a = applyRec(pins, r.pins, mode), b = applyRec(learned, r.learned, mode);
+  const okP = store.set('pins', pins), okL = store.set('learned', learned);
+  recAfter = (mode === 'merge' ? REC_TEXT.mergeDone(a, b) : REC_TEXT.replaceDone(pins.size, learned.size))
+    + (r.dropped ? ' ' + REC_TEXT.droppedTail(r.dropped) : '') + (okP && okL ? '' : ' ' + REC_TEXT.storeBlocked);
+  route(); closeRec();    // 알림과 튀기기는 창이 닫힌 뒤(close 이벤트). 창이 열려 있는 동안 창 밖 알림은 inert라 읽히지 않는다
 }
 function openRec(opener){ if (recEl.open) return; recOpener = opener; recEl.classList.remove('closing'); recHome(); recEl.showModal(); }
 function closeRec(){ if (!recEl.open || recEl.classList.contains('closing')) return; recEl.classList.add('closing');
@@ -9622,7 +9660,9 @@ function recExport(b){
   clearTimeout(recExport.h); recExport.h = setTimeout(() => { b.classList.remove('ok'); b.textContent = REC_TEXT.export; $('#rec-sr').textContent = ''; }, 1500);
 }
 recEl.addEventListener('cancel', e => { e.preventDefault(); closeRec(); });    // Esc도 닫힘 움직임을 거친다
-recEl.addEventListener('close', () => { [closeRec.h, recMsg.h, recExport.h].forEach(clearTimeout); recEl.classList.remove('closing');
+$('#rec-file').addEventListener('change', e => recImport(e.target));
+recEl.addEventListener('close', () => { [closeRec.h, recMsg.h, recExport.h].forEach(clearTimeout); recEl.classList.remove('closing'); recGen++; recPending = null;
+  if (recAfter) { toast(recAfter, 3000); recAfter = ''; bumpPins(); }
   if (recOpener && recOpener.isConnected) recOpener.focus(); else ($('[data-rec="open"]') || $('#main')).focus({preventScroll: true});    // 다시 그려 아이콘이 바뀌었거나 다른 화면으로 갔을 때 초점을 잃지 않게
   recOpener = null; });
 const recOut = e => { const r = recEl.getBoundingClientRect(); return e.clientX < r.left || e.clientX >= r.right || e.clientY < r.top || e.clientY >= r.bottom; };
@@ -9638,11 +9678,13 @@ addEventListener('storage', e => {    // 다른 탭에서 바꾼 핀·외움을 
   document.querySelectorAll('[data-learn]').forEach(b => { const on = learned.has(b.dataset.learn); b.setAttribute('aria-pressed', on); b.closest('.plate')?.classList.toggle('learned', on); });
   if (hashParts()[0] === 'pins') { const y = scrollY; $('#view').innerHTML = viewPins(); observe(); scrollTo(0, y); }    // 목록만 다시 그려 스크롤·목차를 그대로 둔다(창이 열려 있으면 닫힐 때 초점은 새 아이콘으로)
   renderNavKeep();
+  const n = $('#rec-rep-note'); if (n) n.textContent = REC_TEXT.replaceNote(pins.size, learned.size);    // 확인 단계의 "지워집니다" 개수도 맞춘다
 });
 
 document.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.rec) { const r = b.dataset.rec; if (r === 'open') openRec(b); else if (r === 'close') closeRec(); else if (r === 'export') recExport(b); }
+  if (b.dataset.rec) { const r = b.dataset.rec; if (r === 'open') openRec(b); else if (r === 'close') closeRec(); else if (r === 'export') recExport(b);
+    else if (r === 'import') $('#rec-file').click(); else if (r === 'merge' || r === 'replace') recApply(r); else if (r === 'cancel') { recHome(); $('[data-rec="import"]', recEl).focus(); } }
   else if (b.dataset.copy) copy(b.dataset.copy);
   else if ('play' in b.dataset) playToggle(b);
   else if (b.dataset.pin) { const id = b.dataset.pin, on = !pins.has(id); on ? pins.add(id) : pins.delete(id); store.set('pins', pins);
