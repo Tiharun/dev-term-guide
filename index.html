@@ -9627,7 +9627,7 @@ function route(){
 const TOAST_IC = {ok: 'check', unpin: 'pin', fail: 'alert'};    // 성공 체크, 핀 빼기 빈 핀, 실패 느낌표
 const toastBody = (msg, {kind = 'ok', strong = ''} = {}) => {
   if (!TOAST_IC[kind]) throw new Error('toast: kind ' + kind);
-  const m = esc(msg).replace('{s}', () => `<b>${esc(strong)}</b>`).replace('{j}', () => objJosa(strong));    // 함수로 넣어 이름 속 $&·$1이 바꾸기 패턴으로 읽히지 않게
+  const m = esc(msg).replace(/\{([sj])\}/g, (_, k) => k === 's' ? `<b>${esc(strong)}</b>` : objJosa(strong));    // 한 번에 바꿔 이름 속 {j}·$&·$1이 다시 바뀌지 않게
   return `<span class="tst-ic">${ic(TOAST_IC[kind])}</span><span class="tst-m">${m}</span>`;
 };
 const toast = (msg, {kind = 'ok', strong = '', ms = 2000} = {}) => { const t = $('#toast');    // 모든 알림이 같이 쓰는 토스트 하나
