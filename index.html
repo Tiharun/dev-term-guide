@@ -133,7 +133,21 @@ h1.title{font-family:var(--serif);font-size:clamp(30px,3.4vw,42px);font-weight:7
 .desc{min-width:0;display:flex;flex-direction:column}
 .term-h{display:flex;align-items:flex-start;gap:10px}
 .term-en{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:-.02em;line-height:1.2;word-break:keep-all;overflow-wrap:anywhere}
-.term-ko{color:var(--muted);font-size:14.5px;margin:3px 0 12px}
+.term-ko{color:var(--muted);font-size:14.5px;margin:3px 0 12px;display:flex;flex-wrap:wrap;column-gap:12px}
+.cp{font:inherit;color:inherit;letter-spacing:inherit;text-align:inherit;background:none;border:0;padding:0 4px;margin:0 -4px;border-radius:6px;cursor:pointer;display:inline-block;max-width:calc(100% + 8px);position:relative;isolation:isolate;overflow:hidden;-webkit-user-select:text;user-select:text}    /* 이름 조각 복사 버튼. 글자는 끌어 선택할 수 있게 둔다(설계서 §5) */
+.cp svg.i{width:.85em;height:.85em;margin-left:.25em;vertical-align:-.05em;opacity:0;transition:opacity .15s}
+.cp svg.i:last-child{display:none}
+.cp.done svg.i:first-of-type{display:none}
+.cp.done svg.i:last-child{display:inline;opacity:1}
+.cp:hover{background:var(--fig)}
+.cp:hover svg.i{opacity:1}
+@media (pointer:coarse){.cp svg.i{opacity:.35}}
+.cp.done{animation:cp-press .2s var(--ease)}    /* 누르는 동안 크기를 바꾸면 Chrome에서 끌어 선택이 깨진다. 복사된 순간에 한 번 눌린다 */
+@keyframes cp-press{40%{transform:scale(.97)}}
+.cp::before{content:'';position:absolute;inset:0;z-index:-1;background:var(--mark-bg);transform:translateX(-101%)}
+.cp.done::before{animation:cp-sweep .5s var(--ease)}
+@keyframes cp-sweep{to{transform:translateX(101%)}}
+@media (prefers-reduced-motion:reduce){.cp.done,.cp.done::before{animation:none}}
 .acts{margin-left:auto;display:flex;gap:4px;flex:none}
 .act{width:36px;height:36px;display:grid;place-items:center;border-radius:8px;color:var(--soft);border:1px solid transparent}
 .act:hover{color:var(--ink);border-color:var(--rule)}
@@ -9770,12 +9784,20 @@ addEventListener('storage', e => {    // 다른 탭에서 바꾼 핀·외움을 
   const n = $('#rec-rep-note'); if (n) n.textContent = REC_TEXT.replaceNote(pins.size, learned.size);    // 확인 단계의 "지워집니다" 개수도 맞춘다
 });
 
+const cpDone = new WeakMap();
+async function copyName(b){ const s = getSelection(); if (s && !s.isCollapsed && s.containsNode(b, true)) return;    // 글자를 끌어 선택하던 중이면 복사하지 않는다(설계서 §1-5)
+  const name = b.dataset.cp;
+  if (!(await copyText(name))) { toast(COPY_TEXT.fail, {kind: 'fail'}); return; }
+  clearTimeout(cpDone.get(b)); b.classList.remove('done'); void b.offsetWidth; b.classList.add('done');
+  cpDone.set(b, setTimeout(() => b.classList.remove('done'), 1200));
+  toast(COPY_TEXT.copied, {strong: name}); }
 document.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   if (b.dataset.rec) { const r = b.dataset.rec; if (!r.startsWith('reset-')) recUnask();    // 묻는 중 다른 창 버튼을 누르면 물음은 접는다
     if (r === 'reset-pins' || r === 'reset-learned') recAsk(r.slice(6)); else if (r === 'reset-yes') recReset(); else if (r === 'reset-no') recUnask(); else if (r === 'open') openRec(b); else if (r === 'close') closeRec(); else if (r === 'export') recExport(b);
     else if (r === 'import') $('#rec-file').click(); else if (r === 'merge' || r === 'replace') recApply(r); else if (r === 'cancel') { recHome(); $('[data-rec="import"]', recEl).focus(); } }
   else if (b.dataset.copy) copy(b.dataset.copy);
+  else if ('cp' in b.dataset) copyName(b);
   else if ('play' in b.dataset) playToggle(b);
   else if (b.dataset.pin) { const id = b.dataset.pin, on = !pins.has(id); on ? pins.add(id) : pins.delete(id); store.set('pins', pins);
     document.querySelectorAll(`[data-pin="${id}"]`).forEach(x => x.setAttribute('aria-pressed', on)); renderNavKeep(); toast(on ? COPY_TEXT.pinOn : COPY_TEXT.pinOff, {kind: on ? 'ok' : 'unpin'}); }
