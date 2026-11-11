@@ -99,9 +99,10 @@ svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-widt
 .crumb span{color:var(--soft)}
 h1.title{font-family:var(--serif);font-size:clamp(30px,3.4vw,42px);font-weight:700;letter-spacing:-.025em;line-height:1.2;text-wrap:balance}
 .lead{color:var(--muted);font-size:16px;margin-top:8px;max-width:68ch}
-.secs{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;gap:2px;margin:24px 0 8px;border-bottom:1px solid var(--rule)}
+.secs{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;gap:2px;margin:24px 0 8px;padding-top:4px;border-bottom:1px solid var(--rule)}    /* overflow-x만 주면 세로도 auto가 되어 탭의 -1px 여백만큼 세로로 굴러 wheel 입력을 먹는다(§3.8) */
+.sec:focus-visible{outline-offset:-2px}
 .sec{text-decoration:none;font-size:14.5px;color:var(--muted);padding:9px 10px 10px;white-space:nowrap;flex:none;border-radius:9px 9px 0 0;
-  border:1px solid transparent;border-bottom:0;margin-bottom:-1px;display:flex;gap:7px;align-items:baseline}
+  border:1px solid transparent;border-bottom:0;display:flex;gap:7px;align-items:baseline}
 .sec small{font-size:11.5px;color:var(--soft);font-variant-numeric:tabular-nums}
 .sec:hover{color:var(--ink);background:var(--fig)}
 .sec[aria-current]{background:var(--plate);color:var(--ink);font-weight:800;border-color:var(--rule);
@@ -9635,12 +9636,20 @@ function route(){
   $('#q').value = '';    // 검색 결과가 아닌 화면에는 지난 검색어를 남기지 않는다(뒤로 가기로 검색 결과에 오면 주소에서 다시 채운다)
   renderNav(cur);
   $('#view').innerHTML = html; observe();
+  $('#view .secs')?.addEventListener('wheel', secWheel, {passive: false});
   closeNav();
   if (cur.t) { const el = document.getElementById(cur.t); if (el) { el.scrollIntoView({block: 'start'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 2200); } }
   else window.scrollTo(0, 0);
 }
 
 /* ---------- events ---------- */
+const WHEEL_LINE = 40;    // deltaMode 1(줄 단위) 한 줄의 px
+const wheelStep = ({deltaX, deltaY, deltaMode, shiftKey, ctrlKey}, left, max, width) => {    // 하위항목 줄에서 세로 wheel을 가로로 옮길 px. 0이면 브라우저 기본(페이지 스크롤 등)
+  if (ctrlKey || shiftKey || Math.abs(deltaY) <= Math.abs(deltaX) || max <= 0) return 0;
+  if ((deltaY < 0 && left <= 0) || (deltaY > 0 && left >= max - 1)) return 0;
+  return deltaY * (deltaMode === 1 ? WHEEL_LINE : deltaMode === 2 ? width : 1); };
+function secWheel(e){ const bar = e.currentTarget, d = wheelStep(e, bar.scrollLeft, bar.scrollWidth - bar.clientWidth, bar.clientWidth);
+  if (d && e.cancelable) { e.preventDefault(); bar.scrollLeft += d; } }
 const TOAST_IC = {ok: 'check', unpin: 'pin', fail: 'alert'};    // 성공 체크, 핀 빼기 빈 핀, 실패 느낌표
 const toastBody = (msg, {kind = 'ok', strong = ''} = {}) => {
   if (!TOAST_IC[kind]) throw new Error('toast: kind ' + kind);
