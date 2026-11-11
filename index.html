@@ -9619,6 +9619,12 @@ function observe(){ document.querySelectorAll('#view .fig').forEach(f => io.obse
 let qt;    // 검색 입력 지연 타이머
 const viewPins = () => viewList('핀 꽂은 용어', '핀을 꽂아 둔 용어만 모아 봤어요. 자주 쓰는 말을 여기 두세요.', TERMS.filter(t => pins.has(t.id)), '<b>아직 핀이 없어요</b>도판 오른쪽 위 핀 버튼을 누르면 여기 모여요.', `<button class="act rec-open" data-rec="open" title="${REC_TEXT.iconLabel}" aria-label="${REC_TEXT.iconLabel}">${ic('swap')}</button>`);
 const hashParts = () => location.hash.slice(2).split('/').map(s => { try { return decodeURIComponent(s); } catch { return s; } });    // 나눈 뒤 풀어야 검색어 속 '/'가 살아남고, 잘못된 주소(%)에도 오류가 없다
+const SEC_PAD = 16, SEC_EDGE = 1;    // 고른 하위항목을 줄 안으로 밀 때 여유 px · 이만큼 못 미치게 넘친 것은 보이는 것으로 본다(소수 px 떨림 막기)
+const secReveal = (bar, item, pad = SEC_PAD) => {    // 고른 항목이 줄 안에 다 보이게 줄을 밀 px(음수는 왼쪽). 0이면 그대로
+  const cutL = bar.left - item.left >= SEC_EDGE, cutR = item.right - bar.right >= SEC_EDGE;
+  if (!cutL && !cutR) return 0;
+  return cutL || item.right - item.left > bar.right - bar.left ? item.left - bar.left - pad : item.right - bar.right + pad; };
+let lastCat = null;    // 바로 앞에 그린 화면의 카테고리. 같은 카테고리 안에서만 줄 가로 위치를 잇는다
 function route(){
   clearTimeout(qt);    // 입력 직후 다른 화면으로 가면 남은 검색 타이머가 그 이동을 덮지 않게 한다
   const h = hashParts();
@@ -9631,15 +9637,20 @@ function route(){
   } else if (h[0] === 'pins') {
     cur = {pins: 1}; html = viewPins();
   } else if (h[0] === 's' && h[1]) {
-    renderNav({}); $('#q').value = h[1]; showSearch(h[1]); return;
+    lastCat = null; renderNav({}); $('#q').value = h[1]; showSearch(h[1]); return;
   } else html = viewHome();
   $('#q').value = '';    // 검색 결과가 아닌 화면에는 지난 검색어를 남기지 않는다(뒤로 가기로 검색 결과에 오면 주소에서 다시 채운다)
   renderNav(cur);
+  const old = $('#view .secs'), keepX = old && cur.c && cur.c === lastCat ? old.scrollLeft : 0;    // 다시 그리기 전에 지금 줄 위치를 읽는다
   $('#view').innerHTML = html; observe();
-  $('#view .secs')?.addEventListener('wheel', secWheel, {passive: false});
+  const bar = $('#view .secs');
+  if (bar) { bar.addEventListener('wheel', secWheel, {passive: false}); bar.scrollLeft = keepX;
+    const on = bar.querySelector('[aria-current]'), d = on ? secReveal(bar.getBoundingClientRect(), on.getBoundingClientRect()) : 0;
+    if (d) bar.scrollBy({left: d, behavior: motionOff() ? 'instant' : 'smooth'}); }    // 줄만 민다(scrollIntoView는 페이지도 움직인다)
   closeNav();
   if (cur.t) { const el = document.getElementById(cur.t); if (el) { el.scrollIntoView({block: 'start'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 2200); } }
   else window.scrollTo(0, 0);
+  lastCat = cur.c || null;
 }
 
 /* ---------- events ---------- */
