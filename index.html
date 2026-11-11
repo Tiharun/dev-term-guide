@@ -178,9 +178,17 @@ a.tag:hover{background:var(--ink);color:#fff}
 .howto b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
 .empty{background:var(--plate);border:1px dashed var(--steel);border-radius:12px;padding:34px;text-align:center;color:var(--muted);margin-top:20px}
 .empty b{display:block;color:var(--ink);font-family:var(--serif);font-size:20px;margin-bottom:6px}
-.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;
-  font-size:14px;opacity:0;transition:opacity .25s,transform .4s var(--ease);pointer-events:none;z-index:50}
-.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:calc(100vw - 32px);
+  background:var(--ink);color:#fff;padding:10px 16px 10px 10px;border-radius:21px;font-size:14px;line-height:1.4;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;animation:tst-in .25s var(--ease)}    /* 나타날 때만 떠오르고, 사라질 때는 투명도만(위치가 튀지 않게) */
+@keyframes tst-in{from{opacity:0;transform:translate(-50%,8px)}}
+@keyframes tst-fade{from{opacity:0}}
+@media (prefers-reduced-motion:reduce){.toast.on{animation-name:tst-fade}}
+.tst-ic{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:rgb(255 255 255 / .16)}
+.tst-ic svg.i{width:14px;height:14px;stroke-width:2.4}
+.toast[data-kind=fail] .tst-ic{background:var(--mark)}
+.tst-m{word-break:keep-all;overflow-wrap:anywhere;text-wrap:pretty}    /* 한 줄이면 높이 42px라 21px 모서리가 알약형, 두 줄이면 둥근 사각형. 줄은 낱말 단위로 */
+.tst-m b{display:inline-block;max-width:min(18em,50vw);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
 
 /* ---------- generic visuals ---------- */
 .flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;width:100%}
@@ -9622,12 +9630,20 @@ const toastBody = (msg, {kind = 'ok', strong = ''} = {}) => {
   const m = esc(msg).replace('{s}', () => `<b>${esc(strong)}</b>`).replace('{j}', () => objJosa(strong));    // 함수로 넣어 이름 속 $&·$1이 바꾸기 패턴으로 읽히지 않게
   return `<span class="tst-ic">${ic(TOAST_IC[kind])}</span><span class="tst-m">${m}</span>`;
 };
-const toast =(msg, ms = 1600) => { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), ms); };
-async function copy(text){
-  try { await navigator.clipboard.writeText(text); }
-  catch(e){ const a = document.createElement('textarea'); a.value = text; document.body.append(a); a.select(); document.execCommand('copy'); a.remove(); }
-  toast('예문을 복사했어요');
+const toast = (msg, {kind = 'ok', strong = '', ms = 2000} = {}) => { const t = $('#toast');    // 모든 알림이 같이 쓰는 토스트 하나
+  t.innerHTML = toastBody(msg, {kind, strong}); t.dataset.kind = kind;
+  clearTimeout(toast.h); t.classList.remove('on'); void t.offsetWidth; t.classList.add('on');    // 다시 부르면 등장 움직임과 시간을 처음부터
+  toast.h = setTimeout(() => t.classList.remove('on'), ms); };
+async function copyText(text){    // 복사했으면 true. 보안 연결이 아니거나 막혀 writeText가 없거나 거절하면 textarea 방식, 그것도 막히면 false
+  try { await navigator.clipboard.writeText(text); return true; } catch(e){}
+  const was = document.activeElement, a = document.createElement('textarea'); let ok = false;
+  a.value = text; a.readOnly = true; a.style.cssText = 'position:fixed;top:0;left:0;opacity:0';    // 화면이 튀거나 휴대폰 자판이 뜨지 않게
+  document.body.append(a); a.select(); a.setSelectionRange(0, text.length);
+  try { ok = document.execCommand('copy') === true; } catch(e){}
+  a.remove(); was?.focus?.({preventScroll: true});
+  return ok;
 }
+async function copy(text){ const ok = await copyText(text); toast(ok ? COPY_TEXT.sayCopied : COPY_TEXT.fail, {kind: ok ? 'ok' : 'fail'}); }
 const closeNav = () => $('#nav').classList.remove('open');
 
 /* ---------- Pin·외움 목록 창 ---------- */
@@ -9730,7 +9746,7 @@ recEl.addEventListener('cancel', e => { if (e.target !== recEl) return; e.preven
 $('#rec-file').addEventListener('change', e => recImport(e.target));
 ['keydown', 'focusin'].forEach(t => recEl.addEventListener(t, e => { if (recAsk.k && e.target.closest('.rec-slot.asking')) recAskTimer(); }));
 recEl.addEventListener('close', () => { [closeRec.h, recMsg.h, recExport.h, recAsk.h].forEach(clearTimeout); cancelAnimationFrame(recCount.h); recShake.a?.cancel(); recAsk.k = null; recEl.classList.remove('closing'); recGen++; recPending = null;
-  if (recAfter) { toast(recAfter, 3000); recAfter = ''; bumpPins(); }
+  if (recAfter) { toast(recAfter, {kind: recAfter.includes(REC_TEXT.storeBlocked) ? 'fail' : 'ok', ms: 3000}); recAfter = ''; bumpPins(); }
   if (recOpener && recOpener.isConnected) recOpener.focus(); else ($('[data-rec="open"]') || $('#main')).focus({preventScroll: true});    // 다시 그려 아이콘이 바뀌었거나 다른 화면으로 갔을 때 초점을 잃지 않게
   recOpener = null; });
 const recOut = e => { const r = recEl.getBoundingClientRect(); return e.clientX < r.left || e.clientX >= r.right || e.clientY < r.top || e.clientY >= r.bottom; };
@@ -9759,7 +9775,7 @@ document.addEventListener('click', e => {
   else if (b.dataset.copy) copy(b.dataset.copy);
   else if ('play' in b.dataset) playToggle(b);
   else if (b.dataset.pin) { const id = b.dataset.pin, on = !pins.has(id); on ? pins.add(id) : pins.delete(id); store.set('pins', pins);
-    document.querySelectorAll(`[data-pin="${id}"]`).forEach(x => x.setAttribute('aria-pressed', on)); renderNavKeep(); toast(on ? '핀을 꽂았어요' : '핀을 뺐어요'); }
+    document.querySelectorAll(`[data-pin="${id}"]`).forEach(x => x.setAttribute('aria-pressed', on)); renderNavKeep(); toast(on ? COPY_TEXT.pinOn : COPY_TEXT.pinOff, {kind: on ? 'ok' : 'unpin'}); }
   else if (b.dataset.learn) { const id = b.dataset.learn, on = !learned.has(id); on ? learned.add(id) : learned.delete(id); store.set('learned', learned);
     document.querySelectorAll(`[data-learn="${id}"]`).forEach(x => { x.setAttribute('aria-pressed', on); x.closest('.plate').classList.toggle('learned', on); }); renderNavKeep(); }
   else if (b.dataset.g) { keyState.g = keyState.g === b.dataset.g ? null : b.dataset.g; keyState.q = null; renderKey(); }
