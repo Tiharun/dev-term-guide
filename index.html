@@ -4485,7 +4485,7 @@ const REC_TEXT = {
 /* 제목 복사·토스트 문구는 합본(설계서 2026-11-11 §3.7 원본 그대로). {s}는 굵은 이름, {j}는 그 이름 뒤 조사 */
 const COPY_TEXT = {
   copied: "'{s}'{j} 복사했습니다", sayCopied: '예문을 복사했습니다', pinOn: '핀을 꽂았습니다', pinOff: '핀을 뺐습니다',
-  fail: '복사하지 못했습니다. 글자를 길게 눌러 직접 복사해 주세요.', hint: '누르면 복사됩니다'
+  fail: '복사하지 못했습니다. 직접 선택해 복사해 주세요.', hint: '누르면 복사됩니다'
 };
 const objJosa = word => { const c = String(word).slice(-1).charCodeAt(0);    // 한글로 끝나면 받침 따라 을/를, 영문·숫자·괄호·따옴표면 붙이지 않는다
   return c >= 0xAC00 && c <= 0xD7A3 ? ((c - 0xAC00) % 28 ? '을' : '를') : ''; };
@@ -9630,7 +9630,7 @@ const toastBody = (msg, {kind = 'ok', strong = ''} = {}) => {
   const m = esc(msg).replace(/\{([sj])\}/g, (_, k) => k === 's' ? `<b>${esc(strong)}</b>` : objJosa(strong));    // 한 번에 바꿔 이름 속 {j}·$&·$1이 다시 바뀌지 않게
   return `<span class="tst-ic">${ic(TOAST_IC[kind])}</span><span class="tst-m">${m}</span>`;
 };
-const toast = (msg, {kind = 'ok', strong = '', ms = 2000} = {}) => { const t = $('#toast');    // 모든 알림이 같이 쓰는 토스트 하나
+const toast = (msg, {kind = 'ok', strong = '', ms = kind === 'fail' ? 3000 : 2000} = {}) => { const t = $('#toast');    // 모든 알림이 같이 쓰는 토스트 하나. 실패는 안내를 읽도록 3초
   t.innerHTML = toastBody(msg, {kind, strong}); t.dataset.kind = kind;
   clearTimeout(toast.h); t.classList.remove('on'); void t.offsetWidth; t.classList.add('on');    // 다시 부르면 등장 움직임과 시간을 처음부터
   toast.h = setTimeout(() => t.classList.remove('on'), ms); };
