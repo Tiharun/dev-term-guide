@@ -1720,8 +1720,8 @@ a.tag:hover{background:var(--ink);color:#fff}
 }
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
-  .nav{position:fixed;left:0;top:0;z-index:40;width:min(300px,86vw);transform:translateX(-102%);transition:transform .4s var(--ease);box-shadow:0 10px 40px rgba(15,20,30,.2)}
-  .nav.open{transform:none}
+  .nav{position:fixed;left:0;top:0;z-index:40;width:min(300px,86vw);transform:translateX(-102%);visibility:hidden;transition:transform .4s var(--ease),visibility 0s linear .4s;box-shadow:0 10px 40px rgba(15,20,30,.2)}
+  .nav.open{transform:none;visibility:visible;transition-delay:0s}
   .menu-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;border:1px solid var(--rule);background:var(--plate);
     border-radius:8px;padding:8px 14px;margin-bottom:14px}
   .main{padding:16px 16px 60px}
@@ -9625,8 +9625,20 @@ const secReveal = (bar, item, pad = SEC_PAD) => {    // 고른 항목이 줄 안
   if (!cutL && !cutR) return 0;
   return cutL || item.right - item.left > bar.right - bar.left ? item.left - bar.left - pad : item.right - bar.right + pad; };
 let lastCat = null;    // 바로 앞에 그린 화면의 카테고리. 같은 카테고리 안에서만 줄 가로 위치를 잇는다
+const NAV_PAD = 8;    // 옆 메뉴에서 초점 링크를 보이게 밀 때 여유 px
+const navCovers = () => $('#nav').classList.contains('open') && !!$('.menu-btn')?.getClientRects().length;    // 좁은 화면에서 열린 메뉴가 본문을 덮고 있다
+const navShow = el => { const n = $('#nav'), r = el.getBoundingClientRect(), b = n.getBoundingClientRect();    // 옆 메뉴만 밀어 링크를 보인다(페이지는 그대로)
+  if (r.top < b.top + NAV_PAD) n.scrollTop -= b.top + NAV_PAD - r.top; else if (r.bottom > b.bottom - NAV_PAD) n.scrollTop += r.bottom - b.bottom + NAV_PAD; };
+const focusKeep = () => {    // 다시 그리기 전 초점 자리를 기억해, 다시 그린 뒤 같은 자리로 돌려놓는다
+  const a = document.activeElement, box = a?.closest('#view .secs') ? '#view .secs' : a?.closest('#nav') ? '#nav' : '';
+  if (!box || !a.matches('a[href]')) return () => {};
+  if (box === '#view .secs') return () => $('#view .secs [aria-current]')?.focus({preventScroll: true});    // 고른 항목(뒤로 가기면 그 화면에서 고른 항목)
+  if (navCovers()) return () => $('.menu-btn').focus({preventScroll: true});    // 고르면 메뉴가 닫히므로 메뉴 버튼으로
+  const href = a.getAttribute('href'), same = () => [...document.querySelectorAll('#nav a[href]')].filter(x => x.getAttribute('href') === href), nth = same().indexOf(a);    // 같은 주소 링크가 여럿(브랜드·처음)이면 몇 번째인지로 찾는다
+  return () => { const el = same()[nth]; if (el) { el.focus({preventScroll: true}); navShow(el); } }; };
 function route(){
   clearTimeout(qt);    // 입력 직후 다른 화면으로 가면 남은 검색 타이머가 그 이동을 덮지 않게 한다
+  const refocus = focusKeep();
   const h = hashParts();
   if (h[0] === 't' && Object.hasOwn(MOVED, h[1])) { location.replace('#/t/' + MOVED[h[1]]); return; }
   let cur = {}, html = '';
@@ -9637,7 +9649,7 @@ function route(){
   } else if (h[0] === 'pins') {
     cur = {pins: 1}; html = viewPins();
   } else if (h[0] === 's' && h[1]) {
-    lastCat = null; renderNav({}); $('#q').value = h[1]; showSearch(h[1]); return;
+    lastCat = null; renderNav({}); $('#q').value = h[1]; showSearch(h[1]); refocus(); return;
   } else html = viewHome();
   $('#q').value = '';    // 검색 결과가 아닌 화면에는 지난 검색어를 남기지 않는다(뒤로 가기로 검색 결과에 오면 주소에서 다시 채운다)
   const old = $('#view .secs'), keepX = old && cur.c && cur.c === lastCat ? old.scrollLeft : 0;    // 다시 그리기 전에 지금 줄 위치를 읽는다(메뉴를 다시 그려 폭이 바뀌기 전에)
@@ -9650,7 +9662,7 @@ function route(){
     const on = bar.querySelector('[aria-current]'), d = on ? secReveal(bar.getBoundingClientRect(), on.getBoundingClientRect()) : 0;
     if (d) bar.scrollBy({left: d, behavior: motionOff() ? 'instant' : 'smooth'});    // 줄만 민다(scrollIntoView는 페이지도 움직인다)
   }
-  closeNav();
+  closeNav(); refocus();
   if (cur.t) { const el = document.getElementById(cur.t); if (el) { el.scrollIntoView({block: 'start'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 2200); } }
   else window.scrollTo(0, 0);
   lastCat = cur.c || null;
@@ -9689,7 +9701,7 @@ async function copyText(text){    // 복사했으면 true. 보안 연결이 아�
   return ok;
 }
 async function copy(text){ const ok = await copyText(text); toast(ok ? COPY_TEXT.sayCopied : COPY_TEXT.fail, {kind: ok ? 'ok' : 'fail'}); }
-const closeNav = () => $('#nav').classList.remove('open');
+const closeNav = () => { $('#nav').classList.remove('open'); $('.menu-btn')?.setAttribute('aria-expanded', 'false'); };
 
 /* ---------- Pin·외움 목록 창 ---------- */
 const recEl = $('#rec'), motionOff = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -9834,8 +9846,15 @@ document.addEventListener('click', e => {
     document.querySelectorAll(`[data-learn="${id}"]`).forEach(x => { x.setAttribute('aria-pressed', on); x.closest('.plate').classList.toggle('learned', on); }); renderNavKeep(); }
   else if (b.dataset.g) { keyState.g = keyState.g === b.dataset.g ? null : b.dataset.g; keyState.q = null; renderKey(); }
   else if (b.dataset.q) { keyState.q = keyState.q === +b.dataset.q ? null : +b.dataset.q; renderKey(); }
-  else if (b.classList.contains('menu-btn')) $('#nav').classList.toggle('open');
+  else if (b.classList.contains('menu-btn')) { const on = $('#nav').classList.toggle('open'); b.setAttribute('aria-expanded', on);
+    if (on) $('#nav a')?.focus({preventScroll: true}); }    // 메뉴는 문서에서 본문보다 앞이라, 열면 초점을 메뉴 안으로 옮겨야 Tab이 메뉴를 돈다
 });
+document.addEventListener('click', e => {    // 좁은 화면에서 열린 메뉴 바깥을 누르면 그 자리 동작 없이 메뉴만 닫는다(메뉴가 메뉴 버튼을 덮는다)
+  if (!navCovers() || e.target.closest('#nav, .menu-btn')) return;
+  closeNav(); if (e.detail === 0) return;    // 키보드(Enter·Space)로 누른 것은 메뉴를 닫고 그 동작도 한다
+  e.preventDefault(); e.stopPropagation(); }, true);
+document.addEventListener('focusin', e => {    // 키보드 초점이 열린 메뉴 밖으로 나가면 닫는다(덮인 곳에 초점이 숨지 않게). 마우스 누름은 위 click이 맡는다
+  if (navCovers() && !e.target.closest('#nav, .menu-btn') && e.target.matches(':focus-visible')) closeNav(); });
 function renderNavKeep(){ const h = hashParts(); const t = h[0]==='t' && byId.get(h[1]);
   renderNav(h[0]==='c' ? {c:h[1], s:h[2] || (catById.get(h[1])||{secs:[{}]}).secs[0].id} : t ? {c:t.c, s:t.s} : h[0]==='pins' ? {pins:1} : {}); }
 function renderKey(){ const q = $('#q') ? $('#q').value : ''; $('#keyband').innerHTML = keyBand(); $('#q').value = q; }
@@ -9846,10 +9865,10 @@ document.addEventListener('input', e => {
 });
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); }
-  if (e.key === 'Escape') closeNav();
+  if (e.key === 'Escape') { const back = navCovers() && document.activeElement?.closest('#nav'); closeNav(); if (back) $('.menu-btn').focus(); }    // 메뉴 안에서 닫으면 숨는 링크 대신 메뉴 버튼에 초점
 });
 
-$('#main').innerHTML = `<div class="inner"><button class="menu-btn" aria-label="목차 열기">${ic('menu')}목차</button><div id="keyband"></div><div id="view"></div></div>`;
+$('#main').innerHTML = `<div class="inner"><button class="menu-btn" aria-label="목차 열기" aria-expanded="false" aria-controls="nav">${ic('menu')}목차</button><div id="keyband"></div><div id="view"></div></div>`;
 $('#cp-hint').textContent = COPY_TEXT.hint;    // 제목 버튼들이 aria-describedby로 함께 가리키는 안내
 renderKey();
 addEventListener('hashchange', route);
