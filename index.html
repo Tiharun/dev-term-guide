@@ -1796,6 +1796,7 @@ a.tag:hover{background:var(--ink);color:#fff}
   <main class="main" id="main" tabindex="-1"></main>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<p id="cp-hint" class="sr"></p>
 <dialog id="rec" class="rec" aria-labelledby="rec-title"><div class="rec-box"><div class="rec-head"><h2 id="rec-title"></h2><button type="button" class="rec-x" data-rec="close"></button></div><div id="rec-body"></div><p id="rec-msg" class="rec-msg" role="status" aria-live="polite"></p><p id="rec-sr" class="sr" aria-live="polite"></p><input type="file" id="rec-file" accept=".json,application/json" hidden></div></dialog>
 
 <!-- 사이트 설정: 이름·문구는 여기서만 바꾸면 된다 -->
@@ -4489,6 +4490,8 @@ const COPY_TEXT = {
 };
 const objJosa = word => { const c = String(word).slice(-1).charCodeAt(0);    // 한글로 끝나면 받침 따라 을/를, 영문·숫자·괄호·따옴표면 붙이지 않는다
   return c >= 0xAC00 && c <= 0xD7A3 ? ((c - 0xAC00) % 28 ? '을' : '를') : ''; };
+const nameParts = ko => ko.split(/\s+·\s+/).map(s => s.trim()).filter(Boolean);    // 띄어 쓴 " · "에서만 나눈다. 붙여 쓴 "·"는 조각 안에 둔다
+const cpBtn = name => `<button type="button" class="cp" data-cp="${esc(name)}" aria-describedby="cp-hint">${esc(name)}${ic('copy')}${ic('check')}</button>`;    // 아이콘은 CSS로 하나만 보인다(완료 때 체크)
 const recFile = (pins, learned, now) => {    // 파일 이름 날짜는 UTC가 아니라 로컬 날짜
   const d = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('-');
   const obj = {app: SITE.storeKey, version: REC_VER, exportedAt: now.toISOString(), pins: [...pins], learned: [...learned]};
@@ -9466,7 +9469,7 @@ const plate = t => {
   return `<article class="plate${learned.has(t.id)?' learned':''}" id="${t.id}">
     <figure class="fig" data-id="${t.id}"><div class="stage"></div><figcaption class="figcap"><b>도판 ${t.no}</b> · ${esc(t.ko.split('·')[0].trim())}</figcaption></figure>
     <div class="desc">
-      <div class="term-h"><div><h3 class="term-en">${esc(t.en)}</h3><div class="term-ko">${esc(t.ko)}</div></div>
+      <div class="term-h"><div><h3 class="term-en">${cpBtn(t.en)}</h3><div class="term-ko">${nameParts(t.ko).map(cpBtn).join('')}</div></div>
         <div class="acts">
           <button class="act" data-pin="${t.id}" aria-pressed="${pins.has(t.id)}" title="즐겨찾기 핀">${ic('pin')}<span class="sr">즐겨찾기</span></button>
           <button class="act" data-learn="${t.id}" aria-pressed="${learned.has(t.id)}" title="외움 도장">${ic('stamp')}<span class="sr">외웠어요</span></button>
@@ -9796,6 +9799,7 @@ document.addEventListener('keydown', e => {
 });
 
 $('#main').innerHTML = `<div class="inner"><button class="menu-btn" aria-label="목차 열기">${ic('menu')}목차</button><div id="keyband"></div><div id="view"></div></div>`;
+$('#cp-hint').textContent = COPY_TEXT.hint;    // 제목 버튼들이 aria-describedby로 함께 가리키는 안내
 renderKey();
 addEventListener('hashchange', route);
 addEventListener('hashchange', closeRec);    // 주소가 바뀌면(뒤로 가기 등) 창을 닫는다
